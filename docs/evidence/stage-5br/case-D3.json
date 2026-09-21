@@ -1,0 +1,171 @@
+{
+  "resultHex": "0x00000000",
+  "elapsedMs": 5686,
+  "registeredAt": "2026-09-22T01:27:22.0586858+08:00",
+  "case": "D3",
+  "receipts": [
+    {
+      "sha256": "4B11C0E3117B9EC00978C92D5DB179911AD22BD35786DFA3C7EAA0CA7BDCC8B7",
+      "name": "00-started.json",
+      "receipt": {
+        "schemaVersion": 1,
+        "executionId": "stage5br-test-only_1790011642959_a0cf5975-ca2e-4d24-908d-6a82c783c7bc",
+        "jobId": "stage5br-test-only",
+        "commandProfileId": "diagnostic",
+        "phase": "STARTED",
+        "outcome": "UNKNOWN",
+        "startedAt": "2026-09-21T17:27:22.959916600Z",
+        "processStartedAt": null,
+        "finishedAt": null,
+        "durationMs": null,
+        "exitCode": null,
+        "runnerExitCode": null,
+        "processStartFailure": null,
+        "terminationReason": null,
+        "stdout": null,
+        "stderr": null,
+        "createdAt": "2026-09-21T17:27:22.990502900Z"
+      }
+    },
+    {
+      "sha256": "CACAD2FF3BEED858BBB3923CA28864B1838CC1B9BE71CDFA709D37D317675138",
+      "name": "01-process-started.json",
+      "receipt": {
+        "schemaVersion": 1,
+        "executionId": "stage5br-test-only_1790011642959_a0cf5975-ca2e-4d24-908d-6a82c783c7bc",
+        "jobId": "stage5br-test-only",
+        "commandProfileId": "diagnostic",
+        "phase": "PROCESS_STARTED",
+        "outcome": "UNKNOWN",
+        "startedAt": "2026-09-21T17:27:22.959916600Z",
+        "processStartedAt": "2026-09-21T17:27:23.043002400Z",
+        "finishedAt": null,
+        "durationMs": null,
+        "exitCode": null,
+        "runnerExitCode": null,
+        "processStartFailure": null,
+        "terminationReason": null,
+        "stdout": null,
+        "stderr": null,
+        "createdAt": "2026-09-21T17:27:23.043002400Z"
+      }
+    },
+    {
+      "sha256": "36690504820D497C0D2C8B7910BAC9EDA2047580773531E8D731084CAFEAA2B2",
+      "name": "02-terminal.json",
+      "receipt": {
+        "schemaVersion": 1,
+        "executionId": "stage5br-test-only_1790011642959_a0cf5975-ca2e-4d24-908d-6a82c783c7bc",
+        "jobId": "stage5br-test-only",
+        "commandProfileId": "diagnostic",
+        "phase": "TERMINAL",
+        "outcome": "SUCCESS",
+        "startedAt": "2026-09-21T17:27:22.959916600Z",
+        "processStartedAt": "2026-09-21T17:27:23.043002400Z",
+        "finishedAt": "2026-09-21T17:27:24.292745200Z",
+        "durationMs": 1333,
+        "exitCode": 0,
+        "runnerExitCode": 0,
+        "processStartFailure": null,
+        "terminationReason": null,
+        "stdout": {
+          "observedBytes": 0,
+          "sampleLimitBytes": 65536,
+          "sampledBytes": 0,
+          "truncated": false,
+          "complete": true,
+          "readFailed": false,
+          "contentStored": false
+        },
+        "stderr": {
+          "observedBytes": 0,
+          "sampleLimitBytes": 65536,
+          "sampledBytes": 0,
+          "truncated": false,
+          "complete": true,
+          "readFailed": false,
+          "contentStored": false
+        },
+        "createdAt": "2026-09-21T17:27:24.292745200Z"
+      }
+    }
+  ],
+  "state": "Ready",
+  "markerPresent": true,
+  "lastRunTime": "2026-09-22T01:27:22.0000000+08:00",
+  "lastTaskResult": 0,
+  "polls": [
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 263,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 533,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 799,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 1063,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 1330,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 1588,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 1846,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 2098,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 0,
+      "elapsedMs": 2356,
+      "state": 3
+    }
+  ],
+  "wrapperMarkerPresent": false,
+  "collectionRecovered": false,
+  "readbackMatched": true,
+  "otherTaskDifferences": [],
+  "action": {
+    "command": "[DASHBOARD_REPO]\\.tools\\stage5br-shared-20260922-011900-e4c53c2817d8\\release\\runtime\\bin\\java.exe",
+    "arguments": "-jar \"[DASHBOARD_REPO]\\.tools\\stage5br-shared-20260922-011900-e4c53c2817d8\\release\\runner.jar\" run \"[DASHBOARD_REPO]\\.tools\\stage5br-shared-20260922-011900-e4c53c2817d8\\diagnostic.json\" diagnostic",
+    "argv": [
+      "-jar",
+      "[DASHBOARD_REPO]\\.tools\\stage5br-shared-20260922-011900-e4c53c2817d8\\release\\runner.jar",
+      "run",
+      "[DASHBOARD_REPO]\\.tools\\stage5br-shared-20260922-011900-e4c53c2817d8\\diagnostic.json",
+      "diagnostic"
+    ],
+    "workingDirectory": null,
+    "marker": "[DASHBOARD_REPO]\\.tools\\stage5br-shared-20260922-011900-e4c53c2817d8\\marker.json",
+    "receiptDirectory": "[DASHBOARD_REPO]\\.tools\\stage5br-shared-20260922-011900-e4c53c2817d8\\receipts"
+  }
+}

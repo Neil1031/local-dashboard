@@ -1,0 +1,115 @@
+{
+  "resultHex": "0x00000000",
+  "elapsedMs": null,
+  "registeredAt": "2026-09-22T01:22:31.2409429+08:00",
+  "case": "E",
+  "receipts": [
+    {
+      "sha256": "255180066BBF0F9B57249299CA374E6C3F099C5E78824CA4ED1A98BA2CB546CD",
+      "name": "00-started.json",
+      "receipt": {
+        "schemaVersion": 1,
+        "executionId": "stage5br-test-only_1790011352240_ca8fd3f2-dce4-48cc-8333-e00afac0f2f5",
+        "jobId": "stage5br-test-only",
+        "commandProfileId": "diagnostic",
+        "phase": "STARTED",
+        "outcome": "UNKNOWN",
+        "startedAt": "2026-09-21T17:22:32.240705Z",
+        "processStartedAt": null,
+        "finishedAt": null,
+        "durationMs": null,
+        "exitCode": null,
+        "runnerExitCode": null,
+        "processStartFailure": null,
+        "terminationReason": null,
+        "stdout": null,
+        "stderr": null,
+        "createdAt": "2026-09-21T17:22:32.323874600Z"
+      }
+    },
+    {
+      "sha256": "FAD04985630A87530E66FCD598F42B8AC7A32A3D19014EB5DA392D79D2118C9B",
+      "name": "01-process-started.json",
+      "receipt": {
+        "schemaVersion": 1,
+        "executionId": "stage5br-test-only_1790011352240_ca8fd3f2-dce4-48cc-8333-e00afac0f2f5",
+        "jobId": "stage5br-test-only",
+        "commandProfileId": "diagnostic",
+        "phase": "PROCESS_STARTED",
+        "outcome": "UNKNOWN",
+        "startedAt": "2026-09-21T17:22:32.240705Z",
+        "processStartedAt": "2026-09-21T17:22:32.371272500Z",
+        "finishedAt": null,
+        "durationMs": null,
+        "exitCode": null,
+        "runnerExitCode": null,
+        "processStartFailure": null,
+        "terminationReason": null,
+        "stdout": null,
+        "stderr": null,
+        "createdAt": "2026-09-21T17:22:32.371272500Z"
+      }
+    },
+    {
+      "sha256": "81223D808EA5BA89D380584BFD649151C726C0679DDF2804A526ECDC97F6421F",
+      "name": "02-terminal.json",
+      "receipt": {
+        "schemaVersion": 1,
+        "executionId": "stage5br-test-only_1790011352240_ca8fd3f2-dce4-48cc-8333-e00afac0f2f5",
+        "jobId": "stage5br-test-only",
+        "commandProfileId": "diagnostic",
+        "phase": "TERMINAL",
+        "outcome": "SUCCESS",
+        "startedAt": "2026-09-21T17:22:32.240705Z",
+        "processStartedAt": "2026-09-21T17:22:32.371272500Z",
+        "finishedAt": "2026-09-21T17:22:33.543315600Z",
+        "durationMs": 1302,
+        "exitCode": 0,
+        "runnerExitCode": 0,
+        "processStartFailure": null,
+        "terminationReason": null,
+        "stdout": {
+          "observedBytes": 0,
+          "sampleLimitBytes": 65536,
+          "sampledBytes": 0,
+          "truncated": false,
+          "complete": true,
+          "readFailed": false,
+          "contentStored": false
+        },
+        "stderr": {
+          "observedBytes": 0,
+          "sampleLimitBytes": 65536,
+          "sampledBytes": 0,
+          "truncated": false,
+          "complete": true,
+          "readFailed": false,
+          "contentStored": false
+        },
+        "createdAt": "2026-09-21T17:22:33.543315600Z"
+      }
+    }
+  ],
+  "state": "Ready",
+  "markerPresent": true,
+  "lastRunTime": "2026-09-22T01:22:31.0000000+08:00",
+  "lastTaskResult": 0,
+  "polls": [],
+  "collectionRecovered": true,
+  "readbackMatched": true,
+  "otherTaskDifferences": [],
+  "action": {
+    "command": "[DIAGNOSTIC_ROOT]\\work\\中文 空白 release\\runtime\\bin\\java.exe",
+    "arguments": "-jar \"[DIAGNOSTIC_ROOT]\\work\\中文 空白 release\\runner.jar\" run \"[DIAGNOSTIC_ROOT]\\work\\case-E 中文 空白\\diagnostic.json\" diagnostic",
+    "argv": [
+      "-jar",
+      "[DIAGNOSTIC_ROOT]\\work\\中文 空白 release\\runner.jar",
+      "run",
+      "[DIAGNOSTIC_ROOT]\\work\\case-E 中文 空白\\diagnostic.json",
+      "diagnostic"
+    ],
+    "workingDirectory": null,
+    "marker": "[DIAGNOSTIC_ROOT]\\work\\case-E 中文 空白\\marker.json",
+    "receiptDirectory": "[DIAGNOSTIC_ROOT]\\work\\case-E 中文 空白\\receipts"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "at": "2026-09-22T01:27:22.0586858+08:00",
+  "instancesBefore": 0,
+  "lastRunTimeBefore": "2026-09-22T01:25:59.0000000+08:00",
+  "case": "D3",
+  "receiptFilesBefore": [],
+  "action": {
+    "command": "[DASHBOARD_REPO]\\.tools\\stage5br-shared-20260922-011900-e4c53c2817d8\\release\\runtime\\bin\\java.exe",
+    "arguments": "-jar \"[DASHBOARD_REPO]\\.tools\\stage5br-shared-20260922-011900-e4c53c2817d8\\release\\runner.jar\" run \"[DASHBOARD_REPO]\\.tools\\stage5br-shared-20260922-011900-e4c53c2817d8\\diagnostic.json\" diagnostic",
+    "argv": [
+      "-jar",
+      "[DASHBOARD_REPO]\\.tools\\stage5br-shared-20260922-011900-e4c53c2817d8\\release\\runner.jar",
+      "run",
+      "[DASHBOARD_REPO]\\.tools\\stage5br-shared-20260922-011900-e4c53c2817d8\\diagnostic.json",
+      "diagnostic"
+    ],
+    "workingDirectory": null,
+    "marker": "[DASHBOARD_REPO]\\.tools\\stage5br-shared-20260922-011900-e4c53c2817d8\\marker.json",
+    "receiptDirectory": "[DASHBOARD_REPO]\\.tools\\stage5br-shared-20260922-011900-e4c53c2817d8\\receipts"
+  }
+}

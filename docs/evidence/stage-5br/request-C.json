@@ -1,0 +1,16 @@
+{
+  "action": {
+    "command": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\java.exe",
+    "arguments": "-version",
+    "argv": [
+      "-version"
+    ],
+    "workingDirectory": null,
+    "marker": "[DIAGNOSTIC_ROOT]\\work\\unused-C.json",
+    "receiptDirectory": null
+  },
+  "case": "C",
+  "instancesBefore": 0,
+  "lastRunTimeBefore": "2026-09-22T01:21:06.0000000+08:00",
+  "at": "2026-09-22T01:21:41.7175523+08:00"
+}

@@ -1,0 +1,21 @@
+{
+  "at": "2026-09-22T01:23:32.8130575+08:00",
+  "instancesBefore": 0,
+  "lastRunTimeBefore": "2026-09-22T01:22:31.0000000+08:00",
+  "case": "F1",
+  "receiptFilesBefore": [],
+  "action": {
+    "command": "[LOCALAPPDATA]\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\java.exe",
+    "arguments": "-jar [LOCALAPPDATA]\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runner.jar run [DIAGNOSTIC_ROOT]\\work\\case-F\\diagnostic.json diagnostic",
+    "argv": [
+      "-jar",
+      "[LOCALAPPDATA]\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runner.jar",
+      "run",
+      "[DIAGNOSTIC_ROOT]\\work\\case-F\\diagnostic.json",
+      "diagnostic"
+    ],
+    "workingDirectory": null,
+    "marker": "[DIAGNOSTIC_ROOT]\\work\\case-F\\marker.json",
+    "receiptDirectory": "[DIAGNOSTIC_ROOT]\\work\\case-F\\receipts"
+  }
+}

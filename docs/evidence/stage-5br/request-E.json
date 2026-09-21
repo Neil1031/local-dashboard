@@ -1,0 +1,20 @@
+{
+  "action": {
+    "command": "[DIAGNOSTIC_ROOT]\\work\\中文 空白 release\\runtime\\bin\\java.exe",
+    "arguments": "-jar \"[DIAGNOSTIC_ROOT]\\work\\中文 空白 release\\runner.jar\" run \"[DIAGNOSTIC_ROOT]\\work\\case-E 中文 空白\\diagnostic.json\" diagnostic",
+    "argv": [
+      "-jar",
+      "[DIAGNOSTIC_ROOT]\\work\\中文 空白 release\\runner.jar",
+      "run",
+      "[DIAGNOSTIC_ROOT]\\work\\case-E 中文 空白\\diagnostic.json",
+      "diagnostic"
+    ],
+    "workingDirectory": null,
+    "marker": "[DIAGNOSTIC_ROOT]\\work\\case-E 中文 空白\\marker.json",
+    "receiptDirectory": "[DIAGNOSTIC_ROOT]\\work\\case-E 中文 空白\\receipts"
+  },
+  "case": "E",
+  "instancesBefore": 0,
+  "lastRunTimeBefore": "2026-09-22T01:21:58.0000000+08:00",
+  "at": "2026-09-22T01:22:31.2409429+08:00"
+}

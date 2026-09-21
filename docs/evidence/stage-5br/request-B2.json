@@ -1,0 +1,17 @@
+{
+  "at": "2026-09-22T01:25:38.3623756+08:00",
+  "instancesBefore": 0,
+  "lastRunTimeBefore": "2026-09-22T01:24:57.0000000+08:00",
+  "case": "B2",
+  "receiptFilesBefore": [],
+  "action": {
+    "command": "[LOCALAPPDATA]\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\java.exe",
+    "arguments": "-version",
+    "argv": [
+      "-version"
+    ],
+    "workingDirectory": null,
+    "marker": "[DIAGNOSTIC_ROOT]\\work\\unused-B.json",
+    "receiptDirectory": null
+  }
+}

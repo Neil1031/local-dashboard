@@ -1,0 +1,14 @@
+{
+  "temp": "[LOCALAPPDATA]\\Temp",
+  "processId": 7348,
+  "sidHash": "4030C819EB62D4F4EAEBB717E506185749F92413DC12038017F0E5963FC852F0",
+  "cwd": "C:\\WINDOWS\\system32",
+  "markerId": "0ba4a7ae-96aa-41de-b336-561041391eed",
+  "at": "2026-09-22T01:20:22.8189007+08:00",
+  "bundledJavaOnPath": false,
+  "sameUser": true,
+  "processCwd": "C:\\WINDOWS\\system32",
+  "localAppData": "[LOCALAPPDATA]",
+  "process64Bit": true,
+  "os64Bit": true
+}

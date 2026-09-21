@@ -1,0 +1,87 @@
+{
+  "manualRequests": 12,
+  "cases": [
+    {
+      "case": "A",
+      "result": "0x00000000",
+      "marker": true,
+      "receiptCount": 0
+    },
+    {
+      "case": "A2",
+      "result": "0x00000000",
+      "marker": true,
+      "receiptCount": 0
+    },
+    {
+      "case": "B",
+      "result": "0x80070002",
+      "marker": false,
+      "receiptCount": 0
+    },
+    {
+      "case": "B2",
+      "result": "0x00000000",
+      "marker": false,
+      "receiptCount": 0
+    },
+    {
+      "case": "C",
+      "result": "0x80070002",
+      "marker": false,
+      "receiptCount": 0
+    },
+    {
+      "case": "D",
+      "result": "0x80070002",
+      "marker": false,
+      "receiptCount": 0
+    },
+    {
+      "case": "D2",
+      "result": "0x00000000",
+      "marker": true,
+      "receiptCount": 3
+    },
+    {
+      "case": "D3",
+      "result": "0x00000000",
+      "marker": true,
+      "receiptCount": 3
+    },
+    {
+      "case": "E",
+      "result": "0x00000000",
+      "marker": true,
+      "receiptCount": 3
+    },
+    {
+      "case": "F1",
+      "result": "0x80070002",
+      "marker": false,
+      "receiptCount": 0
+    },
+    {
+      "case": "F2",
+      "result": "0x80070002",
+      "marker": false,
+      "receiptCount": 0
+    },
+    {
+      "case": "G",
+      "result": "0x00000001",
+      "marker": false,
+      "receiptCount": 0
+    }
+  ],
+  "rootCause": "Creating process sees a redirected AppData view; Scheduler cannot see the logical Java/JAR paths. Resolved physical paths and an unredirected shared deployment succeed with the same binary hashes.",
+  "literalEnvironmentVariableIsNotCauseOfPriorFailure": true,
+  "sameCwdDidNotFixMissingFiles": true,
+  "wrapperNotRequired": true,
+  "existingTaskDefinitionsUnchanged": 234,
+  "formalWeeklyRunMetadataAndAclUnchanged": true,
+  "service8080RemainedOffline": true,
+  "operationalLogRemainedDisabled": true,
+  "diagnosticTaskDeleted": true,
+  "testConfigMarkersAndCopiedReleasesDeleted": true
+}

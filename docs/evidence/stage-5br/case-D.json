@@ -1,0 +1,77 @@
+{
+  "resultHex": "0x80070002",
+  "elapsedMs": 5278,
+  "registeredAt": "2026-09-22T01:21:58.7536199+08:00",
+  "case": "D",
+  "receipts": [],
+  "state": "Ready",
+  "markerPresent": false,
+  "lastRunTime": "2026-09-22T01:21:58.0000000+08:00",
+  "lastTaskResult": 2147942402,
+  "polls": [
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 257,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 527,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 790,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 1045,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 1305,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 1562,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 1827,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 2081,
+      "state": 3
+    }
+  ],
+  "readbackMatched": true,
+  "otherTaskDifferences": [],
+  "action": {
+    "command": "[LOCALAPPDATA]\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\java.exe",
+    "arguments": "-jar [LOCALAPPDATA]\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runner.jar run [DIAGNOSTIC_ROOT]\\work\\case-D\\diagnostic.json diagnostic",
+    "argv": [
+      "-jar",
+      "[LOCALAPPDATA]\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runner.jar",
+      "run",
+      "[DIAGNOSTIC_ROOT]\\work\\case-D\\diagnostic.json",
+      "diagnostic"
+    ],
+    "workingDirectory": null,
+    "marker": "[DIAGNOSTIC_ROOT]\\work\\case-D\\marker.json",
+    "receiptDirectory": "[DIAGNOSTIC_ROOT]\\work\\case-D\\receipts"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "action": {
+    "command": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "arguments": "-NoProfile -NonInteractive -ExecutionPolicy Bypass -File [DIAGNOSTIC_ROOT]\\work\\case-A\\fixture.ps1",
+    "argv": [
+      "-NoProfile",
+      "-NonInteractive",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-File",
+      "[DIAGNOSTIC_ROOT]\\work\\case-A\\fixture.ps1"
+    ],
+    "workingDirectory": null,
+    "marker": "[DIAGNOSTIC_ROOT]\\work\\case-A\\marker.json",
+    "receiptDirectory": "[DIAGNOSTIC_ROOT]\\work\\case-A\\receipts"
+  },
+  "case": "A",
+  "instancesBefore": 0,
+  "lastRunTimeBefore": "1999-11-30T00:00:00.0000000+08:00",
+  "at": "2026-09-22T01:20:21.9127568+08:00"
+}

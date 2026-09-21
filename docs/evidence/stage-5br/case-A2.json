@@ -1,0 +1,80 @@
+{
+  "resultHex": "0x00000000",
+  "elapsedMs": 5376,
+  "registeredAt": "2026-09-22T01:24:57.3986987+08:00",
+  "case": "A2",
+  "receipts": [],
+  "state": "Ready",
+  "markerPresent": true,
+  "lastRunTime": "2026-09-22T01:24:57.0000000+08:00",
+  "lastTaskResult": 0,
+  "polls": [
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 256,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 533,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 787,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 1052,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 1318,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 1577,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 0,
+      "elapsedMs": 1839,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 0,
+      "elapsedMs": 2101,
+      "state": 3
+    }
+  ],
+  "wrapperMarkerPresent": false,
+  "collectionRecovered": false,
+  "readbackMatched": true,
+  "otherTaskDifferences": [],
+  "action": {
+    "command": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "arguments": "-NoProfile -NonInteractive -ExecutionPolicy Bypass -File [DIAGNOSTIC_ROOT]\\work\\case-A2\\fixture.ps1",
+    "argv": [
+      "-NoProfile",
+      "-NonInteractive",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-File",
+      "[DIAGNOSTIC_ROOT]\\work\\case-A2\\fixture.ps1"
+    ],
+    "workingDirectory": null,
+    "marker": "[DIAGNOSTIC_ROOT]\\work\\case-A2\\marker.json",
+    "receiptDirectory": null
+  }
+}

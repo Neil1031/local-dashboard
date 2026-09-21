@@ -1,0 +1,16 @@
+{
+  "at": "2026-09-22T01:36:18.4754071+08:00",
+  "otherTaskDifferences": [],
+  "diagnosticAbsent": true,
+  "sharedWorkAbsent": true,
+  "environment": {
+    "at": "2026-09-22T01:36:16.4330402+08:00",
+    "weeklyState": "Ready",
+    "listeners8080": [],
+    "weeklyLastRunTime": "2026-09-22T00:11:50.0000000+08:00",
+    "weeklyAclHash": "B0009463B81FBF8226801FF458EA586EB46021BB485E9C6716ADA956A802E81C",
+    "operationalLogEnabled": false,
+    "weeklyLastTaskResult": 2147942402
+  },
+  "workAbsent": true
+}

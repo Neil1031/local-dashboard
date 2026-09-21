@@ -1,0 +1,714 @@
+{
+  "exportedAt": "2026-09-21T17:36:19.380933+00:00",
+  "note": "Raw hashes refer to private originals, not sanitized files. Existing-task XML stays private; all exported XML hashes are retained in each inventory.",
+  "sources": [
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\action-A.xml",
+      "bytes": 3008,
+      "rawSha256": "3E54321E9B30996BEBFE13EEED7F8DDD4DB3C3C0D3DFDCC6118AA5ECBD395109",
+      "handling": "sanitized diagnostic Action/context; not a restorable backup"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\action-A2.xml",
+      "bytes": 3010,
+      "rawSha256": "8473C97467F222758C9DCE739E19792365194E8E7BDAF94768AE7633F4C4F1D3",
+      "handling": "sanitized diagnostic Action/context; not a restorable backup"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\action-B.xml",
+      "bytes": 2662,
+      "rawSha256": "138F3F379D8719DC685FC4302490D222CB8D2BCF0A58BDE51C8D49C25DCCE0C6",
+      "handling": "sanitized diagnostic Action/context; not a restorable backup"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\action-B2.xml",
+      "bytes": 2768,
+      "rawSha256": "CB28FD09F4F2255FBC29CE3725B6C1DFAA68A7E20AB64444F477702720820630",
+      "handling": "sanitized diagnostic Action/context; not a restorable backup"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\action-C.xml",
+      "bytes": 2634,
+      "rawSha256": "55B188F61A3454C6DD0699A857DD567DFC859D373174F6CDE9F335C6A5F7058D",
+      "handling": "sanitized diagnostic Action/context; not a restorable backup"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\action-D.xml",
+      "bytes": 3222,
+      "rawSha256": "6B7C65EE68D56A31F2AA84090B2407C8465F3F54BF0B082D1BD22C7D3F68593F",
+      "handling": "sanitized diagnostic Action/context; not a restorable backup"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\action-D2.xml",
+      "bytes": 3434,
+      "rawSha256": "F816AC759D5C5D4ACFC517F5EBBCE59D8B3CA3789C9AC46C05D63E75B5E88845",
+      "handling": "sanitized diagnostic Action/context; not a restorable backup"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\action-D3.xml",
+      "bytes": 3116,
+      "rawSha256": "FD2E7AEC10587E5509710EBD963686DC19E351F9E1693EEA3BC63630C880BAFB",
+      "handling": "sanitized diagnostic Action/context; not a restorable backup"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\action-E.xml",
+      "bytes": 3574,
+      "rawSha256": "09A9EF1B419444C7638EDB3258E292FF4EF48FD93261379C752D32F04FA0BF9B",
+      "handling": "sanitized diagnostic Action/context; not a restorable backup"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\action-F1.xml",
+      "bytes": 3222,
+      "rawSha256": "1D0F58E0A511015BD538C02482930EF766FD15E55E68218593DCD21B0116AB70",
+      "handling": "sanitized diagnostic Action/context; not a restorable backup"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\action-F2.xml",
+      "bytes": 3350,
+      "rawSha256": "2F2309846A3D56C244DEEA534D34B4B936C174208BBCA6AEECF6916807407057",
+      "handling": "sanitized diagnostic Action/context; not a restorable backup"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\action-G.xml",
+      "bytes": 3014,
+      "rawSha256": "D8576F8854589991E4215A856861F40A0B4CDF4602867F370F444F65E2624CBB",
+      "handling": "sanitized diagnostic Action/context; not a restorable backup"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\application-events.json",
+      "bytes": 134,
+      "rawSha256": "99A30D79EABD4BA6ADCDAD83B25DC562670F50C3549EB9B5CA781A59FC0FC79E",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\captured-environment.json",
+      "bytes": 6515,
+      "rawSha256": "A24431B7016441D11EC8416166F83DF0878DD67A6633B452CFC48DE2F7A5A587",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\case-A.json",
+      "bytes": 3556,
+      "rawSha256": "440BB3183FE7F2D247924901CB46BB47057F82D2115F7426EE2E4D305850F1AF",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\case-A2.json",
+      "bytes": 3453,
+      "rawSha256": "DB62B846637D62EC80FDA38FB05714CCFF1DE11E04B9A943739D71166D7BB952",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\case-B.json",
+      "bytes": 2834,
+      "rawSha256": "B2C3442D66175AF50FFC0F80685EB213B453D41EC760CBDD1CF5B484A57287B3",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\case-B2.json",
+      "bytes": 2881,
+      "rawSha256": "C1C154B4BE4117761287325B637965804B392352DDD4F97EE22541053DE71CAD",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\case-C.json",
+      "bytes": 2816,
+      "rawSha256": "95E18E852596279597F8C7032C9D72F09B06831685F258A940E968A3BBE44A61",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\case-D.json",
+      "bytes": 3772,
+      "rawSha256": "494F7F96160C36B56A60A0282DBD191A21B2A05C4EEE78D851BC41E89FEDAC57",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\case-D2.json",
+      "bytes": 9836,
+      "rawSha256": "AD1A37D7C0AFF9DE1C5AC1C6B9A4AE47C0E6DBB87D597C0A53F327BCEE79C764",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\case-D3.json",
+      "bytes": 9562,
+      "rawSha256": "80E47E3361F12F33AE4A02BA63C6B36D4D6C045216EAF142332378A7920253D5",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\case-E.json",
+      "bytes": 8295,
+      "rawSha256": "5EA96D269299D2B0A6252E13A24BA4F6799A153C3D7EA54343FE78252D8A0865",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\case-F1.json",
+      "bytes": 3809,
+      "rawSha256": "5CDC3F7DAA01ECA5C65F05D279B964626794A21BC81CAE0D55158F02D6F7616F",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\case-F2.json",
+      "bytes": 3828,
+      "rawSha256": "594D4C4A042E2FBDE2B4EF4CE843BAF46719263434899262FA2BBAB4579BC6F2",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\case-G.json",
+      "bytes": 3855,
+      "rawSha256": "2A46906202914BADB7811ABFD63AF8700509CB8DA4206512C30A4090CAC71C84",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\creation-context.json",
+      "bytes": 342,
+      "rawSha256": "8CEDC594BF943DA0B651BAE6928DA8BB005AA912253061A5928F3E0FA49445D7",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\deleted-test-file-hashes.json",
+      "bytes": 179538,
+      "rawSha256": "5ED158A1C72D10107713E185482331AC85FFEAAD1B3467E6701D7C76457608B2",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\environment-after.json",
+      "bytes": 370,
+      "rawSha256": "049DB7DF04B762E9388DBD388FD2E481F348AC519638B1EC4A4ED85F1E66D400",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\environment-before.json",
+      "bytes": 370,
+      "rawSha256": "C48DD1D215836FF5FE9198746FB3194C2A252A69186161EA9F9E7728A5A428FB",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\file-cleanup.json",
+      "bytes": 736,
+      "rawSha256": "DDADBEC6A2B160DD3EE4DD8512D065D7E62D0847CAB4A26FE04A66C309C6A3DA",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\final-audit.json",
+      "bytes": 782,
+      "rawSha256": "5AE9DDF9064C470576B40E1D4E5DC940151AA3CB6043570101CC481A8354CCFC",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-after-A.json",
+      "bytes": 161,
+      "rawSha256": "0977B46CC488AECD86378DCB4DCBCC41A6572EE4B00187A3496EB38CB25F6D45",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-after-A2.json",
+      "bytes": 161,
+      "rawSha256": "F6946FE22472FC590B7CE674F79141B1AA3D32F84BF1C9757A9682B97962284C",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-after-B.json",
+      "bytes": 161,
+      "rawSha256": "D76B9216C728EC6033C1969B8DEB1560ACBF1907CD196189E9F668619FD284C7",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-after-B2.json",
+      "bytes": 161,
+      "rawSha256": "64BD9B1E3D6C01B7E66B34EC61E12D5BB5C05AB392EF4D6D1B691F0A8E1253F4",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-after-C.json",
+      "bytes": 161,
+      "rawSha256": "2D4EF1E7F7B7DBBEA7BBE73C94E531187F09C0749E3F97F42B0C29E0AB6E50DE",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-after-cleanup.json",
+      "bytes": 161,
+      "rawSha256": "134C0137C6F8C8196322E265B6E0AE6EACE1128EF790D5996DF19D8A6B7A7C11",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-after-D.json",
+      "bytes": 161,
+      "rawSha256": "9BFF481536F7128C83C869A3E633671BD5340EB207096F15575BC6A6B2ECD96D",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-after-D2.json",
+      "bytes": 161,
+      "rawSha256": "BC513798AA71F279CF9BD96BF4D5866CD6AF547A9582BB8326DFE62BAC9E7971",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-after-D3.json",
+      "bytes": 161,
+      "rawSha256": "673ED52A1CF5D86C8B8E1A7503B789E1EE77F3A5EB0BDBFDE98F09BCB2364578",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-after-E.json",
+      "bytes": 161,
+      "rawSha256": "294C428F0B04DA0C5123C85AC53FD1B337F6A17111AF4360FA107A85D32E0210",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-after-F1.json",
+      "bytes": 161,
+      "rawSha256": "761191A36CFE06786B0D1955511C35945C7CC42CFD707623E0F44DDC27D19975",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-after-F2.json",
+      "bytes": 161,
+      "rawSha256": "4CB93E450F238378DE01C555F56543622530320A188A7B88EE4AC0B644426989",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-after-G.json",
+      "bytes": 161,
+      "rawSha256": "3E5FF78FAFC5EC6FA97BD69BEC3AC88FA1DD9F66231408A6608600E5FBA85CD3",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-before-A.json",
+      "bytes": 161,
+      "rawSha256": "3EF61E222107C863546FF4A1DA4782DFE6CCA105251F64D6391F45203D584096",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-before-A2.json",
+      "bytes": 161,
+      "rawSha256": "2D8D7990D89389CB2E3CBD002CC5B7BC81722B6EB07F8A0D8785C0A30825AE0E",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-before-B.json",
+      "bytes": 161,
+      "rawSha256": "9F15C7ABCA7F5B91C4C124DA094C4FDC06C9B59A79CBF476EBE4075A0478D222",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-before-B2.json",
+      "bytes": 161,
+      "rawSha256": "222524EE58BC3B81425B46ADA5CFAF73CBDCEA14CA8644C2D214612768962D0B",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-before-C.json",
+      "bytes": 161,
+      "rawSha256": "4224B3B5B983CF947924E8F032A8A9FED8F630F6EE299819ADB197CBE56C45B9",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-before-D.json",
+      "bytes": 161,
+      "rawSha256": "FABE3D32D98C466007ACB943816105EB55EF63C9A08416A92FF3592C2FCD342B",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-before-D2.json",
+      "bytes": 161,
+      "rawSha256": "B79C7C2C79BD93EF1D7078936EF04730DC0EE14FCF759A9041215D4B72C7DC9A",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-before-D3.json",
+      "bytes": 161,
+      "rawSha256": "314ABA44979A13F27C317DD1FC54A758851790DF8E5A38B8535A7EE0C4672394",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-before-E.json",
+      "bytes": 161,
+      "rawSha256": "050B9B8700935C13F83D00CC33B0CDF94AA0069931053B02768994BFCD4D003E",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-before-F1.json",
+      "bytes": 161,
+      "rawSha256": "5873F7F306BADE98F4A9FD09998696038F79A514CE292B52375566D234ABB0F8",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-before-F2.json",
+      "bytes": 161,
+      "rawSha256": "A361EC2A5678A11640DCD3195F069420358097CA3AF6968007258344886B7CEE",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-before-G.json",
+      "bytes": 161,
+      "rawSha256": "E43F7184C54ACBC2D5BD20C949B9BF01AB2C1ABE2D6561A15FDD81560D2AF4F5",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\integrity-final.json",
+      "bytes": 161,
+      "rawSha256": "F6F517D242788AEC186C57DFC0DEA4F3AFC73D89B2FFE2D44F24A6051967BD89",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\path-resolution.json",
+      "bytes": 1354,
+      "rawSha256": "707D6D2D9ED64D865483B874719B85E27AD534A43B7BCC07553F4BE410E9F215",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\prior-candidate.json",
+      "bytes": 534,
+      "rawSha256": "C354215DA979A7DA7439DDE602E77F3B69E42F59F80B764DBA917AAAD101A70E",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\request-A.json",
+      "bytes": 1592,
+      "rawSha256": "AC48E157EC80370D5C09F5F6114A2AF46ECCB18CE885424305967D76DEA7E687",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\request-A2.json",
+      "bytes": 1479,
+      "rawSha256": "555A4C60CB52C6F87C69EEFCD79A0D7100AF912CFD99FFB8703742C80FA72524",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\request-B.json",
+      "bytes": 810,
+      "rawSha256": "7431E6805D1EA9FA7E73AA02162EDEE115D3063C42CBBC62C141A5B889203AD4",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\request-B2.json",
+      "bytes": 931,
+      "rawSha256": "EC6E30F27DF78E04E2791DBCC326BAF618F2589BE82420E72D61FCEDA61CC983",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\request-C.json",
+      "bytes": 792,
+      "rawSha256": "7DFCAF9574EF9245870C7BCA388D72005578DAE0A57CF6A3C71F92352FBDD817",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\request-D.json",
+      "bytes": 1748,
+      "rawSha256": "1E7394EBF20E65FB8279406C71C55749DBE5D602167132C440E05881FD989A5B",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\request-D2.json",
+      "bytes": 1983,
+      "rawSha256": "F87BCBE6EB9D29CA37643A912FCABF51933F48089E7349847DA6F91B0469A57F",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\request-D3.json",
+      "bytes": 1498,
+      "rawSha256": "18C451BF080A2B03BB5E4D9F4C2D477940C82F38F9678A809AF52032A33A0FB3",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\request-E.json",
+      "bytes": 2103,
+      "rawSha256": "3C47499244C7FB19A0AF1CDCD5C110525E9D07E92760349F5199E3B67BC56583",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\request-F1.json",
+      "bytes": 1812,
+      "rawSha256": "E470C9F4612F8EB69DDAADA214BD44C3AFDCB3D510F390F5C4DAE120E3143DF5",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\request-F2.json",
+      "bytes": 1831,
+      "rawSha256": "345814C028234D9BAEFFBB6D765A0123AC9E75852FD7B5949EF82FA081BFFF09",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\request-G.json",
+      "bytes": 1896,
+      "rawSha256": "1ADB0BFD89EA4D647CAC989801D03DC77096B806EBD594FC7820801DD3252EED",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\shared-deployment.json",
+      "bytes": 34948,
+      "rawSha256": "784842E65662659D18DE9740666DF25A8CAEC3473856DF0494CCAD16DB5D1085",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\task-cleanup.json",
+      "bytes": 151,
+      "rawSha256": "3FA30C0A3D5587D1676106AD76EA758B66329457AE562326117BBECBA5F52C26",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-after-A.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-after-A2.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-after-B.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-after-B2.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-after-C.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-after-cleanup.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-after-D.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-after-D2.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-after-D3.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-after-E.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-after-F1.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-after-F2.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-after-G.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-before-A.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-before-A2.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-before-B.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-before-B2.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-before-C.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-before-D.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-before-D2.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-before-D3.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-before-E.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-before-F1.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-before-F2.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-before-G.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-before.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DIAGNOSTIC_ROOT]\\evidence\\tasks-final.json",
+      "bytes": 41583,
+      "rawSha256": "F4E78DB80ED86B2C7DAD104DC44005646F15A031B041B8CBAAE329BBACA4BF54",
+      "handling": "sanitized evidence"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.HistoryApiTest.xml",
+      "bytes": 93449,
+      "rawSha256": "362A6DFED1D68C12B08C1846E98531E5D8644033A1E95FCCF8CE00DB2416EDDF",
+      "handling": "JUnit result fields only; no properties/environment/output"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.HistoryApplicationRestartTest.xml",
+      "bytes": 23519,
+      "rawSha256": "832C261B0D38AACD1AF58D70D8F9087BAC2C0BF51187B721922BA9FA8EFF3C07",
+      "handling": "JUnit result fields only; no properties/environment/output"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.HistoryFailureApiTest.xml",
+      "bytes": 95498,
+      "rawSha256": "E22815CC932422CFB5ECD9C8905D4F77330A9D4D7F88D5B9F8904C962D26AAB6",
+      "handling": "JUnit result fields only; no properties/environment/output"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.HistoryRepositoryTest.xml",
+      "bytes": 25693,
+      "rawSha256": "AA279FB7590A36E8C836DFBB4BF357910E0A535151951F37C0C337EA838A60EC",
+      "handling": "JUnit result fields only; no properties/environment/output"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.JobNormalizerTest.xml",
+      "bytes": 25085,
+      "rawSha256": "1E814E9AC859F91FEFF7128C93532F70285ADD2A1F5D43A50228A609069714FD",
+      "handling": "JUnit result fields only; no properties/environment/output"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.JobsApiTest.xml",
+      "bytes": 25216,
+      "rawSha256": "6827A1909236A4D3F14A4D9BB5D10BFDFA845E37C188647828814ACB0DD93EE2",
+      "handling": "JUnit result fields only; no properties/environment/output"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.JobServiceTest.xml",
+      "bytes": 22393,
+      "rawSha256": "32F54994544367E82F06D2B31EF78129D4FE7947E8BD1B7AD80A149E9B846F70",
+      "handling": "JUnit result fields only; no properties/environment/output"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.launcher.ConfigBootstrapTest.xml",
+      "bytes": 22676,
+      "rawSha256": "5DE734F918F24F69616B8F96033203B6DAA3E9EEB49C71728618F3F59EA8BFA9",
+      "handling": "JUnit result fields only; no properties/environment/output"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.launcher.SafeStopTest.xml",
+      "bytes": 23886,
+      "rawSha256": "A750DC3C349D899D7489329A39D0B041C8B0D699B0CAD5CC49017DC3D76F5719",
+      "handling": "JUnit result fields only; no properties/environment/output"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.launcher.WindowsLauncherTest.xml",
+      "bytes": 22542,
+      "rawSha256": "3E01FA8866BA1048004DB92514BCDEC9A2F967191652287B13D194D8415B6EDB",
+      "handling": "JUnit result fields only; no properties/environment/output"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.LauncherStatusControllerTest.xml",
+      "bytes": 22201,
+      "rawSha256": "6C5C38103CD3EE15823DDA016CE903278E51D8A2625C45B7D7CC0813519D1EAD",
+      "handling": "JUnit result fields only; no properties/environment/output"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.PowerShellCollectorTest.xml",
+      "bytes": 22921,
+      "rawSha256": "96F314B3F12672AB622AD1815D49A1052CAEE4C262FAD5FE82265167527BAA6D",
+      "handling": "JUnit result fields only; no properties/environment/output"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.runner.ReceiptFilesTest.xml",
+      "bytes": 23980,
+      "rawSha256": "5B4DF069F23892236B0E612A7ABFA971A000C35219B349E2D02FBB0142322532",
+      "handling": "JUnit result fields only; no properties/environment/output"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.runner.RunnerTest.xml",
+      "bytes": 27642,
+      "rawSha256": "31457D0B754B797F78E47AD130218EE29EFE7D4F89737DF2FCF6E8AAB74CA41E",
+      "handling": "JUnit result fields only; no properties/environment/output"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.TaskSelectionTest.xml",
+      "bytes": 22507,
+      "rawSha256": "6B4AB552EB6EBC350587991EEC8FF08C3BA4296970BF28C28A0C13F9154F47E0",
+      "handling": "JUnit result fields only; no properties/environment/output"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\.tools\\stage-5br-maven.log",
+      "bytes": 154186,
+      "rawSha256": "11FD811D62BFF145308AFEB8488ED5E71F7DF40FEBB16D6356A3A07A99AE3A05",
+      "handling": "structured result lines only; raw log excluded"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\.tools\\stage-5br-frontend.log",
+      "bytes": 2947,
+      "rawSha256": "0B25EEC6F9589A521C7B2951E460B640F62EAEFCDC9AFA1F7B000E55D7BC573F",
+      "handling": "structured result lines only; raw log excluded"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "resultHex": "0x00000001",
+  "elapsedMs": 5584,
+  "registeredAt": "2026-09-22T01:25:59.4313954+08:00",
+  "case": "G",
+  "receipts": [],
+  "state": "Ready",
+  "markerPresent": false,
+  "lastRunTime": "2026-09-22T01:25:59.0000000+08:00",
+  "lastTaskResult": 1,
+  "polls": [
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 257,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 518,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 776,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 1,
+      "elapsedMs": 1037,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 1,
+      "elapsedMs": 1302,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 1,
+      "elapsedMs": 1567,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 1,
+      "elapsedMs": 1831,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 1,
+      "elapsedMs": 2095,
+      "state": 3
+    }
+  ],
+  "wrapperMarkerPresent": true,
+  "collectionRecovered": false,
+  "readbackMatched": true,
+  "otherTaskDifferences": [],
+  "action": {
+    "command": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "arguments": "-NoProfile -NonInteractive -ExecutionPolicy Bypass -File [DIAGNOSTIC_ROOT]\\work\\case-G\\trampoline.ps1",
+    "argv": [
+      "-NoProfile",
+      "-NonInteractive",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-File",
+      "[DIAGNOSTIC_ROOT]\\work\\case-G\\trampoline.ps1"
+    ],
+    "workingDirectory": null,
+    "marker": "[DIAGNOSTIC_ROOT]\\work\\case-G\\marker.json",
+    "receiptDirectory": "[DIAGNOSTIC_ROOT]\\work\\case-G\\receipts",
+    "wrapperMarker": "[DIAGNOSTIC_ROOT]\\work\\case-G\\wrapper-marker.json"
+  }
+}

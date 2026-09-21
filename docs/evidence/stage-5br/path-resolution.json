@@ -1,0 +1,29 @@
+{
+  "capturedAt": "2026-09-21T17:24:52.341815+00:00",
+  "probes": [
+    {
+      "label": "logical-java",
+      "path": "[LOCALAPPDATA]\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\java.exe",
+      "agentExists": true,
+      "agentSha256": "63267782812F84001922687FEEAA93C3218C7A1F03409F0650DCDBEF2E7BC8CB"
+    },
+    {
+      "label": "physical-java",
+      "path": "[LOCALAPPDATA]\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\java.exe",
+      "agentExists": true,
+      "agentSha256": "63267782812F84001922687FEEAA93C3218C7A1F03409F0650DCDBEF2E7BC8CB"
+    },
+    {
+      "label": "logical-jar",
+      "path": "[LOCALAPPDATA]\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runner.jar",
+      "agentExists": true,
+      "agentSha256": "6582B291D95B1D4FE070169D35E1622940703BB8CC0FED6E5CC24C694462F5AF"
+    },
+    {
+      "label": "physical-jar",
+      "path": "[LOCALAPPDATA]\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runner.jar",
+      "agentExists": true,
+      "agentSha256": "6582B291D95B1D4FE070169D35E1622940703BB8CC0FED6E5CC24C694462F5AF"
+    }
+  ]
+}

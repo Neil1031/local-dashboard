@@ -1,0 +1,873 @@
+{
+  "mavenTotals": {
+    "tests": 133,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "suites": [
+    {
+      "name": "io.github.neil1031.dashboard.HistoryApiTest",
+      "tests": 5,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "readWorksAlongsideReservedWriterAndExclusiveLockFailsSafely",
+          "seconds": "0.258",
+          "result": "passed"
+        },
+        {
+          "name": "emptyHistoryAndExactly31DaysAreValid",
+          "seconds": "0.047",
+          "result": "passed"
+        },
+        {
+          "name": "boundedJoinReturnsEveryExecutionAndHistoricalOnlyJobsWithoutAnyWrites",
+          "seconds": "0.183",
+          "result": "passed"
+        },
+        {
+          "name": "invalidRangesAre400BeforeAnyDatabaseAccess",
+          "seconds": "0.027",
+          "result": "passed"
+        },
+        {
+          "name": "missingCorruptAndNewerSchemaFailSafelyWithoutRepairOrCreation",
+          "seconds": "0.057",
+          "result": "passed"
+        }
+      ]
+    },
+    {
+      "name": "io.github.neil1031.dashboard.HistoryApplicationRestartTest",
+      "tests": 1,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "separateApplicationContextsKeepIdsAndCountsAcrossShutdownAndRestart",
+          "seconds": "0.293",
+          "result": "passed"
+        }
+      ]
+    },
+    {
+      "name": "io.github.neil1031.dashboard.HistoryFailureApiTest",
+      "tests": 1,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "startupRuntimeLockAndCorruptionFailuresPreserveCurrentDataAndRecover",
+          "seconds": "0.148",
+          "result": "passed"
+        }
+      ]
+    },
+    {
+      "name": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+      "tests": 23,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "unversionedDatabaseWithSimilarToReservedNameIsNeverAdopted",
+          "seconds": "0.029",
+          "result": "passed"
+        },
+        {
+          "name": "wholeSnapshotRollsBackAfterMidBatchFailureAndRecoversWithoutDroppingHistory",
+          "seconds": "0.05",
+          "result": "passed"
+        },
+        {
+          "name": "uncertainObservationsNeverCreateCompletedHistory(String)[1]",
+          "seconds": "0.021",
+          "result": "passed"
+        },
+        {
+          "name": "uncertainObservationsNeverCreateCompletedHistory(String)[2]",
+          "seconds": "0.019",
+          "result": "passed"
+        },
+        {
+          "name": "uncertainObservationsNeverCreateCompletedHistory(String)[3]",
+          "seconds": "0.019",
+          "result": "passed"
+        },
+        {
+          "name": "uncertainObservationsNeverCreateCompletedHistory(String)[4]",
+          "seconds": "0.017",
+          "result": "passed"
+        },
+        {
+          "name": "uncertainObservationsNeverCreateCompletedHistory(String)[5]",
+          "seconds": "0.019",
+          "result": "passed"
+        },
+        {
+          "name": "uncertainObservationsNeverCreateCompletedHistory(String)[6]",
+          "seconds": "0.018",
+          "result": "passed"
+        },
+        {
+          "name": "uncertainObservationsNeverCreateCompletedHistory(String)[7]",
+          "seconds": "0.018",
+          "result": "passed"
+        },
+        {
+          "name": "uncertainObservationsNeverCreateCompletedHistory(String)[8]",
+          "seconds": "0.02",
+          "result": "passed"
+        },
+        {
+          "name": "uncertainObservationsNeverCreateCompletedHistory(String)[9]",
+          "seconds": "0.018",
+          "result": "passed"
+        },
+        {
+          "name": "unsupportedOrUnversionedExistingDatabaseFailsWithoutDeletingHistory",
+          "seconds": "0.036",
+          "result": "passed"
+        },
+        {
+          "name": "freshDatabaseCreatesVersionedSchemaAndExistingDatabaseSurvivesReinitialization",
+          "seconds": "0.029",
+          "result": "passed"
+        },
+        {
+          "name": "metadataChangesDoNotChangeIdentityAndStaleObservationCannotOverwriteNewerEvidence",
+          "seconds": "0.049",
+          "result": "passed"
+        },
+        {
+          "name": "internalReadIsBoundedAndUsesParameters",
+          "seconds": "0.018",
+          "result": "passed"
+        },
+        {
+          "name": "independentConcurrentInstancesInitializeAndDeduplicateAtDatabaseLevel",
+          "seconds": "0.077",
+          "result": "passed"
+        },
+        {
+          "name": "initialSchemaAndVersionRollBackTogetherOnFailure",
+          "seconds": "0.021",
+          "result": "passed"
+        },
+        {
+          "name": "versionedDatabaseMissingUniqueConstraintIsRejected",
+          "seconds": "0.035",
+          "result": "passed"
+        },
+        {
+          "name": "tenObservationsAndRepositoryRestartKeepOneStableRunWithEvidence",
+          "seconds": "0.105",
+          "result": "passed"
+        },
+        {
+          "name": "utcOffsetsTaipeiMidnightAndDefaultTimezoneDoNotChangeIdentity",
+          "seconds": "0.036",
+          "result": "passed"
+        },
+        {
+          "name": "corruptDatabaseIsNotReplacedAndLockFailureIsBounded",
+          "seconds": "0.085",
+          "result": "passed"
+        },
+        {
+          "name": "distinctExecutionsAndJobsRemainDistinctIncludingFailureAndDisabledHistory",
+          "seconds": "0.143",
+          "result": "passed"
+        },
+        {
+          "name": "changingExactSelectionToPrefixPreservesJobAndSqliteRunIdentity",
+          "seconds": "0.022",
+          "result": "passed"
+        }
+      ]
+    },
+    {
+      "name": "io.github.neil1031.dashboard.JobNormalizerTest",
+      "tests": 17,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "identityIncludesFolderAndHandlesUnicodeAndSpaces",
+          "seconds": "0.002",
+          "result": "passed"
+        },
+        {
+          "name": "handlesNeverRunAndNoNextRunWithoutFabricatedSuccess",
+          "seconds": "0.001",
+          "result": "passed"
+        },
+        {
+          "name": "classifiesWithoutConfusingSchedulerInformationWithExitCodes(String, boolean, long, String, String)[1]",
+          "seconds": "0.006",
+          "result": "passed"
+        },
+        {
+          "name": "classifiesWithoutConfusingSchedulerInformationWithExitCodes(String, boolean, long, String, String)[2]",
+          "seconds": "0.001",
+          "result": "passed"
+        },
+        {
+          "name": "classifiesWithoutConfusingSchedulerInformationWithExitCodes(String, boolean, long, String, String)[3]",
+          "seconds": "0.0",
+          "result": "passed"
+        },
+        {
+          "name": "classifiesWithoutConfusingSchedulerInformationWithExitCodes(String, boolean, long, String, String)[4]",
+          "seconds": "0.001",
+          "result": "passed"
+        },
+        {
+          "name": "classifiesWithoutConfusingSchedulerInformationWithExitCodes(String, boolean, long, String, String)[5]",
+          "seconds": "0.001",
+          "result": "passed"
+        },
+        {
+          "name": "classifiesWithoutConfusingSchedulerInformationWithExitCodes(String, boolean, long, String, String)[6]",
+          "seconds": "0.001",
+          "result": "passed"
+        },
+        {
+          "name": "classifiesWithoutConfusingSchedulerInformationWithExitCodes(String, boolean, long, String, String)[7]",
+          "seconds": "0.001",
+          "result": "passed"
+        },
+        {
+          "name": "classifiesWithoutConfusingSchedulerInformationWithExitCodes(String, boolean, long, String, String)[8]",
+          "seconds": "0.001",
+          "result": "passed"
+        },
+        {
+          "name": "classifiesWithoutConfusingSchedulerInformationWithExitCodes(String, boolean, long, String, String)[9]",
+          "seconds": "0.001",
+          "result": "passed"
+        },
+        {
+          "name": "classifiesWithoutConfusingSchedulerInformationWithExitCodes(String, boolean, long, String, String)[10]",
+          "seconds": "0.001",
+          "result": "passed"
+        },
+        {
+          "name": "classifiesWithoutConfusingSchedulerInformationWithExitCodes(String, boolean, long, String, String)[11]",
+          "seconds": "0.001",
+          "result": "passed"
+        },
+        {
+          "name": "classifiesWithoutConfusingSchedulerInformationWithExitCodes(String, boolean, long, String, String)[12]",
+          "seconds": "0.001",
+          "result": "passed"
+        },
+        {
+          "name": "malformedDataAndPermissionFailureRemainUnknown",
+          "seconds": "0.002",
+          "result": "passed"
+        },
+        {
+          "name": "absentNextRunAndOldLastRunDoNotInventMissedStatus",
+          "seconds": "0.001",
+          "result": "passed"
+        },
+        {
+          "name": "successfulPriorRunDoesNotMakeFutureJobSuccessful",
+          "seconds": "0.001",
+          "result": "passed"
+        }
+      ]
+    },
+    {
+      "name": "io.github.neil1031.dashboard.JobsApiTest",
+      "tests": 5,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "listAndDetailExposeNormalizedStateAndRawEvidence",
+          "seconds": "0.033",
+          "result": "passed"
+        },
+        {
+          "name": "partialAndMissingTasksAreVisible",
+          "seconds": "0.008",
+          "result": "passed"
+        },
+        {
+          "name": "malformedSnapshotIsVisibleError",
+          "seconds": "0.004",
+          "result": "passed"
+        },
+        {
+          "name": "collectorFailureIs503NotEmptySuccessAndDoesNotReusePriorSnapshot",
+          "seconds": "0.007",
+          "result": "passed"
+        },
+        {
+          "name": "noMutationEndpointAndDashboardAssetsAreServed",
+          "seconds": "0.073",
+          "result": "passed"
+        }
+      ]
+    },
+    {
+      "name": "io.github.neil1031.dashboard.JobServiceTest",
+      "tests": 3,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "unconfiguredDoesNotInvokeCollector",
+          "seconds": "0.003",
+          "result": "passed"
+        },
+        {
+          "name": "excludesCannotLeakThroughApi",
+          "seconds": "0.011",
+          "result": "passed"
+        },
+        {
+          "name": "duplicateIdentitiesAreRejected",
+          "seconds": "0.006",
+          "result": "passed"
+        }
+      ]
+    },
+    {
+      "name": "io.github.neil1031.dashboard.launcher.ConfigBootstrapTest",
+      "tests": 4,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "blockedParentFailsWithoutChangingUsersFile",
+          "seconds": "0.019",
+          "result": "passed"
+        },
+        {
+          "name": "firstRunPublishesExactSharedTemplateAndValidSettings",
+          "seconds": "0.032",
+          "result": "passed"
+        },
+        {
+          "name": "existingCustomEmptyOrInvalidFilesAreNeverRewritten",
+          "seconds": "0.039",
+          "result": "passed"
+        },
+        {
+          "name": "concurrentPublishHasExactlyOneWinnerAndNoPartialConfigOrTemporaryFiles",
+          "seconds": "0.091",
+          "result": "passed"
+        }
+      ]
+    },
+    {
+      "name": "io.github.neil1031.dashboard.launcher.SafeStopTest",
+      "tests": 13,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "missingAndAbsentAreFriendlyNoOps",
+          "seconds": "0.061",
+          "result": "passed"
+        },
+        {
+          "name": "strictCommandAllowsSpacesUnicodeAndRejectsJarSubstringOrExtraOptions",
+          "seconds": "0.008",
+          "result": "passed"
+        },
+        {
+          "name": "reusedPidRefusesAndCleansStaleRecord",
+          "seconds": "0.03",
+          "result": "passed"
+        },
+        {
+          "name": "normalStopWaitsAndCleansOnlyPidFile",
+          "seconds": "0.067",
+          "result": "passed"
+        },
+        {
+          "name": "forcedFallbackRechecksIdentity",
+          "seconds": "0.071",
+          "result": "passed"
+        },
+        {
+          "name": "inaccessibleIdentityProbeRefusesWithoutLeakingProbeDetails",
+          "seconds": "0.031",
+          "result": "passed"
+        },
+        {
+          "name": "windowsDestroyIsLoggedAsForcibleAndRecheckedBeforeFirstRequest",
+          "seconds": "0.07",
+          "result": "passed"
+        },
+        {
+          "name": "wrongReadinessRefusesDespiteMatchingProcess",
+          "seconds": "0.022",
+          "result": "passed"
+        },
+        {
+          "name": "malformedPidAndUnrecordedOccupiedPortRefuse",
+          "seconds": "0.043",
+          "result": "passed"
+        },
+        {
+          "name": "changedIdentityAfterNormalRequestPreventsForce",
+          "seconds": "0.038",
+          "result": "passed"
+        },
+        {
+          "name": "wrongExecutableCommandOrListenerRefusesDespiteReadyResponse",
+          "seconds": "0.047",
+          "result": "passed"
+        },
+        {
+          "name": "unknownStartTimeFailsClosed",
+          "seconds": "0.022",
+          "result": "passed"
+        },
+        {
+          "name": "windowsRecheckMismatchPreventsAnyRequest",
+          "seconds": "0.04",
+          "result": "passed"
+        }
+      ]
+    },
+    {
+      "name": "io.github.neil1031.dashboard.launcher.WindowsLauncherTest",
+      "tests": 3,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "readinessPollsUntilReadyAndFailsOnChildExitOrDeadline",
+          "seconds": "0.458",
+          "result": "passed"
+        },
+        {
+          "name": "homeIsStableAndCommandPreservesExternalConfigurationWithSpacesAndUnicode",
+          "seconds": "0.004",
+          "result": "passed"
+        },
+        {
+          "name": "readinessRequiresExactApplicationIdentityAndSuccessfulStatus",
+          "seconds": "0.043",
+          "result": "passed"
+        }
+      ]
+    },
+    {
+      "name": "io.github.neil1031.dashboard.LauncherStatusControllerTest",
+      "tests": 1,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "reportsReadyOnlyBetweenApplicationReadyAndContextClose",
+          "seconds": "0.001",
+          "result": "passed"
+        }
+      ]
+    },
+    {
+      "name": "io.github.neil1031.dashboard.PowerShellCollectorTest",
+      "tests": 6,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "realScriptFiltersFoldersAndKeepsSingletonAndEmptyArrays",
+          "seconds": "1.43",
+          "result": "passed"
+        },
+        {
+          "name": "processFailureAndTimeoutAreBounded",
+          "seconds": "2.448",
+          "result": "passed"
+        },
+        {
+          "name": "powershellAndJavaMatchTheSameSelectorContract",
+          "seconds": "1.005",
+          "result": "passed"
+        },
+        {
+          "name": "realScriptPreservesUnicodeLiteralNamesAndReportsPermissionDenied",
+          "seconds": "0.407",
+          "result": "passed"
+        },
+        {
+          "name": "prefixMatchesAreNotUnmatchedEvenWhenExcluded",
+          "seconds": "0.762",
+          "result": "passed"
+        },
+        {
+          "name": "wholeEnumerationErrorDoesNotBecomeEmptyList",
+          "seconds": "1.039",
+          "result": "passed"
+        }
+      ]
+    },
+    {
+      "name": "io.github.neil1031.dashboard.runner.ReceiptFilesTest",
+      "tests": 12,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "publishedStartedOnlyPrimaryRemainsIncompleteUnknown",
+          "seconds": "0.066",
+          "result": "passed"
+        },
+        {
+          "name": "unsupportedCorruptAndOversizedReceiptsNeverTurnIntoSuccess",
+          "seconds": "0.103",
+          "result": "passed"
+        },
+        {
+          "name": "racingClaimsAllowOnlyOneOwner",
+          "seconds": "0.005",
+          "result": "passed"
+        },
+        {
+          "name": "emptyOrPendingOnlyPrimaryDoesNotBlockValidFallback(boolean)[1]",
+          "seconds": "0.027",
+          "result": "passed"
+        },
+        {
+          "name": "emptyOrPendingOnlyPrimaryDoesNotBlockValidFallback(boolean)[2]",
+          "seconds": "0.028",
+          "result": "passed"
+        },
+        {
+          "name": "duplicateIdentityAndPhaseAreProtectedAndRestartReadsIncomplete",
+          "seconds": "0.022",
+          "result": "passed"
+        },
+        {
+          "name": "anyCorruptPublishedPrimaryPhaseFailsClosedEvenWithValidFallback(String)[1]",
+          "seconds": "0.077",
+          "result": "passed"
+        },
+        {
+          "name": "anyCorruptPublishedPrimaryPhaseFailsClosedEvenWithValidFallback(String)[2]",
+          "seconds": "0.066",
+          "result": "passed"
+        },
+        {
+          "name": "anyCorruptPublishedPrimaryPhaseFailsClosedEvenWithValidFallback(String)[3]",
+          "seconds": "0.066",
+          "result": "passed"
+        },
+        {
+          "name": "claimedDirectoryWithoutPublishedPhasesHasNoEvidence(boolean)[1]",
+          "seconds": "0.004",
+          "result": "passed"
+        },
+        {
+          "name": "claimedDirectoryWithoutPublishedPhasesHasNoEvidence(boolean)[2]",
+          "seconds": "0.007",
+          "result": "passed"
+        },
+        {
+          "name": "primaryAndFallbackCoalesceToOneExecutionAndConflictingCopiesFailClosed",
+          "seconds": "0.033",
+          "result": "passed"
+        }
+      ]
+    },
+    {
+      "name": "io.github.neil1031.dashboard.runner.RunnerTest",
+      "tests": 36,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "bothStreamsDrainBeyondHardSampleLimitWithoutDeadlock(int)[1]",
+          "seconds": "0.117",
+          "result": "passed"
+        },
+        {
+          "name": "bothStreamsDrainBeyondHardSampleLimitWithoutDeadlock(int)[2]",
+          "seconds": "0.099",
+          "result": "passed"
+        },
+        {
+          "name": "bothStreamsDrainBeyondHardSampleLimitWithoutDeadlock(int)[3]",
+          "seconds": "0.107",
+          "result": "passed"
+        },
+        {
+          "name": "unavailablePrimaryUsesFallbackAndPreservesActualSideEffectAndExit(int)[1]",
+          "seconds": "0.12",
+          "result": "passed"
+        },
+        {
+          "name": "unavailablePrimaryUsesFallbackAndPreservesActualSideEffectAndExit(int)[2]",
+          "seconds": "0.133",
+          "result": "passed"
+        },
+        {
+          "name": "unicodePathsAndLiteralArgumentsWorkWithoutPersistingOutputOrSecrets",
+          "seconds": "0.129",
+          "result": "passed"
+        },
+        {
+          "name": "firstPublicationFailureAfterRealClaimStillExecutesAndFallbackCanBeRead(int)[1]",
+          "seconds": "0.174",
+          "result": "passed"
+        },
+        {
+          "name": "firstPublicationFailureAfterRealClaimStillExecutesAndFallbackCanBeRead(int)[2]",
+          "seconds": "0.132",
+          "result": "passed"
+        },
+        {
+          "name": "invalidConfigRejectedWithoutLeakingSourceOrStartingChild(String)[1]",
+          "seconds": "0.03",
+          "result": "passed"
+        },
+        {
+          "name": "invalidConfigRejectedWithoutLeakingSourceOrStartingChild(String)[2]",
+          "seconds": "0.023",
+          "result": "passed"
+        },
+        {
+          "name": "invalidConfigRejectedWithoutLeakingSourceOrStartingChild(String)[3]",
+          "seconds": "0.025",
+          "result": "passed"
+        },
+        {
+          "name": "invalidConfigRejectedWithoutLeakingSourceOrStartingChild(String)[4]",
+          "seconds": "0.033",
+          "result": "passed"
+        },
+        {
+          "name": "invalidConfigRejectedWithoutLeakingSourceOrStartingChild(String)[5]",
+          "seconds": "0.021",
+          "result": "passed"
+        },
+        {
+          "name": "invalidConfigRejectedWithoutLeakingSourceOrStartingChild(String)[6]",
+          "seconds": "0.026",
+          "result": "passed"
+        },
+        {
+          "name": "invalidConfigRejectedWithoutLeakingSourceOrStartingChild(String)[7]",
+          "seconds": "0.026",
+          "result": "passed"
+        },
+        {
+          "name": "invalidConfigRejectedWithoutLeakingSourceOrStartingChild(String)[8]",
+          "seconds": "0.038",
+          "result": "passed"
+        },
+        {
+          "name": "invalidConfigRejectedWithoutLeakingSourceOrStartingChild(String)[9]",
+          "seconds": "0.028",
+          "result": "passed"
+        },
+        {
+          "name": "independentCliProcessesAndRepeatedProfileHaveUniqueReceiptsWithoutSpring",
+          "seconds": "0.679",
+          "result": "passed"
+        },
+        {
+          "name": "startFailuresNeverPretendChildRan(String)[1]",
+          "seconds": "0.05",
+          "result": "passed"
+        },
+        {
+          "name": "startFailuresNeverPretendChildRan(String)[2]",
+          "seconds": "0.05",
+          "result": "passed"
+        },
+        {
+          "name": "startFailuresNeverPretendChildRan(String)[3]",
+          "seconds": "0.053",
+          "result": "passed"
+        },
+        {
+          "name": "bothStoresUnavailableStillExecutesAndLeavesSafeDiagnostic",
+          "seconds": "0.086",
+          "result": "passed"
+        },
+        {
+          "name": "profileSelectorCannotBecomeACommand(String)[1]",
+          "seconds": "0.013",
+          "result": "passed"
+        },
+        {
+          "name": "profileSelectorCannotBecomeACommand(String)[2]",
+          "seconds": "0.015",
+          "result": "passed"
+        },
+        {
+          "name": "profileSelectorCannotBecomeACommand(String)[3]",
+          "seconds": "0.012",
+          "result": "passed"
+        },
+        {
+          "name": "profileSelectorCannotBecomeACommand(String)[4]",
+          "seconds": "0.015",
+          "result": "passed"
+        },
+        {
+          "name": "profileSelectorCannotBecomeACommand(String)[5]",
+          "seconds": "0.014",
+          "result": "passed"
+        },
+        {
+          "name": "profileSelectorCannotBecomeACommand(String)[6]",
+          "seconds": "0.016",
+          "result": "passed"
+        },
+        {
+          "name": "stdinIsClosedInsteadOfWaitingForConsoleInput",
+          "seconds": "0.096",
+          "result": "passed"
+        },
+        {
+          "name": "actualChildExitPropagatesAndReceiptSurvivesNewReader(int)[1]",
+          "seconds": "0.125",
+          "result": "passed"
+        },
+        {
+          "name": "actualChildExitPropagatesAndReceiptSurvivesNewReader(int)[2]",
+          "seconds": "0.124",
+          "result": "passed"
+        },
+        {
+          "name": "actualChildExitPropagatesAndReceiptSurvivesNewReader(int)[3]",
+          "seconds": "0.133",
+          "result": "passed"
+        },
+        {
+          "name": "actualChildExitPropagatesAndReceiptSurvivesNewReader(int)[4]",
+          "seconds": "0.127",
+          "result": "passed"
+        },
+        {
+          "name": "actualChildExitPropagatesAndReceiptSurvivesNewReader(int)[5]",
+          "seconds": "0.127",
+          "result": "passed"
+        },
+        {
+          "name": "actualChildExitPropagatesAndReceiptSurvivesNewReader(int)[6]",
+          "seconds": "0.125",
+          "result": "passed"
+        },
+        {
+          "name": "actualChildExitPropagatesAndReceiptSurvivesNewReader(int)[7]",
+          "seconds": "0.126",
+          "result": "passed"
+        }
+      ]
+    },
+    {
+      "name": "io.github.neil1031.dashboard.TaskSelectionTest",
+      "tests": 3,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "name": "selectorsMatchTheSharedContract",
+          "seconds": "0.001",
+          "result": "passed"
+        },
+        {
+          "name": "literalSelectorsAreCaseInsensitiveAndFolderAware",
+          "seconds": "0.0",
+          "result": "passed"
+        },
+        {
+          "name": "emptyIncludeSelectsNothingAndExcludeWins",
+          "seconds": "0.001",
+          "result": "passed"
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "maven": [
+      "[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.126 s -- in io.github.neil1031.dashboard.HistoryApiTest",
+      "[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.294 s -- in io.github.neil1031.dashboard.HistoryApplicationRestartTest",
+      "[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.308 s -- in io.github.neil1031.dashboard.HistoryFailureApiTest",
+      "[INFO] Tests run: 23, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.934 s -- in io.github.neil1031.dashboard.HistoryRepositoryTest",
+      "[INFO] Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.038 s -- in io.github.neil1031.dashboard.JobNormalizerTest",
+      "[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.284 s -- in io.github.neil1031.dashboard.JobsApiTest",
+      "[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.084 s -- in io.github.neil1031.dashboard.JobServiceTest",
+      "[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.184 s -- in io.github.neil1031.dashboard.launcher.ConfigBootstrapTest",
+      "[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.561 s -- in io.github.neil1031.dashboard.launcher.SafeStopTest",
+      "[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.505 s -- in io.github.neil1031.dashboard.launcher.WindowsLauncherTest",
+      "[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s -- in io.github.neil1031.dashboard.LauncherStatusControllerTest",
+      "[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.097 s -- in io.github.neil1031.dashboard.PowerShellCollectorTest",
+      "[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.515 s -- in io.github.neil1031.dashboard.runner.ReceiptFilesTest",
+      "[INFO] Tests run: 36, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.275 s -- in io.github.neil1031.dashboard.runner.RunnerTest",
+      "[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in io.github.neil1031.dashboard.TaskSelectionTest",
+      "[INFO] Tests run: 133, Failures: 0, Errors: 0, Skipped: 0",
+      "[INFO] BUILD SUCCESS"
+    ],
+    "frontend": [
+      "✔ initial loading, one GET, refresh coalescing, new response, no detail collection (878.0657ms)",
+      "✔ all statuses, keyboard filters, no inferred MISSED, real drawer null values, history (495.7392ms)",
+      "✔ PARTIAL keeps jobs and all diagnostics visible; text is never HTML (388.0627ms)",
+      "✔ history persistence failure retains current jobs and displays its diagnostic independently of history (330.7853ms)",
+      "✔ initial unavailable backend never renders scheduler success (277.4769ms)",
+      "✔ initial HTTP 503 never renders scheduler success (354.1251ms)",
+      "✔ OK empty collection stays distinct (255.308ms)",
+      "✔ NOT_CONFIGURED empty collection stays distinct (255.3596ms)",
+      "✔ PARTIAL empty collection stays distinct (253.3448ms)",
+      "✔ missing optional job fields show placeholders and preserve UNKNOWN (283.9583ms)",
+      "✔ offline after success removes old rows/counts and recovers (305.6339ms)",
+      "✔ 503 after success removes old rows/counts and recovers (310.2143ms)",
+      "✔ ERROR after success removes old rows/counts and recovers (315.468ms)",
+      "✔ invalid-json after success removes old rows/counts and recovers (308.0457ms)",
+      "✔ invalid-contract after success removes old rows/counts and recovers (318.5392ms)",
+      "✔ 25 jobs, long Unicode names, explicit MISSED, local dates, desktop and 320px drawer (836.4336ms)",
+      "✔ current status and previous execution outcome remain independent (1.6635ms)",
+      "✔ missing values and invalid dates never produce null, epoch, or Invalid Date (12.2527ms)",
+      "✔ accept explicit collection states, reject errors and malformed snapshots (0.5244ms)",
+      "✔ runtime ships no scheduler fixtures, hard-coded rows, log or history entries (22.4042ms)",
+      "✔ friendly job names do not change the original scheduler identity (0.2807ms)",
+      "✔ daily and dated aliases apply to current and history without changing identity (0.2688ms)",
+      "✔ one bounded request, daily summaries, complete sorted details and keyboard focus return (999.8683ms)",
+      "✔ loading has no fake cells; cache and successful Current Refresh invalidate once (585.6093ms)",
+      "✔ history error and retry keep Today snapshot usable and hide unsafe server details (404.8979ms)",
+      "✔ empty inventory and local midnight rollover use an updated range (376.3121ms)",
+      "✔ long Unicode names, injection-looking messages, sticky names and narrow horizontal scroll (1037.555ms)",
+      "✔ Refresh while a history read is in flight discards its stale result and fetches once more (356.8774ms)",
+      "✔ empty, single, all success and every mixed ordering retain failure and counts (7.8914ms)",
+      "✔ Taipei calendar boundaries, eighth day exclusion, union, names and distinct identities (1.8478ms)",
+      "✔ local calendar window spans DST spring/fall changes without using 168 hours (0.3075ms)",
+      "✔ invalid history payloads cannot silently become empty or successful history (0.6355ms)",
+      "ℹ tests 32",
+      "ℹ suites 0",
+      "ℹ pass 32",
+      "ℹ fail 0",
+      "ℹ cancelled 0",
+      "ℹ skipped 0",
+      "ℹ todo 0",
+      "ℹ duration_ms 8483.9936"
+    ]
+  }
+}
