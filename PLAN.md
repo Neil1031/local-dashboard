@@ -374,14 +374,41 @@ Requirements:
 - populate real 7-day history from SQLite
 - no fake history cells
 - support multiple executions for the same task on one day
-- make the representation explicit when a day has multiple outcomes
 - preserve task identity across renamed display text where possible
 - keep current scheduler snapshot and history concepts separate
 - do not infer MISSED; Stage 4 owns MISSED detection
 
+### 7-day history presentation rules
+
+The history grid is a **daily summary of observed runs**, not a replacement for individual executions.
+
+For each job + local calendar day:
+
+- no observed runs -> neutral empty cell
+- exactly one SUCCESS -> green success cell
+- exactly one FAILED -> red failed cell
+- multiple runs, all SUCCESS -> green cell with the run count
+- multiple runs containing at least one FAILED -> red/attention cell with the run count
+- a later SUCCESS must never erase the fact that an earlier run failed that same day
+
+A day cell with observed runs must be interactive. Selecting it shows all runs for that job/day in chronological order, including at least:
+
+- local execution time
+- SUCCESS / FAILED outcome
+- scheduler result code
+- result/message when available
+
+Do not collapse multiple runs into only the final outcome.
+
+Use the browser's local calendar day for grouping presentation, while persisted run identity/timestamps remain UTC.
+
+The 7-day window should be seven local calendar days including today.
+
+History queries must be bounded and must not trigger a fresh Windows Task Scheduler collection.
+
 ## Gate
 
-The 7-day UI matches persisted run records for controlled fixtures and real observed runs.
+The 7-day UI matches persisted run records for controlled fixtures and real observed runs, including multi-run days where a failure is followed by a success.
 
 ## Done when
 
