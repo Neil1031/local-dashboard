@@ -1,6 +1,7 @@
 /target/
 /.tools/
 /config/application.yml
+/config/runner.json
 /.idea/
 *.iml
 *.log

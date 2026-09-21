@@ -1,6 +1,6 @@
 # Local Dashboard
 
-Windows Task Scheduler 的本機唯讀觀測服務。目前完成 **Stage 0 + Stage 1 + Stage 2 + Stage 3A + Stage 3B**（Stage 3B 待 Manager Review）。
+Windows Task Scheduler 的本機唯讀觀測服務。目前另提供 **Stage 5A 獨立 Runner Core**（待 Manager Review）。
 `index.html` 保留原有粉色 UI，透過 `dashboard.mjs` 讀取真實 `/api/jobs`；runtime 不含 mock scheduler data。
 
 ## 環境與啟動
@@ -282,10 +282,79 @@ python scripts/verify-history-ui-live.py --source-db C:/local-data/existing-obse
 
 ## 範圍與參考
 
-尚無 MISSED 偵測、runner、logs、30-day reliability；依 `PLAN.md` 分別屬於後續 stages。
-Stage 3B 未修改 collector/normalization、schema、run identity 或 `PLAN.md`。下一階段為 Stage 4 reliable MISSED detection，須等 Manager Review。
+Stage 4 的可靠 MISSED 偵測依 Manager 決策暫緩；目前不推算 MISSED。
+Stage 5A 提供以下本機 runner；尚無 task migration、receipt UI/API、logs UI 或 30-day reliability。
+下一階段只在 Manager 核准後開始 **Stage 5B：單一低風險 task pilot**。
 
 - [Microsoft Task Scheduler result codes](https://learn.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-error-and-success-constants)
 - [Spring Boot 3.5 system requirements](https://docs.spring.io/spring-boot/3.5/system-requirements.html)
 - [Xerial SQLite JDBC](https://github.com/xerial/sqlite-jdbc)（3.53.4.0；Apache-2.0 / BSD-2-Clause）
 - [SQLite UPSERT](https://www.sqlite.org/lang_upsert.html)、[transactions](https://www.sqlite.org/lang_transaction.html)、[user_version](https://www.sqlite.org/pragma.html#pragma_user_version)
+
+## Stage 5A — 獨立本機 runner
+
+建置會額外產生 `target/local-dashboard-0.1.0-runner.jar`。此 JAR 使用獨立 main，**不啟動 Spring、HTTP 或 SQLite**，
+dashboard service 關閉也可執行。現有 dashboard JAR、scheduler、observed history 與 UI 行為不變。
+
+```powershell
+# 先建置，再複製並編輯本機設定：填入真正的 Java executable 與工作目錄絕對路徑。
+& ./mvnw.cmd -B verify
+Copy-Item ./config/runner.example.json ./config/runner.json
+& "$env:JAVA_HOME/bin/java.exe" -jar ./target/local-dashboard-0.1.0-runner.jar run ./config/runner.json test-java-version
+$LASTEXITCODE
+```
+
+範例只執行 `java -version`；不是正式 task，也不建立 Task Scheduler entry。設定檔採 UTF-8 JSON，完整範例見
+[`config/runner.example.json`](config/runner.example.json)。`config/runner.json`、`data/` 與測試 artifacts 已忽略，不提交秘密設定。
+
+- CLI 僅接受 `run <trusted-config.json> <profile-id>`。沒有動態 args、web command endpoint 或 HTTP dependency。
+- Profile ID / job ID 為 1–64 字元小寫英文字母、數字、連字號，首字母須為英文字母；使用無秘密的穩定名稱。
+- `executable` 與 `workingDirectory` 必須是絕對路徑；`args` 是必填字串陣列，不做 shell interpolation。
+  Windows executable 必須是 `.exe`。腳本應明確指定 interpreter，例如 `python.exe` 或 `powershell.exe -File ...`。
+  不要自行替每個 Windows arg 包外層雙引號；空白與內嵌引號由 JDK 處理。Shell profile 內的腳本文字仍屬受信任本機程式。
+- v1 非互動執行，child stdin 為 EOF；environment 繼承 runner process。Receipt 不保存 environment、args、executable path 或 cwd。
+- `receiptDirectory` 相對於 **config 所在目錄**，不是 runner 啟動 cwd。範例為 repository 的 `data/receipts`。
+  `fallbackDirectory` 可選、同樣相對 config；省略時為使用者 home 下 `.local-dashboard/runner-fallback`。
+  建議兩者使用具有正常本機 ACL 的固定本機目錄，不使用網路 share。
+- 主儲存失效 → fallback → 若兩處皆失效，stderr 印出固定 `RUNNER_RECEIPT_UNAVAILABLE` 與 execution ID。
+  **不因 observability 失效略過 child 或修改 child exit code**。兩處與 stderr 都不可用時無法保證留下證據。
+- Child exit 0 → runner 0 / `SUCCESS`；非零原樣傳回 / `FAILED`。這只是 child process 返回結果，不是 BUSINESS_SUCCESS。
+  無法啟動 → runner 127 / `START_FAILED`，child exitCode 與 processStartedAt 為 null；無效 config/profile → 64，沒有 child。
+  真正 child exit 127/64 仍是 `FAILED`，必須由 receipt 區分，不能只看數值。
+- **沒有自動 execution timeout／termination／retry**，不 kill descendants。Exit/duration 描述直接 child；
+  profile 應使用會等待實際工作結束的 foreground command，不用 `start` / detach 來冒充工作完成。
+- stdout/stderr 同時 drain，超過每 stream 64 KiB sample 上限仍持續讀取。只存 byte count、sample size、truncated、complete、readFailed，
+  **不存 output text、tail 或 hash**。sample 只在記憶體暫存。Direct child 結束後最多等待 5 秒讓兩個 streams 收尾；
+  descendants 保有 pipes 時記 `complete=false`，仍保留 direct child exit。這個 5 秒不是工作執行 timeout。
+
+每次 invocation 的唯一 ID 是 `jobId_epochMilliseconds_UUID`；retry／restart 是新 execution，不自動重跑不完整工作。
+每個 ID 下最多三份 immutable lifecycle snapshots，代表 **一份 logical receipt**：
+
+```text
+data/receipts/<executionId>/
+  00-started.json
+  01-process-started.json
+  02-terminal.json
+```
+
+`schemaVersion=1`。先寫臨時檔、force，再同目錄 atomic move 發佈；專屬目錄原子 claim 防止兩個 invocation 覆寫。
+原始 started evidence 保留。主儲存中途失效時 fallback 的 self-contained terminal snapshot 沿用相同 ID；
+internal `ReceiptFiles.read(List<Path>, executionId)` 合併 primary/fallback，只取最新 phase，identity 衝突會拒讀。
+目前以這些檔案為 authoritative receipt store；**尚未 ingest 到 SQLite 或顯示在 dashboard**。
+沒有更動 SQLite v1；file schema version 與 DB schema 分開。未知／損壞版本拒讀，不自動重建或覆寫。
+
+已發布 started/process-started、但沒有 terminal 的 receipt 一律為 **INCOMPLETE / UNKNOWN**，可能是尚未結束、runner crash、失去終端證據；
+不能宣稱 SUCCESS、永久 RUNNING 或 MISSED。不要只憑 elapsed time 自動 rerun；先查 child 自身結果。
+只有 claimed directory 或 `.pending-*`、沒有任何正式 phase 檔案時，代表 **no published receipt evidence**；
+single-root reader 回 `Optional.empty()`，不阻擋其他 fallback root。任何已發布 phase 的 corruption／版本／identity／lifecycle 錯誤仍會拒讀，
+即使另一 root 有有效 receipt 也不忽略錯誤。
+詳細 crash、去重、format evolution、retention 與 privacy 策略見 [`docs/STAGE-5A.md`](docs/STAGE-5A.md)。
+
+封裝 runner 的 Windows test-only acceptance（不啟動 Spring，不使用 Task Scheduler）：
+
+```powershell
+python scripts/verify-runner.py --java "$env:JAVA_HOME/bin/java.exe"
+```
+
+使用 `target/test-classes` 的 fixture，驗證 exit、Unicode、雙 stream 大輸出、fallback、併發、crash/restart 與 descendants；
+只中止 verifier 自己啟動的 runner，finite fixture child 會自行結束。結果寫入 `target/stage-5a/runner-*/verification.json`。

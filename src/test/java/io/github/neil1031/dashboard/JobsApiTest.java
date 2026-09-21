@@ -75,6 +75,8 @@ class JobsApiTest {
 
     @Test void noMutationEndpointAndDashboardAssetsAreServed() throws Exception {
         mvc.perform(post("/api/jobs")).andExpect(status().isMethodNotAllowed());
+        mvc.perform(post("/api/run").param("cmd", "whoami")).andExpect(status().isNotFound());
+        mvc.perform(post("/run").param("cmd", "whoami")).andExpect(status().isNotFound());
         mvc.perform(get("/index.html")).andExpect(status().isOk())
                 .andExpect(content().bytes(java.nio.file.Files.readAllBytes(java.nio.file.Path.of("index.html"))));
         mvc.perform(get("/dashboard.mjs")).andExpect(status().isOk())
