@@ -1,0 +1,10 @@
+{
+  "priorXmlSha256": "A209624682AACB8D06EC208FD8038BC9F5B520B2FB6F540B6C952997F6EC38E9",
+  "command": "[LOCALAPPDATA]\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\java.exe",
+  "commandIsAbsolute": true,
+  "commandHasLiteralLocalAppData": false,
+  "matchesDeployedJava": true,
+  "verifiedReleaseFileCount": 218,
+  "javaSha256": "63267782812F84001922687FEEAA93C3218C7A1F03409F0650DCDBEF2E7BC8CB",
+  "jarSha256": "6582B291D95B1D4FE070169D35E1622940703BB8CC0FED6E5CC24C694462F5AF"
+}

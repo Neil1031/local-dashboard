@@ -1,0 +1,15 @@
+{
+  "testWorkAbsent": true,
+  "testFilesDeleted": 467,
+  "configAndWorkingMarkersDeleted": true,
+  "sharedTestReleaseAbsent": true,
+  "markerSnapshotsDeleted": 6,
+  "at": "2026-09-22T01:31:36.1319485+08:00",
+  "capturedObservationsRetained": true,
+  "diagnosticTaskAbsent": true,
+  "removedTargets": [
+    "[DIAGNOSTIC_ROOT]\\work",
+    "[DASHBOARD_REPO]\\.tools\\stage5br-shared-20260922-011900-e4c53c2817d8"
+  ],
+  "priorStage5bUnreferencedReleaseUntouched": true
+}

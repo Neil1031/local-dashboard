@@ -1,0 +1,78 @@
+{
+  "resultHex": "0x80070002",
+  "elapsedMs": 5271,
+  "registeredAt": "2026-09-22T01:23:32.8130575+08:00",
+  "case": "F1",
+  "receipts": [],
+  "state": "Ready",
+  "markerPresent": false,
+  "lastRunTime": "2026-09-22T01:23:32.0000000+08:00",
+  "lastTaskResult": 2147942402,
+  "polls": [
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 266,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 534,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 795,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 1056,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 1316,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 1578,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 1839,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 2094,
+      "state": 3
+    }
+  ],
+  "collectionRecovered": false,
+  "readbackMatched": true,
+  "otherTaskDifferences": [],
+  "action": {
+    "command": "[LOCALAPPDATA]\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\java.exe",
+    "arguments": "-jar [LOCALAPPDATA]\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runner.jar run [DIAGNOSTIC_ROOT]\\work\\case-F\\diagnostic.json diagnostic",
+    "argv": [
+      "-jar",
+      "[LOCALAPPDATA]\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runner.jar",
+      "run",
+      "[DIAGNOSTIC_ROOT]\\work\\case-F\\diagnostic.json",
+      "diagnostic"
+    ],
+    "workingDirectory": null,
+    "marker": "[DIAGNOSTIC_ROOT]\\work\\case-F\\marker.json",
+    "receiptDirectory": "[DIAGNOSTIC_ROOT]\\work\\case-F\\receipts"
+  }
+}

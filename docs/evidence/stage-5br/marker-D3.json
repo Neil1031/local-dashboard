@@ -1,0 +1,28 @@
+{
+  "sidHash": "4030C819EB62D4F4EAEBB717E506185749F92413DC12038017F0E5963FC852F0",
+  "processCwd": "C:\\WINDOWS\\System32",
+  "at": "2026-09-22T01:27:23.4047875+08:00",
+  "markerId": "3a6521d6-d5ed-44d1-b9c6-65dd722d877f",
+  "bundledJavaOnPath": false,
+  "os64Bit": true,
+  "fileProbes": [
+    {
+      "label": "shared-java",
+      "path": "[DASHBOARD_REPO]\\.tools\\stage5br-shared-20260922-011900-e4c53c2817d8\\release\\runtime\\bin\\java.exe",
+      "sha256": "63267782812F84001922687FEEAA93C3218C7A1F03409F0650DCDBEF2E7BC8CB",
+      "exists": true
+    },
+    {
+      "label": "shared-jar",
+      "path": "[DASHBOARD_REPO]\\.tools\\stage5br-shared-20260922-011900-e4c53c2817d8\\release\\runner.jar",
+      "sha256": "6582B291D95B1D4FE070169D35E1622940703BB8CC0FED6E5CC24C694462F5AF",
+      "exists": true
+    }
+  ],
+  "processId": 9272,
+  "localAppData": "[LOCALAPPDATA]",
+  "temp": "[LOCALAPPDATA]\\Temp",
+  "cwd": "C:\\WINDOWS\\System32",
+  "process64Bit": true,
+  "sameUser": true
+}

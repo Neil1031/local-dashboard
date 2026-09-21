@@ -1,0 +1,165 @@
+{
+  "resultHex": "0x00000000",
+  "elapsedMs": 5547,
+  "registeredAt": "2026-09-22T01:25:48.7724663+08:00",
+  "case": "D2",
+  "receipts": [
+    {
+      "sha256": "55DAF1370F383D1959DC1ADF7BDE19499BBF0080F1451730A74B7709BF119FC6",
+      "name": "00-started.json",
+      "receipt": {
+        "schemaVersion": 1,
+        "executionId": "stage5br-test-only_1790011549617_5293ca1c-bae7-4e49-a794-3402943df5ab",
+        "jobId": "stage5br-test-only",
+        "commandProfileId": "diagnostic",
+        "phase": "STARTED",
+        "outcome": "UNKNOWN",
+        "startedAt": "2026-09-21T17:25:49.617626200Z",
+        "processStartedAt": null,
+        "finishedAt": null,
+        "durationMs": null,
+        "exitCode": null,
+        "runnerExitCode": null,
+        "processStartFailure": null,
+        "terminationReason": null,
+        "stdout": null,
+        "stderr": null,
+        "createdAt": "2026-09-21T17:25:49.650627800Z"
+      }
+    },
+    {
+      "sha256": "B08003272CEC4D4F1E71B192EE40D42386A62E4020D217F346B2C21419E606CB",
+      "name": "01-process-started.json",
+      "receipt": {
+        "schemaVersion": 1,
+        "executionId": "stage5br-test-only_1790011549617_5293ca1c-bae7-4e49-a794-3402943df5ab",
+        "jobId": "stage5br-test-only",
+        "commandProfileId": "diagnostic",
+        "phase": "PROCESS_STARTED",
+        "outcome": "UNKNOWN",
+        "startedAt": "2026-09-21T17:25:49.617626200Z",
+        "processStartedAt": "2026-09-21T17:25:49.694055700Z",
+        "finishedAt": null,
+        "durationMs": null,
+        "exitCode": null,
+        "runnerExitCode": null,
+        "processStartFailure": null,
+        "terminationReason": null,
+        "stdout": null,
+        "stderr": null,
+        "createdAt": "2026-09-21T17:25:49.695051700Z"
+      }
+    },
+    {
+      "sha256": "8300198433582AA1D1B2EB502340E263693CC1BC77730AA2C9F55DE5F0CAB985",
+      "name": "02-terminal.json",
+      "receipt": {
+        "schemaVersion": 1,
+        "executionId": "stage5br-test-only_1790011549617_5293ca1c-bae7-4e49-a794-3402943df5ab",
+        "jobId": "stage5br-test-only",
+        "commandProfileId": "diagnostic",
+        "phase": "TERMINAL",
+        "outcome": "SUCCESS",
+        "startedAt": "2026-09-21T17:25:49.617626200Z",
+        "processStartedAt": "2026-09-21T17:25:49.694055700Z",
+        "finishedAt": "2026-09-21T17:25:50.853406200Z",
+        "durationMs": 1235,
+        "exitCode": 0,
+        "runnerExitCode": 0,
+        "processStartFailure": null,
+        "terminationReason": null,
+        "stdout": {
+          "observedBytes": 0,
+          "sampleLimitBytes": 65536,
+          "sampledBytes": 0,
+          "truncated": false,
+          "complete": true,
+          "readFailed": false,
+          "contentStored": false
+        },
+        "stderr": {
+          "observedBytes": 0,
+          "sampleLimitBytes": 65536,
+          "sampledBytes": 0,
+          "truncated": false,
+          "complete": true,
+          "readFailed": false,
+          "contentStored": false
+        },
+        "createdAt": "2026-09-21T17:25:50.853406200Z"
+      }
+    }
+  ],
+  "state": "Ready",
+  "markerPresent": true,
+  "lastRunTime": "2026-09-22T01:25:48.0000000+08:00",
+  "lastTaskResult": 0,
+  "polls": [
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 264,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 536,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 802,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 1065,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 1329,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 1593,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 1844,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 0,
+      "elapsedMs": 2107,
+      "state": 3
+    }
+  ],
+  "wrapperMarkerPresent": false,
+  "collectionRecovered": false,
+  "readbackMatched": true,
+  "otherTaskDifferences": [],
+  "action": {
+    "command": "[LOCALAPPDATA]\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\java.exe",
+    "arguments": "-jar [LOCALAPPDATA]\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runner.jar run [DIAGNOSTIC_ROOT]\\work\\case-D\\diagnostic.json diagnostic",
+    "argv": [
+      "-jar",
+      "[LOCALAPPDATA]\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runner.jar",
+      "run",
+      "[DIAGNOSTIC_ROOT]\\work\\case-D\\diagnostic.json",
+      "diagnostic"
+    ],
+    "workingDirectory": null,
+    "marker": "[DIAGNOSTIC_ROOT]\\work\\case-D\\marker.json",
+    "receiptDirectory": "[DIAGNOSTIC_ROOT]\\work\\case-D\\receipts"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "at": "2026-09-22T01:25:48.7724663+08:00",
+  "instancesBefore": 0,
+  "lastRunTimeBefore": "2026-09-22T01:25:38.0000000+08:00",
+  "case": "D2",
+  "receiptFilesBefore": [],
+  "action": {
+    "command": "[LOCALAPPDATA]\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\java.exe",
+    "arguments": "-jar [LOCALAPPDATA]\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runner.jar run [DIAGNOSTIC_ROOT]\\work\\case-D\\diagnostic.json diagnostic",
+    "argv": [
+      "-jar",
+      "[LOCALAPPDATA]\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runner.jar",
+      "run",
+      "[DIAGNOSTIC_ROOT]\\work\\case-D\\diagnostic.json",
+      "diagnostic"
+    ],
+    "workingDirectory": null,
+    "marker": "[DIAGNOSTIC_ROOT]\\work\\case-D\\marker.json",
+    "receiptDirectory": "[DIAGNOSTIC_ROOT]\\work\\case-D\\receipts"
+  }
+}

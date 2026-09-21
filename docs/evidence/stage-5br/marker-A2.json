@@ -1,0 +1,40 @@
+{
+  "sidHash": "4030C819EB62D4F4EAEBB717E506185749F92413DC12038017F0E5963FC852F0",
+  "processCwd": "C:\\WINDOWS\\system32",
+  "at": "2026-09-22T01:24:58.1916695+08:00",
+  "markerId": "f7ead5bb-0fa6-4231-a350-869d93b686d8",
+  "bundledJavaOnPath": false,
+  "os64Bit": true,
+  "fileProbes": [
+    {
+      "label": "logical-java",
+      "path": "[LOCALAPPDATA]\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\java.exe",
+      "sha256": null,
+      "exists": false
+    },
+    {
+      "label": "physical-java",
+      "path": "[LOCALAPPDATA]\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\java.exe",
+      "sha256": "63267782812F84001922687FEEAA93C3218C7A1F03409F0650DCDBEF2E7BC8CB",
+      "exists": true
+    },
+    {
+      "label": "logical-jar",
+      "path": "[LOCALAPPDATA]\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runner.jar",
+      "sha256": null,
+      "exists": false
+    },
+    {
+      "label": "physical-jar",
+      "path": "[LOCALAPPDATA]\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runner.jar",
+      "sha256": "6582B291D95B1D4FE070169D35E1622940703BB8CC0FED6E5CC24C694462F5AF",
+      "exists": true
+    }
+  ],
+  "processId": 33864,
+  "localAppData": "[LOCALAPPDATA]",
+  "temp": "[LOCALAPPDATA]\\Temp",
+  "cwd": "C:\\WINDOWS\\system32",
+  "process64Bit": true,
+  "sameUser": true
+}

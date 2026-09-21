@@ -1,0 +1,10 @@
+{
+  "api": "GetCurrentPackageFullName",
+  "returnCode": 15700,
+  "hasPackageIdentity": false,
+  "packageName": null,
+  "logicalParentReparsePoint": false,
+  "logicalParent": "[LOCALAPPDATA]\\LocalDashboard",
+  "resolvedParent": "[LOCALAPPDATA]\\LocalDashboard",
+  "javaPhysicalPathDiffers": true
+}

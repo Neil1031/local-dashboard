@@ -1,0 +1,78 @@
+{
+  "resultHex": "0x80070002",
+  "elapsedMs": 5401,
+  "registeredAt": "2026-09-22T01:23:43.1314309+08:00",
+  "case": "F2",
+  "receipts": [],
+  "state": "Ready",
+  "markerPresent": false,
+  "lastRunTime": "2026-09-22T01:23:43.0000000+08:00",
+  "lastTaskResult": 2147942402,
+  "polls": [
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 262,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 524,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 780,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 1042,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 1311,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 1571,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 1836,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 2098,
+      "state": 3
+    }
+  ],
+  "collectionRecovered": false,
+  "readbackMatched": true,
+  "otherTaskDifferences": [],
+  "action": {
+    "command": "[LOCALAPPDATA]\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\java.exe",
+    "arguments": "-jar [LOCALAPPDATA]\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runner.jar run [DIAGNOSTIC_ROOT]\\work\\case-F\\diagnostic.json diagnostic",
+    "argv": [
+      "-jar",
+      "[LOCALAPPDATA]\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runner.jar",
+      "run",
+      "[DIAGNOSTIC_ROOT]\\work\\case-F\\diagnostic.json",
+      "diagnostic"
+    ],
+    "workingDirectory": "C:\\WINDOWS\\System32",
+    "marker": "[DIAGNOSTIC_ROOT]\\work\\case-F\\marker.json",
+    "receiptDirectory": "[DIAGNOSTIC_ROOT]\\work\\case-F\\receipts"
+  }
+}

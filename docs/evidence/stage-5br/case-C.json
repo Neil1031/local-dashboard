@@ -1,0 +1,73 @@
+{
+  "resultHex": "0x80070002",
+  "elapsedMs": 5201,
+  "registeredAt": "2026-09-22T01:21:41.7175523+08:00",
+  "case": "C",
+  "receipts": [],
+  "state": "Ready",
+  "markerPresent": false,
+  "lastRunTime": "2026-09-22T01:21:41.0000000+08:00",
+  "lastTaskResult": 2147942402,
+  "polls": [
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 266,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 536,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 797,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 1067,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 1328,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 1583,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 1837,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": -2147024894,
+      "elapsedMs": 2096,
+      "state": 3
+    }
+  ],
+  "readbackMatched": true,
+  "otherTaskDifferences": [],
+  "action": {
+    "command": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\java.exe",
+    "arguments": "-version",
+    "argv": [
+      "-version"
+    ],
+    "workingDirectory": null,
+    "marker": "[DIAGNOSTIC_ROOT]\\work\\unused-C.json",
+    "receiptDirectory": null
+  }
+}

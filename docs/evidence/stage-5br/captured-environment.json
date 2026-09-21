@@ -1,0 +1,116 @@
+{
+  "E": {
+    "temp": "[LOCALAPPDATA]\\Temp",
+    "processId": 19940,
+    "sidHash": "4030C819EB62D4F4EAEBB717E506185749F92413DC12038017F0E5963FC852F0",
+    "cwd": "C:\\WINDOWS\\System32",
+    "markerId": "c88dcd57-709b-45c5-8257-234ae703e6ca",
+    "at": "2026-09-22T01:22:32.6905236+08:00",
+    "bundledJavaOnPath": false,
+    "sameUser": true,
+    "processCwd": "C:\\WINDOWS\\System32",
+    "localAppData": "[LOCALAPPDATA]",
+    "process64Bit": true,
+    "os64Bit": true
+  },
+  "A2": {
+    "sidHash": "4030C819EB62D4F4EAEBB717E506185749F92413DC12038017F0E5963FC852F0",
+    "processCwd": "C:\\WINDOWS\\system32",
+    "at": "2026-09-22T01:24:58.1916695+08:00",
+    "markerId": "f7ead5bb-0fa6-4231-a350-869d93b686d8",
+    "bundledJavaOnPath": false,
+    "os64Bit": true,
+    "fileProbes": [
+      {
+        "label": "logical-java",
+        "path": "[LOCALAPPDATA]\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\java.exe",
+        "sha256": null,
+        "exists": false
+      },
+      {
+        "label": "physical-java",
+        "path": "[LOCALAPPDATA]\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\java.exe",
+        "sha256": "63267782812F84001922687FEEAA93C3218C7A1F03409F0650DCDBEF2E7BC8CB",
+        "exists": true
+      },
+      {
+        "label": "logical-jar",
+        "path": "[LOCALAPPDATA]\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runner.jar",
+        "sha256": null,
+        "exists": false
+      },
+      {
+        "label": "physical-jar",
+        "path": "[LOCALAPPDATA]\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runner.jar",
+        "sha256": "6582B291D95B1D4FE070169D35E1622940703BB8CC0FED6E5CC24C694462F5AF",
+        "exists": true
+      }
+    ],
+    "processId": 33864,
+    "localAppData": "[LOCALAPPDATA]",
+    "temp": "[LOCALAPPDATA]\\Temp",
+    "cwd": "C:\\WINDOWS\\system32",
+    "process64Bit": true,
+    "sameUser": true
+  },
+  "D3": {
+    "sidHash": "4030C819EB62D4F4EAEBB717E506185749F92413DC12038017F0E5963FC852F0",
+    "processCwd": "C:\\WINDOWS\\System32",
+    "at": "2026-09-22T01:27:23.4047875+08:00",
+    "markerId": "3a6521d6-d5ed-44d1-b9c6-65dd722d877f",
+    "bundledJavaOnPath": false,
+    "os64Bit": true,
+    "fileProbes": [
+      {
+        "label": "shared-java",
+        "path": "[DASHBOARD_REPO]\\.tools\\stage5br-shared-20260922-011900-e4c53c2817d8\\release\\runtime\\bin\\java.exe",
+        "sha256": "63267782812F84001922687FEEAA93C3218C7A1F03409F0650DCDBEF2E7BC8CB",
+        "exists": true
+      },
+      {
+        "label": "shared-jar",
+        "path": "[DASHBOARD_REPO]\\.tools\\stage5br-shared-20260922-011900-e4c53c2817d8\\release\\runner.jar",
+        "sha256": "6582B291D95B1D4FE070169D35E1622940703BB8CC0FED6E5CC24C694462F5AF",
+        "exists": true
+      }
+    ],
+    "processId": 9272,
+    "localAppData": "[LOCALAPPDATA]",
+    "temp": "[LOCALAPPDATA]\\Temp",
+    "cwd": "C:\\WINDOWS\\System32",
+    "process64Bit": true,
+    "sameUser": true
+  },
+  "D2": {
+    "temp": "[LOCALAPPDATA]\\Temp",
+    "processId": 16344,
+    "sidHash": "4030C819EB62D4F4EAEBB717E506185749F92413DC12038017F0E5963FC852F0",
+    "cwd": "C:\\WINDOWS\\System32",
+    "markerId": "ccd1eb63-7c8b-4fd8-a80e-48bb1080ab25",
+    "at": "2026-09-22T01:25:50.0171881+08:00",
+    "bundledJavaOnPath": false,
+    "sameUser": true,
+    "processCwd": "C:\\WINDOWS\\System32",
+    "localAppData": "[LOCALAPPDATA]",
+    "process64Bit": true,
+    "os64Bit": true
+  },
+  "wrapperG": {
+    "at": "2026-09-22T01:26:00.1946829+08:00",
+    "javaVisible": false
+  },
+  "A": {
+    "temp": "[LOCALAPPDATA]\\Temp",
+    "processId": 7348,
+    "sidHash": "4030C819EB62D4F4EAEBB717E506185749F92413DC12038017F0E5963FC852F0",
+    "cwd": "C:\\WINDOWS\\system32",
+    "markerId": "0ba4a7ae-96aa-41de-b336-561041391eed",
+    "at": "2026-09-22T01:20:22.8189007+08:00",
+    "bundledJavaOnPath": false,
+    "sameUser": true,
+    "processCwd": "C:\\WINDOWS\\system32",
+    "localAppData": "[LOCALAPPDATA]",
+    "process64Bit": true,
+    "os64Bit": true
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "resultHex": "0x00000000",
+  "elapsedMs": 5360,
+  "registeredAt": "2026-09-22T01:25:38.3623756+08:00",
+  "case": "B2",
+  "receipts": [],
+  "state": "Ready",
+  "markerPresent": false,
+  "lastRunTime": "2026-09-22T01:25:38.0000000+08:00",
+  "lastTaskResult": 0,
+  "polls": [
+    {
+      "instances": 0,
+      "lastTaskResult": 267009,
+      "elapsedMs": 262,
+      "state": 4
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 0,
+      "elapsedMs": 527,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 0,
+      "elapsedMs": 787,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 0,
+      "elapsedMs": 1042,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 0,
+      "elapsedMs": 1308,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 0,
+      "elapsedMs": 1562,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 0,
+      "elapsedMs": 1824,
+      "state": 3
+    },
+    {
+      "instances": 0,
+      "lastTaskResult": 0,
+      "elapsedMs": 2083,
+      "state": 3
+    }
+  ],
+  "wrapperMarkerPresent": false,
+  "collectionRecovered": false,
+  "readbackMatched": true,
+  "otherTaskDifferences": [],
+  "action": {
+    "command": "[LOCALAPPDATA]\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\java.exe",
+    "arguments": "-version",
+    "argv": [
+      "-version"
+    ],
+    "workingDirectory": null,
+    "marker": "[DIAGNOSTIC_ROOT]\\work\\unused-B.json",
+    "receiptDirectory": null
+  }
+}
