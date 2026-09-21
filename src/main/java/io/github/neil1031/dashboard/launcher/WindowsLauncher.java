@@ -34,6 +34,7 @@ public final class WindowsLauncher {
             Files.createDirectories(home.resolve("logs"));
             Files.createDirectories(home.resolve("config"));
             Path log = home.resolve("logs/launcher.log");
+            if (ConfigBootstrap.ensure(home)) append(log, "CONFIG_CREATED config/application.yml");
             // The lock covers concurrent cold starts, including instances using different data homes.
             Path lockDirectory = applicationHome(null, System.getenv("LOCALAPPDATA"));
             Files.createDirectories(lockDirectory);

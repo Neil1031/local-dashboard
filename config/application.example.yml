@@ -7,8 +7,9 @@ dashboard:
       - '\InsiderTracker-Market'
       - '\InsiderTracker-SEC'
       - '\InsiderTracker-SyncImport'
-      - '\AIStockHunter-UnexplainedVolume-HealthCheck'
+      - '\AIStockHunter-UnexplainedVolume-Daily'
       - '\AIStockHunter-Accumulation-Weekly-Check'
+      - '\AIStockHunter-Accumulation-Check-*'
     exclude: []
     missed-grace-minutes: 15
     timeout-seconds: 30

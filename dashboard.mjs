@@ -8,15 +8,24 @@ const jobDisplayNames = Object.freeze({
   'InsiderTracker-Market': '市場資料更新',
   'InsiderTracker-SEC': 'SEC 內部人交易更新',
   'InsiderTracker-SyncImport': '內部人資料同步',
-  'AIStockHunter-UnexplainedVolume-HealthCheck': '異常成交量健康檢查',
+  'AIStockHunter-UnexplainedVolume-Daily': '異常成交量每日掃描',
+  'AIStockHunter-UnexplainedVolume-HealthCheck': '舊版異常成交量健康檢查',
   'AIStockHunter-Accumulation-Weekly-Check': '籌碼累積每週檢查'
 });
 const originalJobName = job => job?.taskName ?? job?.name ?? '';
-export const jobDisplayName = job => jobDisplayNames[originalJobName(job)] ?? displayValue(originalJobName(job));
+const jobAlias = name => {
+  const prefix = 'AIStockHunter-Accumulation-Check-';
+  if (name.startsWith(prefix)) {
+    const date = name.slice(prefix.length);
+    if (/^\d{4}-\d{2}-\d{2}$/.test(date)) return `籌碼累積上線檢查 · ${date}`;
+  }
+  return Object.hasOwn(jobDisplayNames, name) ? jobDisplayNames[name] : undefined;
+};
+export const jobDisplayName = job => jobAlias(originalJobName(job)) ?? displayValue(originalJobName(job));
 export const jobSubtitle = job => {
   const original = originalJobName(job);
   const path = typeof job?.taskPath === 'string' ? job.taskPath : '';
-  return jobDisplayNames[original]
+  return jobAlias(original)
     ? [original, path && path !== '\\' ? path : ''].filter(Boolean).join(' · ')
     : displayValue(path || original);
 };

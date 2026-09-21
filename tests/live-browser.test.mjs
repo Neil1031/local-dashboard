@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import { summarize } from '../dashboard.mjs';
+import { summarize, jobDisplayName, jobSubtitle } from '../dashboard.mjs';
 
 // Explicit opt-in. This uses the packaged service and real configured collector;
 // no routes, mocked responses, task mutations, or additional detail requests.
@@ -46,7 +46,8 @@ test('packaged UI renders the actual list response and refreshes once', { skip: 
       const job = snapshot.jobs[index];
       const row = rows.nth(index);
       assert.equal(await row.getAttribute('data-status'), job.status);
-      assert.equal(await row.locator('.job-name').innerText(), job.name);
+      assert.equal(await row.locator('.job-name').innerText(), jobDisplayName(job));
+      assert.ok((await row.innerText()).includes(jobSubtitle(job)));
       assert.ok((await row.innerText()).includes(`Last run: ${title(job.lastRunStatus)}`));
       await row.click();
       const values = await page.locator('#detailGrid .detail').evaluateAll(details => Object.fromEntries(details.map(detail => [detail.querySelector('small').textContent, detail.querySelector('strong').textContent])));

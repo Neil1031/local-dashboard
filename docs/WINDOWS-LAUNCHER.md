@@ -21,7 +21,7 @@
 
 ```text
 %LOCALAPPDATA%/LocalDashboard/
-  config/application.yml       # 使用者自行建立/修改，不會打包或覆寫
+  config/application.yml       # 缺少時自動建立；使用者可修改，既有檔案不覆寫
   data/local-dashboard.db       # 預設 observed history，重啟/重建後保留
   logs/server.log               # 原 Spring/server stdout + stderr，append
   logs/launcher.log             # 啟動 PID、browser dispatch 與錯誤
@@ -29,19 +29,19 @@
   server.pid                   # PID + start time；防止 PID reuse 被誤認
 ```
 
-第一次沒有設定時採 `include: []` 安全預設，UI 顯示 NOT_CONFIGURED。
-使用 Windows 檔案總管貼上 `%LOCALAPPDATA%\LocalDashboard\config`，建立 `application.yml`，
-內容格式沿用 repository 的 `config/application.example.yml`。例如：
+第一次缺少 `config/application.yml` 時，EXE 自動建立設定，選取五個既有 tasks，UI 沿用中文顯示名稱。
+不需要使用者手動建立 YAML。唯一範本是 [`config/application.example.yml`](../config/application.example.yml)，
+Maven 將這份檔案原樣放進 launcher JAR 的 `bootstrap/application.example.yml`；不打包私人設定。
+使用預設 home 或 `LOCAL_DASHBOARD_HOME` 時行為相同。若想調整監控清單，編輯外部檔案並重啟。
 
-```yaml
-dashboard:
-  scheduler:
-    include:
-      - '\MyExistingTask'
-    exclude: []
-  history:
-    database-path: data/local-dashboard.db
-```
+**已有檔案絕不覆寫**，包括自訂設定、空檔、格式錯誤的設定及既有 symlink。
+使用者原本設定 `include: []` 時仍會顯示 NOT_CONFIGURED，必須自行修改；bootstrap 不把它當成缺少檔案。
+若 task 不存在／不可讀，使用原有 collection diagnostics，不建立或修改 Windows tasks。
+
+發布方式：在同一 config 目錄寫入專屬暫存檔、force 完整內容，再以 hard-link create-only 操作建立
+`application.yml`，最後移除自己建立的暫存名稱。目標已存在時只保留既有檔案；兩個 launcher 競爭時僅一個發布成功，
+讀者看見的設定已完整。此方式適用 Windows 預設 NTFS，不需 Administrator；不支援 hard links 的 filesystem
+會明確失敗，沒有不安全的覆寫或直接寫入 final file fallback。重啟不重新寫入設定，history/data 路徑不變。
 
 **從既有 JAR 部署移轉**：先停止舊服務，再把自己的 `config/application.yml` 與既有 `data/`
 複製到此工作目錄，或透過 Windows 使用者環境變數設定 `LOCAL_DASHBOARD_HOME` 為原本 repository／
@@ -182,3 +182,31 @@ Python 3.11、Node 24 / Playwright / Edge。全程以 shell、HTTP、process、S
 - Launcher 不自動管理 log retention；server.log/launcher.log 持續追加。
 - 舊版（沒有 readiness endpoint）的手動 JAR 服務需先停止再改用此版本。
 - 不提供安裝器、背景服務、自動更新、托盤或新的停止 API；沒有更動 Windows Scheduled Tasks。
+
+## First-run config bootstrap 驗收
+
+```powershell
+.\scripts\package-windows.ps1
+node --test tests/dashboard.test.mjs tests/history.test.mjs tests/browser.test.mjs tests/history-browser.test.mjs
+python scripts/verify-config-bootstrap.py
+git diff --check
+```
+
+Python 驗收沿用前述 Node 22+／Playwright 設定。所有 case 使用獨立 home，連 LOCALAPPDATA 的
+launcher lock／PID 檔也重導向至驗收目錄；不修改使用者真正的 `%LOCALAPPDATA%\LocalDashboard`。
+Case A 從空 override home 執行實際 EXE，確認 packaged template、五個 jobs、真實 browser DOM 中文名稱。
+Case B 驗證自訂單一 task 設定 bytes/hash/mtime 不變；Case C 同 home 兩個 EXE 競爭，只發布一次完整設定；
+Case D 重啟後 config hash/mtime 與既有 history identity 保留。另外驗證沒有 override 時的預設 home 路徑。
+前後比較五個 tasks 的 definition/Actions/Triggers hashes，並只清理驗收自己啟動的 server。
+輸出 `.tools/config-bootstrap-acceptance/<id>/verification.json`、`case-a/ui.json` 與 screenshot，均不提交。
+
+2026-09-21 實測結果（Windows/NTFS，JDK 25.0.2）：A/B/C/D 及無 override 的預設 home 路徑全部通過。
+Case A `/api/jobs` 回傳 5 個原名 tasks，collectionStatus=OK；Playwright 真實 HTTP/DOM 與截圖確認五個中文名稱。
+Case B 只讀到自訂的 1 個 task，config bytes/SHA-256/mtime 不變。
+Case C 兩個 EXE 共用一個 server，只出現一次 CONFIG_CREATED，只有一份完整且等於唯一範本的 YAML，沒有殘留 temp file。
+Case D config SHA-256/mtime 不變，5 筆既有 history identity/outcome 保留。
+116 Maven tests、31 frontend regression tests、1 opt-in live browser test 均通過；app-image 成功。
+五個 tasks 的 definition/Actions/Triggers hashes 前後完全一致；驗收 server 已安全清理。
+使用者真正 home 的 5 個既有檔案 path/size/SHA-256 全部未變，桌面捷徑 target 正確且未重建。
+本機證據：`.tools/config-bootstrap-acceptance/497eaa087a6e4d64954ad68f1b7de8ad/verification.json`，
+建置及回歸 logs 為 `.tools/bootstrap-package-build.log`、`.tools/bootstrap-frontend-tests.log`。

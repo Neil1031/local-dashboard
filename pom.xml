@@ -20,6 +20,7 @@
   <build>
     <resources>
       <resource><directory>src/main/resources</directory></resource>
+      <resource><directory>${project.basedir}/config</directory><includes><include>application.example.yml</include></includes><targetPath>bootstrap</targetPath></resource>
       <resource><directory>${project.basedir}</directory><includes><include>index.html</include><include>dashboard.mjs</include></includes><targetPath>static</targetPath></resource>
     </resources>
     <plugins>
@@ -28,7 +29,7 @@
         <executions><execution><id>windows-launcher</id><goals><goal>jar</goal></goals>
           <configuration>
             <classifier>launcher</classifier>
-            <includes><include>io/github/neil1031/dashboard/launcher/**</include></includes>
+            <includes><include>io/github/neil1031/dashboard/launcher/**</include><include>bootstrap/application.example.yml</include></includes>
             <archive><manifest><mainClass>io.github.neil1031.dashboard.launcher.WindowsLauncher</mainClass></manifest></archive>
           </configuration>
         </execution></executions>

@@ -29,6 +29,37 @@ class PowerShellCollectorTest {
                 mapper.writeValueAsString(Map.of("include", include, "exclude", exclude)), Duration.ofSeconds(10));
         return mapper.readTree(output);
     }
+    @Test void powershellAndJavaMatchTheSameSelectorContract() throws Exception {
+        String collector = resource("/collect-scheduler.ps1");
+        // Load the actual production matching function without invoking the live collector.
+        String functions = collector.substring(0, collector.indexOf("\ntry {"));
+        String script = functions + "\n$cases = [Console]::In.ReadToEnd() | ConvertFrom-Json\n"
+                + "$results = @($cases | ForEach-Object { Test-Selector $_.selector "
+                + "([pscustomobject]@{TaskPath=$_.path;TaskName=$_.name}) })\n"
+                + "ConvertTo-Json -InputObject $results -Compress";
+        String input = resource("/fixtures/selector-cases.json");
+        var cases = mapper.readTree(input);
+        var actual = mapper.readTree(run(script, input, Duration.ofSeconds(10)));
+        assertThat(actual).hasSize(cases.size());
+        for (int i = 0; i < cases.size(); i++) {
+            var entry = cases.get(i);
+            boolean javaMatch = TaskSelection.matches(entry.path("selector").asText(),
+                    entry.path("path").asText(), entry.path("name").asText());
+            assertThat(actual.get(i).asBoolean()).as(entry.toString())
+                    .isEqualTo(entry.path("matches").asBoolean()).isEqualTo(javaMatch);
+        }
+    }
+    @Test void prefixMatchesAreNotUnmatchedEvenWhenExcluded() throws Exception {
+        String prefix = "\\research\\報告*";
+        var snapshot = fixture(List.of(prefix, "\\missing*"), List.of());
+        assertThat(snapshot.path("tasks")).hasSize(1);
+        assertThat(snapshot.path("unmatchedIncludes")).hasSize(1);
+        assertThat(snapshot.path("unmatchedIncludes").get(0).asText()).isEqualTo("\\missing*");
+        assertThat(TaskSelection.matches(prefix, "\\Research\\", snapshot.path("tasks").get(0).path("TaskName").asText())).isTrue();
+        var excluded = fixture(List.of(prefix), List.of("報告*"));
+        assertThat(excluded.path("tasks")).isEmpty();
+        assertThat(excluded.path("unmatchedIncludes")).isEmpty();
+    }
     @Test void realScriptPreservesUnicodeLiteralNamesAndReportsPermissionDenied() throws Exception {
         var snapshot = fixture(List.of("報告 [daily] '; Write-Error injected; '"), List.of());
         assertThat(snapshot.path("tasks")).hasSize(2);

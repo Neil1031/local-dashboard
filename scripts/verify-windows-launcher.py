@@ -1,6 +1,6 @@
 """Windows packaged acceptance. Real browser dispatch; no browser UI automation.
 
-Requires Python 3.11+, a built image, and the five existing tasks in the public
+Requires Python 3.11+, a built image, and the current tasks in the public
 example config. Only reads Task Scheduler. Uses a fresh ignored external home.
 Stops only servers matching the image, isolated config URI, PID and creation time.
 """
@@ -85,7 +85,13 @@ def healthy():
     assert http("/api/launcher/status") == "local-dashboard:ready:v1"
     assert "<title>Local Dashboard</title>" in http("/")
     jobs = json.loads(http("/api/jobs"))
-    assert jobs["collectionStatus"] in ("OK", "PARTIAL") and len(jobs["jobs"]) == 5, jobs["collectionStatus"]
+    assert jobs["collectionStatus"] == "OK" and not jobs["unmatchedIncludes"], jobs["collectionStatus"]
+    required = {'InsiderTracker-Market', 'InsiderTracker-SEC', 'InsiderTracker-SyncImport',
+                'AIStockHunter-UnexplainedVolume-Daily', 'AIStockHunter-Accumulation-Weekly-Check'}
+    names = {job['name'] for job in jobs['jobs']}
+    assert required < names
+    assert all(name.startswith('AIStockHunter-Accumulation-Check-') for name in names - required)
+    assert all(job['taskPath'] == '\\' for job in jobs['jobs'])
     assert all(k in jobs for k in ("collectedAt", "errors", "unmatchedIncludes"))
     assert all(k in job for job in jobs["jobs"] for k in ("id", "name", "state", "status", "lastRunStatus"))
     return {"http": 200, "html": "Local Dashboard", "collectionStatus": jobs["collectionStatus"], "jobs": len(jobs["jobs"])}
@@ -161,8 +167,8 @@ def task_hashes():
     return json.loads(ps("function Hash([string]$s) { $sha=[Security.Cryptography.SHA256]::Create(); "
         "try { [BitConverter]::ToString($sha.ComputeHash([Text.Encoding]::UTF8.GetBytes($s))) } finally {$sha.Dispose()} }; "
         "$names=@('InsiderTracker-Market','InsiderTracker-SEC','InsiderTracker-SyncImport',"
-        "'AIStockHunter-UnexplainedVolume-HealthCheck','AIStockHunter-Accumulation-Weekly-Check'); "
-        "$result=@(Get-ScheduledTask | Where-Object { $_.TaskPath -eq '\\' -and $_.TaskName -in $names } | ForEach-Object { "
+        "'AIStockHunter-UnexplainedVolume-HealthCheck','AIStockHunter-UnexplainedVolume-Daily','AIStockHunter-Accumulation-Weekly-Check'); "
+        "$result=@(Get-ScheduledTask | Where-Object { $_.TaskPath -eq '\\' -and ($_.TaskName -in $names -or $_.TaskName.StartsWith('AIStockHunter-Accumulation-Check-', [StringComparison]::OrdinalIgnoreCase)) } | ForEach-Object { "
         "$raw=Export-ScheduledTask -TaskName $_.TaskName -TaskPath $_.TaskPath; [xml]$xml=$raw; "
         "@{key=$_.TaskPath+$_.TaskName;definition=(Hash $raw);actions=(Hash $xml.Task.Actions.OuterXml);triggers=(Hash $xml.Task.Triggers.OuterXml)} "
         "} | Sort-Object {$_.key}); ConvertTo-Json -InputObject $result -Depth 4"))
@@ -191,7 +197,7 @@ def main():
     marker = HOME / "data/receipts/packaging-persistence.txt"
     marker.write_text("Isolated packaging test marker; not a Runner receipt.\n", encoding="utf-8")
     before = task_hashes()
-    assert len(before) == 5
+    assert len(before) >= 7
     REPORT["taskDefinitionsBefore"] = before
     assert not state()["listeners"], "8080 already in use; never stop an unknown process"
     try:

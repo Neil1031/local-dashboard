@@ -68,3 +68,23 @@ test('friendly job names do not change the original scheduler identity', () => {
   assert.equal(jobDisplayName(unknown), 'Other-Task');
   assert.equal(jobSubtitle(unknown), '\\');
 });
+
+test('daily and dated aliases apply to current and history without changing identity', () => {
+  for (const [name, alias] of [
+    ['AIStockHunter-UnexplainedVolume-Daily', '異常成交量每日掃描'],
+    ['AIStockHunter-Accumulation-Check-2026-09-22', '籌碼累積上線檢查 · 2026-09-22'],
+    ['AIStockHunter-Accumulation-Check-2026-10-01', '籌碼累積上線檢查 · 2026-10-01'],
+    ['AIStockHunter-UnexplainedVolume-HealthCheck', '舊版異常成交量健康檢查'],
+    ['AIStockHunter-Accumulation-Check-custom', 'AIStockHunter-Accumulation-Check-custom'],
+    ['Unknown task', 'Unknown task'],
+    ['toString', 'toString']
+  ]) {
+    for (const field of ['name', 'taskName']) {
+      const job = Object.freeze({ id: 'stable-original-id', [field]: name, taskPath: '\\' });
+      assert.equal(jobDisplayName(job), alias);
+      if (alias !== name) assert.equal(jobSubtitle(job), name);
+      assert.equal(job.id, 'stable-original-id');
+      assert.equal(job[field], name);
+    }
+  }
+});

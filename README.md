@@ -8,6 +8,7 @@ Windows Task Scheduler 的本機唯讀觀測服務。目前另提供 **Stage 5A 
 **Windows 雙擊使用**：建置者執行 `.\scripts\package-windows.ps1`，使用者雙擊
 `dist/LocalDashboard/LocalDashboard.exe`（內含 Java runtime，自動開瀏覽器，重複雙擊重用服務）。
 桌面捷徑：`.\scripts\install-shortcut.ps1`。設定與 data 預設保存於 `%LOCALAPPDATA%\LocalDashboard`；
+首次雙擊會在設定檔缺少時自動建立五個既有 tasks 的監控設定，不需手動建立 YAML；已有設定絕不覆寫。
 既有設定／history 的沿用方式、建置與 debug 詳見 [Windows launcher](docs/WINDOWS-LAUNCHER.md)。
 以下是開發者／手動 JAR 啟動方式。
 
@@ -38,8 +39,10 @@ Invoke-RestMethod http://127.0.0.1:8080/api/jobs | ConvertTo-Json -Depth 16
 
 ## 選擇要監控的 tasks
 
-預設 `include: []`，API 明確回傳 `NOT_CONFIGURED`，且不啟動 PowerShell。
-複製範例後依自己的 tasks 編輯（此檔已列入 `.gitignore`）：
+Windows EXE 會將唯一範本 [`config/application.example.yml`](config/application.example.yml) 寫入缺少的外部設定檔，
+預設選取範本中的五個既有 tasks；`LOCAL_DASHBOARD_HOME` 覆寫目錄也適用。已存在的設定原樣保留。
+以下手動 JAR 啟動方式仍預設 `include: []`，API 回傳 `NOT_CONFIGURED`，且不啟動 PowerShell。
+手動 JAR 使用者可複製範例後依自己的 tasks 編輯（此檔已列入 `.gitignore`）：
 
 ```powershell
 Copy-Item .\config\application.example.yml .\config\application.yml
@@ -52,6 +55,7 @@ dashboard:
       - 'InsiderTracker-Market'       # 各資料夾的同名 task
       - '\Research\Daily Report 中文' # 完整 TaskPath + TaskName
       - '\My Tasks\'                # 此資料夾及其子資料夾
+      - '\AIStockHunter-Accumulation-Check-*' # 日期型一次性檢查
     exclude:
       - '\My Tasks\Disabled job'
     missed-grace-minutes: 15
@@ -59,7 +63,8 @@ dashboard:
 ```
 
 - YAML 路徑使用**單引號**，保留 Windows 反斜線。
-- 選擇器是**字面值、大小寫不敏感**；沒有 wildcard／正規表示式。`*`、`[`、引號、空白與中文皆視為名稱內容。
+- 選擇器**大小寫不敏感**。只有非空 prefix 後的單一末尾 `*` 表示 prefix match：開頭 `\` 比對完整路徑，否則比對 task name。
+- 不支援完整 glob／regex；`*abc`、`a*b`、`a*b*`、單獨 `*`、`?`、`[` 皆維持字面值，不能擴大匹配。include／exclude 使用相同規則。
 - 開頭 `\`、結尾 `\` 表示資料夾子樹；只有 `\` 表示全部可列舉 tasks。
 - `exclude` 永遠優先；重複 include 不會產生重複工作。同名不同資料夾保留不同 ID。
 - `unmatchedIncludes` 表示列舉結果中沒有符合的 selector；可能不存在或目前身分無法看見，不假裝知道原因。明確排除的已找到工作不算 missing。
@@ -138,7 +143,7 @@ PowerShell fixtures 替換讀取 cmdlet 為記憶體資料，不建立測試排�
 & ([scriptblock]::Create((Get-Content -Raw .\scripts\verify-live.ps1)))
 ```
 
-它比對範例列出的全部 5 個 tasks、detail API 與 task definition 前後 SHA-256；
+它比對五個固定監控 tasks 與目前所有日期型 accumulation checks、detail API 與 task definition 前後 SHA-256；
 輸出 `target/live-verification.json`。其他設定可傳 `-ExpectedTaskKeys` 與 `-BaseUrl`。
 若 task 恰好在收集與比較之間自然執行，值可能變動；等待該次執行完成再重新比對。
 Stage 0 + 1 的歷史驗收見 [docs/STAGE-0-1.md](docs/STAGE-0-1.md)；UI 串接驗收見 [docs/STAGE-2.md](docs/STAGE-2.md)。

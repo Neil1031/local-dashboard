@@ -71,6 +71,28 @@ class HistoryRepositoryTest {
         assertThat(number("SELECT count(*) FROM job")).isEqualTo(1);
     }
 
+    @Test void changingExactSelectionToPrefixPreservesJobAndSqliteRunIdentity() throws Exception {
+        String name = "AIStockHunter-Accumulation-Check-2026-09-22";
+        var raw = row().put("TaskPath", "\\").put("TaskName", name);
+        var snapshot = mapper.createObjectNode().put("schemaVersion", 1).put("collectedAt", first.toString());
+        snapshot.putArray("tasks").add(raw);
+        snapshot.putArray("errors");
+        snapshot.putArray("unmatchedIncludes");
+        var repository = repository();
+        var observer = new HistoryObserver(repository);
+        var exact = new JobService(() -> snapshot, new SchedulerProperties(List.of("\\" + name), List.of(), 15, 30), normalizer, observer).jobs();
+        String id = "XGFpc3RvY2todW50ZXItYWNjdW11bGF0aW9uLWNoZWNrLTIwMjYtMDktMjI";
+        assertThat(exact.jobs()).singleElement().satisfies(job -> assertThat(job.id()).isEqualTo(id));
+        var saved = repository.recentRuns(id, 10).getFirst();
+        var prefix = new JobService(() -> snapshot,
+                new SchedulerProperties(List.of("\\AIStockHunter-Accumulation-Check-*"), List.of(), 15, 30), normalizer, observer).jobs();
+        assertThat(prefix.collectionStatus()).isEqualTo("OK");
+        assertThat(prefix.jobs()).isEqualTo(exact.jobs());
+        assertThat(repository.recentRuns(id, 10)).containsExactly(saved);
+        assertThat(number("SELECT count(*) FROM job_run")).isEqualTo(1);
+        assertThat(number("PRAGMA user_version")).isEqualTo(1);
+    }
+
     @Test void distinctExecutionsAndJobsRemainDistinctIncludingFailureAndDisabledHistory() throws Exception {
         var repository = repository();
         var success = normalizer.normalize(row());
