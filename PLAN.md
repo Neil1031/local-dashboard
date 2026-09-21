@@ -244,9 +244,10 @@ Replace mock job rows with backend data while preserving the current design.
 
 Required behaviors:
 
-- Today summary counts
-- Today job list
-- Success / Failed / Missed filters
+- current scheduler summary counts
+- current job list
+- current-status filters
+- last-run outcome shown separately from current status
 - detail drawer
 - Refresh button
 - responsive layout
@@ -254,15 +255,20 @@ Required behaviors:
 The UI should clearly distinguish:
 
 - failed
-- missed
 - running
 - ready/not due yet
 - disabled
 - unknown
+- missed, only when the backend explicitly returns MISSED
+
+Stage 2 must **not infer MISSED** from time, dates, `nextRunAt`, `lastRunAt`, or `NumberOfMissedRuns`.
+Reliable expected-run / MISSED detection belongs to Stage 4.
+
+Do not treat `READY + lastRunStatus=SUCCESS` as "today succeeded". Stage 2 is a current scheduler overview, not an execution-window tracker.
 
 Do not make every non-success state pink/red. Keep semantic colors currently defined in the prototype.
 
-If backend cannot be reached, show a visible collection error instead of displaying stale mock data.
+If backend cannot be reached, show a visible collection error instead of displaying stale mock data. Never fall back to runtime mock scheduler data.
 
 ## Gate
 
@@ -284,11 +290,11 @@ The mock data can be disabled and the page remains fully usable.
 
 ---
 
-# Stage 3 — Persist Execution History
+# Stage 3A — Persist Execution History Core
 
 ## Work
 
-Add SQLite.
+Add SQLite persistence for jobs and observed completed executions.
 
 Suggested tables:
 
@@ -316,28 +322,86 @@ job_run (
 );
 ```
 
-Avoid creating duplicate history rows every time the dashboard polls.
+Requirements:
 
-A run identity must be stable enough to recognize the same execution across repeated observations.
+- persist across application restart
+- repeated polling must not create duplicate history rows for the same execution
+- define and document a stable run identity / deduplication rule
+- do not invent executions when Task Scheduler does not provide enough evidence
+- preserve current Stage 2 UI behavior
+- do not implement 7-day history rendering yet
+- do not implement MISSED detection yet
 
 ## Gate
 
-Repeated polling does not duplicate the same run.
+The same scheduler execution observed repeatedly produces exactly one persisted run, including after application restart.
 
 ## Done when
 
-7-day history in the existing UI is populated from SQLite.
+- SQLite schema is created/migrated safely
+- current jobs can be associated with persisted history
+- duplicate observation tests pass
+- restart persistence is verified
+- history can be queried internally/API-ready without changing the 7-day UI
 
 ## Self-QA
 
 - restart application
 - refresh repeatedly
-- task with multiple runs in one day
-- task with no run
+- same task observed many times
+- task with multiple distinct executions
+- task with no recorded run
 - task disabled midway
-- system clock/timezone handling
+- failed and successful last results
+- timezone / UTC storage
+- database file missing on first startup
+- database unavailable/corrupt failure behavior
 
-Store timestamps in an unambiguous format. UI should present them in local time.
+Store timestamps in an unambiguous format. Prefer UTC persistence; UI localization remains a presentation concern.
+
+---
+
+# Stage 3B — 7-Day History API and UI
+
+## Work
+
+Build the user-facing history view on top of the verified Stage 3A persistence layer.
+
+Add only the API/data shaping needed by the existing 7-day history UI.
+
+Requirements:
+
+- populate real 7-day history from SQLite
+- no fake history cells
+- support multiple executions for the same task on one day
+- make the representation explicit when a day has multiple outcomes
+- preserve task identity across renamed display text where possible
+- keep current scheduler snapshot and history concepts separate
+- do not infer MISSED; Stage 4 owns MISSED detection
+
+## Gate
+
+The 7-day UI matches persisted run records for controlled fixtures and real observed runs.
+
+## Done when
+
+- history API is stable and bounded
+- 7-day history renders real persisted executions
+- empty/no-history state is clear
+- repeated refreshes do not alter historical counts
+- desktop and narrow layouts remain usable
+
+## Self-QA
+
+- no history
+- one run
+- multiple runs in one day
+- success then failure on same day
+- failure then success on same day
+- seven-day boundary
+- local midnight / UTC boundary
+- renamed task display name
+- deleted/disabled task with retained history
 
 ---
 
@@ -594,39 +658,49 @@ Integration tests may use fixture JSON representing PowerShell output so most te
 
 # Codex Working Rules
 
-1. Start with `/plan`.
-2. Work one stage at a time.
-3. Do not implement later stages early unless required by the current stage.
-4. Preserve the existing UI unless a backend requirement makes a small change necessary.
-5. If a problem occurs, investigate and attempt a solution before asking the user.
-6. Do not stop only to report a minor issue that can be resolved locally.
-7. Never claim a Gate passed without verifying it.
-8. At the end of each stage report:
+1. A long-lived **Manager Chat** owns requirements, PLAN updates, review, Gate decisions, and the decision to start the next stage.
+2. Each implementation stage should normally use a **new Codex Implementation Chat**. Do not continue the previous implementation chat into the next stage.
+3. Use a separate Research / Debug Chat when a bounded investigation would otherwise distract or destabilize the implementation chat.
+4. Repository files are the source of truth; do not depend on previous chat context being available.
+5. Start every implementation stage with `/plan`.
+6. Work one stage at a time.
+7. Do not implement later stages early unless required by the current stage.
+8. Preserve the existing UI unless a backend requirement makes a small change necessary.
+9. If a problem occurs, investigate and attempt a solution before asking the user.
+10. Do not stop only to report a minor issue that can be resolved locally.
+11. Never claim a Gate passed without verifying it.
+12. At the end of each stage report:
    - files changed
    - commands/tests run
    - Gate result
    - known limitations
+   - follow-up recommendations
    - next stage
-9. Keep changes reviewable.
-10. Do not rewrite working scheduling scripts unless the current stage explicitly requires it.
+13. Keep changes reviewable.
+14. Do not rewrite working scheduling scripts unless the current stage explicitly requires it.
+15. After a stage passes its Gate, commit and push the implementation branch, then stop. Manager Review decides whether it is merged.
+16. Do not merge an implementation branch to `main` until Manager Review explicitly passes it.
 
 ---
 
-# First Codex Assignment
+# Current Next Codex Assignment
 
-Implement **Stage 0 and Stage 1 only**.
+Open a **new Codex Implementation Chat** for **Stage 3A only**.
 
-Do not connect the UI to real data yet.
+Baseline is the latest `main` after Stage 2.
 
-Expected output:
+Stage 3A scope:
 
-- buildable local application
-- scheduler collector
-- normalized model
-- `GET /api/jobs`
-- configuration for include/exclude
-- tests for normalization
-- README startup instructions
-- evidence that returned values match at least the available local Windows scheduler fixtures / live tasks
+- SQLite persistence
+- stable run identity / deduplication
+- restart persistence
+- tests and verification
 
-After Stage 1 passes its Gate, stop and report results before moving to Stage 2.
+Do not implement:
+
+- 7-day history UI/API shaping (Stage 3B)
+- MISSED detection (Stage 4)
+- runner/application-level result contract (Stage 5)
+- logs (Stage 6)
+
+After Stage 3A passes its Gate, commit and push its branch, then stop for Manager Review.
