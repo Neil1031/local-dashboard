@@ -434,6 +434,25 @@ The 7-day UI matches persisted run records for controlled fixtures and real obse
 
 # Stage 4 — Reliable MISSED Detection
 
+## Manager status
+
+**Deferred after two research passes.**
+
+Research established that current Task Scheduler snapshots, Stage 3 observed-run history, and the currently disabled Task Scheduler Operational log do not provide sufficient negative evidence to declare a scheduled occurrence MISSED reliably on this machine.
+
+Current product behavior:
+
+- preserve reliable SUCCESS / FAILED / RUNNING observations
+- preserve UNKNOWN when evidence is insufficient
+- do not infer MISSED from elapsed time, empty history, LastRunTime gaps, NumberOfMissedRuns, or an empty Event Log query
+- treat automatic MISSED detection as a future enhancement requiring a separately approved evidence strategy
+- do not block Stage 5 on unresolved MISSED detection
+
+See:
+- `docs/STAGE-4-RESEARCH.md`
+- `docs/STAGE-4-EVENT-RESEARCH.md`
+
+
 ## Work
 
 Implement expected-run evaluation from configured / discovered triggers.
@@ -712,48 +731,28 @@ Integration tests may use fixture JSON representing PowerShell output so most te
 
 # Current Next Codex Assignment
 
-Open a **new Codex Research Chat** for **Stage 4 Event Evidence Research only**.
+Open a **new Codex Implementation Chat** for **Stage 5 Runner — first low-risk pilot only**.
 
-Baseline is the latest `main` after the accepted Stage 4 trigger/settings research.
+Baseline is the latest `main` after the accepted Stage 4 research.
 
-The trigger research established that current Task Scheduler snapshots and SQLite observed-run history are not sufficient by themselves to prove MISSED safely. This next research task must determine whether Windows Task Scheduler operational event history can provide stronger start / trigger / completion / failure / negative-coverage evidence.
+Manager decision:
 
-Research scope:
+- automatic MISSED detection is deferred
+- do not start 4R / 4A / 4B / 4C / 4D
+- Stage 5 may proceed independently
+- the practical objective is to make application-level execution receipts reliable: started, finished, exit code, duration, and bounded output/error metadata
 
-- inspect `Microsoft-Windows-TaskScheduler/Operational` availability, enabled state, permissions, retention, size, and oldest/newest available records
-- identify event IDs and payload fields relevant to:
-  - scheduled trigger activation
-  - task start
-  - action start
-  - action completion
-  - task completion
-  - launch/start failure
-  - manual / on-demand execution if distinguishable
-  - retry / restart attempts if distinguishable
-- determine stable correlation fields such as task path, instance ID, action instance ID, activity/correlation ID, timestamps, engine PID, or equivalent
-- determine whether scheduled and manual executions can be distinguished reliably
-- determine whether event history can prove an occurrence did not start, and under exactly what retention / coverage conditions
-- inspect behavior and evidence boundaries across reboot, sleep, logoff/login, catch-up, IgnoreNew, and StartWhenAvailable without mutating existing user tasks
-- compare event evidence against current collector fields and Stage 3 SQLite history
-- propose the minimum Event Evidence contract required before Stage 4 implementation
-- recommend whether Stage 4 can rely on Event Log, needs a hybrid Event Log + observation-epoch model, or must remain conservative UNKNOWN
+Stage 5 first implementation must be incremental:
 
-Research rules:
+- design a generic local runner / receipt contract
+- preserve the original child process exit code
+- record start/end/duration/outcome without requiring the dashboard service to be running
+- fail safely if receipt persistence is unavailable
+- choose **one low-risk existing task** for a pilot only after Manager-approved implementation scope
+- do not migrate all scheduled tasks at once
+- do not claim business success solely from Windows Task Scheduler result code
+- do not implement automatic MISSED detection
+- do not redesign the UI
+- do not expose arbitrary shell execution from the browser
 
-- do not modify production Java/frontend/schema
-- do not modify, run, create, disable, enable, or reschedule the user's existing Windows scheduled tasks
-- do not enable/disable the Operational log without Manager approval
-- do not clear or resize Windows event logs
-- prefer read-only inspection of existing historical events
-- sanitize account identifiers, command lines, actions, paths, and other host-sensitive values before committing evidence
-- distinguish Verified / Inferred / Proposed / Not verified
-- do not implement MISSED detection yet
-- write findings and sanitized evidence to a separate research branch, commit/push, then stop for Manager Review
-
-After this second Research Gate passes, Manager decides whether Stage 4 is split into:
-- 4A Event / evidence collection
-- 4B expected-occurrence domain evaluation
-- 4C API / UI
-- 4D controlled acceptance
-
-Do not start any Stage 4 implementation before that Manager decision.
+The next Implementation Chat must begin with `/plan`, work on a dedicated branch, commit/push when its Stage 5 pilot Gate passes, then stop for Manager Review before any merge or broader migration.
