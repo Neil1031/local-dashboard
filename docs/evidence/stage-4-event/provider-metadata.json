@@ -1,0 +1,4022 @@
+{
+  "capturedAt": "2026-09-21T06:20:16.9935026+00:00",
+  "provider": "Microsoft-Windows-TaskScheduler",
+  "providerGuid": "de7b24ea-73c8-4a09-985d-5bdadcfa9017",
+  "events": [
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 100,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 1,
+      "taskSymbol": "task:JobExecute",
+      "taskDisplayName": "Task Started",
+      "descriptionTemplate": "工作排程器已為使用者 \"%2\" 啟動 \"%1\" 工作的 \"%3\" 執行個體。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "UserContext",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "InstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"UserContext\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"InstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 101,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 101,
+      "taskSymbol": "task:TaskStartFail",
+      "taskDisplayName": "Task Start Failed",
+      "descriptionTemplate": "工作排程器無法為使用者 \"%2\" 啟動 \"%1\" 工作。其他資料: 錯誤值: %3。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "UserContext",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"UserContext\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 102,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 2,
+      "taskSymbol": "task:TaskCompleted",
+      "taskDisplayName": "Task completed",
+      "descriptionTemplate": "工作排程器已順利為使用者 \"%2\" 完成 \"%1\" 工作的 \"%3\" 執行個體。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "UserContext",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "InstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"UserContext\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"InstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 103,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 102,
+      "taskSymbol": "task:TaskFailure",
+      "taskDisplayName": "Action start failed",
+      "descriptionTemplate": "工作排程器無法為使用者 \"%3\" 啟動 \"%1\" 工作的執行個體 \"%2\"。其他資料: 錯誤值: %4。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "InstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        },
+        {
+          "name": "UserContext",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"InstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n  <data name=\"UserContext\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 104,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:LogonFailure",
+      "taskDisplayName": "Logon failure",
+      "descriptionTemplate": "工作排程器無法登入 \"%1\"。\"%2\" 中發生失敗。使用者動作: 確定已正確指定工作的認證。其他資料: 錯誤值: %3。",
+      "payload": [
+        {
+          "name": "UserName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ErrorDescription",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"UserName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ErrorDescription\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 105,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:ImpersonationFailure",
+      "taskDisplayName": "Impersonation failure",
+      "descriptionTemplate": "工作排程器無法模擬 \"%1\"。其他資料: 錯誤值: %2。",
+      "payload": [
+        {
+          "name": "Context",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"Context\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 106,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:JobRegistered",
+      "taskDisplayName": "Task registered",
+      "descriptionTemplate": "使用者 \"%2\" 已登錄工作排程器工作 \"%1\"",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "UserContext",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"UserContext\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 107,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:TimeTrigger",
+      "taskDisplayName": "Task triggered on scheduler",
+      "descriptionTemplate": "由於滿足時間觸發程序條件，工作排程器已啟動工作 \"%1\" 的 \"%2\" 執行個體。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "InstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"InstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 108,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:EventTrigger",
+      "taskDisplayName": "Task triggered on event",
+      "descriptionTemplate": "工作排程器已根據事件觸發程序啟動工作 \"%1\" 的 \"%2\"  執行個體。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "InstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"InstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 109,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:ImmediateTrigger",
+      "taskDisplayName": "Task triggered by registration",
+      "descriptionTemplate": "工作排程器已根據登錄觸發程序啟動工作 \"%1\" 的 \"%2\"  執行個體。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "InstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"InstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 110,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:Run",
+      "taskDisplayName": "Task triggered by user",
+      "descriptionTemplate": "工作排程器已為使用者 \"%3\" 工作 \"%1\" 的 \"%2\" 執行個體啟動。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "InstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        },
+        {
+          "name": "UserContext",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"InstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n  <data name=\"UserContext\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 111,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 103,
+      "taskSymbol": "task:TaskTerminated",
+      "taskDisplayName": "Task terminated",
+      "descriptionTemplate": "工作排程器已終止 \"%1\" 工作的 \"%2\" 執行個體。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "InstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"InstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 112,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 3,
+      "levelName": "win:Warning",
+      "opcode": 0,
+      "taskSymbol": "task:NoStartWithoutNetwork",
+      "taskDisplayName": "Launch condition not met, network unavailable",
+      "descriptionTemplate": "由於網路無法使用，工作排程器無法啟動工作 \"%1\"。使用者動作: 確定電腦以連線至工作中指定的網路。若工作不需要網路連線，請從工作設定中移除網路條件。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 113,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 3,
+      "levelName": "win:Warning",
+      "opcode": 0,
+      "taskSymbol": "task:RegisteredWithoutSomeTriggers",
+      "taskDisplayName": "Task registered without some triggers",
+      "descriptionTemplate": "工作排程器已登錄工作 \"%1\"，並非所有指定的觸發程序都會啟動該工作。使用者動作: 確定所有工作觸發程序都已正確設定。其他資料: 錯誤值: %2。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 114,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 3,
+      "levelName": "win:Warning",
+      "opcode": 0,
+      "taskSymbol": "task:MissedTaskLaunched",
+      "taskDisplayName": "Missed task started",
+      "descriptionTemplate": "工作排程器無法依照設定的排程啟動工作 \"%1\"。已根據啟動工作的設定選項 (可能的話) 啟動執行個體 \"%2\" (若排程遺失)。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "InstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"InstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 115,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:TransactionRollbackFailure",
+      "taskDisplayName": "Task update or deletion error",
+      "descriptionTemplate": "更新或刪除工作時，工作排程器無法回復交易。其他資料: 錯誤值: %1。",
+      "payload": [
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 116,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 3,
+      "levelName": "win:Warning",
+      "opcode": 0,
+      "taskSymbol": "task:TaskRegisteredWithoutCreds",
+      "taskDisplayName": "Task registered without credentials",
+      "descriptionTemplate": "工作排程器已驗證工作 \"%1\" 的設定，但無法儲存認證。使用者動作: 重新登錄該工作以確保認證是正確的。其他資料: 錯誤值: %2。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 117,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:IdleTrigger",
+      "taskDisplayName": "Task triggered on Idle",
+      "descriptionTemplate": "由於滿足閒置條件，工作排程器已啟動工作 \"%1\" 的 \"%2\" 執行個體。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "InstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"InstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 118,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:BootTrigger",
+      "taskDisplayName": "Task triggered by computer startup",
+      "descriptionTemplate": "由於系統重新啟動，工作排程器已啟動工作 \"%1\" 的 \"%2\" 執行個體。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "InstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"InstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 119,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:LogonTrigger",
+      "taskDisplayName": "Task triggered on logon",
+      "descriptionTemplate": "由於使用者 \"%2\" 登入，工作排程器已啟動工作 \"%1\" 的 \"%3\"  執行個體。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "UserName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "InstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"UserName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"InstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 120,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:ConsoleConnectTrigger",
+      "taskDisplayName": "Task triggered on local console connect",
+      "descriptionTemplate": "由於使用者 \"%2\" 連線到主控台觸發程序，工作排程器已啟動工作 \"%1\" 的 \"%3\"  執行個體。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "UserName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "InstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"UserName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"InstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 121,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:ConsoleDisconnectTrigger",
+      "taskDisplayName": "Task triggered on local console disconnect",
+      "descriptionTemplate": "由於使用者 \"%2\" 已從主控台觸發程序中斷連線，工作排程器已啟動工作 \"%1\" 的 \"%3\"  執行個體。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "UserName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "InstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"UserName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"InstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 122,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:RemoteConnectTrigger",
+      "taskDisplayName": "Task triggered on remote console connect",
+      "descriptionTemplate": "由於使用者 \"%2\" 連線到遠端觸發程序，工作排程器已啟動工作 \"%1\" 的 \"%3\" 執行個體。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "UserName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "InstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"UserName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"InstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 123,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:RemoteDisconnectTrigger",
+      "taskDisplayName": "Task triggered on remote console disconnect",
+      "descriptionTemplate": "由於 \"%2\" 使用者中斷遠端觸發程序的連線，工作排程器已啟動工作 \"%1\" 的 \"%3\"  執行個體。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "UserName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "InstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"UserName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"InstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 124,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:SessionLockTrigger",
+      "taskDisplayName": "Task triggered by locking the workstation",
+      "descriptionTemplate": "由於使用者 \"%2\" 鎖定電腦的觸發程序，工作排程器已啟動工作 \"%1\" 的 \"%3\"  執行個體。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "UserName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "InstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"UserName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"InstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 125,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:SessionUnlockTrigger",
+      "taskDisplayName": "Task triggered by unlocking the workstation",
+      "descriptionTemplate": "由於使用者 \"%2\"  已解除鎖定電腦的觸發程序，工作排程器已啟動工作 \"%1\" 的 \"%3\"  執行個體。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "UserName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "InstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"UserName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"InstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 126,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 3,
+      "levelName": "win:Warning",
+      "opcode": 0,
+      "taskSymbol": "task:FailedTaskRestart",
+      "taskDisplayName": "Task restarted on failure",
+      "descriptionTemplate": "工作排程器無法執行工作 \"%1\"。正在嘗試重新啟動。其他資料: 錯誤值: %2。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 127,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:RejectedTaskRestart",
+      "taskDisplayName": "Task restarted on failure",
+      "descriptionTemplate": "由於關機競爭條件，工作排程器無法執行工作 \"%1\"。正在嘗試重新啟動。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 128,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:IgnoredTaskRestart",
+      "taskDisplayName": "Launch condition not met, beyond end time",
+      "descriptionTemplate": "工作排程器並未啟動工作 \"%1\"，因為目前的時間超過設定的工作結束時間。使用者動作: 如果有需要，請延長工作的時間界限。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 129,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:CreatedTaskProcess",
+      "taskDisplayName": "Created Task Process",
+      "descriptionTemplate": "工作排程器已啟動工作 \"%1\"，執行個體 \"%2\"，處理程序識別碼為 %3。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "Path",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ProcessID",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        },
+        {
+          "name": "Priority",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"Path\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ProcessID\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"Priority\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 130,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:TaskNotRunServiceBusy",
+      "taskDisplayName": "Launch condition not met, service busy",
+      "descriptionTemplate": "由於服務忙碌中，工作排程器無法啟動工作 \"%1\"。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 131,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:TaskNotStartedTaskQuotaExceeded",
+      "taskDisplayName": "Launch condition not met, quota exceeded",
+      "descriptionTemplate": "由於工作佇列中的工作數目超過目前為 %2 設定的配額，工作排程器無法啟動工作 \"%1\"。使用者動作: 減少執行中的工作數目，或增加設定的佇列配額。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "CurrentQuota",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"CurrentQuota\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 132,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 3,
+      "levelName": "win:Warning",
+      "opcode": 0,
+      "taskSymbol": "task:TaskQuotaApproaching",
+      "taskDisplayName": "Launch condition warning, quota approaching",
+      "descriptionTemplate": "工作排程器工作啟動佇列配額已接近目前為 %1 設定的工作限制。使用者動作: 減少執行中的工作數目，或增加設定的佇列配額。",
+      "payload": [
+        {
+          "name": "CurrentQuota",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"CurrentQuota\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 133,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:TaskNotStartedEngineQuotaExceeded",
+      "taskDisplayName": "Launch condition not met, quota exceeded",
+      "descriptionTemplate": "工作排程器無法為使用者 \"%3\" 在工作引擎 \"%2\"中啟動工作 %1\"。使用者動作: 減少以指定之使用者內容執行的工作數目。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "TaskEngineName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "UserName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"TaskEngineName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"UserName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 134,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 3,
+      "levelName": "win:Warning",
+      "opcode": 0,
+      "taskSymbol": "task:EngineQuotaApproaching",
+      "taskDisplayName": "Launch condition warning, quota approaching",
+      "descriptionTemplate": "使用者 \"%2\" 的工作引擎 \"%1\" 已接近其工作限制。使用者動作: 減少以指定之使用者內容執行的工作數目。",
+      "payload": [
+        {
+          "name": "TaskEngineName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "UserName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskEngineName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"UserName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 135,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 3,
+      "levelName": "win:Warning",
+      "opcode": 0,
+      "taskSymbol": "task:NoStartWithoutIdle",
+      "taskDisplayName": "Launch condition not met, machine not idle",
+      "descriptionTemplate": "因為電腦不是閒置狀態，工作排程器無法啟動工作 \"%1\"。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 140,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:TaskUpdated",
+      "taskDisplayName": "Task registration updated",
+      "descriptionTemplate": "使用者 \"%2\" 已更新使用者工作 \"%1\"",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "UserName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"UserName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 141,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:TaskDeleted",
+      "taskDisplayName": "Task registration deleted",
+      "descriptionTemplate": "使用者 \"%2\" 已刪除工作排程器工作 \"%1\"",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "UserName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"UserName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 142,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:TaskDisabled",
+      "taskDisplayName": "Task disabled",
+      "descriptionTemplate": "使用者 \"%2\" 已停用工作排程器工作 \"%1\"",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "UserName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"UserName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 145,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:ComputerWakeupToStartTask",
+      "taskDisplayName": "Task triggered by coming out of suspend mode",
+      "descriptionTemplate": "工作排程器已喚醒電腦以執行工作。",
+      "payload": [],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 146,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:TaskLoadFailed",
+      "taskDisplayName": "Task loading at service startup failed",
+      "descriptionTemplate": "工作排程器無法在服務啟動時載入工作 \"%1\"。其他資料: 錯誤值: %2。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 147,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:TaskImageRecoveredAfterMigration",
+      "taskDisplayName": "Task image recovered after OS migration",
+      "descriptionTemplate": "在 OS 升級期間發生損毀後，工作排程器成功地復原工作 \"%1\" 的映像。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 148,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:TaskImageRecoverFailedAfterMigration",
+      "taskDisplayName": "Task image recovering failed after OS migration",
+      "descriptionTemplate": "在 OS 升級期間發生損毀後，工作排程器無法復原工作 \"%1\" 的映像。其他資料: 錯誤值: 0x%2。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:HexInt32",
+          "outType": "win:HexInt32"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:HexInt32\" outType=\"win:HexInt32\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 149,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 3,
+      "levelName": "win:Warning",
+      "opcode": 0,
+      "taskSymbol": "task:TaskUbpmCompatibilityIssueDetected",
+      "taskDisplayName": "Task is using a combination of properties that is incompatible with the scheduling engine",
+      "descriptionTemplate": "工作 \"%1\" 正在使用的屬性組合與排程引擎不相容。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 150,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:TaskEventSubscriptionFailed",
+      "taskDisplayName": "Task registration on event failed",
+      "descriptionTemplate": "工作排程器無法訂閱工作 \"%1\" 的事件觸發程序。其他資料: 錯誤值: %2。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 151,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:TaskInstantiateFailed",
+      "taskDisplayName": "Task Scheduler failed to instantiate task at service startup.",
+      "descriptionTemplate": "工作具現化失敗 \"%1\"。檢查點: %2。錯誤值: %3。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "LogPoint",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"LogPoint\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 152,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 3,
+      "levelName": "win:Warning",
+      "opcode": 0,
+      "taskSymbol": "task:TaskUbpmCompatibilityIssueResolved",
+      "taskDisplayName": "Task was redirected to legacy engine",
+      "descriptionTemplate": "工作 \"%1\" 已重新導向到傳統排程引擎。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 153,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 3,
+      "levelName": "win:Warning",
+      "opcode": 0,
+      "taskSymbol": "task:MissedTaskRejected",
+      "taskDisplayName": "Missed task start rejected",
+      "descriptionTemplate": "「工作排程器」無法啟動工作 \"%1\"，因為該工作已錯過其排程。請考慮使用設定選項在錯過排程時啟動工作 (如果可用)。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 155,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:JobCompletionPending",
+      "taskDisplayName": "Task Completion Pending",
+      "descriptionTemplate": "工作排程器目前正在等候工作 \"%1\" 完成。",
+      "payload": [
+        {
+          "name": "TaskPath",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskPath\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 200,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 1,
+      "taskSymbol": "task:Action",
+      "taskDisplayName": "Action started",
+      "descriptionTemplate": "工作排程器已啟動工作 \"%1\" 的執行個體 \"%3\" 中的動作 \"%2\"。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ActionName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "TaskInstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ActionName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"TaskInstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 200,
+      "version": 1,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 1,
+      "taskSymbol": "task:Action",
+      "taskDisplayName": "Action started",
+      "descriptionTemplate": "工作排程器已啟動工作 \"%1\" 的執行個體 \"%3\" 中的動作 \"%2\"。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ActionName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "TaskInstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        },
+        {
+          "name": "EnginePID",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ActionName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"TaskInstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n  <data name=\"EnginePID\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 201,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 2,
+      "taskSymbol": "task:ActionCompleted",
+      "taskDisplayName": "Action completed",
+      "descriptionTemplate": "工作排程器已順利完成工作 \"%1\"，執行個體 \"%3\"，動作 \"%2\"。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ActionName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "TaskInstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ActionName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"TaskInstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 201,
+      "version": 1,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 2,
+      "taskSymbol": "task:ActionCompleted",
+      "taskDisplayName": "Action completed",
+      "descriptionTemplate": "工作排程器已順利完成工作 \"%1\"，執行個體 \"%2\"，動作 \"%3\"，傳回碼為 %4。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "TaskInstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        },
+        {
+          "name": "ActionName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"TaskInstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n  <data name=\"ActionName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 201,
+      "version": 2,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 2,
+      "taskSymbol": "task:ActionCompleted",
+      "taskDisplayName": "Action completed",
+      "descriptionTemplate": "工作排程器已順利完成工作 \"%1\"，執行個體 \"%2\"，動作 \"%3\"，傳回碼為 %4。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "TaskInstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        },
+        {
+          "name": "ActionName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        },
+        {
+          "name": "EnginePID",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"TaskInstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n  <data name=\"ActionName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"EnginePID\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 202,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 102,
+      "taskSymbol": "task:ActionFailed",
+      "taskDisplayName": "Action failed",
+      "descriptionTemplate": "工作排程器無法完成工作 \"%1\"，執行個體 \"%2\"，動作 \"%3\"。其他資料: 錯誤值: %4。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "TaskInstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        },
+        {
+          "name": "ActionName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"TaskInstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n  <data name=\"ActionName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 202,
+      "version": 1,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 102,
+      "taskSymbol": "task:ActionFailed",
+      "taskDisplayName": "Action failed",
+      "descriptionTemplate": "工作排程器無法完成工作 \"%1\"，執行個體 \"%2\"，動作 \"%3\"。其他資料: 錯誤值: %4。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "TaskInstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        },
+        {
+          "name": "ActionName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        },
+        {
+          "name": "EnginePID",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"TaskInstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n  <data name=\"ActionName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"EnginePID\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 203,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 101,
+      "taskSymbol": "task:ActionFailedToStart",
+      "taskDisplayName": "Action failed to start",
+      "descriptionTemplate": "工作排程器無法啟動工作 \"%1\" 的執行個體 \"%2\" 中的動作 \"%3\"。其他資料: 錯誤值: %4。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "TaskInstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        },
+        {
+          "name": "ActionName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"TaskInstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n  <data name=\"ActionName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 204,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:EventRenderFailed",
+      "taskDisplayName": "Task failed to start on event",
+      "descriptionTemplate": "工作排程器無法抓取工作 \"%1\" 的事件觸發值。將會略過該事件。其他資料: 錯誤值: %2。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 205,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:EventAggregateFailed",
+      "taskDisplayName": "Task failed to start on event pattern match",
+      "descriptionTemplate": "工作排程器無法比對工作 \"%1\" 之事件的模式。將會略過那些事件。其他資料: 錯誤值: %2。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 300,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 1,
+      "taskSymbol": "task:Session",
+      "taskDisplayName": "Task engine launched",
+      "descriptionTemplate": "工作排程器已啟動工作引擎 \"%1\"，處理程序識別碼為 %2。",
+      "payload": [
+        {
+          "name": "TaskEngineName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ProcessID",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskEngineName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ProcessID\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 301,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 2,
+      "taskSymbol": "task:TaskEngineExit",
+      "taskDisplayName": "Task engine properly shut down",
+      "descriptionTemplate": "工作排程器正在關閉工作引擎 \"%1\"",
+      "payload": [
+        {
+          "name": "TaskEngineName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskEngineName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 303,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 104,
+      "taskSymbol": "task:TaskEngineError",
+      "taskDisplayName": "Task engine shut down due to error",
+      "descriptionTemplate": "由於 \"%2\" 中發生錯誤，工作排程器正在關閉工作引擎 \"%1\"。其他資料: 錯誤值: %3。",
+      "payload": [
+        {
+          "name": "TaskEngineName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ErrorDescription",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskEngineName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ErrorDescription\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 304,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:SessionSentJob",
+      "taskDisplayName": "Task sent to engine",
+      "descriptionTemplate": "工作排程器已傳送 \"%1\" 工作到工作引擎 \"%2\"。工作執行個體識別碼為 \"%3\"。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "TaskEngineName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "TaskInstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"TaskEngineName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"TaskInstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 305,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 104,
+      "taskSymbol": "task:SessionSentJobFailed",
+      "taskDisplayName": "Task failed to be sent to engine",
+      "descriptionTemplate": "工作排程器並未傳送 \"%1\" 工作到工作引擎 \"%2\"。其他資料: 錯誤值: %3。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "TaskEngineName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"TaskEngineName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 306,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 104,
+      "taskSymbol": "task:SessionProcessMessage",
+      "taskDisplayName": "Engine failed to receive the task",
+      "descriptionTemplate": "對於工作排程器工作引擎 \"%1\"，執行緒集區無法處理該訊息。其他資料: 錯誤值: %2。",
+      "payload": [
+        {
+          "name": "TaskEngineName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskEngineName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 307,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 104,
+      "taskSymbol": "task:SessionManagerConnectFailed",
+      "taskDisplayName": "Service Engine connection failure",
+      "descriptionTemplate": "工作排程器服務無法連線到工作引擎 \"%1\" 處理程序。其他資料: 錯誤值: %2。",
+      "payload": [
+        {
+          "name": "TaskEngineName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskEngineName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 308,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:SessionManagerConnect",
+      "taskDisplayName": "Service Engine connected",
+      "descriptionTemplate": "工作排程器已連線到工作引擎 \"%1\" 處理程序。",
+      "payload": [
+        {
+          "name": "TaskEngineName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskEngineName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 309,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:SessionJobsOrphaned",
+      "taskDisplayName": "Engine orphaned",
+      "descriptionTemplate": "工作排程器 %1 工作在工作引擎 \"%2\" 關閉期間遭到遺棄。使用者動作: 在 [工作管理員] 中尋找此工作執行的處理程序，並手動將它刪除。",
+      "payload": [
+        {
+          "name": "TaskCount",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        },
+        {
+          "name": "TaskEngineName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskCount\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"TaskEngineName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 310,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:SessionProcessStart",
+      "taskDisplayName": "Task Engine started",
+      "descriptionTemplate": "工作排程器已啟動工作引擎 \"%1\" 處理程序。命令=\"%2\"，處理程序識別碼=%3，執行緒識別碼=%4",
+      "payload": [
+        {
+          "name": "TaskEngineName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "Command",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ProcessID",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        },
+        {
+          "name": "ThreadID",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskEngineName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"Command\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ProcessID\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ThreadID\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 311,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 101,
+      "taskSymbol": "task:SessionProcessStartFailed",
+      "taskDisplayName": "Task Engine failed to start",
+      "descriptionTemplate": "由於 \"%3\" 中發生錯誤，工作排程器無法啟動工作引擎 \"%1\" 處理程序。命令=\"%2\"。其他資料: 錯誤值: %4。",
+      "payload": [
+        {
+          "name": "TaskEngineName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "Command",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ErrorDescription",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskEngineName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"Command\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ErrorDescription\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 312,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:SessionWin32ObjCreated",
+      "taskDisplayName": "Task Engine job object created",
+      "descriptionTemplate": "工作排程器已針對工作引擎 \"%1\" 建立 Win32 工作物件。",
+      "payload": [
+        {
+          "name": "TaskEngineName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskEngineName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 313,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:SessionChannelReady",
+      "taskDisplayName": "Service Engine channel ready",
+      "descriptionTemplate": "工作引擎 \"%1\" 的工作排程器通道已準備好傳送與接收訊息。",
+      "payload": [
+        {
+          "name": "TaskEngineName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskEngineName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 314,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:SessionProcessIdle",
+      "taskDisplayName": "Task Engine idle",
+      "descriptionTemplate": "工作排程器並未針對工作引擎 \"%1\" 執行任何工作，並已啟動閒置計時器。",
+      "payload": [
+        {
+          "name": "TaskEngineName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskEngineName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 315,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 104,
+      "taskSymbol": "task:SessionProcessConnect",
+      "taskDisplayName": "Service Engine connection failure",
+      "descriptionTemplate": "工作引擎 \"%1\" 處理程序無法連線到工作排程器服務。其他資料: 錯誤值: %2。",
+      "payload": [
+        {
+          "name": "TaskEngineName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskEngineName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 316,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 104,
+      "taskSymbol": "task:SessionMessageSend",
+      "taskDisplayName": "Engine failed to send message to service",
+      "descriptionTemplate": "工作引擎 \"%1\" 無法傳送訊息到工作排程器服務。其他資料: 錯誤值: %2。",
+      "payload": [
+        {
+          "name": "TaskEngineName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskEngineName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 317,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 1,
+      "taskSymbol": "task:SessionMain",
+      "taskDisplayName": "Task Engine started",
+      "descriptionTemplate": "工作排程器已啟動工作引擎 \"%1\" 處理程序。",
+      "payload": [
+        {
+          "name": "TaskEngineName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskEngineName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 318,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 2,
+      "taskSymbol": "task:SessionMainShutdown",
+      "taskDisplayName": "Task engine properly shut down",
+      "descriptionTemplate": "工作排程器已關閉工作引擎 \"%1\" 處理程序。",
+      "payload": [
+        {
+          "name": "TaskEngineName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskEngineName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 319,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 1,
+      "taskSymbol": "task:SessionJob",
+      "taskDisplayName": "Task Engine received message to start task",
+      "descriptionTemplate": "工作引擎 \"%1\" 已從工作排程器服務收到要求啟動工作 \"%2\" 的訊息。",
+      "payload": [
+        {
+          "name": "TaskEngineName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskEngineName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 320,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 2,
+      "taskSymbol": "task:SessionJobReceivedStop",
+      "taskDisplayName": "Task Engine received message to stop task",
+      "descriptionTemplate": "工作引擎 \"%1\" 已從工作排程器服務收到要求停止工作執行個體 \"%2\" 的訊息。",
+      "payload": [
+        {
+          "name": "TaskEngineName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "TaskInstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskEngineName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"TaskInstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 322,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 3,
+      "levelName": "win:Warning",
+      "opcode": 0,
+      "taskSymbol": "task:NewInstanceIgnored",
+      "taskDisplayName": "Launch request ignored, instance already running",
+      "descriptionTemplate": "工作排程器並未啟動工作 \"%1\"，因為相同工作的執行個體 \"%2\" 已在執行中。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "TaskInstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"TaskInstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 323,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 3,
+      "levelName": "win:Warning",
+      "opcode": 0,
+      "taskSymbol": "task:RunningInstanceStopped",
+      "taskDisplayName": "Launch request acknowledged, current instance stopped",
+      "descriptionTemplate": "工作排程器已停止工作 \"%1\" 的執行個體 \"%2\"，以啟動新的執行個體 \"%3\"。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "StoppedTaskInstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        },
+        {
+          "name": "NewTaskInstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"StoppedTaskInstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n  <data name=\"NewTaskInstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 324,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 3,
+      "levelName": "win:Warning",
+      "opcode": 0,
+      "taskSymbol": "task:NewInstanceQueued",
+      "taskDisplayName": "Launch request queued, instance already running",
+      "descriptionTemplate": "工作排程器已將工作 \"%1\" 的執行個體 \"%2\" 排入佇列，而且會在執行個體 \"%3\" 完成後立即啟動它。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "QueuedTaskInstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        },
+        {
+          "name": "RunningTaskInstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"QueuedTaskInstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n  <data name=\"RunningTaskInstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 325,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 3,
+      "levelName": "win:Warning",
+      "opcode": 0,
+      "taskSymbol": "task:TaskInstanceQueued",
+      "taskDisplayName": "Launch request queued",
+      "descriptionTemplate": "工作排程器已將工作 \"%1\" 的執行個體 \"%2\" 排入佇列。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "QueuedTaskInstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"QueuedTaskInstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 326,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 3,
+      "levelName": "win:Warning",
+      "opcode": 0,
+      "taskSymbol": "task:NoStartOnBatteries",
+      "taskDisplayName": "Launch condition not met, computer on batteries",
+      "descriptionTemplate": "工作排程器並未啟動工作 \"%1\"，因為電腦使用電池運作。使用者動作: 若需要在以電池運作的電腦上啟動該工作，請變更工作設定中的對應旗標。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 327,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:StoppingOnBatteries",
+      "taskDisplayName": "Task stopping due to  switching to batteries",
+      "descriptionTemplate": "工作排程器已停止工作 \"%1\" 的執行個體 \"%2\"，因為電腦正在切換為電池電源。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "TaskInstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"TaskInstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 328,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:StoppingOffIdle",
+      "taskDisplayName": "Task stopping due to computer not idle",
+      "descriptionTemplate": "工作排程器已停止工作 \"%1\" 的執行個體 \"%2\"，因為電腦已不再處於閒置狀態。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "TaskInstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"TaskInstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 329,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:StoppingOnTimeout",
+      "taskDisplayName": "Task stopping due to timeout reached",
+      "descriptionTemplate": "工作排程器已終止 \"%1\" 工作的 \"%2\" 執行個體，因為超過工作定義中設定的配置執行時間。使用者動作: 增加設定的工作逾時，或調查延遲的外部原因。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "TaskInstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"TaskInstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 330,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:StoppingOnRequest",
+      "taskDisplayName": "Task stopping due to user request",
+      "descriptionTemplate": "由於使用者 \"%3\" 要求，工作排程器已停止工作 \"%1\" 的執行個體 \"%2\"。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "TaskInstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        },
+        {
+          "name": "UserContext",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"TaskInstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n  <data name=\"UserContext\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 331,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 3,
+      "levelName": "win:Warning",
+      "opcode": 0,
+      "taskSymbol": "task:TimeoutWontWork",
+      "taskDisplayName": "Task failed to stop on timeout",
+      "descriptionTemplate": "由於無法建立逾時機制，即使超過指定的逾時時間，工作排程器也會繼續執行工作 \"%1\" 的執行個體 \"%2\"。其他資料: 錯誤值: %3。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "TaskInstanceId",
+          "inType": "win:GUID",
+          "outType": "xs:GUID"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"TaskInstanceId\" inType=\"win:GUID\" outType=\"xs:GUID\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 332,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 3,
+      "levelName": "win:Warning",
+      "opcode": 0,
+      "taskSymbol": "task:NoStartUserNotLogged",
+      "taskDisplayName": "Launch condition not met, user not logged-on",
+      "descriptionTemplate": "由於符合啟動條件時使用者 \"%2\" 並未登入，工作排程器並未啟動工作 \"%1\"。使用者動作: 確定使用者已登入，或變更工作定義以允許在使用者登出時啟動。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "UserName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"UserName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 333,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 3,
+      "levelName": "win:Warning",
+      "opcode": 0,
+      "taskSymbol": "task:NoStartOnRailSession",
+      "taskDisplayName": "Launch condition not met, session is RemoteApp Session",
+      "descriptionTemplate": "因為目標工作階段是 RemoteApp 工作階段，所以工作排程器無法啟動工作 \"%1\"。使用者動作: 如果啟動 RemoteApp 工作階段上的工作是必要的，請在工作設定中變更對應旗標。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 334,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 3,
+      "levelName": "win:Warning",
+      "opcode": 0,
+      "taskSymbol": "task:NoStartOnWorkerSession",
+      "taskDisplayName": "Launch condition not met, session is a Worker Session",
+      "descriptionTemplate": "「工作排程器」未啟動工作 \"%1\"，因為目標工作階段是 WORKER 工作階段。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 400,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 1,
+      "taskSymbol": "task:ServiceMain",
+      "taskDisplayName": "Service started",
+      "descriptionTemplate": "工作排程器服務已啟動。",
+      "payload": [],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 401,
+      "version": 0,
+      "channel": "System",
+      "level": 1,
+      "levelName": "win:Critical",
+      "opcode": 101,
+      "taskSymbol": "task:ServiceStartFailed",
+      "taskDisplayName": "Service failed to start",
+      "descriptionTemplate": "由於 \"%1\" 中發生錯誤，工作排程器服務無法啟動。其他資料: 錯誤值: %2。",
+      "payload": [
+        {
+          "name": "ErrorDescription",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ErrorDescription\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 402,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 2,
+      "taskSymbol": "task:ServiceStop",
+      "taskDisplayName": "Service is shutting down",
+      "descriptionTemplate": "工作排程器服務正在關閉。",
+      "payload": [],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 403,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 104,
+      "taskSymbol": "task:ServiceError",
+      "taskDisplayName": "Service critical error",
+      "descriptionTemplate": "工作排程器服務在 \"%1\" 中發生錯誤。其他資料: 錯誤值: %2。",
+      "payload": [
+        {
+          "name": "ErrorDescription",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ErrorDescription\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 404,
+      "version": 0,
+      "channel": "System",
+      "level": 3,
+      "levelName": "win:Warning",
+      "opcode": 0,
+      "taskSymbol": "task:ServiceRPCInitError",
+      "taskDisplayName": "Service RPC error",
+      "descriptionTemplate": "工作排程器服務在 \"%1\" 中發生 PRC 初始化錯誤。其他資料: 錯誤值: %2。",
+      "payload": [
+        {
+          "name": "ErrorDescription",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ErrorDescription\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 405,
+      "version": 0,
+      "channel": "System",
+      "level": 1,
+      "levelName": "win:Critical",
+      "opcode": 0,
+      "taskSymbol": "task:ServiceCOMInitError",
+      "taskDisplayName": "Service COM error",
+      "descriptionTemplate": "工作排程器服務無法初始化 COM。其他資料: 錯誤值: %1。",
+      "payload": [
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 406,
+      "version": 0,
+      "channel": "System",
+      "level": 1,
+      "levelName": "win:Critical",
+      "opcode": 0,
+      "taskSymbol": "task:ServiceCredStoreInitFailed",
+      "taskDisplayName": "Cred store initialization error",
+      "descriptionTemplate": "工作排程器服務無法初始化認證存放區。其他資料: 錯誤值: %1。",
+      "payload": [
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 407,
+      "version": 0,
+      "channel": "System",
+      "level": 1,
+      "levelName": "win:Critical",
+      "opcode": 0,
+      "taskSymbol": "task:ServiceLSAInitFailed",
+      "taskDisplayName": "LSA initialization error",
+      "descriptionTemplate": "工作排程器服務無法初始化 LSA。其他資料: 錯誤值: %1。",
+      "payload": [
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 408,
+      "version": 0,
+      "channel": "System",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:ServiceIdleInitFailed",
+      "taskDisplayName": "Idle detection error",
+      "descriptionTemplate": "工作排程器服務無法初始化閒置狀態偵測模組。閒置工作可能無法依要求啟動。其他資料: 錯誤值: %1。",
+      "payload": [
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 409,
+      "version": 0,
+      "channel": "System",
+      "level": 1,
+      "levelName": "win:Critical",
+      "opcode": 0,
+      "taskSymbol": "task:ServiceTimeChangeInitFailed",
+      "taskDisplayName": "Time change notification error",
+      "descriptionTemplate": "工作排程器服務無法初始化時間變更通知。服務可能無法接收系統時間更新，且工作排程可能不會更新。其他資料: 錯誤值: %1。",
+      "payload": [
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 410,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:ServiceSetWakeupTimerFailed",
+      "taskDisplayName": "Wakeup timer error",
+      "descriptionTemplate": "工作排程器服務無法設定喚醒計時器。因此，部分排程的工作在系統暫停時將不會執行。其他資料: 錯誤值: %1。",
+      "payload": [
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 411,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:ServiceTimeChangeSignaled",
+      "taskDisplayName": "Service signaled time change",
+      "descriptionTemplate": "工作排程器服務已收到系統時間變更通知。",
+      "payload": [],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 412,
+      "version": 0,
+      "channel": "System",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:ServiceError",
+      "taskDisplayName": "Service critical error",
+      "descriptionTemplate": "工作排程器服務無法啟動由於電腦啟動而觸發的工作。其他資料: 錯誤值: %1。",
+      "payload": [
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 413,
+      "version": 0,
+      "channel": "System",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:ServiceError",
+      "taskDisplayName": "Service critical error",
+      "descriptionTemplate": "工作排程器服務無法在服務啟動時載入工作。其他資料: 錯誤值: %1。",
+      "payload": [
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 414,
+      "version": 0,
+      "channel": "System",
+      "level": 3,
+      "levelName": "win:Warning",
+      "opcode": 0,
+      "taskSymbol": "task:TaskMisconfigured",
+      "taskDisplayName": "Task Misconfiguration",
+      "descriptionTemplate": "工作排程器服務在 %1 定義中找到設定錯誤。其他資料: 錯誤值: %2。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "Parameter",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"Parameter\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 500,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Diagnostic",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:IdleTaskRegister",
+      "taskDisplayName": "Idle Task Register",
+      "descriptionTemplate": "Process ID %2 has registered idle task ID %1.",
+      "payload": [
+        {
+          "name": "IdleTaskId",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        },
+        {
+          "name": "ProcessId",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"IdleTaskId\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ProcessId\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 501,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Diagnostic",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:IdleTaskUnregister",
+      "taskDisplayName": "Idle Task Unregister",
+      "descriptionTemplate": "Process ID %2 has completed idle task ID %1.",
+      "payload": [
+        {
+          "name": "IdleTaskId",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        },
+        {
+          "name": "ProcessId",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"IdleTaskId\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ProcessId\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 502,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Diagnostic",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 1,
+      "taskSymbol": "task:IdleTaskExecute",
+      "taskDisplayName": "Idle Task Execute",
+      "descriptionTemplate": "Execution of idle task ID %1 has started.",
+      "payload": [
+        {
+          "name": "IdleTaskId",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        },
+        {
+          "name": "ProcessId",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"IdleTaskId\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ProcessId\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 503,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Diagnostic",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 2,
+      "taskSymbol": "task:IdleTaskExecute",
+      "taskDisplayName": "Idle Task Execute",
+      "descriptionTemplate": "Execution of idle task ID %1 has ended.",
+      "payload": [
+        {
+          "name": "IdleTaskId",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        },
+        {
+          "name": "ProcessId",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"IdleTaskId\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ProcessId\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 504,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Diagnostic",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 1,
+      "taskSymbol": "task:IdleTaskNotify",
+      "taskDisplayName": "Idle Task Notify",
+      "descriptionTemplate": "Idle task ID %1 has been notified that explicit processing has been requested.",
+      "payload": [
+        {
+          "name": "IdleTaskId",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        },
+        {
+          "name": "ProcessId",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"IdleTaskId\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ProcessId\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 505,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Diagnostic",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 2,
+      "taskSymbol": "task:IdleTaskNotify",
+      "taskDisplayName": "Idle Task Notify",
+      "descriptionTemplate": "Idle task ID %1 has returned from its explicit processing notification.",
+      "payload": [
+        {
+          "name": "IdleTaskId",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        },
+        {
+          "name": "ProcessId",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"IdleTaskId\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ProcessId\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 506,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Diagnostic",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 1,
+      "taskSymbol": "task:IdleTaskExplicitProcessing",
+      "taskDisplayName": "Idle Task Explicit Processing",
+      "descriptionTemplate": "Explicit execution of all idle tasks has been requested.",
+      "payload": [],
+      "templateXml": "",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 507,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Diagnostic",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 2,
+      "taskSymbol": "task:IdleTaskExplicitProcessing",
+      "taskDisplayName": "Idle Task Explicit Processing",
+      "descriptionTemplate": "Explicit execution of all idle tasks has completed.",
+      "payload": [],
+      "templateXml": "",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 508,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Diagnostic",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:IdleTaskExplicitProcessingActive",
+      "taskDisplayName": "Idle Task Explicit Processing Active",
+      "descriptionTemplate": "Explicit execution of all idle tasks is in progress.",
+      "payload": [],
+      "templateXml": "",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 509,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Diagnostic",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:IdleTaskPowerNotificationReceived",
+      "taskDisplayName": "Idle Task Power Notification Received",
+      "descriptionTemplate": "Idle Task Power Notification Received: %1 (%2)",
+      "payload": [
+        {
+          "name": "NotificationType",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "State",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"NotificationType\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"State\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 510,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Diagnostic",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:ItSpEvt_PerfTrack_IdleEntryStats",
+      "taskDisplayName": "Idle Task PerfTrack Resource Consumption",
+      "descriptionTemplate": "",
+      "payload": [
+        {
+          "name": "NoIdleReason",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        },
+        {
+          "name": "DATA1",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        },
+        {
+          "name": "DATA2",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"NoIdleReason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"DATA1\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"DATA2\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 511,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Diagnostic",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:ItSpEvt_PerfTrack_IdleExitStats",
+      "taskDisplayName": "Idle Task PerfTrack Idle Exit",
+      "descriptionTemplate": "",
+      "payload": [
+        {
+          "name": "TimeSinceUserNotPresent",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        },
+        {
+          "name": "DATA",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TimeSinceUserNotPresent\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"DATA\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 512,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Diagnostic",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:IdleCheckPoint",
+      "taskDisplayName": "Idle Check Point",
+      "descriptionTemplate": "Idle check point: State %1, Reason %2.",
+      "payload": [
+        {
+          "name": "DetectionResult",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        },
+        {
+          "name": "Reason",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"DetectionResult\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"Reason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 700,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:CompatStart",
+      "taskDisplayName": "Compatibility module started",
+      "descriptionTemplate": "工作排程器服務已啟動工作相容性模組。",
+      "payload": [],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 701,
+      "version": 0,
+      "channel": "System",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:CompatStartFailed",
+      "taskDisplayName": "Compatibility module failed to start",
+      "descriptionTemplate": "工作排程器服務無法啟動工作相容性模組。工作可能無法在舊版 Windows 上登錄。其他資料: 錯誤值: %1。",
+      "payload": [
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 702,
+      "version": 0,
+      "channel": "System",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:CompatStartRPCFailed",
+      "taskDisplayName": "Compatibility module RPC failed",
+      "descriptionTemplate": "工作排程器無法初始化 RPC 伺服器以啟動工作相容性模組。工作可能無法在舊版 Windows 上登錄。其他資料: 錯誤值: %1。",
+      "payload": [
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 703,
+      "version": 0,
+      "channel": "System",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:CompatStartNetschedFailed",
+      "taskDisplayName": "Compatibility module Net Schedule API failed",
+      "descriptionTemplate": "工作排程器無法初始化 Net Schedule API 以啟動工作相容性模組。工作可能無法在舊版 Windows 上登錄。其他資料: 錯誤值: %1。",
+      "payload": [
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 704,
+      "version": 0,
+      "channel": "System",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:CompatStartLSAFailed",
+      "taskDisplayName": "Compatibility module LSA failed",
+      "descriptionTemplate": "工作排程器無法初始化 LSA 以啟動工作相容性模組。工作可能無法在舊版 Windows 上登錄。其他資料: 錯誤值: %1。",
+      "payload": [
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 705,
+      "version": 0,
+      "channel": "System",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:CompatDirectoryMonitoringFailed",
+      "taskDisplayName": "Compatibility module directory monitoring failed",
+      "descriptionTemplate": "工作排程器無法啟動目錄監控，以啟動工作相容性模組。其他資料: 錯誤值: %1。",
+      "payload": [
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 706,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:CompatTaskStatusUpdateFailed",
+      "taskDisplayName": "Compatibility module task status update failed",
+      "descriptionTemplate": "工作相容性模組無法將工作 \"%1\" 更新為所需的狀態 %2。其他資料: 錯誤值: %3。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "TaskStatus",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"TaskStatus\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 707,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:CompatTaskDeleteFailed",
+      "taskDisplayName": "Compatibility module task deletion failed",
+      "descriptionTemplate": "工作相容性模組無法刪除工作 \"%1\"。其他資料: 錯誤值: %2。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 708,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:CompatTaskSetSDFailed",
+      "taskDisplayName": "Compatibility module security descriptor failed",
+      "descriptionTemplate": "工作相容性模組無法設定工作 \"%2\" 的安全性描述元 \"%1\"。其他資料: 錯誤值: %3。",
+      "payload": [
+        {
+          "name": "SecurityDescriptor",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"SecurityDescriptor\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 709,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:CompatTaskUpdateFailed",
+      "taskDisplayName": "Compatibility module task update failed",
+      "descriptionTemplate": "工作相容性模組無法更新工作 \"%1\"。其他資料: 錯誤值: %2。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 710,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:CompatUpgradeFailed",
+      "taskDisplayName": "Compatibility module tasks upgrade failed",
+      "descriptionTemplate": "工作相容性模組無法升級現有的工作。下次工作排程器服務啟動時將會再嘗試升級。其他資料: 錯誤值: %1。",
+      "payload": [
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 711,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:CompatUpgradeFailed",
+      "taskDisplayName": "Compatibility module tasks upgrade failed",
+      "descriptionTemplate": "工作相容性模組無法升級 NetSchedule 帳戶 \"%1\"。其他資料: 錯誤值: %2。",
+      "payload": [
+        {
+          "name": "Account",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"Account\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 712,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:CompatUpgradeFailed",
+      "taskDisplayName": "Compatibility module tasks upgrade failed",
+      "descriptionTemplate": "工作相容性模組無法讀取現有的存放區以升級工作。其他資料: 錯誤值: %1。",
+      "payload": [
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 713,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:CompatUpgradeFailed",
+      "taskDisplayName": "Compatibility module tasks upgrade failed",
+      "descriptionTemplate": "工作相容性模組無法載入升級的工作 \"%1\"。其他資料: 錯誤值: %2。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 714,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:CompatUpgradeFailed",
+      "taskDisplayName": "Compatibility module tasks upgrade failed",
+      "descriptionTemplate": "工作相容性模組無法登錄升級的工作 \"%1\"。其他資料: 錯誤值: %2。",
+      "payload": [
+        {
+          "name": "TaskName",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TaskName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 715,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:CompatUpgradeFailed",
+      "taskDisplayName": "Compatibility module tasks upgrade failed",
+      "descriptionTemplate": "工作相容性模組無法刪除升級的 LSA 存放區。其他資料: 錯誤值: %1。",
+      "payload": [
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 716,
+      "version": 0,
+      "channel": "System",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:CompatUpgradeFailed",
+      "taskDisplayName": "Compatibility module tasks upgrade failed",
+      "descriptionTemplate": "工作相容性模組無法升級現有的排程工作。其他資料: 錯誤值: %1。",
+      "payload": [
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 717,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Operational",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:CompatUpgradeUndetermined",
+      "taskDisplayName": "Compatibility module tasks upgrade undetermined",
+      "descriptionTemplate": "工作相容性模組無法判定是否需要升級。其他資料: 錯誤值: %1。",
+      "payload": [
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 718,
+      "version": 0,
+      "channel": "System",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:Beta2CredStoreUpgradeFailed",
+      "taskDisplayName": "Credential store upgrade failed",
+      "descriptionTemplate": "工作排程器無法將從 Beta 2 版本升級認證存放區。您可能需要重新登錄任何需要密碼的工作。其他資料: 錯誤值: %1。",
+      "payload": [
+        {
+          "name": "ResultCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ResultCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 719,
+      "version": 0,
+      "channel": "System",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:OpChannelDisabled",
+      "taskDisplayName": "TaskScheduler Operational log was disabled",
+      "descriptionTemplate": "為協助最大化效能，工作排程器已自動停用記錄功能。若要重新啟用記錄功能，請使用 [事件檢視器]。",
+      "payload": [],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 800,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Maintenance",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:MaintenanceStateChanged",
+      "taskDisplayName": "Maintenance state has changed",
+      "descriptionTemplate": "維護狀態已變更為 %1 (上次執行: %2)。",
+      "payload": [
+        {
+          "name": "hc_stateid",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        },
+        {
+          "name": "LastRunDateTime",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"hc_stateid\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"LastRunDateTime\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 801,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Maintenance",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:MaintenanceLaunchError",
+      "taskDisplayName": "Maintenance launch failed",
+      "descriptionTemplate": "維護啟動作業失敗。其他錯誤資訊: %1。",
+      "payload": [
+        {
+          "name": "ErrorCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ErrorCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 802,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Maintenance",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:MaintenanceReconfigurationError",
+      "taskDisplayName": "Maintenance re-configuration failed",
+      "descriptionTemplate": "維護重新設定失敗。其他錯誤資訊: %1。",
+      "payload": [
+        {
+          "name": "ErrorCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"ErrorCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 803,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Maintenance",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:MaintenanceSchedulerTaskError",
+      "taskDisplayName": "Maintenance Scheduler engine task error",
+      "descriptionTemplate": "無法存取維護排程器引擎工作 \"%1\"。其他錯誤資訊: %2。",
+      "payload": [
+        {
+          "name": "Task",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "ErrorCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"Task\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ErrorCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 804,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Maintenance",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:MaintenanceCycleDependencyError",
+      "taskDisplayName": "Maintenance task cycle dependency detected",
+      "descriptionTemplate": "維護排程器偵測到下列維護工作的循環依存性: %1。",
+      "payload": [
+        {
+          "name": "Task",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"Task\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 805,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Maintenance",
+      "level": 3,
+      "levelName": "win:Warning",
+      "opcode": 0,
+      "taskSymbol": "task:MaintenanceTaskBehindDeadline",
+      "taskDisplayName": "Maintenance task is behind deadline",
+      "descriptionTemplate": "維護工作 \"%1\" 超出期限。",
+      "payload": [
+        {
+          "name": "Task",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"Task\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 806,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Maintenance",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:MaintenanceTaskError",
+      "taskDisplayName": "Maintenance task processing error",
+      "descriptionTemplate": "維護工作 \"%1\" 處理錯誤。其他錯誤資訊 %2。",
+      "payload": [
+        {
+          "name": "Task",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "InfoCode",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"Task\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"InfoCode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 807,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Maintenance",
+      "level": 4,
+      "levelName": "win:Informational",
+      "opcode": 0,
+      "taskSymbol": "task:MaintenanceComplete",
+      "taskDisplayName": "Maintenance complete",
+      "descriptionTemplate": "維護完成 (啟動類型 %1)。",
+      "payload": [
+        {
+          "name": "LauncherId",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"LauncherId\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 808,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Maintenance",
+      "level": 3,
+      "levelName": "win:Warning",
+      "opcode": 0,
+      "taskSymbol": "task:MaintenanceTaskWakeupRequested",
+      "taskDisplayName": "Maintenance wakeup requested",
+      "descriptionTemplate": "維護工作 \"%1\" 要求在下次一般維護執行時間喚醒電腦。",
+      "payload": [
+        {
+          "name": "Task",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"Task\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 809,
+      "version": 0,
+      "channel": "System",
+      "level": 2,
+      "levelName": "win:Error",
+      "opcode": 0,
+      "taskSymbol": "task:MaintenanceKeysMalformed",
+      "taskDisplayName": "Maintenance Scheduler configuration error",
+      "descriptionTemplate": "未正確指定 \"%1\" 的維護排程器群組原則設定。正在使用預設設定。",
+      "payload": [
+        {
+          "name": "Failure Reason",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"Failure Reason\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 998,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Debug",
+      "level": 5,
+      "levelName": "win:Verbose",
+      "opcode": 104,
+      "taskSymbol": "task:MethodFailure",
+      "taskDisplayName": "Method Failure",
+      "descriptionTemplate": "DEBUG! (%3:%4) \"%1\" failed. (%2).",
+      "payload": [
+        {
+          "name": "Name",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "HRESULT",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        },
+        {
+          "name": "File",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        },
+        {
+          "name": "Line",
+          "inType": "win:UInt32",
+          "outType": "xs:unsignedInt"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"Name\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"HRESULT\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"File\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"Line\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    },
+    {
+      "provider": "Microsoft-Windows-TaskScheduler",
+      "id": 999,
+      "version": 0,
+      "channel": "Microsoft-Windows-TaskScheduler/Debug",
+      "level": 5,
+      "levelName": "win:Verbose",
+      "opcode": 0,
+      "taskSymbol": "task:Debug",
+      "taskDisplayName": "Debug",
+      "descriptionTemplate": "DEBUG! \"%1\".",
+      "payload": [
+        {
+          "name": "String",
+          "inType": "win:UnicodeString",
+          "outType": "xs:string"
+        }
+      ],
+      "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"String\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+      "source": "INSTALLED_PROVIDER_METADATA_NOT_LIVE_EVENT",
+      "liveOperationalSampleAvailable": false
+    }
+  ]
+}

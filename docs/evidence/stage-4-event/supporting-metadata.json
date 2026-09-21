@@ -1,0 +1,502 @@
+[
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 41,
+    "version": 0,
+    "channel": "System",
+    "level": 1,
+    "descriptionTemplate": "最後一次的睡眠轉換不成功。若系統在睡眠轉換期間停止回應、失敗或電力中斷，就可能會造成此錯誤。",
+    "templateXml": "",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 41,
+    "version": 1,
+    "channel": "System",
+    "level": 1,
+    "descriptionTemplate": "最後一次的睡眠轉換不成功。若系統在睡眠轉換期間停止回應、失敗或電力中斷，就可能會造成此錯誤。",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"BugcheckCode\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"BugcheckParameter\" inType=\"win:Pointer\" outType=\"win:HexInt64\" count=\"4\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 41,
+    "version": 2,
+    "channel": "System",
+    "level": 1,
+    "descriptionTemplate": "系統已重新開機，但未先正常關機。若系統停止回應、當機或電力意外中斷，就可能會造成此錯誤。",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"BugcheckCode\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"BugcheckParameter1\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter2\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter3\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter4\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"SleepInProgress\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"PowerButtonTimestamp\" inType=\"win:UInt64\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BootAppStatus\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 41,
+    "version": 3,
+    "channel": "System",
+    "level": 1,
+    "descriptionTemplate": "系統已重新開機，但未先正常關機。若系統停止回應、當機或電力意外中斷，就可能會造成此錯誤。",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"BugcheckCode\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"BugcheckParameter1\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter2\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter3\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter4\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"SleepInProgress\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"PowerButtonTimestamp\" inType=\"win:UInt64\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BootAppStatus\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 41,
+    "version": 4,
+    "channel": "System",
+    "level": 1,
+    "descriptionTemplate": "系統已重新開機，但未先正常關機。若系統停止回應、當機或電力意外中斷，就可能會造成此錯誤。",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"BugcheckCode\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"BugcheckParameter1\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter2\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter3\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter4\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"SleepInProgress\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"PowerButtonTimestamp\" inType=\"win:UInt64\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BootAppStatus\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"Checkpoint\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"ConnectedStandbyInProgress\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"SystemSleepTransitionsToOn\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"CsEntryScenarioInstanceId\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 41,
+    "version": 5,
+    "channel": "System",
+    "level": 1,
+    "descriptionTemplate": "系統已重新開機，但未先正常關機。若系統停止回應、當機或電力意外中斷，就可能會造成此錯誤。",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"BugcheckCode\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"BugcheckParameter1\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter2\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter3\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter4\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"SleepInProgress\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"PowerButtonTimestamp\" inType=\"win:UInt64\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BootAppStatus\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"Checkpoint\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"ConnectedStandbyInProgress\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"SystemSleepTransitionsToOn\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"CsEntryScenarioInstanceId\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"BugcheckInfoFromEFI\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 41,
+    "version": 6,
+    "channel": "System",
+    "level": 1,
+    "descriptionTemplate": "系統已重新開機，但未先正常關機。若系統停止回應、當機或電力意外中斷，就可能會造成此錯誤。",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"BugcheckCode\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"BugcheckParameter1\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter2\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter3\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter4\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"SleepInProgress\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"PowerButtonTimestamp\" inType=\"win:UInt64\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BootAppStatus\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"Checkpoint\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"ConnectedStandbyInProgress\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"SystemSleepTransitionsToOn\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"CsEntryScenarioInstanceId\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"BugcheckInfoFromEFI\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"CheckpointStatus\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 41,
+    "version": 7,
+    "channel": "System",
+    "level": 1,
+    "descriptionTemplate": "系統已重新開機，但未先正常關機。若系統停止回應、當機或電力意外中斷，就可能會造成此錯誤。",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"BugcheckCode\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"BugcheckParameter1\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter2\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter3\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter4\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"SleepInProgress\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"PowerButtonTimestamp\" inType=\"win:UInt64\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BootAppStatus\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"Checkpoint\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"ConnectedStandbyInProgress\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"SystemSleepTransitionsToOn\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"CsEntryScenarioInstanceId\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"BugcheckInfoFromEFI\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"CheckpointStatus\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"CsEntryScenarioInstanceIdV2\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 41,
+    "version": 8,
+    "channel": "System",
+    "level": 1,
+    "descriptionTemplate": "系統已重新開機，但未先正常關機。若系統停止回應、當機或電力意外中斷，就可能會造成此錯誤。",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"BugcheckCode\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"BugcheckParameter1\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter2\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter3\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter4\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"SleepInProgress\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"PowerButtonTimestamp\" inType=\"win:UInt64\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BootAppStatus\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"Checkpoint\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"ConnectedStandbyInProgress\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"SystemSleepTransitionsToOn\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"CsEntryScenarioInstanceId\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"BugcheckInfoFromEFI\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"CheckpointStatus\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"CsEntryScenarioInstanceIdV2\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"LongPowerButtonPressDetected\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 41,
+    "version": 9,
+    "channel": "System",
+    "level": 1,
+    "descriptionTemplate": "系統已重新開機，但未先正常關機。若系統停止回應、當機或電力意外中斷，就可能會造成此錯誤。",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"BugcheckCode\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"BugcheckParameter1\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter2\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter3\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter4\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"SleepInProgress\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"PowerButtonTimestamp\" inType=\"win:UInt64\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BootAppStatus\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"Checkpoint\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"ConnectedStandbyInProgress\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"SystemSleepTransitionsToOn\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"CsEntryScenarioInstanceId\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"BugcheckInfoFromEFI\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"CheckpointStatus\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"CsEntryScenarioInstanceIdV2\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"LongPowerButtonPressDetected\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"LidReliability\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"InputSuppressionState\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"PowerButtonSuppressionState\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"LidState\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 41,
+    "version": 10,
+    "channel": "System",
+    "level": 1,
+    "descriptionTemplate": "系統已重新開機，但未先正常關機。若系統停止回應、當機或電力意外中斷，就可能會造成此錯誤。",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"BugcheckCode\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"BugcheckParameter1\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter2\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter3\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BugcheckParameter4\" inType=\"win:Pointer\" outType=\"win:HexInt64\"/>\r\n  <data name=\"SleepInProgress\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"PowerButtonTimestamp\" inType=\"win:UInt64\" outType=\"win:HexInt64\"/>\r\n  <data name=\"BootAppStatus\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"Checkpoint\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"ConnectedStandbyInProgress\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"SystemSleepTransitionsToOn\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"CsEntryScenarioInstanceId\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"BugcheckInfoFromEFI\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"CheckpointStatus\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"CsEntryScenarioInstanceIdV2\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"LongPowerButtonPressDetected\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"LidReliability\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"InputSuppressionState\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"PowerButtonSuppressionState\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"LidState\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"WHEABootErrorCount\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 42,
+    "version": 0,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統正在進入睡眠狀態。",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TargetState\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"EffectiveState\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 42,
+    "version": 2,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統正在進入睡眠狀態。\r\n\r\n睡眠原因: %3",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TargetState\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"EffectiveState\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"Reason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"Flags\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 42,
+    "version": 3,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統正在進入睡眠狀態。\r\n\r\n睡眠原因: %3",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TargetState\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"EffectiveState\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"Reason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"Flags\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"TransitionsToOn\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 107,
+    "version": 0,
+    "channel": "Microsoft-Windows-Kernel-Power/Diagnostic",
+    "level": 4,
+    "descriptionTemplate": "",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TargetState\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"EffectiveState\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"WakeFromState\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 107,
+    "version": 1,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統已從睡眠狀態繼續。",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"TargetState\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"EffectiveState\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"WakeFromState\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ProgrammedWakeTimeAc\" inType=\"win:FILETIME\" outType=\"xs:dateTime\"/>\r\n  <data name=\"ProgrammedWakeTimeDc\" inType=\"win:FILETIME\" outType=\"xs:dateTime\"/>\r\n  <data name=\"WakeRequesterTypeAc\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"WakeRequesterTypeDc\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 506,
+    "version": 0,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統正在進入現代待命 \r\n\r\n 原因：%1.",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"Reason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 506,
+    "version": 1,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統正在進入現代待命 \r\n\r\n 原因：%1.",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"Reason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"LidOpenState\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ExternalMonitorConnectedState\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ScenarioInstanceId\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 506,
+    "version": 2,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統正在進入現代待命 \r\n\r\n 原因：%1.",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"Reason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"LidOpenState\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ExternalMonitorConnectedState\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ScenarioInstanceId\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"BatteryRemainingCapacityOnEnter\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"BatteryFullChargeCapacityOnEnter\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 506,
+    "version": 3,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統正在進入現代待命 \r\n\r\n 原因：%1.",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"Reason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"LidOpenState\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ExternalMonitorConnectedState\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ScenarioInstanceId\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"BatteryRemainingCapacityOnEnter\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"BatteryFullChargeCapacityOnEnter\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ScenarioInstanceIdV2\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"BootId\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 507,
+    "version": 0,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統正在結束現代待命 \r\n\r\n 原因：%10.",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"EnergyDrain\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ActiveResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonDripsTimeActivatedInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"FirstDripsEntryInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DurationInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsTransitions\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"FullChargeCapacityRatio\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"AudioPlaying\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"Reason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"AudioPlaybackInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonActivatedCpuInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"PowerStateAc\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 507,
+    "version": 1,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統正在結束現代待命 \r\n\r\n 原因：%10.",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"EnergyDrain\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ActiveResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonDripsTimeActivatedInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"FirstDripsEntryInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DurationInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsTransitions\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"FullChargeCapacityRatio\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"AudioPlaying\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"Reason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"AudioPlaybackInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonActivatedCpuInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"PowerStateAc\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"HwDripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 507,
+    "version": 2,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統正在結束現代待命 \r\n\r\n 原因：%10.",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"EnergyDrain\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ActiveResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonDripsTimeActivatedInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"FirstDripsEntryInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DurationInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsTransitions\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"FullChargeCapacityRatio\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"AudioPlaying\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"Reason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"AudioPlaybackInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonActivatedCpuInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"PowerStateAc\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"HwDripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ExitLatencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 507,
+    "version": 3,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統正在結束現代待命 \r\n\r\n 原因：%10.",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"EnergyDrain\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ActiveResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonDripsTimeActivatedInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"FirstDripsEntryInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DurationInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsTransitions\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"FullChargeCapacityRatio\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"AudioPlaying\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"Reason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"AudioPlaybackInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonActivatedCpuInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"PowerStateAc\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"HwDripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ExitLatencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DisconnectedStandby\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"AoAcCompliantNic\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 507,
+    "version": 4,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統正在結束現代待命 \r\n\r\n 原因：%10.",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"EnergyDrain\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ActiveResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonDripsTimeActivatedInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"FirstDripsEntryInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DurationInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsTransitions\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"FullChargeCapacityRatio\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"AudioPlaying\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"Reason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"AudioPlaybackInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonActivatedCpuInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"PowerStateAc\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"HwDripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ExitLatencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DisconnectedStandby\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"AoAcCompliantNic\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"NonAttributedCpuInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 507,
+    "version": 5,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統正在結束現代待命 \r\n\r\n 原因：%10.",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"EnergyDrain\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ActiveResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonDripsTimeActivatedInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"FirstDripsEntryInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DurationInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsTransitions\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"FullChargeCapacityRatio\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"AudioPlaying\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"Reason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"AudioPlaybackInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonActivatedCpuInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"PowerStateAc\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"HwDripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ExitLatencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DisconnectedStandby\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"AoAcCompliantNic\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"NonAttributedCpuInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ModernSleepEnabledActionsBitmask\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ModernSleepAppliedActionsBitmask\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"LidOpenState\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ExternalMonitorConnectedState\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ScenarioInstanceId\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"IsCsSessionInProgressOnExit\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 507,
+    "version": 6,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統正在結束現代待命 \r\n\r\n 原因：%10.",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"EnergyDrain\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ActiveResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonDripsTimeActivatedInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"FirstDripsEntryInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DurationInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsTransitions\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"FullChargeCapacityRatio\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"AudioPlaying\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"Reason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"AudioPlaybackInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonActivatedCpuInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"PowerStateAc\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"HwDripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ExitLatencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DisconnectedStandby\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"AoAcCompliantNic\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"NonAttributedCpuInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ModernSleepEnabledActionsBitmask\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ModernSleepAppliedActionsBitmask\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"LidOpenState\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ExternalMonitorConnectedState\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ScenarioInstanceId\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"IsCsSessionInProgressOnExit\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"BatteryRemainingCapacityOnExit\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"BatteryFullChargeCapacityOnExit\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 507,
+    "version": 7,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統正在結束現代待命 \r\n\r\n 原因：%10.",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"EnergyDrain\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ActiveResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonDripsTimeActivatedInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"FirstDripsEntryInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DurationInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsTransitions\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"FullChargeCapacityRatio\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"AudioPlaying\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"Reason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"AudioPlaybackInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonActivatedCpuInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"PowerStateAc\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"HwDripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ExitLatencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DisconnectedStandby\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"AoAcCompliantNic\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"NonAttributedCpuInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ModernSleepEnabledActionsBitmask\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ModernSleepAppliedActionsBitmask\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"LidOpenState\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ExternalMonitorConnectedState\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ScenarioInstanceId\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"IsCsSessionInProgressOnExit\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"BatteryRemainingCapacityOnExit\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"BatteryFullChargeCapacityOnExit\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 507,
+    "version": 8,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統正在結束現代待命 \r\n\r\n 原因：%10.",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"EnergyDrain\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ActiveResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonDripsTimeActivatedInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"FirstDripsEntryInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DurationInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsTransitions\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"FullChargeCapacityRatio\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"AudioPlaying\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"Reason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"AudioPlaybackInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonActivatedCpuInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"PowerStateAc\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"HwDripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ExitLatencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DisconnectedStandby\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"AoAcCompliantNic\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"NonAttributedCpuInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ModernSleepEnabledActionsBitmask\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ModernSleepAppliedActionsBitmask\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"LidOpenState\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ExternalMonitorConnectedState\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ScenarioInstanceId\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"IsCsSessionInProgressOnExit\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"BatteryRemainingCapacityOnExit\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"BatteryFullChargeCapacityOnExit\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ScenarioInstanceIdV2\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"BootId\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"InputSuppressionActionCount\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"NonResiliencyTimeInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ResiliencyDripsTimeInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ResiliencyHwDripsTimeInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"GdiOnTime\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DwmSyncFlushTime\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"MonitorPowerOnTime\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 507,
+    "version": 9,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統正在結束現代待命 \r\n\r\n 原因：%10.",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"EnergyDrain\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ActiveResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonDripsTimeActivatedInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"FirstDripsEntryInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DurationInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsTransitions\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"FullChargeCapacityRatio\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"AudioPlaying\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"Reason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"AudioPlaybackInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonActivatedCpuInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"PowerStateAc\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"HwDripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ExitLatencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DisconnectedStandby\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"AoAcCompliantNic\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"NonAttributedCpuInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ModernSleepEnabledActionsBitmask\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ModernSleepAppliedActionsBitmask\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"LidOpenState\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ExternalMonitorConnectedState\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ScenarioInstanceId\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"IsCsSessionInProgressOnExit\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"BatteryRemainingCapacityOnExit\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"BatteryFullChargeCapacityOnExit\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ScenarioInstanceIdV2\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"BootId\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"InputSuppressionActionCount\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"NonResiliencyTimeInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ResiliencyDripsTimeInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ResiliencyHwDripsTimeInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"GdiOnTime\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DwmSyncFlushTime\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"MonitorPowerOnTime\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"SleepEntered\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ScreenOffEnergyCapacityAtStart\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ScreenOffEnergyCapacityAtEnd\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ScreenOffDurationInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"SleepEnergyCapacityAtStart\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"SleepEnergyCapacityAtEnd\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"SleepDurationInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ScreenOffFullEnergyCapacityAtStart\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ScreenOffFullEnergyCapacityAtEnd\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"SleepFullEnergyCapacityAtStart\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"SleepFullEnergyCapacityAtEnd\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 507,
+    "version": 10,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統正在結束現代待命 \r\n\r\n 原因：%10.",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"EnergyDrain\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ActiveResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonDripsTimeActivatedInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"FirstDripsEntryInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DurationInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsTransitions\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"FullChargeCapacityRatio\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"AudioPlaying\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"Reason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"AudioPlaybackInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonActivatedCpuInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"PowerStateAc\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"HwDripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ExitLatencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DisconnectedStandby\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"AoAcCompliantNic\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"NonAttributedCpuInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ModernSleepEnabledActionsBitmask\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ModernSleepAppliedActionsBitmask\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"LidOpenState\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ExternalMonitorConnectedState\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ScenarioInstanceId\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"IsCsSessionInProgressOnExit\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"BatteryRemainingCapacityOnExit\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"BatteryFullChargeCapacityOnExit\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ScenarioInstanceIdV2\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"BootId\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"InputSuppressionActionCount\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"NonResiliencyTimeInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ResiliencyDripsTimeInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ResiliencyHwDripsTimeInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"GdiOnTime\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DwmSyncFlushTime\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"MonitorPowerOnTime\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"SleepEntered\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ScreenOffEnergyCapacityAtStart\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ScreenOffEnergyCapacityAtEnd\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ScreenOffDurationInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"SleepEnergyCapacityAtStart\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"SleepEnergyCapacityAtEnd\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"SleepDurationInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ScreenOffFullEnergyCapacityAtStart\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ScreenOffFullEnergyCapacityAtEnd\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"SleepFullEnergyCapacityAtStart\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"SleepFullEnergyCapacityAtEnd\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"PowerSchemeInfo\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 507,
+    "version": 11,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統正在結束現代待命 \r\n\r\n 原因：%10.",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"EnergyDrain\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ActiveResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonDripsTimeActivatedInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"FirstDripsEntryInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DurationInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsTransitions\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"FullChargeCapacityRatio\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"AudioPlaying\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"Reason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"AudioPlaybackInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonActivatedCpuInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"PowerStateAc\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"HwDripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ExitLatencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DisconnectedStandby\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"AoAcCompliantNic\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"NonAttributedCpuInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ModernSleepEnabledActionsBitmask\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ModernSleepAppliedActionsBitmask\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"LidOpenState\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ExternalMonitorConnectedState\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ScenarioInstanceId\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"IsCsSessionInProgressOnExit\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"BatteryRemainingCapacityOnExit\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"BatteryFullChargeCapacityOnExit\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ScenarioInstanceIdV2\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"BootId\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"InputSuppressionActionCount\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"NonResiliencyTimeInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ResiliencyDripsTimeInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ResiliencyHwDripsTimeInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"GdiOnTime\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DwmSyncFlushTime\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"MonitorPowerOnTime\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"SleepEntered\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ScreenOffEnergyCapacityAtStart\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ScreenOffEnergyCapacityAtEnd\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ScreenOffDurationInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"SleepEnergyCapacityAtStart\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"SleepEnergyCapacityAtEnd\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"SleepDurationInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ScreenOffFullEnergyCapacityAtStart\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ScreenOffFullEnergyCapacityAtEnd\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"SleepFullEnergyCapacityAtStart\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"SleepFullEnergyCapacityAtEnd\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"PowerSchemeInfo\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"PowerButtonSuppressionActionCount\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-Power",
+    "id": 507,
+    "version": 12,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統正在結束現代待命 \r\n\r\n 原因：%10.",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"EnergyDrain\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ActiveResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonDripsTimeActivatedInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"FirstDripsEntryInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DurationInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DripsTransitions\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"FullChargeCapacityRatio\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"AudioPlaying\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"Reason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"AudioPlaybackInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"NonActivatedCpuInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"PowerStateAc\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"HwDripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ExitLatencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DisconnectedStandby\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"AoAcCompliantNic\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"NonAttributedCpuInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ModernSleepEnabledActionsBitmask\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ModernSleepAppliedActionsBitmask\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"LidOpenState\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ExternalMonitorConnectedState\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ScenarioInstanceId\" inType=\"win:UInt8\" outType=\"xs:unsignedByte\"/>\r\n  <data name=\"IsCsSessionInProgressOnExit\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"BatteryRemainingCapacityOnExit\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"BatteryFullChargeCapacityOnExit\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ScenarioInstanceIdV2\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"BootId\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"InputSuppressionActionCount\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"NonResiliencyTimeInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ResiliencyDripsTimeInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ResiliencyHwDripsTimeInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"GdiOnTime\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"DwmSyncFlushTime\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"MonitorPowerOnTime\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"SleepEntered\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"ScreenOffEnergyCapacityAtStart\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ScreenOffEnergyCapacityAtEnd\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ScreenOffDurationInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"SleepEnergyCapacityAtStart\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"SleepEnergyCapacityAtEnd\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"SleepDurationInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ScreenOffFullEnergyCapacityAtStart\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ScreenOffFullEnergyCapacityAtEnd\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"SleepFullEnergyCapacityAtStart\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"SleepFullEnergyCapacityAtEnd\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"PowerSchemeInfo\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"PowerButtonSuppressionActionCount\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ScreenOffSwDripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"ScreenOffHwDripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"SleepSwDripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n  <data name=\"SleepHwDripsResidencyInUs\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Power-Troubleshooter",
+    "id": 1,
+    "version": 0,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統已從低電源狀態回復。\r\n\r\n睡眠時間: %1\r\n喚醒時間: %2\r\n\r\n喚醒來源: %13%15",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"SleepTime\" inType=\"win:FILETIME\" outType=\"xs:dateTime\"/>\r\n  <data name=\"WakeTime\" inType=\"win:FILETIME\" outType=\"xs:dateTime\"/>\r\n  <data name=\"SleepDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"WakeDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"DriverInitDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"BiosInitDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"HiberWriteDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"HiberReadDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"HiberPagesWritten\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"Attributes\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"TargetState\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"EffectiveState\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"WakeSourceType\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"WakeSourceTextLength\" inType=\"win:UInt16\" outType=\"xs:unsignedShort\"/>\r\n  <data name=\"WakeSourceText\" inType=\"win:UnicodeString\" outType=\"xs:string\" length=\"WakeSourceTextLength\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Power-Troubleshooter",
+    "id": 1,
+    "version": 1,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統已從低電源狀態回復。\r\n\r\n睡眠時間: %1\r\n喚醒時間: %2\r\n\r\n喚醒來源: %13%15",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"SleepTime\" inType=\"win:FILETIME\" outType=\"xs:dateTime\"/>\r\n  <data name=\"WakeTime\" inType=\"win:FILETIME\" outType=\"xs:dateTime\"/>\r\n  <data name=\"SleepDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"WakeDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"DriverInitDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"BiosInitDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"HiberWriteDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"HiberReadDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"HiberPagesWritten\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"Attributes\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"TargetState\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"EffectiveState\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"WakeSourceType\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"WakeSourceTextLength\" inType=\"win:UInt16\" outType=\"xs:unsignedShort\"/>\r\n  <data name=\"WakeSourceText\" inType=\"win:UnicodeString\" outType=\"xs:string\" length=\"WakeSourceTextLength\"/>\r\n  <data name=\"WakeTimerOwnerLength\" inType=\"win:UInt16\" outType=\"xs:unsignedShort\"/>\r\n  <data name=\"WakeTimerContextLength\" inType=\"win:UInt16\" outType=\"xs:unsignedShort\"/>\r\n  <data name=\"WakeTimerOwner\" inType=\"win:UnicodeString\" outType=\"xs:string\" length=\"WakeTimerOwnerLength\"/>\r\n  <data name=\"WakeTimerContext\" inType=\"win:UnicodeString\" outType=\"xs:string\" length=\"WakeTimerContextLength\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Power-Troubleshooter",
+    "id": 1,
+    "version": 2,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統已從低電源狀態回復。\r\n\r\n睡眠時間: %1\r\n喚醒時間: %2\r\n\r\n喚醒來源: %13%15",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"SleepTime\" inType=\"win:FILETIME\" outType=\"xs:dateTime\"/>\r\n  <data name=\"WakeTime\" inType=\"win:FILETIME\" outType=\"xs:dateTime\"/>\r\n  <data name=\"SleepDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"WakeDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"DriverInitDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"BiosInitDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"HiberWriteDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"HiberReadDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"HiberPagesWritten\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"Attributes\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"TargetState\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"EffectiveState\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"WakeSourceType\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"WakeSourceTextLength\" inType=\"win:UInt16\" outType=\"xs:unsignedShort\"/>\r\n  <data name=\"WakeSourceText\" inType=\"win:UnicodeString\" outType=\"xs:string\" length=\"WakeSourceTextLength\"/>\r\n  <data name=\"WakeTimerOwnerLength\" inType=\"win:UInt16\" outType=\"xs:unsignedShort\"/>\r\n  <data name=\"WakeTimerContextLength\" inType=\"win:UInt16\" outType=\"xs:unsignedShort\"/>\r\n  <data name=\"NoMultiStageResumeReason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"WakeTimerOwner\" inType=\"win:UnicodeString\" outType=\"xs:string\" length=\"WakeTimerOwnerLength\"/>\r\n  <data name=\"WakeTimerContext\" inType=\"win:UnicodeString\" outType=\"xs:string\" length=\"WakeTimerContextLength\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Power-Troubleshooter",
+    "id": 1,
+    "version": 3,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統已從低電源狀態回復。\r\n\r\n睡眠時間: %1\r\n喚醒時間: %2\r\n\r\n喚醒來源: %13%15",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"SleepTime\" inType=\"win:FILETIME\" outType=\"xs:dateTime\"/>\r\n  <data name=\"WakeTime\" inType=\"win:FILETIME\" outType=\"xs:dateTime\"/>\r\n  <data name=\"SleepDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"WakeDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"DriverInitDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"BiosInitDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"HiberWriteDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"HiberReadDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"HiberPagesWritten\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"Attributes\" inType=\"win:UInt32\" outType=\"win:HexInt32\"/>\r\n  <data name=\"TargetState\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"EffectiveState\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"WakeSourceType\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"WakeSourceTextLength\" inType=\"win:UInt16\" outType=\"xs:unsignedShort\"/>\r\n  <data name=\"WakeSourceText\" inType=\"win:UnicodeString\" outType=\"xs:string\" length=\"WakeSourceTextLength\"/>\r\n  <data name=\"WakeTimerOwnerLength\" inType=\"win:UInt16\" outType=\"xs:unsignedShort\"/>\r\n  <data name=\"WakeTimerContextLength\" inType=\"win:UInt16\" outType=\"xs:unsignedShort\"/>\r\n  <data name=\"NoMultiStageResumeReason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"WakeTimerOwner\" inType=\"win:UnicodeString\" outType=\"xs:string\" length=\"WakeTimerOwnerLength\"/>\r\n  <data name=\"WakeTimerContext\" inType=\"win:UnicodeString\" outType=\"xs:string\" length=\"WakeTimerContextLength\"/>\r\n  <data name=\"CheckpointDuration\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-General",
+    "id": 1,
+    "version": 0,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統時間已從 %2 變更為 %1。",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"NewTime\" inType=\"win:FILETIME\" outType=\"xs:dateTime\"/>\r\n  <data name=\"OldTime\" inType=\"win:FILETIME\" outType=\"xs:dateTime\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-General",
+    "id": 1,
+    "version": 1,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統時間已從 %2 變更為 %1。\r\n\r\n 變更原因：%3。",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"NewTime\" inType=\"win:FILETIME\" outType=\"xs:dateTime\"/>\r\n  <data name=\"OldTime\" inType=\"win:FILETIME\" outType=\"xs:dateTime\"/>\r\n  <data name=\"Reason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-General",
+    "id": 1,
+    "version": 2,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統時間已變更已從 %2 為%1。\r\n\r\n 變更原因：%3。\r\n 處理程序：'%4' (PID %5)。",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"NewTime\" inType=\"win:FILETIME\" outType=\"xs:dateTime\"/>\r\n  <data name=\"OldTime\" inType=\"win:FILETIME\" outType=\"xs:dateTime\"/>\r\n  <data name=\"Reason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ProcessName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ProcessID\" inType=\"win:UInt32\" outType=\"win:PID\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-General",
+    "id": 1,
+    "version": 3,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統時間已從 %2 變更為 %1。\r\n\r\n變更原因：%3。\r\n處理常式：'%4' (PID %5)。\r\n\r\nRTC 時間：%6\r\n目前時區偏差：%7\r\nRTC 時間是 UTC：%8\r\n系統時間是依據 RTC 時間而建立：%9",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"NewTime\" inType=\"win:FILETIME\" outType=\"xs:dateTime\"/>\r\n  <data name=\"OldTime\" inType=\"win:FILETIME\" outType=\"xs:dateTime\"/>\r\n  <data name=\"Reason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ProcessName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ProcessID\" inType=\"win:UInt32\" outType=\"win:PID\"/>\r\n  <data name=\"CmosTime\" inType=\"win:FILETIME\" outType=\"xs:dateTime\"/>\r\n  <data name=\"TimeZoneBias\" inType=\"win:Int32\" outType=\"xs:int\"/>\r\n  <data name=\"RealTimeIsUniversal\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"SystemInCmosMode\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-General",
+    "id": 1,
+    "version": 4,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "系統時間已從 %2 變更為 %1。\r\nTime Delta: %3 ms\r\n\r\n變更原因: %4。\r\n處理常式: '%5' (PID %6)。\r\n\r\nRTC 時間: %7\r\n目前時區偏差: %8\r\nRTC 時間是 UTC: %9\r\n系統時間是依據 RTC 時間而建立: %10",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"NewTime\" inType=\"win:FILETIME\" outType=\"xs:dateTime\"/>\r\n  <data name=\"OldTime\" inType=\"win:FILETIME\" outType=\"xs:dateTime\"/>\r\n  <data name=\"TimeDeltaInMs\" inType=\"win:Int64\" outType=\"xs:long\"/>\r\n  <data name=\"Reason\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ProcessName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ProcessID\" inType=\"win:UInt32\" outType=\"win:PID\"/>\r\n  <data name=\"CmosTime\" inType=\"win:FILETIME\" outType=\"xs:dateTime\"/>\r\n  <data name=\"TimeZoneBias\" inType=\"win:Int32\" outType=\"xs:int\"/>\r\n  <data name=\"RealTimeIsUniversal\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n  <data name=\"SystemInCmosMode\" inType=\"win:Boolean\" outType=\"xs:boolean\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-General",
+    "id": 12,
+    "version": 0,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "作業系統已經在系統時間 %7 啟動。",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"MajorVersion\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"MinorVersion\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"BuildVersion\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"QfeVersion\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ServiceVersion\" inType=\"win:UInt16\" outType=\"xs:unsignedShort\"/>\r\n  <data name=\"BootMode\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"StartTime\" inType=\"win:FILETIME\" outType=\"xs:dateTime\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Kernel-General",
+    "id": 13,
+    "version": 0,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "作業系統已經在系統時間 %1 關閉。",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"StopTime\" inType=\"win:FILETIME\" outType=\"xs:dateTime\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Eventlog",
+    "id": 104,
+    "version": 0,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "%3 記錄檔已清除。",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"SubjectUserName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"SubjectDomainName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"Channel\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"BackupPath\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-Eventlog",
+    "id": 104,
+    "version": 1,
+    "channel": "System",
+    "level": 4,
+    "descriptionTemplate": "%3 記錄檔已清除。",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"SubjectUserName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"SubjectDomainName\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"Channel\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"BackupPath\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"ClientProcessId\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"ClientProcessStartKey\" inType=\"win:UInt64\" outType=\"xs:unsignedLong\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-TerminalServices-LocalSessionManager",
+    "id": 21,
+    "version": 0,
+    "channel": "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational",
+    "level": 4,
+    "descriptionTemplate": "遠端桌面服務: 工作階段登入成功:\r\n\r\n使用者: %1\r\n工作階段識別碼: %2\r\n來源網路位址: %3",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"User\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"SessionID\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"Address\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-TerminalServices-LocalSessionManager",
+    "id": 23,
+    "version": 0,
+    "channel": "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational",
+    "level": 4,
+    "descriptionTemplate": "遠端桌面服務: 工作階段登出成功:\r\n\r\n使用者: %1\r\n工作階段識別碼: %2",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"User\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"SessionID\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-TerminalServices-LocalSessionManager",
+    "id": 24,
+    "version": 0,
+    "channel": "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational",
+    "level": 4,
+    "descriptionTemplate": "遠端桌面服務: 工作階段已中斷連線:\r\n\r\n使用者: %1\r\n工作階段識別碼: %2\r\n來源網路位址: %3",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"User\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"SessionID\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"Address\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  },
+  {
+    "provider": "Microsoft-Windows-TerminalServices-LocalSessionManager",
+    "id": 25,
+    "version": 0,
+    "channel": "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational",
+    "level": 4,
+    "descriptionTemplate": "遠端桌面服務: 工作階段重新連線成功:\r\n\r\n使用者: %1\r\n工作階段識別碼: %2\r\n來源網路位址: %3",
+    "templateXml": "<template xmlns=\"http://schemas.microsoft.com/win/2004/08/events\">\r\n  <data name=\"User\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n  <data name=\"SessionID\" inType=\"win:UInt32\" outType=\"xs:unsignedInt\"/>\r\n  <data name=\"Address\" inType=\"win:UnicodeString\" outType=\"xs:string\"/>\r\n</template>\r\n",
+    "source": "INSTALLED_METADATA_NOT_EVENT"
+  }
+]
