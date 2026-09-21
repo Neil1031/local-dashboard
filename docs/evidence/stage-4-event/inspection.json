@@ -1,0 +1,1059 @@
+{
+  "purpose": "Read-only research, bounded samples; no full-coverage claim",
+  "startedAt": "2026-09-21T06:20:11.1227851+00:00",
+  "finishedAt": "2026-09-21T06:20:17.3846726+00:00",
+  "osBuild": "10.0.26200.0",
+  "powershellVersion": "7.6.5",
+  "elevatedAdministrator": false,
+  "selectionSource": "config/application.example.yml (not effective running-service configuration)",
+  "before": {
+    "name": "Microsoft-Windows-TaskScheduler/Operational",
+    "exists": true,
+    "enabled": false,
+    "logMode": "Circular",
+    "maximumSizeBytes": 10485760,
+    "currentFileSizeBytes": null,
+    "recordCount": null,
+    "oldestRecordNumber": null,
+    "isLogFull": null,
+    "retention": "false",
+    "autoBackup": "false",
+    "wevtutilGlExit": 0,
+    "configurationSha256": "dfc46b8c07e17c777ff788c567d6252e0c83e1674a3528467db344085a210a00",
+    "acl": {
+      "rawOmitted": true,
+      "interactiveUsersReadAcePresent": true,
+      "eventLogReadersReadAcePresent": true
+    }
+  },
+  "after": {
+    "name": "Microsoft-Windows-TaskScheduler/Operational",
+    "exists": true,
+    "enabled": false,
+    "logMode": "Circular",
+    "maximumSizeBytes": 10485760,
+    "currentFileSizeBytes": null,
+    "recordCount": null,
+    "oldestRecordNumber": null,
+    "isLogFull": null,
+    "retention": "false",
+    "autoBackup": "false",
+    "wevtutilGlExit": 0,
+    "configurationSha256": "dfc46b8c07e17c777ff788c567d6252e0c83e1674a3528467db344085a210a00",
+    "acl": {
+      "rawOmitted": true,
+      "interactiveUsersReadAcePresent": true,
+      "eventLogReadersReadAcePresent": true
+    }
+  },
+  "newestQuery": {
+    "startedAt": "2026-09-21T06:20:11.2744604+00:00",
+    "finishedAt": "2026-09-21T06:20:11.2905686+00:00",
+    "log": "Microsoft-Windows-TaskScheduler/Operational",
+    "xpath": "*",
+    "queryStatus": "NO_MATCHING_EVENTS",
+    "returnedCount": 0,
+    "limit": 1,
+    "limitReached": false,
+    "samples": [],
+    "error": {
+      "type": "System.Exception",
+      "id": "NoMatchingEventsFound,Microsoft.PowerShell.Commands.GetWinEventCommand",
+      "hresult": -2146233088
+    }
+  },
+  "oldestQuery": {
+    "startedAt": "2026-09-21T06:20:11.2930623+00:00",
+    "finishedAt": "2026-09-21T06:20:11.2976725+00:00",
+    "log": "Microsoft-Windows-TaskScheduler/Operational",
+    "xpath": "*",
+    "queryStatus": "NO_MATCHING_EVENTS",
+    "returnedCount": 0,
+    "limit": 1,
+    "limitReached": false,
+    "samples": [],
+    "error": {
+      "type": "System.Exception",
+      "id": "NoMatchingEventsFound,Microsoft.PowerShell.Commands.GetWinEventCommand",
+      "hresult": -2146233088
+    }
+  },
+  "services": [
+    {
+      "name": "EventLog",
+      "status": "Running"
+    },
+    {
+      "name": "Schedule",
+      "status": "Running"
+    }
+  ],
+  "relatedLogs": [
+    {
+      "name": "Microsoft-Windows-TaskScheduler/Operational",
+      "exists": true,
+      "enabled": false,
+      "logMode": "Circular",
+      "maximumSizeBytes": 10485760,
+      "currentFileSizeBytes": null,
+      "recordCount": null,
+      "oldestRecordNumber": null,
+      "isLogFull": null,
+      "retention": "false",
+      "autoBackup": "false",
+      "wevtutilGlExit": 0,
+      "configurationSha256": "dfc46b8c07e17c777ff788c567d6252e0c83e1674a3528467db344085a210a00",
+      "acl": {
+        "rawOmitted": true,
+        "interactiveUsersReadAcePresent": true,
+        "eventLogReadersReadAcePresent": true
+      }
+    },
+    {
+      "name": "System",
+      "exists": true,
+      "enabled": true,
+      "logMode": "Circular",
+      "maximumSizeBytes": 20971520,
+      "currentFileSizeBytes": 20975616,
+      "recordCount": 12854,
+      "oldestRecordNumber": 22564423,
+      "isLogFull": false,
+      "retention": "false",
+      "autoBackup": "false",
+      "wevtutilGlExit": 0,
+      "configurationSha256": "4acfbd0b92cea93925e5ee7dffd3ce9edbe783974e3badf960933eaa60632af4",
+      "acl": {
+        "rawOmitted": true,
+        "interactiveUsersReadAcePresent": false,
+        "eventLogReadersReadAcePresent": true
+      }
+    },
+    {
+      "name": "Microsoft-Windows-TaskScheduler/Debug",
+      "exists": true,
+      "enabled": false,
+      "logMode": "Retain",
+      "maximumSizeBytes": 10485760,
+      "currentFileSizeBytes": null,
+      "recordCount": null,
+      "oldestRecordNumber": null,
+      "isLogFull": null,
+      "retention": "true",
+      "autoBackup": "false",
+      "wevtutilGlExit": 0,
+      "configurationSha256": "1a3b25dd8b5b5ae638c26be3be51af7ec2811679f2645a6b2d7a27e28ba0abf2",
+      "acl": {
+        "rawOmitted": true,
+        "interactiveUsersReadAcePresent": true,
+        "eventLogReadersReadAcePresent": true
+      }
+    },
+    {
+      "name": "Microsoft-Windows-TaskScheduler/Diagnostic",
+      "exists": true,
+      "enabled": false,
+      "logMode": "Retain",
+      "maximumSizeBytes": 10485760,
+      "currentFileSizeBytes": null,
+      "recordCount": null,
+      "oldestRecordNumber": null,
+      "isLogFull": null,
+      "retention": "true",
+      "autoBackup": "false",
+      "wevtutilGlExit": 0,
+      "configurationSha256": "427c03cd991630f40db547b94755a3a3ebe536de1e4d11c170b57f10c95c80fa",
+      "acl": {
+        "rawOmitted": true,
+        "interactiveUsersReadAcePresent": true,
+        "eventLogReadersReadAcePresent": true
+      }
+    },
+    {
+      "name": "Microsoft-Windows-TaskScheduler/Maintenance",
+      "exists": true,
+      "enabled": true,
+      "logMode": "Circular",
+      "maximumSizeBytes": 1052672,
+      "currentFileSizeBytes": 1052672,
+      "recordCount": 2322,
+      "oldestRecordNumber": 593,
+      "isLogFull": false,
+      "retention": "false",
+      "autoBackup": "false",
+      "wevtutilGlExit": 0,
+      "configurationSha256": "7c2594eed28a31a9ad80cffd2d687bddbdcc9e180a733a132a413a5d7109b08a",
+      "acl": {
+        "rawOmitted": true,
+        "interactiveUsersReadAcePresent": true,
+        "eventLogReadersReadAcePresent": true
+      }
+    }
+  ],
+  "supportingBounds": [
+    {
+      "configuration": {
+        "name": "System",
+        "exists": true,
+        "enabled": true,
+        "logMode": "Circular",
+        "maximumSizeBytes": 20971520,
+        "currentFileSizeBytes": 20975616,
+        "recordCount": 12854,
+        "oldestRecordNumber": 22564423,
+        "isLogFull": false,
+        "retention": "false",
+        "autoBackup": "false",
+        "wevtutilGlExit": 0,
+        "configurationSha256": "4acfbd0b92cea93925e5ee7dffd3ce9edbe783974e3badf960933eaa60632af4",
+        "acl": {
+          "rawOmitted": true,
+          "interactiveUsersReadAcePresent": false,
+          "eventLogReadersReadAcePresent": true
+        }
+      },
+      "oldest": {
+        "startedAt": "2026-09-21T06:20:17.4911739+00:00",
+        "finishedAt": "2026-09-21T06:20:17.4970164+00:00",
+        "log": "System",
+        "xpath": "*",
+        "queryStatus": "OK",
+        "returnedCount": 1,
+        "limit": 1,
+        "limitReached": true,
+        "firstReturnedUtc": "2026-09-20T19:01:47.1477451Z",
+        "lastReturnedUtc": "2026-09-20T19:01:47.1477451Z",
+        "samples": [
+          {
+            "provider": "Microsoft-Windows-WHEA-Logger",
+            "id": 17,
+            "version": 1,
+            "level": 3,
+            "utc": "2026-09-20T19:01:47.1477451Z",
+            "recordId": 22564423,
+            "activityIdPresent": true,
+            "relatedActivityIdPresent": false,
+            "fields": [
+              {
+                "name": "ErrorSource",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "FRUId",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "FRUText",
+                "fieldPresent": true,
+                "nonempty": false
+              },
+              {
+                "name": "ValidBits",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "PortType",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "Version",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "Command",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "Status",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "Bus",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "Device",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "Function",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "Segment",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "SecondaryBus",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "SecondaryDevice",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "SecondaryFunction",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "VendorID",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "DeviceID",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "ClassCode",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "DeviceSerialNumber",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "BridgeControl",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "BridgeStatus",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "UncorrectableErrorStatus",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "CorrectableErrorStatus",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "HeaderLog",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "PrimaryDeviceName",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "SecondaryDeviceName",
+                "fieldPresent": true,
+                "nonempty": false
+              }
+            ],
+            "sanitizedXml": "<Event xmlns=\"http://schemas.microsoft.com/win/2004/08/events/event\"><System><Provider Name=\"Microsoft-Windows-WHEA-Logger\" Guid=\"{c26c4f3c-3f66-4e99-8f8a-39405cfed220}\" /><EventID>17</EventID><Version>1</Version><Level>3</Level><Task>0</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime=\"2026-09-20T19:01:47.1477451Z\" /><EventRecordID>22564423</EventRecordID><Correlation ActivityID=\"REDACTED-26\" /><Execution ProcessID=\"REDACTED-27\" ThreadID=\"REDACTED-28\" /><Channel>System</Channel><Computer>REDACTED-HOST</Computer><Security UserID=\"REDACTED-29\" /></System><EventData><Data Name=\"ErrorSource\">REDACTED-1</Data><Data Name=\"FRUId\">REDACTED-30</Data><Data Name=\"FRUText\"></Data><Data Name=\"ValidBits\">REDACTED-31</Data><Data Name=\"PortType\">REDACTED-1</Data><Data Name=\"Version\">REDACTED-32</Data><Data Name=\"Command\">REDACTED-33</Data><Data Name=\"Status\">REDACTED-34</Data><Data Name=\"Bus\">REDACTED-35</Data><Data Name=\"Device\">REDACTED-36</Data><Data Name=\"Function\">REDACTED-36</Data><Data Name=\"Segment\">REDACTED-35</Data><Data Name=\"SecondaryBus\">REDACTED-35</Data><Data Name=\"SecondaryDevice\">REDACTED-35</Data><Data Name=\"SecondaryFunction\">REDACTED-35</Data><Data Name=\"VendorID\">REDACTED-37</Data><Data Name=\"DeviceID\">REDACTED-38</Data><Data Name=\"ClassCode\">REDACTED-39</Data><Data Name=\"DeviceSerialNumber\">REDACTED-35</Data><Data Name=\"BridgeControl\">REDACTED-35</Data><Data Name=\"BridgeStatus\">REDACTED-35</Data><Data Name=\"UncorrectableErrorStatus\">REDACTED-40</Data><Data Name=\"CorrectableErrorStatus\">REDACTED-41</Data><Data Name=\"HeaderLog\">REDACTED-42</Data><Data Name=\"PrimaryDeviceName\">REDACTED-43</Data><Data Name=\"SecondaryDeviceName\"></Data></EventData></Event>"
+          }
+        ],
+        "idCounts": [
+          {
+            "key": "Microsoft-Windows-WHEA-Logger, 17",
+            "count": 1
+          }
+        ]
+      },
+      "newest": {
+        "startedAt": "2026-09-21T06:20:17.4991516+00:00",
+        "finishedAt": "2026-09-21T06:20:17.5235073+00:00",
+        "log": "System",
+        "xpath": "*",
+        "queryStatus": "OK",
+        "returnedCount": 1,
+        "limit": 1,
+        "limitReached": true,
+        "firstReturnedUtc": "2026-09-21T06:14:39.7916337Z",
+        "lastReturnedUtc": "2026-09-21T06:14:39.7916337Z",
+        "samples": [
+          {
+            "provider": "nhi",
+            "id": 9007,
+            "version": 0,
+            "level": 4,
+            "utc": "2026-09-21T06:14:39.7916337Z",
+            "recordId": 22577276,
+            "activityIdPresent": false,
+            "relatedActivityIdPresent": false,
+            "fields": [
+              {
+                "name": "Data",
+                "fieldPresent": true,
+                "nonempty": false
+              },
+              {
+                "name": "Binary",
+                "fieldPresent": true,
+                "nonempty": true
+              }
+            ],
+            "sanitizedXml": "<Event xmlns=\"http://schemas.microsoft.com/win/2004/08/events/event\"><System><Provider Name=\"nhi\" /><EventID Qualifiers=\"16388\">9007</EventID><Version>0</Version><Level>4</Level><Task>0</Task><Opcode>0</Opcode><Keywords>0x80000000000000</Keywords><TimeCreated SystemTime=\"2026-09-21T06:14:39.7916337Z\" /><EventRecordID>22577276</EventRecordID><Correlation /><Execution ProcessID=\"REDACTED-1\" ThreadID=\"REDACTED-44\" /><Channel>System</Channel><Computer>REDACTED-HOST</Computer><Security /></System><EventData><Data></Data><Binary>REDACTED-45</Binary></EventData></Event>"
+          }
+        ],
+        "idCounts": [
+          {
+            "key": "nhi, 9007",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "configuration": {
+        "name": "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational",
+        "exists": true,
+        "enabled": true,
+        "logMode": "Circular",
+        "maximumSizeBytes": 1052672,
+        "currentFileSizeBytes": 1052672,
+        "recordCount": 1539,
+        "oldestRecordNumber": 3335895,
+        "isLogFull": false,
+        "retention": "false",
+        "autoBackup": "false",
+        "wevtutilGlExit": 0,
+        "configurationSha256": "75e917f25dc2e3046597b72088b633a154fa565c81a0d04482688d0e6dd4866f",
+        "acl": {
+          "rawOmitted": true,
+          "interactiveUsersReadAcePresent": true,
+          "eventLogReadersReadAcePresent": true
+        }
+      },
+      "oldest": {
+        "startedAt": "2026-09-21T06:20:17.5413545+00:00",
+        "finishedAt": "2026-09-21T06:20:17.5468868+00:00",
+        "log": "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational",
+        "xpath": "*",
+        "queryStatus": "OK",
+        "returnedCount": 1,
+        "limit": 1,
+        "limitReached": true,
+        "firstReturnedUtc": "2026-09-21T05:54:24.0971415Z",
+        "lastReturnedUtc": "2026-09-21T05:54:24.0971415Z",
+        "samples": [
+          {
+            "provider": "Microsoft-Windows-TerminalServices-LocalSessionManager",
+            "id": 59,
+            "version": 0,
+            "level": 4,
+            "utc": "2026-09-21T05:54:24.0971415Z",
+            "recordId": 3335895,
+            "activityIdPresent": false,
+            "relatedActivityIdPresent": false,
+            "fields": [
+              {
+                "name": "Function",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "CallerImageName",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "SessionId",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "ClientProcessId",
+                "fieldPresent": true,
+                "nonempty": true
+              }
+            ],
+            "sanitizedXml": "<Event xmlns=\"http://schemas.microsoft.com/win/2004/08/events/event\"><System><Provider Name=\"Microsoft-Windows-TerminalServices-LocalSessionManager\" Guid=\"{5d896912-022d-40aa-a3a8-4fa5515c76d7}\" /><EventID>59</EventID><Version>0</Version><Level>4</Level><Task>0</Task><Opcode>0</Opcode><Keywords>0x1000000000000000</Keywords><TimeCreated SystemTime=\"2026-09-21T05:54:24.0971415Z\" /><EventRecordID>3335895</EventRecordID><Correlation /><Execution ProcessID=\"REDACTED-46\" ThreadID=\"REDACTED-47\" /><Channel>Microsoft-Windows-TerminalServices-LocalSessionManager/Operational</Channel><Computer>REDACTED-HOST</Computer><Security UserID=\"REDACTED-3\" /></System><UserData><EventXML xmlns=\"Event_NS\"><Function>REDACTED-48</Function><CallerImageName>REDACTED-49</CallerImageName><SessionId>REDACTED-19</SessionId><ClientProcessId>REDACTED-50</ClientProcessId></EventXML></UserData></Event>"
+          }
+        ],
+        "idCounts": [
+          {
+            "key": "Microsoft-Windows-TerminalServices-LocalSessionManager, 59",
+            "count": 1
+          }
+        ]
+      },
+      "newest": {
+        "startedAt": "2026-09-21T06:20:17.5477495+00:00",
+        "finishedAt": "2026-09-21T06:20:17.5526964+00:00",
+        "log": "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational",
+        "xpath": "*",
+        "queryStatus": "OK",
+        "returnedCount": 1,
+        "limit": 1,
+        "limitReached": true,
+        "firstReturnedUtc": "2026-09-21T06:20:15.5496162Z",
+        "lastReturnedUtc": "2026-09-21T06:20:15.5496162Z",
+        "samples": [
+          {
+            "provider": "Microsoft-Windows-TerminalServices-LocalSessionManager",
+            "id": 59,
+            "version": 0,
+            "level": 4,
+            "utc": "2026-09-21T06:20:15.5496162Z",
+            "recordId": 3337433,
+            "activityIdPresent": false,
+            "relatedActivityIdPresent": false,
+            "fields": [
+              {
+                "name": "Function",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "CallerImageName",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "SessionId",
+                "fieldPresent": true,
+                "nonempty": true
+              },
+              {
+                "name": "ClientProcessId",
+                "fieldPresent": true,
+                "nonempty": true
+              }
+            ],
+            "sanitizedXml": "<Event xmlns=\"http://schemas.microsoft.com/win/2004/08/events/event\"><System><Provider Name=\"Microsoft-Windows-TerminalServices-LocalSessionManager\" Guid=\"{5d896912-022d-40aa-a3a8-4fa5515c76d7}\" /><EventID>59</EventID><Version>0</Version><Level>4</Level><Task>0</Task><Opcode>0</Opcode><Keywords>0x1000000000000000</Keywords><TimeCreated SystemTime=\"2026-09-21T06:20:15.5496162Z\" /><EventRecordID>3337433</EventRecordID><Correlation /><Execution ProcessID=\"REDACTED-46\" ThreadID=\"REDACTED-51\" /><Channel>Microsoft-Windows-TerminalServices-LocalSessionManager/Operational</Channel><Computer>REDACTED-HOST</Computer><Security UserID=\"REDACTED-3\" /></System><UserData><EventXML xmlns=\"Event_NS\"><Function>REDACTED-48</Function><CallerImageName>REDACTED-49</CallerImageName><SessionId>REDACTED-19</SessionId><ClientProcessId>REDACTED-50</ClientProcessId></EventXML></UserData></Event>"
+          }
+        ],
+        "idCounts": [
+          {
+            "key": "Microsoft-Windows-TerminalServices-LocalSessionManager, 59",
+            "count": 1
+          }
+        ]
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "taskKey": "\\InsiderTracker-Market",
+      "enabled": true,
+      "state": "Ready",
+      "startWhenAvailable": true,
+      "multipleInstances": "IgnoreNew",
+      "logonType": "Interactive",
+      "lastRunUtc": "2026-09-21T01:38:37.0000000+00:00",
+      "lastTaskResult": 0,
+      "definitionSha256Before": "ba5fbd6f559285959b956b83bd919089a8a42ee4bed0f9653d5a1794bb7df261",
+      "definitionSha256After": "ba5fbd6f559285959b956b83bd919089a8a42ee4bed0f9653d5a1794bb7df261",
+      "query": {
+        "startedAt": "2026-09-21T06:20:12.5669054+00:00",
+        "finishedAt": "2026-09-21T06:20:12.5720906+00:00",
+        "log": "Microsoft-Windows-TaskScheduler/Operational",
+        "xpath": "*[EventData[Data[@Name='TaskName']='\\InsiderTracker-Market' or Data[@Name='TaskPath']='\\InsiderTracker-Market']]",
+        "queryStatus": "NO_MATCHING_EVENTS",
+        "returnedCount": 0,
+        "limit": 501,
+        "limitReached": false,
+        "samples": [],
+        "error": {
+          "type": "System.Exception",
+          "id": "NoMatchingEventsFound,Microsoft.PowerShell.Commands.GetWinEventCommand",
+          "hresult": -2146233088
+        }
+      },
+      "lifecycleVerified": false,
+      "nominalOccurrenceAttribution": "NOT_VERIFIED"
+    },
+    {
+      "taskKey": "\\InsiderTracker-SEC",
+      "enabled": true,
+      "state": "Ready",
+      "startWhenAvailable": true,
+      "multipleInstances": "IgnoreNew",
+      "logonType": "Interactive",
+      "lastRunUtc": "2026-09-21T03:15:01.0000000+00:00",
+      "lastTaskResult": 0,
+      "definitionSha256Before": "27ea30df228ac5e8b25632311c5e2051c3f0f3fd5a5a053e4672c392c1082382",
+      "definitionSha256After": "27ea30df228ac5e8b25632311c5e2051c3f0f3fd5a5a053e4672c392c1082382",
+      "query": {
+        "startedAt": "2026-09-21T06:20:13.6941134+00:00",
+        "finishedAt": "2026-09-21T06:20:13.7002567+00:00",
+        "log": "Microsoft-Windows-TaskScheduler/Operational",
+        "xpath": "*[EventData[Data[@Name='TaskName']='\\InsiderTracker-SEC' or Data[@Name='TaskPath']='\\InsiderTracker-SEC']]",
+        "queryStatus": "NO_MATCHING_EVENTS",
+        "returnedCount": 0,
+        "limit": 501,
+        "limitReached": false,
+        "samples": [],
+        "error": {
+          "type": "System.Exception",
+          "id": "NoMatchingEventsFound,Microsoft.PowerShell.Commands.GetWinEventCommand",
+          "hresult": -2146233088
+        }
+      },
+      "lifecycleVerified": false,
+      "nominalOccurrenceAttribution": "NOT_VERIFIED"
+    },
+    {
+      "taskKey": "\\InsiderTracker-SyncImport",
+      "enabled": true,
+      "state": "Ready",
+      "startWhenAvailable": true,
+      "multipleInstances": "IgnoreNew",
+      "logonType": "Interactive",
+      "lastRunUtc": "2026-09-21T02:40:01.0000000+00:00",
+      "lastTaskResult": 1,
+      "definitionSha256Before": "aa74a642f415792acf841f5dd728c8c2ae470045f540b9e726eef929a73d3886",
+      "definitionSha256After": "aa74a642f415792acf841f5dd728c8c2ae470045f540b9e726eef929a73d3886",
+      "query": {
+        "startedAt": "2026-09-21T06:20:14.7923640+00:00",
+        "finishedAt": "2026-09-21T06:20:14.7975016+00:00",
+        "log": "Microsoft-Windows-TaskScheduler/Operational",
+        "xpath": "*[EventData[Data[@Name='TaskName']='\\InsiderTracker-SyncImport' or Data[@Name='TaskPath']='\\InsiderTracker-SyncImport']]",
+        "queryStatus": "NO_MATCHING_EVENTS",
+        "returnedCount": 0,
+        "limit": 501,
+        "limitReached": false,
+        "samples": [],
+        "error": {
+          "type": "System.Exception",
+          "id": "NoMatchingEventsFound,Microsoft.PowerShell.Commands.GetWinEventCommand",
+          "hresult": -2146233088
+        }
+      },
+      "lifecycleVerified": false,
+      "nominalOccurrenceAttribution": "NOT_VERIFIED"
+    },
+    {
+      "taskKey": "\\AIStockHunter-UnexplainedVolume-HealthCheck",
+      "enabled": false,
+      "state": "Disabled",
+      "startWhenAvailable": true,
+      "multipleInstances": "IgnoreNew",
+      "logonType": "Interactive",
+      "lastRunUtc": "2026-09-14T06:19:11.0000000+00:00",
+      "lastTaskResult": 0,
+      "definitionSha256Before": "3e4306aaa46a8d756dde02b547c5387646fb6826e5c0e25e189806a8b51fd98c",
+      "definitionSha256After": "3e4306aaa46a8d756dde02b547c5387646fb6826e5c0e25e189806a8b51fd98c",
+      "query": {
+        "startedAt": "2026-09-21T06:20:15.8352583+00:00",
+        "finishedAt": "2026-09-21T06:20:15.8407475+00:00",
+        "log": "Microsoft-Windows-TaskScheduler/Operational",
+        "xpath": "*[EventData[Data[@Name='TaskName']='\\AIStockHunter-UnexplainedVolume-HealthCheck' or Data[@Name='TaskPath']='\\AIStockHunter-UnexplainedVolume-HealthCheck']]",
+        "queryStatus": "NO_MATCHING_EVENTS",
+        "returnedCount": 0,
+        "limit": 501,
+        "limitReached": false,
+        "samples": [],
+        "error": {
+          "type": "System.Exception",
+          "id": "NoMatchingEventsFound,Microsoft.PowerShell.Commands.GetWinEventCommand",
+          "hresult": -2146233088
+        }
+      },
+      "lifecycleVerified": false,
+      "nominalOccurrenceAttribution": "NOT_VERIFIED"
+    },
+    {
+      "taskKey": "\\AIStockHunter-Accumulation-Weekly-Check",
+      "enabled": true,
+      "state": "Ready",
+      "startWhenAvailable": true,
+      "multipleInstances": "IgnoreNew",
+      "logonType": "Interactive",
+      "lastRunUtc": "2026-09-18T14:00:00.0000000+00:00",
+      "lastTaskResult": 1,
+      "definitionSha256Before": "2d4183fdb670188dcaedee657366401de7e69f2c8accd0e0f545a514ffc07e67",
+      "definitionSha256After": "2d4183fdb670188dcaedee657366401de7e69f2c8accd0e0f545a514ffc07e67",
+      "query": {
+        "startedAt": "2026-09-21T06:20:16.8336882+00:00",
+        "finishedAt": "2026-09-21T06:20:16.8392019+00:00",
+        "log": "Microsoft-Windows-TaskScheduler/Operational",
+        "xpath": "*[EventData[Data[@Name='TaskName']='\\AIStockHunter-Accumulation-Weekly-Check' or Data[@Name='TaskPath']='\\AIStockHunter-Accumulation-Weekly-Check']]",
+        "queryStatus": "NO_MATCHING_EVENTS",
+        "returnedCount": 0,
+        "limit": 501,
+        "limitReached": false,
+        "samples": [],
+        "error": {
+          "type": "System.Exception",
+          "id": "NoMatchingEventsFound,Microsoft.PowerShell.Commands.GetWinEventCommand",
+          "hresult": -2146233088
+        }
+      },
+      "lifecycleVerified": false,
+      "nominalOccurrenceAttribution": "NOT_VERIFIED"
+    }
+  ],
+  "supplementaryQueries": [
+    {
+      "startedAt": "2026-09-21T06:20:17.1345439+00:00",
+      "finishedAt": "2026-09-21T06:20:17.1557569+00:00",
+      "log": "System",
+      "xpath": "*[System[Provider[@Name='Microsoft-Windows-TaskScheduler']]]",
+      "queryStatus": "NO_MATCHING_EVENTS",
+      "returnedCount": 0,
+      "limit": 501,
+      "limitReached": false,
+      "samples": [],
+      "error": {
+        "type": "System.Exception",
+        "id": "NoMatchingEventsFound,Microsoft.PowerShell.Commands.GetWinEventCommand",
+        "hresult": -2146233088
+      }
+    },
+    {
+      "startedAt": "2026-09-21T06:20:17.1559015+00:00",
+      "finishedAt": "2026-09-21T06:20:17.1819840+00:00",
+      "log": "System",
+      "xpath": "*[System[Provider[@Name='Microsoft-Windows-Kernel-General'] and (EventID=12 or EventID=13 or EventID=1) and TimeCreated[timediff(@SystemTime) <= 604800000]]]",
+      "queryStatus": "OK",
+      "returnedCount": 2,
+      "limit": 501,
+      "limitReached": false,
+      "firstReturnedUtc": "2026-09-21T01:28:48.1367002Z",
+      "lastReturnedUtc": "2026-09-20T19:44:41.2013928Z",
+      "samples": [
+        {
+          "provider": "Microsoft-Windows-Kernel-General",
+          "id": 12,
+          "version": 0,
+          "level": 4,
+          "utc": "2026-09-21T01:28:48.1367002Z",
+          "recordId": 22576694,
+          "activityIdPresent": false,
+          "relatedActivityIdPresent": false,
+          "fields": [
+            {
+              "name": "MajorVersion",
+              "fieldPresent": true,
+              "nonempty": true
+            },
+            {
+              "name": "MinorVersion",
+              "fieldPresent": true,
+              "nonempty": true
+            },
+            {
+              "name": "BuildVersion",
+              "fieldPresent": true,
+              "nonempty": true
+            },
+            {
+              "name": "QfeVersion",
+              "fieldPresent": true,
+              "nonempty": true
+            },
+            {
+              "name": "ServiceVersion",
+              "fieldPresent": true,
+              "nonempty": true
+            },
+            {
+              "name": "BootMode",
+              "fieldPresent": true,
+              "nonempty": true
+            },
+            {
+              "name": "StartTime",
+              "fieldPresent": true,
+              "nonempty": true
+            }
+          ],
+          "sanitizedXml": "<Event xmlns=\"http://schemas.microsoft.com/win/2004/08/events/event\"><System><Provider Name=\"Microsoft-Windows-Kernel-General\" Guid=\"{a68ca8b7-004f-d7b6-a698-07e2de0f1f5d}\" /><EventID>12</EventID><Version>0</Version><Level>4</Level><Task>1</Task><Opcode>0</Opcode><Keywords>0x8000000000000080</Keywords><TimeCreated SystemTime=\"2026-09-21T01:28:48.1367002Z\" /><EventRecordID>22576694</EventRecordID><Correlation /><Execution ProcessID=\"REDACTED-1\" ThreadID=\"REDACTED-2\" /><Channel>System</Channel><Computer>REDACTED-HOST</Computer><Security UserID=\"REDACTED-3\" /></System><EventData><Data Name=\"MajorVersion\">REDACTED-4</Data><Data Name=\"MinorVersion\">REDACTED-5</Data><Data Name=\"BuildVersion\">REDACTED-6</Data><Data Name=\"QfeVersion\">REDACTED-7</Data><Data Name=\"ServiceVersion\">REDACTED-5</Data><Data Name=\"BootMode\">REDACTED-5</Data><Data Name=\"StartTime\">REDACTED-8</Data></EventData></Event>"
+        },
+        {
+          "provider": "Microsoft-Windows-Kernel-General",
+          "id": 13,
+          "version": 0,
+          "level": 4,
+          "utc": "2026-09-20T19:44:41.2013928Z",
+          "recordId": 22576693,
+          "activityIdPresent": false,
+          "relatedActivityIdPresent": false,
+          "fields": [
+            {
+              "name": "StopTime",
+              "fieldPresent": true,
+              "nonempty": true
+            }
+          ],
+          "sanitizedXml": "<Event xmlns=\"http://schemas.microsoft.com/win/2004/08/events/event\"><System><Provider Name=\"Microsoft-Windows-Kernel-General\" Guid=\"{a68ca8b7-004f-d7b6-a698-07e2de0f1f5d}\" /><EventID>13</EventID><Version>0</Version><Level>4</Level><Task>2</Task><Opcode>0</Opcode><Keywords>0x8000000000000080</Keywords><TimeCreated SystemTime=\"2026-09-20T19:44:41.2013928Z\" /><EventRecordID>22576693</EventRecordID><Correlation /><Execution ProcessID=\"REDACTED-1\" ThreadID=\"REDACTED-9\" /><Channel>System</Channel><Computer>REDACTED-HOST</Computer><Security /></System><EventData><Data Name=\"StopTime\">REDACTED-10</Data></EventData></Event>"
+        }
+      ],
+      "idCounts": [
+        {
+          "key": "Microsoft-Windows-Kernel-General, 12",
+          "count": 1
+        },
+        {
+          "key": "Microsoft-Windows-Kernel-General, 13",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "startedAt": "2026-09-21T06:20:17.2189553+00:00",
+      "finishedAt": "2026-09-21T06:20:17.2424275+00:00",
+      "log": "System",
+      "xpath": "*[System[Provider[@Name='Microsoft-Windows-Kernel-Power'] and (EventID=41 or EventID=42 or EventID=107 or EventID=506 or EventID=507) and TimeCreated[timediff(@SystemTime) <= 604800000]]]",
+      "queryStatus": "NO_MATCHING_EVENTS",
+      "returnedCount": 0,
+      "limit": 501,
+      "limitReached": false,
+      "samples": [],
+      "error": {
+        "type": "System.Exception",
+        "id": "NoMatchingEventsFound,Microsoft.PowerShell.Commands.GetWinEventCommand",
+        "hresult": -2146233088
+      }
+    },
+    {
+      "startedAt": "2026-09-21T06:20:17.2425417+00:00",
+      "finishedAt": "2026-09-21T06:20:17.2676904+00:00",
+      "log": "System",
+      "xpath": "*[System[Provider[@Name='Microsoft-Windows-Power-Troubleshooter'] and EventID=1 and TimeCreated[timediff(@SystemTime) <= 604800000]]]",
+      "queryStatus": "NO_MATCHING_EVENTS",
+      "returnedCount": 0,
+      "limit": 501,
+      "limitReached": false,
+      "samples": [],
+      "error": {
+        "type": "System.Exception",
+        "id": "NoMatchingEventsFound,Microsoft.PowerShell.Commands.GetWinEventCommand",
+        "hresult": -2146233088
+      }
+    },
+    {
+      "startedAt": "2026-09-21T06:20:17.2678007+00:00",
+      "finishedAt": "2026-09-21T06:20:17.3034555+00:00",
+      "log": "System",
+      "xpath": "*[System[Provider[@Name='EventLog'] and (EventID=6005 or EventID=6006 or EventID=6008) and TimeCreated[timediff(@SystemTime) <= 604800000]]]",
+      "queryStatus": "OK",
+      "returnedCount": 2,
+      "limit": 501,
+      "limitReached": false,
+      "firstReturnedUtc": "2026-09-21T01:29:31.9804609Z",
+      "lastReturnedUtc": "2026-09-20T19:44:34.0410358Z",
+      "samples": [
+        {
+          "provider": "EventLog",
+          "id": 6005,
+          "version": 0,
+          "level": 4,
+          "utc": "2026-09-21T01:29:31.9804609Z",
+          "recordId": 22576686,
+          "activityIdPresent": false,
+          "relatedActivityIdPresent": false,
+          "fields": [
+            {
+              "name": "Binary",
+              "fieldPresent": true,
+              "nonempty": true
+            }
+          ],
+          "sanitizedXml": "<Event xmlns=\"http://schemas.microsoft.com/win/2004/08/events/event\"><System><Provider Name=\"EventLog\" /><EventID Qualifiers=\"32768\">6005</EventID><Version>0</Version><Level>4</Level><Task>0</Task><Opcode>0</Opcode><Keywords>0x80000000000000</Keywords><TimeCreated SystemTime=\"2026-09-21T01:29:31.9804609Z\" /><EventRecordID>22576686</EventRecordID><Correlation /><Execution ProcessID=\"REDACTED-11\" ThreadID=\"REDACTED-12\" /><Channel>System</Channel><Computer>REDACTED-HOST</Computer><Security /></System><EventData><Binary>REDACTED-13</Binary></EventData></Event>"
+        },
+        {
+          "provider": "EventLog",
+          "id": 6006,
+          "version": 0,
+          "level": 4,
+          "utc": "2026-09-20T19:44:34.0410358Z",
+          "recordId": 22576665,
+          "activityIdPresent": false,
+          "relatedActivityIdPresent": false,
+          "fields": [
+            {
+              "name": "Binary",
+              "fieldPresent": true,
+              "nonempty": true
+            }
+          ],
+          "sanitizedXml": "<Event xmlns=\"http://schemas.microsoft.com/win/2004/08/events/event\"><System><Provider Name=\"EventLog\" /><EventID Qualifiers=\"32768\">6006</EventID><Version>0</Version><Level>4</Level><Task>0</Task><Opcode>0</Opcode><Keywords>0x80000000000000</Keywords><TimeCreated SystemTime=\"2026-09-20T19:44:34.0410358Z\" /><EventRecordID>22576665</EventRecordID><Correlation /><Execution ProcessID=\"REDACTED-14\" ThreadID=\"REDACTED-15\" /><Channel>System</Channel><Computer>REDACTED-HOST</Computer><Security /></System><EventData><Binary>REDACTED-16</Binary></EventData></Event>"
+        }
+      ],
+      "idCounts": [
+        {
+          "key": "EventLog, 6005",
+          "count": 1
+        },
+        {
+          "key": "EventLog, 6006",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "startedAt": "2026-09-21T06:20:17.3048002+00:00",
+      "finishedAt": "2026-09-21T06:20:17.3275474+00:00",
+      "log": "System",
+      "xpath": "*[System[Provider[@Name='Microsoft-Windows-Eventlog'] and EventID=104 and TimeCreated[timediff(@SystemTime) <= 604800000]]]",
+      "queryStatus": "NO_MATCHING_EVENTS",
+      "returnedCount": 0,
+      "limit": 501,
+      "limitReached": false,
+      "samples": [],
+      "error": {
+        "type": "System.Exception",
+        "id": "NoMatchingEventsFound,Microsoft.PowerShell.Commands.GetWinEventCommand",
+        "hresult": -2146233088
+      }
+    },
+    {
+      "startedAt": "2026-09-21T06:20:17.3276598+00:00",
+      "finishedAt": "2026-09-21T06:20:17.3496760+00:00",
+      "log": "System",
+      "xpath": "*[System[Provider[@Name='Service Control Manager'] and (EventID=7036 or EventID=7031 or EventID=7034) and TimeCreated[timediff(@SystemTime) <= 604800000]]]",
+      "queryStatus": "NO_MATCHING_EVENTS",
+      "returnedCount": 0,
+      "limit": 501,
+      "limitReached": false,
+      "samples": [],
+      "error": {
+        "type": "System.Exception",
+        "id": "NoMatchingEventsFound,Microsoft.PowerShell.Commands.GetWinEventCommand",
+        "hresult": -2146233088
+      }
+    },
+    {
+      "startedAt": "2026-09-21T06:20:17.3497731+00:00",
+      "finishedAt": "2026-09-21T06:20:17.3534733+00:00",
+      "log": "Security",
+      "xpath": "*[System[(EventID=4624 or EventID=4634 or EventID=4647 or EventID=1102 or EventID=4616 or EventID=4698 or EventID=4699 or EventID=4700 or EventID=4701 or EventID=4702) and TimeCreated[timediff(@SystemTime) <= 604800000]]]",
+      "queryStatus": "QUERY_FAILED",
+      "returnedCount": 0,
+      "limit": 501,
+      "limitReached": false,
+      "samples": [],
+      "error": {
+        "type": "System.UnauthorizedAccessException",
+        "id": "System.UnauthorizedAccessException,Microsoft.PowerShell.Commands.GetWinEventCommand",
+        "hresult": -2147024891
+      }
+    },
+    {
+      "startedAt": "2026-09-21T06:20:17.3548261+00:00",
+      "finishedAt": "2026-09-21T06:20:17.3609405+00:00",
+      "log": "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational",
+      "xpath": "*[System[(EventID=21 or EventID=23 or EventID=24 or EventID=25) and TimeCreated[timediff(@SystemTime) <= 604800000]]]",
+      "queryStatus": "NO_MATCHING_EVENTS",
+      "returnedCount": 0,
+      "limit": 501,
+      "limitReached": false,
+      "samples": [],
+      "error": {
+        "type": "System.Exception",
+        "id": "NoMatchingEventsFound,Microsoft.PowerShell.Commands.GetWinEventCommand",
+        "hresult": -2146233088
+      }
+    },
+    {
+      "startedAt": "2026-09-21T06:20:17.3610227+00:00",
+      "finishedAt": "2026-09-21T06:20:17.3663311+00:00",
+      "log": "Microsoft-Windows-TaskScheduler/Maintenance",
+      "xpath": "*",
+      "queryStatus": "OK",
+      "returnedCount": 3,
+      "limit": 3,
+      "limitReached": true,
+      "firstReturnedUtc": "2026-09-21T04:50:25.0827559Z",
+      "lastReturnedUtc": "2026-09-21T04:15:11.1383996Z",
+      "samples": [
+        {
+          "provider": "Microsoft-Windows-TaskScheduler",
+          "id": 800,
+          "version": 0,
+          "level": 4,
+          "utc": "2026-09-21T04:50:25.0827559Z",
+          "recordId": 2914,
+          "activityIdPresent": false,
+          "relatedActivityIdPresent": false,
+          "fields": [
+            {
+              "name": "hc_stateid",
+              "fieldPresent": true,
+              "nonempty": true
+            },
+            {
+              "name": "LastRunDateTime",
+              "fieldPresent": true,
+              "nonempty": true
+            }
+          ],
+          "sanitizedXml": "<Event xmlns=\"http://schemas.microsoft.com/win/2004/08/events/event\"><System><Provider Name=\"Microsoft-Windows-TaskScheduler\" Guid=\"{de7b24ea-73c8-4a09-985d-5bdadcfa9017}\" /><EventID>800</EventID><Version>0</Version><Level>4</Level><Task>800</Task><Opcode>0</Opcode><Keywords>0x800000000000000</Keywords><TimeCreated SystemTime=\"2026-09-21T04:50:25.0827559Z\" /><EventRecordID>2914</EventRecordID><Correlation /><Execution ProcessID=\"REDACTED-17\" ThreadID=\"REDACTED-18\" /><Channel>Microsoft-Windows-TaskScheduler/Maintenance</Channel><Computer>REDACTED-HOST</Computer><Security UserID=\"REDACTED-3\" /></System><EventData Name=\"MaintenanceStateChanged\"><Data Name=\"hc_stateid\">REDACTED-19</Data><Data Name=\"LastRunDateTime\">REDACTED-20</Data></EventData></Event>"
+        },
+        {
+          "provider": "Microsoft-Windows-TaskScheduler",
+          "id": 800,
+          "version": 0,
+          "level": 4,
+          "utc": "2026-09-21T04:46:46.2400976Z",
+          "recordId": 2913,
+          "activityIdPresent": false,
+          "relatedActivityIdPresent": false,
+          "fields": [
+            {
+              "name": "hc_stateid",
+              "fieldPresent": true,
+              "nonempty": true
+            },
+            {
+              "name": "LastRunDateTime",
+              "fieldPresent": true,
+              "nonempty": true
+            }
+          ],
+          "sanitizedXml": "<Event xmlns=\"http://schemas.microsoft.com/win/2004/08/events/event\"><System><Provider Name=\"Microsoft-Windows-TaskScheduler\" Guid=\"{de7b24ea-73c8-4a09-985d-5bdadcfa9017}\" /><EventID>800</EventID><Version>0</Version><Level>4</Level><Task>800</Task><Opcode>0</Opcode><Keywords>0x800000000000000</Keywords><TimeCreated SystemTime=\"2026-09-21T04:46:46.2400976Z\" /><EventRecordID>2913</EventRecordID><Correlation /><Execution ProcessID=\"REDACTED-17\" ThreadID=\"REDACTED-21\" /><Channel>Microsoft-Windows-TaskScheduler/Maintenance</Channel><Computer>REDACTED-HOST</Computer><Security UserID=\"REDACTED-3\" /></System><EventData Name=\"MaintenanceStateChanged\"><Data Name=\"hc_stateid\">REDACTED-22</Data><Data Name=\"LastRunDateTime\">REDACTED-23</Data></EventData></Event>"
+        },
+        {
+          "provider": "Microsoft-Windows-TaskScheduler",
+          "id": 800,
+          "version": 0,
+          "level": 4,
+          "utc": "2026-09-21T04:15:11.1383996Z",
+          "recordId": 2912,
+          "activityIdPresent": false,
+          "relatedActivityIdPresent": false,
+          "fields": [
+            {
+              "name": "hc_stateid",
+              "fieldPresent": true,
+              "nonempty": true
+            },
+            {
+              "name": "LastRunDateTime",
+              "fieldPresent": true,
+              "nonempty": true
+            }
+          ],
+          "sanitizedXml": "<Event xmlns=\"http://schemas.microsoft.com/win/2004/08/events/event\"><System><Provider Name=\"Microsoft-Windows-TaskScheduler\" Guid=\"{de7b24ea-73c8-4a09-985d-5bdadcfa9017}\" /><EventID>800</EventID><Version>0</Version><Level>4</Level><Task>800</Task><Opcode>0</Opcode><Keywords>0x800000000000000</Keywords><TimeCreated SystemTime=\"2026-09-21T04:15:11.1383996Z\" /><EventRecordID>2912</EventRecordID><Correlation /><Execution ProcessID=\"REDACTED-17\" ThreadID=\"REDACTED-24\" /><Channel>Microsoft-Windows-TaskScheduler/Maintenance</Channel><Computer>REDACTED-HOST</Computer><Security UserID=\"REDACTED-3\" /></System><EventData Name=\"MaintenanceStateChanged\"><Data Name=\"hc_stateid\">REDACTED-19</Data><Data Name=\"LastRunDateTime\">REDACTED-25</Data></EventData></Event>"
+        }
+      ],
+      "idCounts": [
+        {
+          "key": "Microsoft-Windows-TaskScheduler, 800",
+          "count": 3
+        }
+      ]
+    }
+  ],
+  "coverage": "UNKNOWN",
+  "negativeInferenceAllowed": false,
+  "sanitation": "Live payloads and System identity/process/correlation values replaced with per-run equality tokens. No raw messages, accounts, SIDs, paths, arguments or evtx files."
+}
