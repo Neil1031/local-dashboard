@@ -4,6 +4,22 @@ const lastStatuses = new Set(['SUCCESS', 'FAILED', 'UNKNOWN']);
 export const currentStatus = job => currentStatuses.has(job.status) ? job.status : 'UNKNOWN';
 export const lastStatus = job => lastStatuses.has(job.lastRunStatus) ? job.lastRunStatus : 'UNKNOWN';
 export const displayValue = value => value == null || value === '' ? '—' : String(value);
+const jobDisplayNames = Object.freeze({
+  'InsiderTracker-Market': '市場資料更新',
+  'InsiderTracker-SEC': 'SEC 內部人交易更新',
+  'InsiderTracker-SyncImport': '內部人資料同步',
+  'AIStockHunter-UnexplainedVolume-HealthCheck': '異常成交量健康檢查',
+  'AIStockHunter-Accumulation-Weekly-Check': '籌碼累積每週檢查'
+});
+const originalJobName = job => job?.taskName ?? job?.name ?? '';
+export const jobDisplayName = job => jobDisplayNames[originalJobName(job)] ?? displayValue(originalJobName(job));
+export const jobSubtitle = job => {
+  const original = originalJobName(job);
+  const path = typeof job?.taskPath === 'string' ? job.taskPath : '';
+  return jobDisplayNames[original]
+    ? [original, path && path !== '\\' ? path : ''].filter(Boolean).join(' · ')
+    : displayValue(path || original);
+};
 export function formatDate(value) {
   if (typeof value !== 'string' || !value.trim()) return '—';
   const date = new Date(value);
@@ -121,8 +137,8 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
     get('currentWarnings').hidden = false;
     get('historyExecutions').hidden = true;
     returnFocus = row;
-    get('drawerTitle').textContent = displayValue(job.name);
-    get('drawerSubtitle').textContent = displayValue(job.taskPath);
+    get('drawerTitle').textContent = jobDisplayName(job);
+    get('drawerSubtitle').textContent = jobSubtitle(job);
     const details = [
       ['Current status', label(currentStatus(job))], ['Scheduler state', job.state],
       ['Enabled', job.enabled === true ? 'Yes' : job.enabled === false ? 'No' : null],
@@ -145,8 +161,8 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
   function openHistoryDrawer(job, day, cell, trigger) {
     returnFocus = trigger;
     get('drawer').dataset.mode = 'history';
-    get('drawerTitle').textContent = displayValue(job.name);
-    get('drawerSubtitle').textContent = `${day.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })} · Observed executions · ${job.taskPath}`;
+    get('drawerTitle').textContent = jobDisplayName(job);
+    get('drawerSubtitle').textContent = `${day.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })} · Observed executions · ${jobSubtitle(job)}`;
     get('detailGrid').hidden = true;
     get('currentWarnings').hidden = true;
     get('historyExecutions').hidden = false;
@@ -184,14 +200,14 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
       row.dataset.job = job.id;
       const name = element('th', 'history-name');
       name.scope = 'row';
-      name.append(element('span', 'history-job-name', job.name), element('span', 'job-sub', job.taskPath));
+      name.append(element('span', 'history-job-name', jobDisplayName(job)), element('span', 'job-sub', jobSubtitle(job)));
       if (job.historyOnly) name.append(element('span', 'job-sub', 'History only'));
       row.append(name, ...job.days.map((cell, index) => {
         const td = element('td', '');
         const symbol = cell.outcome === 'NONE' ? '—' : cell.outcome === 'FAILED' ? '!' : '✓';
         const node = element(cell.count ? 'button' : 'span', `day-cell ${cell.count ? cell.outcome.toLowerCase() : 'none'}`,
           `${symbol}${cell.count > 1 ? ` ${cell.count}` : ''}`);
-        node.setAttribute('aria-label', `${displayValue(job.name)}, ${range.days[index].toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}, ${cell.count} runs, ${cell.failed} failed`);
+        node.setAttribute('aria-label', `${jobDisplayName(job)}, ${range.days[index].toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}, ${cell.count} runs, ${cell.failed} failed`);
         if (cell.count) {
           node.type = 'button';
           node.addEventListener('click', () => openHistoryDrawer(job, range.days[index], cell, node));
@@ -252,7 +268,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
         { READY: '◷', RUNNING: '↻', FAILED: '!', DISABLED: 'Ⅱ', UNKNOWN: '?', MISSED: '⌁' }[status]);
       icon.setAttribute('aria-hidden', 'true');
       const name = element('span', 'job-text');
-      name.append(element('span', 'job-name', job.name), element('span', 'job-sub', job.taskPath));
+      name.append(element('span', 'job-name', jobDisplayName(job)), element('span', 'job-sub', jobSubtitle(job)));
       main.append(icon, name);
       row.append(main);
       for (const [title, date] of [['Next run', job.nextRunAt], ['Last run', job.lastRunAt]]) {
