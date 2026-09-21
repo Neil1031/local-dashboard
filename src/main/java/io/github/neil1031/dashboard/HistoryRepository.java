@@ -13,6 +13,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.LinkedHashMap;
+import static io.github.neil1031.dashboard.HistoryResponse.*;
 import static io.github.neil1031.dashboard.Models.*;
 
 /** Short-lived JDBC connections; database constraints coordinate independent instances. */
@@ -138,7 +140,51 @@ public class HistoryRepository {
         }
     }
 
-    /** Internal bounded read only; no public history HTTP contract in Stage 3A. */
+    /** Never creates a file, directory, schema, or observation on the history HTTP path. */
+    private Connection connectReadOnly() throws SQLException {
+        Path file = Path.of(properties.databasePath()).toAbsolutePath().normalize();
+        SQLiteConfig config = new SQLiteConfig();
+        config.setReadOnly(true);
+        config.setBusyTimeout(properties.busyTimeoutMs());
+        return config.createConnection("jdbc:sqlite:" + file.toUri() + "?mode=ro");
+    }
+
+    public HistoryResponse history(HistoryRange range) {
+        try (Connection connection = connectReadOnly(); Statement schema = connection.createStatement()) {
+            try (ResultSet version = schema.executeQuery("PRAGMA user_version")) {
+                if (version.getInt(1) != SCHEMA_VERSION) throw new SQLException("Unsupported history schema");
+            }
+            // One joined SELECT gives a consistent view, without filtering against current monitoring.
+            try (PreparedStatement statement = connection.prepareStatement("""
+                    SELECT j.id AS job_id, j.task_path, j.task_name, j.enabled,
+                           r.id, r.observed_run_at, r.outcome, r.scheduler_result, r.duration_ms, r.message
+                    FROM job_run r JOIN job j ON j.id = r.job_id
+                    WHERE r.observed_run_at >= ? AND r.observed_run_at < ?
+                    ORDER BY j.id, r.observed_run_at, r.id
+                    """)) {
+                statement.setString(1, UTC.format(range.from()));
+                statement.setString(2, UTC.format(range.to()));
+                var jobs = new LinkedHashMap<String, HistoryJob>();
+                try (ResultSet rows = statement.executeQuery()) {
+                    while (rows.next()) {
+                        String id = rows.getString("job_id");
+                        if (!jobs.containsKey(id)) {
+                            Long enabled = nullableLong(rows, "enabled");
+                            jobs.put(id, new HistoryJob(id, rows.getString("task_path"), rows.getString("task_name"),
+                                    enabled == null ? null : enabled != 0, new ArrayList<>()));
+                        }
+                        jobs.get(id).runs().add(new Run(rows.getLong("id"), Instant.parse(rows.getString("observed_run_at")),
+                                Status.valueOf(rows.getString("outcome")), nullableLong(rows, "scheduler_result"),
+                                nullableLong(rows, "duration_ms"), rows.getString("message")));
+                    }
+                }
+                return new HistoryResponse(range.from(), range.to(), jobs.values().stream().map(job ->
+                        new HistoryJob(job.id(), job.taskPath(), job.taskName(), job.enabled(), List.copyOf(job.runs()))).toList());
+            }
+        } catch (Exception failure) { throw new HistoryPersistenceException(failure); }
+    }
+
+    /** Internal bounded read for persistence verification. */
     public List<ObservedRun> recentRuns(String jobId, int limit) {
         if (limit < 1 || limit > 1000) throw new IllegalArgumentException("limit must be 1..1000");
         try (Connection connection = connect(); PreparedStatement statement = connection.prepareStatement("""
