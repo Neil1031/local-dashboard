@@ -712,22 +712,24 @@ Integration tests may use fixture JSON representing PowerShell output so most te
 
 # Current Next Codex Assignment
 
-Open a **new Codex Implementation Chat** for **Stage 3A only**.
+Open a **new Codex Research Chat** for **Stage 4 trigger research only**.
 
-Baseline is the latest `main` after Stage 2.
+Baseline is the latest `main` after Stage 3B.
 
-Stage 3A scope:
+Research scope:
 
-- SQLite persistence
-- stable run identity / deduplication
-- restart persistence
-- tests and verification
+- inspect the actually configured monitored Windows scheduled tasks
+- inventory trigger types and trigger properties
+- inspect StartWhenAvailable and relevant scheduler settings
+- determine which trigger patterns can be evaluated reliably for MISSED detection
+- identify ambiguous / unsupported trigger cases
+- propose Stage 4 implementation rules, fixtures, and acceptance cases
 
-Do not implement:
+Research rules:
 
-- 7-day history UI/API shaping (Stage 3B)
-- MISSED detection (Stage 4)
-- runner/application-level result contract (Stage 5)
-- logs (Stage 6)
+- do not modify production code
+- do not modify, run, create, disable, or reschedule the user's Windows scheduled tasks
+- do not implement MISSED detection yet
+- write findings to a reviewable research document and stop for Manager Review
 
-After Stage 3A passes its Gate, commit and push its branch, then stop for Manager Review.
+After Manager Review approves the research conclusions, open a **separate new Codex Implementation Chat** for Stage 4.
