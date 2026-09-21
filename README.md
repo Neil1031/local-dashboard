@@ -1,6 +1,6 @@
 # Local Dashboard
 
-Windows Task Scheduler 的本機唯讀觀測服務。目前完成 **Stage 0 + Stage 1 + Stage 2 + Stage 3A**。
+Windows Task Scheduler 的本機唯讀觀測服務。目前完成 **Stage 0 + Stage 1 + Stage 2 + Stage 3A + Stage 3B**（Stage 3B 待 Manager Review）。
 `index.html` 保留原有粉色 UI，透過 `dashboard.mjs` 讀取真實 `/api/jobs`；runtime 不含 mock scheduler data。
 
 ## 環境與啟動
@@ -146,7 +146,7 @@ Stage 0 + 1 的歷史驗收見 [docs/STAGE-0-1.md](docs/STAGE-0-1.md)；UI 串�
 - PARTIAL 保留可取得的工作，顯示 errors / unmatchedIncludes，摘要只涵蓋已取得的工作。NOT_CONFIGURED 提示設定 include；OK 空列表顯示沒有可顯示的排程。
 - 載入期間與錯誤後不顯示舊列表／摘要；無 mock fallback。Last refresh 是最近成功取得回應的 collectedAt（含 PARTIAL / NOT_CONFIGURED），失敗不更新。
 - drawer 使用既有列表物件，顯示狀態、enabled、時間、result、description、warnings；空值顯示 `—`。日期含日期與時間，以瀏覽器本機時區呈現。
-- MISSED 只在 API 明確回傳 MISSED 時顯示；不根據日期、nextRunAt 或 NumberOfMissedRuns 推算。7-day history 保留頁籤，提示 Stage 3 後提供資料。
+- MISSED 只在 API 明確回傳 MISSED 時顯示；不根據日期、nextRunAt 或 NumberOfMissedRuns 推算。7-day history 現由下方 Stage 3B 唯讀 API 提供資料。
 - Filter 支援 Tab / Enter / Space；頁籤支援左右方向鍵 / Home / End；drawer 支援 Close / Escape / 點遮罩，關閉後焦點回到原工作。
 
 ## 前端測試（不增加 runtime 相依套件）
@@ -154,14 +154,14 @@ Stage 0 + 1 的歷史驗收見 [docs/STAGE-0-1.md](docs/STAGE-0-1.md)；UI 串�
 使用 Node.js 22+；純 mapping 測試只使用 Node 內建 test runner：
 
 ```powershell
-node --test tests/dashboard.test.mjs
+node --test tests/dashboard.test.mjs tests/history.test.mjs
 ```
 
 瀏覽器測試使用 Playwright 與已安裝的 Microsoft Edge。僅將測試工具裝在忽略的目錄，無前端編譯流程：
 
 ```powershell
 npm install --prefix .tools/browser-tests --no-save --package-lock=false playwright@1.62.1
-node --test tests/dashboard.test.mjs tests/browser.test.mjs
+node --test tests/dashboard.test.mjs tests/history.test.mjs tests/browser.test.mjs tests/history-browser.test.mjs
 ```
 
 也可透過 `NODE_PATH` 使用既有 Playwright。測試會在隨機 loopback port 提供 HTML/JS，
@@ -216,7 +216,7 @@ Python、Node、Playwright 只用於驗收，執行服務只需要 Java 與既�
   每次 configured collection 都重試 schema 檢查與保存；失敗回 `PARTIAL` + `HISTORY_PERSISTENCE_FAILED`，保留 jobs 與既有 diagnostics。
   browser 不會收到 DB path、SQL 或 database exception。無監控設定仍為 `NOT_CONFIGURED`；collector 本身失敗仍為 503。
   DB 修復後後續 observation 自動恢復。請先停服務、備份原始檔再由操作者修復；應用程式不自動刪除損壞 DB。
-- 現有 UI、filters、drawer 與 history unavailable 提示保持不變。這一階段無 public history API，僅有 bounded internal repository read。
+- Stage 3A 當時保留 UI、filters、drawer 與 unavailable 提示，僅提供 bounded internal read；Stage 3B 現已加入下列 public history API/UI。
 
 Stage 3A 後端 tests 使用隔離 temporary DB，包括 application context restart、8 個獨立 repository 同時初始化／寫入、
 直接 SQL UNIQUE rejection、rollback、corrupt/locked/unavailable DB 與 HTTP 安全錯誤呈現。
@@ -236,10 +236,54 @@ python scripts/verify-history-live.py --java "$env:JAVA_HOME/bin/java.exe" --nod
 若 task 在比較途中自然執行而造成不同，腳本會失敗，待完成後重新驗證；不會啟動 task 製造資料。
 完整 Gate 與限制見 [docs/STAGE-3A.md](docs/STAGE-3A.md)。
 
+## Stage 3B — 7-day history
+
+7-day history 顯示瀏覽器本機時區「包含今天」的 7 個日曆日。瀏覽器以本地午夜計算起點及明日午夜終點，
+轉成 UTC 查詢；不是從現在減去 168 小時，因此可跨夏令時間變換。
+
+```text
+GET /api/history?from=2026-09-14T16%3A00%3A00Z&to=2026-09-21T16%3A00%3A00Z
+```
+
+- `from` / `to` 必填，格式 `YYYY-MM-DDTHH:mm:ss[.1至9位小數]Z`（四位西元年、UTC、有效日期時間）。
+  必須 `from < to`，最多 31 × 24 小時；查詢採 **`from <= observedRunAt < to`**。
+  無效範圍回 400 `INVALID_HISTORY_RANGE`；DB 不可讀回 503 `HISTORY_UNAVAILABLE`，錯誤不包含 DB path／SQL／原始 exception。
+- 成功回 `{from, to, jobs}`，每個 job 是 `{id, taskPath, taskName, enabled, runs}`。
+  `runs` 含 `{id, observedRunAt, outcome, schedulerResult, durationMs, message}`，依時間升冪。
+  `enabled` 可為 null；`outcome` 僅 SUCCESS／FAILED；result、duration、message 保留 null。
+  空區間回 `jobs: []`；只有區間內有 execution 的 DB jobs 才進入回應。不傳 raw evidence 或 observation metadata。
+- 此 endpoint 只開 SQLite 唯讀連線，用 prepared statement 查詢；不建立目錄／檔案／schema、不寫 observation、
+  不呼叫 `/api/jobs`、collector、PowerShell 或 Windows Task Scheduler。使用 `Cache-Control: no-store`。
+  Schema v1、UTC run identity 及 UNIQUE constraint 都維持原樣。
+- 首次切換 History 才讀取；每個 range 一次 request，cell/drawer 不送 request。
+  同頁 cache 在成功取得 Current Refresh 後過期：History 可見則重新讀取，否則下次切換才讀取。
+  切換時會重新計算日期邊界。Retry history 只重試 history；沒有背景輪詢或跨分頁 cache 同步。
+- Rows 是最近成功 current snapshot 與 history jobs 按 ID 的聯集；current 名稱優先。
+  Current job 沒 history 仍顯示七個 `—`；只在 history 的工作使用 DB 名稱／路徑及 `History only` 標記，不推定為 deleted。
+- 每個 job/day：無 observed runs → `—`；一筆成功 → 綠色 `✓`；一筆失敗 → 紅色 `!`。
+  多筆顯示總次數（例如 `✓ 3` / `! 3`）；**任一失敗即為紅色，後來成功不會抹掉當天失敗**。
+- 有執行的 cell 可點擊或 Tab／Enter／Space 開啟 history detail，依時間列出全部 observed executions、
+  本地時間、結果碼及 message；duration 無值不顯示。Escape／Close 關閉並回到原 cell。
+  Current 與 History 使用同一 drawer，但有明確 mode 及不同內容。空格不是 button。
+- 窄版表格可局部水平捲動、工作名稱固定在左側；長名稱換行；狀態同時使用符號、次數及 accessible label。
+- History 有獨立 loading/error 與 retry，不清除 Today snapshot，也不改成 collector error。
+  **這是 observed completed executions，不是完整 audit trail；缺資料不是 MISSED，Success 不是業務成功證明。**
+
+可重現的實機驗收：使用 Stage 3A 已累積的 DB（必須有最近七天的真實記錄）。工具透過 SQLite backup 複製到隔離驗收目錄，
+原檔保持不變；正常 Today 讀取可能對副本新增 observation，但不會啟動任何 scheduled task。
+
+```powershell
+python scripts/verify-history-ui-live.py --source-db C:/local-data/existing-observed.db --java "$env:JAVA_HOME/bin/java.exe" --node node
+```
+
+驗收啟動封裝 JAR、執行 Today/History browser 測試，以 Python SQLite 獨立比對每筆 DTO／count／outcome，
+反覆讀 history 並驗證 DB 位元組和觀察時間不變，檢查 5 個既有範例 tasks 的 definition hashes。
+工具只停止自己啟動的 dashboard process。證據寫入忽略的 `target/stage-3b/`；完整驗收見 [docs/STAGE-3B.md](docs/STAGE-3B.md)。
+
 ## 範圍與參考
 
-尚無 7-day history API/UI、MISSED 偵測、runner、logs、30-day reliability；依 `PLAN.md` 分別屬於後續 stages。
-Stage 3A 未修改 UI、collector/normalization 或 `PLAN.md`。下一階段僅為 Stage 3B 的 7-day history API/UI，須等 Manager Review。
+尚無 MISSED 偵測、runner、logs、30-day reliability；依 `PLAN.md` 分別屬於後續 stages。
+Stage 3B 未修改 collector/normalization、schema、run identity 或 `PLAN.md`。下一階段為 Stage 4 reliable MISSED detection，須等 Manager Review。
 
 - [Microsoft Task Scheduler result codes](https://learn.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-error-and-success-constants)
 - [Spring Boot 3.5 system requirements](https://docs.spring.io/spring-boot/3.5/system-requirements.html)

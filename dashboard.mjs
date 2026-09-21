@@ -35,6 +35,57 @@ export function readSnapshot(payload) {
   return payload;
 }
 
+export const localDayKey = date => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+export function historyWindow(now = new Date()) {
+  const days = Array.from({ length: 7 }, (_, index) => new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6 + index));
+  const end = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+  return { days, from: days[0].toISOString(), to: end.toISOString() };
+}
+export function readHistory(payload, range) {
+  const invalid = () => { throw new Error('INVALID_HISTORY_RESPONSE'); };
+  if (!payload || Date.parse(payload.from) !== Date.parse(range.from)
+      || Date.parse(payload.to) !== Date.parse(range.to) || !Array.isArray(payload.jobs)) invalid();
+  const jobs = new Set(), runs = new Set();
+  for (const job of payload.jobs) {
+    if (!job || typeof job.id !== 'string' || !job.id || jobs.has(job.id)
+        || typeof job.taskName !== 'string' || typeof job.taskPath !== 'string'
+        || ![true, false, null].includes(job.enabled) || !Array.isArray(job.runs)) invalid();
+    jobs.add(job.id);
+    for (const run of job.runs) {
+      if (!run || !Number.isSafeInteger(run.id) || runs.has(run.id)
+          || typeof run.observedRunAt !== 'string' || !run.observedRunAt.endsWith('Z')
+          || !Number.isFinite(Date.parse(run.observedRunAt))
+          || Date.parse(run.observedRunAt) < Date.parse(range.from) || Date.parse(run.observedRunAt) >= Date.parse(range.to)
+          || !['SUCCESS', 'FAILED'].includes(run.outcome)
+          || !(run.schedulerResult === null || Number.isSafeInteger(run.schedulerResult))
+          || !(run.durationMs === null || (Number.isSafeInteger(run.durationMs) && run.durationMs >= 0))
+          || !(run.message === null || typeof run.message === 'string')) invalid();
+      runs.add(run.id);
+    }
+  }
+  return payload;
+}
+// Preserve sub-millisecond chronological order while grouping by browser-local day.
+const preciseUtc = value => value.replace(/(?:\.(\d+))?Z$/, (_, fraction = '') => `.${fraction.padEnd(9, '0')}Z`);
+export function aggregateDay(runs) {
+  const ordered = [...runs].sort((a, b) => preciseUtc(a.observedRunAt).localeCompare(preciseUtc(b.observedRunAt)) || a.id - b.id);
+  const failed = ordered.filter(run => run.outcome === 'FAILED').length;
+  return { runs: ordered, count: ordered.length, failed, outcome: !ordered.length ? 'NONE' : failed ? 'FAILED' : 'SUCCESS' };
+}
+export function historyRows(currentJobs, historyJobs, range) {
+  const rows = new Map(historyJobs.map(job => [job.id, { ...job, name: job.taskName, historyOnly: true }]));
+  for (const job of currentJobs) rows.set(job.id, { ...job, runs: rows.get(job.id)?.runs || [], historyOnly: false });
+  const keys = range.days.map(localDayKey);
+  return [...rows.values()].map(job => {
+    const groups = new Map(keys.map(key => [key, []]));
+    for (const run of job.runs) {
+      const instant = new Date(run.observedRunAt);
+      if (instant >= new Date(range.from) && instant < new Date(range.to)) groups.get(localDayKey(instant))?.push(run);
+    }
+    return { ...job, days: keys.map(key => aggregateDay(groups.get(key))) };
+  });
+}
+
 export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globalThis)) {
   const get = id => document.getElementById(id);
   const page = document.querySelector('.page');
@@ -45,6 +96,8 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
   let busy = false;
   let returnFocus = null;
   let phase = 'loading';
+  let historyCache = null, historyBusy = false, historyRevision = 0;
+  let historyCurrentJobs = [];
   const label = status => status.charAt(0) + status.slice(1).toLowerCase();
   function element(tag, className, text) {
     const node = document.createElement(tag);
@@ -63,6 +116,10 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
     returnFocus = null;
   }
   function openDrawer(job, row) {
+    get('drawer').dataset.mode = 'current';
+    get('detailGrid').hidden = false;
+    get('currentWarnings').hidden = false;
+    get('historyExecutions').hidden = true;
     returnFocus = row;
     get('drawerTitle').textContent = displayValue(job.name);
     get('drawerSubtitle').textContent = displayValue(job.taskPath);
@@ -84,6 +141,103 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
     document.body.style.overflow = 'hidden';
     get('drawer').classList.add('open');
     get('closeDrawer').focus();
+  }
+  function openHistoryDrawer(job, day, cell, trigger) {
+    returnFocus = trigger;
+    get('drawer').dataset.mode = 'history';
+    get('drawerTitle').textContent = displayValue(job.name);
+    get('drawerSubtitle').textContent = `${day.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })} · Observed executions · ${job.taskPath}`;
+    get('detailGrid').hidden = true;
+    get('currentWarnings').hidden = true;
+    get('historyExecutions').hidden = false;
+    get('historyExecutions').replaceChildren(...cell.runs.map(run => {
+      const item = element('li', 'history-execution detail');
+      item.dataset.runId = run.id;
+      const time = element('time', '', new Date(run.observedRunAt).toLocaleTimeString());
+      time.dateTime = run.observedRunAt;
+      item.append(time, element('strong', run.outcome.toLowerCase(), `${run.outcome === 'FAILED' ? '!' : '✓'} ${label(run.outcome)}`),
+        element('div', '', `Result: ${displayValue(run.schedulerResult)}`));
+      if (run.message) item.append(element('p', '', run.message));
+      if (run.durationMs != null) item.append(element('div', '', `Duration: ${run.durationMs} ms`));
+      return item;
+    }));
+    page.inert = true;
+    document.body.style.overflow = 'hidden';
+    get('drawer').classList.add('open');
+    get('closeDrawer').focus();
+  }
+  function renderHistory() {
+    const { payload, range } = historyCache;
+    const rows = historyRows(historyCurrentJobs, payload.jobs, range);
+    const head = element('tr', '');
+    const jobHead = element('th', 'history-name', 'Job');
+    jobHead.scope = 'col';
+    head.append(jobHead, ...range.days.map((day, index) => {
+      const node = element('th', 'history-head', index === 6 ? `Today · ${day.toLocaleDateString(undefined, { month: 'numeric', day: 'numeric' })}`
+        : day.toLocaleDateString(undefined, { month: 'numeric', day: 'numeric' }));
+      node.scope = 'col';
+      return node;
+    }));
+    get('historyHead').replaceChildren(head);
+    get('historyBody').replaceChildren(...rows.map(job => {
+      const row = element('tr', 'history-row');
+      row.dataset.job = job.id;
+      const name = element('th', 'history-name');
+      name.scope = 'row';
+      name.append(element('span', 'history-job-name', job.name), element('span', 'job-sub', job.taskPath));
+      if (job.historyOnly) name.append(element('span', 'job-sub', 'History only'));
+      row.append(name, ...job.days.map((cell, index) => {
+        const td = element('td', '');
+        const symbol = cell.outcome === 'NONE' ? '—' : cell.outcome === 'FAILED' ? '!' : '✓';
+        const node = element(cell.count ? 'button' : 'span', `day-cell ${cell.count ? cell.outcome.toLowerCase() : 'none'}`,
+          `${symbol}${cell.count > 1 ? ` ${cell.count}` : ''}`);
+        node.setAttribute('aria-label', `${displayValue(job.name)}, ${range.days[index].toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}, ${cell.count} runs, ${cell.failed} failed`);
+        if (cell.count) {
+          node.type = 'button';
+          node.addEventListener('click', () => openHistoryDrawer(job, range.days[index], cell, node));
+        }
+        td.append(node);
+        return td;
+      }));
+      return row;
+    }));
+    get('historyTableWrap').hidden = rows.length === 0;
+    get('historyStatus').textContent = rows.length ? 'Select a day to see all observed executions.' : 'No observed executions or current jobs in this window.';
+    get('historyStatus').setAttribute('role', 'status');
+  }
+  async function loadHistory() {
+    if (historyBusy) return;
+    const range = historyWindow();
+    if (historyCache?.revision === historyRevision && historyCache.range.from === range.from && historyCache.range.to === range.to) {
+      renderHistory();
+      return;
+    }
+    const revision = historyRevision;
+    historyBusy = true;
+    get('historyView').setAttribute('aria-busy', 'true');
+    get('historyTableWrap').hidden = true;
+    get('historyStatus').setAttribute('role', 'status');
+    get('historyStatus').textContent = 'Loading history…';
+    get('historyRetry').hidden = true;
+    try {
+      const response = await fetchJobs(`/api/history?${new URLSearchParams({ from: range.from, to: range.to })}`, { cache: 'no-store' });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      let payload;
+      try { payload = await response.json(); } catch { throw new Error('INVALID_HISTORY_RESPONSE'); }
+      historyCache = { payload: readHistory(payload, range), range, revision };
+      if (revision === historyRevision) renderHistory();
+    } catch (error) {
+      historyCache = null;
+      // Never reflect arbitrary proxy/database response bodies into this error UI.
+      const reason = /^(HTTP \d{3}|INVALID_HISTORY_RESPONSE)$/.test(error.message) ? error.message : 'Unable to read history. Please retry.';
+      get('historyStatus').textContent = `History unavailable · ${reason}`;
+      get('historyStatus').setAttribute('role', 'alert');
+      get('historyRetry').hidden = false;
+    } finally {
+      historyBusy = false;
+      get('historyView').setAttribute('aria-busy', 'false');
+      if (revision !== historyRevision && !get('historyView').hidden) void loadHistory();
+    }
   }
   function renderRows() {
     const jobs = snapshot ? filterJobs(snapshot.jobs, activeFilter) : [];
@@ -151,6 +305,8 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
       catch { throw new Error(response.ok ? 'INVALID_API_RESPONSE' : `HTTP ${response.status}`); }
       if (!response.ok) throw new Error([`HTTP ${response.status}`, payload?.code, payload?.message].filter(Boolean).join(' · '));
       snapshot = readSnapshot(payload);
+      historyCurrentJobs = snapshot.jobs;
+      historyRevision++;
       phase = 'ready';
       summary(summarize(snapshot.jobs));
       get('refreshTime').textContent = formatDate(snapshot.collectedAt);
@@ -178,6 +334,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
       get('refreshBtn').textContent = '↻ Refresh';
       get('todayView').setAttribute('aria-busy', 'false');
       renderRows();
+      if (!get('historyView').hidden) void loadHistory();
     }
   }
   tabs.forEach((tab, index) => {
@@ -192,6 +349,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
       get('todayView').hidden = !today;
       get('historyView').hidden = today;
       document.querySelector('.filters').hidden = !today;
+      if (!today) void loadHistory();
     });
     tab.addEventListener('keydown', event => {
       if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
@@ -219,6 +377,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
     if (event.key === 'Tab') { event.preventDefault(); get('closeDrawer').focus(); }
   });
   get('refreshBtn').addEventListener('click', refresh);
+  get('historyRetry').addEventListener('click', loadHistory);
   return refresh();
 }
 

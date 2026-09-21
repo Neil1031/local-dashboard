@@ -25,6 +25,10 @@ async function mock(payload, status = 200) {
   const requests = [];
   await page.route('**/api/**', route => {
     requests.push({ url: route.request().url(), method: route.request().method() });
+    const url = new URL(route.request().url());
+    if (url.pathname === '/api/history') return route.fulfill({ contentType: 'application/json', body: JSON.stringify({
+      from: url.searchParams.get('from'), to: url.searchParams.get('to'), jobs: []
+    }) });
     return route.fulfill({ status, contentType: 'application/json', body: JSON.stringify(payload) });
   });
   await page.goto(baseUrl);
@@ -122,10 +126,12 @@ test('all statuses, keyboard filters, no inferred MISSED, real drawer null value
   await page.locator('#closeDrawer').click();
   await page.locator('#todayTab').focus();
   await page.keyboard.press('ArrowRight');
-  assert.match(await page.locator('#historyView').innerText(), /History will be available after Stage 3/);
+  await page.waitForFunction(() => document.getElementById('historyView').getAttribute('aria-busy') === 'false');
+  assert.match(await page.locator('#historyView').innerText(), /Observed completed executions/);
   assert.equal(await page.locator('#todayView').isVisible(), false);
-  assert.equal(await page.locator('.day-cell').count(), 0);
-  assert.equal(requests.length, 1);
+  assert.equal(await page.locator('.day-cell.none').count(), 35);
+  assert.equal(requests.length, 2);
+  assert.equal(requests.filter(request => new URL(request.url).pathname === '/api/jobs').length, 1);
 });
 
 test('PARTIAL keeps jobs and all diagnostics visible; text is never HTML', async () => {
@@ -147,7 +153,7 @@ test('PARTIAL keeps jobs and all diagnostics visible; text is never HTML', async
   await page.screenshot({ path: `${artifactDir}/partial-desktop.png`, fullPage: true });
 });
 
-test('history persistence failure retains current jobs and displays its diagnostic without history UI', async () => {
+test('history persistence failure retains current jobs and displays its diagnostic independently of history', async () => {
   const requests = await mock(snapshot([fixtureJob('READY', { lastRunStatus: 'SUCCESS' })], {
     collectionStatus: 'PARTIAL', errors: [{ code: 'HISTORY_PERSISTENCE_FAILED', taskPath: null, taskName: null,
       message: 'Current scheduler data is available, but observed execution history could not be saved. Check the server log.' }]
@@ -157,9 +163,10 @@ test('history persistence failure retains current jobs and displays its diagnost
   assert.match(await page.locator('#collectionDetails').innerText(), /HISTORY_PERSISTENCE_FAILED.*could not be saved/);
   assert.match(await page.locator('#collectionTitle').innerText(), /PARTIAL/);
   await page.locator('#historyTab').click();
-  assert.equal(await page.locator('.day-cell').count(), 0);
-  assert.match(await page.locator('#historyView').innerText(), /History will be available after Stage 3/);
-  assert.equal(requests.length, 1);
+  await page.waitForFunction(() => document.getElementById('historyView').getAttribute('aria-busy') === 'false');
+  assert.equal(await page.locator('.day-cell.none').count(), 7);
+  assert.match(await page.locator('#historyView').innerText(), /Observed completed executions/);
+  assert.equal(requests.length, 2);
 });
 
 for (const offline of [true, false]) {
