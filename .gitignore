@@ -4,3 +4,10 @@
 /.idea/
 *.iml
 *.log
+/data/
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*

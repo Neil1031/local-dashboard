@@ -147,6 +147,21 @@ test('PARTIAL keeps jobs and all diagnostics visible; text is never HTML', async
   await page.screenshot({ path: `${artifactDir}/partial-desktop.png`, fullPage: true });
 });
 
+test('history persistence failure retains current jobs and displays its diagnostic without history UI', async () => {
+  const requests = await mock(snapshot([fixtureJob('READY', { lastRunStatus: 'SUCCESS' })], {
+    collectionStatus: 'PARTIAL', errors: [{ code: 'HISTORY_PERSISTENCE_FAILED', taskPath: null, taskName: null,
+      message: 'Current scheduler data is available, but observed execution history could not be saved. Check the server log.' }]
+  }));
+  assert.equal(await rows().count(), 1);
+  assert.match(await rows().innerText(), /Current\s+Ready\s+Last run: Success/);
+  assert.match(await page.locator('#collectionDetails').innerText(), /HISTORY_PERSISTENCE_FAILED.*could not be saved/);
+  assert.match(await page.locator('#collectionTitle').innerText(), /PARTIAL/);
+  await page.locator('#historyTab').click();
+  assert.equal(await page.locator('.day-cell').count(), 0);
+  assert.match(await page.locator('#historyView').innerText(), /History will be available after Stage 3/);
+  assert.equal(requests.length, 1);
+});
+
 for (const offline of [true, false]) {
   test(`initial ${offline ? 'unavailable backend' : 'HTTP 503'} never renders scheduler success`, async () => {
     await page.route('**/api/**', route => offline ? route.abort('connectionfailed') : route.fulfill({

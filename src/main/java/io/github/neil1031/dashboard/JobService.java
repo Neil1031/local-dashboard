@@ -12,11 +12,13 @@ public class JobService {
     private final SchedulerCollector collector;
     private final SchedulerProperties properties;
     private final JobNormalizer normalizer;
+    private final HistoryObserver history;
 
-    public JobService(SchedulerCollector collector, SchedulerProperties properties, JobNormalizer normalizer) {
+    public JobService(SchedulerCollector collector, SchedulerProperties properties, JobNormalizer normalizer, HistoryObserver history) {
         this.collector = collector;
         this.properties = properties;
         this.normalizer = normalizer;
+        this.history = history;
     }
 
     public JobsResponse jobs() {
@@ -51,6 +53,7 @@ public class JobService {
         }
         for (JsonNode selector : snapshot.path("unmatchedIncludes")) unmatched.add(selector.asText());
         jobs.sort(Comparator.comparing(j -> (j.taskPath() + j.name()).toLowerCase(Locale.ROOT)));
+        history.observe(jobs, collectedAt).ifPresent(errors::add);
         return new JobsResponse(errors.isEmpty() && unmatched.isEmpty() ? "OK" : "PARTIAL", collectedAt,
                 List.copyOf(jobs), List.copyOf(errors), List.copyOf(unmatched));
     }

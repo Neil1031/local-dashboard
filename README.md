@@ -1,6 +1,6 @@
 # Local Dashboard
 
-Windows Task Scheduler 的本機唯讀觀測服務。目前完成 **Stage 0 + Stage 1 + Stage 2**。
+Windows Task Scheduler 的本機唯讀觀測服務。目前完成 **Stage 0 + Stage 1 + Stage 2 + Stage 3A**。
 `index.html` 保留原有粉色 UI，透過 `dashboard.mjs` 讀取真實 `/api/jobs`；runtime 不含 mock scheduler data。
 
 ## 環境與啟動
@@ -63,7 +63,7 @@ dashboard:
 
 ## API 與狀態契約
 
-`GET /api/jobs` 每次重新讀取，無持久化、無舊快照 fallback，回應有 `Cache-Control: no-store`：
+`GET /api/jobs` 每次重新讀取，將可確認的 completed execution 保存至本機 SQLite；current data 無舊快照 fallback，回應有 `Cache-Control: no-store`：
 
 ```json
 {
@@ -101,13 +101,14 @@ FAILED 表示最近一次已知失敗，不代表今天那個執行視窗失敗�
 `MISSED` 保留於 enum，但 Stage 1 不產生此分類；不使用 `NumberOfMissedRuns` 代替可靠的執行視窗判定。
 
 `GET /api/jobs/{id}` 只能查詢目前 server 設定篩選出的工作；不接受任意 task path 或 shell command。
-找不到 ID 回 404 `JOB_NOT_FOUND`。所有 API 都是唯讀，無 run／refresh mutation endpoint。
+找不到 ID 回 404 `JOB_NOT_FOUND`。所有 API 對 Windows scheduler 都是唯讀；讀取 snapshot 會保存本機 observed history，無 run／refresh mutation endpoint。
 
 | 情況 | HTTP / collectionStatus |
 | --- | --- |
 | 收集正常（包括明確排除全部的空結果） | 200 / OK |
 | 未設定 include | 200 / NOT_CONFIGURED |
 | 部分 task 權限不足／資料不完整／include 未匹配 | 200 / PARTIAL，查看 errors／unmatchedIncludes |
+| Scheduler collection 成功但 history 儲存失敗 | 200 / PARTIAL，保留 current jobs，errors 包含 HISTORY_PERSISTENCE_FAILED |
 | PowerShell 無法啟動、列舉失敗、timeout、JSON 無效或不支援的平台 | 503 / ERROR，提供 code／message，不回偽造空 jobs |
 
 PowerShell stdout/stderr 各有 8 MiB 上限。錯誤時不回傳任意主機 stderr，以免洩漏敏感內容；
@@ -179,10 +180,68 @@ Remove-Item Env:DASHBOARD_LIVE_URL
 並寫出 `target/stage-2/live-ui.json` 與桌面／窄版截圖。未設定環境變數時會明確 skip，不視為實機通過。
 Maven 驗證後端與靜態資源封裝；Node 測試需另外執行。
 
+## Stage 3A — 本機 observed execution history
+
+預設檔案為 **`data/local-dashboard.db`**，相對於啟動時的工作目錄。首次啟動自動建立父目錄、SQLite 檔案與 schema；
+restart 時必須指向同一檔案，才會保留原有 history。可在 `config/application.yml` 設定：
+
+```yaml
+dashboard:
+  history:
+    database-path: data/local-dashboard.db
+    busy-timeout-ms: 2000
+```
+
+也可用 `--dashboard.history.database-path=C:/local-data/dashboard.db` 指定固定絕對路徑。
+SQLite 是本機檔案，無外部 DB server；`data/`、常見 DB 副檔名與 journal/WAL sidecars 已忽略，不可 commit。
+Python、Node、Playwright 只用於驗收，執行服務只需要 Java 與既有 PowerShell。
+
+- **Observed history，非完整 Windows audit log**：只保存 dashboard 收集到、且 Stage 1 normalization 有足夠完成證據的 execution。
+  若 dashboard 關閉三天，task 跑了 20 次，但 Windows 只提供最後一次，重新開啟時只能保存最後觀察到的那次；不補造另外 19 筆。
+- 建立 run 必須同時符合 `lastRunAt != null` 且 `lastRunStatus` 是 `SUCCESS` 或 `FAILED`。
+  RUNNING、informational result、never-run、時間缺失或 collection incomplete 不建立 completed run。
+  `lastTaskResult = 0` 本身不是執行證據。Disabled job 若有可靠的 completed last run，仍會保存該次歷史。
+- Identity 固定為 **Stage 1 job ID + normalized UTC lastRunAt**；資料庫 `UNIQUE(job_id, observed_run_at)` 與 UPSERT
+  保障 Refresh、多 tab、併發 request、application restart 都不重複。同一次 execution 後來的 outcome/result/message 更新同一筆。
+  較舊 `collectedAt` 不覆蓋較新 metadata；UNKNOWN observation 不會降級已保存的 completed run。
+- `job` 保存 task path/name、nullable enabled（未知不假裝 disabled）、first/last seen；`job_run` 保存 outcome、scheduler result、
+  message、raw JSON、first/last observed。`observed_run_at` 是 scheduler 的 LastRunTime，不是完成時間；目前 duration 為 NULL。
+  時間儲存成固定 9 位小數的 UTC ISO-8601；瀏覽器本機時區／台北午夜不影響 identity。
+- 每份 normalized snapshot 是一個 `BEGIN IMMEDIATE` transaction；foreign keys 開啟、synchronous FULL，使用 SQLite 預設 rollback journal。
+  busy timeout 預設 2000ms（可設 1–10000ms，單次 lock wait 上限）。有寫入錯誤就 rollback，下一次 Refresh 可重試。
+- Schema 版本存於 `PRAGMA user_version`，目前為 **1**，DDL 在 `src/main/resources/db/migration/V1__observed_history.sql`。
+  migration 與 version bump 在同一 transaction。未來新增循序 migration，不修改已發佈的 V1。
+  不支援的較新版本、非空但未標版本的 DB、損壞 schema 均明確失敗；不會 drop history 或偷偷重建。
+- 啟動時 DB 不可用仍保留 current scheduler service，server log 記錄初始化錯誤。
+  每次 configured collection 都重試 schema 檢查與保存；失敗回 `PARTIAL` + `HISTORY_PERSISTENCE_FAILED`，保留 jobs 與既有 diagnostics。
+  browser 不會收到 DB path、SQL 或 database exception。無監控設定仍為 `NOT_CONFIGURED`；collector 本身失敗仍為 503。
+  DB 修復後後續 observation 自動恢復。請先停服務、備份原始檔再由操作者修復；應用程式不自動刪除損壞 DB。
+- 現有 UI、filters、drawer 與 history unavailable 提示保持不變。這一階段無 public history API，僅有 bounded internal repository read。
+
+Stage 3A 後端 tests 使用隔離 temporary DB，包括 application context restart、8 個獨立 repository 同時初始化／寫入、
+直接 SQL UNIQUE rejection、rollback、corrupt/locked/unavailable DB 與 HTTP 安全錯誤呈現。
+新增的 browser fixture 驗證 `HISTORY_PERSISTENCE_FAILED` 可見且 current jobs 保留。
+
+實機唯讀驗收（Python 3.11+，使用範例設定列出的 5 個既有 tasks）：
+
+```powershell
+# 先完成 Maven verify；Node 22+ 與 Playwright 設定同上。
+python scripts/verify-history-live.py --java "$env:JAVA_HOME/bin/java.exe" --node node
+```
+
+此腳本以獨立 DB 啟動兩次封裝服務，驗證 10 次觀察、restart、3 次觀察及真實 browser load/Refresh，
+用 Python SQLite 獨立讀取 DB 並比對每筆 observed identity、run ID、結果與 raw evidence。
+另外比對 Windows 當下值、所有 5 個 monitored task definition hashes，最後只停止它自己啟動的 dashboard processes。
+收據、DB、logs 放在忽略的 `target/stage-3a/live-*/`；截圖沿用 `target/stage-2/`。
+若 task 在比較途中自然執行而造成不同，腳本會失敗，待完成後重新驗證；不會啟動 task 製造資料。
+完整 Gate 與限制見 [docs/STAGE-3A.md](docs/STAGE-3A.md)。
+
 ## 範圍與參考
 
-尚無 SQLite history、MISSED 偵測、runner、logs、30-day reliability；依 `PLAN.md` 分別屬於後續 stages。
-Stage 2 未修改 backend/API 行為或 `PLAN.md`。下一階段僅為 Stage 3 的執行歷史持久化。
+尚無 7-day history API/UI、MISSED 偵測、runner、logs、30-day reliability；依 `PLAN.md` 分別屬於後續 stages。
+Stage 3A 未修改 UI、collector/normalization 或 `PLAN.md`。下一階段僅為 Stage 3B 的 7-day history API/UI，須等 Manager Review。
 
 - [Microsoft Task Scheduler result codes](https://learn.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-error-and-success-constants)
 - [Spring Boot 3.5 system requirements](https://docs.spring.io/spring-boot/3.5/system-requirements.html)
+- [Xerial SQLite JDBC](https://github.com/xerial/sqlite-jdbc)（3.53.4.0；Apache-2.0 / BSD-2-Clause）
+- [SQLite UPSERT](https://www.sqlite.org/lang_upsert.html)、[transactions](https://www.sqlite.org/lang_transaction.html)、[user_version](https://www.sqlite.org/pragma.html#pragma_user_version)
