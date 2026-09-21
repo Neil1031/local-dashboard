@@ -712,24 +712,48 @@ Integration tests may use fixture JSON representing PowerShell output so most te
 
 # Current Next Codex Assignment
 
-Open a **new Codex Research Chat** for **Stage 4 trigger research only**.
+Open a **new Codex Research Chat** for **Stage 4 Event Evidence Research only**.
 
-Baseline is the latest `main` after Stage 3B.
+Baseline is the latest `main` after the accepted Stage 4 trigger/settings research.
+
+The trigger research established that current Task Scheduler snapshots and SQLite observed-run history are not sufficient by themselves to prove MISSED safely. This next research task must determine whether Windows Task Scheduler operational event history can provide stronger start / trigger / completion / failure / negative-coverage evidence.
 
 Research scope:
 
-- inspect the actually configured monitored Windows scheduled tasks
-- inventory trigger types and trigger properties
-- inspect StartWhenAvailable and relevant scheduler settings
-- determine which trigger patterns can be evaluated reliably for MISSED detection
-- identify ambiguous / unsupported trigger cases
-- propose Stage 4 implementation rules, fixtures, and acceptance cases
+- inspect `Microsoft-Windows-TaskScheduler/Operational` availability, enabled state, permissions, retention, size, and oldest/newest available records
+- identify event IDs and payload fields relevant to:
+  - scheduled trigger activation
+  - task start
+  - action start
+  - action completion
+  - task completion
+  - launch/start failure
+  - manual / on-demand execution if distinguishable
+  - retry / restart attempts if distinguishable
+- determine stable correlation fields such as task path, instance ID, action instance ID, activity/correlation ID, timestamps, engine PID, or equivalent
+- determine whether scheduled and manual executions can be distinguished reliably
+- determine whether event history can prove an occurrence did not start, and under exactly what retention / coverage conditions
+- inspect behavior and evidence boundaries across reboot, sleep, logoff/login, catch-up, IgnoreNew, and StartWhenAvailable without mutating existing user tasks
+- compare event evidence against current collector fields and Stage 3 SQLite history
+- propose the minimum Event Evidence contract required before Stage 4 implementation
+- recommend whether Stage 4 can rely on Event Log, needs a hybrid Event Log + observation-epoch model, or must remain conservative UNKNOWN
 
 Research rules:
 
-- do not modify production code
-- do not modify, run, create, disable, or reschedule the user's Windows scheduled tasks
+- do not modify production Java/frontend/schema
+- do not modify, run, create, disable, enable, or reschedule the user's existing Windows scheduled tasks
+- do not enable/disable the Operational log without Manager approval
+- do not clear or resize Windows event logs
+- prefer read-only inspection of existing historical events
+- sanitize account identifiers, command lines, actions, paths, and other host-sensitive values before committing evidence
+- distinguish Verified / Inferred / Proposed / Not verified
 - do not implement MISSED detection yet
-- write findings to a reviewable research document and stop for Manager Review
+- write findings and sanitized evidence to a separate research branch, commit/push, then stop for Manager Review
 
-After Manager Review approves the research conclusions, open a **separate new Codex Implementation Chat** for Stage 4.
+After this second Research Gate passes, Manager decides whether Stage 4 is split into:
+- 4A Event / evidence collection
+- 4B expected-occurrence domain evaluation
+- 4C API / UI
+- 4D controlled acceptance
+
+Do not start any Stage 4 implementation before that Manager decision.
