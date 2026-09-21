@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-09-21T10:00:00+08:00",
+  "tasks": [
+    {"TaskName":"Daily Report 中文","TaskPath":"\\Research\\","Description":"Fixture only","State":"Ready","Enabled":true,"LastRunTime":"2026-09-20T20:46:08+08:00","LastTaskResult":0,"NextRunTime":"2026-09-21T20:45:00+08:00","Triggers":[{"type":"MSFT_TaskDailyTrigger","StartBoundary":"2026-09-01T20:45:00+08:00","Enabled":true,"DaysInterval":1}],"CollectionError":null},
+    {"TaskName":"Daily Report 中文","TaskPath":"\\Archive\\","State":"Disabled","Enabled":false,"LastRunTime":"2026-09-20T20:46:08+08:00","LastTaskResult":1,"NextRunTime":null,"Triggers":[],"CollectionError":null},
+    {"TaskName":"Failed","TaskPath":"\\","State":"Ready","Enabled":true,"LastRunTime":"2026-09-21T01:02:03Z","LastTaskResult":1,"NextRunTime":"2026-09-22T01:00:00Z","Triggers":[],"CollectionError":null},
+    {"TaskName":"Never run","TaskPath":"\\","State":"Ready","Enabled":true,"LastRunTime":"1899-12-30T00:00:00+08:00","LastTaskResult":267011,"NextRunTime":"1601-01-01T00:00:00Z","Triggers":[],"CollectionError":null}
+  ],
+  "errors": [],
+  "unmatchedIncludes": []
+}

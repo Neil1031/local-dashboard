@@ -1,0 +1,6 @@
+/target/
+/.tools/
+/config/application.yml
+/.idea/
+*.iml
+*.log

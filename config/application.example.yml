@@ -1,0 +1,11 @@
+dashboard:
+  scheduler:
+    include:
+      - '\InsiderTracker-Market'
+      - '\InsiderTracker-SEC'
+      - '\InsiderTracker-SyncImport'
+      - '\AIStockHunter-UnexplainedVolume-HealthCheck'
+      - '\AIStockHunter-Accumulation-Weekly-Check'
+    exclude: []
+    missed-grace-minutes: 15
+    timeout-seconds: 30
