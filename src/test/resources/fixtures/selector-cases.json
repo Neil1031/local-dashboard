@@ -1,0 +1,194 @@
+[
+  {
+    "selector": "Daily",
+    "path": "\\A\\",
+    "name": "dAILY",
+    "matches": true
+  },
+  {
+    "selector": "Daily",
+    "path": "\\A\\",
+    "name": "Daily Report",
+    "matches": false
+  },
+  {
+    "selector": "\\a\\DAILY",
+    "path": "\\A\\",
+    "name": "Daily",
+    "matches": true
+  },
+  {
+    "selector": "\\A\\Daily",
+    "path": "\\B\\",
+    "name": "Daily",
+    "matches": false
+  },
+  {
+    "selector": "\\a\\",
+    "path": "\\A\\Child\\",
+    "name": "Daily",
+    "matches": true
+  },
+  {
+    "selector": "\\A\\",
+    "path": "\\AB\\",
+    "name": "Daily",
+    "matches": false
+  },
+  {
+    "selector": "\\",
+    "path": "\\Nested\\",
+    "name": "Daily",
+    "matches": true
+  },
+  {
+    "selector": "\\aistockhunter-accumulation-check-*",
+    "path": "\\",
+    "name": "AIStockHunter-Accumulation-Check-2026-09-22",
+    "matches": true
+  },
+  {
+    "selector": "\\aistockhunter-accumulation-check-*",
+    "path": "\\",
+    "name": "AIStockHunter-Accumulation-Check-2026-10-01",
+    "matches": true
+  },
+  {
+    "selector": "\\AIStockHunter-Accumulation-Check-*",
+    "path": "\\Other\\",
+    "name": "AIStockHunter-Accumulation-Check-2026-09-22",
+    "matches": false
+  },
+  {
+    "selector": "AIStockHunter-Accumulation-Check-*",
+    "path": "\\Other\\",
+    "name": "AIStockHunter-Accumulation-Check-2026-09-22",
+    "matches": true
+  },
+  {
+    "selector": "\\AIStockHunter-Accumulation-Check-*",
+    "path": "\\",
+    "name": "AIStockHunter-Accumulation-Weekly-Check",
+    "matches": false
+  },
+  {
+    "selector": "Daily*",
+    "path": "\\",
+    "name": "Daily",
+    "matches": true
+  },
+  {
+    "selector": "DAILY*",
+    "path": "\\",
+    "name": "daily 中文",
+    "matches": true
+  },
+  {
+    "selector": "Daily*",
+    "path": "\\",
+    "name": "Not Daily",
+    "matches": false
+  },
+  {
+    "selector": "*abc",
+    "path": "\\",
+    "name": "xabc",
+    "matches": false
+  },
+  {
+    "selector": "a*b",
+    "path": "\\",
+    "name": "axxb",
+    "matches": false
+  },
+  {
+    "selector": "a*b*",
+    "path": "\\",
+    "name": "axxb-more",
+    "matches": false
+  },
+  {
+    "selector": "Daily**",
+    "path": "\\",
+    "name": "Daily Report",
+    "matches": false
+  },
+  {
+    "selector": "*",
+    "path": "\\",
+    "name": "anything",
+    "matches": false
+  },
+  {
+    "selector": "?",
+    "path": "\\",
+    "name": "a",
+    "matches": false
+  },
+  {
+    "selector": "[abc]",
+    "path": "\\",
+    "name": "a",
+    "matches": false
+  },
+  {
+    "selector": "Daily.*",
+    "path": "\\",
+    "name": "DailyReport",
+    "matches": false
+  },
+  {
+    "selector": "*abc",
+    "path": "\\",
+    "name": "*abc",
+    "matches": true
+  },
+  {
+    "selector": "a*b",
+    "path": "\\",
+    "name": "a*b",
+    "matches": true
+  },
+  {
+    "selector": "a*b*",
+    "path": "\\",
+    "name": "a*b*",
+    "matches": true
+  },
+  {
+    "selector": "Daily**",
+    "path": "\\",
+    "name": "Daily**",
+    "matches": true
+  },
+  {
+    "selector": "*",
+    "path": "\\",
+    "name": "*",
+    "matches": true
+  },
+  {
+    "selector": "?",
+    "path": "\\",
+    "name": "?",
+    "matches": true
+  },
+  {
+    "selector": "[abc]",
+    "path": "\\",
+    "name": "[abc]",
+    "matches": true
+  },
+  {
+    "selector": "報告*",
+    "path": "\\",
+    "name": "報告 中文",
+    "matches": true
+  },
+  {
+    "selector": "ÉCOLE*",
+    "path": "\\",
+    "name": "école 中文",
+    "matches": true
+  }
+]

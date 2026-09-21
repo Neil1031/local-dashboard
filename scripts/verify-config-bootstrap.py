@@ -2,7 +2,7 @@
 
 Reuses the launcher's existing HTTP/process identity and read-only task helpers.
 Requires Python 3.11+, Node 22+/Playwright (same setup as frontend tests), and the
-five existing example tasks. Does not alter the real LOCALAPPDATA home or tasks.
+current example tasks. Does not alter the real LOCALAPPDATA home or tasks.
 """
 import hashlib
 import importlib.util
@@ -23,7 +23,8 @@ qa.REPORT = {'result': 'RUNNING', 'evidenceDirectory': str(qa.OUT), 'stages': {}
 qa.OUT.mkdir(parents=True)
 template = (ROOT / 'config/application.example.yml').read_bytes()
 expected_names = ['InsiderTracker-Market', 'InsiderTracker-SEC', 'InsiderTracker-SyncImport',
-                  'AIStockHunter-UnexplainedVolume-HealthCheck', 'AIStockHunter-Accumulation-Weekly-Check']
+                  'AIStockHunter-UnexplainedVolume-Daily', 'AIStockHunter-Accumulation-Weekly-Check']
+expected_names += json.loads(qa.ps("$names=@(Get-ScheduledTask | Where-Object { $_.TaskPath -eq '\\' -and $_.TaskName.StartsWith('AIStockHunter-Accumulation-Check-', [StringComparison]::OrdinalIgnoreCase) } | ForEach-Object TaskName); ConvertTo-Json -InputObject $names"))
 selected = expected_names
 
 
@@ -79,7 +80,7 @@ def live_ui():
 def main():
     global selected
     before = qa.task_hashes()
-    assert len(before) == 5
+    assert len(before) >= 7
     qa.REPORT['taskDefinitionsBefore'] = before
     assert not qa.state()['listeners'], '8080 occupied: do not stop an unrelated service'
     with ZipFile(qa.IMAGE / 'app/launcher.jar') as archive:

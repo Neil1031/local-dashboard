@@ -55,6 +55,7 @@ dashboard:
       - 'InsiderTracker-Market'       # 各資料夾的同名 task
       - '\Research\Daily Report 中文' # 完整 TaskPath + TaskName
       - '\My Tasks\'                # 此資料夾及其子資料夾
+      - '\AIStockHunter-Accumulation-Check-*' # 日期型一次性檢查
     exclude:
       - '\My Tasks\Disabled job'
     missed-grace-minutes: 15
@@ -62,7 +63,8 @@ dashboard:
 ```
 
 - YAML 路徑使用**單引號**，保留 Windows 反斜線。
-- 選擇器是**字面值、大小寫不敏感**；沒有 wildcard／正規表示式。`*`、`[`、引號、空白與中文皆視為名稱內容。
+- 選擇器**大小寫不敏感**。只有非空 prefix 後的單一末尾 `*` 表示 prefix match：開頭 `\` 比對完整路徑，否則比對 task name。
+- 不支援完整 glob／regex；`*abc`、`a*b`、`a*b*`、單獨 `*`、`?`、`[` 皆維持字面值，不能擴大匹配。include／exclude 使用相同規則。
 - 開頭 `\`、結尾 `\` 表示資料夾子樹；只有 `\` 表示全部可列舉 tasks。
 - `exclude` 永遠優先；重複 include 不會產生重複工作。同名不同資料夾保留不同 ID。
 - `unmatchedIncludes` 表示列舉結果中沒有符合的 selector；可能不存在或目前身分無法看見，不假裝知道原因。明確排除的已找到工作不算 missing。
@@ -141,7 +143,7 @@ PowerShell fixtures 替換讀取 cmdlet 為記憶體資料，不建立測試排�
 & ([scriptblock]::Create((Get-Content -Raw .\scripts\verify-live.ps1)))
 ```
 
-它比對範例列出的全部 5 個 tasks、detail API 與 task definition 前後 SHA-256；
+它比對五個固定監控 tasks 與目前所有日期型 accumulation checks、detail API 與 task definition 前後 SHA-256；
 輸出 `target/live-verification.json`。其他設定可傳 `-ExpectedTaskKeys` 與 `-BaseUrl`。
 若 task 恰好在收集與比較之間自然執行，值可能變動；等待該次執行完成再重新比對。
 Stage 0 + 1 的歷史驗收見 [docs/STAGE-0-1.md](docs/STAGE-0-1.md)；UI 串接驗收見 [docs/STAGE-2.md](docs/STAGE-2.md)。

@@ -2,7 +2,7 @@ param(
     [string]$BaseUrl = 'http://127.0.0.1:8080',
     [string[]]$ExpectedTaskKeys = @(
         '\InsiderTracker-Market', '\InsiderTracker-SEC', '\InsiderTracker-SyncImport',
-        '\AIStockHunter-UnexplainedVolume-HealthCheck', '\AIStockHunter-Accumulation-Weekly-Check'
+        '\AIStockHunter-UnexplainedVolume-Daily', '\AIStockHunter-Accumulation-Weekly-Check'
     ),
     [string]$OutputPath = 'target/live-verification.json'
 )
@@ -26,6 +26,9 @@ function As-Instant($Value) {
     return $date.ToUniversalTime().ToString('o')
 }
 
+if (-not $PSBoundParameters.ContainsKey('ExpectedTaskKeys')) {
+    $ExpectedTaskKeys += @(Get-ScheduledTask | Where-Object { $_.TaskPath -eq '\' -and $_.TaskName.StartsWith('AIStockHunter-Accumulation-Check-', [StringComparison]::OrdinalIgnoreCase) } | ForEach-Object { $_.TaskPath + $_.TaskName })
+}
 $tasks = @(Get-ScheduledTask | Where-Object { ($_.TaskPath + $_.TaskName) -in $ExpectedTaskKeys })
 Assert-Equal $tasks.Count $ExpectedTaskKeys.Count 'configured tasks found'
 $before = @{}
@@ -51,9 +54,11 @@ foreach ($task in $tasks) {
     Assert-Equal ([long]$job.lastTaskResult) ([long]$info.LastTaskResult) "$key result"
     Assert-Equal ([long]$job.raw.LastTaskResult) ([long]$info.LastTaskResult) "$key raw result"
     foreach ($pair in @(@('lastRunAt','LastRunTime'), @('nextRunAt','NextRunTime'))) {
-        $expected = if ($info.($pair[1]).Year -le 1899) { $null } else { ([DateTimeOffset]$info.($pair[1])).ToUniversalTime().ToString('o') }
-        Assert-Equal (As-Instant $job.($pair[0])) $expected "$key $($pair[0])"
+        $expected = As-Instant $info.($pair[1])
         Assert-Equal (As-Instant $job.raw.($pair[1])) $expected "$key raw $($pair[1])"
+        # SCHED_S_TASK_HAS_NOT_RUN clears normalized lastRunAt even when Windows supplies a date.
+        if ($pair[0] -eq 'lastRunAt' -and [long]$info.LastTaskResult -eq 0x41303) { $expected = $null }
+        Assert-Equal (As-Instant $job.($pair[0])) $expected "$key $($pair[0])"
     }
     Assert-Equal $job.raw.NumberOfMissedRuns $info.NumberOfMissedRuns "$key missed counter"
     Assert-Equal $job.raw.StartWhenAvailable ([bool]$task.Settings.StartWhenAvailable) "$key StartWhenAvailable"

@@ -4,14 +4,21 @@ $ProgressPreference = 'SilentlyContinue'
 [Console]::OutputEncoding = New-Object System.Text.UTF8Encoding($false)
 
 function Test-Selector($Selector, $Task) {
-    $full = $Task.TaskPath + $Task.TaskName
+    # Use invariant lowercase + ordinal comparison, as in Java TaskSelection.
+    $Selector = $Selector.ToLowerInvariant()
+    $name = $Task.TaskName.ToLowerInvariant()
+    $full = ($Task.TaskPath + $Task.TaskName).ToLowerInvariant()
+    if ($Selector.Length -gt 1 -and $Selector.IndexOf('*') -eq $Selector.Length - 1) {
+        $target = if ($Selector.StartsWith('\')) { $full } else { $name }
+        return $target.StartsWith($Selector.Substring(0, $Selector.Length - 1), [StringComparison]::Ordinal)
+    }
     if ($Selector.StartsWith('\')) {
         if ($Selector.EndsWith('\')) {
-            return $full.StartsWith($Selector, [StringComparison]::OrdinalIgnoreCase)
+            return $full.StartsWith($Selector, [StringComparison]::Ordinal)
         }
-        return [string]::Equals($full, $Selector, [StringComparison]::OrdinalIgnoreCase)
+        return [string]::Equals($full, $Selector, [StringComparison]::Ordinal)
     }
-    return [string]::Equals($Task.TaskName, $Selector, [StringComparison]::OrdinalIgnoreCase)
+    return [string]::Equals($name, $Selector, [StringComparison]::Ordinal)
 }
 
 function Convert-Date($Value) {

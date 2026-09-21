@@ -27,7 +27,7 @@ class ConfigBootstrapTest {
         Map<?, ?> dashboard = (Map<?, ?>) yaml.get("dashboard");
         Map<?, ?> scheduler = (Map<?, ?>) dashboard.get("scheduler");
         assertThat(scheduler.get("include")).isEqualTo(List.of("\\InsiderTracker-Market", "\\InsiderTracker-SEC",
-                "\\InsiderTracker-SyncImport", "\\AIStockHunter-UnexplainedVolume-HealthCheck", "\\AIStockHunter-Accumulation-Weekly-Check"));
+                "\\InsiderTracker-SyncImport", "\\AIStockHunter-UnexplainedVolume-Daily", "\\AIStockHunter-Accumulation-Weekly-Check", "\\AIStockHunter-Accumulation-Check-*"));
         assertThat(scheduler.get("exclude")).isEqualTo(List.of());
         assertThat(scheduler.get("missed-grace-minutes")).isEqualTo(15);
         assertThat(scheduler.get("timeout-seconds")).isEqualTo(30);
