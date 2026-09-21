@@ -1,0 +1,735 @@
+{
+  "evidenceVersion": 1,
+  "purpose": "Stage 4 research only; not an effective running-service configuration assertion",
+  "startedAt": "2026-09-21T13:00:12.9093054+08:00",
+  "finishedAt": "2026-09-21T13:00:13.3000741+08:00",
+  "timezone": {
+    "windowsId": "Taipei Standard Time",
+    "baseUtcOffset": "08:00:00",
+    "supportsDaylightSaving": false
+  },
+  "powershellVersion": "7.6.5",
+  "selection": {
+    "source": "config/application.example.yml",
+    "localOverridePresent": false,
+    "packagedDefaultIncludeCount": 0,
+    "selectors": [
+      "\\InsiderTracker-Market",
+      "\\InsiderTracker-SEC",
+      "\\InsiderTracker-SyncImport",
+      "\\AIStockHunter-UnexplainedVolume-HealthCheck",
+      "\\AIStockHunter-Accumulation-Weekly-Check"
+    ],
+    "exclusions": [],
+    "configurationSha256": "3f43077eb1cbabc7675388e198f7b5dc943a84c60ece9f5986d66cce92248efe",
+    "matchedCount": 5
+  },
+  "sanitation": "Actions, registration metadata, account identities, trigger IDs and network profile identities omitted. Full task XML exists in memory only; SHA-256 retained.",
+  "nullSemantics": "null = not exposed/not applicable; empty string = provider returned empty. Neither automatically means false. See research applicability table and XML presence.",
+  "tasks": [
+    {
+      "TaskName": "InsiderTracker-Market",
+      "TaskPath": "\\",
+      "Enabled": true,
+      "State": "Ready",
+      "sampledAt": "2026-09-21T13:00:13.1092056+08:00",
+      "LastRunTime": "2026-09-21T09:38:37.0000000+08:00",
+      "NextRunTime": "2026-09-22T06:30:00.0000000+08:00",
+      "LastTaskResult": 0,
+      "NumberOfMissedRuns": 0,
+      "Triggers": [
+        {
+          "Enabled": true,
+          "StartBoundary": "2026-09-19T06:30:00+08:00",
+          "EndBoundary": null,
+          "DaysInterval": 1,
+          "WeeksInterval": null,
+          "DaysOfWeek": null,
+          "MonthsOfYear": null,
+          "DaysOfMonth": null,
+          "WeeksOfMonth": null,
+          "RunOnLastDayOfMonth": null,
+          "RunOnLastWeekOfMonth": null,
+          "RandomDelay": null,
+          "ExecutionTimeLimit": null,
+          "Delay": null,
+          "type": "MSFT_TaskDailyTrigger",
+          "Repetition": {
+            "Interval": null,
+            "Duration": null,
+            "StopAtDurationEnd": false
+          },
+          "uncollectedPropertyNames": [],
+          "triggerIdPresent": false
+        }
+      ],
+      "Settings": {
+        "StartWhenAvailable": true,
+        "RunOnlyIfNetworkAvailable": false,
+        "DisallowStartIfOnBatteries": false,
+        "StopIfGoingOnBatteries": false,
+        "WakeToRun": false,
+        "ExecutionTimeLimit": "PT2H",
+        "AllowDemandStart": true,
+        "Enabled": true,
+        "RestartCount": 0,
+        "RestartInterval": null,
+        "DeleteExpiredTaskAfter": null,
+        "RunOnlyIfIdle": false,
+        "AllowHardTerminate": true,
+        "Hidden": false,
+        "Priority": 7,
+        "DisallowStartOnRemoteAppSession": false,
+        "UseUnifiedSchedulingEngine": true,
+        "Volatile": false,
+        "MultipleInstances": "IgnoreNew",
+        "Compatibility": "Win7",
+        "IdleSettings": {
+          "IdleDuration": "PT10M",
+          "WaitTimeout": "PT1H",
+          "StopOnIdleEnd": true,
+          "RestartOnIdle": false
+        },
+        "NetworkSettings": {
+          "NamePresent": false,
+          "IdPresent": false
+        },
+        "MaintenanceSettings": {
+          "Period": null,
+          "Deadline": null,
+          "Exclusive": null
+        }
+      },
+      "Principal": {
+        "LogonType": "Interactive",
+        "RunLevel": "Limited",
+        "identitiesOmitted": true
+      },
+      "xmlTaskVersion": "1.3",
+      "xmlScheduleAndSettingsLeaves": [
+        {
+          "path": "Triggers/CalendarTrigger/StartBoundary",
+          "value": "2026-09-19T06:30:00+08:00"
+        },
+        {
+          "path": "Triggers/CalendarTrigger/ScheduleByDay/DaysInterval",
+          "value": "1"
+        },
+        {
+          "path": "Settings/DisallowStartIfOnBatteries",
+          "value": "false"
+        },
+        {
+          "path": "Settings/StopIfGoingOnBatteries",
+          "value": "false"
+        },
+        {
+          "path": "Settings/ExecutionTimeLimit",
+          "value": "PT2H"
+        },
+        {
+          "path": "Settings/MultipleInstancesPolicy",
+          "value": "IgnoreNew"
+        },
+        {
+          "path": "Settings/StartWhenAvailable",
+          "value": "true"
+        },
+        {
+          "path": "Settings/IdleSettings/Duration",
+          "value": "PT10M"
+        },
+        {
+          "path": "Settings/IdleSettings/WaitTimeout",
+          "value": "PT1H"
+        },
+        {
+          "path": "Settings/IdleSettings/StopOnIdleEnd",
+          "value": "true"
+        },
+        {
+          "path": "Settings/IdleSettings/RestartOnIdle",
+          "value": "false"
+        },
+        {
+          "path": "Settings/UseUnifiedSchedulingEngine",
+          "value": "true"
+        }
+      ],
+      "definitionSha256Before": "ba5fbd6f559285959b956b83bd919089a8a42ee4bed0f9653d5a1794bb7df261",
+      "definitionSha256After": "ba5fbd6f559285959b956b83bd919089a8a42ee4bed0f9653d5a1794bb7df261"
+    },
+    {
+      "TaskName": "InsiderTracker-SEC",
+      "TaskPath": "\\",
+      "Enabled": true,
+      "State": "Ready",
+      "sampledAt": "2026-09-21T13:00:13.1916950+08:00",
+      "LastRunTime": "2026-09-21T11:15:01.0000000+08:00",
+      "NextRunTime": "2026-09-22T11:15:00.0000000+08:00",
+      "LastTaskResult": 0,
+      "NumberOfMissedRuns": 0,
+      "Triggers": [
+        {
+          "Enabled": true,
+          "StartBoundary": "2026-09-19T11:15:00+08:00",
+          "EndBoundary": null,
+          "DaysInterval": 1,
+          "WeeksInterval": null,
+          "DaysOfWeek": null,
+          "MonthsOfYear": null,
+          "DaysOfMonth": null,
+          "WeeksOfMonth": null,
+          "RunOnLastDayOfMonth": null,
+          "RunOnLastWeekOfMonth": null,
+          "RandomDelay": null,
+          "ExecutionTimeLimit": null,
+          "Delay": null,
+          "type": "MSFT_TaskDailyTrigger",
+          "Repetition": {
+            "Interval": null,
+            "Duration": null,
+            "StopAtDurationEnd": false
+          },
+          "uncollectedPropertyNames": [],
+          "triggerIdPresent": false
+        }
+      ],
+      "Settings": {
+        "StartWhenAvailable": true,
+        "RunOnlyIfNetworkAvailable": false,
+        "DisallowStartIfOnBatteries": false,
+        "StopIfGoingOnBatteries": false,
+        "WakeToRun": false,
+        "ExecutionTimeLimit": "PT2H",
+        "AllowDemandStart": true,
+        "Enabled": true,
+        "RestartCount": 0,
+        "RestartInterval": null,
+        "DeleteExpiredTaskAfter": null,
+        "RunOnlyIfIdle": false,
+        "AllowHardTerminate": true,
+        "Hidden": false,
+        "Priority": 7,
+        "DisallowStartOnRemoteAppSession": false,
+        "UseUnifiedSchedulingEngine": true,
+        "Volatile": false,
+        "MultipleInstances": "IgnoreNew",
+        "Compatibility": "Win7",
+        "IdleSettings": {
+          "IdleDuration": "PT10M",
+          "WaitTimeout": "PT1H",
+          "StopOnIdleEnd": true,
+          "RestartOnIdle": false
+        },
+        "NetworkSettings": {
+          "NamePresent": false,
+          "IdPresent": false
+        },
+        "MaintenanceSettings": {
+          "Period": null,
+          "Deadline": null,
+          "Exclusive": null
+        }
+      },
+      "Principal": {
+        "LogonType": "Interactive",
+        "RunLevel": "Limited",
+        "identitiesOmitted": true
+      },
+      "xmlTaskVersion": "1.3",
+      "xmlScheduleAndSettingsLeaves": [
+        {
+          "path": "Triggers/CalendarTrigger/StartBoundary",
+          "value": "2026-09-19T11:15:00+08:00"
+        },
+        {
+          "path": "Triggers/CalendarTrigger/ScheduleByDay/DaysInterval",
+          "value": "1"
+        },
+        {
+          "path": "Settings/DisallowStartIfOnBatteries",
+          "value": "false"
+        },
+        {
+          "path": "Settings/StopIfGoingOnBatteries",
+          "value": "false"
+        },
+        {
+          "path": "Settings/ExecutionTimeLimit",
+          "value": "PT2H"
+        },
+        {
+          "path": "Settings/MultipleInstancesPolicy",
+          "value": "IgnoreNew"
+        },
+        {
+          "path": "Settings/StartWhenAvailable",
+          "value": "true"
+        },
+        {
+          "path": "Settings/IdleSettings/Duration",
+          "value": "PT10M"
+        },
+        {
+          "path": "Settings/IdleSettings/WaitTimeout",
+          "value": "PT1H"
+        },
+        {
+          "path": "Settings/IdleSettings/StopOnIdleEnd",
+          "value": "true"
+        },
+        {
+          "path": "Settings/IdleSettings/RestartOnIdle",
+          "value": "false"
+        },
+        {
+          "path": "Settings/UseUnifiedSchedulingEngine",
+          "value": "true"
+        }
+      ],
+      "definitionSha256Before": "27ea30df228ac5e8b25632311c5e2051c3f0f3fd5a5a053e4672c392c1082382",
+      "definitionSha256After": "27ea30df228ac5e8b25632311c5e2051c3f0f3fd5a5a053e4672c392c1082382"
+    },
+    {
+      "TaskName": "InsiderTracker-SyncImport",
+      "TaskPath": "\\",
+      "Enabled": true,
+      "State": "Ready",
+      "sampledAt": "2026-09-21T13:00:13.2319209+08:00",
+      "LastRunTime": "2026-09-21T10:40:01.0000000+08:00",
+      "NextRunTime": "2026-09-22T10:40:00.0000000+08:00",
+      "LastTaskResult": 1,
+      "NumberOfMissedRuns": 0,
+      "Triggers": [
+        {
+          "Enabled": true,
+          "StartBoundary": "2026-09-19T10:40:00+08:00",
+          "EndBoundary": null,
+          "DaysInterval": 1,
+          "WeeksInterval": null,
+          "DaysOfWeek": null,
+          "MonthsOfYear": null,
+          "DaysOfMonth": null,
+          "WeeksOfMonth": null,
+          "RunOnLastDayOfMonth": null,
+          "RunOnLastWeekOfMonth": null,
+          "RandomDelay": null,
+          "ExecutionTimeLimit": null,
+          "Delay": null,
+          "type": "MSFT_TaskDailyTrigger",
+          "Repetition": {
+            "Interval": null,
+            "Duration": null,
+            "StopAtDurationEnd": false
+          },
+          "uncollectedPropertyNames": [],
+          "triggerIdPresent": false
+        }
+      ],
+      "Settings": {
+        "StartWhenAvailable": true,
+        "RunOnlyIfNetworkAvailable": false,
+        "DisallowStartIfOnBatteries": false,
+        "StopIfGoingOnBatteries": false,
+        "WakeToRun": false,
+        "ExecutionTimeLimit": "PT2H",
+        "AllowDemandStart": true,
+        "Enabled": true,
+        "RestartCount": 0,
+        "RestartInterval": null,
+        "DeleteExpiredTaskAfter": null,
+        "RunOnlyIfIdle": false,
+        "AllowHardTerminate": true,
+        "Hidden": false,
+        "Priority": 7,
+        "DisallowStartOnRemoteAppSession": false,
+        "UseUnifiedSchedulingEngine": true,
+        "Volatile": false,
+        "MultipleInstances": "IgnoreNew",
+        "Compatibility": "Win7",
+        "IdleSettings": {
+          "IdleDuration": "PT10M",
+          "WaitTimeout": "PT1H",
+          "StopOnIdleEnd": true,
+          "RestartOnIdle": false
+        },
+        "NetworkSettings": {
+          "NamePresent": false,
+          "IdPresent": false
+        },
+        "MaintenanceSettings": {
+          "Period": null,
+          "Deadline": null,
+          "Exclusive": null
+        }
+      },
+      "Principal": {
+        "LogonType": "Interactive",
+        "RunLevel": "Limited",
+        "identitiesOmitted": true
+      },
+      "xmlTaskVersion": "1.3",
+      "xmlScheduleAndSettingsLeaves": [
+        {
+          "path": "Triggers/CalendarTrigger/StartBoundary",
+          "value": "2026-09-19T10:40:00+08:00"
+        },
+        {
+          "path": "Triggers/CalendarTrigger/ScheduleByDay/DaysInterval",
+          "value": "1"
+        },
+        {
+          "path": "Settings/DisallowStartIfOnBatteries",
+          "value": "false"
+        },
+        {
+          "path": "Settings/StopIfGoingOnBatteries",
+          "value": "false"
+        },
+        {
+          "path": "Settings/ExecutionTimeLimit",
+          "value": "PT2H"
+        },
+        {
+          "path": "Settings/MultipleInstancesPolicy",
+          "value": "IgnoreNew"
+        },
+        {
+          "path": "Settings/StartWhenAvailable",
+          "value": "true"
+        },
+        {
+          "path": "Settings/IdleSettings/Duration",
+          "value": "PT10M"
+        },
+        {
+          "path": "Settings/IdleSettings/WaitTimeout",
+          "value": "PT1H"
+        },
+        {
+          "path": "Settings/IdleSettings/StopOnIdleEnd",
+          "value": "true"
+        },
+        {
+          "path": "Settings/IdleSettings/RestartOnIdle",
+          "value": "false"
+        },
+        {
+          "path": "Settings/UseUnifiedSchedulingEngine",
+          "value": "true"
+        }
+      ],
+      "definitionSha256Before": "aa74a642f415792acf841f5dd728c8c2ae470045f540b9e726eef929a73d3886",
+      "definitionSha256After": "aa74a642f415792acf841f5dd728c8c2ae470045f540b9e726eef929a73d3886"
+    },
+    {
+      "TaskName": "AIStockHunter-UnexplainedVolume-HealthCheck",
+      "TaskPath": "\\",
+      "Enabled": false,
+      "State": "Disabled",
+      "sampledAt": "2026-09-21T13:00:13.2648009+08:00",
+      "LastRunTime": "2026-09-14T14:19:11.0000000+08:00",
+      "NextRunTime": "2026-09-21T13:35:00.0000000+08:00",
+      "LastTaskResult": 0,
+      "NumberOfMissedRuns": 4,
+      "Triggers": [
+        {
+          "Enabled": true,
+          "StartBoundary": "2026-09-14T13:35:00+08:00",
+          "EndBoundary": null,
+          "DaysInterval": null,
+          "WeeksInterval": 1,
+          "DaysOfWeek": 62,
+          "MonthsOfYear": null,
+          "DaysOfMonth": null,
+          "WeeksOfMonth": null,
+          "RunOnLastDayOfMonth": null,
+          "RunOnLastWeekOfMonth": null,
+          "RandomDelay": null,
+          "ExecutionTimeLimit": null,
+          "Delay": null,
+          "type": "MSFT_TaskWeeklyTrigger",
+          "Repetition": {
+            "Interval": null,
+            "Duration": null,
+            "StopAtDurationEnd": false
+          },
+          "uncollectedPropertyNames": [],
+          "triggerIdPresent": false
+        }
+      ],
+      "Settings": {
+        "StartWhenAvailable": true,
+        "RunOnlyIfNetworkAvailable": false,
+        "DisallowStartIfOnBatteries": true,
+        "StopIfGoingOnBatteries": true,
+        "WakeToRun": false,
+        "ExecutionTimeLimit": "PT30M",
+        "AllowDemandStart": true,
+        "Enabled": false,
+        "RestartCount": 2,
+        "RestartInterval": "PT5M",
+        "DeleteExpiredTaskAfter": null,
+        "RunOnlyIfIdle": false,
+        "AllowHardTerminate": true,
+        "Hidden": false,
+        "Priority": 7,
+        "DisallowStartOnRemoteAppSession": false,
+        "UseUnifiedSchedulingEngine": true,
+        "Volatile": false,
+        "MultipleInstances": "IgnoreNew",
+        "Compatibility": "Win7",
+        "IdleSettings": {
+          "IdleDuration": "PT10M",
+          "WaitTimeout": "PT1H",
+          "StopOnIdleEnd": true,
+          "RestartOnIdle": false
+        },
+        "NetworkSettings": {
+          "NamePresent": false,
+          "IdPresent": false
+        },
+        "MaintenanceSettings": {
+          "Period": null,
+          "Deadline": null,
+          "Exclusive": null
+        }
+      },
+      "Principal": {
+        "LogonType": "Interactive",
+        "RunLevel": "Limited",
+        "identitiesOmitted": true
+      },
+      "xmlTaskVersion": "1.3",
+      "xmlScheduleAndSettingsLeaves": [
+        {
+          "path": "Triggers/CalendarTrigger/StartBoundary",
+          "value": "2026-09-14T13:35:00+08:00"
+        },
+        {
+          "path": "Triggers/CalendarTrigger/ScheduleByWeek/WeeksInterval",
+          "value": "1"
+        },
+        {
+          "path": "Triggers/CalendarTrigger/ScheduleByWeek/DaysOfWeek/Monday",
+          "value": ""
+        },
+        {
+          "path": "Triggers/CalendarTrigger/ScheduleByWeek/DaysOfWeek/Tuesday",
+          "value": ""
+        },
+        {
+          "path": "Triggers/CalendarTrigger/ScheduleByWeek/DaysOfWeek/Wednesday",
+          "value": ""
+        },
+        {
+          "path": "Triggers/CalendarTrigger/ScheduleByWeek/DaysOfWeek/Thursday",
+          "value": ""
+        },
+        {
+          "path": "Triggers/CalendarTrigger/ScheduleByWeek/DaysOfWeek/Friday",
+          "value": ""
+        },
+        {
+          "path": "Settings/DisallowStartIfOnBatteries",
+          "value": "true"
+        },
+        {
+          "path": "Settings/StopIfGoingOnBatteries",
+          "value": "true"
+        },
+        {
+          "path": "Settings/Enabled",
+          "value": "false"
+        },
+        {
+          "path": "Settings/ExecutionTimeLimit",
+          "value": "PT30M"
+        },
+        {
+          "path": "Settings/MultipleInstancesPolicy",
+          "value": "IgnoreNew"
+        },
+        {
+          "path": "Settings/RestartOnFailure/Count",
+          "value": "2"
+        },
+        {
+          "path": "Settings/RestartOnFailure/Interval",
+          "value": "PT5M"
+        },
+        {
+          "path": "Settings/StartWhenAvailable",
+          "value": "true"
+        },
+        {
+          "path": "Settings/IdleSettings/Duration",
+          "value": "PT10M"
+        },
+        {
+          "path": "Settings/IdleSettings/WaitTimeout",
+          "value": "PT1H"
+        },
+        {
+          "path": "Settings/IdleSettings/StopOnIdleEnd",
+          "value": "true"
+        },
+        {
+          "path": "Settings/IdleSettings/RestartOnIdle",
+          "value": "false"
+        },
+        {
+          "path": "Settings/UseUnifiedSchedulingEngine",
+          "value": "true"
+        }
+      ],
+      "definitionSha256Before": "3e4306aaa46a8d756dde02b547c5387646fb6826e5c0e25e189806a8b51fd98c",
+      "definitionSha256After": "3e4306aaa46a8d756dde02b547c5387646fb6826e5c0e25e189806a8b51fd98c"
+    },
+    {
+      "TaskName": "AIStockHunter-Accumulation-Weekly-Check",
+      "TaskPath": "\\",
+      "Enabled": true,
+      "State": "Ready",
+      "sampledAt": "2026-09-21T13:00:13.2991594+08:00",
+      "LastRunTime": "2026-09-18T22:00:00.0000000+08:00",
+      "NextRunTime": "2026-09-25T22:00:00.0000000+08:00",
+      "LastTaskResult": 1,
+      "NumberOfMissedRuns": 0,
+      "Triggers": [
+        {
+          "Enabled": true,
+          "StartBoundary": "2026-09-18T22:00:00+08:00",
+          "EndBoundary": null,
+          "DaysInterval": null,
+          "WeeksInterval": 1,
+          "DaysOfWeek": 32,
+          "MonthsOfYear": null,
+          "DaysOfMonth": null,
+          "WeeksOfMonth": null,
+          "RunOnLastDayOfMonth": null,
+          "RunOnLastWeekOfMonth": null,
+          "RandomDelay": null,
+          "ExecutionTimeLimit": null,
+          "Delay": null,
+          "type": "MSFT_TaskWeeklyTrigger",
+          "Repetition": {
+            "Interval": null,
+            "Duration": null,
+            "StopAtDurationEnd": false
+          },
+          "uncollectedPropertyNames": [],
+          "triggerIdPresent": false
+        }
+      ],
+      "Settings": {
+        "StartWhenAvailable": true,
+        "RunOnlyIfNetworkAvailable": false,
+        "DisallowStartIfOnBatteries": false,
+        "StopIfGoingOnBatteries": false,
+        "WakeToRun": false,
+        "ExecutionTimeLimit": "PT10M",
+        "AllowDemandStart": true,
+        "Enabled": true,
+        "RestartCount": 2,
+        "RestartInterval": "PT5M",
+        "DeleteExpiredTaskAfter": null,
+        "RunOnlyIfIdle": false,
+        "AllowHardTerminate": true,
+        "Hidden": false,
+        "Priority": 7,
+        "DisallowStartOnRemoteAppSession": false,
+        "UseUnifiedSchedulingEngine": true,
+        "Volatile": false,
+        "MultipleInstances": "IgnoreNew",
+        "Compatibility": "Win7",
+        "IdleSettings": {
+          "IdleDuration": "PT10M",
+          "WaitTimeout": "PT1H",
+          "StopOnIdleEnd": true,
+          "RestartOnIdle": false
+        },
+        "NetworkSettings": {
+          "NamePresent": false,
+          "IdPresent": false
+        },
+        "MaintenanceSettings": {
+          "Period": null,
+          "Deadline": null,
+          "Exclusive": null
+        }
+      },
+      "Principal": {
+        "LogonType": "Interactive",
+        "RunLevel": "Limited",
+        "identitiesOmitted": true
+      },
+      "xmlTaskVersion": "1.3",
+      "xmlScheduleAndSettingsLeaves": [
+        {
+          "path": "Triggers/CalendarTrigger/StartBoundary",
+          "value": "2026-09-18T22:00:00+08:00"
+        },
+        {
+          "path": "Triggers/CalendarTrigger/ScheduleByWeek/WeeksInterval",
+          "value": "1"
+        },
+        {
+          "path": "Triggers/CalendarTrigger/ScheduleByWeek/DaysOfWeek/Friday",
+          "value": ""
+        },
+        {
+          "path": "Settings/DisallowStartIfOnBatteries",
+          "value": "false"
+        },
+        {
+          "path": "Settings/StopIfGoingOnBatteries",
+          "value": "false"
+        },
+        {
+          "path": "Settings/ExecutionTimeLimit",
+          "value": "PT10M"
+        },
+        {
+          "path": "Settings/MultipleInstancesPolicy",
+          "value": "IgnoreNew"
+        },
+        {
+          "path": "Settings/RestartOnFailure/Count",
+          "value": "2"
+        },
+        {
+          "path": "Settings/RestartOnFailure/Interval",
+          "value": "PT5M"
+        },
+        {
+          "path": "Settings/StartWhenAvailable",
+          "value": "true"
+        },
+        {
+          "path": "Settings/IdleSettings/Duration",
+          "value": "PT10M"
+        },
+        {
+          "path": "Settings/IdleSettings/WaitTimeout",
+          "value": "PT1H"
+        },
+        {
+          "path": "Settings/IdleSettings/StopOnIdleEnd",
+          "value": "true"
+        },
+        {
+          "path": "Settings/IdleSettings/RestartOnIdle",
+          "value": "false"
+        },
+        {
+          "path": "Settings/UseUnifiedSchedulingEngine",
+          "value": "true"
+        }
+      ],
+      "definitionSha256Before": "2d4183fdb670188dcaedee657366401de7e69f2c8accd0e0f545a514ffc07e67",
+      "definitionSha256After": "2d4183fdb670188dcaedee657366401de7e69f2c8accd0e0f545a514ffc07e67"
+    }
+  ]
+}
