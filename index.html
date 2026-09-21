@@ -599,6 +599,38 @@
       .drawer { padding: 8px; }
       .drawer-card { max-height: calc(100dvh - 16px); border-radius: 24px; }
     }
+
+    /* Stage 2: preserve the prototype palette and cards; accommodate real data. */
+    [hidden] { display: none !important; }
+    .empty, .history { display: block; }
+    .refresh:disabled { cursor: wait; opacity: .65; }
+    .panel-head { align-items: flex-start; flex-direction: column; }
+    .cell-label { display: block; }
+    .job-row { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1fr) 135px 24px; }
+    .job-text, .meta, .drawer-head > div { min-width: 0; }
+    .job-name, .job-sub { display: block; }
+    .job-sub, .cell-value, .drawer-title, .drawer-sub, .collection-notice { overflow-wrap: anywhere; }
+    .job-icon.ready, .status.ready { background: #edf5fa; color: #517d99; }
+    .job-icon.disabled, .status.disabled { background: #f3f0f2; color: #84747d; }
+    .job-icon.unknown, .status.unknown { background: var(--warning-bg); color: #99682f; }
+    .summary-note { color: var(--muted); font-size: 11px; margin: -5px 3px 14px; }
+    .collection-notice { padding: 14px 18px; border: 1px solid var(--border); border-radius: 18px; background: #fff; font-size: 13px; margin-bottom: 16px; }
+    .collection-notice.warning { background: var(--warning-bg); }
+    .collection-notice.error { background: var(--danger-bg); }
+    .collection-notice ul { padding-left: 20px; margin: 8px 0 0; }
+    .collection-notice ul:empty { display: none; }
+    .warnings { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 13px; line-height: 1.6; }
+    .pill { flex-wrap: wrap; }
+    @media (max-width: 820px) {
+      .job-row { grid-template-columns: minmax(0, 1fr) 24px; }
+      .job-row .meta, .status-cell { grid-column: 1; }
+      .chev { grid-column: 2; grid-row: 2 / span 3; }
+    }
+    @media (max-width: 520px) {
+      .topbar { flex-wrap: wrap; }
+      .toolbar { width: 100%; justify-content: space-between; }
+      .toolbar .pill { display: inline-flex; font-size: 11px; padding: 7px 11px; }
+    }
   </style>
 </head>
 <body>
@@ -606,265 +638,73 @@
     <header class="topbar">
       <div class="brand">
         <div class="brand-mark" aria-hidden="true">✿</div>
-        <div>
-          <h1>Local Dashboard</h1>
-          <small>Your little scheduler garden</small>
-        </div>
+        <div><h1>Local Dashboard</h1><small>Your little scheduler garden</small></div>
       </div>
       <div class="toolbar">
-        <span class="pill">Last refresh <strong id="refreshTime">09:42</strong></span>
-        <button class="refresh" id="refreshBtn" type="button">↻ Refresh</button>
+        <span class="pill">Last refresh <strong id="refreshTime">—</strong></span>
+        <button class="refresh" id="refreshBtn" type="button" disabled>↻ Refreshing…</button>
       </div>
     </header>
-
-    <section class="hero" aria-label="今日摘要">
+    <section class="hero" aria-label="目前排程摘要">
       <div class="hero-card">
-        <div class="eyebrow">Sunday · Sep 21</div>
-        <h2 class="hero-title">Good morning. Most jobs are blooming nicely today.</h2>
-        <p class="hero-copy">你不用再翻 Task Scheduler 或 log。這裡只告訴你：哪些有跑、哪些失敗、哪些應該跑卻沒跑。</p>
+        <div class="eyebrow">Current scheduler overview</div>
+        <h2 class="hero-title">A little care for your scheduler garden.</h2>
+        <p class="hero-copy">目前排程狀態與最近執行結果，分開看得清楚。<br>Current scheduler state · execution-window tracking will be added later.</p>
       </div>
       <aside class="mood-card">
         <div class="mood-face" aria-hidden="true">🌷</div>
-        <div>
-          <strong>System mood: Mostly happy</strong>
-          <span>1 failed job needs attention. Everything else looks healthy.</span>
-        </div>
+        <div><strong id="moodTitle">Reading scheduler</strong><span id="moodText">正在取得目前排程狀態。</span></div>
       </aside>
     </section>
-
-    <section class="stats" aria-label="今日統計">
-      <article class="stat total"><div class="stat-label">Scheduled today</div><div class="stat-value">5</div></article>
-      <article class="stat success"><div class="stat-label">Successful</div><div class="stat-value">3</div></article>
-      <article class="stat failed"><div class="stat-label">Failed</div><div class="stat-value">1</div></article>
-      <article class="stat missed"><div class="stat-label">Missed</div><div class="stat-value">1</div></article>
+    <section class="stats" aria-label="目前收集摘要">
+      <article class="stat total"><div class="stat-label">Monitored</div><div class="stat-value" id="count-monitored">—</div></article>
+      <article class="stat success"><div class="stat-label">Last run success</div><div class="stat-value" id="count-success">—</div></article>
+      <article class="stat failed"><div class="stat-label">Last run failed</div><div class="stat-value" id="count-failed">—</div></article>
+      <article class="stat missed"><div class="stat-label">Attention · current status</div><div class="stat-value" id="count-attention">—</div></article>
     </section>
-
+    <p class="summary-note">Attention: Failed / Unknown / Missed jobs. Collection warnings are shown below.</p>
+    <section class="collection-notice" id="collectionNotice" role="status" aria-live="polite" aria-atomic="true">
+      <strong id="collectionTitle">正在讀取 Windows Task Scheduler…</strong>
+      <ul id="collectionDetails"></ul>
+    </section>
+    <noscript><p class="collection-notice error">請啟用 JavaScript 以讀取 /api/jobs；目前沒有載入排程資料。</p></noscript>
     <section class="panel">
       <div class="panel-head">
         <div class="tabs" role="tablist" aria-label="Dashboard views">
-          <button class="tab active" type="button" data-tab="today" role="tab" aria-selected="true">Today</button>
-          <button class="tab" type="button" data-tab="history" role="tab" aria-selected="false">7-day history</button>
+          <button class="tab active" id="todayTab" type="button" data-tab="today" role="tab" aria-controls="todayView" aria-selected="true">Today</button>
+          <button class="tab" id="historyTab" type="button" data-tab="history" role="tab" aria-controls="historyView" aria-selected="false" tabindex="-1">7-day history</button>
         </div>
-        <div class="filters" aria-label="Status filters">
-          <button class="filter active" type="button" data-filter="all">All</button>
-          <button class="filter" type="button" data-filter="failed">Failed</button>
-          <button class="filter" type="button" data-filter="missed">Missed</button>
-          <button class="filter" type="button" data-filter="success">Success</button>
+        <div class="filters" role="group" aria-label="Current status filters">
+          <button class="filter active" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter" type="button" data-filter="FAILED" aria-pressed="false">Failed</button>
+          <button class="filter" type="button" data-filter="READY" aria-pressed="false">Ready</button>
+          <button class="filter" type="button" data-filter="RUNNING" aria-pressed="false">Running</button>
+          <button class="filter" type="button" data-filter="DISABLED" aria-pressed="false">Disabled</button>
+          <button class="filter" type="button" data-filter="UNKNOWN" aria-pressed="false">Unknown</button>
+          <button class="filter" type="button" data-filter="MISSED" aria-pressed="false">Missed</button>
         </div>
       </div>
-
-      <div class="content" id="todayView">
-        <button class="job-row" type="button" data-status="success" data-job="market">
-          <div class="job-main">
-            <span class="job-icon success">✓</span>
-            <div><div class="job-name">InsiderTracker-Market</div><div class="job-sub">Market data sync</div></div>
-          </div>
-          <div class="meta"><span class="cell-label">Scheduled</span><span class="cell-value">06:30</span></div>
-          <div class="meta"><span class="cell-label">Last run</span><span class="cell-value">06:31 · 1m 42s</span></div>
-          <div class="status-cell"><span class="status success">● Success</span></div>
-          <div class="chev">›</div>
-        </button>
-
-        <button class="job-row" type="button" data-status="success" data-job="sync">
-          <div class="job-main">
-            <span class="job-icon success">✓</span>
-            <div><div class="job-name">SyncImport</div><div class="job-sub">Local import pipeline</div></div>
-          </div>
-          <div class="meta"><span class="cell-label">Scheduled</span><span class="cell-value">08:00</span></div>
-          <div class="meta"><span class="cell-label">Last run</span><span class="cell-value">08:04 · 2m 18s</span></div>
-          <div class="status-cell"><span class="status success">● Success</span></div>
-          <div class="chev">›</div>
-        </button>
-
-        <button class="job-row" type="button" data-status="failed" data-job="sec">
-          <div class="job-main">
-            <span class="job-icon failed">!</span>
-            <div><div class="job-name">InsiderTracker-SEC</div><div class="job-sub">SEC filing parser</div></div>
-          </div>
-          <div class="meta"><span class="cell-label">Scheduled</span><span class="cell-value">11:15</span></div>
-          <div class="meta"><span class="cell-label">Last run</span><span class="cell-value">11:16 · 43s</span></div>
-          <div class="status-cell"><span class="status failed">● Failed</span></div>
-          <div class="chev">›</div>
-        </button>
-
-        <button class="job-row" type="button" data-status="missed" data-job="report">
-          <div class="job-main">
-            <span class="job-icon missed">⌁</span>
-            <div><div class="job-name">Daily Report</div><div class="job-sub">Expected run not detected</div></div>
-          </div>
-          <div class="meta"><span class="cell-label">Scheduled</span><span class="cell-value">12:00</span></div>
-          <div class="meta"><span class="cell-label">Last run</span><span class="cell-value">Yesterday 12:01</span></div>
-          <div class="status-cell"><span class="status missed">● Missed</span></div>
-          <div class="chev">›</div>
-        </button>
-
-        <button class="job-row" type="button" data-status="success" data-job="nightly">
-          <div class="job-main">
-            <span class="job-icon success">✓</span>
-            <div><div class="job-name">Nightly Discussion Watch</div><div class="job-sub">Daily summary job</div></div>
-          </div>
-          <div class="meta"><span class="cell-label">Scheduled</span><span class="cell-value">20:45</span></div>
-          <div class="meta"><span class="cell-label">Last run</span><span class="cell-value">Yesterday 20:46</span></div>
-          <div class="status-cell"><span class="status success">● Ready</span></div>
-          <div class="chev">›</div>
-        </button>
-
-        <div class="empty" id="emptyState">No jobs match this filter ♡</div>
+      <div class="content" id="todayView" role="tabpanel" aria-labelledby="todayTab" aria-busy="true">
+        <div id="jobList"></div>
+        <div class="empty" id="emptyState">正在讀取排程…</div>
       </div>
-
-      <div class="history" id="historyView">
-        <div class="history-grid" aria-label="7 day scheduler history">
-          <div></div>
-          <div class="history-head">Mon 15</div><div class="history-head">Tue 16</div><div class="history-head">Wed 17</div><div class="history-head">Thu 18</div><div class="history-head">Fri 19</div><div class="history-head">Sat 20</div><div class="history-head">Today</div>
-
-          <div class="history-name">Market</div>
-          <div class="day-cell success">✓</div><div class="day-cell success">✓</div><div class="day-cell success">✓</div><div class="day-cell success">✓</div><div class="day-cell success">✓</div><div class="day-cell success">✓</div><div class="day-cell success">✓</div>
-
-          <div class="history-name">SyncImport</div>
-          <div class="day-cell success">✓</div><div class="day-cell success">✓</div><div class="day-cell success">✓</div><div class="day-cell failed">!</div><div class="day-cell success">✓</div><div class="day-cell success">✓</div><div class="day-cell success">✓</div>
-
-          <div class="history-name">SEC</div>
-          <div class="day-cell success">✓</div><div class="day-cell success">✓</div><div class="day-cell failed">!</div><div class="day-cell success">✓</div><div class="day-cell success">✓</div><div class="day-cell success">✓</div><div class="day-cell failed">!</div>
-
-          <div class="history-name">Daily Report</div>
-          <div class="day-cell success">✓</div><div class="day-cell success">✓</div><div class="day-cell success">✓</div><div class="day-cell success">✓</div><div class="day-cell success">✓</div><div class="day-cell success">✓</div><div class="day-cell missed">⌁</div>
-
-          <div class="history-name">Nightly Watch</div>
-          <div class="day-cell success">✓</div><div class="day-cell success">✓</div><div class="day-cell success">✓</div><div class="day-cell success">✓</div><div class="day-cell success">✓</div><div class="day-cell success">✓</div><div class="day-cell none">—</div>
-        </div>
-        <div class="legend">
-          <span><i class="dot success"></i>Success</span>
-          <span><i class="dot failed"></i>Failed</span>
-          <span><i class="dot missed"></i>Missed</span>
-          <span>— Not scheduled / not due yet</span>
-        </div>
+      <div class="history" id="historyView" role="tabpanel" aria-labelledby="historyTab" hidden>
+        <div class="empty">History will be available after Stage 3.<br>尚未保存執行歷史。</div>
       </div>
     </section>
-
-    <div class="footer-note">UI prototype · mock data only · backend will be implemented by Codex</div>
+    <div class="footer-note">Local · read-only · dates shown in your local time zone</div>
   </main>
-
   <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
     <section class="drawer-card">
       <div class="drawer-head">
-        <div>
-          <h2 class="drawer-title" id="drawerTitle">Job detail</h2>
-          <div class="drawer-sub" id="drawerSubtitle">Run detail</div>
-        </div>
+        <div><h2 class="drawer-title" id="drawerTitle">Job detail</h2><div class="drawer-sub" id="drawerSubtitle"></div></div>
         <button class="close" id="closeDrawer" type="button" aria-label="Close">×</button>
       </div>
       <div class="detail-grid" id="detailGrid"></div>
-      <div class="log-title">Latest output</div>
-      <pre id="logOutput"></pre>
+      <div class="log-title">Warnings</div>
+      <div class="warnings" id="jobWarnings"></div>
     </section>
   </div>
-
-  <script>
-    const jobs = {
-      market: {
-        name: "InsiderTracker-Market", subtitle: "Today · 06:31", status: "Success",
-        scheduled: "06:30", lastRun: "2026-09-21 06:31:02", nextRun: "2026-09-22 06:30",
-        duration: "1m 42s", result: "0", log: "[06:31:02] Market sync started\n[06:32:44] Imported 184 records\n[06:32:44] Completed successfully"
-      },
-      sync: {
-        name: "SyncImport", subtitle: "Today · 08:04", status: "Success",
-        scheduled: "08:00", lastRun: "2026-09-21 08:04:11", nextRun: "2026-09-22 08:00",
-        duration: "2m 18s", result: "0", log: "[08:04:11] Sync started\n[08:06:29] 36 items updated\n[08:06:29] Completed successfully"
-      },
-      sec: {
-        name: "InsiderTracker-SEC", subtitle: "Today · 11:16", status: "Failed",
-        scheduled: "11:15", lastRun: "2026-09-21 11:16:03", nextRun: "2026-09-22 11:15",
-        duration: "43s", result: "1", log: "[11:16:03] SEC import started\n[11:16:41] ERROR ParseError\nDocument has no transaction row\n[11:16:46] Process exited with code 1"
-      },
-      report: {
-        name: "Daily Report", subtitle: "Expected today · 12:00", status: "Missed",
-        scheduled: "12:00", lastRun: "2026-09-20 12:01:18", nextRun: "2026-09-22 12:00",
-        duration: "—", result: "No run detected", log: "Expected execution window passed.\nNo run was detected for today's schedule."
-      },
-      nightly: {
-        name: "Nightly Discussion Watch", subtitle: "Next due · 20:45", status: "Ready",
-        scheduled: "20:45", lastRun: "2026-09-20 20:46:08", nextRun: "2026-09-21 20:45",
-        duration: "58s", result: "0", log: "Last run completed successfully.\nToday's execution is not due yet."
-      }
-    };
-
-    const tabs = document.querySelectorAll(".tab");
-    const filters = document.querySelectorAll(".filter");
-    const rows = [...document.querySelectorAll(".job-row")];
-    const todayView = document.getElementById("todayView");
-    const historyView = document.getElementById("historyView");
-    const emptyState = document.getElementById("emptyState");
-    const drawer = document.getElementById("drawer");
-    const closeDrawer = document.getElementById("closeDrawer");
-    const detailGrid = document.getElementById("detailGrid");
-    const logOutput = document.getElementById("logOutput");
-    const drawerTitle = document.getElementById("drawerTitle");
-    const drawerSubtitle = document.getElementById("drawerSubtitle");
-
-    tabs.forEach(tab => {
-      tab.addEventListener("click", () => {
-        tabs.forEach(t => { t.classList.remove("active"); t.setAttribute("aria-selected", "false"); });
-        tab.classList.add("active");
-        tab.setAttribute("aria-selected", "true");
-        const isToday = tab.dataset.tab === "today";
-        todayView.style.display = isToday ? "block" : "none";
-        historyView.style.display = isToday ? "none" : "block";
-        document.querySelector(".filters").style.visibility = isToday ? "visible" : "hidden";
-      });
-    });
-
-    filters.forEach(filter => {
-      filter.addEventListener("click", () => {
-        filters.forEach(f => f.classList.remove("active"));
-        filter.classList.add("active");
-        const value = filter.dataset.filter;
-        let visible = 0;
-        rows.forEach(row => {
-          const show = value === "all" || row.dataset.status === value;
-          row.style.display = show ? "grid" : "none";
-          if (show) visible++;
-        });
-        emptyState.style.display = visible ? "none" : "block";
-      });
-    });
-
-    rows.forEach(row => {
-      row.addEventListener("click", () => {
-        const job = jobs[row.dataset.job];
-        if (!job) return;
-        drawerTitle.textContent = job.name;
-        drawerSubtitle.textContent = job.subtitle + " · " + job.status;
-        const details = [
-          ["Scheduled", job.scheduled], ["Last run", job.lastRun],
-          ["Next run", job.nextRun], ["Duration", job.duration],
-          ["Last result", job.result], ["State", job.status]
-        ];
-        detailGrid.innerHTML = details.map(([label, value]) =>
-          '<div class="detail"><small>' + label + '</small><strong>' + value + '</strong></div>'
-        ).join("");
-        logOutput.textContent = job.log;
-        drawer.classList.add("open");
-        closeDrawer.focus();
-      });
-    });
-
-    function hideDrawer() {
-      drawer.classList.remove("open");
-    }
-
-    closeDrawer.addEventListener("click", hideDrawer);
-    drawer.addEventListener("click", event => {
-      if (event.target === drawer) hideDrawer();
-    });
-    document.addEventListener("keydown", event => {
-      if (event.key === "Escape" && drawer.classList.contains("open")) hideDrawer();
-    });
-
-    document.getElementById("refreshBtn").addEventListener("click", () => {
-      const now = new Date();
-      document.getElementById("refreshTime").textContent =
-        String(now.getHours()).padStart(2, "0") + ":" + String(now.getMinutes()).padStart(2, "0");
-    });
-  </script>
+  <script type="module" src="/dashboard.mjs"></script>
 </body>
 </html>

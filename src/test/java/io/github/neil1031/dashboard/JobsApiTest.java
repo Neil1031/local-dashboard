@@ -65,10 +65,12 @@ class JobsApiTest {
                 .andExpect(jsonPath("$.code").value("INVALID_COLLECTOR_OUTPUT"));
     }
 
-    @Test void noMutationEndpointAndPrototypeIsStillServed() throws Exception {
+    @Test void noMutationEndpointAndDashboardAssetsAreServed() throws Exception {
         mvc.perform(post("/api/jobs")).andExpect(status().isMethodNotAllowed());
         mvc.perform(get("/index.html")).andExpect(status().isOk())
                 .andExpect(content().bytes(java.nio.file.Files.readAllBytes(java.nio.file.Path.of("index.html"))));
+        mvc.perform(get("/dashboard.mjs")).andExpect(status().isOk())
+                .andExpect(content().bytes(java.nio.file.Files.readAllBytes(java.nio.file.Path.of("dashboard.mjs"))));
         verifyNoInteractions(collector);
     }
 }
