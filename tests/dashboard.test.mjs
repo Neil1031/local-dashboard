@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { currentStatus, lastStatus, summarize, filterJobs, formatDate, displayValue, readSnapshot } from '../dashboard.mjs';
+import { currentStatus, lastStatus, summarize, filterJobs, formatDate, displayValue, jobDisplayName, jobSubtitle, readSnapshot } from '../dashboard.mjs';
 
 test('current status and previous execution outcome remain independent', () => {
   const jobs = [
@@ -49,7 +49,22 @@ test('runtime ships no scheduler fixtures, hard-coded rows, log or history entri
   const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
   const js = await readFile(new URL('../dashboard.mjs', import.meta.url), 'utf8');
   assert.doesNotMatch(html, /data-job=|day-cell success|id="logOutput"|Today Success|Scheduled today|\d{4}-\d{2}-\d{2}/);
-  assert.doesNotMatch(js, /InsiderTracker|Nightly Discussion|NumberOfMissedRuns|\/api\/jobs\//);
+  assert.doesNotMatch(js, /Nightly Discussion|NumberOfMissedRuns|\/api\/jobs\//);
   assert.match(html, /Observed completed executions/);
   assert.match(js, /fetchJobs\('\/api\/jobs'/);
+});
+
+
+test('friendly job names do not change the original scheduler identity', () => {
+  const known = { name: 'InsiderTracker-SEC', taskPath: '\\' };
+  assert.equal(jobDisplayName(known), 'SEC 內部人交易更新');
+  assert.equal(jobSubtitle(known), 'InsiderTracker-SEC');
+
+  const nested = { name: 'AIStockHunter-Accumulation-Weekly-Check', taskPath: '\\Stocks\\' };
+  assert.equal(jobDisplayName(nested), '籌碼累積每週檢查');
+  assert.equal(jobSubtitle(nested), 'AIStockHunter-Accumulation-Weekly-Check · \\Stocks\\');
+
+  const unknown = { name: 'Other-Task', taskPath: '\\' };
+  assert.equal(jobDisplayName(unknown), 'Other-Task');
+  assert.equal(jobSubtitle(unknown), '\\');
 });

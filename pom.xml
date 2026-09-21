@@ -24,6 +24,16 @@
     </resources>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId>
+        <executions><execution><id>windows-launcher</id><goals><goal>jar</goal></goals>
+          <configuration>
+            <classifier>launcher</classifier>
+            <includes><include>io/github/neil1031/dashboard/launcher/**</include></includes>
+            <archive><manifest><mainClass>io.github.neil1031.dashboard.launcher.WindowsLauncher</mainClass></manifest></archive>
+          </configuration>
+        </execution></executions>
+      </plugin>
+      <plugin>
         <groupId>org.springframework.boot</groupId><artifactId>spring-boot-maven-plugin</artifactId>
         <configuration><mainClass>io.github.neil1031.dashboard.DashboardApplication</mainClass></configuration>
         <executions>
