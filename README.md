@@ -343,8 +343,11 @@ internal `ReceiptFiles.read(List<Path>, executionId)` 合併 primary/fallback，
 目前以這些檔案為 authoritative receipt store；**尚未 ingest 到 SQLite 或顯示在 dashboard**。
 沒有更動 SQLite v1；file schema version 與 DB schema 分開。未知／損壞版本拒讀，不自動重建或覆寫。
 
-沒有 terminal 的 receipt 一律為 **INCOMPLETE / UNKNOWN**，可能是尚未結束、runner crash、失去終端證據；
+已發布 started/process-started、但沒有 terminal 的 receipt 一律為 **INCOMPLETE / UNKNOWN**，可能是尚未結束、runner crash、失去終端證據；
 不能宣稱 SUCCESS、永久 RUNNING 或 MISSED。不要只憑 elapsed time 自動 rerun；先查 child 自身結果。
+只有 claimed directory 或 `.pending-*`、沒有任何正式 phase 檔案時，代表 **no published receipt evidence**；
+single-root reader 回 `Optional.empty()`，不阻擋其他 fallback root。任何已發布 phase 的 corruption／版本／identity／lifecycle 錯誤仍會拒讀，
+即使另一 root 有有效 receipt 也不忽略錯誤。
 詳細 crash、去重、format evolution、retention 與 privacy 策略見 [`docs/STAGE-5A.md`](docs/STAGE-5A.md)。
 
 封裝 runner 的 Windows test-only acceptance（不啟動 Spring，不使用 Task Scheduler）：

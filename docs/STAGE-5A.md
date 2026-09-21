@@ -174,7 +174,12 @@ If it dies after the child finishes but before terminal publication, completion 
 If it dies before the first durable snapshot or both stores are unavailable, there may be no receipt.
 No receipt is not proof of no execution or MISSED.
 
-On restart, read both configured spools, coalesce by execution ID, preserve originals and classify missing terminal as INCOMPLETE.
+On restart, read both configured spools, coalesce by execution ID, preserve originals and classify published nonterminal evidence without a terminal as INCOMPLETE.
+An execution directory without any of the three published phase files is **no published receipt evidence**:
+single-root read returns Optional.empty(), whether the directory is empty or contains only pending temp files.
+It does not become an INCOMPLETE execution receipt and does not block a valid receipt in another root.
+Every published phase is still parsed and validated; corrupt JSON, unsupported schema, identity conflicts or invalid lifecycle
+fail closed even when another root has valid evidence. Empty-claim handling does not catch or suppress those errors.
 Do not use a stale-age threshold alone to declare a dead process or rerun work. Inspect application-specific output/state first;
 runner crash does not prove its child was stopped. A manual retry gets a new ID and must account for business idempotency.
 Corrupt/unsupported/conflicting evidence is an explicit read error, not silently replaced by success.
@@ -226,7 +231,7 @@ git diff --check
 Verified environment: Windows, OpenJDK 25.0.2 (Java 21 compilation target), Maven Wrapper 3.9.11,
 Node 24.19.0, Playwright 1.62.1, installed Edge and Python 3.11.
 
-| Verification | Final result |
+| Verification | Initial implementation result (before Manager fallback fix) |
 | --- | --- |
 | Maven verify | **98 passed**, 0 failures/errors/skips; 60 existing cases + 38 runner cases; BUILD SUCCESS in 19.135 s |
 | Node mapping / Edge fixture regression | **30 passed**, 0 failures/skips |
@@ -272,6 +277,48 @@ Local evidence (not committed):
 - `target/stage-5a/runner-5tj65213/verification.json` and test-only lifecycle snapshots/markers.
 - `target/stage-3b/live-te8u_jzl/receipt.json`, isolated DB, application/browser logs.
 - `target/stage-2/live-desktop.png`, `target/stage-3b/live-history-320.png` and the existing browser suite's other screenshots.
+
+## Manager Review follow-up: empty primary claim recovery
+
+Baseline: `2db9bd34c7b4998b9b58df53f8f2deca0b1fb108`. This revision only fixes receipt recovery; merge approval is still pending.
+
+An execution directory with no published phase files, including one containing only `.pending-*`, now returns `Optional.empty()`.
+This lets the multi-root reader recover a valid fallback receipt after the primary claim succeeded but its first publication failed.
+Published STARTED-only evidence still returns INCOMPLETE / UNKNOWN. Published invalid JSON, unsupported schema, identity conflicts
+and invalid lifecycle evidence still fail closed, even when another root contains a valid terminal receipt.
+
+Ten additional parameterized test cases cover empty/pending-only single-root and primary/fallback reads, STARTED-only recovery,
+corruption at each of the three published phase paths, and first-publication failure with child exits 0 and 7.
+The publication-failure test performs a real claim, injects IOException at the first write, runs a real child, verifies its marker and
+fallback terminal, then reads both roots through the real reader. This is controlled I/O fault injection, not a physical disk-failure test.
+Before the fix, these tests reproduced six `Incomplete execution without readable receipt` errors; after the fix all pass.
+
+Revalidation completed 2026-09-21, with the packaged runner report at 15:17:52 +08:00 and dashboard report at 15:18:19 +08:00:
+
+| Verification | Follow-up result |
+| --- | --- |
+| Runner unit/integration tests | **48 passed**, 0 failures/errors/skips (12 ReceiptFilesTest + 36 RunnerTest) |
+| Full Maven verify | **108 passed**, 0 failures/errors/skips; BUILD SUCCESS |
+| Node / Edge fixture regression | **30 passed**, 0 failures/skips |
+| Packaged runner acceptance | **14 scenarios passed** |
+| Actual packaged Today / History browser acceptance | **2 passed**, source DB unchanged, ten reads leave DB bytes unchanged, task definitions unchanged |
+| Scope / whitespace | Only reader, runner tests and documentation changed; `git diff --check` passed |
+
+Commands used the same Java/Node environment documented above:
+
+```powershell
+& ./mvnw.cmd -B '-Dtest=ReceiptFilesTest,RunnerTest' test
+& ./mvnw.cmd -B verify
+& $stage5Node --test tests/dashboard.test.mjs tests/history.test.mjs tests/browser.test.mjs tests/history-browser.test.mjs
+python scripts/verify-runner.py --java "$env:JAVA_HOME/bin/java.exe"
+python scripts/verify-history-ui-live.py --source-db .tools/stage-3b-source/observed.db --java "$env:JAVA_HOME/bin/java.exe" --node $stage5Node
+git diff --check
+```
+
+Ignored local evidence: `.tools/stage-5a-fallback-{red,runner-tests,build,browser,packaged,dashboard-live}.log`,
+`target/stage-5a/runner-4zrj0bkq/verification.json`, and `target/stage-3b/live-w_j8sagm/receipt.json` plus `browser.log`.
+No Windows scheduled task changes, Stage 4 behavior changes, UI changes, SQLite schema changes or Stage 5B implementation.
+The **Stage 5A implementation Gate remains 15/15 PASS**; Manager Review must still approve merge.
 
 ## Gate result
 

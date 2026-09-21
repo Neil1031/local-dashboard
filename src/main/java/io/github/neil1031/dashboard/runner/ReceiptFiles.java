@@ -49,7 +49,7 @@ public final class ReceiptFiles {
         } finally { Files.deleteIfExists(pending); }
     }
 
-    /** Read one logical execution after restart. A missing terminal never means RUNNING/SUCCESS. */
+    /** Read published evidence only. An empty/pending-only claim is not an incomplete execution receipt. */
     public static Optional<ExecutionReceipt> read(Path root, String executionId) throws IOException {
         validateId(executionId);
         Path directory = root.resolve(executionId);
@@ -71,8 +71,9 @@ public final class ReceiptFiles {
                 throw new IOException("Conflicting execution identity");
             latest = receipt;
         }
-        if (latest == null) throw new IOException("Incomplete execution without readable receipt");
-        return Optional.of(latest);
+        // A failed first publication can leave only the claim or pending files in this root.
+        // No evidence here must not hide another root's valid fallback receipt.
+        return Optional.ofNullable(latest);
     }
 
     /** Coalesce primary/fallback copies by execution ID. Never count lifecycle snapshots as new runs. */

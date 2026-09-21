@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import static org.assertj.core.api.Assertions.*;
+import static org.mockito.Mockito.*;
 import static io.github.neil1031.dashboard.runner.ExecutionReceipt.*;
 
 @Timeout(45)
@@ -130,6 +131,43 @@ class RunnerTest {
         assertThat(Files.readString(marker)).isEqualTo("child-executed");
         assertThat(saved("fallback").exitCode()).isEqualTo(code);
         assertThat(diagnostics.toString(StandardCharsets.UTF_8)).contains("RUNNER_PRIMARY_UNAVAILABLE", "RUNNER_FALLBACK_ACTIVE");
+    }
+
+    @ParameterizedTest @ValueSource(ints = {0, 7})
+    void firstPublicationFailureAfterRealClaimStillExecutesAndFallbackCanBeRead(int code) throws Exception {
+        Path primary = temp.resolve("receipts"), fallback = temp.resolve("fallback"), marker = temp.resolve("marker");
+        Path file = config(fixture("marker", marker.toString(), Integer.toString(code)));
+        var failures = new java.util.concurrent.atomic.AtomicInteger();
+        // Inject only publication failure; directory claims, fallback writes and child execution are real.
+        // No production fault-injection switch or runner/storage refactor is needed.
+        try (var fault = mockStatic(ReceiptFiles.class, invocation -> {
+            Object result = invocation.callRealMethod();
+            if (invocation.getMethod().getName().equals("claim") && primary.equals(invocation.getArgument(0))) {
+                ReceiptFiles claimed = spy((ReceiptFiles) result);
+                doAnswer(write -> {
+                    ExecutionReceipt receipt = write.getArgument(0);
+                    assertThat(receipt.phase()).isEqualTo(Phase.STARTED);
+                    assertThat(primary.resolve(receipt.executionId())).isDirectory();
+                    failures.incrementAndGet();
+                    throw new java.io.IOException("Injected first publication failure");
+                }).when(claimed).write(any(ExecutionReceipt.class));
+                return claimed;
+            }
+            return result;
+        })) {
+            assertThat(run(file)).isEqualTo(code);
+        }
+        assertThat(failures.get()).isEqualTo(1);
+        assertThat(Files.readString(marker)).isEqualTo("child-executed");
+        assertThat(diagnostics.toString(StandardCharsets.UTF_8)).contains("RUNNER_PRIMARY_UNAVAILABLE", "RUNNER_FALLBACK_ACTIVE");
+        Path emptyClaim = executions("receipts").getFirst();
+        try (var files = Files.list(emptyClaim)) { assertThat(files.toList()).isEmpty(); }
+        var terminal = saved("fallback");
+        String id = emptyClaim.getFileName().toString();
+        assertThat(terminal.executionId()).isEqualTo(id);
+        assertThat(terminal.exitCode()).isEqualTo(code);
+        assertThat(terminal.phase()).isEqualTo(Phase.TERMINAL);
+        assertThat(ReceiptFiles.read(List.of(primary, fallback), id)).contains(terminal);
     }
 
     @Test void bothStoresUnavailableStillExecutesAndLeavesSafeDiagnostic() throws Exception {
