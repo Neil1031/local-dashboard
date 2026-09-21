@@ -1,0 +1,23 @@
+{
+  "at": "2026-09-22T02:16:12.9763865+08:00",
+  "privateConfigRemoved": false,
+  "diagnosticFilesDeleted": true,
+  "deletion": "Automatic approval review rejected the deletion command: blocked by policy. Command did not execute. Candidate retained and marked UNREFERENCED.",
+  "diagnosticDeleted": true,
+  "formalManualRequests": 0,
+  "liveReceiptCount": 0,
+  "candidateUnreferenced": true,
+  "candidateFilesRetained": 219,
+  "releaseRemoved": false,
+  "candidate": {
+    "taskReferences": [],
+    "path": "[RUNNER_ROOT]",
+    "physicalPathMatches": true,
+    "noReparsePoints": true,
+    "allCopiedHashesStillMatch": true,
+    "driveFormat": "NTFS",
+    "status": "UNREFERENCED",
+    "driveType": "Fixed",
+    "candidateFileCount": 219
+  }
+}

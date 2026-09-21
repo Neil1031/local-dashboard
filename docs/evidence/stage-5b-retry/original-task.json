@@ -1,0 +1,96 @@
+{
+  "metadata": {
+    "TaskName": "AIStockHunter-Accumulation-Weekly-Check",
+    "TaskPath": "\\",
+    "Enabled": true,
+    "State": "Ready",
+    "Principal": {
+      "LogonType": 3,
+      "UserId": "[USER]",
+      "RunLevel": 0
+    },
+    "Actions": [
+      {
+        "Execute": "[WINDOWS]\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "Arguments": "-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File \"[WORKSPACE]\\ai-stock-hunter\\tools\\run_stock_task_hidden.ps1\" -Kind weekly-check -NoNotification",
+        "WorkingDirectory": null
+      }
+    ],
+    "LastRunTime": "2026-09-22T00:11:50.0000000+08:00",
+    "LastTaskResult": 2147942402,
+    "NextRunTime": "2026-09-25T22:00:00.0000000+08:00",
+    "CapturedAt": "2026-09-22T02:03:05.9316596+08:00"
+  },
+  "settings": {
+    "DisallowStartIfOnBatteries": "false",
+    "StopIfGoingOnBatteries": "false",
+    "ExecutionTimeLimit": "PT10M",
+    "MultipleInstancesPolicy": "IgnoreNew",
+    "RestartOnFailure": {
+      "Count": "2",
+      "Interval": "PT5M"
+    },
+    "StartWhenAvailable": "true",
+    "IdleSettings": {
+      "Duration": "PT10M",
+      "WaitTimeout": "PT1H",
+      "StopOnIdleEnd": "true",
+      "RestartOnIdle": "false"
+    },
+    "UseUnifiedSchedulingEngine": "true"
+  },
+  "triggers": {
+    "CalendarTrigger": {
+      "StartBoundary": "2026-09-18T22:00:00+08:00",
+      "ScheduleByWeek": {
+        "WeeksInterval": "1",
+        "DaysOfWeek": {
+          "Friday": null
+        }
+      }
+    }
+  },
+  "backupFileHashes": [
+    {
+      "Name": "Actions.xml",
+      "Hash": "8CFB33801885FAAADA11280473391D7877B6C2503EE2A5C1A707A179F104B03A"
+    },
+    {
+      "Name": "all-tasks-before.json",
+      "Hash": "25BCD5F273EFF6B530E927E05AA22762C6DFB3531C576CE06B427D1BBBEE6FA2"
+    },
+    {
+      "Name": "original-metadata.json",
+      "Hash": "D2A0CFD533EEF3F78BFBFC67AA7E963702E9E149EE168805C3FB3842F3E83E70"
+    },
+    {
+      "Name": "original.sddl.txt",
+      "Hash": "B0009463B81FBF8226801FF458EA586EB46021BB485E9C6716ADA956A802E81C"
+    },
+    {
+      "Name": "original.xml",
+      "Hash": "71ED789B5639D1C0127D5D9969F45729EDEE86EBE47A59E369472CCA05C4E2E1"
+    },
+    {
+      "Name": "Principals.xml",
+      "Hash": "8CD1C6E624F4A023DEFE20752ECF94BABDC583D7E4E94C4B36A9431D817EA93B"
+    },
+    {
+      "Name": "RegistrationInfo.xml",
+      "Hash": "D39B4B733FDF0C5DCB6EA773F8802254693896B0D45C4BFF030E8C9BE1E6D3CB"
+    },
+    {
+      "Name": "Settings.xml",
+      "Hash": "66608552C29C52B4980E743246A87471BD266648615A7B7285FF7C7D0247B80B"
+    },
+    {
+      "Name": "Triggers.xml",
+      "Hash": "40E6178B252464A4F53052A3B289048D7A8F113B66165AB3D932D73D0144C7B9"
+    }
+  ],
+  "fullXmlTextHash": "2D4183FDB670188DCAEDEE657366401DE7E69F2C8ACCD0E0F545A514FFC07E67",
+  "aclHash": "B0009463B81FBF8226801FF458EA586EB46021BB485E9C6716ADA956A802E81C",
+  "finalExactXml": true,
+  "finalExactAcl": true,
+  "lastTaskResultMeaning": "0x80070002 is unchanged prior-run metadata, not an execution in this attempt"
+}

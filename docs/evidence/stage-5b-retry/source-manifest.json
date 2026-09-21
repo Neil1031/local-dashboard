@@ -1,0 +1,204 @@
+{
+  "exportedAt": "2026-09-21T18:22:40.320290+00:00",
+  "sources": [
+    {
+      "source": "[PRIVATE_EVIDENCE]\\deployment.json",
+      "rawSha256": "9308DF45FD59E26403C589AE9ED595B8F85E2D00961FC4E14DD37F5B32B144B6",
+      "bytes": 61605,
+      "handling": "sanitized structured evidence"
+    },
+    {
+      "source": "[PRIVATE_EVIDENCE]\\all-tasks-before.json",
+      "rawSha256": "25BCD5F273EFF6B530E927E05AA22762C6DFB3531C576CE06B427D1BBBEE6FA2",
+      "bytes": 38307,
+      "handling": "sanitized structured evidence"
+    },
+    {
+      "source": "[PRIVATE_EVIDENCE]\\all-tasks-latest.json",
+      "rawSha256": "863E6D8DA548FB74B2E8A2B76A19C8CF9FBDC8DC8FD836564E72182C6BCEBB75",
+      "bytes": 38309,
+      "handling": "sanitized structured evidence"
+    },
+    {
+      "source": "[PRIVATE_EVIDENCE]\\preflight-result.json",
+      "rawSha256": "9F8732CAE3FE88ACC87B857820EE2FF371B727A0C19D9BCE83A72BADFABFC8A2",
+      "bytes": 669,
+      "handling": "sanitized structured evidence"
+    },
+    {
+      "source": "[PRIVATE_EVIDENCE]\\final-audit.json",
+      "rawSha256": "487533B72B58ED1F133DDA30BD75BC02CB86B457218211D0B4CF1BF06423F907",
+      "bytes": 1739,
+      "handling": "sanitized structured evidence"
+    },
+    {
+      "source": "[PRIVATE_EVIDENCE]\\cleanup.json",
+      "rawSha256": "DA05A19042FFEC79C649884B1972565D00EBF9947331E11AC2506EE98F72FE10",
+      "bytes": 465,
+      "handling": "sanitized structured evidence"
+    },
+    {
+      "source": "[PRIVATE_EVIDENCE]\\preflight-guard-test.json",
+      "rawSha256": "1BF7B26EC7E347D29C5EA2BDCE0B4AB42BAF7A37D71097BD5403CA5CB3218143",
+      "bytes": 231,
+      "handling": "sanitized structured evidence"
+    },
+    {
+      "source": "[PRIVATE_EVIDENCE]\\failed-preflight-guard-test.json",
+      "rawSha256": "EC127C09ACF138B5A88E0EBC0B71A3D728B0052FB8EB066E2FADDDFD5BBA7FA7",
+      "bytes": 149,
+      "handling": "sanitized structured evidence"
+    },
+    {
+      "source": "[PRIVATE_EVIDENCE]\\candidate-retained.json",
+      "rawSha256": "506B1963F23AE2846D9D2EAA9EE6C04609386DC7F7929C34569FB5895F2E20DD",
+      "bytes": 293,
+      "handling": "sanitized structured evidence"
+    },
+    {
+      "source": "[PRIVATE_EVIDENCE]\\original-metadata.json",
+      "rawSha256": "D2A0CFD533EEF3F78BFBFC67AA7E963702E9E149EE168805C3FB3842F3E83E70",
+      "bytes": 751,
+      "handling": "sanitized structured evidence"
+    },
+    {
+      "source": "[PRIVATE_EVIDENCE]\\backup-hashes.json",
+      "rawSha256": "DF63B7571E953D636BEC0647C7FE61454CDEBB9AE24E61996F6DEDA40EB0545E",
+      "bytes": 1116,
+      "handling": "sanitized structured evidence"
+    },
+    {
+      "source": "[PRIVATE_EVIDENCE]\\original.xml",
+      "rawSha256": "71ED789B5639D1C0127D5D9969F45729EDEE86EBE47A59E369472CCA05C4E2E1",
+      "bytes": 3870,
+      "handling": "private only; XML section hashes and selected task fields"
+    },
+    {
+      "source": "[PRIVATE_EVIDENCE]\\original.sddl.txt",
+      "rawSha256": "B0009463B81FBF8226801FF458EA586EB46021BB485E9C6716ADA956A802E81C",
+      "bytes": 244,
+      "handling": "private only; ACL digest and equality assertion"
+    },
+    {
+      "source": "[PRIVATE_EVIDENCE]\\drift-refresh-cache.json",
+      "rawSha256": "612EDB63D1E73616A5AB90C2684BFFD071008109AB8BC48202A37EDC6321C44C",
+      "bytes": 685,
+      "handling": "sanitized structured evidence"
+    },
+    {
+      "source": "[PRIVATE_EVIDENCE]\\drift-refresh-cache.xml",
+      "rawSha256": "62DB855330DD6F7167D59D889F830D461134AC425A0B2CCD27020B49EC6C0D4A",
+      "bytes": 3910,
+      "handling": "only selected drift task fields; raw XML excluded"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.HistoryApiTest.xml",
+      "rawSha256": "C52AEF8626D4A52F67B50A7D54CC5F818E6D9C6289C7C7FC163FEC75371AC92B",
+      "bytes": 93460,
+      "handling": "JUnit names/counts only; system properties and output excluded"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.HistoryApplicationRestartTest.xml",
+      "rawSha256": "D24A20E3B5979E9F888834880F2D82EF94B1868C623A7C31F6AEDF4861927700",
+      "bytes": 23524,
+      "handling": "JUnit names/counts only; system properties and output excluded"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.HistoryFailureApiTest.xml",
+      "rawSha256": "E23FE42C3AA6AAC6BB782726DBF805E97D5088F095583758EECBE73723366077",
+      "bytes": 95510,
+      "handling": "JUnit names/counts only; system properties and output excluded"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.HistoryRepositoryTest.xml",
+      "rawSha256": "C80FB4D22C17D3C006040BFB83BFAFCD92C774E9F0BFAF4B4238143888662860",
+      "bytes": 25690,
+      "handling": "JUnit names/counts only; system properties and output excluded"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.JobNormalizerTest.xml",
+      "rawSha256": "1803E35F56BDDC7F091CC15AA5126004A5BAC95D72AB183C9E5B0D3F2A356882",
+      "bytes": 25077,
+      "handling": "JUnit names/counts only; system properties and output excluded"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.JobsApiTest.xml",
+      "rawSha256": "60A257E3F576DE767D0593F1EC3041FA6A58FC4000F5C74FF91104CAD88F9E34",
+      "bytes": 25222,
+      "handling": "JUnit names/counts only; system properties and output excluded"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.JobServiceTest.xml",
+      "rawSha256": "498E46871C6D694B20F2B830DAA530599C61EEDF188E601C8A9AB9B7AF545644",
+      "bytes": 22391,
+      "handling": "JUnit names/counts only; system properties and output excluded"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.launcher.ConfigBootstrapTest.xml",
+      "rawSha256": "038FE01F939952552C4F98BB658981C2D86F5329CF7F29A8A5D11EE9370FF305",
+      "bytes": 22674,
+      "handling": "JUnit names/counts only; system properties and output excluded"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.launcher.SafeStopTest.xml",
+      "rawSha256": "32DB051DCAE6BDA56977F505D6DE3D6287F72B44847AF53EB3679BAFCCC37C68",
+      "bytes": 23886,
+      "handling": "JUnit names/counts only; system properties and output excluded"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.launcher.WindowsLauncherTest.xml",
+      "rawSha256": "FD2FF8B1ABF3EC6620A081DD84CCAEB05ED956286CAD7D62502709D0438F6E2F",
+      "bytes": 22540,
+      "handling": "JUnit names/counts only; system properties and output excluded"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.LauncherStatusControllerTest.xml",
+      "rawSha256": "F8B666DB312F7E9418F7C14446708F449FC6A533563B81E08316AAC8B0EFDFC5",
+      "bytes": 22199,
+      "handling": "JUnit names/counts only; system properties and output excluded"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.PowerShellCollectorTest.xml",
+      "rawSha256": "41FDCAD0BE6B66980638FDB003E6B15240C2C114E698284C01A7FFC8D261BA19",
+      "bytes": 22920,
+      "handling": "JUnit names/counts only; system properties and output excluded"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.runner.ReceiptFilesTest.xml",
+      "rawSha256": "5F40ACB30F2091C1BBAE38A89E44C26A7644553F8D9D14EA2886C42271356EB3",
+      "bytes": 23978,
+      "handling": "JUnit names/counts only; system properties and output excluded"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.runner.RunnerTest.xml",
+      "rawSha256": "92DF845F13500AB2AFF0369236D5223FE8923A61D6729DA84FAE3858F8DA88FF",
+      "bytes": 27640,
+      "handling": "JUnit names/counts only; system properties and output excluded"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.TaskSelectionTest.xml",
+      "rawSha256": "9DA1EA025A177E6DAC9AF3C4C0261632D04BC198B265C025B161792CAD90B02C",
+      "bytes": 22503,
+      "handling": "JUnit names/counts only; system properties and output excluded"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\.tools\\stage-5b-retry-package.log",
+      "rawSha256": "59BA7FD2A77AA6E857D36E2F52587316BF80601229D44CEC0EBB009167F50D83",
+      "bytes": 155355,
+      "handling": "selected test result lines only; raw log excluded"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\.tools\\stage-5b-retry-frontend.log",
+      "rawSha256": "B53A6FFF6F591504C90EE745BC2856861E02A65BC5F336E381386C6A62F0E535",
+      "bytes": 2946,
+      "handling": "selected test result lines only; raw log excluded"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\.tools\\stage-5b-retry-root-tests.log",
+      "rawSha256": "AFCD60201CC56EFCBA7FAFF31E68BCA9DCD022D128B381657ED80A9EBECAC4C9",
+      "bytes": 1173,
+      "handling": "selected test result lines only; raw log excluded"
+    }
+  ],
+  "note": "Hashes identify private originals, not sanitized exports. No raw config/task XML/log/receipt is published."
+}

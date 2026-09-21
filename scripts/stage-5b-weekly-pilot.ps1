@@ -1,7 +1,8 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory=$true)][ValidateSet('Backup','Prepare','Apply','Restore','Inspect')][string]$Mode,
-    [Parameter(Mandatory=$true)][string]$BackupDirectory
+    [Parameter(Mandatory=$true)][string]$BackupDirectory,
+    [string]$RunnerRoot
 )
 # Deliberately restricted to the single Manager-approved pilot. Never runs a task.
 $ErrorActionPreference = 'Stop'
@@ -42,11 +43,16 @@ function Get-AllHashes {
     } | Sort-Object {$_.key})
 }
 function Assert-OtherTasks {
-    $before = @(Get-Content -LiteralPath "$backup/all-tasks-before.json" -Raw | ConvertFrom-Json)
+    $before = Get-Content -LiteralPath "$backup/all-tasks-before.json" -Raw | ConvertFrom-Json
     $after = Get-AllHashes
     $old = @($before | Where-Object key -ne ($pilotPath+$pilotName) | ForEach-Object { $_.key+'|'+$_.sha256 })
     $new = @($after | Where-Object key -ne ($pilotPath+$pilotName) | ForEach-Object { $_.key+'|'+$_.sha256 })
-    if (@(Compare-Object $old $new).Count) { throw 'Another task definition differs from the saved baseline; no other task will be modified.' }
+    $diff=@(Compare-Object $old $new | Select-Object InputObject,SideIndicator)
+    $checks=@()
+    if (Test-Path "$backup/checkpoints.json") { $checks=@(Get-Content "$backup/checkpoints.json" -Raw | ConvertFrom-Json) }
+    $checks+=@{mode=$Mode;at=[DateTimeOffset]::Now.ToString('o');otherTaskCount=$after.Count-1;differences=$diff}
+    Save-Json "$backup/checkpoints.json" $checks
+    if ($diff.Count) { throw 'Another task definition differs from the saved baseline; no other task will be modified.' }
     Save-Json "$backup/all-tasks-latest.json" $after
     return $after.Count
 }
@@ -89,6 +95,7 @@ if ($Mode -eq 'Backup') {
     $service.Connect()
     $folder = $service.GetFolder($pilotPath)
     Assert-Idle
+    if ([string]$task.State -ne 'Ready' -or !$task.Settings.Enabled) { throw 'Backup requires the original task to be Ready and Enabled' }
     $original = Export-ScheduledTask -TaskPath $pilotPath -TaskName $pilotName
     if ($original -cne [string]$folder.GetTask($pilotName).Xml) { throw 'Task changed during backup' }
     [IO.File]::WriteAllText("$backup/original.xml",$original,[Text.Encoding]::Unicode)
@@ -145,20 +152,25 @@ if ($Mode -eq 'Prepare') {
     $cwd = [string]$action.WorkingDirectory
     if (!$cwd) { $cwd = Join-Path $env:SystemRoot 'System32' }
     if (![IO.Path]::IsPathRooted($cwd)) { throw 'Unreviewed relative working directory' }
-    $dashboardHome = Join-Path $env:LOCALAPPDATA 'LocalDashboard'
-    $config = Join-Path $dashboardHome 'config/runner.json'
+    if (!$RunnerRoot) { throw 'Prepare requires an explicit durable -RunnerRoot' }
+    $validationText = & python -B "$PSScriptRoot/validate-runner-root.py" --root $RunnerRoot --repo $repo --create
+    if ($LASTEXITCODE -ne 0) { throw 'RunnerRoot rejected before deployment' }
+    $rootValidation = $validationText | ConvertFrom-Json
+    $durableRoot = $rootValidation.root
+    $config = Join-Path $durableRoot 'config/runner.json'
     if (Test-Path -LiteralPath $config) { throw 'Existing private runner.json must not be overwritten' }
     $sourceJar = Join-Path $repo 'target/local-dashboard-0.1.0-runner.jar'
     $runtime = Join-Path $repo 'dist/LocalDashboard/runtime'
     if (!(Test-Path -LiteralPath "$runtime/bin/java.exe")) { throw 'Build the self-contained Windows image first' }
     $jarHash = (Get-FileHash -LiteralPath $sourceJar).Hash
-    $release = Join-Path $dashboardHome ('runner/releases/pilot-' + $jarHash.Substring(0,16).ToLowerInvariant())
+    $release = Join-Path $durableRoot ('releases/' + $jarHash.ToLowerInvariant())
     if (Test-Path -LiteralPath $release) { throw 'Release already exists; never overwrite a deployed runtime' }
     New-Item -ItemType Directory -Path $release | Out-Null
     Copy-Item -LiteralPath $runtime -Destination "$release/runtime" -Recurse
     Copy-Item -LiteralPath $sourceJar -Destination "$release/runner.jar"
-    $configuration = [ordered]@{schemaVersion=1;receiptDirectory=(Join-Path $dashboardHome 'data/runner-receipts');
-        fallbackDirectory=(Join-Path $dashboardHome 'runner-fallback');profiles=@{}}
+    New-Item -ItemType Directory -Path (Split-Path $config -Parent) -Force | Out-Null
+    $configuration = [ordered]@{schemaVersion=1;receiptDirectory=(Join-Path $durableRoot 'receipts');
+        fallbackDirectory=(Join-Path $durableRoot 'fallback');profiles=@{}}
     $configuration.profiles[$profileId] = [ordered]@{jobId=$profileId;executable=[string]$action.Command;args=$childArgs;workingDirectory=$cwd}
     # Create-only private configuration; no shell command construction in the child profile.
     $stream = [IO.File]::Open($config, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, [IO.FileShare]::None)
@@ -177,7 +189,13 @@ if ($Mode -eq 'Prepare') {
     $releaseHashes = @(Get-ChildItem -LiteralPath $release -Recurse -File | ForEach-Object {
         @{path=$_.FullName;sha256=(Get-FileHash -LiteralPath $_.FullName).Hash}
     })
-    Save-Json $manifestPath ([ordered]@{profileId=$profileId;config=$config;configHash=(Get-FileHash $config).Hash;
+    foreach ($file in $releaseHashes) {
+        $relative=$file.path.Substring($release.Length).TrimStart('\','/')
+        $source=if ($relative -eq 'runner.jar') {$sourceJar} else {Join-Path $runtime $relative.Substring(8)}
+        if ((Get-FileHash -LiteralPath $source).Hash -ne $file.sha256) { throw 'Post-copy source/deployment hash mismatch' }
+    }
+    Save-Json $manifestPath ([ordered]@{runnerRoot=$durableRoot;rootValidation=$rootValidation;requiresSchedulerPreflight=$true;
+        profileId=$profileId;config=$config;configHash=(Get-FileHash $config).Hash;
         release=$release;java=$java;jar=$jar;releaseHashes=$releaseHashes;
         originalHash=(Hash-Text $original);desiredFileHash=(Get-FileHash "$backup/runner-action.xml").Hash;
         childWorkingDirectory=$cwd;originalWorkingDirectory=[string]$metadata.Actions[0].WorkingDirectory})
@@ -194,12 +212,18 @@ if ((Without-Actions $desired) -cne (Without-Actions $original)) { throw 'Non-Ac
 if ($Mode -eq 'Apply') {
     if (Test-Path -LiteralPath "$backup/live-result.json") {
         $live = Get-Content -LiteralPath "$backup/live-result.json" -Raw | ConvertFrom-Json
-        if ($live.newReceiptCount -eq 0 -and $live.lastTaskResult -ne 0) {
+        if ($live.lastTaskResult -ne 0 -or $live.gate -eq 'FAILED') {
             throw 'This candidate failed live launch and was rolled back. Preserve evidence; further attempts need a new reviewed scope.'
         }
     }
     Assert-Idle
     if ($current -cne $original) { throw 'Apply requires exact original definition' }
+    if (!$manifest.requiresSchedulerPreflight) { throw 'Legacy deployment cannot be applied; prepare a durable deployment and Scheduler preflight' }
+    $rootCheck=& python -B "$PSScriptRoot/validate-runner-root.py" --root $manifest.runnerRoot --repo $repo
+    if ($LASTEXITCODE -ne 0) { throw 'Durable deployment path no longer valid' }
+    $preflight=Get-Content "$backup/preflight-result.json" -Raw | ConvertFrom-Json
+    if ($preflight.gate -ne 'PASSED' -or !$preflight.diagnosticDeleted -or $preflight.deploymentManifestHash -ne (Get-FileHash $manifestPath).Hash -or
+        $preflight.baselineXmlHash -ne (Hash-Text $original)) { throw 'Matching Scheduler-context preflight is required before Apply' }
     if ((Get-FileHash $manifest.config).Hash -ne $manifest.configHash) { throw 'Private profile changed' }
     foreach ($file in $manifest.releaseHashes) { if ((Get-FileHash -LiteralPath $file.path).Hash -ne $file.sha256) { throw 'Deployed runtime/JAR changed' } }
     $null = Assert-OtherTasks

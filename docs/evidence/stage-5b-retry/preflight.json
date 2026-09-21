@@ -1,0 +1,29 @@
+{
+  "gate": "FAILED",
+  "deploymentManifestHash": "9308DF45FD59E26403C589AE9ED595B8F85E2D00961FC4E14DD37F5B32B144B6",
+  "baselineXmlHash": "2D4183FDB670188DCAEDEE657366401DE7E69F2C8ACCD0E0F545A514FFC07E67",
+  "diagnosticDeleted": true,
+  "temporaryFilesDeleted": true,
+  "manualRequests": 0,
+  "context": {
+    "noRestart": true,
+    "triggerless": true,
+    "directJava": true,
+    "interactiveToken": true,
+    "sameEngine": true,
+    "argumentsExact": true,
+    "leastPrivilege": true,
+    "samePrincipal": false
+  },
+  "error": "Diagnostic readback/context mismatch",
+  "weeklyExactOriginal": true,
+  "taskCount": 234,
+  "taskDifferences": [],
+  "samePrincipalMeaning": "Literal COM UserId vs baseline XML UserId comparison only; identifiers were not canonicalized to SID",
+  "identityMismatchProven": false,
+  "javaStarted": false,
+  "runnerStarted": false,
+  "receiptCount": 0,
+  "executionEvidence": "NOT RUN",
+  "limitation": "Raw diagnostic UserId readback/XML was not retained before diagnostic deletion; the boolean does not prove a different Windows identity"
+}
