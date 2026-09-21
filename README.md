@@ -1,7 +1,7 @@
 # Local Dashboard
 
-Windows Task Scheduler 的本機唯讀觀測服務。目前只完成 `PLAN.md` 的 **Stage 0 + Stage 1**。
-`index.html` 是原始 UI 基準，頁面仍全部使用 mock data；API 尚未接入 UI。
+Windows Task Scheduler 的本機唯讀觀測服務。目前完成 **Stage 0 + Stage 1 + Stage 2**。
+`index.html` 保留原有粉色 UI，透過 `dashboard.mjs` 讀取真實 `/api/jobs`；runtime 不含 mock scheduler data。
 
 ## 環境與啟動
 
@@ -20,7 +20,7 @@ $env:JAVA_HOME = 'C:\path\to\jdk-21'
 & "$env:JAVA_HOME\bin\java.exe" -jar .\target\local-dashboard-0.1.0.jar
 ```
 
-瀏覽 <http://127.0.0.1:8080/>（原始 mock UI），或查詢 API：
+瀏覽 <http://127.0.0.1:8080/>，或查詢 API：
 
 ```powershell
 Invoke-RestMethod http://127.0.0.1:8080/api/jobs | ConvertTo-Json -Depth 16
@@ -94,7 +94,7 @@ dashboard:
 `status` 規則：資料不完整或 task info 收集失敗 → UNKNOWN；正在執行 → RUNNING；停用 → DISABLED；
 READY 工作若最近可確認結果失敗 → FAILED，否則 READY。QUEUED／未知 state → UNKNOWN。
 所以**未到期工作不會因上次成功而變成 SUCCESS**，但仍能在 `lastRunStatus` 看見 SUCCESS。
-FAILED 表示最近一次已知失敗，不代表今天那個執行視窗失敗。Stage 2 必須尊重此區別，Today 歸屬需另行決定。
+FAILED 表示最近一次已知失敗，不代表今天那個執行視窗失敗。Today 頁籤顯示目前排程概況，不推算今日執行視窗。
 
 沒有執行時間時不把 `0` 當成功；`0x00041303` 表示從未執行；正在執行或 scheduler 資訊碼不代表已完成。
 負值結果保留在 `raw`，normalized `lastTaskResult` 轉成 unsigned 32-bit。時間保留來源 offset 於 `raw`。
@@ -134,12 +134,55 @@ PowerShell fixtures 替換讀取 cmdlet 為記憶體資料，不建立測試排�
 它比對範例列出的全部 5 個 tasks、detail API 與 task definition 前後 SHA-256；
 輸出 `target/live-verification.json`。其他設定可傳 `-ExpectedTaskKeys` 與 `-BaseUrl`。
 若 task 恰好在收集與比較之間自然執行，值可能變動；等待該次執行完成再重新比對。
-實際本次驗收、限制與後續建議見 [docs/STAGE-0-1.md](docs/STAGE-0-1.md)。
+Stage 0 + 1 的歷史驗收見 [docs/STAGE-0-1.md](docs/STAGE-0-1.md)；UI 串接驗收見 [docs/STAGE-2.md](docs/STAGE-2.md)。
+
+## Stage 2 UI 行為
+
+- 請從服務網址開啟，不能直接雙擊 `index.html`；JavaScript module 與 API 由同一個本機服務提供。
+- 初次載入及每次 Refresh 各呼叫一次 `GET /api/jobs`。收集中停用 Refresh，沒有自動輪詢；drawer、filters、history 頁籤都不增加 API collection。
+- 列表同時顯示 Current 與 Last run；篩選器只篩 current status。READY + SUCCESS 表示目前等待執行、上次成功，不代表今天執行成功。
+- 摘要為 Monitored、Last run success、Last run failed、Attention。Attention 計算 current FAILED / UNKNOWN / MISSED 工作數；collection 警告獨立顯示，不把警告數混成工作數。
+- PARTIAL 保留可取得的工作，顯示 errors / unmatchedIncludes，摘要只涵蓋已取得的工作。NOT_CONFIGURED 提示設定 include；OK 空列表顯示沒有可顯示的排程。
+- 載入期間與錯誤後不顯示舊列表／摘要；無 mock fallback。Last refresh 是最近成功取得回應的 collectedAt（含 PARTIAL / NOT_CONFIGURED），失敗不更新。
+- drawer 使用既有列表物件，顯示狀態、enabled、時間、result、description、warnings；空值顯示 `—`。日期含日期與時間，以瀏覽器本機時區呈現。
+- MISSED 只在 API 明確回傳 MISSED 時顯示；不根據日期、nextRunAt 或 NumberOfMissedRuns 推算。7-day history 保留頁籤，提示 Stage 3 後提供資料。
+- Filter 支援 Tab / Enter / Space；頁籤支援左右方向鍵 / Home / End；drawer 支援 Close / Escape / 點遮罩，關閉後焦點回到原工作。
+
+## 前端測試（不增加 runtime 相依套件）
+
+使用 Node.js 22+；純 mapping 測試只使用 Node 內建 test runner：
+
+```powershell
+node --test tests/dashboard.test.mjs
+```
+
+瀏覽器測試使用 Playwright 與已安裝的 Microsoft Edge。僅將測試工具裝在忽略的目錄，無前端編譯流程：
+
+```powershell
+npm install --prefix .tools/browser-tests --no-save --package-lock=false playwright@1.62.1
+node --test tests/dashboard.test.mjs tests/browser.test.mjs
+```
+
+也可透過 `NODE_PATH` 使用既有 Playwright。測試會在隨機 loopback port 提供 HTML/JS，
+以 mocked HTTP responses 驗證狀態、收集錯誤、loading、refresh 去重、空值、25 筆資料、Unicode、文字注入、鍵盤和 320/375/820/1280px 版面。
+測試 fixture 不封裝進應用程式。截圖寫入忽略的 `target/stage-2/`。
+
+真實服務的 browser acceptance 需先依上方步驟建置並啟動封裝 JAR，設定至少一個可讀取的 task，再明確啟用：
+
+```powershell
+$env:DASHBOARD_LIVE_URL = 'http://127.0.0.1:8080'
+node --test tests/live-browser.test.mjs
+Remove-Item Env:DASHBOARD_LIVE_URL
+```
+
+此測試不 mock HTTP：捕捉 UI 自己取得的列表、逐筆驗證列表與 drawer、確認初次載入與 Refresh 共兩次 GET、無 detail API 請求，
+並寫出 `target/stage-2/live-ui.json` 與桌面／窄版截圖。未設定環境變數時會明確 skip，不視為實機通過。
+Maven 驗證後端與靜態資源封裝；Node 測試需另外執行。
 
 ## 範圍與參考
 
-沒有 UI 串接、SQLite history、MISSED 偵測、runner、logs、30-day reliability；依 `PLAN.md` 分別屬於後續 stages。
-本次不更動 `PLAN.md` 或 `index.html`。
+尚無 SQLite history、MISSED 偵測、runner、logs、30-day reliability；依 `PLAN.md` 分別屬於後續 stages。
+Stage 2 未修改 backend/API 行為或 `PLAN.md`。下一階段僅為 Stage 3 的執行歷史持久化。
 
 - [Microsoft Task Scheduler result codes](https://learn.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-error-and-success-constants)
 - [Spring Boot 3.5 system requirements](https://docs.spring.io/spring-boot/3.5/system-requirements.html)
