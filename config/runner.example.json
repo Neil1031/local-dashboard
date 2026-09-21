@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "receiptDirectory": "../data/receipts",
+  "profiles": {
+    "test-java-version": {
+      "jobId": "test-java-version",
+      "executable": "C:/path/to/jdk-21/bin/java.exe",
+      "args": ["-version"],
+      "workingDirectory": "C:/path/to/local-dashboard"
+    }
+  }
+}

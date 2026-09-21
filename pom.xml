@@ -23,7 +23,19 @@
       <resource><directory>${project.basedir}</directory><includes><include>index.html</include><include>dashboard.mjs</include></includes><targetPath>static</targetPath></resource>
     </resources>
     <plugins>
-      <plugin><groupId>org.springframework.boot</groupId><artifactId>spring-boot-maven-plugin</artifactId></plugin>
+      <plugin>
+        <groupId>org.springframework.boot</groupId><artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration><mainClass>io.github.neil1031.dashboard.DashboardApplication</mainClass></configuration>
+        <executions>
+          <execution>
+            <id>runner</id><goals><goal>repackage</goal></goals>
+            <configuration>
+              <classifier>runner</classifier>
+              <mainClass>io.github.neil1031.dashboard.runner.RunnerMain</mainClass>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 </project>
