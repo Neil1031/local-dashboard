@@ -1,0 +1,13 @@
+server:
+  address: 127.0.0.1
+  port: 8080
+spring:
+  application:
+    name: local-dashboard
+dashboard:
+  scheduler:
+    # Empty means monitor nothing. Copy config/application.example.yml to opt in.
+    include: []
+    exclude: []
+    missed-grace-minutes: 15
+    timeout-seconds: 30
