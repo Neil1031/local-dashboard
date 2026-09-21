@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 @SpringBootApplication
-@EnableConfigurationProperties(SchedulerProperties.class)
+@EnableConfigurationProperties({SchedulerProperties.class, HistoryProperties.class})
 public class DashboardApplication {
     public static void main(String[] args) {
         SpringApplication.run(DashboardApplication.class, args);

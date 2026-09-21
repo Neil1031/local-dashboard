@@ -5,6 +5,9 @@ spring:
   application:
     name: local-dashboard
 dashboard:
+  history:
+    database-path: data/local-dashboard.db
+    busy-timeout-ms: 2000
   scheduler:
     # Empty means monitor nothing. Copy config/application.example.yml to opt in.
     include: []

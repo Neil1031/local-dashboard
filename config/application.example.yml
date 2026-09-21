@@ -1,4 +1,7 @@
 dashboard:
+  history:
+    database-path: data/local-dashboard.db
+    busy-timeout-ms: 2000
   scheduler:
     include:
       - '\InsiderTracker-Market'

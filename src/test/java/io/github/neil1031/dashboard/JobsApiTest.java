@@ -5,6 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
+import java.nio.file.Path;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,6 +21,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(properties = "dashboard.scheduler.include[0]=\\\\")
 @AutoConfigureMockMvc
 class JobsApiTest {
+    @TempDir static Path temp;
+    @DynamicPropertySource static void historyDatabase(DynamicPropertyRegistry registry) {
+        registry.add("dashboard.history.database-path", () -> temp.resolve("api.db").toString());
+    }
     @Autowired MockMvc mvc;
     @Autowired ObjectMapper mapper;
     @MockitoBean SchedulerCollector collector;
