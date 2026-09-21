@@ -5,6 +5,12 @@ Windows Task Scheduler 的本機唯讀觀測服務。目前另提供 **Stage 5A 
 
 ## 環境與啟動
 
+**Windows 雙擊使用**：建置者執行 `.\scripts\package-windows.ps1`，使用者雙擊
+`dist/LocalDashboard/LocalDashboard.exe`（內含 Java runtime，自動開瀏覽器，重複雙擊重用服務）。
+桌面捷徑：`.\scripts\install-shortcut.ps1`。設定與 data 預設保存於 `%LOCALAPPDATA%\LocalDashboard`；
+既有設定／history 的沿用方式、建置與 debug 詳見 [Windows launcher](docs/WINDOWS-LAUNCHER.md)。
+以下是開發者／手動 JAR 啟動方式。
+
 - Windows 10/11，Windows PowerShell 5.1 與內建 `ScheduledTasks` module。
 - JDK 21–25，將 `JAVA_HOME` 指向 JDK 目錄。建置目標為 Java 21。
 - 不需要安裝 Maven；repository 附 Maven Wrapper（Maven 3.9.11）。
