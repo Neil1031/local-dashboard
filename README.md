@@ -296,8 +296,9 @@ python scripts/verify-history-ui-live.py --source-db C:/local-data/existing-obse
 ## 範圍與參考
 
 Stage 4 的可靠 MISSED 偵測依 Manager 決策暫緩；目前不推算 MISSED。
-Stage 5A 提供以下本機 runner；尚無 task migration、receipt UI/API、logs UI 或 30-day reliability。
-下一階段只在 Manager 核准後開始 **Stage 5B：單一低風險 task pilot**。
+Stage 5A 提供以下本機 runner；尚無 receipt UI/API、logs UI 或 30-day reliability。
+Stage 5B 單一 task pilot 已進行遷移與 rollback 驗證，但真實排程啟動未通過，最終恢復 original Action；
+完整結果與證據界線見 [`docs/STAGE-5B.md`](docs/STAGE-5B.md)。尚未保留任何正式 task migration。
 
 - [Microsoft Task Scheduler result codes](https://learn.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-error-and-success-constants)
 - [Spring Boot 3.5 system requirements](https://docs.spring.io/spring-boot/3.5/system-requirements.html)
