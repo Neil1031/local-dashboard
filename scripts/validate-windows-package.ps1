@@ -14,6 +14,7 @@ $port = $listener.LocalEndpoint.Port
 $listener.Stop()
 $oldJavaHome = $env:JAVA_HOME
 $oldPath = $env:PATH
+$oldLocalAppData = $env:LOCALAPPDATA
 $process = $null
 try {
     $env:JAVA_HOME = $null
@@ -34,8 +35,21 @@ try {
     if ($jobs.collectionStatus -ne 'NOT_CONFIGURED') { throw 'Safe empty configuration smoke check failed.' }
     if (!(Test-Path -LiteralPath "$probe/data/local-dashboard.db")) { throw 'SQLite initialization failed.' }
     Write-Host "PASS: bundled runtime, no JAVA_HOME/Java PATH, HTTP readiness, safe defaults, writable SQLite. Logs: $probe"
+    # Exercise the packaged entry point without creating config or touching the user's PID.
+    $env:LOCALAPPDATA = Join-Path $probe 'stop-localappdata'
+    $occupied8080 = @(Get-NetTCPConnection -LocalPort 8080 -State Listen -ErrorAction SilentlyContinue).Count -gt 0
+    $stop = Start-Process -FilePath "$image/LocalDashboard.exe" -ArgumentList '--stop','--quiet' -WindowStyle Hidden -PassThru
+    $null = $stop.Handle
+    if (!$stop.WaitForExit(30000)) { $stop.Kill(); throw 'Packaged stop entry point timed out.' }
+    $expectedStopExit = if ($occupied8080) { 1 } else { 0 }
+    if ($stop.ExitCode -ne $expectedStopExit) { throw "Packaged stop entry point failed: exit $($stop.ExitCode), expected $expectedStopExit." }
+    $stopLog = Get-Content -LiteralPath "$env:LOCALAPPDATA/LocalDashboard/logs/stop.log" -Raw
+    if ($occupied8080 -and $stopLog -notmatch 'No recorded server; port 8080 is occupied') { throw 'Expected safe refusal of unrecorded listener.' }
+    if (Test-Path -LiteralPath "$env:LOCALAPPDATA/LocalDashboard/config/application.yml") { throw 'Stop must not bootstrap configuration.' }
+    Write-Host "PASS: packaged --stop entry point (exit $expectedStopExit), no configuration bootstrap, no unrecorded process termination."
 } finally {
     if ($process -and !$process.HasExited) { Stop-Process -Id $process.Id; $process.WaitForExit() }
     $env:JAVA_HOME = $oldJavaHome
     $env:PATH = $oldPath
+    $env:LOCALAPPDATA = $oldLocalAppData
 }

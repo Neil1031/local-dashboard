@@ -7,7 +7,9 @@ Windows Task Scheduler 的本機唯讀觀測服務。目前另提供 **Stage 5A 
 
 **Windows 雙擊使用**：建置者執行 `.\scripts\package-windows.ps1`，使用者雙擊
 `dist/LocalDashboard/LocalDashboard.exe`（內含 Java runtime，自動開瀏覽器，重複雙擊重用服務）。
-桌面捷徑：`.\scripts\install-shortcut.ps1`。設定與 data 預設保存於 `%LOCALAPPDATA%\LocalDashboard`；
+桌面捷徑：`.\scripts\install-shortcut.ps1`，建立 **Local Dashboard** 與 **Stop Local Dashboard**。
+停止捷徑使用 `LocalDashboard.exe --stop`，核對程序身分後只停止本 Dashboard；瀏覽器保持開啟。
+設定與 data 預設保存於 `%LOCALAPPDATA%\LocalDashboard`；
 首次雙擊會在設定檔缺少時自動建立五個既有 tasks 的監控設定，不需手動建立 YAML；已有設定絕不覆寫。
 既有設定／history 的沿用方式、建置與 debug 詳見 [Windows launcher](docs/WINDOWS-LAUNCHER.md)。
 以下是開發者／手動 JAR 啟動方式。

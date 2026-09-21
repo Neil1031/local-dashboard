@@ -11,9 +11,12 @@
 若其他程式占用 8080，會顯示錯誤，不會終止該程式。啟動最多等待 90 秒，失敗顯示 log 路徑。
 包裝版固定 loopback / 8080；YAML 不能把它改成 LAN listener 或另一個 port。
 
-關閉瀏覽器不會停止服務。需要停止時，在 Windows 工作管理員「詳細資料」找到此封裝的
-`javaw.exe`（開啟「命令列」欄確認指向 `LocalDashboard\app\dashboard.jar`），結束該程序。
-不要結束其他 Java 程序。下次雙擊可重新啟動。更新 app-image 前先停止服務。
+關閉瀏覽器不會停止服務。需要停止時，雙擊桌面的 **Stop Local Dashboard**。
+它執行 `LocalDashboard.exe --stop`，核對記錄的 PID、建立時間、bundled executable/JAR、完整命令形狀、
+8080 listener 的 PID 與 readiness 身分後才停止；不關閉瀏覽器、不終止其他 Java 或 descendants。
+已停止時顯示 `Local Dashboard is not running.`。身分無法確認時會拒絕並提示 log 位置。
+下次雙擊 **Local Dashboard** 可重新啟動。更新 app-image 前先停止服務。
+停止行為、Windows termination 限制與驗收詳見 [Safe Stop](WINDOWS-SAFE-STOP.md)。
 
 ## 設定與資料
 
@@ -25,6 +28,7 @@
   data/local-dashboard.db       # 預設 observed history，重啟/重建後保留
   logs/server.log               # 原 Spring/server stdout + stderr，append
   logs/launcher.log             # 啟動 PID、browser dispatch 與錯誤
+  logs/stop.log                 # 停止驗證、拒絕、PID 清理及終止結果
   launcher.lock                # OS file lock；殘留空檔不表示仍在執行
   server.pid                   # PID + start time；防止 PID reuse 被誤認
 ```
@@ -65,8 +69,10 @@ Runner Core 與 receipts 路徑完全未改動，也不會把使用者 config、
 ```
 
 已發佈的 image 也內附 `install-shortcut.ps1`，若該 PowerShell 的 execution policy 允許，可右鍵「使用 PowerShell 執行」。
-它在目前使用者 Desktop（包括 Windows 重新導向的桌面）建立 `Local Dashboard.lnk`，指向 EXE。
-同一 target 會安全更新；不同 target 會拒絕覆寫，檢查後可傳 `-Replace` 明確更換。
+它在目前使用者 Desktop（包括 Windows 重新導向的桌面）建立 `Local Dashboard.lnk` 與
+`Stop Local Dashboard.lnk`，皆指向 EXE；後者帶 `--stop`。
+先檢查兩份捷徑，再更新；相同 target/arguments 安全更新，不重複建立。
+不同 target 或 arguments 會拒絕覆寫，檢查後可傳 `-Replace` 明確更換。
 搬移 image 後重新執行並指定 `-ExecutablePath 'D:\Apps\LocalDashboard\LocalDashboard.exe' -Replace`。
 遵循系統既有 PowerShell execution policy，腳本不修改 policy。
 若預設 Windows PowerShell 5.1 要求簽章，使用已允許執行此腳本的 PowerShell 7，或依組織流程簽章；不自動繞過政策。
@@ -86,7 +92,7 @@ Runner Core 與 receipts 路徑完全未改動，也不會把使用者 config、
 
 ```text
 dist/LocalDashboard/
-  LocalDashboard.exe
+  LocalDashboard.exe           # 無參數啟動；--stop 安全停止
   runtime/                     # jlink runtime，保留 java/javaw 供 server/debug
   app/launcher.jar             # 純 JDK bootstrap
   app/dashboard.jar            # 既有 Spring Boot dashboard

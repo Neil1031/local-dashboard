@@ -40,6 +40,7 @@ try {
     & "$PSScriptRoot/validate-windows-package.ps1" -ImagePath $image
     Copy-Item -LiteralPath "$PSScriptRoot/install-shortcut.ps1" -Destination $image
     Copy-Item -LiteralPath "$repo/docs/WINDOWS-LAUNCHER.md" -Destination "$image/README.md"
+    Copy-Item -LiteralPath "$repo/docs/WINDOWS-SAFE-STOP.md" -Destination "$image/WINDOWS-SAFE-STOP.md"
     $dist = Join-Path $repo 'dist'
     New-Item -ItemType Directory -Path $dist -Force | Out-Null
     $destination = Join-Path $dist 'LocalDashboard'
@@ -50,7 +51,7 @@ try {
         Write-Host "Previous image preserved at $backup (may be removed manually when no longer needed)."
     }
     Move-Item -LiteralPath $image -Destination $destination
-    Write-Host "Validated app-image: $destination/LocalDashboard.exe"
+    Write-Host "Validated app-image: $destination/LocalDashboard.exe (start), LocalDashboard.exe --stop (safe stop)"
 } finally {
     $env:JAVA_HOME = $previousJavaHome
     Pop-Location
