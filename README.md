@@ -8,6 +8,7 @@ Windows Task Scheduler 的本機唯讀觀測服務。目前另提供 **Stage 5A 
 **Windows 雙擊使用**：建置者執行 `.\scripts\package-windows.ps1`，使用者雙擊
 `dist/LocalDashboard/LocalDashboard.exe`（內含 Java runtime，自動開瀏覽器，重複雙擊重用服務）。
 桌面捷徑：`.\scripts\install-shortcut.ps1`。設定與 data 預設保存於 `%LOCALAPPDATA%\LocalDashboard`；
+首次雙擊會在設定檔缺少時自動建立五個既有 tasks 的監控設定，不需手動建立 YAML；已有設定絕不覆寫。
 既有設定／history 的沿用方式、建置與 debug 詳見 [Windows launcher](docs/WINDOWS-LAUNCHER.md)。
 以下是開發者／手動 JAR 啟動方式。
 
@@ -38,8 +39,10 @@ Invoke-RestMethod http://127.0.0.1:8080/api/jobs | ConvertTo-Json -Depth 16
 
 ## 選擇要監控的 tasks
 
-預設 `include: []`，API 明確回傳 `NOT_CONFIGURED`，且不啟動 PowerShell。
-複製範例後依自己的 tasks 編輯（此檔已列入 `.gitignore`）：
+Windows EXE 會將唯一範本 [`config/application.example.yml`](config/application.example.yml) 寫入缺少的外部設定檔，
+預設選取範本中的五個既有 tasks；`LOCAL_DASHBOARD_HOME` 覆寫目錄也適用。已存在的設定原樣保留。
+以下手動 JAR 啟動方式仍預設 `include: []`，API 回傳 `NOT_CONFIGURED`，且不啟動 PowerShell。
+手動 JAR 使用者可複製範例後依自己的 tasks 編輯（此檔已列入 `.gitignore`）：
 
 ```powershell
 Copy-Item .\config\application.example.yml .\config\application.yml
