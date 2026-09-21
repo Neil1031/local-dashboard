@@ -731,7 +731,7 @@ Integration tests may use fixture JSON representing PowerShell output so most te
 
 # Current Next Codex Assignment
 
-Open a **new Codex Implementation Chat** for **Stage 5 Runner — first low-risk pilot only**.
+Open a **new Codex Implementation Chat** for **Stage 5A — Runner Core only**.
 
 Baseline is the latest `main` after the accepted Stage 4 research.
 
@@ -740,19 +740,30 @@ Manager decision:
 - automatic MISSED detection is deferred
 - do not start 4R / 4A / 4B / 4C / 4D
 - Stage 5 may proceed independently
-- the practical objective is to make application-level execution receipts reliable: started, finished, exit code, duration, and bounded output/error metadata
+- split Stage 5 into:
+  - **5A Runner Core** — implement and verify a generic local runner / receipt contract without modifying existing scheduled tasks
+  - **5B Pilot Migration** — after Manager Review, migrate exactly one low-risk scheduled task and compare behavior
 
-Stage 5 first implementation must be incremental:
+Stage 5A scope:
 
-- design a generic local runner / receipt contract
-- preserve the original child process exit code
-- record start/end/duration/outcome without requiring the dashboard service to be running
-- fail safely if receipt persistence is unavailable
-- choose **one low-risk existing task** for a pilot only after Manager-approved implementation scope
-- do not migrate all scheduled tasks at once
-- do not claim business success solely from Windows Task Scheduler result code
-- do not implement automatic MISSED detection
-- do not redesign the UI
-- do not expose arbitrary shell execution from the browser
+- generic local runner / wrapper
+- launch an explicitly configured child command
+- record started / finished timestamps, duration, exit code, outcome, and bounded diagnostic metadata
+- preserve and return the child process exit code
+- write receipts locally even when the dashboard service is not running
+- define deterministic receipt identity and duplicate/retry behavior
+- fail safely if receipt persistence fails; never prevent the child command from running solely because observability storage is unavailable
+- tests for success, non-zero exit, process-start failure, timeout policy if supported, Unicode paths/output, large output bounds, and persistence failure
 
-The next Implementation Chat must begin with `/plan`, work on a dedicated branch, commit/push when its Stage 5 pilot Gate passes, then stop for Manager Review before any merge or broader migration.
+Stage 5A must **not**:
+
+- modify any existing Windows scheduled task
+- migrate any production/local user task yet
+- execute arbitrary commands supplied by the browser
+- add a generic remote shell API
+- implement automatic MISSED detection
+- redesign the dashboard UI
+- migrate all tasks
+- claim business-level success beyond the child process/receipt evidence
+
+After Stage 5A passes its Gate, commit and push its implementation branch, then stop for Manager Review. Stage 5B requires a separate new Implementation Chat and explicit Manager approval.
