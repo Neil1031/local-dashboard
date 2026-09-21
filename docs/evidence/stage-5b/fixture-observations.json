@@ -1,0 +1,520 @@
+[
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\0-primary-中文 空白\\marker.json",
+    "kind": "fixture-marker",
+    "observed": {
+      "NoNotification": true,
+      "ExtraArgs": [],
+      "User": "REDACTED_USER_SID",
+      "Cwd": "C:\\WINDOWS\\System32",
+      "Kind": "weekly-check"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\0-primary-中文 空白\\receipts\\stage-5b-test-only_1790006717235_310c06b0-8971-4ebe-a856-4c5acaf7e71e\\00-started.json",
+    "kind": "fixture-receipt-fields",
+    "observed": {
+      "schemaVersion": 1,
+      "executionId": "stage-5b-test-only_1790006717235_310c06b0-8971-4ebe-a856-4c5acaf7e71e",
+      "jobId": "stage-5b-test-only",
+      "phase": "STARTED",
+      "startedAt": "2026-09-21T16:05:17.235834800Z",
+      "processStartedAt": null,
+      "finishedAt": null,
+      "durationMs": null,
+      "exitCode": null,
+      "runnerExitCode": null,
+      "outcome": "UNKNOWN"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\0-primary-中文 空白\\receipts\\stage-5b-test-only_1790006717235_310c06b0-8971-4ebe-a856-4c5acaf7e71e\\01-process-started.json",
+    "kind": "fixture-receipt-fields",
+    "observed": {
+      "schemaVersion": 1,
+      "executionId": "stage-5b-test-only_1790006717235_310c06b0-8971-4ebe-a856-4c5acaf7e71e",
+      "jobId": "stage-5b-test-only",
+      "phase": "PROCESS_STARTED",
+      "startedAt": "2026-09-21T16:05:17.235834800Z",
+      "processStartedAt": "2026-09-21T16:05:17.331053800Z",
+      "finishedAt": null,
+      "durationMs": null,
+      "exitCode": null,
+      "runnerExitCode": null,
+      "outcome": "UNKNOWN"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\0-primary-中文 空白\\receipts\\stage-5b-test-only_1790006717235_310c06b0-8971-4ebe-a856-4c5acaf7e71e\\02-terminal.json",
+    "kind": "fixture-receipt-fields",
+    "observed": {
+      "schemaVersion": 1,
+      "executionId": "stage-5b-test-only_1790006717235_310c06b0-8971-4ebe-a856-4c5acaf7e71e",
+      "jobId": "stage-5b-test-only",
+      "phase": "TERMINAL",
+      "startedAt": "2026-09-21T16:05:17.235834800Z",
+      "processStartedAt": "2026-09-21T16:05:17.331053800Z",
+      "finishedAt": "2026-09-21T16:05:17.628851400Z",
+      "durationMs": 392,
+      "exitCode": 0,
+      "runnerExitCode": 0,
+      "outcome": "SUCCESS"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\3010-primary-中文 空白\\marker.json",
+    "kind": "fixture-marker",
+    "observed": {
+      "NoNotification": true,
+      "ExtraArgs": [],
+      "User": "REDACTED_USER_SID",
+      "Cwd": "C:\\WINDOWS\\System32",
+      "Kind": "weekly-check"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\3010-primary-中文 空白\\receipts\\stage-5b-test-only_1790006723705_495a310f-49e2-421f-aa60-51768966a9d0\\00-started.json",
+    "kind": "fixture-receipt-fields",
+    "observed": {
+      "schemaVersion": 1,
+      "executionId": "stage-5b-test-only_1790006723705_495a310f-49e2-421f-aa60-51768966a9d0",
+      "jobId": "stage-5b-test-only",
+      "phase": "STARTED",
+      "startedAt": "2026-09-21T16:05:23.705145400Z",
+      "processStartedAt": null,
+      "finishedAt": null,
+      "durationMs": null,
+      "exitCode": null,
+      "runnerExitCode": null,
+      "outcome": "UNKNOWN"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\3010-primary-中文 空白\\receipts\\stage-5b-test-only_1790006723705_495a310f-49e2-421f-aa60-51768966a9d0\\01-process-started.json",
+    "kind": "fixture-receipt-fields",
+    "observed": {
+      "schemaVersion": 1,
+      "executionId": "stage-5b-test-only_1790006723705_495a310f-49e2-421f-aa60-51768966a9d0",
+      "jobId": "stage-5b-test-only",
+      "phase": "PROCESS_STARTED",
+      "startedAt": "2026-09-21T16:05:23.705145400Z",
+      "processStartedAt": "2026-09-21T16:05:23.797898900Z",
+      "finishedAt": null,
+      "durationMs": null,
+      "exitCode": null,
+      "runnerExitCode": null,
+      "outcome": "UNKNOWN"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\3010-primary-中文 空白\\receipts\\stage-5b-test-only_1790006723705_495a310f-49e2-421f-aa60-51768966a9d0\\02-terminal.json",
+    "kind": "fixture-receipt-fields",
+    "observed": {
+      "schemaVersion": 1,
+      "executionId": "stage-5b-test-only_1790006723705_495a310f-49e2-421f-aa60-51768966a9d0",
+      "jobId": "stage-5b-test-only",
+      "phase": "TERMINAL",
+      "startedAt": "2026-09-21T16:05:23.705145400Z",
+      "processStartedAt": "2026-09-21T16:05:23.797898900Z",
+      "finishedAt": "2026-09-21T16:05:24.101788200Z",
+      "durationMs": 397,
+      "exitCode": 3010,
+      "runnerExitCode": 3010,
+      "outcome": "FAILED"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-fallback-中文 空白\\fallback\\stage-5b-test-only_1790006726941_e42671de-cf43-4e8f-a70f-c89ff0cfcf54\\00-started.json",
+    "kind": "fixture-receipt-fields",
+    "observed": {
+      "schemaVersion": 1,
+      "executionId": "stage-5b-test-only_1790006726941_e42671de-cf43-4e8f-a70f-c89ff0cfcf54",
+      "jobId": "stage-5b-test-only",
+      "phase": "STARTED",
+      "startedAt": "2026-09-21T16:05:26.941384800Z",
+      "processStartedAt": null,
+      "finishedAt": null,
+      "durationMs": null,
+      "exitCode": null,
+      "runnerExitCode": null,
+      "outcome": "UNKNOWN"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-fallback-中文 空白\\fallback\\stage-5b-test-only_1790006726941_e42671de-cf43-4e8f-a70f-c89ff0cfcf54\\01-process-started.json",
+    "kind": "fixture-receipt-fields",
+    "observed": {
+      "schemaVersion": 1,
+      "executionId": "stage-5b-test-only_1790006726941_e42671de-cf43-4e8f-a70f-c89ff0cfcf54",
+      "jobId": "stage-5b-test-only",
+      "phase": "PROCESS_STARTED",
+      "startedAt": "2026-09-21T16:05:26.941384800Z",
+      "processStartedAt": "2026-09-21T16:05:27.025947Z",
+      "finishedAt": null,
+      "durationMs": null,
+      "exitCode": null,
+      "runnerExitCode": null,
+      "outcome": "UNKNOWN"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-fallback-中文 空白\\fallback\\stage-5b-test-only_1790006726941_e42671de-cf43-4e8f-a70f-c89ff0cfcf54\\02-terminal.json",
+    "kind": "fixture-receipt-fields",
+    "observed": {
+      "schemaVersion": 1,
+      "executionId": "stage-5b-test-only_1790006726941_e42671de-cf43-4e8f-a70f-c89ff0cfcf54",
+      "jobId": "stage-5b-test-only",
+      "phase": "TERMINAL",
+      "startedAt": "2026-09-21T16:05:26.941384800Z",
+      "processStartedAt": "2026-09-21T16:05:27.025947Z",
+      "finishedAt": "2026-09-21T16:05:27.346867900Z",
+      "durationMs": 405,
+      "exitCode": 7,
+      "runnerExitCode": 7,
+      "outcome": "FAILED"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-fallback-中文 空白\\marker.json",
+    "kind": "fixture-marker",
+    "observed": {
+      "NoNotification": true,
+      "ExtraArgs": [],
+      "User": "REDACTED_USER_SID",
+      "Cwd": "C:\\WINDOWS\\System32",
+      "Kind": "weekly-check"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-primary-中文 空白\\marker.json",
+    "kind": "fixture-marker",
+    "observed": {
+      "NoNotification": true,
+      "ExtraArgs": [],
+      "User": "REDACTED_USER_SID",
+      "Cwd": "C:\\WINDOWS\\System32",
+      "Kind": "weekly-check"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-primary-中文 空白\\receipts\\stage-5b-test-only_1790006720471_59da1ba4-6e17-4eba-9fd0-e666b7069f28\\00-started.json",
+    "kind": "fixture-receipt-fields",
+    "observed": {
+      "schemaVersion": 1,
+      "executionId": "stage-5b-test-only_1790006720471_59da1ba4-6e17-4eba-9fd0-e666b7069f28",
+      "jobId": "stage-5b-test-only",
+      "phase": "STARTED",
+      "startedAt": "2026-09-21T16:05:20.471225Z",
+      "processStartedAt": null,
+      "finishedAt": null,
+      "durationMs": null,
+      "exitCode": null,
+      "runnerExitCode": null,
+      "outcome": "UNKNOWN"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-primary-中文 空白\\receipts\\stage-5b-test-only_1790006720471_59da1ba4-6e17-4eba-9fd0-e666b7069f28\\01-process-started.json",
+    "kind": "fixture-receipt-fields",
+    "observed": {
+      "schemaVersion": 1,
+      "executionId": "stage-5b-test-only_1790006720471_59da1ba4-6e17-4eba-9fd0-e666b7069f28",
+      "jobId": "stage-5b-test-only",
+      "phase": "PROCESS_STARTED",
+      "startedAt": "2026-09-21T16:05:20.471225Z",
+      "processStartedAt": "2026-09-21T16:05:20.563232100Z",
+      "finishedAt": null,
+      "durationMs": null,
+      "exitCode": null,
+      "runnerExitCode": null,
+      "outcome": "UNKNOWN"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-primary-中文 空白\\receipts\\stage-5b-test-only_1790006720471_59da1ba4-6e17-4eba-9fd0-e666b7069f28\\02-terminal.json",
+    "kind": "fixture-receipt-fields",
+    "observed": {
+      "schemaVersion": 1,
+      "executionId": "stage-5b-test-only_1790006720471_59da1ba4-6e17-4eba-9fd0-e666b7069f28",
+      "jobId": "stage-5b-test-only",
+      "phase": "TERMINAL",
+      "startedAt": "2026-09-21T16:05:20.471225Z",
+      "processStartedAt": "2026-09-21T16:05:20.563232100Z",
+      "finishedAt": "2026-09-21T16:05:20.868849300Z",
+      "durationMs": 396,
+      "exitCode": 7,
+      "runnerExitCode": 7,
+      "outcome": "FAILED"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-unavailable-中文 空白\\marker.json",
+    "kind": "fixture-marker",
+    "observed": {
+      "NoNotification": true,
+      "ExtraArgs": [],
+      "User": "REDACTED_USER_SID",
+      "Cwd": "C:\\WINDOWS\\System32",
+      "Kind": "weekly-check"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\0-primary-中文 空白\\marker.json",
+    "kind": "fixture-marker",
+    "observed": {
+      "NoNotification": true,
+      "ExtraArgs": [],
+      "User": "REDACTED_USER_SID",
+      "Cwd": "C:\\WINDOWS\\System32",
+      "Kind": "weekly-check"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\0-primary-中文 空白\\receipts\\stage-5b-test-only_1790006799080_94193669-bc82-4d40-9384-c6a203e8c6d0\\00-started.json",
+    "kind": "fixture-receipt-fields",
+    "observed": {
+      "schemaVersion": 1,
+      "executionId": "stage-5b-test-only_1790006799080_94193669-bc82-4d40-9384-c6a203e8c6d0",
+      "jobId": "stage-5b-test-only",
+      "phase": "STARTED",
+      "startedAt": "2026-09-21T16:06:39.080251200Z",
+      "processStartedAt": null,
+      "finishedAt": null,
+      "durationMs": null,
+      "exitCode": null,
+      "runnerExitCode": null,
+      "outcome": "UNKNOWN"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\0-primary-中文 空白\\receipts\\stage-5b-test-only_1790006799080_94193669-bc82-4d40-9384-c6a203e8c6d0\\01-process-started.json",
+    "kind": "fixture-receipt-fields",
+    "observed": {
+      "schemaVersion": 1,
+      "executionId": "stage-5b-test-only_1790006799080_94193669-bc82-4d40-9384-c6a203e8c6d0",
+      "jobId": "stage-5b-test-only",
+      "phase": "PROCESS_STARTED",
+      "startedAt": "2026-09-21T16:06:39.080251200Z",
+      "processStartedAt": "2026-09-21T16:06:39.174609300Z",
+      "finishedAt": null,
+      "durationMs": null,
+      "exitCode": null,
+      "runnerExitCode": null,
+      "outcome": "UNKNOWN"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\0-primary-中文 空白\\receipts\\stage-5b-test-only_1790006799080_94193669-bc82-4d40-9384-c6a203e8c6d0\\02-terminal.json",
+    "kind": "fixture-receipt-fields",
+    "observed": {
+      "schemaVersion": 1,
+      "executionId": "stage-5b-test-only_1790006799080_94193669-bc82-4d40-9384-c6a203e8c6d0",
+      "jobId": "stage-5b-test-only",
+      "phase": "TERMINAL",
+      "startedAt": "2026-09-21T16:06:39.080251200Z",
+      "processStartedAt": "2026-09-21T16:06:39.174609300Z",
+      "finishedAt": "2026-09-21T16:06:39.489766900Z",
+      "durationMs": 409,
+      "exitCode": 0,
+      "runnerExitCode": 0,
+      "outcome": "SUCCESS"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\3010-primary-中文 空白\\marker.json",
+    "kind": "fixture-marker",
+    "observed": {
+      "NoNotification": true,
+      "ExtraArgs": [],
+      "User": "REDACTED_USER_SID",
+      "Cwd": "C:\\WINDOWS\\System32",
+      "Kind": "weekly-check"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\3010-primary-中文 空白\\receipts\\stage-5b-test-only_1790006805618_14fb99df-a52f-468b-a887-3b7af1acac3e\\00-started.json",
+    "kind": "fixture-receipt-fields",
+    "observed": {
+      "schemaVersion": 1,
+      "executionId": "stage-5b-test-only_1790006805618_14fb99df-a52f-468b-a887-3b7af1acac3e",
+      "jobId": "stage-5b-test-only",
+      "phase": "STARTED",
+      "startedAt": "2026-09-21T16:06:45.618164200Z",
+      "processStartedAt": null,
+      "finishedAt": null,
+      "durationMs": null,
+      "exitCode": null,
+      "runnerExitCode": null,
+      "outcome": "UNKNOWN"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\3010-primary-中文 空白\\receipts\\stage-5b-test-only_1790006805618_14fb99df-a52f-468b-a887-3b7af1acac3e\\01-process-started.json",
+    "kind": "fixture-receipt-fields",
+    "observed": {
+      "schemaVersion": 1,
+      "executionId": "stage-5b-test-only_1790006805618_14fb99df-a52f-468b-a887-3b7af1acac3e",
+      "jobId": "stage-5b-test-only",
+      "phase": "PROCESS_STARTED",
+      "startedAt": "2026-09-21T16:06:45.618164200Z",
+      "processStartedAt": "2026-09-21T16:06:45.699569100Z",
+      "finishedAt": null,
+      "durationMs": null,
+      "exitCode": null,
+      "runnerExitCode": null,
+      "outcome": "UNKNOWN"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\3010-primary-中文 空白\\receipts\\stage-5b-test-only_1790006805618_14fb99df-a52f-468b-a887-3b7af1acac3e\\02-terminal.json",
+    "kind": "fixture-receipt-fields",
+    "observed": {
+      "schemaVersion": 1,
+      "executionId": "stage-5b-test-only_1790006805618_14fb99df-a52f-468b-a887-3b7af1acac3e",
+      "jobId": "stage-5b-test-only",
+      "phase": "TERMINAL",
+      "startedAt": "2026-09-21T16:06:45.618164200Z",
+      "processStartedAt": "2026-09-21T16:06:45.699569100Z",
+      "finishedAt": "2026-09-21T16:06:46.007442400Z",
+      "durationMs": 389,
+      "exitCode": 3010,
+      "runnerExitCode": 3010,
+      "outcome": "FAILED"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-fallback-中文 空白\\fallback\\stage-5b-test-only_1790006808856_077603ea-bba7-4546-89fc-7457c591ec7d\\00-started.json",
+    "kind": "fixture-receipt-fields",
+    "observed": {
+      "schemaVersion": 1,
+      "executionId": "stage-5b-test-only_1790006808856_077603ea-bba7-4546-89fc-7457c591ec7d",
+      "jobId": "stage-5b-test-only",
+      "phase": "STARTED",
+      "startedAt": "2026-09-21T16:06:48.856148500Z",
+      "processStartedAt": null,
+      "finishedAt": null,
+      "durationMs": null,
+      "exitCode": null,
+      "runnerExitCode": null,
+      "outcome": "UNKNOWN"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-fallback-中文 空白\\fallback\\stage-5b-test-only_1790006808856_077603ea-bba7-4546-89fc-7457c591ec7d\\01-process-started.json",
+    "kind": "fixture-receipt-fields",
+    "observed": {
+      "schemaVersion": 1,
+      "executionId": "stage-5b-test-only_1790006808856_077603ea-bba7-4546-89fc-7457c591ec7d",
+      "jobId": "stage-5b-test-only",
+      "phase": "PROCESS_STARTED",
+      "startedAt": "2026-09-21T16:06:48.856148500Z",
+      "processStartedAt": "2026-09-21T16:06:48.950456800Z",
+      "finishedAt": null,
+      "durationMs": null,
+      "exitCode": null,
+      "runnerExitCode": null,
+      "outcome": "UNKNOWN"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-fallback-中文 空白\\fallback\\stage-5b-test-only_1790006808856_077603ea-bba7-4546-89fc-7457c591ec7d\\02-terminal.json",
+    "kind": "fixture-receipt-fields",
+    "observed": {
+      "schemaVersion": 1,
+      "executionId": "stage-5b-test-only_1790006808856_077603ea-bba7-4546-89fc-7457c591ec7d",
+      "jobId": "stage-5b-test-only",
+      "phase": "TERMINAL",
+      "startedAt": "2026-09-21T16:06:48.856148500Z",
+      "processStartedAt": "2026-09-21T16:06:48.950456800Z",
+      "finishedAt": "2026-09-21T16:06:49.271312Z",
+      "durationMs": 415,
+      "exitCode": 7,
+      "runnerExitCode": 7,
+      "outcome": "FAILED"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-fallback-中文 空白\\marker.json",
+    "kind": "fixture-marker",
+    "observed": {
+      "NoNotification": true,
+      "ExtraArgs": [],
+      "User": "REDACTED_USER_SID",
+      "Cwd": "C:\\WINDOWS\\System32",
+      "Kind": "weekly-check"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-primary-中文 空白\\marker.json",
+    "kind": "fixture-marker",
+    "observed": {
+      "NoNotification": true,
+      "ExtraArgs": [],
+      "User": "REDACTED_USER_SID",
+      "Cwd": "C:\\WINDOWS\\System32",
+      "Kind": "weekly-check"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-primary-中文 空白\\receipts\\stage-5b-test-only_1790006802358_c6dc2b44-8579-4fcb-81d6-a11ee4a7112e\\00-started.json",
+    "kind": "fixture-receipt-fields",
+    "observed": {
+      "schemaVersion": 1,
+      "executionId": "stage-5b-test-only_1790006802358_c6dc2b44-8579-4fcb-81d6-a11ee4a7112e",
+      "jobId": "stage-5b-test-only",
+      "phase": "STARTED",
+      "startedAt": "2026-09-21T16:06:42.358080900Z",
+      "processStartedAt": null,
+      "finishedAt": null,
+      "durationMs": null,
+      "exitCode": null,
+      "runnerExitCode": null,
+      "outcome": "UNKNOWN"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-primary-中文 空白\\receipts\\stage-5b-test-only_1790006802358_c6dc2b44-8579-4fcb-81d6-a11ee4a7112e\\01-process-started.json",
+    "kind": "fixture-receipt-fields",
+    "observed": {
+      "schemaVersion": 1,
+      "executionId": "stage-5b-test-only_1790006802358_c6dc2b44-8579-4fcb-81d6-a11ee4a7112e",
+      "jobId": "stage-5b-test-only",
+      "phase": "PROCESS_STARTED",
+      "startedAt": "2026-09-21T16:06:42.358080900Z",
+      "processStartedAt": "2026-09-21T16:06:42.442060900Z",
+      "finishedAt": null,
+      "durationMs": null,
+      "exitCode": null,
+      "runnerExitCode": null,
+      "outcome": "UNKNOWN"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-primary-中文 空白\\receipts\\stage-5b-test-only_1790006802358_c6dc2b44-8579-4fcb-81d6-a11ee4a7112e\\02-terminal.json",
+    "kind": "fixture-receipt-fields",
+    "observed": {
+      "schemaVersion": 1,
+      "executionId": "stage-5b-test-only_1790006802358_c6dc2b44-8579-4fcb-81d6-a11ee4a7112e",
+      "jobId": "stage-5b-test-only",
+      "phase": "TERMINAL",
+      "startedAt": "2026-09-21T16:06:42.358080900Z",
+      "processStartedAt": "2026-09-21T16:06:42.442060900Z",
+      "finishedAt": "2026-09-21T16:06:42.759423400Z",
+      "durationMs": 401,
+      "exitCode": 7,
+      "runnerExitCode": 7,
+      "outcome": "FAILED"
+    }
+  },
+  {
+    "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-unavailable-中文 空白\\marker.json",
+    "kind": "fixture-marker",
+    "observed": {
+      "NoNotification": true,
+      "ExtraArgs": [],
+      "User": "REDACTED_USER_SID",
+      "Cwd": "C:\\WINDOWS\\System32",
+      "Kind": "weekly-check"
+    }
+  }
+]

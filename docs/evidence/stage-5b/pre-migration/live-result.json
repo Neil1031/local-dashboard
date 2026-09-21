@@ -1,0 +1,19 @@
+{
+  "manualRequests": 1,
+  "requestedAt": "2026-09-22T00:11:50.3111819+08:00",
+  "lastRunTime": "2026-09-22T00:11:50.0000000+08:00",
+  "lastTaskResult": 2147942402,
+  "lastTaskResultHex": "0x80070002",
+  "state": "Ready",
+  "nextRunTime": "2026-09-25T22:00:00.0000000+08:00",
+  "newReceiptCount": 0,
+  "fallbackReceiptCount": 0,
+  "dashboardOffline": true,
+  "protectedFilesChecked": 109,
+  "protectedFilesChanged": [],
+  "executableExists": true,
+  "executableSignature": "Valid",
+  "taskOperationalLogEnabled": false,
+  "conclusion": "Live scheduler integration FAILED before receipt creation. Underlying launch cause unverified; direct runtime and equivalent fixtures passed. No second manual trigger authorized. Restore original definition.",
+  "checkedAt": "2026-09-22T00:13:57.6248760+08:00"
+}

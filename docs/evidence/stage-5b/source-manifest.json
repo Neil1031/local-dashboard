@@ -1,0 +1,816 @@
+{
+  "exportedAt": "2026-09-21T16:25:25.306883+00:00",
+  "note": "Raw hashes identify private original bytes, not sanitized exported bytes. No independent signature or missing historical evidence is implied.",
+  "sources": [
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\Actions.xml",
+      "bytes": 371,
+      "rawSha256": "8D19F7A8E85CBCDE627B450BAE88CBFFF90ECC86DCD04BD144DAA2EA4C4DD9CE",
+      "disposition": "sanitized reference only; not restorable"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\all-tasks-before.json",
+      "bytes": 38309,
+      "rawSha256": "B88A70EA6F44B6FA7DEF5E580AAF29463AA25785CCAE8B97A13D8ACD49C3F8F3",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\all-tasks-drift.json",
+      "bytes": 38307,
+      "rawSha256": "4CB81B57E4F571EE52275E66A2F2FA549BE53A64BFA58F2D20DBAADBFA910C84",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\backup-hashes.json",
+      "bytes": 1118,
+      "rawSha256": "483CE9380C7BD53C0CDB45335A8951790E5589AF5BA8C3A38FDAEC540A6EE94B",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\deployment.json",
+      "bytes": 55517,
+      "rawSha256": "12EB6419EDDBB642B833134FCB3BCD55119B23AA9DC619B3A11F0E0183269C87",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixture-results.json",
+      "bytes": 867,
+      "rawSha256": "A01281CE1135C32F5FF213C8707FCB40A6605F7AECCA8B45C24823DB39AAFA3F",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\original-metadata.json",
+      "bytes": 690,
+      "rawSha256": "D3D381F88DCB4F4B8EB06BEFF507171AC8BF03C85514EFB50C46E4FA74941DAC",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\original.sddl.txt",
+      "bytes": 244,
+      "rawSha256": "B0009463B81FBF8226801FF458EA586EB46021BB485E9C6716ADA956A802E81C",
+      "disposition": "sanitized reference only; not restorable"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\original.xml",
+      "bytes": 3870,
+      "rawSha256": "71ED789B5639D1C0127D5D9969F45729EDEE86EBE47A59E369472CCA05C4E2E1",
+      "disposition": "sanitized reference only; not restorable"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\Principals.xml",
+      "bytes": 222,
+      "rawSha256": "A525DEAA1120FC1C41515522738C827A3D12CEDAD6AC6D307CBBCEB71E4BB306",
+      "disposition": "sanitized reference only; not restorable"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\protected-files-before.json",
+      "bytes": 23810,
+      "rawSha256": "AD6FA46CBC51F76BD6526612FAA515692596F9092E0EEEE7561DB59B94E2429A",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\RegistrationInfo.xml",
+      "bytes": 305,
+      "rawSha256": "AF2FF549FF5A537702ED574B68547173C74CB4C9E2EA882C2A18E227E129D9FB",
+      "disposition": "sanitized reference only; not restorable"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\runner-action.xml",
+      "bytes": 4046,
+      "rawSha256": "A209624682AACB8D06EC208FD8038BC9F5B520B2FB6F540B6C952997F6EC38E9",
+      "disposition": "sanitized reference only; not restorable"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\Settings.xml",
+      "bytes": 646,
+      "rawSha256": "51D1962821A89256C773CF29CEBB984AE0C0D8D6DB011BB96F280F55DA3AFF17",
+      "disposition": "sanitized reference only; not restorable"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\Triggers.xml",
+      "bytes": 274,
+      "rawSha256": "26359831A46700546EC7F444CB056E95FB622E88A7E6156796509724CCD0634C",
+      "disposition": "sanitized reference only; not restorable"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\weekly-log-before.json",
+      "bytes": 102,
+      "rawSha256": "90C641184810F1D29419F1C18900718188610DA1FEDAC44679A41D830DEF4817",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\weekly-reports-before.json",
+      "bytes": 322,
+      "rawSha256": "CD50D45741F7A9F953BA10F087893F3F39E08B7DA5FDE254A9DCE06EBCC75D9D",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\Actions.xml",
+      "bytes": 403,
+      "rawSha256": "8CFB33801885FAAADA11280473391D7877B6C2503EE2A5C1A707A179F104B03A",
+      "disposition": "sanitized reference only; not restorable"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\all-tasks-before.json",
+      "bytes": 38307,
+      "rawSha256": "4CB81B57E4F571EE52275E66A2F2FA549BE53A64BFA58F2D20DBAADBFA910C84",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\all-tasks-latest.json",
+      "bytes": 38307,
+      "rawSha256": "4CB81B57E4F571EE52275E66A2F2FA549BE53A64BFA58F2D20DBAADBFA910C84",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\applied.json",
+      "bytes": 257,
+      "rawSha256": "8DC5C1FADE062DCDAE21388716674B54987EA6665D629A000EE3E51C11BF977A",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\applied.xml",
+      "bytes": 4046,
+      "rawSha256": "A209624682AACB8D06EC208FD8038BC9F5B520B2FB6F540B6C952997F6EC38E9",
+      "disposition": "sanitized reference only; not restorable"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\backup-hashes.json",
+      "bytes": 1116,
+      "rawSha256": "3157DBAAD809719FA5CD635E85AA4E647537777ACCD87E265A5C83E58460004B",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\baseline-refresh.json",
+      "bytes": 523,
+      "rawSha256": "D8371EC2909E4B5016B4E7A2B3F24E8FE67AE25D207274F4DECBA7309ACF2B19",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\current-inspect.xml",
+      "bytes": 4452,
+      "rawSha256": "A9E9E2350E2B764453EDFB0000D86CE6465F00ABE12769F553D93528FC26C666",
+      "disposition": "sanitized reference only; not restorable"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\deployment.json",
+      "bytes": 55517,
+      "rawSha256": "12EB6419EDDBB642B833134FCB3BCD55119B23AA9DC619B3A11F0E0183269C87",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\external-drift-task.xml",
+      "bytes": 3912,
+      "rawSha256": "378F69CD41DC1ADB0D0F557F74C939B8420A8FE41CD2369A1D506A5CF26C67BC",
+      "disposition": "sanitized reference only; not restorable"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\final-data-integrity.json",
+      "bytes": 160,
+      "rawSha256": "1F34D4A86CA524AB4208C65DA3CDF6F3E23923C220FD3BE9ECF6B21C054430FA",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\final-restored.xml",
+      "bytes": 3870,
+      "rawSha256": "71ED789B5639D1C0127D5D9969F45729EDEE86EBE47A59E369472CCA05C4E2E1",
+      "disposition": "sanitized reference only; not restorable"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\final-task-inspection.json",
+      "bytes": 284,
+      "rawSha256": "60BCD0030A382296E4EE246D1707799C5BC417589B54883518ADCCC58A8578E8",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\fixture-results.json",
+      "bytes": 867,
+      "rawSha256": "A01281CE1135C32F5FF213C8707FCB40A6605F7AECCA8B45C24823DB39AAFA3F",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\live-result.json",
+      "bytes": 817,
+      "rawSha256": "FB136267FBD8F4A24E4987EB25B06AEA5B40E32F897E452879C343B6A658FC17",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\manual-run-request.json",
+      "bytes": 320,
+      "rawSha256": "F619DF536EAAC2470F0463240EA12345F36980A792EA81457BCED028DAA52C46",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\original-metadata.json",
+      "bytes": 742,
+      "rawSha256": "913FC9AD64AE2925DC764B8F62FF396B0C7E94CBD862674ACCBD13572ADCA41B",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\original.sddl.txt",
+      "bytes": 244,
+      "rawSha256": "B0009463B81FBF8226801FF458EA586EB46021BB485E9C6716ADA956A802E81C",
+      "disposition": "sanitized reference only; not restorable"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\original.xml",
+      "bytes": 3870,
+      "rawSha256": "71ED789B5639D1C0127D5D9969F45729EDEE86EBE47A59E369472CCA05C4E2E1",
+      "disposition": "sanitized reference only; not restorable"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\Principals.xml",
+      "bytes": 254,
+      "rawSha256": "8CD1C6E624F4A023DEFE20752ECF94BABDC583D7E4E94C4B36A9431D817EA93B",
+      "disposition": "sanitized reference only; not restorable"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\protected-files-before.json",
+      "bytes": 23810,
+      "rawSha256": "AD6FA46CBC51F76BD6526612FAA515692596F9092E0EEEE7561DB59B94E2429A",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\registration-observed.xml",
+      "bytes": 4046,
+      "rawSha256": "A209624682AACB8D06EC208FD8038BC9F5B520B2FB6F540B6C952997F6EC38E9",
+      "disposition": "sanitized reference only; not restorable"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\RegistrationInfo.xml",
+      "bytes": 321,
+      "rawSha256": "D39B4B733FDF0C5DCB6EA773F8802254693896B0D45C4BFF030E8C9BE1E6D3CB",
+      "disposition": "sanitized reference only; not restorable"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\rollback-rehearsal.json",
+      "bytes": 300,
+      "rawSha256": "3C1D49217E99BF104710AF8F5789CDB35EE3AB1268C0D9FFB71F58BD5FC54160",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\rollback.json",
+      "bytes": 300,
+      "rawSha256": "39FB01786A38FC615D37221E2A808CD581CACC77315B99F40C7970A3CECFBAFC",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\runner-action.xml",
+      "bytes": 4046,
+      "rawSha256": "A209624682AACB8D06EC208FD8038BC9F5B520B2FB6F540B6C952997F6EC38E9",
+      "disposition": "sanitized reference only; not restorable"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\Settings.xml",
+      "bytes": 758,
+      "rawSha256": "66608552C29C52B4980E743246A87471BD266648615A7B7285FF7C7D0247B80B",
+      "disposition": "sanitized reference only; not restorable"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\Triggers.xml",
+      "bytes": 356,
+      "rawSha256": "40E6178B252464A4F53052A3B289048D7A8F113B66165AB3D932D73D0144C7B9",
+      "disposition": "sanitized reference only; not restorable"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\weekly-log-before.json",
+      "bytes": 102,
+      "rawSha256": "90C641184810F1D29419F1C18900718188610DA1FEDAC44679A41D830DEF4817",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\LocalDashboard\\pilots\\weekly-check\\20260922-000842-pre-migration\\weekly-reports-before.json",
+      "bytes": 322,
+      "rawSha256": "CD50D45741F7A9F953BA10F087893F3F39E08B7DA5FDE254A9DCE06EBCC75D9D",
+      "disposition": "sanitized structured evidence"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\0-primary-中文 空白\\exit.txt",
+      "bytes": 1,
+      "rawSha256": "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\0-primary-中文 空白\\marker.json",
+      "bytes": 208,
+      "rawSha256": "07D668C11A905133FC28C51FA8D9970ED796512F7E1A7B1D14FC4CC52C5BADE1",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\0-primary-中文 空白\\receipts\\stage-5b-test-only_1790006717235_310c06b0-8971-4ebe-a856-4c5acaf7e71e\\00-started.json",
+      "bytes": 469,
+      "rawSha256": "8E796ECD85A9C84D7AB0A0E081687708B5B8B2C1E6B2D83A0CBB629A7A3B9817",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\0-primary-中文 空白\\receipts\\stage-5b-test-only_1790006717235_310c06b0-8971-4ebe-a856-4c5acaf7e71e\\01-process-started.json",
+      "bytes": 505,
+      "rawSha256": "E1254B76ECFF3BF474FA0536977442AA165BCF94BC67E4282C9217AE94FBCB4D",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\0-primary-中文 空白\\receipts\\stage-5b-test-only_1790006717235_310c06b0-8971-4ebe-a856-4c5acaf7e71e\\02-terminal.json",
+      "bytes": 783,
+      "rawSha256": "1E0B83A04C124E6FBA77176BF17E92F8B47E4885F7FCF1145398731C279CEFA7",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\0-primary-中文 空白\\run_stock_task_hidden.ps1",
+      "bytes": 431,
+      "rawSha256": "90813A05496B9A9CA0F9189493F7E48FCBF5A44E4E81C9EB6576D895415A8FCF",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\0-primary-中文 空白\\runner.json",
+      "bytes": 1099,
+      "rawSha256": "55A65E68E8516E6AAB2673B89921419B24711EDBF8E6019CA1BEBABEB839099B",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\3010-primary-中文 空白\\exit.txt",
+      "bytes": 4,
+      "rawSha256": "FF4B467B7A593047C46682ECDBF6DA36B3F3BB4B50D35F08F17F751EF5F15531",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\3010-primary-中文 空白\\marker.json",
+      "bytes": 208,
+      "rawSha256": "07D668C11A905133FC28C51FA8D9970ED796512F7E1A7B1D14FC4CC52C5BADE1",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\3010-primary-中文 空白\\receipts\\stage-5b-test-only_1790006723705_495a310f-49e2-421f-aa60-51768966a9d0\\00-started.json",
+      "bytes": 469,
+      "rawSha256": "495B57FA401C1EE48ABF35FF00A96F9D44E2A988E662A725CD698DCA6F92C82B",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\3010-primary-中文 空白\\receipts\\stage-5b-test-only_1790006723705_495a310f-49e2-421f-aa60-51768966a9d0\\01-process-started.json",
+      "bytes": 505,
+      "rawSha256": "745D9CEE8FA79EE7713A4E6991F9D540448AD96FDB9D9818014401A58E4573F3",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\3010-primary-中文 空白\\receipts\\stage-5b-test-only_1790006723705_495a310f-49e2-421f-aa60-51768966a9d0\\02-terminal.json",
+      "bytes": 788,
+      "rawSha256": "9A2922CFA0FDD5BB8081D86C59529C56CE6ABACFFB1E8DEE5550745FDC18CC9A",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\3010-primary-中文 空白\\run_stock_task_hidden.ps1",
+      "bytes": 431,
+      "rawSha256": "90813A05496B9A9CA0F9189493F7E48FCBF5A44E4E81C9EB6576D895415A8FCF",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\3010-primary-中文 空白\\runner.json",
+      "bytes": 1108,
+      "rawSha256": "7B540449877CDAA77B9B00EC201FC483F581F4FDCE683199DFDFF7CCBBFD46B8",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-fallback-中文 空白\\exit.txt",
+      "bytes": 1,
+      "rawSha256": "7902699BE42C8A8E46FBBB4501726517E86B22C56A189F7625A6DA49081B2451",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-fallback-中文 空白\\fallback\\stage-5b-test-only_1790006726941_e42671de-cf43-4e8f-a70f-c89ff0cfcf54\\00-started.json",
+      "bytes": 469,
+      "rawSha256": "57A3F3B89804C0A8FCC8DA315D0A2F1F0B510BA06FDF1AF4243B8A7E7916C793",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-fallback-中文 空白\\fallback\\stage-5b-test-only_1790006726941_e42671de-cf43-4e8f-a70f-c89ff0cfcf54\\01-process-started.json",
+      "bytes": 502,
+      "rawSha256": "2B223357C6FFAF365622167456F457357483C2EFF0E51A1B4BDE57DFB8547D0E",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-fallback-中文 空白\\fallback\\stage-5b-test-only_1790006726941_e42671de-cf43-4e8f-a70f-c89ff0cfcf54\\02-terminal.json",
+      "bytes": 779,
+      "rawSha256": "F5976DFC0D308674955B5CBA5CB672A58981B14F23B3156A469B483872986026",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-fallback-中文 空白\\marker.json",
+      "bytes": 208,
+      "rawSha256": "07D668C11A905133FC28C51FA8D9970ED796512F7E1A7B1D14FC4CC52C5BADE1",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-fallback-中文 空白\\receipts",
+      "bytes": 25,
+      "rawSha256": "9BB0461C8C246CCD70C79AD3A7B7619968B9459E93A8B9E5FCCCC90B2507FA58",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-fallback-中文 空白\\run_stock_task_hidden.ps1",
+      "bytes": 431,
+      "rawSha256": "90813A05496B9A9CA0F9189493F7E48FCBF5A44E4E81C9EB6576D895415A8FCF",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-fallback-中文 空白\\runner.json",
+      "bytes": 1102,
+      "rawSha256": "EF0AAC419171A4C9282FFBB29D3A7AC170BFADB53C1A0394875121102A848C99",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-primary-中文 空白\\exit.txt",
+      "bytes": 1,
+      "rawSha256": "7902699BE42C8A8E46FBBB4501726517E86B22C56A189F7625A6DA49081B2451",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-primary-中文 空白\\marker.json",
+      "bytes": 208,
+      "rawSha256": "07D668C11A905133FC28C51FA8D9970ED796512F7E1A7B1D14FC4CC52C5BADE1",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-primary-中文 空白\\receipts\\stage-5b-test-only_1790006720471_59da1ba4-6e17-4eba-9fd0-e666b7069f28\\00-started.json",
+      "bytes": 466,
+      "rawSha256": "B98379888EDCF72F243429EE512974E2CA333F3272F09084ACD9F8861490FBB7",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-primary-中文 空白\\receipts\\stage-5b-test-only_1790006720471_59da1ba4-6e17-4eba-9fd0-e666b7069f28\\01-process-started.json",
+      "bytes": 499,
+      "rawSha256": "BFD8ED83CE0B601A47796AB211AEC665D7400DCB88F936E60FA5BE60D1766EF0",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-primary-中文 空白\\receipts\\stage-5b-test-only_1790006720471_59da1ba4-6e17-4eba-9fd0-e666b7069f28\\02-terminal.json",
+      "bytes": 779,
+      "rawSha256": "644D69A9873746B77CE6DDC45298E51983287B11027703D24CD3EC76F3506718",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-primary-中文 空白\\run_stock_task_hidden.ps1",
+      "bytes": 431,
+      "rawSha256": "90813A05496B9A9CA0F9189493F7E48FCBF5A44E4E81C9EB6576D895415A8FCF",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-primary-中文 空白\\runner.json",
+      "bytes": 1099,
+      "rawSha256": "4B523F24BAF3657BB678B9A7B7D7229DAE4A92CEF880B5DAA5047902EC6D1329",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-unavailable-中文 空白\\exit.txt",
+      "bytes": 1,
+      "rawSha256": "7902699BE42C8A8E46FBBB4501726517E86B22C56A189F7625A6DA49081B2451",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-unavailable-中文 空白\\fallback",
+      "bytes": 25,
+      "rawSha256": "9BB0461C8C246CCD70C79AD3A7B7619968B9459E93A8B9E5FCCCC90B2507FA58",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-unavailable-中文 空白\\marker.json",
+      "bytes": 208,
+      "rawSha256": "07D668C11A905133FC28C51FA8D9970ED796512F7E1A7B1D14FC4CC52C5BADE1",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-unavailable-中文 空白\\receipts",
+      "bytes": 25,
+      "rawSha256": "9BB0461C8C246CCD70C79AD3A7B7619968B9459E93A8B9E5FCCCC90B2507FA58",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-unavailable-中文 空白\\run_stock_task_hidden.ps1",
+      "bytes": 431,
+      "rawSha256": "90813A05496B9A9CA0F9189493F7E48FCBF5A44E4E81C9EB6576D895415A8FCF",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-2p65zxwe\\7-unavailable-中文 空白\\runner.json",
+      "bytes": 1111,
+      "rawSha256": "C89AFEA1DC26515502575AFD8EDC7D08F4885D98B08CF5C7E4148CC33DC5CF97",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\0-primary-中文 空白\\exit.txt",
+      "bytes": 1,
+      "rawSha256": "5FECEB66FFC86F38D952786C6D696C79C2DBC239DD4E91B46729D73A27FB57E9",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\0-primary-中文 空白\\marker.json",
+      "bytes": 208,
+      "rawSha256": "07D668C11A905133FC28C51FA8D9970ED796512F7E1A7B1D14FC4CC52C5BADE1",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\0-primary-中文 空白\\receipts\\stage-5b-test-only_1790006799080_94193669-bc82-4d40-9384-c6a203e8c6d0\\00-started.json",
+      "bytes": 469,
+      "rawSha256": "82170AFDB5E74CBF144B6A009A87C7EF85F582A05B52DFC3C6F5D6A177215A5A",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\0-primary-中文 空白\\receipts\\stage-5b-test-only_1790006799080_94193669-bc82-4d40-9384-c6a203e8c6d0\\01-process-started.json",
+      "bytes": 505,
+      "rawSha256": "5DB106C1B4D67A0DDF0EFDD1DE95D211AB6F2C5974D12766BCC59C955FA07749",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\0-primary-中文 空白\\receipts\\stage-5b-test-only_1790006799080_94193669-bc82-4d40-9384-c6a203e8c6d0\\02-terminal.json",
+      "bytes": 783,
+      "rawSha256": "ED584E41FCF3410487C17B9B4A9CF32CC36BB83B0D1CD08DDF9D80849F577307",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\0-primary-中文 空白\\run_stock_task_hidden.ps1",
+      "bytes": 431,
+      "rawSha256": "90813A05496B9A9CA0F9189493F7E48FCBF5A44E4E81C9EB6576D895415A8FCF",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\0-primary-中文 空白\\runner.json",
+      "bytes": 1099,
+      "rawSha256": "BF5C9333B43DE70F07E99A88F66A1A7D2EBEA89A8B0191B6F94E9CEC68CDB3EE",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\3010-primary-中文 空白\\exit.txt",
+      "bytes": 4,
+      "rawSha256": "FF4B467B7A593047C46682ECDBF6DA36B3F3BB4B50D35F08F17F751EF5F15531",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\3010-primary-中文 空白\\marker.json",
+      "bytes": 208,
+      "rawSha256": "07D668C11A905133FC28C51FA8D9970ED796512F7E1A7B1D14FC4CC52C5BADE1",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\3010-primary-中文 空白\\receipts\\stage-5b-test-only_1790006805618_14fb99df-a52f-468b-a887-3b7af1acac3e\\00-started.json",
+      "bytes": 469,
+      "rawSha256": "7E3CB310358C8C3E68A3CA9B48046BAE47C85D64DB53F41D52AA923CDF7C6BD1",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\3010-primary-中文 空白\\receipts\\stage-5b-test-only_1790006805618_14fb99df-a52f-468b-a887-3b7af1acac3e\\01-process-started.json",
+      "bytes": 505,
+      "rawSha256": "FF6EF813BE856D44778B84BF6DF5BF27231CE0375937D2B183396260A77B8AC5",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\3010-primary-中文 空白\\receipts\\stage-5b-test-only_1790006805618_14fb99df-a52f-468b-a887-3b7af1acac3e\\02-terminal.json",
+      "bytes": 788,
+      "rawSha256": "4526D3E53DBB04C11944A9D3206186DA4044626CDD2C5AF1D7F1EF57E9FF7086",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\3010-primary-中文 空白\\run_stock_task_hidden.ps1",
+      "bytes": 431,
+      "rawSha256": "90813A05496B9A9CA0F9189493F7E48FCBF5A44E4E81C9EB6576D895415A8FCF",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\3010-primary-中文 空白\\runner.json",
+      "bytes": 1108,
+      "rawSha256": "48EE85A0603DEE884FEE2FB0EC953D6707FD93D249DD4505A25B22E8C7522520",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-fallback-中文 空白\\exit.txt",
+      "bytes": 1,
+      "rawSha256": "7902699BE42C8A8E46FBBB4501726517E86B22C56A189F7625A6DA49081B2451",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-fallback-中文 空白\\fallback\\stage-5b-test-only_1790006808856_077603ea-bba7-4546-89fc-7457c591ec7d\\00-started.json",
+      "bytes": 469,
+      "rawSha256": "2698AE1B4B4131DF1FF613383F48EF860D496DDF8B77D649F3C32A1E2E9CE3E1",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-fallback-中文 空白\\fallback\\stage-5b-test-only_1790006808856_077603ea-bba7-4546-89fc-7457c591ec7d\\01-process-started.json",
+      "bytes": 505,
+      "rawSha256": "314B18F43FC3707F7C6177CAE5DF01C80172D3DD825535D5055525D2BB5D90AA",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-fallback-中文 空白\\fallback\\stage-5b-test-only_1790006808856_077603ea-bba7-4546-89fc-7457c591ec7d\\02-terminal.json",
+      "bytes": 776,
+      "rawSha256": "C6467650CE5F81CD8AE4F43E75A282A8E42B20E298852D82369BC41EB4B4350D",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-fallback-中文 空白\\marker.json",
+      "bytes": 208,
+      "rawSha256": "07D668C11A905133FC28C51FA8D9970ED796512F7E1A7B1D14FC4CC52C5BADE1",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-fallback-中文 空白\\receipts",
+      "bytes": 25,
+      "rawSha256": "9BB0461C8C246CCD70C79AD3A7B7619968B9459E93A8B9E5FCCCC90B2507FA58",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-fallback-中文 空白\\run_stock_task_hidden.ps1",
+      "bytes": 431,
+      "rawSha256": "90813A05496B9A9CA0F9189493F7E48FCBF5A44E4E81C9EB6576D895415A8FCF",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-fallback-中文 空白\\runner.json",
+      "bytes": 1102,
+      "rawSha256": "21651452583B0F89277D52C680BCD80CB02EB7FC852B2962C2EB142953F2EC14",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-primary-中文 空白\\exit.txt",
+      "bytes": 1,
+      "rawSha256": "7902699BE42C8A8E46FBBB4501726517E86B22C56A189F7625A6DA49081B2451",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-primary-中文 空白\\marker.json",
+      "bytes": 208,
+      "rawSha256": "07D668C11A905133FC28C51FA8D9970ED796512F7E1A7B1D14FC4CC52C5BADE1",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-primary-中文 空白\\receipts\\stage-5b-test-only_1790006802358_c6dc2b44-8579-4fcb-81d6-a11ee4a7112e\\00-started.json",
+      "bytes": 469,
+      "rawSha256": "6ACC3983D5A71C22E3A89AD7A55657A09F171BFA4BED8116A012B98C7E1420DC",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-primary-中文 空白\\receipts\\stage-5b-test-only_1790006802358_c6dc2b44-8579-4fcb-81d6-a11ee4a7112e\\01-process-started.json",
+      "bytes": 505,
+      "rawSha256": "1BC7F6E07A2AF205DC79AACBC53154B1FF7E841E97247509CA4884C2A1EBE1F7",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-primary-中文 空白\\receipts\\stage-5b-test-only_1790006802358_c6dc2b44-8579-4fcb-81d6-a11ee4a7112e\\02-terminal.json",
+      "bytes": 782,
+      "rawSha256": "15B46428E15970CC6FB228710BEE4C4284F4E3847E27FCD413A8AB06AC300D4E",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-primary-中文 空白\\run_stock_task_hidden.ps1",
+      "bytes": 431,
+      "rawSha256": "90813A05496B9A9CA0F9189493F7E48FCBF5A44E4E81C9EB6576D895415A8FCF",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-primary-中文 空白\\runner.json",
+      "bytes": 1099,
+      "rawSha256": "8D2B1B4E31FAFFBB413F62CC0CD0DCFCA716A073BB5EB0CC3A23A27056888201",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-unavailable-中文 空白\\exit.txt",
+      "bytes": 1,
+      "rawSha256": "7902699BE42C8A8E46FBBB4501726517E86B22C56A189F7625A6DA49081B2451",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-unavailable-中文 空白\\fallback",
+      "bytes": 25,
+      "rawSha256": "9BB0461C8C246CCD70C79AD3A7B7619968B9459E93A8B9E5FCCCC90B2507FA58",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-unavailable-中文 空白\\marker.json",
+      "bytes": 208,
+      "rawSha256": "07D668C11A905133FC28C51FA8D9970ED796512F7E1A7B1D14FC4CC52C5BADE1",
+      "disposition": "derived fixture observation"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-unavailable-中文 空白\\receipts",
+      "bytes": 25,
+      "rawSha256": "9BB0461C8C246CCD70C79AD3A7B7619968B9459E93A8B9E5FCCCC90B2507FA58",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-unavailable-中文 空白\\run_stock_task_hidden.ps1",
+      "bytes": 431,
+      "rawSha256": "90813A05496B9A9CA0F9189493F7E48FCBF5A44E4E81C9EB6576D895415A8FCF",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc\\fixtures-_pb1ejuu\\7-unavailable-中文 空白\\runner.json",
+      "bytes": 1111,
+      "rawSha256": "5D3234EB4B06D8952EB6D1CFFD72930F6DE5A9200DC4191700937566100778EE",
+      "disposition": "hash only; fixture config/script/storage blocker not published"
+    },
+    {
+      "source": "[DASHBOARD_PROJECT]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.HistoryApiTest.xml",
+      "bytes": 93460,
+      "rawSha256": "2B1BD1A5622531057F9C9E174F79089B73FD17AB1BFC90D8C4BE4E881EDDFB9C",
+      "disposition": "test outcomes only; environment/system-output excluded"
+    },
+    {
+      "source": "[DASHBOARD_PROJECT]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.HistoryApplicationRestartTest.xml",
+      "bytes": 23525,
+      "rawSha256": "138984235C56E770FF105048EAF47FDB9772F626CF3421177D538166916440E2",
+      "disposition": "test outcomes only; environment/system-output excluded"
+    },
+    {
+      "source": "[DASHBOARD_PROJECT]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.HistoryFailureApiTest.xml",
+      "bytes": 95510,
+      "rawSha256": "005CD4342223BE10BE54A23C139A5E145BEFFBD8AE3258B3C838BFF426377DC9",
+      "disposition": "test outcomes only; environment/system-output excluded"
+    },
+    {
+      "source": "[DASHBOARD_PROJECT]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.HistoryRepositoryTest.xml",
+      "bytes": 25689,
+      "rawSha256": "E5176AEED27CC3F5592E833DBEAEE9ED1257D41B8B61E2A18A88BC9E83280636",
+      "disposition": "test outcomes only; environment/system-output excluded"
+    },
+    {
+      "source": "[DASHBOARD_PROJECT]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.JobNormalizerTest.xml",
+      "bytes": 25081,
+      "rawSha256": "0FA8A00D323CDEEA6956370BD0C85A02FB156E87F7A6B91FE50DE810E1B99617",
+      "disposition": "test outcomes only; environment/system-output excluded"
+    },
+    {
+      "source": "[DASHBOARD_PROJECT]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.JobsApiTest.xml",
+      "bytes": 25224,
+      "rawSha256": "5AD754B834D8C0B4EA498A6A37E8F21603C3E43E6BF71FDB5BACC8E23C015D1C",
+      "disposition": "test outcomes only; environment/system-output excluded"
+    },
+    {
+      "source": "[DASHBOARD_PROJECT]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.JobServiceTest.xml",
+      "bytes": 22391,
+      "rawSha256": "76F3ECA6B21E1F6BEF921E395B6C6BCAAF0EF3D5592FE90C52653F4B27B75D5B",
+      "disposition": "test outcomes only; environment/system-output excluded"
+    },
+    {
+      "source": "[DASHBOARD_PROJECT]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.launcher.ConfigBootstrapTest.xml",
+      "bytes": 22673,
+      "rawSha256": "B7AD1D1A5B6214DC91A5747E2774F7144FCC6FAF83686A64BEC5E652C26ECAE7",
+      "disposition": "test outcomes only; environment/system-output excluded"
+    },
+    {
+      "source": "[DASHBOARD_PROJECT]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.launcher.SafeStopTest.xml",
+      "bytes": 23885,
+      "rawSha256": "4B995D396448315D7D3F34C2EEE9B436D05912F1D1941FCB94BB7AC8CF10646A",
+      "disposition": "test outcomes only; environment/system-output excluded"
+    },
+    {
+      "source": "[DASHBOARD_PROJECT]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.launcher.WindowsLauncherTest.xml",
+      "bytes": 22540,
+      "rawSha256": "A52A587A050251DF0E3C6482CF1E699942DDD00AE48104DBD4EE80D40359125E",
+      "disposition": "test outcomes only; environment/system-output excluded"
+    },
+    {
+      "source": "[DASHBOARD_PROJECT]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.LauncherStatusControllerTest.xml",
+      "bytes": 22199,
+      "rawSha256": "BE66E4CA1A0E3F7F25FA836FC957C0D231CB8312D1476111838E9C6E45146922",
+      "disposition": "test outcomes only; environment/system-output excluded"
+    },
+    {
+      "source": "[DASHBOARD_PROJECT]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.PowerShellCollectorTest.xml",
+      "bytes": 22918,
+      "rawSha256": "6BFBC7CCA982361ADD50F4320032249159BE46514F4DC7244027FE25F570D740",
+      "disposition": "test outcomes only; environment/system-output excluded"
+    },
+    {
+      "source": "[DASHBOARD_PROJECT]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.runner.ReceiptFilesTest.xml",
+      "bytes": 23976,
+      "rawSha256": "5D7038BAFF3229D1803E694CDD0C5C1070A6B43EC15E0A6CA20B059E20B286D2",
+      "disposition": "test outcomes only; environment/system-output excluded"
+    },
+    {
+      "source": "[DASHBOARD_PROJECT]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.runner.RunnerTest.xml",
+      "bytes": 27642,
+      "rawSha256": "3C41E62A2041CA159E05A8B87BFB47BEAB371F82718FA3586466CE1113AC16BF",
+      "disposition": "test outcomes only; environment/system-output excluded"
+    },
+    {
+      "source": "[DASHBOARD_PROJECT]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.TaskSelectionTest.xml",
+      "bytes": 22501,
+      "rawSha256": "01BEFB33CE67EE29794B85262CBDD354EFE430FC39342E59EE630697545B43C1",
+      "disposition": "test outcomes only; environment/system-output excluded"
+    },
+    {
+      "source": "[DASHBOARD_PROJECT]\\.tools\\stage-5b-package.log",
+      "bytes": 155356,
+      "rawSha256": "4F73E4BCEDBDDCE91068DFE68B653E492431EAF80AF2BB8C8D2489D16208DBD8",
+      "disposition": "derived check results only; raw log excluded"
+    },
+    {
+      "source": "[DASHBOARD_PROJECT]\\.tools\\stage-5b-frontend.log",
+      "bytes": 2947,
+      "rawSha256": "9953DAEEE3CDF3CCEC4D4A6F1C260FA33905A9B7E1B7F47712D2163CF4AC8BD2",
+      "disposition": "derived check results only; raw log excluded"
+    },
+    {
+      "source": "[DASHBOARD_PROJECT]\\.tools\\stage-5b-weekly-unit-evidence.txt",
+      "bytes": 113,
+      "rawSha256": "60B72FC0B07CE5B362692450F90D7771CBB1A82550A419A387BA25515B1D32CA",
+      "disposition": "derived check results only; raw log excluded"
+    }
+  ]
+}

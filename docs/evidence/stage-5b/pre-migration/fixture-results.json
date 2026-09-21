@@ -1,0 +1,43 @@
+{
+  "profileEquivalent": true,
+  "dashboardOffline": true,
+  "schedulerTouched": false,
+  "realChildInvoked": false,
+  "cases": [
+    {
+      "exitCode": 0,
+      "storage": "primary",
+      "sameArgumentsCwdUser": true,
+      "passed": true
+    },
+    {
+      "exitCode": 7,
+      "storage": "primary",
+      "sameArgumentsCwdUser": true,
+      "passed": true
+    },
+    {
+      "exitCode": 3010,
+      "storage": "primary",
+      "sameArgumentsCwdUser": true,
+      "passed": true
+    },
+    {
+      "exitCode": 7,
+      "storage": "fallback",
+      "sameArgumentsCwdUser": true,
+      "passed": true
+    },
+    {
+      "exitCode": 7,
+      "storage": "unavailable",
+      "sameArgumentsCwdUser": true,
+      "passed": true
+    },
+    {
+      "case": "missing-config",
+      "exitCode": 64,
+      "passed": true
+    }
+  ]
+}

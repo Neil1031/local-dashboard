@@ -1,0 +1,886 @@
+{
+  "profileId": "aistockhunter-accumulation-weekly",
+  "config": "%LOCALAPPDATA%\\LocalDashboard\\config\\runner.json",
+  "configHash": "94BF0F9CDB448EDDEB9383885A001ABB9116B85002AFF3CE38D2031C1DB26150",
+  "release": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f",
+  "java": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\java.exe",
+  "jar": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runner.jar",
+  "releaseHashes": [
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runner.jar",
+      "sha256": "6582B291D95B1D4FE070169D35E1622940703BB8CC0FED6E5CC24C694462F5AF"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\release",
+      "sha256": "EA3B8726A59D6A39FC2A75257AB3A060A10ABD42B06B7B08A80DEE9C57B5BD28"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-console-l1-1-0.dll",
+      "sha256": "880CB1680BF1977AA232CCCB59A49DC9D3708D940AF0F0A9029734216A6DC2BB"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-console-l1-2-0.dll",
+      "sha256": "233BB2AF5176DEB0957C42651CC2126328640C0816CCFD09A619AA5BEE9CE309"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-datetime-l1-1-0.dll",
+      "sha256": "D5BCEDB99014C6D0993EB76AF35AC16E820969ECFB149F19B75D02D603DD52A9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-debug-l1-1-0.dll",
+      "sha256": "7C8276339755ACD397F44B7AFFA938103EA72966D4C066A4CDC259BC0E8500FE"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-errorhandling-l1-1-0.dll",
+      "sha256": "0C06DFC6CD7D358B58EA4E6AF0CB54E0469BB89D5B2A12C187FC788F9543741F"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-fibers-l1-1-0.dll",
+      "sha256": "804C3AE2C3DC033BDC5BEEC45CB369C8470C0D9A790BED79B05AE93CDAD83460"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-fibers-l1-1-1.dll",
+      "sha256": "0456C30EE2124EBE7788CD7C41A96A8CE8F5C18E4F28C782E1BE4B9852C5B0B0"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-file-l1-1-0.dll",
+      "sha256": "7645683E443BA242E8AE03FA8241AAEC1C304BBB3B6EACD5897F85846D98E2C7"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-file-l1-2-0.dll",
+      "sha256": "B2C7CB7D8CC4D78D3AEAA33BE5F37FA72C8DACDAFB9259E2AB9C633EB4523221"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-file-l2-1-0.dll",
+      "sha256": "CF9BBD97661A1BAFE171E5F9FC1EDF7F172DA0BC6424E1B68550455196A0A049"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-handle-l1-1-0.dll",
+      "sha256": "A6A86EED6C1B67723D66B8715BC148E45650F3017C2A22D35AE2B06348A4B8E0"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-heap-l1-1-0.dll",
+      "sha256": "81CAE96E0876AA0B5242E2ACC6014B5C51F811389979D7DC583D3CB9374E549C"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-interlocked-l1-1-0.dll",
+      "sha256": "BCB5B0EC15FD59CF19D5FFC490A40D907C1F320C3A5F2B9570C24BF62D8C43D6"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-kernel32-legacy-l1-1-1.dll",
+      "sha256": "D3667ED353E1548C8833280E50834B634B9775D15D25CE0511D2B385D7A607A8"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-libraryloader-l1-1-0.dll",
+      "sha256": "007305876BDF0472C403DDCF8C1F8A0D3831427E06DDFAEA8E40AAAA8D870384"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-localization-l1-2-0.dll",
+      "sha256": "058A3BCB3C1E463BCE5C1990C369600DCCA924F1B0AAC87DDE15F10C00FB4AAF"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-memory-l1-1-0.dll",
+      "sha256": "B27F216BE782AD764C881D45612838EFE3E4EE34AC8A7171319D6D42C0BEE37B"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-namedpipe-l1-1-0.dll",
+      "sha256": "9054404F0AFF7AC16D86F672117715047EC1D2797A47ED44BDCB2FBB022421C5"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-processenvironment-l1-1-0.dll",
+      "sha256": "1EC7A2A06577BB6781FBD3E32176DE34E22692134E79ED3B478BDE9048C007F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-processthreads-l1-1-0.dll",
+      "sha256": "DD41ABEC22841140F58EE12B60F825D72BDB7B6C61765C4465C10DCB6072373E"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-processthreads-l1-1-1.dll",
+      "sha256": "0203D7EBE58D19216F53812A8944044C663DF83AD118FC3E308DFE8A694774FE"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-profile-l1-1-0.dll",
+      "sha256": "C4F24E945D3CB6362AC6CC396B8D235F16308C80831770E2B8B72456330FB475"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-rtlsupport-l1-1-0.dll",
+      "sha256": "E93BCAE3CCE38E176E7CDA2D3F83C04AEE03288062FB2A111468EC2FBC641BBB"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-string-l1-1-0.dll",
+      "sha256": "8EB1DA72518C92B2250E16E5FCF221BCC3FEBDCB9294F6830F3034756D44AAE9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-synch-l1-1-0.dll",
+      "sha256": "5F2C9C688FCBA002F7DD0FFCB22B213402A3F18FA5CEDE2A0A6D960A614AB6F6"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-synch-l1-2-0.dll",
+      "sha256": "7BD60AEE2DB91901C5804C6C69F9D877727BD8CDDEC30BCD047BC3AFEC5D8852"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-sysinfo-l1-1-0.dll",
+      "sha256": "0EEA540B635EADAE0D4FD77D72438D8F49658BC6433253BABF99FDF1FE3AEC0A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-sysinfo-l1-2-0.dll",
+      "sha256": "F03792B75B79CD3ED91953C2960019E5B5D331DD5BAD713B617CD3EC8D3150FB"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-timezone-l1-1-0.dll",
+      "sha256": "EF80D454DA25256A4C5AF5322CED313867576978E8201EC0946EAC21D44FE637"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-core-util-l1-1-0.dll",
+      "sha256": "910F94A276AC11A8F2721A5BDAF25C2089D2C5FA83FA593B05DBB0F5B00B6D27"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-crt-conio-l1-1-0.dll",
+      "sha256": "D306CB07DB31E3D74D2C79891E8C861FEAA13E8DFA5D1CE042CD777EA1566B0A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-crt-convert-l1-1-0.dll",
+      "sha256": "81F4B3CD11611AEAA94171EBC1079E501EC247E8DA6C113E6C81A3877ACCA15D"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-crt-environment-l1-1-0.dll",
+      "sha256": "1884872DBBE89023100D7F15E7B3A3EAC16C3C8E3C103016C87C223BDC60BA7A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-crt-filesystem-l1-1-0.dll",
+      "sha256": "54545D0571542469E80141D18E1AF3C5185F6CE849478F1BD829F53703A92AE1"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-crt-heap-l1-1-0.dll",
+      "sha256": "0D69F5D5720655DD15172949E379DCE5DC364E1920F6FCAB8F809AED7ED2CE9C"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-crt-locale-l1-1-0.dll",
+      "sha256": "7D49900CA3815F1737B10E0C7E603DDE326053D56E89139C41EAE3D27DEC7D8B"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-crt-math-l1-1-0.dll",
+      "sha256": "A991ECD3B528F586274C638CDFA196454F2BCCCA70692652867BF224F7CC6258"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-crt-multibyte-l1-1-0.dll",
+      "sha256": "0CD1B25EAF2EC2988F3BE4DF11DA60F0306FD0834B3465710DAE025D7781DB6D"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-crt-private-l1-1-0.dll",
+      "sha256": "B481E525346526CECCAC17603EB7D10B565201735E94E76AA0333BCA230FA723"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-crt-process-l1-1-0.dll",
+      "sha256": "95A4F71991DC98393A69A56C3562F38882A9842DAEB7F905E49D9B40A1EA5E38"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-crt-runtime-l1-1-0.dll",
+      "sha256": "09B320D575B456B1199E4E2B09D34D4200FB8146B297CA78D06D80E9158A45E0"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-crt-stdio-l1-1-0.dll",
+      "sha256": "4E72F645F47ABAE98427B4CE8C510F96112C16E640721CE3F82D3619EB3961A8"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-crt-string-l1-1-0.dll",
+      "sha256": "265C87B9A63420DE788BA7855E847B4EB794C4256080EEACF64B81E70AF889CD"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-crt-time-l1-1-0.dll",
+      "sha256": "AC90C44B194135BF555AC7DF2405D443DA87E1374E5B5BB408A2761A9BC63E3D"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\api-ms-win-crt-utility-l1-1-0.dll",
+      "sha256": "3FC3564E2276E8149856E74F59F594549D017A3A967EA66450E1C04AF8768BC8"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\awt.dll",
+      "sha256": "8007BB1E0EECCDBBAC74A9B7F11FA9374CE90494619F05A88C27CD649C1C2582"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\fontmanager.dll",
+      "sha256": "94F3A4CD2776A48DD9CFAB2D48058BDAC9D475276F13DDD0BF677304797FF2AD"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\freetype.dll",
+      "sha256": "1C18DDB5A0F99DBD91214A04A7EDC23282A6E6DC29A9E9DC7E7716A0F50203F7"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\instrument.dll",
+      "sha256": "CBFCA8B1E27E4AA1FECBE8EA90BC212EE90072125E7B130FEC63239669CA920E"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\j2gss.dll",
+      "sha256": "50439BF2C4343A3B032AD6626A9A3796821F028FA94598CFA1E30355E407856A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\java.dll",
+      "sha256": "396AF136F9F9295259FB5F5FEDF9993972A5DD45D9B2AD118DFEFF15E2E4BD9D"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\java.exe",
+      "sha256": "63267782812F84001922687FEEAA93C3218C7A1F03409F0650DCDBEF2E7BC8CB"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\javajpeg.dll",
+      "sha256": "6CED0A57431BE66F42A02BF7E6BB6047BD117B7BEC124E7700EC7E63D722E685"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\javaw.exe",
+      "sha256": "4296DF628D57E4EFED8AFD5E0CF6109862A186B825E6FE85721B3C028F663CFD"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\jawt.dll",
+      "sha256": "313CF752D2960C105EB1F60F4BD4DE628E2BC344396DD7056B466D4E0F62D1E2"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\jimage.dll",
+      "sha256": "929531AE936031D3054BEDA7D21044A1FD4874C3ADCE558F993879C04E43240B"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\jli.dll",
+      "sha256": "7611E414AC53D08AAF7F3B81D2B66C7801B40FD0EF1242C3B2D32AF6CAD5F663"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\jrunscript.exe",
+      "sha256": "282EC823882C4D4707B48673B820BA031AF668DAC316997174693A544747A562"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\jsound.dll",
+      "sha256": "F6B8A0F4724762A284FA575725BC8F58062B1F5AEE0E2C23321916CC4794F128"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\keytool.exe",
+      "sha256": "773C267D0E7C9E94C2FDD90AAAE026940BAB380A9EDA9518353F5D27E00E0D0C"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\kinit.exe",
+      "sha256": "5329F60F30EFAA4648E90C5BDC46E78CDF27C347A65A7EEE0415BE935B9E3156"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\klist.exe",
+      "sha256": "1832F2C19297FC374270BC7764522688B264F88056C5D927DADE18B390A567D8"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\ktab.exe",
+      "sha256": "851134651A1AB48BD9A9F9512B4DD0EE6AD7437BE07451939A5E3939703320A3"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\lcms.dll",
+      "sha256": "4E7E7AABEB406607217D0A0BFAD8B93853F348DB74825C36A88FDCB7CE10C511"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\management_ext.dll",
+      "sha256": "3115BA7BA612B9C3EF21FD9CF0A1E014D737E34E31DFD926999DCE65F64A6E49"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\management.dll",
+      "sha256": "3D2FDE953DF0AD5ACA1ED06944AB73E045649C13721975E0F359BA10AE5449B4"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\mlib_image.dll",
+      "sha256": "AC2FE8ACCDDEA3C49D60429125E492B9AA9A8891C5CF5F7C26CDCF8771E61B32"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\msvcp140.dll",
+      "sha256": "B99EB28A471311113F5C4109CB3C463F39CFD9BDB3B07F706204DEDDDB4516A1"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\net.dll",
+      "sha256": "8004A2ED43787005D1293612F55458C5BD0861235731D50BBDCA9B750AC07992"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\nio.dll",
+      "sha256": "23C83B83B31C62B93976E91F59AB4DF3DCAC096B63F666F8CF14B8C2FAD18EB3"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\prefs.dll",
+      "sha256": "32F57E241E45EB521319579290E21519A1E9DA5119CC8EA1A7BA6FEEE2F76AE0"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\rmi.dll",
+      "sha256": "52C74C0F445ADAB267B4AC44253CD10DBDF0E3DCE1D02AE44E01F406B268E37E"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\rmiregistry.exe",
+      "sha256": "CBD5703BFE351C5E65E5EF9C391F2E3D604CADBB961E3FA80D2491968F85AD61"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\splashscreen.dll",
+      "sha256": "6D4DEA2812A5A9740AA6C3B4CBB27D54692AF310933F47971844829A36F11003"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\sspi_bridge.dll",
+      "sha256": "6C68AE40D52B45B3F09CC206C9E4987A8AB3CC9A806339FCF847373B7F54926C"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\syslookup.dll",
+      "sha256": "3074EC3D2336292237189D614F3A1D8B1D25AF3E0F63378FF97C6BBB7C399813"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\ucrtbase.dll",
+      "sha256": "3088326CB0FE5B5646E02C7B2DE71AE363FCD26A0000CF32209C8BED05A7A866"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\vcruntime140_1.dll",
+      "sha256": "6A99BC0128E0C7D6CBBF615FCC26909565E17D4CA3451B97F8987F9C6ACBC6C8"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\vcruntime140.dll",
+      "sha256": "052AD6A20D375957E82AA6A3C441EA548D89BE0981516CA7EB306E063D5027F4"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\verify.dll",
+      "sha256": "5ED2925DA8293BCAAC7569D96F6B32ABDC027C6ACF79B06A5557BF7BC17BD070"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\w2k_lsa_auth.dll",
+      "sha256": "1ED9816A9EE977583F19A38AF2238DC1CC92CCBD4D3A48CEE5D848313F52F31C"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\zip.dll",
+      "sha256": "07C5F1BD14E592E591D6F495AB6C1BFC32AF40553E21450F608B9D3816CA81D7"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\bin\\server\\jvm.dll",
+      "sha256": "B490375D4040FFA39BECD1A2A38C63C39C0AC704E5F807AACD8408C984F6B949"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\conf\\jaxp-strict.properties.template",
+      "sha256": "3CC9B87633769414B22C24C97ECDED8A15DF630FE5AB12ABCA2398D88E31B32B"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\conf\\jaxp.properties",
+      "sha256": "D4F45052A100E5AEF02B6638A3B9C69B2BDD46155CEB58A52671E5D594C30100"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\conf\\logging.properties",
+      "sha256": "8590633E1E8A7D88FFE74CC04189C5C61B1ED4703180CBC851DCD5575EFCCE74"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\conf\\net.properties",
+      "sha256": "594BC40230A0BD7C441FE069989D66E534A6BAE2EE5910F9F4BF64E59B583256"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\conf\\sound.properties",
+      "sha256": "299C2360B6155EB28990EC49CD21753F97E43442FE8FAB03E04F3E213DF43A66"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\conf\\security\\java.security",
+      "sha256": "FDE0E205EFED66F3578B68798F5CBD47AA337F354EDBF7EE65E8EE78B531E7AE"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\conf\\security\\policy\\README.txt",
+      "sha256": "6DA0747334B0FEA7592FD92614B2BBC8B126535E129B1FEE483774D914E98EB5"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\conf\\security\\policy\\limited\\default_local.policy",
+      "sha256": "2B2627548E61316150D47FFC3E6CAD465CA05B3CCCD4785EB7D21AA7BAA0F441"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\conf\\security\\policy\\limited\\default_US_export.policy",
+      "sha256": "758B930A526FC670AB7537F8C26321527050A31F5F42149A2DDA623C56A0A1A9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\conf\\security\\policy\\limited\\exempt_local.policy",
+      "sha256": "8C3D7648ABCD95A272CE12DB870082937F4D7F6878D730D83CB7FBB31EB8B2C9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\conf\\security\\policy\\unlimited\\default_local.policy",
+      "sha256": "8D8A318E6D90DFD7E26612D2B6385AA704F686CA6134C551F8928418D92B851A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\conf\\security\\policy\\unlimited\\default_US_export.policy",
+      "sha256": "758B930A526FC670AB7537F8C26321527050A31F5F42149A2DDA623C56A0A1A9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.base\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "A69BCE275BA7A3570AF6579CB0F55682CD75FEDFCD49E0E8E9022270C447C916"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.base\\aes.md",
+      "sha256": "45C6D4DA48325EDFBFF3DCF71C704E504C057904435ED23C6D57046D551EB69D"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.base\\ASSEMBLY_EXCEPTION",
+      "sha256": "75292F03BF23D3DB7C985AECC191029B93883200721ED23ED34A2E601463DF33"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.base\\c-libutl.md",
+      "sha256": "BEF40679922D6FDFB7E4DDB223AD6722300F6054BA737BBF6188D60FCEC517F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.base\\cldr.md",
+      "sha256": "472E341C36EFC1136860ED7A6461A2AF4A53AE95D55D1126726340F5BA62B06A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.base\\icu.md",
+      "sha256": "BE23AD20A8231D2241B37FCF401548FEBD8597DE8373F89268882020CB7C8818"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.base\\LICENSE",
+      "sha256": "4B9ABEBC4338048A7C2DC184E9F800DEB349366BDF28EB23C2677A77B4C87726"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.base\\public_suffix.md",
+      "sha256": "861DE1E4992A7D28F1DE25C73CD50D26A94779EBD749C0643FECFA56442C3429"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.base\\siphash.md",
+      "sha256": "5A792B5A74AD2A5F3D6A7AD8B7A841116E58A772C18BC6E392320A365B222C76"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.base\\unicode.md",
+      "sha256": "5194D6760F2E7ECCC07804196CC619F84E730FA9D10C0529B71416186F4D12DC"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.base\\wepoll.md",
+      "sha256": "3AC2992770080453B98C42AFA807BA4B2C1738EF756B92A55C645F55E7DF48F0"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.base\\zlib.md",
+      "sha256": "809B62BA648E02302F7D9EA6B6886C10D5253AC86AD528038A50C73EADA5FCE2"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.compiler\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "EBF9777BD307ED789CEABF282A9ACA168C391C7F48E15A60939352EFB3EA33F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.compiler\\ASSEMBLY_EXCEPTION",
+      "sha256": "B998CDA101E5A1EBCFB5FF9CDDD76ED43A2F2169676592D428B7C0D780665F2A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.compiler\\LICENSE",
+      "sha256": "86E0516B888276A492B19F9A84F5A866ED36925FAE1510B3A94A0B6213E69192"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.datatransfer\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "EBF9777BD307ED789CEABF282A9ACA168C391C7F48E15A60939352EFB3EA33F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.datatransfer\\ASSEMBLY_EXCEPTION",
+      "sha256": "B998CDA101E5A1EBCFB5FF9CDDD76ED43A2F2169676592D428B7C0D780665F2A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.datatransfer\\LICENSE",
+      "sha256": "86E0516B888276A492B19F9A84F5A866ED36925FAE1510B3A94A0B6213E69192"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.desktop\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "EBF9777BD307ED789CEABF282A9ACA168C391C7F48E15A60939352EFB3EA33F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.desktop\\ASSEMBLY_EXCEPTION",
+      "sha256": "B998CDA101E5A1EBCFB5FF9CDDD76ED43A2F2169676592D428B7C0D780665F2A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.desktop\\colorimaging.md",
+      "sha256": "04D61E3E8E71DD452EBE52008AF5378D9F6640D14578AEB515DC5375973B0189"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.desktop\\freetype.md",
+      "sha256": "65EE85395DC7A1521DA39BE7672E8902F1CF3411FD32ED1560D0E5DAC11580F7"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.desktop\\giflib.md",
+      "sha256": "2ABB4EA821FD70BFE62269913D4872766748533BE5DC3DE88D15DF7FF6CFB0BF"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.desktop\\harfbuzz.md",
+      "sha256": "B3F327A8B36D56BEB152B3FD1BB5A7F245362CBEA123EBBC68F8907F741B552A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.desktop\\jpeg.md",
+      "sha256": "C1DFB9719A71AD9F861F8728550542D681E25C8EF40E6393606E6E2A0C1D653A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.desktop\\lcms.md",
+      "sha256": "3FEA7C1D86EE0955F4B3911F9EDFC0452008131727E6219255EFDD3CC11095BE"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.desktop\\libpng.md",
+      "sha256": "4E4C0ECD9795B9181538EA94FA63E6817E6E1F4B51481D720ADAEE0FDE409C20"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.desktop\\LICENSE",
+      "sha256": "86E0516B888276A492B19F9A84F5A866ED36925FAE1510B3A94A0B6213E69192"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.desktop\\mesa3d.md",
+      "sha256": "63F4E6F75CAEBBCCB95D903FB43E46AC7111B3624D0A34F146B276D7D9E7B152"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.instrument\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "EBF9777BD307ED789CEABF282A9ACA168C391C7F48E15A60939352EFB3EA33F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.instrument\\ASSEMBLY_EXCEPTION",
+      "sha256": "B998CDA101E5A1EBCFB5FF9CDDD76ED43A2F2169676592D428B7C0D780665F2A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.instrument\\LICENSE",
+      "sha256": "86E0516B888276A492B19F9A84F5A866ED36925FAE1510B3A94A0B6213E69192"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.logging\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "EBF9777BD307ED789CEABF282A9ACA168C391C7F48E15A60939352EFB3EA33F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.logging\\ASSEMBLY_EXCEPTION",
+      "sha256": "B998CDA101E5A1EBCFB5FF9CDDD76ED43A2F2169676592D428B7C0D780665F2A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.logging\\LICENSE",
+      "sha256": "86E0516B888276A492B19F9A84F5A866ED36925FAE1510B3A94A0B6213E69192"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.management\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "EBF9777BD307ED789CEABF282A9ACA168C391C7F48E15A60939352EFB3EA33F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.management\\ASSEMBLY_EXCEPTION",
+      "sha256": "B998CDA101E5A1EBCFB5FF9CDDD76ED43A2F2169676592D428B7C0D780665F2A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.management\\LICENSE",
+      "sha256": "86E0516B888276A492B19F9A84F5A866ED36925FAE1510B3A94A0B6213E69192"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.management.rmi\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "EBF9777BD307ED789CEABF282A9ACA168C391C7F48E15A60939352EFB3EA33F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.management.rmi\\ASSEMBLY_EXCEPTION",
+      "sha256": "B998CDA101E5A1EBCFB5FF9CDDD76ED43A2F2169676592D428B7C0D780665F2A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.management.rmi\\LICENSE",
+      "sha256": "86E0516B888276A492B19F9A84F5A866ED36925FAE1510B3A94A0B6213E69192"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.naming\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "EBF9777BD307ED789CEABF282A9ACA168C391C7F48E15A60939352EFB3EA33F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.naming\\ASSEMBLY_EXCEPTION",
+      "sha256": "B998CDA101E5A1EBCFB5FF9CDDD76ED43A2F2169676592D428B7C0D780665F2A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.naming\\LICENSE",
+      "sha256": "86E0516B888276A492B19F9A84F5A866ED36925FAE1510B3A94A0B6213E69192"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.net.http\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "EBF9777BD307ED789CEABF282A9ACA168C391C7F48E15A60939352EFB3EA33F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.net.http\\ASSEMBLY_EXCEPTION",
+      "sha256": "B998CDA101E5A1EBCFB5FF9CDDD76ED43A2F2169676592D428B7C0D780665F2A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.net.http\\LICENSE",
+      "sha256": "86E0516B888276A492B19F9A84F5A866ED36925FAE1510B3A94A0B6213E69192"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.prefs\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "EBF9777BD307ED789CEABF282A9ACA168C391C7F48E15A60939352EFB3EA33F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.prefs\\ASSEMBLY_EXCEPTION",
+      "sha256": "B998CDA101E5A1EBCFB5FF9CDDD76ED43A2F2169676592D428B7C0D780665F2A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.prefs\\LICENSE",
+      "sha256": "86E0516B888276A492B19F9A84F5A866ED36925FAE1510B3A94A0B6213E69192"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.rmi\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "EBF9777BD307ED789CEABF282A9ACA168C391C7F48E15A60939352EFB3EA33F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.rmi\\ASSEMBLY_EXCEPTION",
+      "sha256": "B998CDA101E5A1EBCFB5FF9CDDD76ED43A2F2169676592D428B7C0D780665F2A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.rmi\\LICENSE",
+      "sha256": "86E0516B888276A492B19F9A84F5A866ED36925FAE1510B3A94A0B6213E69192"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.scripting\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "EBF9777BD307ED789CEABF282A9ACA168C391C7F48E15A60939352EFB3EA33F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.scripting\\ASSEMBLY_EXCEPTION",
+      "sha256": "B998CDA101E5A1EBCFB5FF9CDDD76ED43A2F2169676592D428B7C0D780665F2A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.scripting\\LICENSE",
+      "sha256": "86E0516B888276A492B19F9A84F5A866ED36925FAE1510B3A94A0B6213E69192"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.se\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "EBF9777BD307ED789CEABF282A9ACA168C391C7F48E15A60939352EFB3EA33F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.se\\ASSEMBLY_EXCEPTION",
+      "sha256": "B998CDA101E5A1EBCFB5FF9CDDD76ED43A2F2169676592D428B7C0D780665F2A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.se\\LICENSE",
+      "sha256": "86E0516B888276A492B19F9A84F5A866ED36925FAE1510B3A94A0B6213E69192"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.security.jgss\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "EBF9777BD307ED789CEABF282A9ACA168C391C7F48E15A60939352EFB3EA33F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.security.jgss\\ASSEMBLY_EXCEPTION",
+      "sha256": "B998CDA101E5A1EBCFB5FF9CDDD76ED43A2F2169676592D428B7C0D780665F2A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.security.jgss\\LICENSE",
+      "sha256": "86E0516B888276A492B19F9A84F5A866ED36925FAE1510B3A94A0B6213E69192"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.security.sasl\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "EBF9777BD307ED789CEABF282A9ACA168C391C7F48E15A60939352EFB3EA33F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.security.sasl\\ASSEMBLY_EXCEPTION",
+      "sha256": "B998CDA101E5A1EBCFB5FF9CDDD76ED43A2F2169676592D428B7C0D780665F2A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.security.sasl\\LICENSE",
+      "sha256": "86E0516B888276A492B19F9A84F5A866ED36925FAE1510B3A94A0B6213E69192"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.sql\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "EBF9777BD307ED789CEABF282A9ACA168C391C7F48E15A60939352EFB3EA33F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.sql\\ASSEMBLY_EXCEPTION",
+      "sha256": "B998CDA101E5A1EBCFB5FF9CDDD76ED43A2F2169676592D428B7C0D780665F2A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.sql\\LICENSE",
+      "sha256": "86E0516B888276A492B19F9A84F5A866ED36925FAE1510B3A94A0B6213E69192"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.sql.rowset\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "EBF9777BD307ED789CEABF282A9ACA168C391C7F48E15A60939352EFB3EA33F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.sql.rowset\\ASSEMBLY_EXCEPTION",
+      "sha256": "B998CDA101E5A1EBCFB5FF9CDDD76ED43A2F2169676592D428B7C0D780665F2A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.sql.rowset\\LICENSE",
+      "sha256": "86E0516B888276A492B19F9A84F5A866ED36925FAE1510B3A94A0B6213E69192"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.transaction.xa\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "EBF9777BD307ED789CEABF282A9ACA168C391C7F48E15A60939352EFB3EA33F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.transaction.xa\\ASSEMBLY_EXCEPTION",
+      "sha256": "B998CDA101E5A1EBCFB5FF9CDDD76ED43A2F2169676592D428B7C0D780665F2A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.transaction.xa\\LICENSE",
+      "sha256": "86E0516B888276A492B19F9A84F5A866ED36925FAE1510B3A94A0B6213E69192"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.xml\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "EBF9777BD307ED789CEABF282A9ACA168C391C7F48E15A60939352EFB3EA33F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.xml\\ASSEMBLY_EXCEPTION",
+      "sha256": "B998CDA101E5A1EBCFB5FF9CDDD76ED43A2F2169676592D428B7C0D780665F2A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.xml\\bcel.md",
+      "sha256": "853A1E7CE397BB10DE0E2B3BDE0844BCC651F17D983DECD07D2D003C0304C311"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.xml\\dom.md",
+      "sha256": "6686E8877667584A3A7C07344BAADCA1A03E29F677162D87C3C0811E990D1148"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.xml\\jcup.md",
+      "sha256": "8D5DCFDF50455A3C34C753A98F21E953248AF200415A9084E3F102CB6C43B8BF"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.xml\\LICENSE",
+      "sha256": "86E0516B888276A492B19F9A84F5A866ED36925FAE1510B3A94A0B6213E69192"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.xml\\schema10part1.md",
+      "sha256": "B220F891E5BFA3AA4B2A4B34DFAB53A291553C2AE0FD0B15A4CB1116D4E97770"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.xml\\schema10part2.md",
+      "sha256": "2350E35E91866D5EE5BD7EE7C303B3E424BBCA335D36C71452588AAC494EAA3E"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.xml\\xalan.md",
+      "sha256": "02BD013FC3F438DBB8FA41FA57888177E015EFA6431D37FCE6E794C6F353A6A1"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.xml\\xerces.md",
+      "sha256": "4A6BF6B367193EE68681CB2D9FED30FFC5D62DD2D477BD62E0271707D71B3244"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.xml\\xhtml10.md",
+      "sha256": "9A5CDE47073CA80CF59127891420F4AED603EB65070738AD027BB19E76FB9319"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.xml\\xhtml10schema.md",
+      "sha256": "7BC51D884AAAE6EF27551EE78D404BA3116356790DA3D06B665679EB2E1CC002"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.xml\\xhtml11.md",
+      "sha256": "4F99A390896F0F55A0B78376DE89BFD2AC845713DE85E67E37F884B77E0C3122"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.xml\\xhtml11schema.md",
+      "sha256": "8CD69B1392E286538008F4CB003F85CAEA3A375C619E697813D820B69857CF74"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.xml\\xmlspec.md",
+      "sha256": "AFEC263BF5DC67697EE33734EE243F86A878161335EF6298273E4041673B0544"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.xml\\xmlxsd.md",
+      "sha256": "498A5FEC63509A8F3949983BB6878AC5C95AAF1D5E3679272D93314371AA0211"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.xml.crypto\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "EBF9777BD307ED789CEABF282A9ACA168C391C7F48E15A60939352EFB3EA33F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.xml.crypto\\ASSEMBLY_EXCEPTION",
+      "sha256": "B998CDA101E5A1EBCFB5FF9CDDD76ED43A2F2169676592D428B7C0D780665F2A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.xml.crypto\\LICENSE",
+      "sha256": "86E0516B888276A492B19F9A84F5A866ED36925FAE1510B3A94A0B6213E69192"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\java.xml.crypto\\santuario.md",
+      "sha256": "D08690D25F660F145C73365D260ED522CD0AACE8A0E1396706551B7A1AE8C9A3"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\jdk.charsets\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "EBF9777BD307ED789CEABF282A9ACA168C391C7F48E15A60939352EFB3EA33F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\jdk.charsets\\ASSEMBLY_EXCEPTION",
+      "sha256": "B998CDA101E5A1EBCFB5FF9CDDD76ED43A2F2169676592D428B7C0D780665F2A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\jdk.charsets\\LICENSE",
+      "sha256": "86E0516B888276A492B19F9A84F5A866ED36925FAE1510B3A94A0B6213E69192"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\jdk.crypto.ec\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "EBF9777BD307ED789CEABF282A9ACA168C391C7F48E15A60939352EFB3EA33F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\jdk.crypto.ec\\ASSEMBLY_EXCEPTION",
+      "sha256": "B998CDA101E5A1EBCFB5FF9CDDD76ED43A2F2169676592D428B7C0D780665F2A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\jdk.crypto.ec\\LICENSE",
+      "sha256": "86E0516B888276A492B19F9A84F5A866ED36925FAE1510B3A94A0B6213E69192"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\jdk.management\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "EBF9777BD307ED789CEABF282A9ACA168C391C7F48E15A60939352EFB3EA33F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\jdk.management\\ASSEMBLY_EXCEPTION",
+      "sha256": "B998CDA101E5A1EBCFB5FF9CDDD76ED43A2F2169676592D428B7C0D780665F2A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\jdk.management\\LICENSE",
+      "sha256": "86E0516B888276A492B19F9A84F5A866ED36925FAE1510B3A94A0B6213E69192"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\jdk.unsupported\\ADDITIONAL_LICENSE_INFO",
+      "sha256": "EBF9777BD307ED789CEABF282A9ACA168C391C7F48E15A60939352EFB3EA33F9"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\jdk.unsupported\\ASSEMBLY_EXCEPTION",
+      "sha256": "B998CDA101E5A1EBCFB5FF9CDDD76ED43A2F2169676592D428B7C0D780665F2A"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\legal\\jdk.unsupported\\LICENSE",
+      "sha256": "86E0516B888276A492B19F9A84F5A866ED36925FAE1510B3A94A0B6213E69192"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\lib\\classlist",
+      "sha256": "11EE337EC529C15DF186DC5F83950D2EB320F62A4C2911B8002E588EEB732496"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\lib\\fontconfig.bfc",
+      "sha256": "C7E2E76B908CB6330823E698889943C162E9861A4575501CBB59C9B830158AB0"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\lib\\fontconfig.properties.src",
+      "sha256": "74E6C464AE1E63983ADA241869FDC66EF8C28CEF403EE2301E0A90DB9555B00C"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\lib\\jawt.lib",
+      "sha256": "163220A0CA37814A50676294B8D1FE5079694AAC27BB05D68B4C02FA011DF1E1"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\lib\\jrt-fs.jar",
+      "sha256": "33A9A0293DBFD5FC09DA64629D12FA54CCE3E633A4D70FB1C58BBE72BE2623B6"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\lib\\jvm.cfg",
+      "sha256": "AA9EFB969444C1484E29ADECAB55A122458090616E766B2F1230EF05BC3867E0"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\lib\\jvm.lib",
+      "sha256": "7E060D96D1B0965D881B651C8CBFB0FA95B1B27B5B291F0069C9100A6C8735CA"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\lib\\modules",
+      "sha256": "631E3830C813A06D99EB92C92912958565BF90009018027875B835502B8947BF"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\lib\\psfont.properties.ja",
+      "sha256": "5A4BD51B969BF187FF86D94F4A71FDFBFA602762975FA3C73D264B4575F7C78F"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\lib\\psfontj2d.properties",
+      "sha256": "CFB2F55FC4A22368567273C38F1AFE3FC627AD56710A1D922ADA68015710E53F"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\lib\\tzdb.dat",
+      "sha256": "7BE2A3ADF10FF841579629F7725B15F0DB41E8856527EC72847B5477073A3D29"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\lib\\tzmappings",
+      "sha256": "3929AB1380771D0D542D91CFBAE02CE519A76678F5F63813739A6C6B98DC6D72"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\lib\\security\\blocked.certs",
+      "sha256": "583500B76965EB54B03493372989AB4D3426F85462D1DB232C5AE6706A4D6C58"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\lib\\security\\cacerts",
+      "sha256": "707312D3E8018928F53D108E4534F628CBBFAD18196DF1A2E72884300BE1A69F"
+    },
+    {
+      "path": "%LOCALAPPDATA%\\LocalDashboard\\runner\\releases\\pilot-6582b291d95b1d4f\\runtime\\lib\\security\\public_suffix_list.dat",
+      "sha256": "37E71E43C8605F29B9072F152D0EA4708735CDF335A5B68B2BC2F875760806C3"
+    }
+  ],
+  "originalHash": "2D4183FDB670188DCAEDEE657366401DE7E69F2C8ACCD0E0F545A514FFC07E67",
+  "desiredFileHash": "A209624682AACB8D06EC208FD8038BC9F5B520B2FB6F540B6C952997F6EC38E9",
+  "childWorkingDirectory": "C:\\WINDOWS\\System32",
+  "originalWorkingDirectory": ""
+}
