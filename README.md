@@ -300,9 +300,12 @@ Stage 5A 提供以下本機 runner；尚無 receipt UI/API、logs UI 或 30-day 
 Stage 5B 單一 task pilot 已進行遷移與 rollback 驗證，但真實排程啟動未通過，最終恢復 original Action；
 完整結果與證據界線見 [`docs/STAGE-5B.md`](docs/STAGE-5B.md)。尚未保留任何正式 task migration。
 
-Stage 5B Retry 停在 preflight 的 principal 字串比對失敗，未啟動診斷 fixture 或正式 weekly，
-也未 Apply 正式任務。最終 weekly XML/ACL 仍與 original 完全相同；另觀察到一個 Windows task
-definition drift，因此整體 Gate 為 FAILED。詳見 [`docs/STAGE-5B-RETRY.md`](docs/STAGE-5B-RETRY.md)。
+Stage 5B Retry attempt 1 的 principal 字串比對失敗紀錄保留於
+[`docs/STAGE-5B-RETRY.md`](docs/STAGE-5B-RETRY.md)。Manager 授權的 identity fix／attempt 2
+已通過 canonical SID、Scheduler preflight 與 controlled integrity；唯一一次正式 weekly
+回傳 1，因此依規則 exact rollback，最終仍是 original Action，整體 Gate 為 FAILED。
+Ambient system-task drift 另記為 `EXTERNAL_DRIFT_OBSERVED`；詳見
+[`docs/STAGE-5B-RETRY-IDENTITY-FIX.md`](docs/STAGE-5B-RETRY-IDENTITY-FIX.md)。
 
 - [Microsoft Task Scheduler result codes](https://learn.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-error-and-success-constants)
 - [Spring Boot 3.5 system requirements](https://docs.spring.io/spring-boot/3.5/system-requirements.html)

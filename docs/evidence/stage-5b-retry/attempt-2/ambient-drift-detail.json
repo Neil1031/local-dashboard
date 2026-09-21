@@ -1,0 +1,10 @@
+{
+  "task": "\\Microsoft\\Windows\\Flighting\\OneSettings\\RefreshCache",
+  "observedStartBoundaries": [
+    "2026-09-22T02:28:01+08:00"
+  ],
+  "currentXmlTextSha256": "8B9C13CD1A81E8EEF740DF8BF3689E83EBAD6FAE0D570D611E096F82D93F811E",
+  "actor": "UNKNOWN",
+  "cause": "UNKNOWN",
+  "modifiedByThisWork": false
+}

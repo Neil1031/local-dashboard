@@ -1,0 +1,564 @@
+{
+  "at": "2026-09-21T18:44:10.521360+00:00",
+  "stockRoot": "[WORKSPACE]\\ai-stock-hunter",
+  "weeklyRoot": "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\weekly-checks",
+  "logPath": "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\weekly-check-task.log",
+  "protected": {
+    "[USERPROFILE]\\AppData\\Local\\LocalDashboard\\config\\application.yml": {
+      "sha256": "0F4FE18A5FC3861EB7D8F823421E8123605F6C0A5DA5F2E4226A7327E7F41FF5",
+      "bytes": 447
+    },
+    "[USERPROFILE]\\AppData\\Local\\LocalDashboard\\config\\application.yml.backup-20260921-184630": {
+      "sha256": "3F43077EB1CBABC7675388E198F7B5DC943A84C60ECE9F5986D66CCE92248EFE",
+      "bytes": 406
+    },
+    "[USERPROFILE]\\AppData\\Local\\LocalDashboard\\config\\runner.json": {
+      "sha256": "94BF0F9CDB448EDDEB9383885A001ABB9116B85002AFF3CE38D2031C1DB26150",
+      "bytes": 792
+    },
+    "[USERPROFILE]\\AppData\\Local\\LocalDashboard\\data\\local-dashboard.db": {
+      "sha256": "A962E27CD966359747DDDE0FF9D0B0A9BD2F3F206C85F696AACC3B7F20998A17",
+      "bytes": 28672
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\data\\unexplained_volume.sqlite3": {
+      "sha256": "4EDEA6C29D00C86129D7B33C5152A2667F9D4C953C929B6C4DF69706E2A6AC7C",
+      "bytes": 18739200
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\data\\unexplained_volume.sqlite3.accumulation-lock.sqlite3": {
+      "sha256": "A0B56139A21F40BB74FA01DEF7901B7250FE5A152135D13D3B5E31B45B82D0FA",
+      "bytes": 8192
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\accumulation\\0bda5c5a180349aca40bd5153b418335\\2026-09-18-before.sqlite3": {
+      "sha256": "5E97249922C2CBE14FA6F5452ADFD32E7DCA9C72E36AB7F96BEDA9086AF93D8D",
+      "bytes": 18305024
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\accumulation\\0bda5c5a180349aca40bd5153b418335\\2026-09-18.sqlite3": {
+      "sha256": "CE9B3122450996D7113C14C4C6AA9D2DC28920F4EAFDD6F4FE12D31D7223B8FA",
+      "bytes": 18423808
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\accumulation\\0bda5c5a180349aca40bd5153b418335\\2026-09-21-before.sqlite3": {
+      "sha256": "622DD9E1922D5F86B8E37729CD1F4AAEC423D5186871AC17874C5595167420F3",
+      "bytes": 18198528
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\accumulation\\0bda5c5a180349aca40bd5153b418335\\2026-09-21.sqlite3": {
+      "sha256": "AA5D836B5A191B10C6525530909916321C9989C38ED105D7C00E6B8A48730455",
+      "bytes": 18321408
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\accumulation\\1ba648d2c9ec47b886bf2eb05321537d\\2026-09-18-before.sqlite3": {
+      "sha256": "0B27BECFE76A81A3AA44D92A3420BADC908DCAC12C44B8D4BC840CEAA58CD95F",
+      "bytes": 18661376
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\accumulation\\1ba648d2c9ec47b886bf2eb05321537d\\2026-09-18.sqlite3": {
+      "sha256": "F4057506C8E022710D10DF790DC5403AAC04DA3718E77770CE1E0DC84FED8202",
+      "bytes": 18759680
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\accumulation\\1ba648d2c9ec47b886bf2eb05321537d\\2026-09-21-before.sqlite3": {
+      "sha256": "B9A6AE8ADC98B3A5BA2CE7BC7F689D4361BCA1CA5638A614D875E22E3D4CC946",
+      "bytes": 18567168
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\accumulation\\1ba648d2c9ec47b886bf2eb05321537d\\2026-09-21.sqlite3": {
+      "sha256": "66D1D1E5E37DD8382DB562FE642CCC2952A54781B9B2FEB5E461048C81FBF656",
+      "bytes": 18698240
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\accumulation\\24fb93f7ef9d4600904aebd2122c97e1\\2026-09-18-before.sqlite3": {
+      "sha256": "1D970972E6DF5D717CBAE80D88FC4DCE8BF31CD054981E22510883F3E4651D16",
+      "bytes": 18100224
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\accumulation\\24fb93f7ef9d4600904aebd2122c97e1\\2026-09-18.sqlite3": {
+      "sha256": "F20E87516E669B7E7B2752AB6EFEE0A32F68818EDF02444601138C2E3DA47BD1",
+      "bytes": 18219008
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\accumulation\\24fb93f7ef9d4600904aebd2122c97e1\\2026-09-21-before.sqlite3": {
+      "sha256": "EB7EF2971C65AE794E147BF403505D062BD5A4C650EBFE937591527684651F1E",
+      "bytes": 13959168
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\accumulation\\24fb93f7ef9d4600904aebd2122c97e1\\2026-09-21.sqlite3": {
+      "sha256": "AC8E6AE42195E8C1D0693EEFC1B8AF9216FDF8608D8CDC00741B533834899FD1",
+      "bytes": 18837504
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\accumulation\\497b14ad72df4547a9a2248054153264\\2026-09-18-before.sqlite3": {
+      "sha256": "88432AA76DBFD59D0FBE8F9A8E4704D6656DCFBA68D5F911D6892FBFB6C8F317",
+      "bytes": 18481152
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\accumulation\\497b14ad72df4547a9a2248054153264\\2026-09-18.sqlite3": {
+      "sha256": "CE4A708AEEBCB3303C30BA1FFA6575028D976BDC18E5902BC463AAB8FF847D3B",
+      "bytes": 18608128
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\accumulation\\497b14ad72df4547a9a2248054153264\\2026-09-21-before.sqlite3": {
+      "sha256": "CB4E0D6EBA263C8F0DDA9DB2794E5315DCB44D1BAF922DF5CAFB8ACC37CBA266",
+      "bytes": 18382848
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\accumulation\\497b14ad72df4547a9a2248054153264\\2026-09-21.sqlite3": {
+      "sha256": "EF7DAE3049290099045B0FD68BB0D3ACB7606741D691884CF77260BBDDDB0F5C",
+      "bytes": 18505728
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\accumulation\\a54d146e25ab480f969c5e72a024a661\\2026-09-18-before.sqlite3": {
+      "sha256": "72F346DD74615EAF4B56781AA2A50EC98D6C36117EEB89EF7CE79B7BBD973F19",
+      "bytes": 466944
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\accumulation\\a54d146e25ab480f969c5e72a024a661\\2026-09-18.sqlite3": {
+      "sha256": "7F2C1089C29B826C54F1EC9DFD64E2458C0D3647A6F1A785B28AADE3FFA0E668",
+      "bytes": 6750208
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\accumulation\\a82799db1fbd44f49ce56306259a1597\\2026-09-18-before.sqlite3": {
+      "sha256": "5129EF38032B92FF64D4DDF809D89535ACF537F2F4BD58AF9BB6B7A44E3E0D1A",
+      "bytes": 9519104
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\accumulation\\a82799db1fbd44f49ce56306259a1597\\2026-09-18.sqlite3": {
+      "sha256": "7E9CC619335BDB1BDD0277E60192129D0CC777AA72F3A217B17FF89C743630C1",
+      "bytes": 14352384
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\accumulation\\a82799db1fbd44f49ce56306259a1597\\2026-09-21-before.sqlite3": {
+      "sha256": "CCD52489E98BE2B67B188D51F2AD6C902D51A6D3BAC671F203D48C731DA2CCC3",
+      "bytes": 6483968
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\accumulation\\a82799db1fbd44f49ce56306259a1597\\2026-09-21.sqlite3": {
+      "sha256": "2657EFAF5EDAA785DE9E457B4F1302C9E692E3F44DECAA16E0302EC8425D4B81",
+      "bytes": 9834496
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\accumulation-notifications.sqlite3": {
+      "sha256": "8C47E0FFBC9D4D0B48E285700133A4F312DBD4965D62BB075EE6A9422461F0B7",
+      "bytes": 327680
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\accumulation-notifications.sqlite3.accumulation-lock.sqlite3": {
+      "sha256": "A0B56139A21F40BB74FA01DEF7901B7250FE5A152135D13D3B5E31B45B82D0FA",
+      "bytes": 8192
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\daily-task.log": {
+      "sha256": "68722BAF26C396DA00CD8AA1382D5D48F27285519BAE85D51ACCA82545EDC1A2",
+      "bytes": 269979
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\latest_daily_accumulation_operation.json": {
+      "sha256": "EFEEDA559D6535AA844A227AB16AD1A2734163701293E9F35B7A5295C3ED805E",
+      "bytes": 75188
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\latest_daily_task.json": {
+      "sha256": "167279A723297221786CEC4650FE20661BF2482DE8B5121995250E7293AF0E5A",
+      "bytes": 75863
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\operation-journal.sqlite3": {
+      "sha256": "CC427134FA38BBD2842E06CCEB457B03A6DD31ED8698C236E8A051B134EE5664",
+      "bytes": 1236992
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\runs\\0bda5c5a180349aca40bd5153b418335\\run.json": {
+      "sha256": "346B72BB87DA48AEAE71CE4C1EE2D4C188DCBA57A9739DCAC3D7D94DD59659CF",
+      "bytes": 70898
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\runs\\1ba648d2c9ec47b886bf2eb05321537d\\run.json": {
+      "sha256": "EFEEDA559D6535AA844A227AB16AD1A2734163701293E9F35B7A5295C3ED805E",
+      "bytes": 75188
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\runs\\24fb93f7ef9d4600904aebd2122c97e1\\run.json": {
+      "sha256": "2B7575B5F3B973CFE86F241DF5C03ABC512B3A56EC013B0B6FCC2DEA4A8683C3",
+      "bytes": 70878
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\runs\\497b14ad72df4547a9a2248054153264\\run.json": {
+      "sha256": "8CDE66F713F57262F25D2A36922EDECD843C3D5860F810DBF7552259D43AF469",
+      "bytes": 70918
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\runs\\a54d146e25ab480f969c5e72a024a661\\run.json": {
+      "sha256": "944D00AF7FE0ECD0C57924D6C1A8090467AA374C5A5A7167530C2FAE14C4AF07",
+      "bytes": 45184
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\runs\\a82799db1fbd44f49ce56306259a1597\\run.json": {
+      "sha256": "63D3F67681BC32C361D47E1BEFB5D9B272C4378E9AC074671C648CFE0EBCB0BE",
+      "bytes": 76425
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\startup-check-task.log": {
+      "sha256": "BE443CC19E770799148DF30ADA21F8A3B29CD4F37B38EA1F0F8F008696777187",
+      "bytes": 115596
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\startup-checks\\2026-09-18-7d293ada56164c068171ea38d0d14faf.json": {
+      "sha256": "667988771A48DC2AEDC5C7300034242CB9ABC7D6107A5C333DD76E9B75D495AC",
+      "bytes": 58777
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\startup-checks\\2026-09-18.json": {
+      "sha256": "667988771A48DC2AEDC5C7300034242CB9ABC7D6107A5C333DD76E9B75D495AC",
+      "bytes": 58777
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\startup-checks\\2026-09-21-f0f8673c510048adb16c0a44a5e7f28e.json": {
+      "sha256": "12E2399E596CDD27BD0789899E886973DF01166FCFF99A88ECC3C6CCBD993860",
+      "bytes": 56815
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\startup-checks\\2026-09-21.json": {
+      "sha256": "12E2399E596CDD27BD0789899E886973DF01166FCFF99A88ECC3C6CCBD993860",
+      "bytes": 56815
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\task-attempts\\7178bfc28ceb441790db444aa5fca3b1-delivery.json": {
+      "sha256": "BE3F44E5C7F9AD56C447B9466B4E3B5095CBC203C63FCBB101C2D3AF0D93FA82",
+      "bytes": 72053
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\task-attempts\\7178bfc28ceb441790db444aa5fca3b1.json": {
+      "sha256": "CF88996856865AA06CD1B6EA1ACDDBDABEB6D84B4E3F77BA720E5E7CD9A57B77",
+      "bytes": 75493
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\task-attempts\\92ea5fe021634630b2adedd1f9f5ef25-delivery.json": {
+      "sha256": "167279A723297221786CEC4650FE20661BF2482DE8B5121995250E7293AF0E5A",
+      "bytes": 75863
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\task-attempts\\92ea5fe021634630b2adedd1f9f5ef25.json": {
+      "sha256": "A0E13908F826A55BCE97EEBC506894F217DE86CE3E1912BB376A16A351D13BF1",
+      "bytes": 79484
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\task-attempts\\daily-worker.accumulation-lock.sqlite3": {
+      "sha256": "A0B56139A21F40BB74FA01DEF7901B7250FE5A152135D13D3B5E31B45B82D0FA",
+      "bytes": 8192
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\task-attempts\\f9092e675a51405db7789f2ec8a509ff-delivery.json": {
+      "sha256": "F4EDD05D72D7483EB4CA5CE9C75CCAD1AB7D6CE535A382C77B396C4A04BEEA7B",
+      "bytes": 76727
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\task-attempts\\f9092e675a51405db7789f2ec8a509ff.json": {
+      "sha256": "FD97B9165941A909D842E2E3E4343368D0AC971A8AE485B5FC97244D9839315B",
+      "bytes": 81527
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\__init__.py": {
+      "sha256": "250FF1BE3AEFBF963676FCB1F66CEF9BE773DEB36BAE24F0A135543BE7FDFF2A",
+      "bytes": 81
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\__main__.py": {
+      "sha256": "80DB5084406D090ABAEA44139EA86282EBC0DED9D18A887A0D9E2F24E118BAE2",
+      "bytes": 19075
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\accumulation_delivery.py": {
+      "sha256": "F419060E1E454252D339E0658B33F87F916F96964BE6A46B5796EA02EEE0AE47",
+      "bytes": 7025
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\action_results.py": {
+      "sha256": "F54DDBD33766CE46200037F3C7284B7DE674C0C876ABA05910A4837316AEE8E8",
+      "bytes": 11083
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\agents.py": {
+      "sha256": "D120ED0BF83BD2523D0025D59D2AAA5B2F70289993BD1E296B88C98EDD7D3DFE",
+      "bytes": 31053
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\ai.py": {
+      "sha256": "2C9C477F4AC71D6F27300D999636F74A1D6EBFC1D2540BD7AF6609866131C6FE",
+      "bytes": 2599
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\api.py": {
+      "sha256": "9236A964BD400F6FAFEFFFAA252B89E7AF2D7790FBA6C5FEEB30B1ABE3DFBF8F",
+      "bytes": 19556
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\article_audit.py": {
+      "sha256": "9352E99B0A7F30E3AB9F95336BF44B55A4087B72261A848693E20149CF4CF94F",
+      "bytes": 5404
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\article_resolver.py": {
+      "sha256": "D6EEE2717C5B33C8D222B639D2879EE4F633EC048D37C89DC882027C81AA2915",
+      "bytes": 4663
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\article_time.py": {
+      "sha256": "7E61AAEEA4E2BC6F21EF35FC91AE428E959DE317629561102F6B5EB245D44AC3",
+      "bytes": 2354
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\audit.py": {
+      "sha256": "8D11E2CD0E86A2D9FC04CD238DB0C57DC7BF447D021D9D5DAC92FCC5224365CA",
+      "bytes": 6072
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\broker.py": {
+      "sha256": "EB02ACB00CDA826B8B9683C8A087082A82941B53F32D9D4BF52B7D3080D9AB2B",
+      "bytes": 6660
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\capital_suspensions.py": {
+      "sha256": "BD280B3721763979B1F3D175DFE5DF50C172B61DC12A13BE83ACA072E51DFCA5",
+      "bytes": 4880
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\coverage_policy.py": {
+      "sha256": "E37EA19BF6A2B1CE71F80E8F825BAF4D9A55B8DD0EE01CDC8F9C748B926BCCD2",
+      "bytes": 8793
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\csv_importer.py": {
+      "sha256": "564FB05A079210A0197CF66B1A625778EF070455A21CDBF407C71ABD4490BC3B",
+      "bytes": 21380
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\daily_accumulation.py": {
+      "sha256": "D1E852BE7D7F01C3B3F3B5A8747628D42B4FAFB6A787D79D458997A952A3FE91",
+      "bytes": 30138
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\data_gaps.py": {
+      "sha256": "9C5C7E79B8BCBD3033929AF80191C4D3A7AD42D921CB5B43951FD4B0C6A24C59",
+      "bytes": 7249
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\data_quality.py": {
+      "sha256": "845EF6D86532046FFF7B296B83E48EB75A3C9420249B439163BE925727A7E852",
+      "bytes": 11575
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\database_promotion.py": {
+      "sha256": "2B8640C44785685B09EE5180AFFF786240704E9BFD4D06CBAABF81C0DAF9D7F4",
+      "bytes": 6287
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\dated_disclosures.py": {
+      "sha256": "21B77093D062CCDECBB584D69206728D8923255C5ED4A2447A326464254503B3",
+      "bytes": 9125
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\db.py": {
+      "sha256": "D771583B8C92923B6F21133B6570AA37F10DE2D8C70A42AD3313FCCD1634180C",
+      "bytes": 29642
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\decision_quality.py": {
+      "sha256": "82F554313CDCD45CA446708799B7AF359B0576E7AACE6167324C9F2CBA081DC5",
+      "bytes": 10087
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\decisions.py": {
+      "sha256": "7CAAE6D1356FBC2F42EA752E4E9148F0268FE0D06A481B45D3EB70DB0DEF9FC6",
+      "bytes": 1680
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\divination\\__init__.py": {
+      "sha256": "555DE58E13DFE991A30000FC2498AAAFB27DE87EC69C8B91C527D4C708FC2E66",
+      "bytes": 776
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\divination\\dashboard.py": {
+      "sha256": "4AAFBFF1471F08733F1DB70917393FA426345AA828D2F28157AFB8856955B92D",
+      "bytes": 9921
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\divination\\db_bridge.py": {
+      "sha256": "A6ED418E8F362315052118293A097ED3F352BFE3F3933858483AD64D129D59DF",
+      "bytes": 11221
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\divination\\meihua.py": {
+      "sha256": "F2BC209C889DBEDDFAB99B23D0A46252866438DC063C19A3FBA6991E7508609C",
+      "bytes": 3739
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\divination\\orders.py": {
+      "sha256": "9B1B0ABCCD58C1C2680F76F7F9E5F018C1F5B6CE8F5DE4488D5EE44DB5C9B209",
+      "bytes": 7200
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\divination\\pipeline.py": {
+      "sha256": "C93A3CC5673368015C11A0E254D0C639449B7C0D304AE677CD2EAAFD80B066D8",
+      "bytes": 24735
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\divination\\rules.py": {
+      "sha256": "59D16FD82D3D33674E69DA2BED0FCD85E1D8440E60E985B10F8117E85E7634F7",
+      "bytes": 3541
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\divination\\run_log.py": {
+      "sha256": "5566F2CE00C32A1845E8DFC978D7271BB9E6B3240DD98E6540A0A473276753E9",
+      "bytes": 3587
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\divination\\scheduler.py": {
+      "sha256": "120DC0B046E22502384BA4054C879942F74F57AD8740B6A9F326B7C003D1E45E",
+      "bytes": 4369
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\divination\\tarot.py": {
+      "sha256": "1B5FA55B2553F9B137EC2F5EAE3D7AF2241D5A7276AE64F4AC9AD1791B045339",
+      "bytes": 5300
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\divination\\web.py": {
+      "sha256": "289AA2DB1F8FC9F937EBCA5B0B550124E12D3444B1A0C4FAF6791430A1997397",
+      "bytes": 4713
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\http_transport.py": {
+      "sha256": "FCCAC4135CE51D39E8AB6B1AA99BE7561035E26088CDB80B5BB608D9B68D99AE",
+      "bytes": 901
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\index_context.py": {
+      "sha256": "C1229E3B432C0920A2518F1CF0C339B1C944F33AB2D36B32BCE8DF3638F53C5B",
+      "bytes": 15478
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\market_closures.py": {
+      "sha256": "A215B470CD2B7FA2B3F53819577D1D9403040084E71E1DD07DC28B2122A17DBE",
+      "bytes": 6464
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\market_context.py": {
+      "sha256": "0A23DD3A8EA547F2D25934096058ED13D29586E19EDCC7698AD40A07EED6A2B6",
+      "bytes": 9832
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\market_history.py": {
+      "sha256": "17E209CC4438388A91427707A31711301EFA93C2A6CD868E5610EAA03A1C708C",
+      "bytes": 5923
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\mops_status.py": {
+      "sha256": "7AC5729B337FD42CF61B9D71CDA02DF4833FEC1B4B664F950F0FF4B11E04405B",
+      "bytes": 363
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\news_associations.py": {
+      "sha256": "36DF3029E5034CE8333336F88F494BC61E2D42D929EC1842C73F794FDCF13493",
+      "bytes": 11673
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\news_identity.py": {
+      "sha256": "CBDE92556850DB65DD99DE203FB658828D6068FC700946237CA85C51DD912CFA",
+      "bytes": 10270
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\notification_intents.py": {
+      "sha256": "29F74BC80307FA42EEB514A3C5FCE09F155D5F68AC9CF8850AD3FA600A0411CE",
+      "bytes": 5562
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\official_content.py": {
+      "sha256": "1D0479FC72EE20CCED0FA56C202728600EAFDCF5483D1578B74D3F033A09EC13",
+      "bytes": 9503
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\official_status.py": {
+      "sha256": "D4C569619A90BDD985E938AEBBF0B4D97E7B5AB9DCBC99C873AF44A2EFE68581",
+      "bytes": 12809
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\operation_journal.py": {
+      "sha256": "5A402708957ADCB20E7D85A053B9EBD12041061C7B1132C67299724DA989D571",
+      "bytes": 8843
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\operations.py": {
+      "sha256": "3137347D7031A786F5C5EA9B5DB176E8D517B5E9331DCF4D1BEBC4EBB643B7A3",
+      "bytes": 3084
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\portfolio.py": {
+      "sha256": "5F148A1CFC5E4AACA7320435BA7992B3AA802B975B79E76EB7AB323B758EB9DC",
+      "bytes": 8917
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\provider_execution.py": {
+      "sha256": "BEAD48946DA9DE71C6BD1E0FD2DEDE1806A81E43B8408333DAE5FE442B1040E0",
+      "bytes": 3517
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\provider_profiles.py": {
+      "sha256": "E4D4B093C7A8E2709CC4329752F720A266FDB4C54C7665CFFB739CF1D974C9F0",
+      "bytes": 14637
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\providers.py": {
+      "sha256": "C16652D56372EF44CCF817364653F72805CB5C9669E3C22E163789D7E1F1F61E",
+      "bytes": 44523
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\public_info.py": {
+      "sha256": "C6736937BFF5FB80AF11B1C578190E53496C980FEB742BF78205AFB8B416FC53",
+      "bytes": 41573
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\quote_scopes.py": {
+      "sha256": "BF392599D978C868C92B2FFD87113EA3B10C375343DD112C3EAC862131007E71",
+      "bytes": 8691
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\readiness.py": {
+      "sha256": "0CBF089BF7C1EAF7A67E43EEB50E014904CB0AF82923A02C350A5C8A370CFE81",
+      "bytes": 16193
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\replay.py": {
+      "sha256": "EF68CC5FC345BBB2CB5F632E78426FB300F7CE047CF4520EA9BD3FC04BCCB93C",
+      "bytes": 5502
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\report.py": {
+      "sha256": "FC6F7FA7C8CFA9EE636109418C4631844A8072FB0714D3DE4E36DCA0E25CDBF5",
+      "bytes": 23374
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\scanner.py": {
+      "sha256": "74F499C1A0F0745690860131080F1EAD7F8B9000193CA1D6AE00100B7B4ED679",
+      "bytes": 21915
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\scheduler.py": {
+      "sha256": "213659115DCB876108DDB5843828DC34FE20E93D2A729BB83017708C7C293BC7",
+      "bytes": 10499
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\scoring.py": {
+      "sha256": "E05B293E845D728E261FE63800C93CA3A5AAC7637ACBE22B45BD21D996832B64",
+      "bytes": 15940
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\simulator.py": {
+      "sha256": "1EF7AF78475B325EC8EAB92D2631832C41B16B3B073F4821E94AA23FE277579B",
+      "bytes": 16860
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\status.py": {
+      "sha256": "22E00D3C6E8585C835D88683D6F77ADA51D1C0F0CAAC360499702E40FEFE97C5",
+      "bytes": 2027
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\status_history.py": {
+      "sha256": "09C16C7801154972C9C233572216EF6ED8AC441A43DAE16672E771CEFBB8A388",
+      "bytes": 6493
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\taiwan_official.py": {
+      "sha256": "AFD52733CC945B22459696ECF30BBF748558F33B1C9D80408A4698ABBA1AF74C",
+      "bytes": 79755
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\ui.py": {
+      "sha256": "347317244CD4056DEE0515F8B2F2C9A15C899D93E31EC8E218011BD1BBA68D01",
+      "bytes": 16975
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\unexplained_volume.py": {
+      "sha256": "2228B74790EAE890DB3027D8497089715D0B9CF8F82C0D0E5E22DA07444CD0AA",
+      "bytes": 31895
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\weekly_accumulation_check.py": {
+      "sha256": "3306F4794A45A6C6CE5F8C0DB72B7948E7FB67C815ACE90B2088EDFFD6B61D88",
+      "bytes": 5456
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\work_budget.py": {
+      "sha256": "AD973041A7F72FC1F591D02313F73E5D7FD9B2222BB5DA94BA0535C099195FE4",
+      "bytes": 776
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\stock_hunter\\worker_identity.py": {
+      "sha256": "923C1B8ECC9E3BCF0CE1F45CE1B0B0676D456DDCFA41DC0965D5049F41995A9A",
+      "bytes": 1654
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\tools\\DivinationStockGuiLauncher\\obj\\Release\\net8.0-windows\\win-x64\\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs": {
+      "sha256": "F7A5D9789C863625E139FF99E1113A503830F6B85A88F6129916DF83AC76B49E",
+      "bytes": 198
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\tools\\DivinationStockGuiLauncher\\obj\\Release\\net8.0-windows\\win-x64\\DivinationStockGuiLauncher.AssemblyInfo.cs": {
+      "sha256": "6C1D539B26683285757615E56B00D8BE6DBD683E82DF2D4B705A488591988A1C",
+      "bytes": 1144
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\tools\\DivinationStockGuiLauncher\\obj\\Release\\net8.0-windows\\win-x64\\DivinationStockGuiLauncher.GlobalUsings.g.cs": {
+      "sha256": "427D9A42FA44FD3D6C018A63A0D55B7C737DFDF7FC82CF33C069304BEA4C74BE",
+      "bytes": 377
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\tools\\DivinationStockGuiLauncher\\Program.cs": {
+      "sha256": "E8195C876B7FB18D14EB595F8C1EA787E012DA69E52A49B1D75B234AFE7FA7C0",
+      "bytes": 5202
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\tools\\generate_sample_data.py": {
+      "sha256": "829CEE8A13F4B942EAE08E0D903E0E18DFDB8DE2B924B49D1BAC090E1CBDB4FC",
+      "bytes": 6859
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\tools\\install_accumulation_checks.ps1": {
+      "sha256": "3532C6D9586B1814A668742590AAFE0CBBF56A211D5A997FBD41BE572FA3568D",
+      "bytes": 2014
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\tools\\install_accumulation_weekly_check.ps1": {
+      "sha256": "31B22D42E63D63728E1422CAD82AAB418674752DCAC8D8405B7AECB855D0DABE",
+      "bytes": 1604
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\tools\\install_unexplained_volume_health_task.ps1": {
+      "sha256": "15F0AA961CEF97BAD693146359607CF0214D73D51F9DBE458C5C333AF4AD0805",
+      "bytes": 289
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\tools\\install_unexplained_volume_task.ps1": {
+      "sha256": "F9229A1964BE3991694E2A8800969A656C044026BE4C81FB8FD7C0DEADA32A0C",
+      "bytes": 3602
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\tools\\install_unexplained_volume_v2_weekly_task.ps1": {
+      "sha256": "F3E71305037BA8719A1948DEEBDB29F4712706E303C2BB99FEFA4EFEB2DC884F",
+      "bytes": 287
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\tools\\notify_stock.ps1": {
+      "sha256": "EA86828F9F948ECF9CC58456E7A31F4B2FB21D871785D2990DB41F2AFB6AFD01",
+      "bytes": 1325
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\tools\\run_stock_task.py": {
+      "sha256": "7DB7F2544CC1B814D4E69D25ABC097654A50D8596A7019C5C336C7F0E50EE99E",
+      "bytes": 6658
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\tools\\run_stock_task_hidden.ps1": {
+      "sha256": "A06E784BF74EE74E7283B511F0DE81964F90B1CD5BC73EB8C4A081967A2D0A58",
+      "bytes": 2069
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\tools\\verify_pipeline.py": {
+      "sha256": "88D0E42DAF95E14449A4FFE44F3CEFFE7B0831657DF6782DD9EC0813F2741DA4",
+      "bytes": 30596
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\tools\\WindowsTaskJob.cs": {
+      "sha256": "5AF3B7D783F4B58A51671D5289A9D30DFA4502490C61482901A1121DDD3D12D3",
+      "bytes": 6537
+    }
+  },
+  "weekly": {
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\weekly-checks\\2026-09-18-9176acae01a44b43ac0a6e05672afffc.json": {
+      "sha256": "DB726DBED651BF5384CC46E6CBA7AC35EEBE19C1DF654008AA7578CE43FC9F88",
+      "bytes": 69889
+    },
+    "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\weekly-checks\\latest.json": {
+      "sha256": "DB726DBED651BF5384CC46E6CBA7AC35EEBE19C1DF654008AA7578CE43FC9F88",
+      "bytes": 69889
+    }
+  },
+  "log": {
+    "sha256": "8685CEC83F26BB7C38FD96B77D857B62AC89B65DA00571A7113153A136BBE2ED",
+    "bytes": 69891
+  },
+  "receipts": {},
+  "stockGitStatusHash": "AF0741ACA6FE1E8B1CBD5BB87B7589DC7169E3CECD39D63B0C6639CC1C17FABC"
+}

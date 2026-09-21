@@ -1,0 +1,20 @@
+{
+  "rehearsal": {
+    "exactXml": true,
+    "aclUnchanged": true,
+    "controlledIntegrity": "PASSED",
+    "checkedAt": "2026-09-22T02:44:43.1177842+08:00",
+    "restoredHash": "2D4183FDB670188DCAEDEE657366401DE7E69F2C8ACCD0E0F545A514FFC07E67",
+    "originalHash": "2D4183FDB670188DCAEDEE657366401DE7E69F2C8ACCD0E0F545A514FFC07E67",
+    "allTaskCount": 234
+  },
+  "final": {
+    "allTaskCount": 234,
+    "exactXml": true,
+    "controlledIntegrity": "PASSED",
+    "checkedAt": "2026-09-22T02:45:26.2347369+08:00",
+    "aclUnchanged": true,
+    "restoredHash": "2D4183FDB670188DCAEDEE657366401DE7E69F2C8ACCD0E0F545A514FFC07E67",
+    "originalHash": "2D4183FDB670188DCAEDEE657366401DE7E69F2C8ACCD0E0F545A514FFC07E67"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "liveReceiptFileCount": 3,
+  "lastTaskResult": 1,
+  "originalTaskCount": 234,
+  "differencesFromOriginal": [
+    {
+      "key": "\\Microsoft\\Windows\\Flighting\\OneSettings\\RefreshCache",
+      "before": "1E513621ADA8F2997A6B425AC39391998698EA87DE93A10D0A1BD2CFE90D8DB0",
+      "after": "8B9C13CD1A81E8EEF740DF8BF3689E83EBAD6FAE0D570D611E096F82D93F811E"
+    }
+  ],
+  "state": "Ready",
+  "instances": 0,
+  "enabled": true,
+  "at": "2026-09-22T02:48:20.7312873+08:00",
+  "weeklyExactOriginalXml": true,
+  "formalManualRequestCount": 1,
+  "cause": "UNKNOWN",
+  "controlledOperationIntegrity": "PASSED",
+  "controlledCheckpointCount": 18,
+  "lastRunTime": "2026-09-22T02:45:14.0000000+08:00",
+  "classification": "EXTERNAL_DRIFT_OBSERVED",
+  "differencesSinceControlledAnchor": [],
+  "finalAction": "ORIGINAL",
+  "nextRunTime": "2026-09-25T22:00:00.0000000+08:00",
+  "listener8080Count": 0,
+  "sameSingleRunMetadata": true,
+  "lastControlledCheckpointAt": "2026-09-22T02:45:26.2198051+08:00",
+  "baselineReplaced": false,
+  "weeklyExactOriginalAcl": true,
+  "weeklyAclHash": "B0009463B81FBF8226801FF458EA586EB46021BB485E9C6716ADA956A802E81C",
+  "weeklyXmlHash": "2D4183FDB670188DCAEDEE657366401DE7E69F2C8ACCD0E0F545A514FFC07E67",
+  "unexpectedUserOrPilotDrift": [],
+  "finalTaskCount": 234,
+  "diagnosticAbsent": true,
+  "actor": "UNKNOWN",
+  "originalInventoryFileHash": "25BCD5F273EFF6B530E927E05AA22762C6DFB3531C576CE06B427D1BBBEE6FA2"
+}

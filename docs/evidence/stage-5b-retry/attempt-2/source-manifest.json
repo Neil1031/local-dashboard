@@ -1,0 +1,330 @@
+{
+  "exportedAt": "2026-09-21T18:51:05.053548+00:00",
+  "sources": [
+    {
+      "source": "[ORIGINAL_PRIVATE_BACKUP]\\preflight-result.json",
+      "rawSha256": "9F8732CAE3FE88ACC87B857820EE2FF371B727A0C19D9BCE83A72BADFABFC8A2",
+      "bytes": 669,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ORIGINAL_PRIVATE_BACKUP]\\final-audit.json",
+      "rawSha256": "487533B72B58ED1F133DDA30BD75BC02CB86B457218211D0B4CF1BF06423F907",
+      "bytes": 1739,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\preflight-result.json",
+      "rawSha256": "722E71F33674143A5D18BD1F96980A2E9A098064F731F5A34DD1EA7EA4BC975D",
+      "bytes": 77975,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\live-result.json",
+      "rawSha256": "ACFF0AC5043E94DD0138FD1121EB8507F4DACDC0BCFE6F00B1E1C0732994BF9D",
+      "bytes": 3885,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\ambient-audit.json",
+      "rawSha256": "6FB9148C1406A04EB5555472723FBDA8EE4DF2CD0181ABC2BDEEE8E74FECFF7B",
+      "bytes": 1479,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\live-files-after.json",
+      "rawSha256": "59FB682FA4DFA8123438573FFF1B0BC2344552D42115BF49F3AD358518B2AB00",
+      "bytes": 2640,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\live-files-before.json",
+      "rawSha256": "C9EE0DC24C35F4F9E7E32731A02DCB5A2ED988BF3E580685959C1A74BF9B1E65",
+      "bytes": 29768,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\deployment-final.json",
+      "rawSha256": "30F64343C4EF7614DC4E6E9A3EAD065ED35903829708E17A97BBF483F984B318",
+      "bytes": 681,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\rollback-rehearsal.json",
+      "rawSha256": "F858D5FE49FA366B57F145380A9C3F247DABFD9B165C0F209D25E046B8D82167",
+      "bytes": 336,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\final-rollback-verification.json",
+      "rawSha256": "B2E016F19490D371C1E7CDFC04755CE6B4ECA8E8A8C23EAB899A55C132D7380D",
+      "bytes": 336,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\integrity-anchor.json",
+      "rawSha256": "9A5D049F82D621909A25BD4B9209A6B22988DF2BBEB74BA3929D0F5E05A227CF",
+      "bytes": 698,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\checkpoints\\20260921-183834-4430331-before-registration.json",
+      "rawSha256": "FEB96EDD750868DBE2B6A42DA35D40C1C67A49A428FA61A59FA2B9BDC332F163",
+      "bytes": 243,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\checkpoints\\20260921-183837-5847101-after-registration.json",
+      "rawSha256": "A936B4C2F26238CE482D38A0318104863BA388C6220301B53D033DF9AE663A32",
+      "bytes": 242,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\checkpoints\\20260921-183840-0449147-after-readback.json",
+      "rawSha256": "0694F045FEBF22ECF450D581B6986F7D4FB84808AB11B0997BDA574CAEAC4CA6",
+      "bytes": 238,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\checkpoints\\20260921-183844-7117264-after-diagnostic-run.json",
+      "rawSha256": "5BA658408BC90836D95FB67FFEFA289574EC9B6163BBA13E08233E6F7F8D102D",
+      "bytes": 244,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\checkpoints\\20260921-183848-4221520-after-diagnostic-deletion.json",
+      "rawSha256": "44B949BDF204AEA9E13C9862A2E78ED275346CF5D16CD167AEB99FC651BA3FB8",
+      "bytes": 249,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\checkpoints\\20260921-184015-6545798-Inspect-inspect.json",
+      "rawSha256": "19234323CAB718ABFEA4DEA3990C33195967D6C732DBF167BB3114600ED3C285",
+      "bytes": 239,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\checkpoints\\20260921-184431-8629540-Apply-before.json",
+      "rawSha256": "56B8882C099535E29EB5938CEA5F4047761484DC864D4329B0383D37FF818CEF",
+      "bytes": 236,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\checkpoints\\20260921-184434-8694362-Apply-after.json",
+      "rawSha256": "CCE5CD3DEE233AE3CB5508DF188B9CA47120572F248C9613387F07258490AAD3",
+      "bytes": 235,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\checkpoints\\20260921-184437-2600077-Inspect-inspect.json",
+      "rawSha256": "590A94C24549B1FC4D66A68802D86B5E52CF697FFA48C6417B7EFCF6400A5581",
+      "bytes": 239,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\checkpoints\\20260921-184439-7041726-Restore-before.json",
+      "rawSha256": "5C0047DBCE33832B0AC22B256DB40DE426EC225CD11825A3D2747790BAECF092",
+      "bytes": 238,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\checkpoints\\20260921-184443-1037718-Restore-after.json",
+      "rawSha256": "F23E53353E08E2655D95892A0199BB5DAC2981058BDAC810D36C53CF72B9A294",
+      "bytes": 237,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\checkpoints\\20260921-184445-9134283-Apply-before.json",
+      "rawSha256": "E4207FD509251F6495AB998B4ED003F316329387D00BF2E0431635918441B3F9",
+      "bytes": 236,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\checkpoints\\20260921-184448-8430892-Apply-after.json",
+      "rawSha256": "22280A951CA6606FF9F1F96712A376C03F82E0CF28B0D7F3DDB237E5B59356E4",
+      "bytes": 235,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\checkpoints\\20260921-184451-4490240-Inspect-inspect.json",
+      "rawSha256": "E4C2DAC5B85E164138900210AAFAFC02785727F23087DAFDDBF0BAF19BAD10B7",
+      "bytes": 239,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\checkpoints\\20260921-184512-6369116-live-before.json",
+      "rawSha256": "0581F9405D4FE5EC9143690CCBDE31F25316F8F5B3EE11763FE2E9D576313194",
+      "bytes": 235,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\checkpoints\\20260921-184519-9981434-live-after.json",
+      "rawSha256": "E6BACC4C00239B80314E7ECA561C34A0D5CCF2D3498F214E266C9A9711BCF770",
+      "bytes": 234,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\checkpoints\\20260921-184523-1304601-Restore-before.json",
+      "rawSha256": "EEA5DAB91C7686472C055B05A0FB6C074216F67EC8EFD4470CD05B971418D54D",
+      "bytes": 238,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\checkpoints\\20260921-184526-2198258-Restore-after.json",
+      "rawSha256": "0FBC65406593A1B949C59CB229A502F4FE560F942CC2AF1C620F1D575F42DD3A",
+      "bytes": 237,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\operations\\20260921-184434-8959387-Apply.json",
+      "rawSha256": "C3531FEA2491FAF251E49B6DE34BC56DE7043F389CD7ED0A6F8C3492F9FF33DE",
+      "bytes": 282,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\operations\\20260921-184443-1199004-Restore.json",
+      "rawSha256": "F858D5FE49FA366B57F145380A9C3F247DABFD9B165C0F209D25E046B8D82167",
+      "bytes": 336,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\operations\\20260921-184448-8598458-Apply.json",
+      "rawSha256": "7B78DE1629A7FEA61E0BC3D12631EE6A14EE2A9BD8A854B9FE14015173FE5421",
+      "bytes": 282,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\operations\\20260921-184526-2419887-Restore.json",
+      "rawSha256": "B2E016F19490D371C1E7CDFC04755CE6B4ECA8E8A8C23EAB899A55C132D7380D",
+      "bytes": 336,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\deployment-reuse.json",
+      "rawSha256": "B39F96882C2AA88D053AAAB30E35FD4CDB60DA680F458ABCD29D3BA5B433705D",
+      "bytes": 327,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[ATTEMPT_2_PRIVATE]\\ambient-refresh-cache.xml",
+      "rawSha256": "A4F2853DE88291F56629C0BF5C339614BB82C4E47BEB3AEC3DD50CC48E0643BE",
+      "bytes": 3908,
+      "handling": "selected fields of the sole drifting system task; raw XML excluded"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.HistoryApiTest.xml",
+      "rawSha256": "39BDCE9FE83C24689BB57C253B2AF19659EF3A350D36A72D458D023EA818DBA2",
+      "bytes": 93458,
+      "handling": "JUnit counts and suite names only"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.HistoryApplicationRestartTest.xml",
+      "rawSha256": "59848FE823586BB1F11897F879DADAC5D631FB4FC7496D11CB82E3BFBFF250B1",
+      "bytes": 23524,
+      "handling": "JUnit counts and suite names only"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.HistoryFailureApiTest.xml",
+      "rawSha256": "B25AC0A08C67A8E74FB6D1387F6065C3210FD6F0AAD86E28A447EA290A31465D",
+      "bytes": 95510,
+      "handling": "JUnit counts and suite names only"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.HistoryRepositoryTest.xml",
+      "rawSha256": "6DDB9D09B7C48128AA5B508452693EED9CFC6B8E101DFA9AAEDBA5C63C07E22D",
+      "bytes": 25691,
+      "handling": "JUnit counts and suite names only"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.JobNormalizerTest.xml",
+      "rawSha256": "D7CB776DF91FCD91C8DC62D29C2617E6B873481FA132725ED5933E14E216F21C",
+      "bytes": 25075,
+      "handling": "JUnit counts and suite names only"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.JobsApiTest.xml",
+      "rawSha256": "0A9398771123A9B5FB082AEE8553FB98C6F60FBCB783EFC739BA4DD7B1E8007D",
+      "bytes": 25224,
+      "handling": "JUnit counts and suite names only"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.JobServiceTest.xml",
+      "rawSha256": "100EBE6349C6700AB7F9902349378FCB258B6996A58266DF1BA6B8AB31636D8E",
+      "bytes": 22390,
+      "handling": "JUnit counts and suite names only"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.launcher.ConfigBootstrapTest.xml",
+      "rawSha256": "7589305F44CD650D4049A66D90A7F890FAF13B92FC041650B0EBE7D5A5C08799",
+      "bytes": 22674,
+      "handling": "JUnit counts and suite names only"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.launcher.SafeStopTest.xml",
+      "rawSha256": "9673531EE202555AF77C99257802A3F08C4864FC573F4A383F56A129DA0AEC7D",
+      "bytes": 23883,
+      "handling": "JUnit counts and suite names only"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.launcher.WindowsLauncherTest.xml",
+      "rawSha256": "9C9BCE867B556B6F7462986733D2DB14A5A636745909F627156066D0AAB40B1A",
+      "bytes": 22540,
+      "handling": "JUnit counts and suite names only"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.LauncherStatusControllerTest.xml",
+      "rawSha256": "6C77BFB74377B95644BFA32F88802C6D083741895C01CCD0D9CD94717406C6BD",
+      "bytes": 22199,
+      "handling": "JUnit counts and suite names only"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.PowerShellCollectorTest.xml",
+      "rawSha256": "6A937BF88086CB25D7879AD48E537BC2EE64EC1AFE61A422541F89338E475EF8",
+      "bytes": 22920,
+      "handling": "JUnit counts and suite names only"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.runner.ReceiptFilesTest.xml",
+      "rawSha256": "53EA5471B02098F84E5D4C61FC4DE71027E3DF5DB44D886EBCD1D31AFE159EE7",
+      "bytes": 23976,
+      "handling": "JUnit counts and suite names only"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.runner.RunnerTest.xml",
+      "rawSha256": "EA1D26AF8CA2998ACAB04C6A44A9189827F17B27DE4F8538AD8F606CD7A89F97",
+      "bytes": 27640,
+      "handling": "JUnit counts and suite names only"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\target\\surefire-reports\\TEST-io.github.neil1031.dashboard.TaskSelectionTest.xml",
+      "rawSha256": "06362B120AFFFD0FD144E655EB462547C58E440D97DCDB94FE24136BEDDD0A33",
+      "bytes": 22505,
+      "handling": "JUnit counts and suite names only"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\.tools\\stage-5b-retry-fix-identity.json",
+      "rawSha256": "ECBD429E439AD9107B789B3C8241E05508FCE5C108F40C5A78B2DD57B7A7BEF7",
+      "bytes": 357,
+      "handling": "sanitized selected fields; raw private artifact excluded"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\.tools\\stage-5b-retry-fix-maven.log",
+      "rawSha256": "C379B12A51E6DCAB9A82687CF6ED16D38A96FB30A76593D95701D5D5C1866425",
+      "bytes": 154230,
+      "handling": "test result lines only; raw logs excluded"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\.tools\\stage-5b-retry-fix-frontend.log",
+      "rawSha256": "0624660E69F8BAC468610C367A0135C2DEAC37EFA55297A464A3CCBFD01FD437",
+      "bytes": 2944,
+      "handling": "test result lines only; raw logs excluded"
+    },
+    {
+      "source": "[DASHBOARD_REPO]\\.tools\\stage-5b-retry-fix-root-tests.log",
+      "rawSha256": "6CB19DB9D83F8A3821C25B47746CC36E1066CC2863AA9C204ACD9427D35B7F75",
+      "bytes": 1173,
+      "handling": "test result lines only; raw logs excluded"
+    }
+  ],
+  "note": "Raw source hashes bind private artifacts. Receipt exports are projections, not raw receipts. Attempt 1 is untouched."
+}

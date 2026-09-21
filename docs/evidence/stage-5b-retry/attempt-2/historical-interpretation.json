@@ -1,0 +1,27 @@
+{
+  "attempt1ArtifactsChanged": false,
+  "attempt1": {
+    "literalComparison": "FAILED",
+    "manualRequests": 0,
+    "runnerStarted": false
+  },
+  "historicalAfterDiagnosticCleanup": {
+    "matchingDefinitions": 234,
+    "totalDefinitions": 234
+  },
+  "historicalLaterAmbientAudit": {
+    "differences": [
+      {
+        "InputObject": "\\Microsoft\\Windows\\Flighting\\OneSettings\\RefreshCache|D5D57AA8F84A0E248551DF310224320B8A10F1C1BE2026D009CE3727ED4E7C9F",
+        "SideIndicator": "=>"
+      },
+      {
+        "InputObject": "\\Microsoft\\Windows\\Flighting\\OneSettings\\RefreshCache|1E513621ADA8F2997A6B425AC39391998698EA87DE93A10D0A1BD2CFE90D8DB0",
+        "SideIndicator": "<="
+      }
+    ],
+    "originalRecordedGate": "FAILED: one non-pilot task hash drifted; baseline retained, no task restored or modified by this audit."
+  },
+  "managerReviewInterpretation": "EXTERNAL_DRIFT_OBSERVED; actor/cause UNKNOWN. Does not negate the earlier clean controlled checkpoint.",
+  "baselineReplaced": false
+}
