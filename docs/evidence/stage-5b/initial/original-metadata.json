@@ -1,0 +1,21 @@
+{
+  "TaskName": "AIStockHunter-Accumulation-Weekly-Check",
+  "TaskPath": "\\",
+  "Enabled": true,
+  "State": "Ready",
+  "Principal": {
+    "UserId": "[USER]",
+    "LogonType": 3,
+    "RunLevel": 0
+  },
+  "Actions": [
+    {
+      "Execute": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "Arguments": "-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File \"[STOCK_PROJECT]\\tools\\run_stock_task_hidden.ps1\" -Kind weekly-check -NoNotification",
+      "WorkingDirectory": null
+    }
+  ],
+  "LastRunTime": "2026-09-18T22:00:00.0000000+08:00",
+  "LastTaskResult": 1,
+  "NextRunTime": "2026-09-25T22:00:00.0000000+08:00"
+}

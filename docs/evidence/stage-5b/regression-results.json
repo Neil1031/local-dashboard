@@ -1,0 +1,1021 @@
+{
+  "maven": {
+    "totals": {
+      "tests": 133,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "suites": [
+      {
+        "name": "io.github.neil1031.dashboard.HistoryApiTest",
+        "tests": 5,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "cases": [
+          {
+            "name": "readWorksAlongsideReservedWriterAndExclusiveLockFailsSafely",
+            "class": "io.github.neil1031.dashboard.HistoryApiTest",
+            "seconds": "0.515",
+            "result": "passed"
+          },
+          {
+            "name": "emptyHistoryAndExactly31DaysAreValid",
+            "class": "io.github.neil1031.dashboard.HistoryApiTest",
+            "seconds": "0.044",
+            "result": "passed"
+          },
+          {
+            "name": "boundedJoinReturnsEveryExecutionAndHistoricalOnlyJobsWithoutAnyWrites",
+            "class": "io.github.neil1031.dashboard.HistoryApiTest",
+            "seconds": "0.202",
+            "result": "passed"
+          },
+          {
+            "name": "invalidRangesAre400BeforeAnyDatabaseAccess",
+            "class": "io.github.neil1031.dashboard.HistoryApiTest",
+            "seconds": "0.041",
+            "result": "passed"
+          },
+          {
+            "name": "missingCorruptAndNewerSchemaFailSafelyWithoutRepairOrCreation",
+            "class": "io.github.neil1031.dashboard.HistoryApiTest",
+            "seconds": "0.052",
+            "result": "passed"
+          }
+        ]
+      },
+      {
+        "name": "io.github.neil1031.dashboard.HistoryApplicationRestartTest",
+        "tests": 1,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "cases": [
+          {
+            "name": "separateApplicationContextsKeepIdsAndCountsAcrossShutdownAndRestart",
+            "class": "io.github.neil1031.dashboard.HistoryApplicationRestartTest",
+            "seconds": "0.438",
+            "result": "passed"
+          }
+        ]
+      },
+      {
+        "name": "io.github.neil1031.dashboard.HistoryFailureApiTest",
+        "tests": 1,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "cases": [
+          {
+            "name": "startupRuntimeLockAndCorruptionFailuresPreserveCurrentDataAndRecover",
+            "class": "io.github.neil1031.dashboard.HistoryFailureApiTest",
+            "seconds": "0.209",
+            "result": "passed"
+          }
+        ]
+      },
+      {
+        "name": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+        "tests": 23,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "cases": [
+          {
+            "name": "unversionedDatabaseWithSimilarToReservedNameIsNeverAdopted",
+            "class": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+            "seconds": "0.031",
+            "result": "passed"
+          },
+          {
+            "name": "wholeSnapshotRollsBackAfterMidBatchFailureAndRecoversWithoutDroppingHistory",
+            "class": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+            "seconds": "0.064",
+            "result": "passed"
+          },
+          {
+            "name": "uncertainObservationsNeverCreateCompletedHistory(String)[1]",
+            "class": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+            "seconds": "0.024",
+            "result": "passed"
+          },
+          {
+            "name": "uncertainObservationsNeverCreateCompletedHistory(String)[2]",
+            "class": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+            "seconds": "0.02",
+            "result": "passed"
+          },
+          {
+            "name": "uncertainObservationsNeverCreateCompletedHistory(String)[3]",
+            "class": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+            "seconds": "0.02",
+            "result": "passed"
+          },
+          {
+            "name": "uncertainObservationsNeverCreateCompletedHistory(String)[4]",
+            "class": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+            "seconds": "0.02",
+            "result": "passed"
+          },
+          {
+            "name": "uncertainObservationsNeverCreateCompletedHistory(String)[5]",
+            "class": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+            "seconds": "0.018",
+            "result": "passed"
+          },
+          {
+            "name": "uncertainObservationsNeverCreateCompletedHistory(String)[6]",
+            "class": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+            "seconds": "0.022",
+            "result": "passed"
+          },
+          {
+            "name": "uncertainObservationsNeverCreateCompletedHistory(String)[7]",
+            "class": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+            "seconds": "0.022",
+            "result": "passed"
+          },
+          {
+            "name": "uncertainObservationsNeverCreateCompletedHistory(String)[8]",
+            "class": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+            "seconds": "0.024",
+            "result": "passed"
+          },
+          {
+            "name": "uncertainObservationsNeverCreateCompletedHistory(String)[9]",
+            "class": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+            "seconds": "0.024",
+            "result": "passed"
+          },
+          {
+            "name": "unsupportedOrUnversionedExistingDatabaseFailsWithoutDeletingHistory",
+            "class": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+            "seconds": "0.046",
+            "result": "passed"
+          },
+          {
+            "name": "freshDatabaseCreatesVersionedSchemaAndExistingDatabaseSurvivesReinitialization",
+            "class": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+            "seconds": "0.034",
+            "result": "passed"
+          },
+          {
+            "name": "metadataChangesDoNotChangeIdentityAndStaleObservationCannotOverwriteNewerEvidence",
+            "class": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+            "seconds": "0.06",
+            "result": "passed"
+          },
+          {
+            "name": "internalReadIsBoundedAndUsesParameters",
+            "class": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+            "seconds": "0.021",
+            "result": "passed"
+          },
+          {
+            "name": "independentConcurrentInstancesInitializeAndDeduplicateAtDatabaseLevel",
+            "class": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+            "seconds": "0.163",
+            "result": "passed"
+          },
+          {
+            "name": "initialSchemaAndVersionRollBackTogetherOnFailure",
+            "class": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+            "seconds": "0.025",
+            "result": "passed"
+          },
+          {
+            "name": "versionedDatabaseMissingUniqueConstraintIsRejected",
+            "class": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+            "seconds": "0.037",
+            "result": "passed"
+          },
+          {
+            "name": "tenObservationsAndRepositoryRestartKeepOneStableRunWithEvidence",
+            "class": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+            "seconds": "0.117",
+            "result": "passed"
+          },
+          {
+            "name": "utcOffsetsTaipeiMidnightAndDefaultTimezoneDoNotChangeIdentity",
+            "class": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+            "seconds": "0.042",
+            "result": "passed"
+          },
+          {
+            "name": "corruptDatabaseIsNotReplacedAndLockFailureIsBounded",
+            "class": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+            "seconds": "0.126",
+            "result": "passed"
+          },
+          {
+            "name": "distinctExecutionsAndJobsRemainDistinctIncludingFailureAndDisabledHistory",
+            "class": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+            "seconds": "0.063",
+            "result": "passed"
+          },
+          {
+            "name": "changingExactSelectionToPrefixPreservesJobAndSqliteRunIdentity",
+            "class": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+            "seconds": "0.031",
+            "result": "passed"
+          }
+        ]
+      },
+      {
+        "name": "io.github.neil1031.dashboard.JobNormalizerTest",
+        "tests": 17,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "cases": [
+          {
+            "name": "identityIncludesFolderAndHandlesUnicodeAndSpaces",
+            "class": "io.github.neil1031.dashboard.JobNormalizerTest",
+            "seconds": "0.002",
+            "result": "passed"
+          },
+          {
+            "name": "handlesNeverRunAndNoNextRunWithoutFabricatedSuccess",
+            "class": "io.github.neil1031.dashboard.JobNormalizerTest",
+            "seconds": "0.001",
+            "result": "passed"
+          },
+          {
+            "name": "classifiesWithoutConfusingSchedulerInformationWithExitCodes(String, boolean, long, String, String)[1]",
+            "class": "io.github.neil1031.dashboard.JobNormalizerTest",
+            "seconds": "0.011",
+            "result": "passed"
+          },
+          {
+            "name": "classifiesWithoutConfusingSchedulerInformationWithExitCodes(String, boolean, long, String, String)[2]",
+            "class": "io.github.neil1031.dashboard.JobNormalizerTest",
+            "seconds": "0.002",
+            "result": "passed"
+          },
+          {
+            "name": "classifiesWithoutConfusingSchedulerInformationWithExitCodes(String, boolean, long, String, String)[3]",
+            "class": "io.github.neil1031.dashboard.JobNormalizerTest",
+            "seconds": "0.001",
+            "result": "passed"
+          },
+          {
+            "name": "classifiesWithoutConfusingSchedulerInformationWithExitCodes(String, boolean, long, String, String)[4]",
+            "class": "io.github.neil1031.dashboard.JobNormalizerTest",
+            "seconds": "0.001",
+            "result": "passed"
+          },
+          {
+            "name": "classifiesWithoutConfusingSchedulerInformationWithExitCodes(String, boolean, long, String, String)[5]",
+            "class": "io.github.neil1031.dashboard.JobNormalizerTest",
+            "seconds": "0.001",
+            "result": "passed"
+          },
+          {
+            "name": "classifiesWithoutConfusingSchedulerInformationWithExitCodes(String, boolean, long, String, String)[6]",
+            "class": "io.github.neil1031.dashboard.JobNormalizerTest",
+            "seconds": "0.001",
+            "result": "passed"
+          },
+          {
+            "name": "classifiesWithoutConfusingSchedulerInformationWithExitCodes(String, boolean, long, String, String)[7]",
+            "class": "io.github.neil1031.dashboard.JobNormalizerTest",
+            "seconds": "0.001",
+            "result": "passed"
+          },
+          {
+            "name": "classifiesWithoutConfusingSchedulerInformationWithExitCodes(String, boolean, long, String, String)[8]",
+            "class": "io.github.neil1031.dashboard.JobNormalizerTest",
+            "seconds": "0.001",
+            "result": "passed"
+          },
+          {
+            "name": "classifiesWithoutConfusingSchedulerInformationWithExitCodes(String, boolean, long, String, String)[9]",
+            "class": "io.github.neil1031.dashboard.JobNormalizerTest",
+            "seconds": "0.002",
+            "result": "passed"
+          },
+          {
+            "name": "classifiesWithoutConfusingSchedulerInformationWithExitCodes(String, boolean, long, String, String)[10]",
+            "class": "io.github.neil1031.dashboard.JobNormalizerTest",
+            "seconds": "0.0",
+            "result": "passed"
+          },
+          {
+            "name": "classifiesWithoutConfusingSchedulerInformationWithExitCodes(String, boolean, long, String, String)[11]",
+            "class": "io.github.neil1031.dashboard.JobNormalizerTest",
+            "seconds": "0.001",
+            "result": "passed"
+          },
+          {
+            "name": "classifiesWithoutConfusingSchedulerInformationWithExitCodes(String, boolean, long, String, String)[12]",
+            "class": "io.github.neil1031.dashboard.JobNormalizerTest",
+            "seconds": "0.001",
+            "result": "passed"
+          },
+          {
+            "name": "malformedDataAndPermissionFailureRemainUnknown",
+            "class": "io.github.neil1031.dashboard.JobNormalizerTest",
+            "seconds": "0.003",
+            "result": "passed"
+          },
+          {
+            "name": "absentNextRunAndOldLastRunDoNotInventMissedStatus",
+            "class": "io.github.neil1031.dashboard.JobNormalizerTest",
+            "seconds": "0.0",
+            "result": "passed"
+          },
+          {
+            "name": "successfulPriorRunDoesNotMakeFutureJobSuccessful",
+            "class": "io.github.neil1031.dashboard.JobNormalizerTest",
+            "seconds": "0.002",
+            "result": "passed"
+          }
+        ]
+      },
+      {
+        "name": "io.github.neil1031.dashboard.JobsApiTest",
+        "tests": 5,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "cases": [
+          {
+            "name": "listAndDetailExposeNormalizedStateAndRawEvidence",
+            "class": "io.github.neil1031.dashboard.JobsApiTest",
+            "seconds": "0.044",
+            "result": "passed"
+          },
+          {
+            "name": "partialAndMissingTasksAreVisible",
+            "class": "io.github.neil1031.dashboard.JobsApiTest",
+            "seconds": "0.013",
+            "result": "passed"
+          },
+          {
+            "name": "malformedSnapshotIsVisibleError",
+            "class": "io.github.neil1031.dashboard.JobsApiTest",
+            "seconds": "0.006",
+            "result": "passed"
+          },
+          {
+            "name": "collectorFailureIs503NotEmptySuccessAndDoesNotReusePriorSnapshot",
+            "class": "io.github.neil1031.dashboard.JobsApiTest",
+            "seconds": "0.011",
+            "result": "passed"
+          },
+          {
+            "name": "noMutationEndpointAndDashboardAssetsAreServed",
+            "class": "io.github.neil1031.dashboard.JobsApiTest",
+            "seconds": "0.099",
+            "result": "passed"
+          }
+        ]
+      },
+      {
+        "name": "io.github.neil1031.dashboard.JobServiceTest",
+        "tests": 3,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "cases": [
+          {
+            "name": "unconfiguredDoesNotInvokeCollector",
+            "class": "io.github.neil1031.dashboard.JobServiceTest",
+            "seconds": "0.006",
+            "result": "passed"
+          },
+          {
+            "name": "excludesCannotLeakThroughApi",
+            "class": "io.github.neil1031.dashboard.JobServiceTest",
+            "seconds": "0.014",
+            "result": "passed"
+          },
+          {
+            "name": "duplicateIdentitiesAreRejected",
+            "class": "io.github.neil1031.dashboard.JobServiceTest",
+            "seconds": "0.004",
+            "result": "passed"
+          }
+        ]
+      },
+      {
+        "name": "io.github.neil1031.dashboard.launcher.ConfigBootstrapTest",
+        "tests": 4,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "cases": [
+          {
+            "name": "blockedParentFailsWithoutChangingUsersFile",
+            "class": "io.github.neil1031.dashboard.launcher.ConfigBootstrapTest",
+            "seconds": "0.008",
+            "result": "passed"
+          },
+          {
+            "name": "firstRunPublishesExactSharedTemplateAndValidSettings",
+            "class": "io.github.neil1031.dashboard.launcher.ConfigBootstrapTest",
+            "seconds": "0.025",
+            "result": "passed"
+          },
+          {
+            "name": "existingCustomEmptyOrInvalidFilesAreNeverRewritten",
+            "class": "io.github.neil1031.dashboard.launcher.ConfigBootstrapTest",
+            "seconds": "0.019",
+            "result": "passed"
+          },
+          {
+            "name": "concurrentPublishHasExactlyOneWinnerAndNoPartialConfigOrTemporaryFiles",
+            "class": "io.github.neil1031.dashboard.launcher.ConfigBootstrapTest",
+            "seconds": "0.114",
+            "result": "passed"
+          }
+        ]
+      },
+      {
+        "name": "io.github.neil1031.dashboard.launcher.SafeStopTest",
+        "tests": 13,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "cases": [
+          {
+            "name": "missingAndAbsentAreFriendlyNoOps",
+            "class": "io.github.neil1031.dashboard.launcher.SafeStopTest",
+            "seconds": "0.058",
+            "result": "passed"
+          },
+          {
+            "name": "strictCommandAllowsSpacesUnicodeAndRejectsJarSubstringOrExtraOptions",
+            "class": "io.github.neil1031.dashboard.launcher.SafeStopTest",
+            "seconds": "0.008",
+            "result": "passed"
+          },
+          {
+            "name": "reusedPidRefusesAndCleansStaleRecord",
+            "class": "io.github.neil1031.dashboard.launcher.SafeStopTest",
+            "seconds": "0.046",
+            "result": "passed"
+          },
+          {
+            "name": "normalStopWaitsAndCleansOnlyPidFile",
+            "class": "io.github.neil1031.dashboard.launcher.SafeStopTest",
+            "seconds": "0.081",
+            "result": "passed"
+          },
+          {
+            "name": "forcedFallbackRechecksIdentity",
+            "class": "io.github.neil1031.dashboard.launcher.SafeStopTest",
+            "seconds": "0.088",
+            "result": "passed"
+          },
+          {
+            "name": "inaccessibleIdentityProbeRefusesWithoutLeakingProbeDetails",
+            "class": "io.github.neil1031.dashboard.launcher.SafeStopTest",
+            "seconds": "0.038",
+            "result": "passed"
+          },
+          {
+            "name": "windowsDestroyIsLoggedAsForcibleAndRecheckedBeforeFirstRequest",
+            "class": "io.github.neil1031.dashboard.launcher.SafeStopTest",
+            "seconds": "0.07",
+            "result": "passed"
+          },
+          {
+            "name": "wrongReadinessRefusesDespiteMatchingProcess",
+            "class": "io.github.neil1031.dashboard.launcher.SafeStopTest",
+            "seconds": "0.023",
+            "result": "passed"
+          },
+          {
+            "name": "malformedPidAndUnrecordedOccupiedPortRefuse",
+            "class": "io.github.neil1031.dashboard.launcher.SafeStopTest",
+            "seconds": "0.041",
+            "result": "passed"
+          },
+          {
+            "name": "changedIdentityAfterNormalRequestPreventsForce",
+            "class": "io.github.neil1031.dashboard.launcher.SafeStopTest",
+            "seconds": "0.04",
+            "result": "passed"
+          },
+          {
+            "name": "wrongExecutableCommandOrListenerRefusesDespiteReadyResponse",
+            "class": "io.github.neil1031.dashboard.launcher.SafeStopTest",
+            "seconds": "0.023",
+            "result": "passed"
+          },
+          {
+            "name": "unknownStartTimeFailsClosed",
+            "class": "io.github.neil1031.dashboard.launcher.SafeStopTest",
+            "seconds": "0.018",
+            "result": "passed"
+          },
+          {
+            "name": "windowsRecheckMismatchPreventsAnyRequest",
+            "class": "io.github.neil1031.dashboard.launcher.SafeStopTest",
+            "seconds": "0.045",
+            "result": "passed"
+          }
+        ]
+      },
+      {
+        "name": "io.github.neil1031.dashboard.launcher.WindowsLauncherTest",
+        "tests": 3,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "cases": [
+          {
+            "name": "readinessPollsUntilReadyAndFailsOnChildExitOrDeadline",
+            "class": "io.github.neil1031.dashboard.launcher.WindowsLauncherTest",
+            "seconds": "0.481",
+            "result": "passed"
+          },
+          {
+            "name": "homeIsStableAndCommandPreservesExternalConfigurationWithSpacesAndUnicode",
+            "class": "io.github.neil1031.dashboard.launcher.WindowsLauncherTest",
+            "seconds": "0.003",
+            "result": "passed"
+          },
+          {
+            "name": "readinessRequiresExactApplicationIdentityAndSuccessfulStatus",
+            "class": "io.github.neil1031.dashboard.launcher.WindowsLauncherTest",
+            "seconds": "0.052",
+            "result": "passed"
+          }
+        ]
+      },
+      {
+        "name": "io.github.neil1031.dashboard.LauncherStatusControllerTest",
+        "tests": 1,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "cases": [
+          {
+            "name": "reportsReadyOnlyBetweenApplicationReadyAndContextClose",
+            "class": "io.github.neil1031.dashboard.LauncherStatusControllerTest",
+            "seconds": "0.001",
+            "result": "passed"
+          }
+        ]
+      },
+      {
+        "name": "io.github.neil1031.dashboard.PowerShellCollectorTest",
+        "tests": 6,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "cases": [
+          {
+            "name": "realScriptFiltersFoldersAndKeepsSingletonAndEmptyArrays",
+            "class": "io.github.neil1031.dashboard.PowerShellCollectorTest",
+            "seconds": "1.654",
+            "result": "passed"
+          },
+          {
+            "name": "processFailureAndTimeoutAreBounded",
+            "class": "io.github.neil1031.dashboard.PowerShellCollectorTest",
+            "seconds": "2.47",
+            "result": "passed"
+          },
+          {
+            "name": "powershellAndJavaMatchTheSameSelectorContract",
+            "class": "io.github.neil1031.dashboard.PowerShellCollectorTest",
+            "seconds": "1.017",
+            "result": "passed"
+          },
+          {
+            "name": "realScriptPreservesUnicodeLiteralNamesAndReportsPermissionDenied",
+            "class": "io.github.neil1031.dashboard.PowerShellCollectorTest",
+            "seconds": "0.429",
+            "result": "passed"
+          },
+          {
+            "name": "prefixMatchesAreNotUnmatchedEvenWhenExcluded",
+            "class": "io.github.neil1031.dashboard.PowerShellCollectorTest",
+            "seconds": "0.746",
+            "result": "passed"
+          },
+          {
+            "name": "wholeEnumerationErrorDoesNotBecomeEmptyList",
+            "class": "io.github.neil1031.dashboard.PowerShellCollectorTest",
+            "seconds": "0.967",
+            "result": "passed"
+          }
+        ]
+      },
+      {
+        "name": "io.github.neil1031.dashboard.runner.ReceiptFilesTest",
+        "tests": 12,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "cases": [
+          {
+            "name": "publishedStartedOnlyPrimaryRemainsIncompleteUnknown",
+            "class": "io.github.neil1031.dashboard.runner.ReceiptFilesTest",
+            "seconds": "0.062",
+            "result": "passed"
+          },
+          {
+            "name": "unsupportedCorruptAndOversizedReceiptsNeverTurnIntoSuccess",
+            "class": "io.github.neil1031.dashboard.runner.ReceiptFilesTest",
+            "seconds": "0.059",
+            "result": "passed"
+          },
+          {
+            "name": "racingClaimsAllowOnlyOneOwner",
+            "class": "io.github.neil1031.dashboard.runner.ReceiptFilesTest",
+            "seconds": "0.014",
+            "result": "passed"
+          },
+          {
+            "name": "emptyOrPendingOnlyPrimaryDoesNotBlockValidFallback(boolean)[1]",
+            "class": "io.github.neil1031.dashboard.runner.ReceiptFilesTest",
+            "seconds": "0.025",
+            "result": "passed"
+          },
+          {
+            "name": "emptyOrPendingOnlyPrimaryDoesNotBlockValidFallback(boolean)[2]",
+            "class": "io.github.neil1031.dashboard.runner.ReceiptFilesTest",
+            "seconds": "0.03",
+            "result": "passed"
+          },
+          {
+            "name": "duplicateIdentityAndPhaseAreProtectedAndRestartReadsIncomplete",
+            "class": "io.github.neil1031.dashboard.runner.ReceiptFilesTest",
+            "seconds": "0.025",
+            "result": "passed"
+          },
+          {
+            "name": "anyCorruptPublishedPrimaryPhaseFailsClosedEvenWithValidFallback(String)[1]",
+            "class": "io.github.neil1031.dashboard.runner.ReceiptFilesTest",
+            "seconds": "0.066",
+            "result": "passed"
+          },
+          {
+            "name": "anyCorruptPublishedPrimaryPhaseFailsClosedEvenWithValidFallback(String)[2]",
+            "class": "io.github.neil1031.dashboard.runner.ReceiptFilesTest",
+            "seconds": "0.064",
+            "result": "passed"
+          },
+          {
+            "name": "anyCorruptPublishedPrimaryPhaseFailsClosedEvenWithValidFallback(String)[3]",
+            "class": "io.github.neil1031.dashboard.runner.ReceiptFilesTest",
+            "seconds": "0.064",
+            "result": "passed"
+          },
+          {
+            "name": "claimedDirectoryWithoutPublishedPhasesHasNoEvidence(boolean)[1]",
+            "class": "io.github.neil1031.dashboard.runner.ReceiptFilesTest",
+            "seconds": "0.004",
+            "result": "passed"
+          },
+          {
+            "name": "claimedDirectoryWithoutPublishedPhasesHasNoEvidence(boolean)[2]",
+            "class": "io.github.neil1031.dashboard.runner.ReceiptFilesTest",
+            "seconds": "0.006",
+            "result": "passed"
+          },
+          {
+            "name": "primaryAndFallbackCoalesceToOneExecutionAndConflictingCopiesFailClosed",
+            "class": "io.github.neil1031.dashboard.runner.ReceiptFilesTest",
+            "seconds": "0.053",
+            "result": "passed"
+          }
+        ]
+      },
+      {
+        "name": "io.github.neil1031.dashboard.runner.RunnerTest",
+        "tests": 36,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "cases": [
+          {
+            "name": "bothStreamsDrainBeyondHardSampleLimitWithoutDeadlock(int)[1]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.143",
+            "result": "passed"
+          },
+          {
+            "name": "bothStreamsDrainBeyondHardSampleLimitWithoutDeadlock(int)[2]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.121",
+            "result": "passed"
+          },
+          {
+            "name": "bothStreamsDrainBeyondHardSampleLimitWithoutDeadlock(int)[3]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.143",
+            "result": "passed"
+          },
+          {
+            "name": "unavailablePrimaryUsesFallbackAndPreservesActualSideEffectAndExit(int)[1]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.136",
+            "result": "passed"
+          },
+          {
+            "name": "unavailablePrimaryUsesFallbackAndPreservesActualSideEffectAndExit(int)[2]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.135",
+            "result": "passed"
+          },
+          {
+            "name": "unicodePathsAndLiteralArgumentsWorkWithoutPersistingOutputOrSecrets",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.133",
+            "result": "passed"
+          },
+          {
+            "name": "firstPublicationFailureAfterRealClaimStillExecutesAndFallbackCanBeRead(int)[1]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.172",
+            "result": "passed"
+          },
+          {
+            "name": "firstPublicationFailureAfterRealClaimStillExecutesAndFallbackCanBeRead(int)[2]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.125",
+            "result": "passed"
+          },
+          {
+            "name": "invalidConfigRejectedWithoutLeakingSourceOrStartingChild(String)[1]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.029",
+            "result": "passed"
+          },
+          {
+            "name": "invalidConfigRejectedWithoutLeakingSourceOrStartingChild(String)[2]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.025",
+            "result": "passed"
+          },
+          {
+            "name": "invalidConfigRejectedWithoutLeakingSourceOrStartingChild(String)[3]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.031",
+            "result": "passed"
+          },
+          {
+            "name": "invalidConfigRejectedWithoutLeakingSourceOrStartingChild(String)[4]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.029",
+            "result": "passed"
+          },
+          {
+            "name": "invalidConfigRejectedWithoutLeakingSourceOrStartingChild(String)[5]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.031",
+            "result": "passed"
+          },
+          {
+            "name": "invalidConfigRejectedWithoutLeakingSourceOrStartingChild(String)[6]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.023",
+            "result": "passed"
+          },
+          {
+            "name": "invalidConfigRejectedWithoutLeakingSourceOrStartingChild(String)[7]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.026",
+            "result": "passed"
+          },
+          {
+            "name": "invalidConfigRejectedWithoutLeakingSourceOrStartingChild(String)[8]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.022",
+            "result": "passed"
+          },
+          {
+            "name": "invalidConfigRejectedWithoutLeakingSourceOrStartingChild(String)[9]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.03",
+            "result": "passed"
+          },
+          {
+            "name": "independentCliProcessesAndRepeatedProfileHaveUniqueReceiptsWithoutSpring",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.65",
+            "result": "passed"
+          },
+          {
+            "name": "startFailuresNeverPretendChildRan(String)[1]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.042",
+            "result": "passed"
+          },
+          {
+            "name": "startFailuresNeverPretendChildRan(String)[2]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.063",
+            "result": "passed"
+          },
+          {
+            "name": "startFailuresNeverPretendChildRan(String)[3]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.059",
+            "result": "passed"
+          },
+          {
+            "name": "bothStoresUnavailableStillExecutesAndLeavesSafeDiagnostic",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.095",
+            "result": "passed"
+          },
+          {
+            "name": "profileSelectorCannotBecomeACommand(String)[1]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.012",
+            "result": "passed"
+          },
+          {
+            "name": "profileSelectorCannotBecomeACommand(String)[2]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.019",
+            "result": "passed"
+          },
+          {
+            "name": "profileSelectorCannotBecomeACommand(String)[3]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.016",
+            "result": "passed"
+          },
+          {
+            "name": "profileSelectorCannotBecomeACommand(String)[4]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.011",
+            "result": "passed"
+          },
+          {
+            "name": "profileSelectorCannotBecomeACommand(String)[5]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.012",
+            "result": "passed"
+          },
+          {
+            "name": "profileSelectorCannotBecomeACommand(String)[6]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.012",
+            "result": "passed"
+          },
+          {
+            "name": "stdinIsClosedInsteadOfWaitingForConsoleInput",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.098",
+            "result": "passed"
+          },
+          {
+            "name": "actualChildExitPropagatesAndReceiptSurvivesNewReader(int)[1]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.133",
+            "result": "passed"
+          },
+          {
+            "name": "actualChildExitPropagatesAndReceiptSurvivesNewReader(int)[2]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.128",
+            "result": "passed"
+          },
+          {
+            "name": "actualChildExitPropagatesAndReceiptSurvivesNewReader(int)[3]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.127",
+            "result": "passed"
+          },
+          {
+            "name": "actualChildExitPropagatesAndReceiptSurvivesNewReader(int)[4]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.122",
+            "result": "passed"
+          },
+          {
+            "name": "actualChildExitPropagatesAndReceiptSurvivesNewReader(int)[5]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.127",
+            "result": "passed"
+          },
+          {
+            "name": "actualChildExitPropagatesAndReceiptSurvivesNewReader(int)[6]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.125",
+            "result": "passed"
+          },
+          {
+            "name": "actualChildExitPropagatesAndReceiptSurvivesNewReader(int)[7]",
+            "class": "io.github.neil1031.dashboard.runner.RunnerTest",
+            "seconds": "0.117",
+            "result": "passed"
+          }
+        ]
+      },
+      {
+        "name": "io.github.neil1031.dashboard.TaskSelectionTest",
+        "tests": 3,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "cases": [
+          {
+            "name": "selectorsMatchTheSharedContract",
+            "class": "io.github.neil1031.dashboard.TaskSelectionTest",
+            "seconds": "0.0",
+            "result": "passed"
+          },
+          {
+            "name": "literalSelectorsAreCaseInsensitiveAndFolderAware",
+            "class": "io.github.neil1031.dashboard.TaskSelectionTest",
+            "seconds": "0.0",
+            "result": "passed"
+          },
+          {
+            "name": "emptyIncludeSelectsNothingAndExcludeWins",
+            "class": "io.github.neil1031.dashboard.TaskSelectionTest",
+            "seconds": "0.0",
+            "result": "passed"
+          }
+        ]
+      }
+    ]
+  },
+  "package": {
+    "sourceModifiedAt": "2026-09-21T15:58:29.521476+00:00",
+    "checks": [
+      "[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.742 s -- in io.github.neil1031.dashboard.HistoryApiTest",
+      "[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.439 s -- in io.github.neil1031.dashboard.HistoryApplicationRestartTest",
+      "[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.445 s -- in io.github.neil1031.dashboard.HistoryFailureApiTest",
+      "[INFO] Tests run: 23, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.096 s -- in io.github.neil1031.dashboard.HistoryRepositoryTest",
+      "[INFO] Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.048 s -- in io.github.neil1031.dashboard.JobNormalizerTest",
+      "[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.419 s -- in io.github.neil1031.dashboard.JobsApiTest",
+      "[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.115 s -- in io.github.neil1031.dashboard.JobServiceTest",
+      "[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.170 s -- in io.github.neil1031.dashboard.launcher.ConfigBootstrapTest",
+      "[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.593 s -- in io.github.neil1031.dashboard.launcher.SafeStopTest",
+      "[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.537 s -- in io.github.neil1031.dashboard.launcher.WindowsLauncherTest",
+      "[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in io.github.neil1031.dashboard.LauncherStatusControllerTest",
+      "[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.290 s -- in io.github.neil1031.dashboard.PowerShellCollectorTest",
+      "[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.490 s -- in io.github.neil1031.dashboard.runner.ReceiptFilesTest",
+      "[INFO] Tests run: 36, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.364 s -- in io.github.neil1031.dashboard.runner.RunnerTest",
+      "[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in io.github.neil1031.dashboard.TaskSelectionTest",
+      "[INFO] Tests run: 133, Failures: 0, Errors: 0, Skipped: 0",
+      "[INFO] BUILD SUCCESS",
+      "PASS: bundled runtime, no JAVA_HOME/Java PATH, HTTP readiness, safe defaults, writable SQLite. Logs: %LOCALAPPDATA%\\Temp\\dashboard-package-a46713f6811f495985d18736292c3b9b",
+      "PASS: packaged --stop entry point (exit 0), no configuration bootstrap, no unrecorded process termination."
+    ]
+  },
+  "frontend": {
+    "sourceModifiedAt": "2026-09-21T16:05:43.907369+00:00",
+    "checks": [
+      "✔ initial loading, one GET, refresh coalescing, new response, no detail collection (802.9914ms)",
+      "✔ all statuses, keyboard filters, no inferred MISSED, real drawer null values, history (437.6121ms)",
+      "✔ PARTIAL keeps jobs and all diagnostics visible; text is never HTML (391.9375ms)",
+      "✔ history persistence failure retains current jobs and displays its diagnostic independently of history (278.8038ms)",
+      "✔ initial unavailable backend never renders scheduler success (232.957ms)",
+      "✔ initial HTTP 503 never renders scheduler success (330.6358ms)",
+      "✔ OK empty collection stays distinct (237.1286ms)",
+      "✔ NOT_CONFIGURED empty collection stays distinct (241.6213ms)",
+      "✔ PARTIAL empty collection stays distinct (247.3672ms)",
+      "✔ missing optional job fields show placeholders and preserve UNKNOWN (317.9841ms)",
+      "✔ offline after success removes old rows/counts and recovers (375.6984ms)",
+      "✔ 503 after success removes old rows/counts and recovers (318.6301ms)",
+      "✔ ERROR after success removes old rows/counts and recovers (314.8303ms)",
+      "✔ invalid-json after success removes old rows/counts and recovers (298.4931ms)",
+      "✔ invalid-contract after success removes old rows/counts and recovers (316.594ms)",
+      "✔ 25 jobs, long Unicode names, explicit MISSED, local dates, desktop and 320px drawer (821.6269ms)",
+      "✔ current status and previous execution outcome remain independent (1.7981ms)",
+      "✔ missing values and invalid dates never produce null, epoch, or Invalid Date (12.5695ms)",
+      "✔ accept explicit collection states, reject errors and malformed snapshots (0.4877ms)",
+      "✔ runtime ships no scheduler fixtures, hard-coded rows, log or history entries (4.6195ms)",
+      "✔ friendly job names do not change the original scheduler identity (0.2714ms)",
+      "✔ daily and dated aliases apply to current and history without changing identity (0.2718ms)",
+      "✔ one bounded request, daily summaries, complete sorted details and keyboard focus return (923.1866ms)",
+      "✔ loading has no fake cells; cache and successful Current Refresh invalidate once (547.4483ms)",
+      "✔ history error and retry keep Today snapshot usable and hide unsafe server details (375.5813ms)",
+      "✔ empty inventory and local midnight rollover use an updated range (321.7952ms)",
+      "✔ long Unicode names, injection-looking messages, sticky names and narrow horizontal scroll (1055.8617ms)",
+      "✔ Refresh while a history read is in flight discards its stale result and fetches once more (363.9741ms)",
+      "✔ empty, single, all success and every mixed ordering retain failure and counts (8.2558ms)",
+      "✔ Taipei calendar boundaries, eighth day exclusion, union, names and distinct identities (1.7207ms)",
+      "✔ local calendar window spans DST spring/fall changes without using 168 hours (0.2979ms)",
+      "✔ invalid history payloads cannot silently become empty or successful history (0.6089ms)",
+      "ℹ tests 32",
+      "ℹ suites 0",
+      "ℹ pass 32",
+      "ℹ fail 0",
+      "ℹ cancelled 0",
+      "ℹ skipped 0",
+      "ℹ todo 0",
+      "ℹ duration_ms 8113.8082"
+    ]
+  },
+  "weekly-unit-rerun": {
+    "sourceModifiedAt": "2026-09-21T16:23:31.996756+00:00",
+    "checks": [
+      "Ran 9 tests in 14.953s",
+      "OK"
+    ]
+  }
+}

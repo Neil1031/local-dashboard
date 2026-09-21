@@ -1,0 +1,6 @@
+<Actions Context="Author" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+    <Exec>
+      <Command>C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe</Command>
+      <Arguments>-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File "[STOCK_PROJECT]\tools\run_stock_task_hidden.ps1" -Kind weekly-check -NoNotification</Arguments>
+    </Exec>
+  </Actions>

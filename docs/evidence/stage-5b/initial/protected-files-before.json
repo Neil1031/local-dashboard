@@ -1,0 +1,547 @@
+[
+  {
+    "Path": "%LOCALAPPDATA%\\LocalDashboard\\config\\application.yml",
+    "Length": 447,
+    "Hash": "0F4FE18A5FC3861EB7D8F823421E8123605F6C0A5DA5F2E4226A7327E7F41FF5"
+  },
+  {
+    "Path": "%LOCALAPPDATA%\\LocalDashboard\\config\\application.yml.backup-20260921-184630",
+    "Length": 406,
+    "Hash": "3F43077EB1CBABC7675388E198F7B5DC943A84C60ECE9F5986D66CCE92248EFE"
+  },
+  {
+    "Path": "%LOCALAPPDATA%\\LocalDashboard\\config\\runner.json",
+    "Length": 792,
+    "Hash": "94BF0F9CDB448EDDEB9383885A001ABB9116B85002AFF3CE38D2031C1DB26150"
+  },
+  {
+    "Path": "%LOCALAPPDATA%\\LocalDashboard\\data\\local-dashboard.db",
+    "Length": 28672,
+    "Hash": "A962E27CD966359747DDDE0FF9D0B0A9BD2F3F206C85F696AACC3B7F20998A17"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\data\\unexplained_volume.sqlite3",
+    "Length": 18739200,
+    "Hash": "4EDEA6C29D00C86129D7B33C5152A2667F9D4C953C929B6C4DF69706E2A6AC7C"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\data\\unexplained_volume.sqlite3.accumulation-lock.sqlite3",
+    "Length": 8192,
+    "Hash": "A0B56139A21F40BB74FA01DEF7901B7250FE5A152135D13D3B5E31B45B82D0FA"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\accumulation-notifications.sqlite3",
+    "Length": 327680,
+    "Hash": "8C47E0FFBC9D4D0B48E285700133A4F312DBD4965D62BB075EE6A9422461F0B7"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\accumulation-notifications.sqlite3.accumulation-lock.sqlite3",
+    "Length": 8192,
+    "Hash": "A0B56139A21F40BB74FA01DEF7901B7250FE5A152135D13D3B5E31B45B82D0FA"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\accumulation\\0bda5c5a180349aca40bd5153b418335\\2026-09-18-before.sqlite3",
+    "Length": 18305024,
+    "Hash": "5E97249922C2CBE14FA6F5452ADFD32E7DCA9C72E36AB7F96BEDA9086AF93D8D"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\accumulation\\0bda5c5a180349aca40bd5153b418335\\2026-09-18.sqlite3",
+    "Length": 18423808,
+    "Hash": "CE9B3122450996D7113C14C4C6AA9D2DC28920F4EAFDD6F4FE12D31D7223B8FA"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\accumulation\\0bda5c5a180349aca40bd5153b418335\\2026-09-21-before.sqlite3",
+    "Length": 18198528,
+    "Hash": "622DD9E1922D5F86B8E37729CD1F4AAEC423D5186871AC17874C5595167420F3"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\accumulation\\0bda5c5a180349aca40bd5153b418335\\2026-09-21.sqlite3",
+    "Length": 18321408,
+    "Hash": "AA5D836B5A191B10C6525530909916321C9989C38ED105D7C00E6B8A48730455"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\accumulation\\1ba648d2c9ec47b886bf2eb05321537d\\2026-09-18-before.sqlite3",
+    "Length": 18661376,
+    "Hash": "0B27BECFE76A81A3AA44D92A3420BADC908DCAC12C44B8D4BC840CEAA58CD95F"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\accumulation\\1ba648d2c9ec47b886bf2eb05321537d\\2026-09-18.sqlite3",
+    "Length": 18759680,
+    "Hash": "F4057506C8E022710D10DF790DC5403AAC04DA3718E77770CE1E0DC84FED8202"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\accumulation\\1ba648d2c9ec47b886bf2eb05321537d\\2026-09-21-before.sqlite3",
+    "Length": 18567168,
+    "Hash": "B9A6AE8ADC98B3A5BA2CE7BC7F689D4361BCA1CA5638A614D875E22E3D4CC946"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\accumulation\\1ba648d2c9ec47b886bf2eb05321537d\\2026-09-21.sqlite3",
+    "Length": 18698240,
+    "Hash": "66D1D1E5E37DD8382DB562FE642CCC2952A54781B9B2FEB5E461048C81FBF656"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\accumulation\\24fb93f7ef9d4600904aebd2122c97e1\\2026-09-18-before.sqlite3",
+    "Length": 18100224,
+    "Hash": "1D970972E6DF5D717CBAE80D88FC4DCE8BF31CD054981E22510883F3E4651D16"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\accumulation\\24fb93f7ef9d4600904aebd2122c97e1\\2026-09-18.sqlite3",
+    "Length": 18219008,
+    "Hash": "F20E87516E669B7E7B2752AB6EFEE0A32F68818EDF02444601138C2E3DA47BD1"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\accumulation\\24fb93f7ef9d4600904aebd2122c97e1\\2026-09-21-before.sqlite3",
+    "Length": 13959168,
+    "Hash": "EB7EF2971C65AE794E147BF403505D062BD5A4C650EBFE937591527684651F1E"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\accumulation\\24fb93f7ef9d4600904aebd2122c97e1\\2026-09-21.sqlite3",
+    "Length": 18837504,
+    "Hash": "AC8E6AE42195E8C1D0693EEFC1B8AF9216FDF8608D8CDC00741B533834899FD1"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\accumulation\\497b14ad72df4547a9a2248054153264\\2026-09-18-before.sqlite3",
+    "Length": 18481152,
+    "Hash": "88432AA76DBFD59D0FBE8F9A8E4704D6656DCFBA68D5F911D6892FBFB6C8F317"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\accumulation\\497b14ad72df4547a9a2248054153264\\2026-09-18.sqlite3",
+    "Length": 18608128,
+    "Hash": "CE4A708AEEBCB3303C30BA1FFA6575028D976BDC18E5902BC463AAB8FF847D3B"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\accumulation\\497b14ad72df4547a9a2248054153264\\2026-09-21-before.sqlite3",
+    "Length": 18382848,
+    "Hash": "CB4E0D6EBA263C8F0DDA9DB2794E5315DCB44D1BAF922DF5CAFB8ACC37CBA266"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\accumulation\\497b14ad72df4547a9a2248054153264\\2026-09-21.sqlite3",
+    "Length": 18505728,
+    "Hash": "EF7DAE3049290099045B0FD68BB0D3ACB7606741D691884CF77260BBDDDB0F5C"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\accumulation\\a54d146e25ab480f969c5e72a024a661\\2026-09-18-before.sqlite3",
+    "Length": 466944,
+    "Hash": "72F346DD74615EAF4B56781AA2A50EC98D6C36117EEB89EF7CE79B7BBD973F19"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\accumulation\\a54d146e25ab480f969c5e72a024a661\\2026-09-18.sqlite3",
+    "Length": 6750208,
+    "Hash": "7F2C1089C29B826C54F1EC9DFD64E2458C0D3647A6F1A785B28AADE3FFA0E668"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\accumulation\\a82799db1fbd44f49ce56306259a1597\\2026-09-18-before.sqlite3",
+    "Length": 9519104,
+    "Hash": "5129EF38032B92FF64D4DDF809D89535ACF537F2F4BD58AF9BB6B7A44E3E0D1A"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\accumulation\\a82799db1fbd44f49ce56306259a1597\\2026-09-18.sqlite3",
+    "Length": 14352384,
+    "Hash": "7E9CC619335BDB1BDD0277E60192129D0CC777AA72F3A217B17FF89C743630C1"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\accumulation\\a82799db1fbd44f49ce56306259a1597\\2026-09-21-before.sqlite3",
+    "Length": 6483968,
+    "Hash": "CCD52489E98BE2B67B188D51F2AD6C902D51A6D3BAC671F203D48C731DA2CCC3"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\accumulation\\a82799db1fbd44f49ce56306259a1597\\2026-09-21.sqlite3",
+    "Length": 9834496,
+    "Hash": "2657EFAF5EDAA785DE9E457B4F1302C9E692E3F44DECAA16E0302EC8425D4B81"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\daily-task.log",
+    "Length": 269979,
+    "Hash": "68722BAF26C396DA00CD8AA1382D5D48F27285519BAE85D51ACCA82545EDC1A2"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\latest_daily_accumulation_operation.json",
+    "Length": 75188,
+    "Hash": "EFEEDA559D6535AA844A227AB16AD1A2734163701293E9F35B7A5295C3ED805E"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\latest_daily_task.json",
+    "Length": 75863,
+    "Hash": "167279A723297221786CEC4650FE20661BF2482DE8B5121995250E7293AF0E5A"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\operation-journal.sqlite3",
+    "Length": 1236992,
+    "Hash": "CC427134FA38BBD2842E06CCEB457B03A6DD31ED8698C236E8A051B134EE5664"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\runs\\0bda5c5a180349aca40bd5153b418335\\run.json",
+    "Length": 70898,
+    "Hash": "346B72BB87DA48AEAE71CE4C1EE2D4C188DCBA57A9739DCAC3D7D94DD59659CF"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\runs\\1ba648d2c9ec47b886bf2eb05321537d\\run.json",
+    "Length": 75188,
+    "Hash": "EFEEDA559D6535AA844A227AB16AD1A2734163701293E9F35B7A5295C3ED805E"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\runs\\24fb93f7ef9d4600904aebd2122c97e1\\run.json",
+    "Length": 70878,
+    "Hash": "2B7575B5F3B973CFE86F241DF5C03ABC512B3A56EC013B0B6FCC2DEA4A8683C3"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\runs\\497b14ad72df4547a9a2248054153264\\run.json",
+    "Length": 70918,
+    "Hash": "8CDE66F713F57262F25D2A36922EDECD843C3D5860F810DBF7552259D43AF469"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\runs\\a54d146e25ab480f969c5e72a024a661\\run.json",
+    "Length": 45184,
+    "Hash": "944D00AF7FE0ECD0C57924D6C1A8090467AA374C5A5A7167530C2FAE14C4AF07"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\runs\\a82799db1fbd44f49ce56306259a1597\\run.json",
+    "Length": 76425,
+    "Hash": "63D3F67681BC32C361D47E1BEFB5D9B272C4378E9AC074671C648CFE0EBCB0BE"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\startup-check-task.log",
+    "Length": 115596,
+    "Hash": "BE443CC19E770799148DF30ADA21F8A3B29CD4F37B38EA1F0F8F008696777187"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\startup-checks\\2026-09-18-7d293ada56164c068171ea38d0d14faf.json",
+    "Length": 58777,
+    "Hash": "667988771A48DC2AEDC5C7300034242CB9ABC7D6107A5C333DD76E9B75D495AC"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\startup-checks\\2026-09-18.json",
+    "Length": 58777,
+    "Hash": "667988771A48DC2AEDC5C7300034242CB9ABC7D6107A5C333DD76E9B75D495AC"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\startup-checks\\2026-09-21-f0f8673c510048adb16c0a44a5e7f28e.json",
+    "Length": 56815,
+    "Hash": "12E2399E596CDD27BD0789899E886973DF01166FCFF99A88ECC3C6CCBD993860"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\startup-checks\\2026-09-21.json",
+    "Length": 56815,
+    "Hash": "12E2399E596CDD27BD0789899E886973DF01166FCFF99A88ECC3C6CCBD993860"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\task-attempts\\7178bfc28ceb441790db444aa5fca3b1-delivery.json",
+    "Length": 72053,
+    "Hash": "BE3F44E5C7F9AD56C447B9466B4E3B5095CBC203C63FCBB101C2D3AF0D93FA82"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\task-attempts\\7178bfc28ceb441790db444aa5fca3b1.json",
+    "Length": 75493,
+    "Hash": "CF88996856865AA06CD1B6EA1ACDDBDABEB6D84B4E3F77BA720E5E7CD9A57B77"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\task-attempts\\92ea5fe021634630b2adedd1f9f5ef25-delivery.json",
+    "Length": 75863,
+    "Hash": "167279A723297221786CEC4650FE20661BF2482DE8B5121995250E7293AF0E5A"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\task-attempts\\92ea5fe021634630b2adedd1f9f5ef25.json",
+    "Length": 79484,
+    "Hash": "A0E13908F826A55BCE97EEBC506894F217DE86CE3E1912BB376A16A351D13BF1"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\task-attempts\\daily-worker.accumulation-lock.sqlite3",
+    "Length": 8192,
+    "Hash": "A0B56139A21F40BB74FA01DEF7901B7250FE5A152135D13D3B5E31B45B82D0FA"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\task-attempts\\f9092e675a51405db7789f2ec8a509ff-delivery.json",
+    "Length": 76727,
+    "Hash": "F4EDD05D72D7483EB4CA5CE9C75CCAD1AB7D6CE535A382C77B396C4A04BEEA7B"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\output\\unexplained-volume\\task-attempts\\f9092e675a51405db7789f2ec8a509ff.json",
+    "Length": 81527,
+    "Hash": "FD97B9165941A909D842E2E3E4343368D0AC971A8AE485B5FC97244D9839315B"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\__init__.py",
+    "Length": 81,
+    "Hash": "250FF1BE3AEFBF963676FCB1F66CEF9BE773DEB36BAE24F0A135543BE7FDFF2A"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\__main__.py",
+    "Length": 19075,
+    "Hash": "80DB5084406D090ABAEA44139EA86282EBC0DED9D18A887A0D9E2F24E118BAE2"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\accumulation_delivery.py",
+    "Length": 7025,
+    "Hash": "F419060E1E454252D339E0658B33F87F916F96964BE6A46B5796EA02EEE0AE47"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\action_results.py",
+    "Length": 11083,
+    "Hash": "F54DDBD33766CE46200037F3C7284B7DE674C0C876ABA05910A4837316AEE8E8"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\agents.py",
+    "Length": 31053,
+    "Hash": "D120ED0BF83BD2523D0025D59D2AAA5B2F70289993BD1E296B88C98EDD7D3DFE"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\ai.py",
+    "Length": 2599,
+    "Hash": "2C9C477F4AC71D6F27300D999636F74A1D6EBFC1D2540BD7AF6609866131C6FE"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\api.py",
+    "Length": 19556,
+    "Hash": "9236A964BD400F6FAFEFFFAA252B89E7AF2D7790FBA6C5FEEB30B1ABE3DFBF8F"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\article_audit.py",
+    "Length": 5404,
+    "Hash": "9352E99B0A7F30E3AB9F95336BF44B55A4087B72261A848693E20149CF4CF94F"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\article_resolver.py",
+    "Length": 4663,
+    "Hash": "D6EEE2717C5B33C8D222B639D2879EE4F633EC048D37C89DC882027C81AA2915"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\article_time.py",
+    "Length": 2354,
+    "Hash": "7E61AAEEA4E2BC6F21EF35FC91AE428E959DE317629561102F6B5EB245D44AC3"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\audit.py",
+    "Length": 6072,
+    "Hash": "8D11E2CD0E86A2D9FC04CD238DB0C57DC7BF447D021D9D5DAC92FCC5224365CA"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\broker.py",
+    "Length": 6660,
+    "Hash": "EB02ACB00CDA826B8B9683C8A087082A82941B53F32D9D4BF52B7D3080D9AB2B"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\coverage_policy.py",
+    "Length": 8793,
+    "Hash": "E37EA19BF6A2B1CE71F80E8F825BAF4D9A55B8DD0EE01CDC8F9C748B926BCCD2"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\csv_importer.py",
+    "Length": 21380,
+    "Hash": "564FB05A079210A0197CF66B1A625778EF070455A21CDBF407C71ABD4490BC3B"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\daily_accumulation.py",
+    "Length": 27043,
+    "Hash": "11176FE8C33B117079D0AD4392736CFB17694ECDA2F043D89FAA4F0459E4BA1C"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\data_gaps.py",
+    "Length": 7249,
+    "Hash": "9C5C7E79B8BCBD3033929AF80191C4D3A7AD42D921CB5B43951FD4B0C6A24C59"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\data_quality.py",
+    "Length": 11575,
+    "Hash": "845EF6D86532046FFF7B296B83E48EB75A3C9420249B439163BE925727A7E852"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\database_promotion.py",
+    "Length": 6287,
+    "Hash": "2B8640C44785685B09EE5180AFFF786240704E9BFD4D06CBAABF81C0DAF9D7F4"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\db.py",
+    "Length": 29642,
+    "Hash": "D771583B8C92923B6F21133B6570AA37F10DE2D8C70A42AD3313FCCD1634180C"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\decision_quality.py",
+    "Length": 10087,
+    "Hash": "82F554313CDCD45CA446708799B7AF359B0576E7AACE6167324C9F2CBA081DC5"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\decisions.py",
+    "Length": 1680,
+    "Hash": "7CAAE6D1356FBC2F42EA752E4E9148F0268FE0D06A481B45D3EB70DB0DEF9FC6"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\http_transport.py",
+    "Length": 901,
+    "Hash": "FCCAC4135CE51D39E8AB6B1AA99BE7561035E26088CDB80B5BB608D9B68D99AE"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\index_context.py",
+    "Length": 15478,
+    "Hash": "C1229E3B432C0920A2518F1CF0C339B1C944F33AB2D36B32BCE8DF3638F53C5B"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\market_closures.py",
+    "Length": 6464,
+    "Hash": "A215B470CD2B7FA2B3F53819577D1D9403040084E71E1DD07DC28B2122A17DBE"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\market_context.py",
+    "Length": 9832,
+    "Hash": "0A23DD3A8EA547F2D25934096058ED13D29586E19EDCC7698AD40A07EED6A2B6"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\market_history.py",
+    "Length": 5923,
+    "Hash": "17E209CC4438388A91427707A31711301EFA93C2A6CD868E5610EAA03A1C708C"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\mops_status.py",
+    "Length": 363,
+    "Hash": "7AC5729B337FD42CF61B9D71CDA02DF4833FEC1B4B664F950F0FF4B11E04405B"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\news_associations.py",
+    "Length": 11673,
+    "Hash": "36DF3029E5034CE8333336F88F494BC61E2D42D929EC1842C73F794FDCF13493"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\news_identity.py",
+    "Length": 10270,
+    "Hash": "CBDE92556850DB65DD99DE203FB658828D6068FC700946237CA85C51DD912CFA"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\notification_intents.py",
+    "Length": 5562,
+    "Hash": "29F74BC80307FA42EEB514A3C5FCE09F155D5F68AC9CF8850AD3FA600A0411CE"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\official_content.py",
+    "Length": 9452,
+    "Hash": "CB0DE09A494908A294F47BA3AA0A0F26D6242D3E69AF318F7BD9B3988B98EAA9"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\official_status.py",
+    "Length": 9063,
+    "Hash": "C014027D7E80ABD53E50A4E9913CD7B2740A36A2F825F66AE5F7445BEDFB93ED"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\operation_journal.py",
+    "Length": 8843,
+    "Hash": "5A402708957ADCB20E7D85A053B9EBD12041061C7B1132C67299724DA989D571"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\operations.py",
+    "Length": 3084,
+    "Hash": "3137347D7031A786F5C5EA9B5DB176E8D517B5E9331DCF4D1BEBC4EBB643B7A3"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\portfolio.py",
+    "Length": 8917,
+    "Hash": "5F148A1CFC5E4AACA7320435BA7992B3AA802B975B79E76EB7AB323B758EB9DC"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\provider_execution.py",
+    "Length": 3517,
+    "Hash": "BEAD48946DA9DE71C6BD1E0FD2DEDE1806A81E43B8408333DAE5FE442B1040E0"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\provider_profiles.py",
+    "Length": 14637,
+    "Hash": "E4D4B093C7A8E2709CC4329752F720A266FDB4C54C7665CFFB739CF1D974C9F0"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\providers.py",
+    "Length": 44523,
+    "Hash": "C16652D56372EF44CCF817364653F72805CB5C9669E3C22E163789D7E1F1F61E"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\public_info.py",
+    "Length": 40533,
+    "Hash": "F32BD93E89EB11291E81FF1D7AD7E4BD7A7BBFD33F359EFDE66CF60F04FBBECE"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\readiness.py",
+    "Length": 16193,
+    "Hash": "0CBF089BF7C1EAF7A67E43EEB50E014904CB0AF82923A02C350A5C8A370CFE81"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\replay.py",
+    "Length": 5502,
+    "Hash": "EF68CC5FC345BBB2CB5F632E78426FB300F7CE047CF4520EA9BD3FC04BCCB93C"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\report.py",
+    "Length": 23374,
+    "Hash": "FC6F7FA7C8CFA9EE636109418C4631844A8072FB0714D3DE4E36DCA0E25CDBF5"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\scanner.py",
+    "Length": 21915,
+    "Hash": "74F499C1A0F0745690860131080F1EAD7F8B9000193CA1D6AE00100B7B4ED679"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\scheduler.py",
+    "Length": 10499,
+    "Hash": "213659115DCB876108DDB5843828DC34FE20E93D2A729BB83017708C7C293BC7"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\scoring.py",
+    "Length": 15940,
+    "Hash": "E05B293E845D728E261FE63800C93CA3A5AAC7637ACBE22B45BD21D996832B64"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\simulator.py",
+    "Length": 16860,
+    "Hash": "1EF7AF78475B325EC8EAB92D2631832C41B16B3B073F4821E94AA23FE277579B"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\status_history.py",
+    "Length": 6493,
+    "Hash": "09C16C7801154972C9C233572216EF6ED8AC441A43DAE16672E771CEFBB8A388"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\status.py",
+    "Length": 2027,
+    "Hash": "22E00D3C6E8585C835D88683D6F77ADA51D1C0F0CAAC360499702E40FEFE97C5"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\taiwan_official.py",
+    "Length": 76646,
+    "Hash": "E4CE5E1A071E1F6A508E73F1CDEFDC3DAB8F0A1E05E3C4F3FD61DAA094989602"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\ui.py",
+    "Length": 16975,
+    "Hash": "347317244CD4056DEE0515F8B2F2C9A15C899D93E31EC8E218011BD1BBA68D01"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\unexplained_volume.py",
+    "Length": 31895,
+    "Hash": "2228B74790EAE890DB3027D8497089715D0B9CF8F82C0D0E5E22DA07444CD0AA"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\weekly_accumulation_check.py",
+    "Length": 5456,
+    "Hash": "3306F4794A45A6C6CE5F8C0DB72B7948E7FB67C815ACE90B2088EDFFD6B61D88"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\work_budget.py",
+    "Length": 776,
+    "Hash": "AD973041A7F72FC1F591D02313F73E5D7FD9B2222BB5DA94BA0535C099195FE4"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\stock_hunter\\worker_identity.py",
+    "Length": 1654,
+    "Hash": "923C1B8ECC9E3BCF0CE1F45CE1B0B0676D456DDCFA41DC0965D5049F41995A9A"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\tools\\run_stock_task_hidden.ps1",
+    "Length": 2069,
+    "Hash": "A06E784BF74EE74E7283B511F0DE81964F90B1CD5BC73EB8C4A081967A2D0A58"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\tools\\run_stock_task.py",
+    "Length": 6658,
+    "Hash": "7DB7F2544CC1B814D4E69D25ABC097654A50D8596A7019C5C336C7F0E50EE99E"
+  },
+  {
+    "Path": "[STOCK_PROJECT]\\tools\\WindowsTaskJob.cs",
+    "Length": 6537,
+    "Hash": "5AF3B7D783F4B58A51671D5289A9D30DFA4502490C61482901A1121DDD3D12D3"
+  }
+]

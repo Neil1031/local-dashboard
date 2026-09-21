@@ -1,0 +1,11 @@
+<Triggers xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+    <CalendarTrigger>
+      <StartBoundary>2026-09-18T22:00:00+08:00</StartBoundary>
+      <ScheduleByWeek>
+        <WeeksInterval>1</WeeksInterval>
+        <DaysOfWeek>
+          <Friday />
+        </DaysOfWeek>
+      </ScheduleByWeek>
+    </CalendarTrigger>
+  </Triggers>

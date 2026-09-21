@@ -1,0 +1,1 @@
+<Principals xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task"><Principal id="Author"><UserId>REDACTED_USER_SID</UserId><LogonType>InteractiveToken</LogonType></Principal></Principals>

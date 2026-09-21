@@ -15,6 +15,12 @@ The repository and live task definition were inspected before implementation.
 PLAN.md remains unchanged. No Runner, Launcher, Stop, collector, UI, schema or
 stock-project source changes are included.
 
+Sanitized source evidence is committed in [docs/evidence/stage-5b](evidence/stage-5b/README.md),
+including the failed live request, XML comparisons, inventories, rollback records,
+fixture observations, regression results and original-artifact SHA-256 provenance.
+Private originals remain outside Git; the evidence index explains each redaction
+and the distinction between original and sanitized file hashes.
+
 ## Plan / stages / gates
 
 | Stage | Scope and dependency | Gate / done when | Self-QA result |

@@ -1,0 +1,938 @@
+[
+  {
+    "sha256": "7B6E75AD6B3843DB95D005BD2794E7D49B2029FDB0E8C92CB5689A77DA8D8232",
+    "key": "\\AIStockHunter-Accumulation-Check-2026-09-18"
+  },
+  {
+    "sha256": "028E48B036B5275324F88AF9A5D1A255B49AC0708EF47C3278540DB2CF2A590E",
+    "key": "\\AIStockHunter-Accumulation-Check-2026-09-21"
+  },
+  {
+    "sha256": "075DDA70C729F4B3E63ADA8EAA4400958E0A35C683AA8173CC0C3CC61E6FCE3B",
+    "key": "\\AIStockHunter-Accumulation-Check-2026-09-22"
+  },
+  {
+    "sha256": "2D4183FDB670188DCAEDEE657366401DE7E69F2C8ACCD0E0F545A514FFC07E67",
+    "key": "\\AIStockHunter-Accumulation-Weekly-Check"
+  },
+  {
+    "sha256": "DE5A8F00DF286AD441DBCF9DC69DF5DAFA3BB5D331A4CB326D4FA784B9D06971",
+    "key": "\\AIStockHunter-UnexplainedVolume-Daily"
+  },
+  {
+    "sha256": "3E4306AAA46A8D756DDE02B547C5387646FB6826E5C0E25E189806A8B51FD98C",
+    "key": "\\AIStockHunter-UnexplainedVolume-HealthCheck"
+  },
+  {
+    "sha256": "DEF1636645A5C55F3563AD26EC2284C5B74263C053336F5202687C657C45E6BE",
+    "key": "\\AIStockHunter-UnexplainedVolume-V2-Weekly"
+  },
+  {
+    "sha256": "CA572E8A0F20AD45B92B76BDAE4D64CE9269676D41EB3AF8C081C659AB49BC1F",
+    "key": "\\BlueStacksHelper_nxt"
+  },
+  {
+    "sha256": "9DC9C2E1C97AC8A40A3A541D460294806F85AC0AA38EFD6684394AABAADCA09E",
+    "key": "\\ETW Host Service Updater v16"
+  },
+  {
+    "sha256": "057F8DE257A6DFF93492761A76EDA3B87E1BFDD9057149B190454CCF8D0059A5",
+    "key": "\\GoogleUserPEH\\RunPlatformExperienceHelper_Daily"
+  },
+  {
+    "sha256": "2AB5D0A024845DE8687942A995CC3FACBCFAE1BCB5B6CC94E6A1F111B8AFFF8D",
+    "key": "\\GoogleUserPEH\\RunPlatformExperienceHelper_Metrics"
+  },
+  {
+    "sha256": "E36FAC05A3D86149B8EC2EF7D64BF5B45ECDC806B7A7ECD8560DF1DADF255CE9",
+    "key": "\\GoogleUserPEH\\RunPlatformExperienceHelperOnUnlock"
+  },
+  {
+    "sha256": "BA5FBD6F559285959B956B83BD919089A8A42EE4BED0F9653D5A1794BB7DF261",
+    "key": "\\InsiderTracker-Market"
+  },
+  {
+    "sha256": "27EA30DF228AC5E8B25632311C5E2051C3F0F3FD5A5A053E4672C392C1082382",
+    "key": "\\InsiderTracker-SEC"
+  },
+  {
+    "sha256": "AA74A642F415792ACF841F5DD728C8C2AE470045F540B9E726EEF929A73D3886",
+    "key": "\\InsiderTracker-SyncImport"
+  },
+  {
+    "sha256": "4F53ADE02888BB26B0337AFA5D927CB171B8175F12AE08365AC2E758343A839E",
+    "key": "\\LocalStockDBDailyUpdate"
+  },
+  {
+    "sha256": "3B17310A85891336666EE1D490E0DE9CA7511783E6B399076427354B6ED70046",
+    "key": "\\Microsoft\\Office\\Office Actions Server"
+  },
+  {
+    "sha256": "FD03760BFECDBE63225EC3716501B29980A52DFFBBFF38AFEC883C6D83C36278",
+    "key": "\\Microsoft\\Office\\Office Automatic Updates 2.0"
+  },
+  {
+    "sha256": "A4096F37B7B9DCFC279AB65F36379F55B9C9596D9EABB2CBF992530B13FD2B42",
+    "key": "\\Microsoft\\Office\\Office Background Push Maintenance"
+  },
+  {
+    "sha256": "9C1574C4B66F99ABE3130CB0C28376697FC4B6152AA4F2689CBD30F983C26895",
+    "key": "\\Microsoft\\Office\\Office ClickToRun Service Monitor"
+  },
+  {
+    "sha256": "BDF89A8D32636BC9815E3D53EB1EE7F36A1B9232A932F888613EB4B774792402",
+    "key": "\\Microsoft\\Office\\Office Feature Updates"
+  },
+  {
+    "sha256": "37C85A830BCB674A7FBDF4DAB7F70CCF09D23823ED2960EA203024EF34B1038E",
+    "key": "\\Microsoft\\Office\\Office Feature Updates Logon"
+  },
+  {
+    "sha256": "A1DA7360FAB15F93F6E26AC57C3BAD306910EAA4CAB2840C2AFF4771E9678CB1",
+    "key": "\\Microsoft\\Office\\Office Performance Monitor"
+  },
+  {
+    "sha256": "6B3115B5ECEB2333B792EBAEC61DDAC33EEF3420C964BEB1C592A30A6ECB5C5F",
+    "key": "\\Microsoft\\Office\\Office Startup Maintenance"
+  },
+  {
+    "sha256": "5E6F25D6A2D83444A022FDFD4672975470ECF8C809C5E18ABD54FA9FF9BB4944",
+    "key": "\\Microsoft\\VisualStudio\\Updates\\BackgroundDownload"
+  },
+  {
+    "sha256": "96B271A51206E94E6EA215AC8542363AAEAE0A46A9364BBAF9DD45258A7CBC62",
+    "key": "\\Microsoft\\Windows\\.NET Framework\\.NET Framework NGEN v4.0.30319"
+  },
+  {
+    "sha256": "62A24B3F73AC0C84EDA52BC3753B5924660EBD62E843499E39A4B3BB4D6170C2",
+    "key": "\\Microsoft\\Windows\\.NET Framework\\.NET Framework NGEN v4.0.30319 64"
+  },
+  {
+    "sha256": "46E06383D7B4D84350007E3A54AD175275C254441A3153C2CDF9B2E32100CFD2",
+    "key": "\\Microsoft\\Windows\\.NET Framework\\.NET Framework NGEN v4.0.30319 64 Critical"
+  },
+  {
+    "sha256": "F274BB4087870683131D053A63FB4651C1E0EF7B4AC1FD334CE367631B5615BE",
+    "key": "\\Microsoft\\Windows\\.NET Framework\\.NET Framework NGEN v4.0.30319 Critical"
+  },
+  {
+    "sha256": "44A8F1DFB9D1B4177BEF233FBC4C4A9A4BBDF6784124BE7E06C78EC280316843",
+    "key": "\\Microsoft\\Windows\\AccountHealth\\RecoverabilityToastTask"
+  },
+  {
+    "sha256": "1D700E6A45B24A366CEFDC72297E546DCC5C703DD4A932C191674CCE21D317A1",
+    "key": "\\Microsoft\\Windows\\Active Directory Rights Management Services Client\\AD RMS Rights Policy Template Management (Automated)"
+  },
+  {
+    "sha256": "3E2BAF9DEEEFCACA23EBEA9592B775E4D991E8FE7D86A2581A3CF2FA19E6839D",
+    "key": "\\Microsoft\\Windows\\Active Directory Rights Management Services Client\\AD RMS Rights Policy Template Management (Manual)"
+  },
+  {
+    "sha256": "2BDDD9EEB0A3C0CF9FD5A429231685779C24BB5E3908BA784165E56F5003D764",
+    "key": "\\Microsoft\\Windows\\AppID\\PolicyConverter"
+  },
+  {
+    "sha256": "09B7004D2F0BEE6B73EE1AFAFA5A9147E63EDCBB29B8F84ED697FC7C11A7A4A1",
+    "key": "\\Microsoft\\Windows\\AppID\\VerifiedPublisherCertStoreCheck"
+  },
+  {
+    "sha256": "1F7EDF23E341FE8043258FAC3530B5F98DABB14FA4601C19E3CEA8E5BE221CFA",
+    "key": "\\Microsoft\\Windows\\Application Experience\\MareBackup"
+  },
+  {
+    "sha256": "218DA7B66AA644B3BB36F3D7C5400F6250CB32DF13C4C67C64960968EA99AAD1",
+    "key": "\\Microsoft\\Windows\\Application Experience\\Microsoft Compatibility Appraiser Exp"
+  },
+  {
+    "sha256": "0FF64511D69325C2017FF0873AD74DD149324F2BC2E8CDE6F066EC8A885F0EF7",
+    "key": "\\Microsoft\\Windows\\Application Experience\\PcaPatchDbTask"
+  },
+  {
+    "sha256": "5D4C6DA82CA6D41EE91F3439645BB8E1F82B28212FF43A38704C683FD2BC2B89",
+    "key": "\\Microsoft\\Windows\\Application Experience\\SdbinstMergeDbTask"
+  },
+  {
+    "sha256": "AA01D98EFCD99BF7A131DFC429794AD5A2D7290A1A255AF90D2E99FD23D8D7EF",
+    "key": "\\Microsoft\\Windows\\Application Experience\\StartupAppTask"
+  },
+  {
+    "sha256": "4881043D7FB3054C025FADD175188DF478E8D687170635BCBCF3E6ADBDCC5141",
+    "key": "\\Microsoft\\Windows\\ApplicationData\\appuriverifierdaily"
+  },
+  {
+    "sha256": "458652825B3BDBCD0C78ED2ADE2047FBC3C08D4C5EC68B1CE9C232D373458DB7",
+    "key": "\\Microsoft\\Windows\\ApplicationData\\appuriverifierinstall"
+  },
+  {
+    "sha256": "B274BDCAFD27999AE01AA2479FA0B6435CF8A4A168A83BB98B88E2A6F78A7B5F",
+    "key": "\\Microsoft\\Windows\\ApplicationData\\CleanupTemporaryState"
+  },
+  {
+    "sha256": "FEA0B69A0D7AC60F0989F07344C2B62A077E23B30EC8268D3BDBACF7D8E5DB13",
+    "key": "\\Microsoft\\Windows\\ApplicationData\\DsSvcCleanup"
+  },
+  {
+    "sha256": "9A821D641057366CCE2BA6A2189CEDED4F2E0F4ED63F9E26949BC0738FE5DAB7",
+    "key": "\\Microsoft\\Windows\\AppListBackup\\Backup"
+  },
+  {
+    "sha256": "7261839AC882BD2FA3DB83AFD986BD88EB3219A67475654D8AC7CE17BAA6C77D",
+    "key": "\\Microsoft\\Windows\\AppListBackup\\BackupNonMaintenance"
+  },
+  {
+    "sha256": "1A1B621D9515D631DEA7A94D1655EF4C5AA696646F6C0DA09D78E54D0C572186",
+    "key": "\\Microsoft\\Windows\\AppxDeploymentClient\\Pre-staged app cleanup"
+  },
+  {
+    "sha256": "E6FF41EBC9A01830F235D019B0A81FCC65492AE67AA1674359227E65ECDA828C",
+    "key": "\\Microsoft\\Windows\\Autochk\\Proxy"
+  },
+  {
+    "sha256": "80EF669A126921C4CED7F281899C611924936E30062FA0A07747BDFC1C1EF0A5",
+    "key": "\\Microsoft\\Windows\\BitLocker\\BitLocker Encrypt All Drives"
+  },
+  {
+    "sha256": "904D9A37559291DDCBE861055F51A0130A09FBCFAA779B21A6DA44C686AE1A14",
+    "key": "\\Microsoft\\Windows\\BitLocker\\BitLocker MDM policy Refresh"
+  },
+  {
+    "sha256": "13F660F4BE8313A954F5DE1A4B895B600C9B8B044EC5266916C8F8C6261B5A48",
+    "key": "\\Microsoft\\Windows\\Bluetooth\\UninstallDeviceTask"
+  },
+  {
+    "sha256": "8A257FE5F61DD5286206AF47AD75CEBFC1481DFEF3BABF75ADAD25747913F13C",
+    "key": "\\Microsoft\\Windows\\BrokerInfrastructure\\BgTaskRegistrationMaintenanceTask"
+  },
+  {
+    "sha256": "4E37BDCDE0E6BE51EDA4EF02AC8CF0EA71465FB229E97446D900CEBA9404EEC8",
+    "key": "\\Microsoft\\Windows\\capabilityaccessmanager\\maintenancetasks"
+  },
+  {
+    "sha256": "83F611EC6A350EE761BBB4E8CE038607DA04E77A1107C47550B5AEB5A135DE6F",
+    "key": "\\Microsoft\\Windows\\CertificateServicesClient\\UserTask"
+  },
+  {
+    "sha256": "7FE2C1875E7938B4F6157E27326A1DB200BB4FD89F86588D1A021DD582631CD3",
+    "key": "\\Microsoft\\Windows\\CertificateServicesClient\\UserTask-Roam"
+  },
+  {
+    "sha256": "8EC6B094F1ECFEFBC414AD0C0478B1D764E3F7D03DBA0D5D00D5A95A75F39443",
+    "key": "\\Microsoft\\Windows\\Chkdsk\\ProactiveScan"
+  },
+  {
+    "sha256": "4C41A843F4AE119494B3FCAD14CAD5CFDA2D4357C9878A713512C7B623FE8B1D",
+    "key": "\\Microsoft\\Windows\\Chkdsk\\SyspartRepair"
+  },
+  {
+    "sha256": "F6E503D7357A63678D2D3935A231B668D398E45AEF806D4AA8A46080D7F8AB9C",
+    "key": "\\Microsoft\\Windows\\CloudExperienceHost\\CreateObjectTask"
+  },
+  {
+    "sha256": "9EE7352861E05C1A503D431028E5E4F91BDB843748060AF516CBE4BFCEA55618",
+    "key": "\\Microsoft\\Windows\\CloudRestore\\Backup"
+  },
+  {
+    "sha256": "8580C76640810CBDCA898283D7885B59A07AD265FE866FD0299455E6DCF0DC68",
+    "key": "\\Microsoft\\Windows\\CloudRestore\\Restore"
+  },
+  {
+    "sha256": "29B365BCE7D6F5D0ACE8345A8486DC0AE5B56FA078F20CC4C1863EC83ADCD63B",
+    "key": "\\Microsoft\\Windows\\ConsentUX\\UnifiedConsent\\UnifiedConsentSyncTask"
+  },
+  {
+    "sha256": "FE9AF896BBBF7FF0E3E482BD46738860A2710381968C56C917C7B78D5E108E70",
+    "key": "\\Microsoft\\Windows\\Containers\\CmCleanup"
+  },
+  {
+    "sha256": "B45B3C83335829E80A5B5779C499964109967632C7101646B0F07288CA28E550",
+    "key": "\\Microsoft\\Windows\\Customer Experience Improvement Program\\Consolidator"
+  },
+  {
+    "sha256": "78BAED605B8F52ED46F4E0351CF66BD678D283438116A7585DC67C7FBC85299D",
+    "key": "\\Microsoft\\Windows\\Customer Experience Improvement Program\\UsbCeip"
+  },
+  {
+    "sha256": "8D12953194DC47DAD495E312C464C1428A095D0D09609944A77D60F6768560CB",
+    "key": "\\Microsoft\\Windows\\Data Integrity Scan\\Data Integrity Check And Scan"
+  },
+  {
+    "sha256": "8862A935C0928F9C4E661191D5DF976E2091E1EDB960A2FDBFCA54073EECE538",
+    "key": "\\Microsoft\\Windows\\Data Integrity Scan\\Data Integrity Scan"
+  },
+  {
+    "sha256": "F0203AAB31DF5E0CC988282BA4E3DF2A00A07425C74C44349FDEED18486C296C",
+    "key": "\\Microsoft\\Windows\\Data Integrity Scan\\Data Integrity Scan for Crash Recovery"
+  },
+  {
+    "sha256": "C13E613A02F248712928EFB865B42604308A1D8937D27FA224109D59C6A77482",
+    "key": "\\Microsoft\\Windows\\Defrag\\ScheduledDefrag"
+  },
+  {
+    "sha256": "A9F8CA0C2F6EEE38ACB5D9096E70FC556BBD0248609AE0B8DB0BB4ED7EE4FCE1",
+    "key": "\\Microsoft\\Windows\\Device Information\\Device"
+  },
+  {
+    "sha256": "60FA84872ABB33CC9C366BB8AF31503DA82BA2C75CD8AAA7B9068108A9B90B12",
+    "key": "\\Microsoft\\Windows\\Device Information\\Device User"
+  },
+  {
+    "sha256": "0017499922B0751BC7F48A7100F1663E375763138BF0C2EC99F2503EDD9FBA7F",
+    "key": "\\Microsoft\\Windows\\Device Setup\\Driver Recovery on Reboot"
+  },
+  {
+    "sha256": "7771864EA3FEBF3D18D56E44DDE09C01AF3ABDB7F38CC4A41669AB7A0F793DA3",
+    "key": "\\Microsoft\\Windows\\Diagnosis\\RecommendedTroubleshootingScanner"
+  },
+  {
+    "sha256": "F83392ECAFA362188CFDCE6045B1A42CDFDD0D3E0A5B839A3ACFB9BF9769FD49",
+    "key": "\\Microsoft\\Windows\\Diagnosis\\Scheduled"
+  },
+  {
+    "sha256": "B7114901F63B6894B94EE4CBDF5C438648A68C5C46DEA24A90BA322968593A51",
+    "key": "\\Microsoft\\Windows\\Diagnosis\\UnexpectedCodepath"
+  },
+  {
+    "sha256": "770EE8066316DE799D04694B026CA3FB6585F2974A0419F34B2623B900B1009A",
+    "key": "\\Microsoft\\Windows\\DirectX\\DirectXDatabaseUpdater"
+  },
+  {
+    "sha256": "4711052C7E14B276A0C0C026CFBD4E4BB854F05F71C7228F931081904552AF52",
+    "key": "\\Microsoft\\Windows\\DirectX\\DXGIAdapterCache"
+  },
+  {
+    "sha256": "037E6C9F3C0F4D888E3439BF8C669EA741BF346FC819585E628CDE884E9DB0BC",
+    "key": "\\Microsoft\\Windows\\DiskCleanup\\SilentCleanup"
+  },
+  {
+    "sha256": "0C51C8A60C8A6FC1857C726A3691C1D011257788E7E650C9709D73B9E7C3CC58",
+    "key": "\\Microsoft\\Windows\\DiskDiagnostic\\Microsoft-Windows-DiskDiagnosticDataCollector"
+  },
+  {
+    "sha256": "8694E3DCFC08685B05919B23D0CBB9E8C0244248B6C79D051DFC50D74E0C1B0F",
+    "key": "\\Microsoft\\Windows\\DiskDiagnostic\\Microsoft-Windows-DiskDiagnosticResolver"
+  },
+  {
+    "sha256": "CC79BF59E5E35C1290E6577B186D16267A64CE43CB066D205C58399F9BD63016",
+    "key": "\\Microsoft\\Windows\\DiskFootprint\\Diagnostics"
+  },
+  {
+    "sha256": "AA03FC1863086BC709F143BF24566C735344C3253362C07E23C5C27BDF82431B",
+    "key": "\\Microsoft\\Windows\\DiskFootprint\\StorageSense"
+  },
+  {
+    "sha256": "0D8DCB176C3C9130954573C06791CD78772799DF81FDB3F04F866CDAA661442E",
+    "key": "\\Microsoft\\Windows\\DUSM\\dusmtask"
+  },
+  {
+    "sha256": "70EE3EAA0F77488E269E4F0DB8F0AC2DB17CFCCCB76D5932AD832A88F58FD513",
+    "key": "\\Microsoft\\Windows\\EDP\\EDP App Launch Task"
+  },
+  {
+    "sha256": "C478C47058B25CAB8E06B48ACCE35856F15B76EA7D9F08F7FEF01B27AE46A9EE",
+    "key": "\\Microsoft\\Windows\\EDP\\EDP Auth Task"
+  },
+  {
+    "sha256": "AF78DF6235E3BEE3C0E1D5DA771E3AE82AE187DD74EDF407690814C3B0786B0F",
+    "key": "\\Microsoft\\Windows\\EDP\\EDP Inaccessible Credentials Task"
+  },
+  {
+    "sha256": "73EA0FFCFF235BF137A83E6D8C516636BE012434782B90ECCA7F3F0A482DC1A0",
+    "key": "\\Microsoft\\Windows\\EDP\\StorageCardEncryption Task"
+  },
+  {
+    "sha256": "C7887292F236EDCCA1565A774D91EC4061ADB07EAD3BB82531D3B945EE231B42",
+    "key": "\\Microsoft\\Windows\\ExploitGuard\\ExploitGuard MDM policy Refresh"
+  },
+  {
+    "sha256": "70FB07CF86BD8D56BD4BD94729A7AD7FEE90C581688E4623F88A8EE2F7C9A0F4",
+    "key": "\\Microsoft\\Windows\\Feedback\\Siuf\\DmClient"
+  },
+  {
+    "sha256": "501A683BD98FC28FBFE81D301F875EE8D0B940AA0917702154BD0887BB418A43",
+    "key": "\\Microsoft\\Windows\\Feedback\\Siuf\\DmClientOnScenarioDownload"
+  },
+  {
+    "sha256": "AC77642E7A16B2BB4A254477CED19CFCD78331FDD8E5BB1D74180129C221618E",
+    "key": "\\Microsoft\\Windows\\File Classification Infrastructure\\Property Definition Sync"
+  },
+  {
+    "sha256": "408659ABD5866DB95D9AF2FFC1B1F1C303C9F99B344FC1BB092498C42F4B7250",
+    "key": "\\Microsoft\\Windows\\FileHistory\\File History (maintenance mode)"
+  },
+  {
+    "sha256": "062A4A767761A88B0BBE26C54124588734214DD98608BADA85264772430289BA",
+    "key": "\\Microsoft\\Windows\\Flighting\\FeatureConfig\\BootstrapUsageDataReporting"
+  },
+  {
+    "sha256": "0B37AF1D7AF46E36D81826E8FB1681FBCAEA055FFB7D0507BB2EA4A3C7C77B20",
+    "key": "\\Microsoft\\Windows\\Flighting\\FeatureConfig\\GovernedFeatureUsageProcessing"
+  },
+  {
+    "sha256": "056A47FB746A4AB5A18A12FE6B4BC80B51397E3029BD3AA9CF21CEFE078A349B",
+    "key": "\\Microsoft\\Windows\\Flighting\\FeatureConfig\\ReconcileConfigs"
+  },
+  {
+    "sha256": "A16450857131A1CE4D2EA4DBC53080878014CCC17661A69CBAE64CA96D44445D",
+    "key": "\\Microsoft\\Windows\\Flighting\\FeatureConfig\\ReconcileFeatures"
+  },
+  {
+    "sha256": "8ECB82427BFE6F275114536A53967F2C22CEB24414A9E81EE5A542457D51DF84",
+    "key": "\\Microsoft\\Windows\\Flighting\\FeatureConfig\\SafeguardsReconciliation"
+  },
+  {
+    "sha256": "D402787B246026A3A1DA49D089257B084830A4BF2DF823574E22C981DF22FB2B",
+    "key": "\\Microsoft\\Windows\\Flighting\\FeatureConfig\\UsageDataFlushing"
+  },
+  {
+    "sha256": "7284D94AAB11D2FAAEAF02BE826375C980FF38D1068AE66FB1687A503B844DAD",
+    "key": "\\Microsoft\\Windows\\Flighting\\FeatureConfig\\UsageDataReceiver"
+  },
+  {
+    "sha256": "14207383488C38BAB8F93670FF21EE67356FA9D5FCC2F30618BC674D8AF59A74",
+    "key": "\\Microsoft\\Windows\\Flighting\\FeatureConfig\\UsageDataReporting"
+  },
+  {
+    "sha256": "B11C9633AB260CC3E62EDDBD53D34072A86459DB1EA7658D817E1F098D7A5CD0",
+    "key": "\\Microsoft\\Windows\\Flighting\\OneSettings\\RefreshCache"
+  },
+  {
+    "sha256": "905726D4484217E1A5C57D8DA69E516F2165EEF5395E119901A783633202E07A",
+    "key": "\\Microsoft\\Windows\\Hotpatch\\Monitoring"
+  },
+  {
+    "sha256": "3B2052A9474189A4BBCB29F21F260DCBA9D22F418E06BF5F1B4D60A42F578E04",
+    "key": "\\Microsoft\\Windows\\input\\InputSettingsRestoreDataAvailable"
+  },
+  {
+    "sha256": "62B85603871620CD2B0156DDF309673F2A8F32FD706A4B73599123D35F89689D",
+    "key": "\\Microsoft\\Windows\\input\\LocalUserSyncDataAvailable"
+  },
+  {
+    "sha256": "D4AE12BAC77BB02648996A306EE642EC848EF92FCD169F40AAC2ED78732966D0",
+    "key": "\\Microsoft\\Windows\\input\\MouseSyncDataAvailable"
+  },
+  {
+    "sha256": "FF7CF2BB299FA544CA9B9EC5B331D70379AC67377B5BA88DEA5186DCF5B53EFE",
+    "key": "\\Microsoft\\Windows\\input\\PenSyncDataAvailable"
+  },
+  {
+    "sha256": "CAD5920A217D2407A198BA5112B6226853E8A7184D3842B9F5C262B25F0AF2BE",
+    "key": "\\Microsoft\\Windows\\input\\RemoteMouseSyncDataAvailable"
+  },
+  {
+    "sha256": "D81FF8FEAA60BAB6DEA922ACFF8814B271FAC56573BBA39C7057699989B10ED6",
+    "key": "\\Microsoft\\Windows\\input\\RemotePenSyncDataAvailable"
+  },
+  {
+    "sha256": "51EFC158669AC9E012A8AE81517B9879C67F953C933A0F5569C8273111AA6565",
+    "key": "\\Microsoft\\Windows\\input\\RemoteTouchpadSyncDataAvailable"
+  },
+  {
+    "sha256": "19139EC4D74960F43960A7DA9940E9AC88E22BBD1E394DE69D89C97A2B0534E5",
+    "key": "\\Microsoft\\Windows\\input\\syncpensettings"
+  },
+  {
+    "sha256": "7D4DBCFC3F1B39C1B5E7CE89431B793CEB7CA2CA2FAB44EFEFB03573992FB28B",
+    "key": "\\Microsoft\\Windows\\input\\TouchpadSyncDataAvailable"
+  },
+  {
+    "sha256": "365BDECFB4A778FC2124CD8F23399A44235A6567D28253FB5D6837F88866462A",
+    "key": "\\Microsoft\\Windows\\InstallService\\RestoreDevice"
+  },
+  {
+    "sha256": "6ADE6F0A0B3381772D51D2452443F91A46D3E6224BFE11784F4559E96C62AA0A",
+    "key": "\\Microsoft\\Windows\\InstallService\\ScanForUpdates"
+  },
+  {
+    "sha256": "07C97002E27AA95B67C97AC0ADB36FA23AF054322657A4697DEDC6ED373EED99",
+    "key": "\\Microsoft\\Windows\\InstallService\\ScanForUpdatesAsUser"
+  },
+  {
+    "sha256": "48566F3F21686E0D32E2334F202694DC0E5B0803B21EE38D8B39D94C8B38B583",
+    "key": "\\Microsoft\\Windows\\InstallService\\WakeUpAndContinueUpdates"
+  },
+  {
+    "sha256": "8C970CC6D45D44E969C0AE6EBBCAFD0CCF86213C7CF717A71C17542159BA59D6",
+    "key": "\\Microsoft\\Windows\\InstallService\\WakeUpAndScanForUpdates"
+  },
+  {
+    "sha256": "7793042CA44A565A126BA8A9CC16BAE8EE1EF7C9ED11A386A1DDE54999625354",
+    "key": "\\Microsoft\\Windows\\International\\Synchronize Language Settings"
+  },
+  {
+    "sha256": "08D7B87C7154A0E706783B2C987A6B5B92463D20C05B1E2AA00557868BB9ED02",
+    "key": "\\Microsoft\\Windows\\Kernel\\La57Cleanup"
+  },
+  {
+    "sha256": "30C9A4221C28A4DC0F658AE1C4358D9C92CD4CD6AEAB2DE62EC5D22B8693DC04",
+    "key": "\\Microsoft\\Windows\\LanguageComponentsInstaller\\Installation"
+  },
+  {
+    "sha256": "816E6CAB7A9D73487D38F09022C497299B0CC426340834F2ADA6FBFBA5424B88",
+    "key": "\\Microsoft\\Windows\\LanguageComponentsInstaller\\ReconcileLanguageResources"
+  },
+  {
+    "sha256": "CDB781852947627E4A84860E9E6F4B3D2248AB92B976184C0156935CCA979B85",
+    "key": "\\Microsoft\\Windows\\Location\\Notifications"
+  },
+  {
+    "sha256": "B03A3BF89247140E3825B3F3D910E7788652C89B66C525D512D476967CCBC3EA",
+    "key": "\\Microsoft\\Windows\\Location\\WindowsActionDialog"
+  },
+  {
+    "sha256": "54DE7498165BA23F541541728F39A3ED67FC6ABA943FAF44A6152CEECDB0F0BF",
+    "key": "\\Microsoft\\Windows\\Maintenance\\WinSAT"
+  },
+  {
+    "sha256": "89191E416BF0EC2A1B04A33D9C65A4EDC5EDDDA68AEA65FBDB04A487836B109C",
+    "key": "\\Microsoft\\Windows\\Management\\Autopilot\\DetectHardwareChange"
+  },
+  {
+    "sha256": "B275F83F1BA8BC468230FF255B29E8CF2A5998132F1AE66566003DA696E9091B",
+    "key": "\\Microsoft\\Windows\\Management\\Autopilot\\RemediateHardwareChange"
+  },
+  {
+    "sha256": "B0C2464EC946F3A0D42BE465A3D7E737B1EF918AA7195E382489D42523090613",
+    "key": "\\Microsoft\\Windows\\Management\\Provisioning\\Cellular"
+  },
+  {
+    "sha256": "933C3C0A9A17E370F8D2294A892710BE17DCF642E36ED81BD3C8BB36A8C61DB3",
+    "key": "\\Microsoft\\Windows\\Management\\Provisioning\\Logon"
+  },
+  {
+    "sha256": "9ADDDC1226C9500887D9CFE4D06601CE4B8E2424A7E5BC55F37954492A8942D5",
+    "key": "\\Microsoft\\Windows\\Management\\Provisioning\\MdmDiagnosticsCleanup"
+  },
+  {
+    "sha256": "32B9CDFD28F83BCDCEF2AC5ABE679B3EC1B5062A2FFCEC87A5925DC985371474",
+    "key": "\\Microsoft\\Windows\\Management\\Provisioning\\Retry"
+  },
+  {
+    "sha256": "047F8E13A604A2ECD41D24C072076AD711229AE323B63C07A71F184322F2CDDA",
+    "key": "\\Microsoft\\Windows\\Management\\Provisioning\\RunOnReboot"
+  },
+  {
+    "sha256": "B30AF73BBB67365B3C560DE8E467C7BA77B0902E9AC950C6AF751CD452C1CBF5",
+    "key": "\\Microsoft\\Windows\\Maps\\MapsToastTask"
+  },
+  {
+    "sha256": "EAB7EE4D8EE9128E7ECC28EC02D845173BD98658DB60BFCDB839A178354FFF13",
+    "key": "\\Microsoft\\Windows\\Maps\\MapsUpdateTask"
+  },
+  {
+    "sha256": "8F115AAA2A1C862EE53CFE3DAF417E3560DFC710C8C983C0372EA0812686FCB8",
+    "key": "\\Microsoft\\Windows\\MemoryDiagnostic\\AutomaticOfflineMemoryDiagnostic"
+  },
+  {
+    "sha256": "99601A59767503867A43019D12DB0DD7BACE7150DF95DD01CD917EB0DC5D12A7",
+    "key": "\\Microsoft\\Windows\\MemoryDiagnostic\\ProcessMemoryDiagnosticEvents"
+  },
+  {
+    "sha256": "6B545B4035F4CD098E1022B114CCDA5456A0F22F0DFE0C7C19FBD1705285CB19",
+    "key": "\\Microsoft\\Windows\\MemoryDiagnostic\\RunFullMemoryDiagnostic"
+  },
+  {
+    "sha256": "25C5C803ADA0C1D79E622E7CB1B851C4249DABC9F97ACD3D7D96A5C96E3561DE",
+    "key": "\\Microsoft\\Windows\\MUI\\LPRemove"
+  },
+  {
+    "sha256": "6B1FE33E51BE768DF2254377E136C950492A6F8ED0CCB9720E10DE3A8992EAAF",
+    "key": "\\Microsoft\\Windows\\Multimedia\\SystemSoundsService"
+  },
+  {
+    "sha256": "4EBCECD4814EBBFA419E20967E71F56649E7A345AEA6D6AF6D3E8D909BC4BD4E",
+    "key": "\\Microsoft\\Windows\\Network Connectivity Status Indicator\\NcsiIdentifyUserProxies"
+  },
+  {
+    "sha256": "7BC0B87DF851E9A180C6CC0590E33A9F1F8628D224D409DFE96EB2931021B6A0",
+    "key": "\\Microsoft\\Windows\\NlaSvc\\WiFiTask"
+  },
+  {
+    "sha256": "F857C65CDE458C429DB2286DDB0B663C981993C01D1F328679B2D4F03FCE3837",
+    "key": "\\Microsoft\\Windows\\Offline Files\\Background Synchronization"
+  },
+  {
+    "sha256": "230FC76CB03301CFA215A466013750B2CE9C7861B6C0B1D390367F8940ECA8A9",
+    "key": "\\Microsoft\\Windows\\Offline Files\\Logon Synchronization"
+  },
+  {
+    "sha256": "623D2FEF3EABAB6F3FD17BEB018B1C2FE8E30911FD7BF8570694F56AB624BB22",
+    "key": "\\Microsoft\\Windows\\PCRPF\\PCR Prediction Framework Firmware Update Task"
+  },
+  {
+    "sha256": "FCF6479B7614A65B1D84AE48C66FF7C9C6BFE4141C204B6AF03FDDD2C3949CB1",
+    "key": "\\Microsoft\\Windows\\PerformanceTrace\\ShowFeedbackToast"
+  },
+  {
+    "sha256": "D067808DBBBF34E6CA0140B3816D83C63BCABE800622480D4D7FED3AD0F413F0",
+    "key": "\\Microsoft\\Windows\\PerformanceTrace\\WhesvcToast"
+  },
+  {
+    "sha256": "98CA3BB91CB2379107AB481FC3BCFB332E3EA3BB5CC7A0F3E9444660F33E665B",
+    "key": "\\Microsoft\\Windows\\Plug and Play\\Device Install Group Policy"
+  },
+  {
+    "sha256": "28EC2406812CDB83EB14F5D8D50D7B17BB23043ACC1578978AF6040325D2F4F3",
+    "key": "\\Microsoft\\Windows\\Plug and Play\\Device Install Reboot Required"
+  },
+  {
+    "sha256": "8EF72968E10EA62F480872614E09C145C9B74BB19761284FBDE163FB041DD889",
+    "key": "\\Microsoft\\Windows\\Plug and Play\\Sysprep Generalize Drivers"
+  },
+  {
+    "sha256": "9EEC81327D09786132D3E4AA47497CF5376774D843819A124904261E2E71F30A",
+    "key": "\\Microsoft\\Windows\\Power Efficiency Diagnostics\\AnalyzeSystem"
+  },
+  {
+    "sha256": "EA0B3DE40C72A90C74D1C002C914FBAD800A3A00F46FE0BAB1876C5C9F3E4F38",
+    "key": "\\Microsoft\\Windows\\Printing\\EduPrintProv"
+  },
+  {
+    "sha256": "9BC68199D24E51A2025EA6B26215BB7DCCE1DC9BF0489686C34D498F1E262609",
+    "key": "\\Microsoft\\Windows\\Printing\\PrinterCleanupTask"
+  },
+  {
+    "sha256": "10AFB0F6DA8123775F3673B1A5D24B7BC4618BD0F0C1C0DFB95489D83C5075A0",
+    "key": "\\Microsoft\\Windows\\Printing\\PrintJobCleanupTask"
+  },
+  {
+    "sha256": "EAC9D079AD823C744B3426FCFE015BC80A266A169B5DB5EBF242D9E5F26991EC",
+    "key": "\\Microsoft\\Windows\\RecoveryEnvironment\\VerifyWinRE"
+  },
+  {
+    "sha256": "75483473AC3EF3DD30D4DD09BEAFBF49A4FEFE59150D21594E8AB6F00873CD92",
+    "key": "\\Microsoft\\Windows\\ReFsDedupSvc\\Initialization"
+  },
+  {
+    "sha256": "63EDBAF8369190295F983E1AF1F0617A992123029ACC104947327AA18E688FBA",
+    "key": "\\Microsoft\\Windows\\Registry\\RegIdleBackup"
+  },
+  {
+    "sha256": "795ABC4C0A1B717738F3818BE4043A2C36EE883B8AF159CC24F19F903DA5ED3F",
+    "key": "\\Microsoft\\Windows\\Servicing\\OOBEFodSetup"
+  },
+  {
+    "sha256": "99512BE75A5C284E2AAB4ABAEAC488E3103AE8D564132EBA369478559316D273",
+    "key": "\\Microsoft\\Windows\\Servicing\\StartComponentCleanup"
+  },
+  {
+    "sha256": "73C47E9B16FCD9E8E7FBCE753591B9D803C20625224563AB4F14AF6BD3BB08C5",
+    "key": "\\Microsoft\\Windows\\Setup\\EM"
+  },
+  {
+    "sha256": "CAA9F960991851A2ED594E960BA88C4A386DD8B451E8B5ABED12A2123624DB80",
+    "key": "\\Microsoft\\Windows\\Setup\\PITRTask"
+  },
+  {
+    "sha256": "375A4DD4197AC5C14AB816A91330146836726A2977E37536984DB8D05E4C2FEF",
+    "key": "\\Microsoft\\Windows\\Setup\\SetupRecoveryDataTask"
+  },
+  {
+    "sha256": "4256CBF2CC8BCE76CE82F94D8CA427F841B23283DA8E8F540AE666D915BF9FF3",
+    "key": "\\Microsoft\\Windows\\SharedPC\\Account Cleanup"
+  },
+  {
+    "sha256": "25C6E904B605C0A0885E62B10A0C2024BF299CD10CC10242012CEDF79546E3AA",
+    "key": "\\Microsoft\\Windows\\Shell\\CreateObjectTask"
+  },
+  {
+    "sha256": "F4046A130C2735642A8DC3189C24B8ED66768ED7A8CA43D614E8F3B97384FB40",
+    "key": "\\Microsoft\\Windows\\Shell\\FamilySafetyMonitor"
+  },
+  {
+    "sha256": "79CD37B97DF486FA5B173F7C28294A00683289B3890B3AFD16FD147031EDD3BD",
+    "key": "\\Microsoft\\Windows\\Shell\\FamilySafetyRefreshTask"
+  },
+  {
+    "sha256": "10306A892746DCBF698ACBF1E75A4678C5281563B65E9CC5A81EAE4706F021FC",
+    "key": "\\Microsoft\\Windows\\Shell\\IndexerAutomaticMaintenance"
+  },
+  {
+    "sha256": "AC55711927D1C8073710DE0E99138BB3B624454570663F35543650595140CB45",
+    "key": "\\Microsoft\\Windows\\Shell\\ThemesSyncedImageDownload"
+  },
+  {
+    "sha256": "3ED23778F4BBB26217A8B9F3C515140900441D4287F1ECB8DD5BC178D4626DE9",
+    "key": "\\Microsoft\\Windows\\SMB\\UninstallSMB1ClientTask"
+  },
+  {
+    "sha256": "CE4EDCCBCD989FC7669DAADCDFF2A5B03CBD0D8B3E190A8A72B9BD85852109F0",
+    "key": "\\Microsoft\\Windows\\SMB\\UninstallSMB1ServerTask"
+  },
+  {
+    "sha256": "B8945DE45D74F725698EB7907EFF6B6E8022D4E798E8B9D05E7B6EE24B657476",
+    "key": "\\Microsoft\\Windows\\SoftwareProtectionPlatform\\SvcRestartTaskLogon"
+  },
+  {
+    "sha256": "D5A301683E6A8719B8CD774DC10EB9E853F07EE2015943755CC7CEB95DD7C4DA",
+    "key": "\\Microsoft\\Windows\\SpacePort\\SpaceAgentTask"
+  },
+  {
+    "sha256": "785E0C310D651199328D176C395EB45421EAF9B1783C138537824B12A9D7BD4D",
+    "key": "\\Microsoft\\Windows\\SpacePort\\SpaceManagerTask"
+  },
+  {
+    "sha256": "DBD2F385FB0B13FA8B009DB278466B63017289970C46BAA56F492B892B94A93A",
+    "key": "\\Microsoft\\Windows\\StateRepository\\MaintenanceTasks"
+  },
+  {
+    "sha256": "5A00DC1463088A775EB8763B963589C1A069C1021CE3219AB1B42905049F9D4D",
+    "key": "\\Microsoft\\Windows\\Storage Tiers Management\\Storage Tiers Management Initialization"
+  },
+  {
+    "sha256": "6D7AF3308141D0716728BBD06B100F84EA2412445414FF23EC0B59829D851591",
+    "key": "\\Microsoft\\Windows\\Storage Tiers Management\\Storage Tiers Optimization"
+  },
+  {
+    "sha256": "6A319AFC591C2F42AB48ECC8D3F273465535E89F1B47A8DEDB700C380411E159",
+    "key": "\\Microsoft\\Windows\\Subscription\\EnableLicenseAcquisition"
+  },
+  {
+    "sha256": "EE5697E5B40483BF01C34B4758159F0E626BF37074B29E546123FC581BB6A114",
+    "key": "\\Microsoft\\Windows\\Subscription\\LicenseAcquisition"
+  },
+  {
+    "sha256": "98F753124B745D1F88C1368377C84DC2BEAEC5198EF7856A18BAAC580981D77F",
+    "key": "\\Microsoft\\Windows\\Sustainability\\PowerGridForecastTask"
+  },
+  {
+    "sha256": "E0ED1E9E14FF911E95EDBF902CA0A6F58C14A04469FB34333FDE40D3A8BD5962",
+    "key": "\\Microsoft\\Windows\\Sustainability\\SustainabilityTelemetry"
+  },
+  {
+    "sha256": "39D96004CAE0600A3D260F3A3C0CA0530F99131ECD0C9FAE7B93E9ED7B855072",
+    "key": "\\Microsoft\\Windows\\Sysmain\\HybridDriveCachePrepopulate"
+  },
+  {
+    "sha256": "DC394863CE00923AC49DF71664C79D2029406FD7A8789BBE8FF5AE8EE49D8870",
+    "key": "\\Microsoft\\Windows\\Sysmain\\HybridDriveCacheRebalance"
+  },
+  {
+    "sha256": "52509DCD7FDE31FF06F0E5D4240778668761E4385E7CDEF032807626A6CDC07C",
+    "key": "\\Microsoft\\Windows\\Sysmain\\ResPriStaticDbSync"
+  },
+  {
+    "sha256": "A2C64A0EFB2E1A2D6CCC978237F27B524F2F34DDC6D5752B9E6CDCB2534B4836",
+    "key": "\\Microsoft\\Windows\\Sysmain\\WsSwapAssessmentTask"
+  },
+  {
+    "sha256": "B64308468B21C675B95B85CE1F82DED7522F330E8BC2B781BDBC66811037E298",
+    "key": "\\Microsoft\\Windows\\SystemRestore\\SR"
+  },
+  {
+    "sha256": "CE3255347542007C2E50961AF68DC692B6B9524F089545571647B70C27FF4791",
+    "key": "\\Microsoft\\Windows\\Task Manager\\Interactive"
+  },
+  {
+    "sha256": "0D07D71AE7148CE2FE2868E813082C2B6790ADBA558E929302F3528999C00506",
+    "key": "\\Microsoft\\Windows\\TextServicesFramework\\MsCtfMonitor"
+  },
+  {
+    "sha256": "7D3C90C5B01D9B76AE1A6488205889F0434D69DC25ED4B0BE719486BC6B2A0AA",
+    "key": "\\Microsoft\\Windows\\Time Synchronization\\ForceSynchronizeTime"
+  },
+  {
+    "sha256": "E51523FD3117400265E2E7E84DBA27D7DD100AC291172B7B34DA597AEC6A3023",
+    "key": "\\Microsoft\\Windows\\Time Synchronization\\SynchronizeTime"
+  },
+  {
+    "sha256": "CD3ACA155C7D36F8A8E84444351C74D91FF39F64D52F586AC4A603217562D8E0",
+    "key": "\\Microsoft\\Windows\\Time Zone\\SynchronizeTimeZone"
+  },
+  {
+    "sha256": "2DB18FE4A59663B80F0418F8FB4D18FF46E990D39A05473905B1113645255B8A",
+    "key": "\\Microsoft\\Windows\\UPnP\\UPnPHostConfig"
+  },
+  {
+    "sha256": "26DE6CC52869B2D4FFB194C84F45A6231B1344F10724AB0BBE4599C781A9A5BD",
+    "key": "\\Microsoft\\Windows\\USB\\Usb-Notifications"
+  },
+  {
+    "sha256": "203D30815A1C70DCC2229D7653E554DBC2E0951773E3655088644DF27E1CCD45",
+    "key": "\\Microsoft\\Windows\\WCM\\WiFiTask"
+  },
+  {
+    "sha256": "5ED6DC56C82641736761FD3A78A5BF300E50BD71693C08B6604DA25C66E118FB",
+    "key": "\\Microsoft\\Windows\\WDI\\ResolutionHost"
+  },
+  {
+    "sha256": "FAB4388558A07F0D6CE60D732ED7E31B2AD6D2244D1EF0E6DA5F0622365067E5",
+    "key": "\\Microsoft\\Windows\\Windows Defender\\Windows Defender Cache Maintenance"
+  },
+  {
+    "sha256": "8C7038E426B65CE84BBDA99DE9551DF6778E098B035F7EC830BF526950FB9655",
+    "key": "\\Microsoft\\Windows\\Windows Defender\\Windows Defender Cleanup"
+  },
+  {
+    "sha256": "73457D1F2AD4042E0E2F01B0ADFC69C21D03231A97ADE0DAB0BAF01C58758F35",
+    "key": "\\Microsoft\\Windows\\Windows Defender\\Windows Defender Scheduled Scan"
+  },
+  {
+    "sha256": "0ED693F883C69BCA8D950F222ADAA89E306E154B686B5382CD923E2860F06C39",
+    "key": "\\Microsoft\\Windows\\Windows Defender\\Windows Defender Verification"
+  },
+  {
+    "sha256": "5DCDAA751835AF967BAD8E520191B48A13D8592F95AA0D6B52E7243AEDA6D9B9",
+    "key": "\\Microsoft\\Windows\\Windows Error Reporting\\QueueReporting"
+  },
+  {
+    "sha256": "EF71556C18709DBD6E4536CA7F8E826EAC0ABCEC4BDC9706A8A32C4AE9054625",
+    "key": "\\Microsoft\\Windows\\Windows Filtering Platform\\BfeOnServiceStartTypeChange"
+  },
+  {
+    "sha256": "E400D687A02731320565550539E3C3EA42AF3272A74F46BECCDE7DD12C624C7A",
+    "key": "\\Microsoft\\Windows\\Windows Media Sharing\\UpdateLibrary"
+  },
+  {
+    "sha256": "DC2C9B4DE34C0595412E98932E6F7737F31639FDE797401A041523EC7C10CC9B",
+    "key": "\\Microsoft\\Windows\\WindowsColorSystem\\Calibration Loader"
+  },
+  {
+    "sha256": "AC536EB059A45B64DCAF3F4A41BB3036D7BBCCCDDDE428E0B5F3A2AD4DCB968C",
+    "key": "\\Microsoft\\Windows\\WindowsUpdate\\Scheduled Start"
+  },
+  {
+    "sha256": "DC6A4813651534D00DE3D0A63F1932BE6C57D41120DBA05B15D70CA47A2842B1",
+    "key": "\\Microsoft\\Windows\\Wininet\\CacheTask"
+  },
+  {
+    "sha256": "8348DBA9ACB6C5E15AF2F969B84AD2388803B097E13DD1C27951495CA61F0A46",
+    "key": "\\Microsoft\\Windows\\WlanSvc\\CDSSync"
+  },
+  {
+    "sha256": "4D6787D71C33AAA0D498AA2FDF3762A7D78246D71E41244DF47CFDA011A5B2FB",
+    "key": "\\Microsoft\\Windows\\WlanSvc\\MoProfileManagement"
+  },
+  {
+    "sha256": "74CC77DBD443AFE9FEF23E41D1FA8794A4537FA0FC865346495B2674A99C5377",
+    "key": "\\Microsoft\\Windows\\Work Folders\\Work Folders Logon Synchronization"
+  },
+  {
+    "sha256": "2FC3C7947A8240E6E0210D8FD9E9E9AA85D4D87670AC0B02E4AAD7B6576A45A8",
+    "key": "\\Microsoft\\Windows\\Work Folders\\Work Folders Maintenance Work"
+  },
+  {
+    "sha256": "BF4423ADB38F96270573A359AE721DBFC18447056B78F722AB1D663FFA46B7DA",
+    "key": "\\Microsoft\\Windows\\Workplace Join\\Automatic-Device-Join"
+  },
+  {
+    "sha256": "46E0CB7AFF91413A9DC8A7A28E8544D8CF42382933F16373CC49358665721817",
+    "key": "\\Microsoft\\Windows\\Workplace Join\\Device-Sync"
+  },
+  {
+    "sha256": "719C53A20C1F86FFDD7E98B7225E0641FA4A31FBC7DA86AF8DAF71CBC35DD7FD",
+    "key": "\\Microsoft\\Windows\\Workplace Join\\Recovery-Check"
+  },
+  {
+    "sha256": "97BAB5C82B9A62ADC49668FFCBBE8822D1064827AEE62806E8FD7E8E93A1A3B2",
+    "key": "\\Microsoft\\Windows\\WwanSvc\\NotificationTask"
+  },
+  {
+    "sha256": "DAFEE30FFBBC17F049448141F5DF7BB9272721228CC3648DD31F51B9B7A1A319",
+    "key": "\\Microsoft\\Windows\\WwanSvc\\OobeDiscovery"
+  },
+  {
+    "sha256": "53D8706E9B53DC235A32B8FF64FEDA22A4D67D7C9947B4F785D1B0DE98D596C1",
+    "key": "\\Microsoft\\XblGameSave\\XblGameSaveTask"
+  },
+  {
+    "sha256": "AF359B1A075083D5C6B14D7832F15AA2EDFFC077CB88F20B228F788E22428766",
+    "key": "\\MonitorMicroKey"
+  },
+  {
+    "sha256": "3ABFADBC26D5181104FA5EA223B75C1ECD6D209F0716AB3998EA9ABE358D9BE1",
+    "key": "\\MonitorMysticLight"
+  },
+  {
+    "sha256": "8B883191A33D2D56C48826FA7092CFC4F1AF143FCB8F4805C59A87CA69EF6635",
+    "key": "\\MonitorWeatherDetector"
+  },
+  {
+    "sha256": "FA52F6F98D07CD7649244571CCF35DC82562A4462C02715E6164C0B954EC9633",
+    "key": "\\Mozilla\\Firefox Background Update 308046B0AF4A39CB"
+  },
+  {
+    "sha256": "09A11C51672E6F524201B1362628272366DC7FB4F1189B21232400C332C90ED7",
+    "key": "\\MSI_OLED_Service"
+  },
+  {
+    "sha256": "D65D1ECAF7842C34D24AE27D63FF2E360E1BBEA50514922CBAB64A9F596E57A5",
+    "key": "\\MSIAfterburner"
+  },
+  {
+    "sha256": "594282FA6722999350BEE8DA67F4D69B803B656330F83723FFCABD91D5557E37",
+    "key": "\\NahimicTask32"
+  },
+  {
+    "sha256": "B42932B4613811085FCFB3585E6CAB4583303DF360C864720BA8BB17AE2F0546",
+    "key": "\\NahimicTask64"
+  },
+  {
+    "sha256": "F313415E1E08215CC8FD6C13FF7F3B2665982FDDC767F95631316F912BF9A13E",
+    "key": "\\Netmarble Launcher helper"
+  },
+  {
+    "sha256": "9221F2F640A36B43A225C9582DA107875D999B5A09B51E5F180A26D494B82759",
+    "key": "\\NVIDIA App SelfUpdate_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
+  },
+  {
+    "sha256": "2AC60B448B1C8A828183255C9B264D56C119074E17C736FC1F52A653D169C1B0",
+    "key": "\\OmApSvcBroker"
+  },
+  {
+    "sha256": "422F1245C833AAF1CD672F01D298E25E0E810B09DD3AA4F6865E1488842159EA",
+    "key": "\\OneDC_Updater"
+  },
+  {
+    "sha256": "D0819AC9D7D28845E2B509BDF87EE32FD5AD2099EE5FE526799DD6B7D3B52ECB",
+    "key": "\\OneDrive Per-Machine Standalone Update Task"
+  },
+  {
+    "sha256": "7D7C56EC4297A53B30B013C56681E36585427E110F6B30BAF7AB6443BEC156E9",
+    "key": "\\OneDrive Reporting Task-REDACTED_USER_SID"
+  },
+  {
+    "sha256": "68773428BE307F6314A851288ABDA9ABF7E5C978CA51A0CCB5B6B94C2C5FC9C8",
+    "key": "\\OneDrive Startup Task-REDACTED_USER_SID"
+  },
+  {
+    "sha256": "E2BC44E8F2978CB61D2346BF46BBBEA8CA2A5E22F121511C9AE7C57985A90184",
+    "key": "\\Optimize Push Notification Data File-REDACTED_USER_SID"
+  },
+  {
+    "sha256": "A5A83D86D14B4AED0177EF3FD8B5BCB2F6EA7211EE92D80B7B6A4323AC71A9B5",
+    "key": "\\OSDAppAutoStartUp"
+  },
+  {
+    "sha256": "91B889C16F06D365F95AC7EFB9B70A2217D406C1E4328EDE500B957B3CF8F7DC",
+    "key": "\\PlatformExperiencesHelper_Daily"
+  },
+  {
+    "sha256": "9CCE3FC4EC18BEF59EF86AE0C2D8261B680DB62B88720E305587825788448666",
+    "key": "\\PlatformExperiencesHelper_Metrics"
+  },
+  {
+    "sha256": "562EC4DB3C2892EF0D0BAD6B8B9C5E0E8460477A9E7BA4377D3AF342BACDD69F",
+    "key": "\\PlatformExperiencesHelper_OnUnlock"
+  },
+  {
+    "sha256": "CB0D8AF378EA9E743DD15C50DB189A6ED3B93370EA3929FC6A00FA6A6169D8D7",
+    "key": "\\RemoteDesktop\\[USER]\\Remote Desktop Feed Refresh Task"
+  },
+  {
+    "sha256": "EE685D0474F326A16D4A64B3F9EAA9B5E03D4FC0438E6407AAE25301B577714A",
+    "key": "\\SoftLanding\\REDACTED_USER_SID\\SoftLandingCreativeManagementTask"
+  },
+  {
+    "sha256": "8BBD6E50664E31B2321C82F73F29569B0DC699AB784AF69CACD773F9E8FD0B34",
+    "key": "\\SoftLanding\\REDACTED_USER_SID\\SoftLandingDeferralTask-{bd7e87c5-0e6c-44ed-bff1-f00e5b140a7a}"
+  },
+  {
+    "sha256": "D10E882937B282BB17CC701DE1D44E86CF1C0FFB6903C82D4C6996B728CBE067",
+    "key": "\\SoftLanding\\REDACTED_USER_SID\\SoftLandingTriggerTask-128000000001615609-render-{58e3c5bd-20e0-4e75-a4cc-6ad8ccf82018}"
+  },
+  {
+    "sha256": "47F7EE98EBD505B2A4D682ABA28452F04F0C4080547F3895D665F48CC280D51B",
+    "key": "\\ZoomUpdateTaskUser-REDACTED_USER_SID"
+  }
+]

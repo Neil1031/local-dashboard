@@ -1,0 +1,6 @@
+{
+  "pilotOriginalFileHash": "71ED789B5639D1C0127D5D9969F45729EDEE86EBE47A59E369472CCA05C4E2E1",
+  "reason": "One non-pilot task hash changed before any registration attempt. RefreshCache current StartBoundary is 2026-09-22T00:06:36+08:00. Operational event log disabled; actor unverified. Original evidence retained.",
+  "refreshedAt": "2026-09-22T00:08:46.2542446+08:00",
+  "previousBackup": "%LOCALAPPDATA%\\LocalDashboard\\pilots\\weekly-check\\20260921-235736-b5028c2763d048a9b47533e7dab7c4dc"
+}
