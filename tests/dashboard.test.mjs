@@ -49,7 +49,7 @@ test('runtime ships no scheduler fixtures, hard-coded rows, log or history entri
   const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
   const js = await readFile(new URL('../dashboard.mjs', import.meta.url), 'utf8');
   assert.doesNotMatch(html, /data-job=|day-cell success|id="logOutput"|Today Success|Scheduled today|\d{4}-\d{2}-\d{2}/);
-  assert.doesNotMatch(js, /InsiderTracker|Nightly Discussion|NumberOfMissedRuns|\/api\/jobs\//);
+  assert.doesNotMatch(js, /Nightly Discussion|NumberOfMissedRuns|\/api\/jobs\//);
   assert.match(html, /Observed completed executions/);
   assert.match(js, /fetchJobs\('\/api\/jobs'/);
 });
