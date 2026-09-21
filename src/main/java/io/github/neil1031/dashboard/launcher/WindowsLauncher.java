@@ -9,6 +9,7 @@ import java.net.Proxy;
 import java.net.Socket;
 import java.net.URI;
 import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
@@ -24,6 +25,12 @@ public final class WindowsLauncher {
     private static final Duration START_TIMEOUT = Duration.ofSeconds(90);
 
     public static void main(String[] args) {
+        if (args.length > 0) {
+            if (args[0].equals("--stop") && (args.length == 1 || (args.length == 2 && args[1].equals("--quiet")))) {
+                System.exit(WindowsStopLauncher.run(args.length == 2));
+            }
+            throw new IllegalArgumentException("Supported arguments: --stop [--quiet]");
+        }
         Path home = null;
         try {
             home = applicationHome(System.getenv("LOCAL_DASHBOARD_HOME"), System.getenv("LOCALAPPDATA"));
@@ -39,14 +46,7 @@ public final class WindowsLauncher {
             Path lockDirectory = applicationHome(null, System.getenv("LOCALAPPDATA"));
             Files.createDirectories(lockDirectory);
             try (var channel = FileChannel.open(lockDirectory.resolve("launcher.lock"), CREATE, WRITE)) {
-                var lock = channel.tryLock();
-                if (lock == null) {
-                    append(log, "WAIT_EXISTING_INSTANCE lock=held");
-                    awaitReadyLogged(log, () -> true);
-                    browse(log);
-                    return;
-                }
-                try (lock) {
+                try (var lock = acquireLock(channel, log)) {
                     if (ready(URL)) {
                         append(log, "EXISTING_INSTANCE_READY " + URL);
                         browse(log);
@@ -147,7 +147,7 @@ public final class WindowsLauncher {
         append(log, "READY_CONFIRMED polls=" + polls);
     }
 
-    private static boolean portOccupied() {
+    static boolean portOccupied() {
         try (Socket socket = new Socket()) {
             socket.connect(new InetSocketAddress("127.0.0.1", 8080), 500);
             return true;
@@ -169,7 +169,20 @@ public final class WindowsLauncher {
         append(log, "BROWSER_DISPATCHED " + URL);
     }
 
-    private static void append(Path file, String message) throws IOException {
+    static FileLock acquireLock(FileChannel channel, Path log) throws IOException, InterruptedException {
+        long deadline = System.nanoTime() + Duration.ofSeconds(120).toNanos();
+        var lock = channel.tryLock();
+        if (lock != null) return lock;
+        append(log, "WAIT_EXISTING_INSTANCE lock=held");
+        do {
+            Thread.sleep(150);
+            lock = channel.tryLock();
+            if (lock != null) return lock;
+        } while (System.nanoTime() < deadline);
+        throw new IOException("Another Dashboard start/stop operation is still busy. Please retry.");
+    }
+
+    static void append(Path file, String message) throws IOException {
         Files.writeString(file, Instant.now() + " launcherPid=" + ProcessHandle.current().pid() + " "
                 + "launcherParentPid=" + ProcessHandle.current().parent().map(ProcessHandle::pid).orElse(-1L) + " "
                 + message + System.lineSeparator(), CREATE, APPEND);
