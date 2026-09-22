@@ -1,5 +1,5 @@
 param(
-    [string]$BaseUrl = 'http://127.0.0.1:8080',
+    [string]$BaseUrl = 'http://127.0.0.1:43871',
     [string[]]$ExpectedTaskKeys = @(
         '\InsiderTracker-Market', '\InsiderTracker-SEC', '\InsiderTracker-SyncImport',
         '\AIStockHunter-UnexplainedVolume-Daily', '\AIStockHunter-Accumulation-Weekly-Check'

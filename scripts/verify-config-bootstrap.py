@@ -68,7 +68,7 @@ def live_ui():
     node = shutil.which('node.exe')
     assert node, 'Node 22+ must be on PATH for live UI verification'
     env = os.environ.copy()
-    env['DASHBOARD_BOOTSTRAP_LIVE_URL'] = 'http://127.0.0.1:8080'
+    env['DASHBOARD_BOOTSTRAP_LIVE_URL'] = 'http://127.0.0.1:43871'
     env['DASHBOARD_BOOTSTRAP_EVIDENCE'] = str(qa.OUT / 'case-a')
     with (qa.OUT / 'live-ui.log').open('wb') as log:
         result = subprocess.run([node, '--test', 'tests/bootstrap-live-browser.test.mjs'], cwd=ROOT, env=env,
@@ -82,7 +82,7 @@ def main():
     before = qa.task_hashes()
     assert len(before) >= 7
     qa.REPORT['taskDefinitionsBefore'] = before
-    assert not qa.state()['listeners'], '8080 occupied: do not stop an unrelated service'
+    assert not qa.state()['listeners'], '43871 occupied: do not stop an unrelated service'
     with ZipFile(qa.IMAGE / 'app/launcher.jar') as archive:
         assert archive.read('bootstrap/application.example.yml') == template
     try:

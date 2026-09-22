@@ -1,0 +1,52 @@
+{
+  "observedAt": "2026-09-22T06:13:17.442150+00:00",
+  "oldPort": 8080,
+  "newPort": 43871,
+  "originalServerStop": {
+    "safeStopExitCode": 0,
+    "recordedProcessExited": true,
+    "oldListenerReleased": true
+  },
+  "portSelection": {
+    "listenerAbsentBeforeBuild": true,
+    "outsideObservedWindowsTcpExclusions": true
+  },
+  "packageBuild": "PASSED",
+  "maven": {
+    "tests": 133,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "isolatedPackagedPortSmoke": {
+    "port": 43871,
+    "packagedLauncherPort": true,
+    "springDefaultPort": true,
+    "readiness": true,
+    "isolatedDatabase": true,
+    "packagedStopExit": 0,
+    "identityConfirmed": true,
+    "pidCleaned": true,
+    "portReleased": true
+  },
+  "finalState": {
+    "userFilesUnchanged": true,
+    "userFileCount": 4,
+    "listeners8080": 0,
+    "listeners43871": 0
+  },
+  "productionConfigEdited": false,
+  "scheduledTasksModified": false,
+  "leftRunning": false,
+  "sourceHashes": {
+    "packageLog": "86DC5A0C7C5AEEE020EBCFD5B0F716C8065713F5BD805A11EEBC12B77CDB9198",
+    "smokeResult": "8E47DE6747217F8C026C02A9DAE72DC9EE9C1660DAB4A5345D712A9EBFEC3602",
+    "finalState": "1D0612E1B7DD302BB08132DBC48DB83E158885A2F81DB55800397ECE47BDCEE6"
+  },
+  "installedArtifactHashes": {
+    "app/launcher.jar": "E6BC225D92E70DCFED52E7B0A309484D5A5B4DC654B3D2116A9DA3C0D919AFA2",
+    "app/dashboard.jar": "2DB077001D33465DA2C384433FE0DA759E74E6FB0E1A167C0B91715AE35A4205",
+    "LocalDashboard.exe": "057513578E2C6CE1203DC243E0826057F940C2394BB8328512D89E37FAD766AA"
+  },
+  "note": "Private logs/config/database paths excluded. Packaged default/start command/readiness and real safe Stop verified with isolated config/data. No browser or production server restart."
+}

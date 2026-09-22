@@ -2,6 +2,8 @@
 
 範圍僅 Windows 一鍵停止；不包含 Stage 5B、Runner migration、Service、tray、auto-start 或 scheduler 修改。
 
+2026-09-22：目前 Start／Stop 共用連接埠 **43871**。原計畫與 2026-09-21 驗收中的 8080 為歷史紀錄。
+
 ## Plan / Stage / Gate
 
 | Stage | Goal / Scope | Dependencies | Gate / Done when | Self-QA |
@@ -16,7 +18,7 @@
 `--stop --quiet` 供自動驗收使用，只抑制提示對話框，不放寬驗證。
 一般停止以獨立標題與工作列視窗顯示成功／已停止／安全拒絕提示，可用 OK 或關閉按鈕結束。
 成功及已停止回傳 0，拒絕或失敗回傳 1。
-Start 不帶參數，保留原設定 bootstrap、固定 loopback/8080、ready 後開啟 browser 的行為。
+Start 不帶參數，保留原設定 bootstrap、固定 loopback/43871、ready 後開啟 browser 的行為。
 
 Start/Stop 共用 `%LOCALAPPDATA%/LocalDashboard/launcher.lock`。競爭者等待取得 lock，再重新評估狀態，
 上限 120 秒；啟動持有 lock 直到 readiness/browser dispatch 結束。兩個 Stop 串行完成，第二個是 no-op。
@@ -36,7 +38,7 @@ Stop 在釋放 lock 後才顯示提示，因此未關閉對話框不會阻擋下
 4. CIM command line 必須符合 launcher 的完整六個 token：bundled Java、`-jar`、此 image 的
    `app/dashboard.jar`、固定 address/port、唯一絕對 file URI 的外部 config location。
    不是子字串搜尋；拒絕額外參數、不同 JAR、不同 port、引號混淆。支援空白及中文路徑。
-5. 8080 必須只有一個 `127.0.0.1` listener，OwningProcess 等於記錄 PID。
+5. 43871 必須只有一個 `127.0.0.1` listener，OwningProcess 等於記錄 PID。
 6. 直接 loopback、無 proxy、無 redirect 的 readiness 必須 HTTP 200 且 body 完全等於 `local-dashboard:ready:v1`。
 7. 驗證後再次核對原 ProcessHandle 的 alive/start instant；若需要強制終止，全部重驗。
 
@@ -49,7 +51,7 @@ Windows JDK 不提供完整 process arguments，因此 Java 以絕對路徑呼�
 在同一 native process handle 上比較 creation time 後才 TerminateProcess，避免檢查後 PID 重用誤殺。
 參考 [OpenJDK Windows ProcessHandle implementation](https://github.com/openjdk/jdk/blob/jdk-25-ga/src/java.base/windows/native/libjava/ProcessHandleImpl_win.c)。
 
-缺少 PID 紀錄但 8080 有服務時拒絕，不採取 listener-only fallback。尚未 ready、無法存取身分、
+缺少 PID 紀錄但 43871 有服務時拒絕，不採取 listener-only fallback。尚未 ready、無法存取身分、
 從另一份 image 啟動的 server 也拒絕。應使用啟動該 server 的 image；更新前先停止。
 產品不會自動修復或猜測不一致的 PID 紀錄。
 
@@ -58,7 +60,7 @@ Windows JDK 不提供完整 process arguments，因此 Java 以絕對路徑呼�
 先呼叫 `ProcessHandle.destroy()`，等候最多 10 秒；若仍在執行，完整重驗身分後
 才呼叫 `destroyForcibly()`，再等最多 5 秒。身分資訊一旦無法確認，不再發出終止。
 只針對一個已確認的 server，從不列舉／終止 descendants 或其他 Java。
-程序退出後移除匹配 PID 紀錄，確認 8080 無 listener；若 port 被其他服務接手，提示錯誤但不終止它。
+程序退出後移除匹配 PID 紀錄，確認 43871 無 listener；若 port 被其他服務接手，提示錯誤但不終止它。
 
 **Windows bundled JDK 的 `supportsNormalTermination()` 為 false：`destroy()` 本身就是強制程序終止，
 不保證 Spring graceful shutdown。** 因此初次 destroy 前也完整重驗，並明確寫入 `FORCED_TERMINATION`。

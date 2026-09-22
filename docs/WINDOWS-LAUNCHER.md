@@ -1,19 +1,22 @@
 # Windows app-image / launcher
 
+目前預設連接埠為 **43871**；下方 2026-09-21 驗收保留當時的 8080 歷史紀錄。
+從舊版升級前，先用舊版 Stop 停止 8080 instance，再更新 app-image。
+
 ## 日常使用
 
 把整個 `dist/LocalDashboard` 資料夾放在固定位置（不要只複製 EXE），雙擊
 `LocalDashboard.exe`。它使用內含 runtime，等待 HTTP readiness 後以 Windows
-預設瀏覽器開啟 `http://127.0.0.1:8080`。使用者不需 Java、JAVA_HOME、Maven 或 command line。
+預設瀏覽器開啟 `http://127.0.0.1:43871`。使用者不需 Java、JAVA_HOME、Maven 或 command line。
 預設 jpackage application icon；沒有 installer、WiX、Service、登入自動啟動或 updater。
 
 連續雙擊會等待同一次啟動，已執行時則直接開既有 Dashboard，不建立另一個 Spring instance。
-若其他程式占用 8080，會顯示錯誤，不會終止該程式。啟動最多等待 90 秒，失敗顯示 log 路徑。
-包裝版固定 loopback / 8080；YAML 不能把它改成 LAN listener 或另一個 port。
+若其他程式占用 43871，會顯示錯誤，不會終止該程式。啟動最多等待 90 秒，失敗顯示 log 路徑。
+包裝版固定 loopback / 43871；YAML 不能把它改成 LAN listener 或另一個 port。
 
 關閉瀏覽器不會停止服務。需要停止時，雙擊桌面的 **Stop Local Dashboard**。
 它執行 `LocalDashboard.exe --stop`，核對記錄的 PID、建立時間、bundled executable/JAR、完整命令形狀、
-8080 listener 的 PID 與 readiness 身分後才停止；不關閉瀏覽器、不終止其他 Java 或 descendants。
+43871 listener 的 PID 與 readiness 身分後才停止；不關閉瀏覽器、不終止其他 Java 或 descendants。
 已停止時顯示 `Local Dashboard is not running.`。身分無法確認時會拒絕並提示 log 位置。
 下次雙擊 **Local Dashboard** 可重新啟動。更新 app-image 前先停止服務。
 停止行為、Windows termination 限制與驗收詳見 [Safe Stop](WINDOWS-SAFE-STOP.md)。
@@ -106,7 +109,7 @@ Debug 可先停服務，使用內含 Java 在 PowerShell 中執行（Ctrl+C 停�
 ```powershell
 $image = 'D:\Apps\LocalDashboard' # 改成 image 的絕對位置
 Set-Location "$env:LOCALAPPDATA\LocalDashboard" # 或自己的 LOCAL_DASHBOARD_HOME
-& "$image\runtime\bin\java.exe" -jar "$image\app\dashboard.jar" --server.address=127.0.0.1 --server.port=8080
+& "$image\runtime\bin\java.exe" -jar "$image\app\dashboard.jar" --server.address=127.0.0.1 --server.port=43871
 ```
 
 readiness endpoint `GET /api/launcher/status` 不收集 tasks、不寫 DB；在 ApplicationReadyEvent 前回 503，
@@ -132,7 +135,7 @@ git diff --check
 
 Node/browser tests 的 Node 22+／Playwright 設定沿用主 README。Python 3.11+ 僅用於驗收。
 驗收優先使用 PATH 中的 `pwsh.exe`，否則使用 Windows PowerShell，保持原 execution policy。
-`verify-windows-launcher.py` 要求 8080 空閒，以及範例設定中五個既有 tasks 有可讀取的 completed history；
+`verify-windows-launcher.py` 要求 43871 空閒，以及範例設定中五個既有 tasks 有可讀取的 completed history；
 缺少這些前置條件會明確失敗，不建立 tasks 或偽造 history。它會：
 
 - 在忽略的 `.tools/windows-launcher-acceptance/<id>/external home 中文` 建立隔離設定與資料，保留證據於同層 `verification.json`。

@@ -53,7 +53,7 @@ def stop_async():
 
 
 def stopped():
-    assert not qa.state()['listeners'], '8080 still listening'
+    assert not qa.state()['listeners'], '43871 still listening'
     assert not qa.servers(qa.state()), 'Owned Dashboard still alive'
     qa.SERVER = None
 
@@ -144,7 +144,7 @@ def main():
     qa.HOME.joinpath('data/receipts/acceptance-marker.txt').write_text('Not a runner receipt; preservation fixture.\n', encoding='utf-8')
     fixture = None
     good_record = None
-    assert not qa.state()['listeners'], '8080 occupied: will not terminate an unrelated process'
+    assert not qa.state()['listeners'], '43871 occupied: will not terminate an unrelated process'
     try:
         assert stop() == 0
         assert not pid_file.exists()

@@ -22,7 +22,7 @@ final class WindowsProcessIdentity {
         String script = " $ErrorActionPreference='Stop'; "
                 + "$p=Get-CimInstance Win32_Process -Filter 'ProcessId=" + pid + "'; "
                 + "if (!$p -or !$p.ExecutablePath -or !$p.CommandLine) { exit 2 }; "
-                + "$listeners=@(Get-NetTCPConnection -LocalPort 8080 -State Listen -ErrorAction Stop); "
+                + "$listeners=@(Get-NetTCPConnection -LocalPort " + WindowsLauncher.PORT + " -State Listen -ErrorAction Stop); "
                 + "if ($listeners.Count -ne 1 -or $listeners[0].LocalAddress -ne '127.0.0.1' "
                 + "-or $listeners[0].OwningProcess -ne " + pid + ") { exit 3 }; "
                 + "[Console]::WriteLine([Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($p.ExecutablePath))); "
@@ -63,7 +63,7 @@ final class WindowsProcessIdentity {
             List<String> args = arguments(command);
             if (args.size() != 6 || !sameFile(args.get(0), java) || !args.get(1).equals("-jar")
                     || !sameFile(args.get(2), jar) || !args.get(3).equals("--server.address=127.0.0.1")
-                    || !args.get(4).equals("--server.port=8080")) return false;
+                    || !args.get(4).equals("--server.port=" + WindowsLauncher.PORT)) return false;
             String prefix = "--spring.config.location=classpath:/application.yml,optional:";
             if (!args.get(5).startsWith(prefix)) return false;
             Path config = Path.of(URI.create(args.get(5).substring(prefix.length())));

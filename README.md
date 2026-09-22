@@ -29,13 +29,13 @@ $env:JAVA_HOME = 'C:\path\to\jdk-21'
 & "$env:JAVA_HOME\bin\java.exe" -jar .\target\local-dashboard-0.1.0.jar
 ```
 
-瀏覽 <http://127.0.0.1:8080/>，或查詢 API：
+瀏覽 <http://127.0.0.1:43871/>，或查詢 API：
 
 ```powershell
-Invoke-RestMethod http://127.0.0.1:8080/api/jobs | ConvertTo-Json -Depth 16
+Invoke-RestMethod http://127.0.0.1:43871/api/jobs | ConvertTo-Json -Depth 16
 ```
 
-按 Ctrl+C 停止。若 8080 已被占用，在 Java 指令最後加上 `--server.port=8081`。
+按 Ctrl+C 停止。若 43871 已被占用，在 Java 指令最後加上 `--server.port=43872`。
 預設只綁定 `127.0.0.1`，沒有 LAN listener。不要為本機儀表板改成公開介面。
 服務不會註冊／修改／啟動／停止任何 Windows 排程，也不會改系統 execution policy。
 
@@ -184,7 +184,7 @@ node --test tests/dashboard.test.mjs tests/history.test.mjs tests/browser.test.m
 真實服務的 browser acceptance 需先依上方步驟建置並啟動封裝 JAR，設定至少一個可讀取的 task，再明確啟用：
 
 ```powershell
-$env:DASHBOARD_LIVE_URL = 'http://127.0.0.1:8080'
+$env:DASHBOARD_LIVE_URL = 'http://127.0.0.1:43871'
 node --test tests/live-browser.test.mjs
 Remove-Item Env:DASHBOARD_LIVE_URL
 ```
