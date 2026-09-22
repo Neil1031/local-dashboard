@@ -1,0 +1,235 @@
+{
+  "originalBaseline": "../baseline-inventory.json",
+  "fixedPreOperationDelta": {
+    "cause": "UNKNOWN",
+    "ambientDifferences": [
+      {
+        "key": "\\Microsoft\\Windows\\Flighting\\OneSettings\\RefreshCache",
+        "before": "1E513621ADA8F2997A6B425AC39391998698EA87DE93A10D0A1BD2CFE90D8DB0",
+        "after": "8B9C13CD1A81E8EEF740DF8BF3689E83EBAD6FAE0D570D611E096F82D93F811E"
+      }
+    ],
+    "at": "2026-09-22T02:38:31.9325870+08:00",
+    "originalInventoryFileHash": "25BCD5F273EFF6B530E927E05AA22762C6DFB3531C576CE06B427D1BBBEE6FA2",
+    "meaning": "Original baseline retained. These pre-existing differences form a fixed delta for controlled comparisons; no drift during operations is tolerated.",
+    "classification": "EXTERNAL_DRIFT_OBSERVED",
+    "actor": "UNKNOWN"
+  },
+  "checkpoints": [
+    {
+      "taskCount": 234,
+      "diagnosticAclUnchanged": true,
+      "differences": [],
+      "expectedTaskCount": 234,
+      "at": "2026-09-22T02:38:34.4424806+08:00",
+      "gate": "PASSED",
+      "label": "before-registration",
+      "weeklyAclUnchanged": true
+    },
+    {
+      "taskCount": 235,
+      "diagnosticAclUnchanged": true,
+      "differences": [],
+      "expectedTaskCount": 235,
+      "at": "2026-09-22T02:38:37.5846884+08:00",
+      "gate": "PASSED",
+      "label": "after-registration",
+      "weeklyAclUnchanged": true
+    },
+    {
+      "taskCount": 235,
+      "diagnosticAclUnchanged": true,
+      "differences": [],
+      "expectedTaskCount": 235,
+      "at": "2026-09-22T02:38:40.0448934+08:00",
+      "gate": "PASSED",
+      "label": "after-readback",
+      "weeklyAclUnchanged": true
+    },
+    {
+      "taskCount": 235,
+      "diagnosticAclUnchanged": true,
+      "differences": [],
+      "expectedTaskCount": 235,
+      "at": "2026-09-22T02:38:44.7117009+08:00",
+      "gate": "PASSED",
+      "label": "after-diagnostic-run",
+      "weeklyAclUnchanged": true
+    },
+    {
+      "taskCount": 234,
+      "diagnosticAclUnchanged": true,
+      "differences": [],
+      "expectedTaskCount": 234,
+      "at": "2026-09-22T02:38:48.4221298+08:00",
+      "gate": "PASSED",
+      "label": "after-diagnostic-deletion",
+      "weeklyAclUnchanged": true
+    },
+    {
+      "diagnosticAclUnchanged": true,
+      "taskCount": 234,
+      "differences": [],
+      "expectedTaskCount": 234,
+      "weeklyAclUnchanged": true,
+      "label": "Inspect-inspect",
+      "gate": "PASSED",
+      "at": "2026-09-22T02:40:15.6521992+08:00"
+    },
+    {
+      "taskCount": 234,
+      "expectedTaskCount": 234,
+      "diagnosticAclUnchanged": true,
+      "weeklyAclUnchanged": true,
+      "label": "Apply-before",
+      "gate": "PASSED",
+      "at": "2026-09-22T02:44:31.8601193+08:00",
+      "differences": []
+    },
+    {
+      "taskCount": 234,
+      "expectedTaskCount": 234,
+      "diagnosticAclUnchanged": true,
+      "weeklyAclUnchanged": true,
+      "label": "Apply-after",
+      "gate": "PASSED",
+      "at": "2026-09-22T02:44:34.8693719+08:00",
+      "differences": []
+    },
+    {
+      "taskCount": 234,
+      "expectedTaskCount": 234,
+      "diagnosticAclUnchanged": true,
+      "weeklyAclUnchanged": true,
+      "label": "Inspect-inspect",
+      "gate": "PASSED",
+      "at": "2026-09-22T02:44:37.2599724+08:00",
+      "differences": []
+    },
+    {
+      "taskCount": 234,
+      "expectedTaskCount": 234,
+      "diagnosticAclUnchanged": true,
+      "weeklyAclUnchanged": true,
+      "label": "Restore-before",
+      "gate": "PASSED",
+      "at": "2026-09-22T02:44:39.7041525+08:00",
+      "differences": []
+    },
+    {
+      "taskCount": 234,
+      "expectedTaskCount": 234,
+      "diagnosticAclUnchanged": true,
+      "weeklyAclUnchanged": true,
+      "label": "Restore-after",
+      "gate": "PASSED",
+      "at": "2026-09-22T02:44:43.1037484+08:00",
+      "differences": []
+    },
+    {
+      "taskCount": 234,
+      "expectedTaskCount": 234,
+      "diagnosticAclUnchanged": true,
+      "weeklyAclUnchanged": true,
+      "label": "Apply-before",
+      "gate": "PASSED",
+      "at": "2026-09-22T02:44:45.9134069+08:00",
+      "differences": []
+    },
+    {
+      "taskCount": 234,
+      "expectedTaskCount": 234,
+      "diagnosticAclUnchanged": true,
+      "weeklyAclUnchanged": true,
+      "label": "Apply-after",
+      "gate": "PASSED",
+      "at": "2026-09-22T02:44:48.8430654+08:00",
+      "differences": []
+    },
+    {
+      "taskCount": 234,
+      "expectedTaskCount": 234,
+      "diagnosticAclUnchanged": true,
+      "weeklyAclUnchanged": true,
+      "label": "Inspect-inspect",
+      "gate": "PASSED",
+      "at": "2026-09-22T02:44:51.4490027+08:00",
+      "differences": []
+    },
+    {
+      "gate": "PASSED",
+      "taskCount": 234,
+      "expectedTaskCount": 234,
+      "differences": [],
+      "diagnosticAclUnchanged": true,
+      "weeklyAclUnchanged": true,
+      "label": "live-before",
+      "at": "2026-09-22T02:45:12.6349523+08:00"
+    },
+    {
+      "gate": "PASSED",
+      "taskCount": 234,
+      "expectedTaskCount": 234,
+      "differences": [],
+      "diagnosticAclUnchanged": true,
+      "weeklyAclUnchanged": true,
+      "label": "live-after",
+      "at": "2026-09-22T02:45:19.9981027+08:00"
+    },
+    {
+      "gate": "PASSED",
+      "taskCount": 234,
+      "expectedTaskCount": 234,
+      "differences": [],
+      "diagnosticAclUnchanged": true,
+      "weeklyAclUnchanged": true,
+      "label": "Restore-before",
+      "at": "2026-09-22T02:45:23.1304004+08:00"
+    },
+    {
+      "gate": "PASSED",
+      "taskCount": 234,
+      "expectedTaskCount": 234,
+      "differences": [],
+      "diagnosticAclUnchanged": true,
+      "weeklyAclUnchanged": true,
+      "label": "Restore-after",
+      "at": "2026-09-22T02:45:26.2198051+08:00"
+    }
+  ],
+  "operations": [
+    {
+      "aclUnchanged": true,
+      "otherTasksUnchanged": 233,
+      "nonActionHash": "700B50B9123E1CB26DB74F34C7BFF285E975FFC320C5FDB0740946B0D882C281",
+      "xmlHash": "9C838C024CCD47E1185D5BC9DBC30B797E427BAE0D43BF86A1FA857DC2533343",
+      "checkedAt": "2026-09-22T02:44:34.8874352+08:00"
+    },
+    {
+      "exactXml": true,
+      "aclUnchanged": true,
+      "controlledIntegrity": "PASSED",
+      "checkedAt": "2026-09-22T02:44:43.1177842+08:00",
+      "restoredHash": "2D4183FDB670188DCAEDEE657366401DE7E69F2C8ACCD0E0F545A514FFC07E67",
+      "originalHash": "2D4183FDB670188DCAEDEE657366401DE7E69F2C8ACCD0E0F545A514FFC07E67",
+      "allTaskCount": 234
+    },
+    {
+      "aclUnchanged": true,
+      "otherTasksUnchanged": 233,
+      "nonActionHash": "700B50B9123E1CB26DB74F34C7BFF285E975FFC320C5FDB0740946B0D882C281",
+      "xmlHash": "9C838C024CCD47E1185D5BC9DBC30B797E427BAE0D43BF86A1FA857DC2533343",
+      "checkedAt": "2026-09-22T02:44:48.8594175+08:00"
+    },
+    {
+      "allTaskCount": 234,
+      "exactXml": true,
+      "controlledIntegrity": "PASSED",
+      "checkedAt": "2026-09-22T02:45:26.2347369+08:00",
+      "aclUnchanged": true,
+      "restoredHash": "2D4183FDB670188DCAEDEE657366401DE7E69F2C8ACCD0E0F545A514FFC07E67",
+      "originalHash": "2D4183FDB670188DCAEDEE657366401DE7E69F2C8ACCD0E0F545A514FFC07E67"
+    }
+  ],
+  "gate": "PASSED"
+}

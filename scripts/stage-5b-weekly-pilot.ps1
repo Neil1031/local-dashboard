@@ -1,7 +1,9 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory=$true)][ValidateSet('Backup','Prepare','Apply','Restore','Inspect')][string]$Mode,
-    [Parameter(Mandatory=$true)][string]$BackupDirectory
+    [Parameter(Mandatory=$true)][string]$BackupDirectory,
+    [string]$RunnerRoot,
+    [string]$AttemptDirectory
 )
 # Deliberately restricted to the single Manager-approved pilot. Never runs a task.
 $ErrorActionPreference = 'Stop'
@@ -14,6 +16,14 @@ if ($Mode -eq 'Backup') {
     New-Item -ItemType Directory -Path $BackupDirectory | Out-Null
 }
 $backup = (Resolve-Path -LiteralPath $BackupDirectory).Path
+$operation=$backup
+if ($AttemptDirectory) {
+    if ($Mode -in @('Backup','Prepare')) {throw 'AttemptDirectory is for reuse/Apply/Restore/Inspect, never a replacement baseline'}
+    $operation=(Resolve-Path -LiteralPath $AttemptDirectory).Path
+    if (!$operation.StartsWith($backup.TrimEnd('\')+'\',[StringComparison]::OrdinalIgnoreCase)) {throw 'Attempt must belong to the immutable private backup'}
+    . "$PSScriptRoot/stage-5b-integrity.ps1"
+    if (!(Test-Path "$operation/operations")) {New-Item -ItemType Directory -Path "$operation/operations" | Out-Null}
+}
 $utf8 = [Text.UTF8Encoding]::new($false)
 
 function Hash-Text([string]$value) {
@@ -41,14 +51,28 @@ function Get-AllHashes {
         @{key=$_.TaskPath+$_.TaskName;sha256=(Hash-Text (Export-ScheduledTask -TaskName $_.TaskName -TaskPath $_.TaskPath))}
     } | Sort-Object {$_.key})
 }
-function Assert-OtherTasks {
-    $before = @(Get-Content -LiteralPath "$backup/all-tasks-before.json" -Raw | ConvertFrom-Json)
+function Assert-OtherTasks([string]$ExpectedXml=$original,[string]$Phase='inspect') {
+    if ($AttemptDirectory) {
+        $checkpoint=Assert-ControlledCheckpoint $backup $operation ($Mode+'-'+$Phase) $ExpectedXml
+        return $checkpoint.taskCount
+    }
+    $before = Get-Content -LiteralPath "$backup/all-tasks-before.json" -Raw | ConvertFrom-Json
     $after = Get-AllHashes
     $old = @($before | Where-Object key -ne ($pilotPath+$pilotName) | ForEach-Object { $_.key+'|'+$_.sha256 })
     $new = @($after | Where-Object key -ne ($pilotPath+$pilotName) | ForEach-Object { $_.key+'|'+$_.sha256 })
-    if (@(Compare-Object $old $new).Count) { throw 'Another task definition differs from the saved baseline; no other task will be modified.' }
+    $diff=@(Compare-Object $old $new | Select-Object InputObject,SideIndicator)
+    $checks=@()
+    if (Test-Path "$backup/checkpoints.json") { $checks=@(Get-Content "$backup/checkpoints.json" -Raw | ConvertFrom-Json) }
+    $checks+=@{mode=$Mode;at=[DateTimeOffset]::Now.ToString('o');otherTaskCount=$after.Count-1;differences=$diff}
+    Save-Json "$backup/checkpoints.json" $checks
+    if ($diff.Count) { throw 'Another task definition differs from the saved baseline; no other task will be modified.' }
     Save-Json "$backup/all-tasks-latest.json" $after
     return $after.Count
+}
+function Save-Operation($value) {
+    if ($AttemptDirectory) {
+        Write-NewEvidence (Join-Path $operation ('operations/'+[DateTime]::UtcNow.ToString('yyyyMMdd-HHmmss-fffffff')+'-'+$Mode+'.json')) $value
+    }
 }
 function Assert-Idle {
     $registered = $folder.GetTask($pilotName)
@@ -89,6 +113,7 @@ if ($Mode -eq 'Backup') {
     $service.Connect()
     $folder = $service.GetFolder($pilotPath)
     Assert-Idle
+    if ([string]$task.State -ne 'Ready' -or !$task.Settings.Enabled) { throw 'Backup requires the original task to be Ready and Enabled' }
     $original = Export-ScheduledTask -TaskPath $pilotPath -TaskName $pilotName
     if ($original -cne [string]$folder.GetTask($pilotName).Xml) { throw 'Task changed during backup' }
     [IO.File]::WriteAllText("$backup/original.xml",$original,[Text.Encoding]::Unicode)
@@ -145,20 +170,25 @@ if ($Mode -eq 'Prepare') {
     $cwd = [string]$action.WorkingDirectory
     if (!$cwd) { $cwd = Join-Path $env:SystemRoot 'System32' }
     if (![IO.Path]::IsPathRooted($cwd)) { throw 'Unreviewed relative working directory' }
-    $dashboardHome = Join-Path $env:LOCALAPPDATA 'LocalDashboard'
-    $config = Join-Path $dashboardHome 'config/runner.json'
+    if (!$RunnerRoot) { throw 'Prepare requires an explicit durable -RunnerRoot' }
+    $validationText = & python -B "$PSScriptRoot/validate-runner-root.py" --root $RunnerRoot --repo $repo --create
+    if ($LASTEXITCODE -ne 0) { throw 'RunnerRoot rejected before deployment' }
+    $rootValidation = $validationText | ConvertFrom-Json
+    $durableRoot = $rootValidation.root
+    $config = Join-Path $durableRoot 'config/runner.json'
     if (Test-Path -LiteralPath $config) { throw 'Existing private runner.json must not be overwritten' }
     $sourceJar = Join-Path $repo 'target/local-dashboard-0.1.0-runner.jar'
     $runtime = Join-Path $repo 'dist/LocalDashboard/runtime'
     if (!(Test-Path -LiteralPath "$runtime/bin/java.exe")) { throw 'Build the self-contained Windows image first' }
     $jarHash = (Get-FileHash -LiteralPath $sourceJar).Hash
-    $release = Join-Path $dashboardHome ('runner/releases/pilot-' + $jarHash.Substring(0,16).ToLowerInvariant())
+    $release = Join-Path $durableRoot ('releases/' + $jarHash.ToLowerInvariant())
     if (Test-Path -LiteralPath $release) { throw 'Release already exists; never overwrite a deployed runtime' }
     New-Item -ItemType Directory -Path $release | Out-Null
     Copy-Item -LiteralPath $runtime -Destination "$release/runtime" -Recurse
     Copy-Item -LiteralPath $sourceJar -Destination "$release/runner.jar"
-    $configuration = [ordered]@{schemaVersion=1;receiptDirectory=(Join-Path $dashboardHome 'data/runner-receipts');
-        fallbackDirectory=(Join-Path $dashboardHome 'runner-fallback');profiles=@{}}
+    New-Item -ItemType Directory -Path (Split-Path $config -Parent) -Force | Out-Null
+    $configuration = [ordered]@{schemaVersion=1;receiptDirectory=(Join-Path $durableRoot 'receipts');
+        fallbackDirectory=(Join-Path $durableRoot 'fallback');profiles=@{}}
     $configuration.profiles[$profileId] = [ordered]@{jobId=$profileId;executable=[string]$action.Command;args=$childArgs;workingDirectory=$cwd}
     # Create-only private configuration; no shell command construction in the child profile.
     $stream = [IO.File]::Open($config, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, [IO.FileShare]::None)
@@ -177,7 +207,13 @@ if ($Mode -eq 'Prepare') {
     $releaseHashes = @(Get-ChildItem -LiteralPath $release -Recurse -File | ForEach-Object {
         @{path=$_.FullName;sha256=(Get-FileHash -LiteralPath $_.FullName).Hash}
     })
-    Save-Json $manifestPath ([ordered]@{profileId=$profileId;config=$config;configHash=(Get-FileHash $config).Hash;
+    foreach ($file in $releaseHashes) {
+        $relative=$file.path.Substring($release.Length).TrimStart('\','/')
+        $source=if ($relative -eq 'runner.jar') {$sourceJar} else {Join-Path $runtime $relative.Substring(8)}
+        if ((Get-FileHash -LiteralPath $source).Hash -ne $file.sha256) { throw 'Post-copy source/deployment hash mismatch' }
+    }
+    Save-Json $manifestPath ([ordered]@{runnerRoot=$durableRoot;rootValidation=$rootValidation;requiresSchedulerPreflight=$true;
+        profileId=$profileId;config=$config;configHash=(Get-FileHash $config).Hash;
         release=$release;java=$java;jar=$jar;releaseHashes=$releaseHashes;
         originalHash=(Hash-Text $original);desiredFileHash=(Get-FileHash "$backup/runner-action.xml").Hash;
         childWorkingDirectory=$cwd;originalWorkingDirectory=[string]$metadata.Actions[0].WorkingDirectory})
@@ -192,21 +228,28 @@ if ($manifest.desiredFileHash -ne (Get-FileHash "$backup/runner-action.xml").Has
 if ((Without-Actions $desired) -cne (Without-Actions $original)) { throw 'Non-Action difference in desired XML' }
 
 if ($Mode -eq 'Apply') {
-    if (Test-Path -LiteralPath "$backup/live-result.json") {
-        $live = Get-Content -LiteralPath "$backup/live-result.json" -Raw | ConvertFrom-Json
-        if ($live.newReceiptCount -eq 0 -and $live.lastTaskResult -ne 0) {
+    if (Test-Path -LiteralPath "$operation/live-result.json") {
+        $live = Get-Content -LiteralPath "$operation/live-result.json" -Raw | ConvertFrom-Json
+        if ($live.lastTaskResult -ne 0 -or $live.gate -eq 'FAILED') {
             throw 'This candidate failed live launch and was rolled back. Preserve evidence; further attempts need a new reviewed scope.'
         }
     }
     Assert-Idle
     if ($current -cne $original) { throw 'Apply requires exact original definition' }
+    if (!$manifest.requiresSchedulerPreflight) { throw 'Legacy deployment cannot be applied; prepare a durable deployment and Scheduler preflight' }
+    $rootCheck=& python -B "$PSScriptRoot/validate-runner-root.py" --root $manifest.runnerRoot --repo $repo
+    if ($LASTEXITCODE -ne 0) { throw 'Durable deployment path no longer valid' }
+    $preflight=Get-Content "$operation/preflight-result.json" -Raw | ConvertFrom-Json
+    if ($preflight.gate -ne 'PASSED' -or !$preflight.diagnosticDeleted -or $preflight.deploymentManifestHash -ne (Get-FileHash $manifestPath).Hash -or
+        $preflight.baselineXmlHash -ne (Hash-Text $original)) { throw 'Matching Scheduler-context preflight is required before Apply' }
+    if ($AttemptDirectory -and (!$preflight.allCanonicalSidsEqual -or $preflight.controlledOperationIntegrity -ne 'PASSED' -or !$preflight.temporaryFilesDeleted)) {throw 'Canonical identity and complete controlled preflight required'}
     if ((Get-FileHash $manifest.config).Hash -ne $manifest.configHash) { throw 'Private profile changed' }
     foreach ($file in $manifest.releaseHashes) { if ((Get-FileHash -LiteralPath $file.path).Hash -ne $file.sha256) { throw 'Deployed runtime/JAR changed' } }
-    $null = Assert-OtherTasks
+    $null = Assert-OtherTasks $original 'before'
     try {
         Register-Exact $desired
         $actual = Export-ScheduledTask -TaskPath $pilotPath -TaskName $pilotName
-        [IO.File]::WriteAllText("$backup/registration-observed.xml",$actual,[Text.Encoding]::Unicode)
+        [IO.File]::WriteAllText("$operation/registration-observed.xml",$actual,[Text.Encoding]::Unicode)
         if ((Without-Actions $actual) -cne (Without-Actions $original) -or
             (Read-Xml $actual).Task.Actions.OuterXml -cne (Read-Xml $desired).Task.Actions.OuterXml -or
             $folder.GetTask($pilotName).GetSecurityDescriptor(7) -cne [IO.File]::ReadAllText("$backup/original.sddl.txt")) {
@@ -215,29 +258,42 @@ if ($Mode -eq 'Apply') {
                 ((Read-Xml $actual).Task.Actions.OuterXml -ceq (Read-Xml $desired).Task.Actions.OuterXml),
                 ($folder.GetTask($pilotName).GetSecurityDescriptor(7) -ceq [IO.File]::ReadAllText("$backup/original.sddl.txt")))
         }
-        $count = Assert-OtherTasks
-        [IO.File]::WriteAllText("$backup/applied.xml",$actual,[Text.Encoding]::Unicode)
-        Save-Json "$backup/applied.json" @{xmlHash=(Hash-Text $actual);nonActionHash=(Hash-Text (Without-Actions $actual));otherTasksUnchanged=$count-1;checkedAt=[DateTimeOffset]::Now.ToString('o')}
+        $count = Assert-OtherTasks $desired 'after'
+        [IO.File]::WriteAllText("$operation/applied.xml",$actual,[Text.Encoding]::Unicode)
+        $record=@{xmlHash=(Hash-Text $actual);nonActionHash=(Hash-Text (Without-Actions $actual));otherTasksUnchanged=$count-1;checkedAt=[DateTimeOffset]::Now.ToString('o');aclUnchanged=$true}
+        Save-Json "$operation/applied.json" $record
+        Save-Operation $record
     } catch {
         $failure = $_
         Register-Exact $original
         if ((Export-ScheduledTask -TaskPath $pilotPath -TaskName $pilotName) -cne $original) { throw 'CRITICAL: restore exact XML after apply failure could not be verified' }
+        $null=Assert-OtherTasks $original 'failed-apply-restored'
         throw $failure
     }
     Write-Output 'APPLIED: only pilot Action changed; all non-Action XML, ACL and other tasks unchanged.'
 } elseif ($Mode -eq 'Restore') {
     Assert-Idle
-    $applied = [IO.File]::ReadAllText("$backup/applied.xml")
+    $applied = [IO.File]::ReadAllText("$operation/applied.xml")
     if ($current -cne $applied -and $current -cne $original) { throw 'Unexpected task changes; refusing to overwrite them' }
+    # Record a pre-restore drift as HARD FAIL, but do not let unrelated drift
+    # prevent returning our known applied pilot to its exact saved definition.
+    $integrityFailure=$null
+    try {$null=Assert-OtherTasks $current 'before'} catch {$integrityFailure=$_}
     Register-Exact $original
     $actual = Export-ScheduledTask -TaskPath $pilotPath -TaskName $pilotName
     if ($actual -cne $original) { throw 'Rollback XML differs from original' }
     if ($folder.GetTask($pilotName).GetSecurityDescriptor(7) -cne [IO.File]::ReadAllText("$backup/original.sddl.txt")) { throw 'Rollback ACL differs' }
-    $count = Assert-OtherTasks
-    Save-Json "$backup/rollback.json" @{originalHash=(Hash-Text $original);restoredHash=(Hash-Text $actual);exactXml=$true;aclUnchanged=$true;allTaskCount=$count;checkedAt=[DateTimeOffset]::Now.ToString('o')}
-    Write-Output 'RESTORED: exact original XML and ACL; all task hashes equal baseline.'
+    $count=$null
+    try {$count=Assert-OtherTasks $original 'after'} catch {$integrityFailure=$_}
+    $record=@{originalHash=(Hash-Text $original);restoredHash=(Hash-Text $actual);exactXml=$true;aclUnchanged=$true;allTaskCount=$count;checkedAt=[DateTimeOffset]::Now.ToString('o');controlledIntegrity=$(if($integrityFailure){'HARD FAIL'}else{'PASSED'})}
+    Save-Json "$operation/rollback.json" $record
+    Save-Operation $record
+    if ($integrityFailure) {throw $integrityFailure}
+    if ($AttemptDirectory) {Write-Output 'RESTORED: exact original XML and ACL; controlled inventory matches its fixed pre-operation anchor.'}
+    else {Write-Output 'RESTORED: exact original XML and ACL; all task hashes equal baseline.'}
 } else {
-    $count = Assert-OtherTasks
+    $expected=if ($current -ceq $original) {$original} else {$desired}
+    $count = Assert-OtherTasks $expected
     [pscustomobject]@{TaskName=$pilotName;State=([string]$folder.GetTask($pilotName).State);
         OriginalAction=($current -ceq $original);RunnerAction=((Read-Xml $current).Task.Actions.OuterXml -ceq (Read-Xml $desired).Task.Actions.OuterXml);
         NonActionUnchanged=((Without-Actions $current) -ceq (Without-Actions $original));

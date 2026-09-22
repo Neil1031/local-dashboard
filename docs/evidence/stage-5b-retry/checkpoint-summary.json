@@ -1,0 +1,44 @@
+{
+  "baselineTaskCount": 234,
+  "checkpoints": [
+    {
+      "name": "Apply without preflight",
+      "reason": "Cannot find path '[PRIVATE_EVIDENCE]\\preflight-result.json' because it does not exist.",
+      "missingPreflightRejected": true,
+      "originalUnchanged": true
+    },
+    {
+      "name": "Diagnostic deleted after failed assertion",
+      "taskCount": 234,
+      "differences": [],
+      "weeklyExactOriginal": true
+    },
+    {
+      "name": "Apply with failed preflight",
+      "failedPreflightRejected": true,
+      "reason": "Matching Scheduler-context preflight is required before Apply",
+      "originalUnchanged": true
+    },
+    {
+      "name": "Final integrity",
+      "taskCount": 234,
+      "matchingDefinitions": 233,
+      "differences": [
+        {
+          "InputObject": "\\Microsoft\\Windows\\Flighting\\OneSettings\\RefreshCache|D5D57AA8F84A0E248551DF310224320B8A10F1C1BE2026D009CE3727ED4E7C9F",
+          "SideIndicator": "=>"
+        },
+        {
+          "InputObject": "\\Microsoft\\Windows\\Flighting\\OneSettings\\RefreshCache|1E513621ADA8F2997A6B425AC39391998698EA87DE93A10D0A1BD2CFE90D8DB0",
+          "SideIndicator": "<="
+        }
+      ],
+      "baselineReplaced": false
+    }
+  ],
+  "formalMigration": "NOT RUN",
+  "rehearsal": "NOT RUN",
+  "live": "NOT RUN",
+  "finalRollback": "NOT NEEDED: no formal modification",
+  "collectorCorrection": "LastRunTime is compared as UTC ticks, not a string against the DateTime value materialized by PowerShell JSON parsing. Both recorded timestamps are identical."
+}

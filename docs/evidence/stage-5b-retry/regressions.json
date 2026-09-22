@@ -1,0 +1,192 @@
+{
+  "maven": {
+    "tests": 133,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": [
+    {
+      "name": "io.github.neil1031.dashboard.HistoryApiTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "io.github.neil1031.dashboard.HistoryApplicationRestartTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "io.github.neil1031.dashboard.HistoryFailureApiTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "io.github.neil1031.dashboard.HistoryRepositoryTest",
+      "tests": 23,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "io.github.neil1031.dashboard.JobNormalizerTest",
+      "tests": 17,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "io.github.neil1031.dashboard.JobsApiTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "io.github.neil1031.dashboard.JobServiceTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "io.github.neil1031.dashboard.launcher.ConfigBootstrapTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "io.github.neil1031.dashboard.launcher.SafeStopTest",
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "io.github.neil1031.dashboard.launcher.WindowsLauncherTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "io.github.neil1031.dashboard.LauncherStatusControllerTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "io.github.neil1031.dashboard.PowerShellCollectorTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "io.github.neil1031.dashboard.runner.ReceiptFilesTest",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "io.github.neil1031.dashboard.runner.RunnerTest",
+      "tests": 36,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "io.github.neil1031.dashboard.TaskSelectionTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "frontend": {
+    "tests": 32,
+    "failures": 0,
+    "skipped": 0
+  },
+  "rootValidator": {
+    "tests": 13,
+    "failures": 0,
+    "skipped": 0
+  },
+  "resultLines": {
+    "package": [
+      "[INFO] BUILD SUCCESS",
+      "PASS: bundled runtime, no JAVA_HOME/Java PATH, HTTP readiness, safe defaults, writable SQLite. Logs: [USERPROFILE]\\AppData\\Local\\Temp\\dashboard-package-70527e0c1cb8464cb484016ecaddff92",
+      "PASS: packaged --stop entry point (exit 0), no configuration bootstrap, no unrecorded process termination."
+    ],
+    "frontend": [
+      "✔ initial loading, one GET, refresh coalescing, new response, no detail collection (811.9353ms)",
+      "✔ all statuses, keyboard filters, no inferred MISSED, real drawer null values, history (515.5735ms)",
+      "✔ PARTIAL keeps jobs and all diagnostics visible; text is never HTML (415.29ms)",
+      "✔ history persistence failure retains current jobs and displays its diagnostic independently of history (307.514ms)",
+      "✔ initial unavailable backend never renders scheduler success (276.9396ms)",
+      "✔ initial HTTP 503 never renders scheduler success (355.3702ms)",
+      "✔ OK empty collection stays distinct (258.7463ms)",
+      "✔ NOT_CONFIGURED empty collection stays distinct (284.4065ms)",
+      "✔ PARTIAL empty collection stays distinct (299.0874ms)",
+      "✔ missing optional job fields show placeholders and preserve UNKNOWN (342.8037ms)",
+      "✔ offline after success removes old rows/counts and recovers (367.9549ms)",
+      "✔ 503 after success removes old rows/counts and recovers (350.1614ms)",
+      "✔ ERROR after success removes old rows/counts and recovers (326.3182ms)",
+      "✔ invalid-json after success removes old rows/counts and recovers (363.2428ms)",
+      "✔ invalid-contract after success removes old rows/counts and recovers (367.3633ms)",
+      "✔ 25 jobs, long Unicode names, explicit MISSED, local dates, desktop and 320px drawer (1097.1837ms)",
+      "✔ current status and previous execution outcome remain independent (1.9473ms)",
+      "✔ missing values and invalid dates never produce null, epoch, or Invalid Date (14.0407ms)",
+      "✔ accept explicit collection states, reject errors and malformed snapshots (0.5145ms)",
+      "✔ runtime ships no scheduler fixtures, hard-coded rows, log or history entries (4.9178ms)",
+      "✔ friendly job names do not change the original scheduler identity (0.2745ms)",
+      "✔ daily and dated aliases apply to current and history without changing identity (0.2941ms)",
+      "✔ one bounded request, daily summaries, complete sorted details and keyboard focus return (996.3317ms)",
+      "✔ loading has no fake cells; cache and successful Current Refresh invalidate once (596.7997ms)",
+      "✔ history error and retry keep Today snapshot usable and hide unsafe server details (414.4823ms)",
+      "✔ empty inventory and local midnight rollover use an updated range (390.994ms)",
+      "✔ long Unicode names, injection-looking messages, sticky names and narrow horizontal scroll (1201.0308ms)",
+      "✔ Refresh while a history read is in flight discards its stale result and fetches once more (398.5411ms)",
+      "✔ empty, single, all success and every mixed ordering retain failure and counts (7.9188ms)",
+      "✔ Taipei calendar boundaries, eighth day exclusion, union, names and distinct identities (1.7675ms)",
+      "✔ local calendar window spans DST spring/fall changes without using 168 hours (0.3093ms)",
+      "✔ invalid history payloads cannot silently become empty or successful history (0.6445ms)",
+      "ℹ tests 32",
+      "ℹ suites 0",
+      "ℹ pass 32",
+      "ℹ fail 0",
+      "ℹ cancelled 0",
+      "ℹ skipped 0",
+      "ℹ todo 0",
+      "ℹ duration_ms 7273.3718"
+    ],
+    "root-tests": [
+      "test_appdata (__main__.RunnerRootTests.test_appdata) ... ok",
+      "test_build_and_temporary_paths (__main__.RunnerRootTests.test_build_and_temporary_paths) ... ok",
+      "test_device_path (__main__.RunnerRootTests.test_device_path) ... ok",
+      "test_drive_relative_path (__main__.RunnerRootTests.test_drive_relative_path) ... ok",
+      "test_existing_file (__main__.RunnerRootTests.test_existing_file) ... ok",
+      "test_existing_physical_directory_outside_repo (__main__.RunnerRootTests.test_existing_physical_directory_outside_repo) ... ok",
+      "test_missing_without_create (__main__.RunnerRootTests.test_missing_without_create) ... ok",
+      "test_normalized_repository_descendant (__main__.RunnerRootTests.test_normalized_repository_descendant) ... ok",
+      "test_package_cache (__main__.RunnerRootTests.test_package_cache) ... ok",
+      "test_relative_path (__main__.RunnerRootTests.test_relative_path) ... ok",
+      "test_repository (__main__.RunnerRootTests.test_repository) ... ok",
+      "test_repository_descendant (__main__.RunnerRootTests.test_repository_descendant) ... ok",
+      "test_unc (__main__.RunnerRootTests.test_unc) ... ok",
+      "Ran 13 tests in 0.003s",
+      "OK"
+    ]
+  },
+  "scope": "Application/package regressions and creator-context path guards; do not establish Scheduler preflight or live integration"
+}

@@ -1,0 +1,39 @@
+{
+  "rollback": "Not performed: formal task never changed",
+  "dashboardProcessCount": 0,
+  "finalAclHash": "B0009463B81FBF8226801FF458EA586EB46021BB485E9C6716ADA956A802E81C",
+  "gate": "FAILED",
+  "live": "NOT RUN",
+  "state": "Ready",
+  "enabled": true,
+  "lastTaskResult": 2147942402,
+  "rehearsal": "NOT RUN",
+  "exactOriginalAcl": true,
+  "originalAclHash": "B0009463B81FBF8226801FF458EA586EB46021BB485E9C6716ADA956A802E81C",
+  "lastTaskResultUnchanged": true,
+  "originalXmlHash": "2D4183FDB670188DCAEDEE657366401DE7E69F2C8ACCD0E0F545A514FFC07E67",
+  "listener8080Count": 0,
+  "finalXmlHash": "2D4183FDB670188DCAEDEE657366401DE7E69F2C8ACCD0E0F545A514FFC07E67",
+  "taskDifferences": [
+    {
+      "InputObject": "\\Microsoft\\Windows\\Flighting\\OneSettings\\RefreshCache|D5D57AA8F84A0E248551DF310224320B8A10F1C1BE2026D009CE3727ED4E7C9F",
+      "SideIndicator": "=>"
+    },
+    {
+      "InputObject": "\\Microsoft\\Windows\\Flighting\\OneSettings\\RefreshCache|1E513621ADA8F2997A6B425AC39391998698EA87DE93A10D0A1BD2CFE90D8DB0",
+      "SideIndicator": "<="
+    }
+  ],
+  "at": "2026-09-22T02:22:39.0279433+08:00",
+  "diagnosticManualRequests": 0,
+  "diagnosticAbsent": true,
+  "formalManualRequests": 0,
+  "taskCount": 234,
+  "finalAction": "ORIGINAL",
+  "instances": 0,
+  "exactOriginalXml": true,
+  "lastRunTime": "2026-09-22T00:11:50+08:00",
+  "lastRunTimeUnchanged": true,
+  "collectorCorrection": "LastRunTime is compared as UTC ticks, not a string against the DateTime value materialized by PowerShell JSON parsing. Both recorded timestamps are identical.",
+  "otherTasksIntegrity": "FAILED: one non-pilot task hash drifted; baseline retained, no task restored or modified by this audit."
+}

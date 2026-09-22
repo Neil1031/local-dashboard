@@ -1,0 +1,32 @@
+{
+  "reuse": {
+    "privateConfigHashMatches": true,
+    "deploymentManifestHash": "9308DF45FD59E26403C589AE9ED595B8F85E2D00961FC4E14DD37F5B32B144B6",
+    "rootValidatorPassed": true,
+    "allReleaseHashesMatch": true,
+    "copiedNewRuntime": false,
+    "at": "2026-09-22T02:38:31.9643705+08:00",
+    "releaseFiles": 218,
+    "taskReferences": 0
+  },
+  "final": {
+    "markerHash": "FB1E6D5E400B1A231BDA71F95918DBB77CA6D605AA0957E69C4B2194F0E2B586",
+    "releaseFiles": 218,
+    "rootValidator": {
+      "root": "[RUNNER_ROOT]",
+      "absolute": true,
+      "outsideRepository": true,
+      "notAppDataCacheOrBuildOutput": true,
+      "noReparseAncestors": true,
+      "physicalPathMatches": true
+    },
+    "candidateDeletionRetried": false,
+    "previousMarkerHash": "C6FF656DA03713F4907FE8B4E93DBD1B6CF5762A230545B552DC14ACA355F1A8",
+    "allHashesMatch": true,
+    "at": "2026-09-22T02:46:55.0428962+08:00",
+    "taskReferences": [],
+    "configHashMatches": true,
+    "liveReceiptsRetained": true,
+    "state": "UNREFERENCED"
+  }
+}

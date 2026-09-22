@@ -1,0 +1,75 @@
+{
+  "gate": "FAILED",
+  "formalManualRequests": 1,
+  "requestedAt": "2026-09-22T02:45:14.2463571+08:00",
+  "lastTaskResult": 1,
+  "offlineBefore": {
+    "listener8080Count": 0,
+    "dashboardProcessCount": 0
+  },
+  "lastRunTimeBefore": "2026-09-22T00:11:50.0000000+08:00",
+  "lastRunTime": "2026-09-22T02:45:14.0000000+08:00",
+  "lastRunTimeUpdated": true,
+  "threePhases": true,
+  "receiptFieldsComplete": true,
+  "schedulerMatchesChild": true,
+  "childExitCode": 1,
+  "offlineAfter": {
+    "listener8080Count": 0,
+    "dashboardProcessCount": 0
+  },
+  "error": "Formal pilot acceptance failed; nonzero/missing/mismatched evidence is a failure, never retried",
+  "receipts": [
+    {
+      "sourceName": "00-started.json",
+      "rawSha256": "47448A66ABD8D3F2D06FD36F611BFB73F1E2480297743351564BE56ED32BD7AA",
+      "selectedFields": {
+        "executionId": "aistockhunter-accumulation-weekly_1790016314870_1cb96c96-b5c5-43a9-a04a-b5c17cb85999",
+        "jobId": "aistockhunter-accumulation-weekly",
+        "commandProfileId": "aistockhunter-accumulation-weekly",
+        "phase": "STARTED",
+        "outcome": "UNKNOWN",
+        "startedAt": "2026-09-21T18:45:14.870391700Z",
+        "processStartedAt": null,
+        "finishedAt": null,
+        "durationMs": null,
+        "exitCode": null,
+        "runnerExitCode": null
+      }
+    },
+    {
+      "sourceName": "01-process-started.json",
+      "rawSha256": "23A96495437EE56C86A89865C58610719583FEF64F890EA22F851C0AB7CF0C17",
+      "selectedFields": {
+        "executionId": "aistockhunter-accumulation-weekly_1790016314870_1cb96c96-b5c5-43a9-a04a-b5c17cb85999",
+        "jobId": "aistockhunter-accumulation-weekly",
+        "commandProfileId": "aistockhunter-accumulation-weekly",
+        "phase": "PROCESS_STARTED",
+        "outcome": "UNKNOWN",
+        "startedAt": "2026-09-21T18:45:14.870391700Z",
+        "processStartedAt": "2026-09-21T18:45:14.952233600Z",
+        "finishedAt": null,
+        "durationMs": null,
+        "exitCode": null,
+        "runnerExitCode": null
+      }
+    },
+    {
+      "sourceName": "02-terminal.json",
+      "rawSha256": "93DF0AED2CE955D3AF9C9EF01F22871C3E61E43F7EDD78D19BB5D7631EE681AE",
+      "selectedFields": {
+        "executionId": "aistockhunter-accumulation-weekly_1790016314870_1cb96c96-b5c5-43a9-a04a-b5c17cb85999",
+        "jobId": "aistockhunter-accumulation-weekly",
+        "commandProfileId": "aistockhunter-accumulation-weekly",
+        "phase": "TERMINAL",
+        "outcome": "FAILED",
+        "startedAt": "2026-09-21T18:45:14.870391700Z",
+        "processStartedAt": "2026-09-21T18:45:14.952233600Z",
+        "finishedAt": "2026-09-21T18:45:16.308399700Z",
+        "durationMs": 1437,
+        "exitCode": 1,
+        "runnerExitCode": 1
+      }
+    }
+  ]
+}

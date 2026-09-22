@@ -1,0 +1,13 @@
+{
+  "instances": 0,
+  "observation": "Read-only delivery check; no task mutation/request",
+  "state": "Ready",
+  "diagnosticAbsent": true,
+  "lastRunTime": "2026-09-22T02:45:14.0000000+08:00",
+  "observedAt": "2026-09-22T02:53:59.2379785+08:00",
+  "enabled": true,
+  "sameSingleRunMetadata": true,
+  "originalAclExact": true,
+  "lastTaskResult": 1,
+  "originalXmlExact": true
+}

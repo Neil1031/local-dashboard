@@ -1,0 +1,63 @@
+{
+  "originalNonPilotXmlAvailable": false,
+  "finalHash": "D5D57AA8F84A0E248551DF310224320B8A10F1C1BE2026D009CE3727ED4E7C9F",
+  "baselineHash": "1E513621ADA8F2997A6B425AC39391998698EA87DE93A10D0A1BD2CFE90D8DB0",
+  "observedAt": "2026-09-22T02:17:50.1677681+08:00",
+  "modifiedByThisWork": false,
+  "exactFieldDiff": "NOT VERIFIED: baseline inventory stores definition hashes, not a raw XML snapshot of every other task",
+  "actor": "UNKNOWN",
+  "observedStartBoundaries": [
+    "2026-09-22T02:15:50+08:00",
+    null,
+    null,
+    null
+  ],
+  "task": "\\Microsoft\\Windows\\Flighting\\OneSettings\\RefreshCache",
+  "cause": "UNKNOWN",
+  "baselineNotReplaced": true,
+  "observedDefinitionFields": {
+    "Triggers": {
+      "TimeTrigger": {
+        "StartBoundary": "2026-09-22T02:15:50+08:00",
+        "Repetition": {
+          "Interval": "PT4H58M"
+        },
+        "RandomDelay": "PT1H"
+      },
+      "WnfStateChangeTrigger": [
+        {
+          "StateName": "7538BCA33A019502"
+        },
+        {
+          "StateName": "7574BCA33A019502"
+        },
+        {
+          "StateName": "75B8BCA33A019502"
+        }
+      ]
+    },
+    "Principals": {
+      "Principal": {
+        "UserId": "[SID]"
+      }
+    },
+    "Settings": {
+      "DisallowStartIfOnBatteries": "false",
+      "StopIfGoingOnBatteries": "false",
+      "ExecutionTimeLimit": "PT5M",
+      "MultipleInstancesPolicy": "IgnoreNew",
+      "StartWhenAvailable": "true",
+      "RunOnlyIfNetworkAvailable": "true",
+      "IdleSettings": {
+        "StopOnIdleEnd": "false",
+        "RestartOnIdle": "false"
+      },
+      "UseUnifiedSchedulingEngine": "true"
+    },
+    "Actions": {
+      "ComHandler": {
+        "ClassId": "{E07647F7-AED2-48D9-9720-939BC24A8A3C}"
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "at": "2026-09-21T18:45:26.358068+00:00",
+  "protectedFileCount": 135,
+  "protectedDifferences": [],
+  "weeklyDifferences": [
+    {
+      "path": "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\weekly-checks\\2026-09-18-a02769d55cc045d3b6bf17a688026438.json",
+      "before": null,
+      "after": {
+        "sha256": "6372C64CBF40097F6992C8D60EBADF115E0354D242AFCF80AB6EFDE04482A676",
+        "bytes": 64781
+      }
+    },
+    {
+      "path": "[WORKSPACE]\\ai-stock-hunter\\output\\unexplained-volume\\weekly-checks\\latest.json",
+      "before": {
+        "sha256": "DB726DBED651BF5384CC46E6CBA7AC35EEBE19C1DF654008AA7578CE43FC9F88",
+        "bytes": 69889
+      },
+      "after": {
+        "sha256": "6372C64CBF40097F6992C8D60EBADF115E0354D242AFCF80AB6EFDE04482A676",
+        "bytes": 64781
+      }
+    }
+  ],
+  "newReportCount": 1,
+  "existingReportsUnchanged": true,
+  "latestMatchesNewReport": true,
+  "logAppendOnly": true,
+  "logBefore": {
+    "sha256": "8685CEC83F26BB7C38FD96B77D857B62AC89B65DA00571A7113153A136BBE2ED",
+    "bytes": 69891
+  },
+  "logAfter": {
+    "sha256": "B4F355B776ADE0FC0403280977ADCE0562D5DDD8CA79C9F5F2A9EBFE4321B10A",
+    "bytes": 134782
+  },
+  "stockGitStatusUnchanged": true,
+  "receiptFiles": {
+    "[RUNNER_ROOT]\\receipts\\aistockhunter-accumulation-weekly_1790016314870_1cb96c96-b5c5-43a9-a04a-b5c17cb85999\\00-started.json": {
+      "sha256": "47448A66ABD8D3F2D06FD36F611BFB73F1E2480297743351564BE56ED32BD7AA",
+      "bytes": 525
+    },
+    "[RUNNER_ROOT]\\receipts\\aistockhunter-accumulation-weekly_1790016314870_1cb96c96-b5c5-43a9-a04a-b5c17cb85999\\01-process-started.json": {
+      "sha256": "23A96495437EE56C86A89865C58610719583FEF64F890EA22F851C0AB7CF0C17",
+      "bytes": 561
+    },
+    "[RUNNER_ROOT]\\receipts\\aistockhunter-accumulation-weekly_1790016314870_1cb96c96-b5c5-43a9-a04a-b5c17cb85999\\02-terminal.json": {
+      "sha256": "93DF0AED2CE955D3AF9C9EF01F22871C3E61E43F7EDD78D19BB5D7631EE681AE",
+      "bytes": 839
+    }
+  },
+  "weeklyReport": {
+    "status": "FAILED",
+    "checked_at": "2026-09-21T18:45:16.050448+00:00",
+    "finished_at": "2026-09-21T18:45:16.214748+00:00",
+    "week_start": "2026-09-14",
+    "week_end": "2026-09-18",
+    "check_run_id": "a02769d55cc045d3b6bf17a688026438",
+    "problems": [
+      "DAY_INCOMPLETE:2026-09-18",
+      "UNRESOLVED_REVALIDATION"
+    ],
+    "notifications": "NOT_REQUESTED",
+    "inspection_mode": "READ_ONLY_OBSERVATIONS"
+  },
+  "expectedEffectsOnly": true
+}
