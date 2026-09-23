@@ -1,7 +1,26 @@
 # Local Dashboard
 
-Windows Task Scheduler 的本機唯讀觀測服務。目前另提供 **Stage 5A 獨立 Runner Core**（待 Manager Review）。
+Windows Task Scheduler 的本機唯讀觀測服務。目前另提供已合併的 **Stage 5A 獨立 Runner Core**。
 `index.html` 保留原有粉色 UI，透過 `dashboard.mjs` 讀取真實 `/api/jobs`；runtime 不含 mock scheduler data。
+
+## 開發狀態與後續規劃
+
+截至 2026-09-23 核對的 main `22af205`：Stage 0/1、2、3A/3B、5A、Windows launcher、config bootstrap、monitoring selection 與 Safe Stop 已合併。
+Stage 5B 的修正與失敗證據已合併，但 **final migration 仍 BLOCKED**：最近一次正式 weekly-check child exit `1` 後已 exact rollback。
+自動 MISSED 仍 **DEFERRED**；Runner receipt API/UI、logs UI 與 30-day reliability 尚未實作。
+
+新的 **Dashboard UX metadata／workflow** 規劃包含台股／美股分類、中文名稱／說明、前置／後置、自訂排序、legacy 隱藏、日期 task 折疊與流程視圖；
+**之後另做顯示設定頁**。目前只有程式內中文 aliases，尚不能透過 metadata 或設定頁調整。
+規劃中的顯示設定由 Dashboard 維護，不寫入 Windows Task Scheduler Description。
+
+- [PLAN 與目前下一個指派](PLAN.md)
+- [完整 backlog、已完成／未完成盤點與重新排序的 Stage](docs/BACKLOG.md)
+- [UX-A/B/C 設計與驗收 Gate](docs/DASHBOARD-UX-METADATA.md)
+
+本規劃待 Manager Review；建議依 UX-A → UX-B → UX-C 優先改善日常使用。
+Runner receipt UI、5B final migration、MISSED、tray／auto-start／installer／updater 與維護項目均保留在 backlog。
+`fix/dashboard-port-43871` 尚未合併至本次核對的 main，因此下方 main 的啟動說明仍為 8080；port 分支另待 review。
+歷史 Stage 報告中的 pending merge／Next stage 記錄保留當時語境，現在的佇列以上述 PLAN/backlog 為準。
 
 ## 環境與啟動
 
@@ -10,7 +29,7 @@ Windows Task Scheduler 的本機唯讀觀測服務。目前另提供 **Stage 5A 
 桌面捷徑：`.\scripts\install-shortcut.ps1`，建立 **Local Dashboard** 與 **Stop Local Dashboard**。
 停止捷徑使用 `LocalDashboard.exe --stop`，核對程序身分後只停止本 Dashboard；瀏覽器保持開啟。
 設定與 data 預設保存於 `%LOCALAPPDATA%\LocalDashboard`；
-首次雙擊會在設定檔缺少時自動建立五個既有 tasks 的監控設定，不需手動建立 YAML；已有設定絕不覆寫。
+首次雙擊會在設定檔缺少時自動建立範本中的六個 include selectors（日期 prefix 可匹配多個 tasks），不需手動建立 YAML；已有設定絕不覆寫。
 既有設定／history 的沿用方式、建置與 debug 詳見 [Windows launcher](docs/WINDOWS-LAUNCHER.md)。
 以下是開發者／手動 JAR 啟動方式。
 
@@ -42,7 +61,7 @@ Invoke-RestMethod http://127.0.0.1:8080/api/jobs | ConvertTo-Json -Depth 16
 ## 選擇要監控的 tasks
 
 Windows EXE 會將唯一範本 [`config/application.example.yml`](config/application.example.yml) 寫入缺少的外部設定檔，
-預設選取範本中的五個既有 tasks；`LOCAL_DASHBOARD_HOME` 覆寫目錄也適用。已存在的設定原樣保留。
+預設使用範本中的六個 include selectors，實際 task 數量依日期 prefix 的匹配結果而定；`LOCAL_DASHBOARD_HOME` 覆寫目錄也適用。已存在的設定原樣保留。
 以下手動 JAR 啟動方式仍預設 `include: []`，API 回傳 `NOT_CONFIGURED`，且不啟動 PowerShell。
 手動 JAR 使用者可複製範例後依自己的 tasks 編輯（此檔已列入 `.gitignore`）：
 
@@ -93,7 +112,7 @@ dashboard:
 | 欄位 | 意義 |
 | --- | --- |
 | `id` | 完整 task path + name 小寫後的 UTF-8 Base64URL，不是 task name；供 detail URL 使用 |
-| `name`, `taskPath`, `description`, `enabled` | 已正規化的識別與設定 |
+| `name`, `taskPath`, `description`, `enabled` | 已正規化的識別與設定；目前 `description` 是 Windows Scheduler Description，並非規劃中的 Dashboard 中文說明 |
 | `state` | 排程器當下狀態：READY／RUNNING／DISABLED／QUEUED／UNKNOWN |
 | `status` | Stage 1 的目前狀態；參見下方規則 |
 | `lastRunStatus` | 可判定的最近一次執行結果：SUCCESS／FAILED／UNKNOWN |
@@ -297,13 +316,14 @@ python scripts/verify-history-ui-live.py --source-db C:/local-data/existing-obse
 
 Stage 4 的可靠 MISSED 偵測依 Manager 決策暫緩；目前不推算 MISSED。
 Stage 5A 提供以下本機 runner；尚無 receipt UI/API、logs UI 或 30-day reliability。
-Stage 5B 單一 task pilot 已進行遷移與 rollback 驗證，但真實排程啟動未通過，最終恢復 original Action；
+Stage 5B 初次單一 task pilot 的真實排程啟動未通過，最終恢復 original Action；
 完整結果與證據界線見 [`docs/STAGE-5B.md`](docs/STAGE-5B.md)。尚未保留任何正式 task migration。
 
 Stage 5B Retry attempt 1 的 principal 字串比對失敗紀錄保留於
 [`docs/STAGE-5B-RETRY.md`](docs/STAGE-5B-RETRY.md)。Manager 授權的 identity fix／attempt 2
 已通過 canonical SID、Scheduler preflight 與 controlled integrity；唯一一次正式 weekly
-回傳 1，因此依規則 exact rollback，最終仍是 original Action，整體 Gate 為 FAILED。
+回傳 1（`DAY_INCOMPLETE:2026-09-18`、`UNRESOLVED_REVALIDATION`），因此依規則 exact rollback；
+最後提交的驗收狀態為 original Action，整體 Gate 為 FAILED，final migration 暫停等待外部問題處置與 Manager 再授權。
 Ambient system-task drift 另記為 `EXTERNAL_DRIFT_OBSERVED`；詳見
 [`docs/STAGE-5B-RETRY-IDENTITY-FIX.md`](docs/STAGE-5B-RETRY-IDENTITY-FIX.md)。
 

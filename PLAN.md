@@ -1,5 +1,35 @@
 # Local Dashboard Implementation Plan
 
+# Current roadmap — 2026-09-23（等待 Manager Review）
+
+本輪已核對遠端 `main` = `22af205509f2a25ce287053a120cd6a82784a8ee`。
+本次只更新規劃文件；新的 Stage 排序是待審提案，不授權功能實作、排程操作、部署或正式資料修復。
+
+- **完整完成盤點／backlog／優先順序／各 Stage Gate**：[docs/BACKLOG.md](docs/BACKLOG.md)。
+- **新增 Dashboard UX metadata 需求與 UX-A/B/C**：[docs/DASHBOARD-UX-METADATA.md](docs/DASHBOARD-UX-METADATA.md)。
+- 已合併：Stage 0/1、2、3A、3B、5A、Windows app-image/launcher、config bootstrap、monitoring selection、中文 aliases、Safe Stop，以及 Stage 4 與 5B 的研究／失敗證據。
+- **5B final migration = BLOCKED**：attempt 2 preflight/receipt/exit propagation 通過，但 ai-stock-hunter weekly-check child exit `1`（`DAY_INCOMPLETE:2026-09-18`、`UNRESOLVED_REVALIDATION`），已 exact rollback；merge 不表示 migration 成功。
+- **Stage 4 MISSED = DEFERRED**：缺足夠 coverage/negative evidence；4R/4A/4B/4C/4D 均未啟動，不阻擋其他 Stage。
+- **Port 43871 = BRANCH_ONLY**：`fix/dashboard-port-43871` / `96fd763d` 尚未進 main；另待 Manager 處置，本輪不合併。
+
+建議執行順序（舊 Stage ID 保留，依此優先順序排工作）：
+
+| 優先順序 | Stage 與目標 |
+| --- | --- |
+| P0 | Manager Review 本規劃；獨立 review 43871 分支的整合／延期 |
+| P1 | **UX-A metadata／基本顯示 → UX-B 日期折疊／流程視圖 → UX-C 之後的顯示設定頁** |
+| P2 | **5C Runner receipt API/UI → 6 Logs/error detail**；5B final migration 保留 BLOCKED，外部 blocker 處置與 Manager 再授權後另排單一 pilot |
+| P3 | **8A Tray → 8B opt-in auto-start → 8C installer/upgrade/uninstall → 8D updater** |
+| P4 | **7 三十日 observed reliability**；**4R–4D MISSED** 保留 deferred evidence strategy，不把未知顯示為 0 |
+| P5 | **9 維護 backlog**：retention/backup、collection/UI 韌性、history 規模、identity linkage、平台/無障礙、Runner 進階政策、可選控制功能 |
+
+Blocked/Deferred 項目不構成整個佇列的串行阻塞。5C 可使用隔離 receipts 開發，不需重新跑正式 5B；
+三十日 observed metrics 可獨立於 MISSED，但 duration／missed count 必須標示實際來源與可用性。
+下列原始 Stage 規格保留作設計與歷史追溯；目前狀態與下一個指派以上述 roadmap、backlog 與本文末節為準。
+歷史 `docs/STAGE-*.md` 的「Next stage／pending merge」只表示當時交付狀態。
+
+---
+
 ## Goal
 
 Build a **local-only scheduler observability dashboard** for Windows.
@@ -18,7 +48,7 @@ The first objective is not to replace existing scheduled tasks. It is to make th
 - What was the last result / error?
 - What happened over the last 7 / 30 days?
 
-Do not redesign the UI unless required for real data. Preserve the existing pink visual language, spacing, cards, status presentation, responsive behavior, Today view, History view, filtering, and detail drawer.
+Preserve the existing UI as the baseline; the proposed UX-A/B/C stages may extend its information layout only after Manager approval. Preserve the existing pink visual language, spacing, cards, status presentation, responsive behavior, Today view, History view, filtering, and detail drawer.
 
 ---
 
@@ -92,6 +122,8 @@ The backend must normalize scheduler information into these statuses:
 Do not show a future job as `SUCCESS` merely because its previous run succeeded.
 
 ## MISSED
+
+**Deferred design, not current behavior.** The conditions below are necessary but not sufficient: Stage 4R–4D must first establish trustworthy occurrence identity and observation/negative-evidence coverage. A missing run alone remains UNKNOWN; see [the current Stage 4 backlog](docs/BACKLOG.md).
 
 A task is `MISSED` when:
 
@@ -470,7 +502,7 @@ At minimum consider:
 - machine was off / asleep
 - StartWhenAvailable behavior when discoverable
 
-Use:
+The following is only a candidate rule after the separately approved evidence/coverage Gate; it must not be implemented from timestamps or missing receipts alone.
 
 ```
 expected execution time
@@ -506,7 +538,7 @@ Test around midnight and daily boundaries.
 
 Windows `LastTaskResult = 0` is not sufficient proof that the underlying business operation was successful.
 
-Do this only after Stages 1–4 work.
+Stages 1–3B are available; Stage 4 MISSED is deferred and does not block Stage 5. Stage 5A is merged, 5B final migration is blocked, and 5C receipt API/UI is planned; see the current backlog.
 
 ## Work
 
@@ -711,7 +743,7 @@ Integration tests may use fixture JSON representing PowerShell output so most te
 5. Start every implementation stage with `/plan`.
 6. Work one stage at a time.
 7. Do not implement later stages early unless required by the current stage.
-8. Preserve the existing UI unless a backend requirement makes a small change necessary.
+8. Preserve the existing visual language; only the separately approved UX stage may extend information layout within its stated scope.
 9. If a problem occurs, investigate and attempt a solution before asking the user.
 10. Do not stop only to report a minor issue that can be resolved locally.
 11. Never claim a Gate passed without verifying it.
@@ -731,39 +763,19 @@ Integration tests may use fixture JSON representing PowerShell output so most te
 
 # Current Next Codex Assignment
 
-Open a **new Codex Implementation Chat** for **Stage 5A — Runner Core only**.
+**本次：Planning only，commit/push 新的 planning branch 後，等待 Manager Review。**
 
-Baseline is the latest `main` after the accepted Stage 4 research.
+本輪 scope：核對最新 main 的 PLAN/README/docs 與實作入口、整理完整 backlog、正式寫入 UX metadata 需求、修正過時指派與目前狀態。
+不實作功能、不改 configuration/schema/Scheduler/正式資料、不重跑 Stage 5B、不啟用 Event Log、不 merge main。
 
-Manager decision:
+Manager Review 後建議另開 **UX-A — Dashboard Job Metadata / Basic Display only** 的 Implementation Chat，從當時最新 main 開始：
 
-- automatic MISSED detection is deferred
-- do not start 4R / 4A / 4B / 4C / 4D
-- Stage 5 may proceed independently
-- split Stage 5 into:
-  - **5A Runner Core** — implement and verify a generic local runner / receipt contract without modifying existing scheduled tasks
-  - **5B Pilot Migration** — after Manager Review, migrate exactly one low-risk scheduled task and compare behavior
+- 依 [UX 設計提案](docs/DASHBOARD-UX-METADATA.md) 定義 Dashboard 專用 metadata contract。
+- 台股／美股／其他、中文 display name/description、前置與推導後置、自訂排序、legacy 預設隱藏、備註。
+- 保留 raw Scheduler name/path/Description、current/last-run 區別、history identity；不改 Windows Task Scheduler Description。
+- metadata 缺失／無效、同名不同資料夾、循環／缺少依賴、排序衝突、hidden attention 與 fallback 都需明確 Gate。
+- **UX-B 日期型 task 折疊／流程視圖** 與 **UX-C 顯示設定頁** 是後續獨立 Stage，不在 UX-A 提前實作。
+- 5B final migration、5C Runner receipt UI、Stage 6 logs、7 reliability、8 Windows 產品化、9 維護與 Stage 4 MISSED 不遺漏，也不夾帶進 UX-A。
 
-Stage 5A scope:
-
-- generic local runner / wrapper
-- launch an explicitly configured child command
-- record started / finished timestamps, duration, exit code, outcome, and bounded diagnostic metadata
-- preserve and return the child process exit code
-- write receipts locally even when the dashboard service is not running
-- define deterministic receipt identity and duplicate/retry behavior
-- fail safely if receipt persistence fails; never prevent the child command from running solely because observability storage is unavailable
-- tests for success, non-zero exit, process-start failure, timeout policy if supported, Unicode paths/output, large output bounds, and persistence failure
-
-Stage 5A must **not**:
-
-- modify any existing Windows scheduled task
-- migrate any production/local user task yet
-- execute arbitrary commands supplied by the browser
-- add a generic remote shell API
-- implement automatic MISSED detection
-- redesign the dashboard UI
-- migrate all tasks
-- claim business-level success beyond the child process/receipt evidence
-
-After Stage 5A passes its Gate, commit and push its implementation branch, then stop for Manager Review. Stage 5B requires a separate new Implementation Chat and explicit Manager approval.
+驗收與停止點：docs-only diff、連結／需求覆蓋／狀態一致性檢查，提交／推送 planning branch；
+Manager 決定是否合併與何時開始下一 Stage。此段取代過時的「下一步 Stage 5A Runner Core」指派。
