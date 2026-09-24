@@ -4,31 +4,45 @@ const lastStatuses = new Set(['SUCCESS', 'FAILED', 'UNKNOWN']);
 export const currentStatus = job => currentStatuses.has(job.status) ? job.status : 'UNKNOWN';
 export const lastStatus = job => lastStatuses.has(job.lastRunStatus) ? job.lastRunStatus : 'UNKNOWN';
 export const displayValue = value => value == null || value === '' ? '—' : String(value);
-const jobDisplayNames = Object.freeze({
-  'InsiderTracker-Market': '市場資料更新',
-  'InsiderTracker-SEC': 'SEC 內部人交易更新',
-  'InsiderTracker-SyncImport': '內部人資料同步',
-  'AIStockHunter-UnexplainedVolume-Daily': '異常成交量每日掃描',
-  'AIStockHunter-UnexplainedVolume-HealthCheck': '舊版異常成交量健康檢查',
-  'AIStockHunter-Accumulation-Weekly-Check': '籌碼累積每週檢查'
+// UI-only, versioned defaults. A dependency describes data or display order; it never controls Scheduler.
+export const jobMetadata = Object.freeze({
+  'InsiderTracker-Market': { displayName: '市場資料更新', market: '美股', description: '更新既有訊號的行情與績效；不依賴當天的 SyncImport 或 SEC。', order: 10, dependsOn: [], legacy: false, hidden: false },
+  'InsiderTracker-SyncImport': { displayName: '內部人資料同步', market: '美股', description: '同步並匯入 AI 日報。', order: 20, dependsOn: [{ task: '外部 AI 日報已產生並進 Git', kind: 'external' }], legacy: false, hidden: false },
+  'InsiderTracker-SEC': { displayName: 'SEC 內部人交易更新', market: '美股', description: '抓取 SEC Form 4/4A；與其他 InsiderTracker 工作共用 pipeline lock。', order: 30, dependsOn: [{ task: 'InsiderTracker-SyncImport', kind: 'orderOnly' }], legacy: false, hidden: false },
+  'AIStockHunter-UnexplainedVolume-Daily': { displayName: '異常成交量每日掃描', market: '台股', description: '主要資料產生流程：累積每日正式資料並掃描異常成交量。', order: 10, dependsOn: [], legacy: false, hidden: false },
+  'AIStockHunter-Accumulation-Weekly-Check': { displayName: '籌碼累積每週檢查', market: '台股', description: '檢查本週 Daily 累積資料完整性；不要求執行前立刻先跑 Daily。', order: 30, dependsOn: [{ task: 'AIStockHunter-UnexplainedVolume-Daily', kind: 'data', note: '本週已有 Daily 資料' }], legacy: false, hidden: false },
+  'AIStockHunter-Accumulation-Check-*': { displayName: '籌碼累積上線檢查', market: '台股', description: '一次性上線／日期型驗收；需要對應日期的 Daily 資料。', order: 20, dependsOn: [{ task: 'AIStockHunter-UnexplainedVolume-Daily', kind: 'data', note: '對應日期 Daily 已產生資料' }], legacy: false, hidden: false },
+  'AIStockHunter-UnexplainedVolume-HealthCheck': { displayName: '舊版異常成交量健康檢查', market: '台股', description: '舊版異常成交量健康檢查排程。', order: 90, dependsOn: [], legacy: true, hidden: true },
+  'AIStockHunter-UnexplainedVolume-V2-Weekly': { displayName: '舊版異常成交量每週檢查', market: '台股', description: '舊版異常成交量 V2 每週排程。', order: 100, dependsOn: [], legacy: true, hidden: true }
 });
 const originalJobName = job => job?.taskName ?? job?.name ?? '';
-const jobAlias = name => {
+export const metadataFor = job => {
+  const name = originalJobName(job);
+  if (Object.hasOwn(jobMetadata, name)) return jobMetadata[name];
   const prefix = 'AIStockHunter-Accumulation-Check-';
-  if (name.startsWith(prefix)) {
-    const date = name.slice(prefix.length);
-    if (/^\d{4}-\d{2}-\d{2}$/.test(date)) return `籌碼累積上線檢查 · ${date}`;
-  }
-  return Object.hasOwn(jobDisplayNames, name) ? jobDisplayNames[name] : undefined;
+  return name.startsWith(prefix) && /^\d{4}-\d{2}-\d{2}$/.test(name.slice(prefix.length))
+    ? jobMetadata['AIStockHunter-Accumulation-Check-*'] : null;
 };
-export const jobDisplayName = job => jobAlias(originalJobName(job)) ?? displayValue(originalJobName(job));
+export const jobDisplayName = job => {
+  const metadata = metadataFor(job);
+  return metadata ? `${metadata.displayName}${originalJobName(job).startsWith('AIStockHunter-Accumulation-Check-') ? ` · ${originalJobName(job).slice(-10)}` : ''}` : displayValue(originalJobName(job));
+};
 export const jobSubtitle = job => {
   const original = originalJobName(job);
   const path = typeof job?.taskPath === 'string' ? job.taskPath : '';
-  return jobAlias(original)
+  return metadataFor(job)
     ? [original, path && path !== '\\' ? path : ''].filter(Boolean).join(' · ')
     : displayValue(path || original);
 };
+const marketRank = Object.freeze({ '台股': 0, '美股': 1, '其他': 2 });
+export const jobMarket = job => metadataFor(job)?.market ?? '其他';
+export const visibleJobs = (jobs, showLegacy = false) => jobs.filter(job => showLegacy || !metadataFor(job)?.hidden);
+export const orderedJobs = jobs => [...jobs].sort((a, b) =>
+  marketRank[jobMarket(a)] - marketRank[jobMarket(b)]
+  || (metadataFor(a)?.order ?? Number.MAX_SAFE_INTEGER) - (metadataFor(b)?.order ?? Number.MAX_SAFE_INTEGER));
+export const downstreamJobs = (job, jobs) => orderedJobs(jobs.filter(candidate =>
+  metadataFor(candidate)?.dependsOn.some(dependency => dependency.task === originalJobName(job))
+  || false));
 export function formatDate(value) {
   if (typeof value !== 'string' || !value.trim()) return '—';
   const date = new Date(value);
@@ -118,6 +132,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
   const filters = [...document.querySelectorAll('.filter')];
   let snapshot = null;
   let activeFilter = 'all';
+  let showLegacy = false;
   let busy = false;
   let returnFocus = null;
   let phase = 'loading';
@@ -132,6 +147,31 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
   }
   function badge(status) {
     return element('span', `status ${status.toLowerCase()}`, label(status));
+  }
+  function renderMetadata(job, candidates) {
+    const metadata = metadataFor(job);
+    const dependencies = metadata?.dependsOn ?? [];
+    const downstream = downstreamJobs(job, candidates);
+    const formatDependency = dependency => {
+      const known = metadataFor({ name: dependency.task });
+      const title = known ? `${known.displayName}（${dependency.task}）` : dependency.task;
+      const kind = dependency.kind === 'orderOnly' ? '僅顯示順序，非硬依賴'
+        : dependency.kind === 'external' ? '外部前置' : dependency.note || '資料前置';
+      return `${title} · ${kind}`;
+    };
+    const details = [
+      ['市場別', jobMarket(job)],
+      ['中文用途說明', metadata?.description ?? displayValue(job.description)],
+      ['前置 task', dependencies.length ? dependencies.map(formatDependency).join('；') : '無已設定前置 task'],
+      ['後續 task', downstream.length
+        ? downstream.map(candidate => `${jobDisplayName(candidate)}（${originalJobName(candidate)}）`).join('；')
+        : '無已知後續 task']
+    ];
+    get('metadataGrid').replaceChildren(...details.map(([title, value]) => {
+      const detail = element('div', 'detail');
+      detail.append(element('small', '', title), element('strong', '', value));
+      return detail;
+    }));
   }
   function closeDrawer() {
     get('drawer').classList.remove('open');
@@ -148,6 +188,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
     returnFocus = row;
     get('drawerTitle').textContent = jobDisplayName(job);
     get('drawerSubtitle').textContent = jobSubtitle(job);
+    renderMetadata(job, snapshot?.jobs ?? []);
     const details = [
       ['Current status', label(currentStatus(job))], ['Scheduler state', job.state],
       ['Enabled', job.enabled === true ? 'Yes' : job.enabled === false ? 'No' : null],
@@ -172,6 +213,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
     get('drawer').dataset.mode = 'history';
     get('drawerTitle').textContent = jobDisplayName(job);
     get('drawerSubtitle').textContent = `${day.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })} · Observed executions · ${jobSubtitle(job)}`;
+    renderMetadata(job, historyRows(historyCurrentJobs, historyCache.payload.jobs, historyCache.range));
     get('detailGrid').hidden = true;
     get('currentWarnings').hidden = true;
     get('historyExecutions').hidden = false;
@@ -193,7 +235,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
   }
   function renderHistory() {
     const { payload, range } = historyCache;
-    const rows = historyRows(historyCurrentJobs, payload.jobs, range);
+    const rows = orderedJobs(visibleJobs(historyRows(historyCurrentJobs, payload.jobs, range), showLegacy));
     const head = element('tr', '');
     const jobHead = element('th', 'history-name', 'Job');
     jobHead.scope = 'col';
@@ -204,7 +246,19 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
       return node;
     }));
     get('historyHead').replaceChildren(head);
-    get('historyBody').replaceChildren(...rows.map(job => {
+    let previousMarket = null;
+    const historyNodes = [];
+    for (const job of rows) {
+      const market = jobMarket(job);
+      if (market !== previousMarket) {
+        const group = element('tr', 'market-group history-group');
+        const heading = element('th', '', market);
+        heading.colSpan = range.days.length + 1;
+        heading.scope = 'rowgroup';
+        group.append(heading);
+        historyNodes.push(group);
+        previousMarket = market;
+      }
       const row = element('tr', 'history-row');
       row.dataset.job = job.id;
       const name = element('th', 'history-name');
@@ -224,8 +278,9 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
         td.append(node);
         return td;
       }));
-      return row;
-    }));
+      historyNodes.push(row);
+    }
+    get('historyBody').replaceChildren(...historyNodes);
     get('historyTableWrap').hidden = rows.length === 0;
     get('historyStatus').textContent = rows.length ? 'Select a day to see all observed executions.' : 'No observed executions or current jobs in this window.';
     get('historyStatus').setAttribute('role', 'status');
@@ -265,8 +320,15 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
     }
   }
   function renderRows() {
-    const jobs = snapshot ? filterJobs(snapshot.jobs, activeFilter) : [];
-    get('jobList').replaceChildren(...jobs.map(job => {
+    const jobs = snapshot ? orderedJobs(filterJobs(visibleJobs(snapshot.jobs, showLegacy), activeFilter)) : [];
+    let previousMarket = null;
+    const nodes = [];
+    for (const job of jobs) {
+      const market = jobMarket(job);
+      if (market !== previousMarket) {
+        nodes.push(element('h3', 'market-group', market));
+        previousMarket = market;
+      }
       const status = currentStatus(job);
       const row = element('button', 'job-row');
       row.type = 'button';
@@ -277,7 +339,9 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
         { READY: '◷', RUNNING: '↻', FAILED: '!', DISABLED: 'Ⅱ', UNKNOWN: '?', MISSED: '⌁' }[status]);
       icon.setAttribute('aria-hidden', 'true');
       const name = element('span', 'job-text');
+      const metadata = metadataFor(job);
       name.append(element('span', 'job-name', jobDisplayName(job)), element('span', 'job-sub', jobSubtitle(job)));
+      if (metadata) name.append(element('span', 'job-description', metadata.description));
       main.append(icon, name);
       row.append(main);
       for (const [title, date] of [['Next run', job.nextRunAt], ['Last run', job.lastRunAt]]) {
@@ -290,14 +354,17 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
         element('span', 'job-sub', `Last run: ${label(lastStatus(job))}`));
       row.append(statuses, element('span', 'chev', '›'));
       row.addEventListener('click', () => openDrawer(job, row));
-      return row;
-    }));
+      nodes.push(row);
+    }
+    get('jobList').replaceChildren(...nodes);
     get('emptyState').hidden = jobs.length > 0;
     get('emptyState').textContent = phase === 'loading' ? '正在讀取排程…'
       : phase === 'error' ? '無法顯示目前排程。請查看上方錯誤後重試。'
       : snapshot?.collectionStatus === 'NOT_CONFIGURED'
         ? '尚未設定要監控的排程。請設定 dashboard.scheduler.include（config/application.yml；參見 README.md）。'
-      : snapshot?.jobs.length === 0 ? '目前沒有可顯示的排程。' : 'No jobs match this filter ♡';
+      : snapshot?.jobs.length === 0 ? '目前沒有可顯示的排程。'
+        : !showLegacy && visibleJobs(snapshot.jobs).length === 0 ? '目前只有舊版／停用排程。可開啟「顯示舊版／停用排程」。'
+        : 'No jobs match this filter ♡';
   }
   function showNotice(title, details = [], kind = 'info') {
     get('collectionNotice').className = `collection-notice ${kind}`;
@@ -393,6 +460,12 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
     });
     renderRows();
   }));
+  get('showLegacy').addEventListener('click', () => {
+    showLegacy = !showLegacy;
+    get('showLegacy').setAttribute('aria-checked', String(showLegacy));
+    renderRows();
+    if (historyCache && !get('historyView').hidden) renderHistory();
+  });
   get('closeDrawer').addEventListener('click', closeDrawer);
   get('drawer').addEventListener('click', event => { if (event.target === get('drawer')) closeDrawer(); });
   document.addEventListener('keydown', event => {

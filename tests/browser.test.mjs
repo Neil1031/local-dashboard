@@ -260,3 +260,50 @@ test('25 jobs, long Unicode names, explicit MISSED, local dates, desktop and 320
   assert.equal(await rows().count(), 1);
   await page.screenshot({ path: `${artifactDir}/narrow-list.png`, fullPage: true });
 });
+
+test('metadata grouping, dependency details, legacy toggle, unknown fallback and safe text', async () => {
+  const unsafe = '<img src=x onerror="window.injected=true">';
+  const names = ['InsiderTracker-SEC', 'AIStockHunter-Accumulation-Weekly-Check',
+    'InsiderTracker-Market', 'AIStockHunter-UnexplainedVolume-Daily',
+    'AIStockHunter-Accumulation-Check-2026-09-22', 'AIStockHunter-UnexplainedVolume-HealthCheck',
+    'Unknown-Task', unsafe, 'InsiderTracker-SyncImport'];
+  const requests = await mock(snapshot(names.map((name, index) => fixtureJob('READY', {
+    id: `metadata-${index}`, name, description: unsafe
+  }))));
+  assert.deepEqual(await page.locator('.market-group:not(.history-group)').allInnerTexts(), ['台股', '美股', '其他']);
+  assert.deepEqual(await rows().evaluateAll(nodes => nodes.map(node => node.querySelector('.job-name').textContent)), [
+    '異常成交量每日掃描', '籌碼累積上線檢查 · 2026-09-22', '籌碼累積每週檢查',
+    '市場資料更新', '內部人資料同步', 'SEC 內部人交易更新', 'Unknown-Task', unsafe]);
+  assert.equal(await rows().count(), 8);
+  assert.equal(await page.locator('img').count(), 0);
+  assert.equal(await page.evaluate(() => window.injected), undefined);
+  await page.screenshot({ path: `${artifactDir}/ux1-grouped-desktop.png`, fullPage: true });
+  await page.locator('[data-job="metadata-3"]').click();
+  assert.match(await page.locator('#metadataGrid').innerText(), /台股.*主要資料產生流程.*後續 task.*籌碼累積上線檢查.*籌碼累積每週檢查/s);
+  await page.screenshot({ path: `${artifactDir}/ux1-dependencies-drawer.png` });
+  await page.keyboard.press('Escape');
+  await page.locator('[data-job="metadata-0"]').click();
+  assert.match(await page.locator('#metadataGrid').innerText(), /美股.*僅顯示順序，非硬依賴/s);
+  await page.keyboard.press('Escape');
+  await page.locator('[data-job="metadata-4"]').click();
+  assert.match(await page.locator('#metadataGrid').innerText(), /對應日期 Daily 已產生資料/);
+  await page.keyboard.press('Escape');
+  await page.locator('[data-job="metadata-6"]').click();
+  assert.match(await page.locator('#metadataGrid').innerText(), /其他.*<img.*無已設定前置 task/s);
+  assert.equal(await page.locator('img').count(), 0);
+  await page.keyboard.press('Escape');
+  await page.locator('#showLegacy').click();
+  assert.equal(await page.locator('#showLegacy').getAttribute('aria-checked'), 'true');
+  assert.equal(await rows().count(), 9);
+  assert.match(await page.locator('[data-job="metadata-5"]').innerText(), /舊版異常成交量健康檢查/);
+  await page.locator('[data-filter="READY"]').click();
+  assert.equal(await rows().count(), 9);
+  await page.locator('#historyTab').click();
+  await page.waitForFunction(() => document.getElementById('historyView').getAttribute('aria-busy') === 'false');
+  assert.equal(await page.locator('.history-row').count(), 9);
+  assert.deepEqual(await page.locator('.history-group').allInnerTexts(), ['台股', '美股', '其他']);
+  await page.locator('#showLegacy').click();
+  assert.equal(await page.locator('.history-row').count(), 8);
+  assert.equal(requests.filter(request => new URL(request.url).pathname === '/api/jobs').length, 1);
+  assert.equal(requests.filter(request => new URL(request.url).pathname === '/api/history').length, 1);
+});

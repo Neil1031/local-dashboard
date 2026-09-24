@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import { summarize, jobDisplayName, jobSubtitle } from '../dashboard.mjs';
+import { summarize, jobDisplayName, jobSubtitle, orderedJobs, visibleJobs } from '../dashboard.mjs';
 
 // Explicit opt-in. This uses the packaged service and real configured collector;
 // no routes, mocked responses, task mutations, or additional detail requests.
@@ -38,12 +38,13 @@ test('packaged UI renders the actual list response and refreshes once', { skip: 
     assert.ok(snapshot.jobs.length > 0, 'Configure real tasks for this opt-in acceptance test');
     await page.waitForFunction(() => !document.getElementById('refreshBtn').disabled);
     const rows = page.locator('.job-row');
-    assert.equal(await rows.count(), snapshot.jobs.length);
+    const displayedJobs = orderedJobs(visibleJobs(snapshot.jobs));
+    assert.equal(await rows.count(), displayedJobs.length);
     const counts = summarize(snapshot.jobs);
     for (const [key, value] of Object.entries(counts)) assert.equal(await page.locator(`#count-${key}`).innerText(), String(value));
     const title = value => value.charAt(0) + value.slice(1).toLowerCase();
-    for (let index = 0; index < snapshot.jobs.length; index++) {
-      const job = snapshot.jobs[index];
+    for (let index = 0; index < displayedJobs.length; index++) {
+      const job = displayedJobs[index];
       const row = rows.nth(index);
       assert.equal(await row.getAttribute('data-status'), job.status);
       assert.equal(await row.locator('.job-name').innerText(), jobDisplayName(job));
