@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { currentStatus, lastStatus, summarize, filterJobs, formatDate, displayValue, jobDisplayName, jobSubtitle, readSnapshot, jobMetadata, metadataFor, jobMarket, orderedJobs, visibleJobs, downstreamJobs } from '../dashboard.mjs';
+import { currentStatus, lastStatus, summarize, filterJobs, formatDate, displayValue, jobDisplayName, jobSubtitle, readSnapshot, jobMetadata, metadataFor, jobMarket, orderedJobs, visibleJobs, downstreamJobs, datedTaskDate, foldDatedJobs, viewCounts } from '../dashboard.mjs';
 
 test('current status and previous execution outcome remain independent', () => {
   const jobs = [
@@ -113,4 +113,39 @@ test('versioned metadata groups by market, orders jobs, and preserves unknown jo
   assert.equal(jobMetadata['AIStockHunter-Accumulation-Weekly-Check'].dependsOn[0].note, '本週已有 Daily 資料');
   assert.equal(jobMetadata['AIStockHunter-UnexplainedVolume-V2-Weekly'].hidden, true);
   assert.equal(visibleJobs([{ name: 'AIStockHunter-UnexplainedVolume-V2-Weekly' }]).length, 0);
+});
+
+test('dated tasks use real calendar dates and keep every original ID', () => {
+  const dated = date => Object.freeze({ id: `id-${date}`, name: `AIStockHunter-Accumulation-Check-${date}` });
+  const jobs = [dated('2026-09-18'), dated('2026-09-22'), dated('2026-09-21'),
+    dated('2026-02-29'), dated('2026-13-01'), dated('2026-09-2x'),
+    { id: 'other', name: 'Other-Task' }];
+  assert.equal(datedTaskDate(jobs[1]), '2026-09-22');
+  for (const job of jobs.slice(3, 6)) {
+    assert.equal(datedTaskDate(job), null);
+    assert.equal(metadataFor(job), null);
+  }
+  assert.equal(datedTaskDate(dated('2024-02-29')), '2024-02-29');
+  const entries = foldDatedJobs(jobs);
+  const group = entries.find(entry => entry.kind === 'dated');
+  assert.deepEqual(group.latest.map(job => job.id), ['id-2026-09-22']);
+  assert.deepEqual(group.history.map(job => job.id), ['id-2026-09-21', 'id-2026-09-18']);
+  assert.deepEqual(entries.filter(entry => entry.kind === 'job').map(entry => entry.job.id),
+    ['id-2026-02-29', 'id-2026-13-01', 'id-2026-09-2x', 'other']);
+  assert.deepEqual(foldDatedJobs([dated('2026-09-22')])[0].history, []);
+  assert.deepEqual(foldDatedJobs([dated('2026-09-22'), { ...dated('2026-09-22'), id: 'different-path-id' }])[0].latest.map(job => job.id),
+    ['id-2026-09-22', 'different-path-id']);
+});
+
+test('view counts separate legacy, filter exclusion, and collapsed dates', () => {
+  const jobs = ['2026-09-18', '2026-09-21', '2026-09-22'].map(date =>
+    ({ name: `AIStockHunter-Accumulation-Check-${date}`, status: 'READY' }));
+  jobs.push({ name: 'AIStockHunter-UnexplainedVolume-HealthCheck', status: 'DISABLED' },
+    { name: 'InsiderTracker-Market', status: 'DISABLED' });
+  assert.deepEqual(viewCounts(jobs, false, 'all'), { visible: 2, legacyHidden: 1, filteredOut: 0, folded: 2 });
+  assert.deepEqual(viewCounts(jobs, false, 'all', true), { visible: 4, legacyHidden: 1, filteredOut: 0, folded: 0 });
+  assert.deepEqual(viewCounts(jobs, false, 'DISABLED'), { visible: 1, legacyHidden: 1, filteredOut: 3, folded: 0 });
+  assert.deepEqual(viewCounts(jobs, true, 'DISABLED'), { visible: 2, legacyHidden: 0, filteredOut: 3, folded: 0 });
+  assert.equal(visibleJobs(jobs).some(job => job.name === 'InsiderTracker-Market'), true);
+  assert.equal(summarize(jobs).monitored, 5);
 });
