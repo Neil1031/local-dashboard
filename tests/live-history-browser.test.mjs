@@ -30,6 +30,8 @@ test('packaged history UI matches every persisted API execution without another 
     await page.waitForFunction(() => document.getElementById('historyView').getAttribute('aria-busy') === 'false');
     const expectedIds = new Set(visibleJobs([...snapshot.jobs, ...history.jobs]).map(job => job.id));
     assert.equal(await page.locator('.history-row').count(), expectedIds.size);
+    const fold = page.locator('#historyBody .fold-toggle');
+    if (await fold.count()) await fold.click();
     let checkedExecutions = 0, checkedCells = 0;
     const details = [];
     for (const id of expectedIds) {

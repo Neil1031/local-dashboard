@@ -275,35 +275,128 @@ test('metadata grouping, dependency details, legacy toggle, unknown fallback and
     '異常成交量每日掃描', '籌碼累積上線檢查 · 2026-09-22', '籌碼累積每週檢查',
     '市場資料更新', '內部人資料同步', 'SEC 內部人交易更新', 'Unknown-Task', unsafe]);
   assert.equal(await rows().count(), 8);
+  assert.equal(await page.locator('#jobList .fold-toggle').count(), 0);
   assert.equal(await page.locator('img').count(), 0);
   assert.equal(await page.evaluate(() => window.injected), undefined);
   await page.screenshot({ path: `${artifactDir}/ux1-grouped-desktop.png`, fullPage: true });
-  await page.locator('[data-job="metadata-3"]').click();
+  await page.locator('.job-row[data-job="metadata-3"]').click();
   assert.match(await page.locator('#metadataGrid').innerText(), /台股.*主要資料產生流程.*後續 task.*籌碼累積上線檢查.*籌碼累積每週檢查/s);
   await page.screenshot({ path: `${artifactDir}/ux1-dependencies-drawer.png` });
   await page.keyboard.press('Escape');
-  await page.locator('[data-job="metadata-0"]').click();
+  await page.locator('.job-row[data-job="metadata-0"]').click();
   assert.match(await page.locator('#metadataGrid').innerText(), /美股.*僅顯示順序，非硬依賴/s);
   await page.keyboard.press('Escape');
-  await page.locator('[data-job="metadata-4"]').click();
+  await page.locator('.job-row[data-job="metadata-4"]').click();
   assert.match(await page.locator('#metadataGrid').innerText(), /對應日期 Daily 已產生資料/);
   await page.keyboard.press('Escape');
-  await page.locator('[data-job="metadata-6"]').click();
+  await page.locator('.job-row[data-job="metadata-6"]').click();
   assert.match(await page.locator('#metadataGrid').innerText(), /其他.*<img.*無已設定前置 task/s);
   assert.equal(await page.locator('img').count(), 0);
   await page.keyboard.press('Escape');
   await page.locator('#showLegacy').click();
   assert.equal(await page.locator('#showLegacy').getAttribute('aria-checked'), 'true');
   assert.equal(await rows().count(), 9);
-  assert.match(await page.locator('[data-job="metadata-5"]').innerText(), /舊版異常成交量健康檢查/);
+  assert.match(await page.locator('.job-row[data-job="metadata-5"]').innerText(), /舊版異常成交量健康檢查/);
   await page.locator('[data-filter="READY"]').click();
   assert.equal(await rows().count(), 9);
   await page.locator('#historyTab').click();
   await page.waitForFunction(() => document.getElementById('historyView').getAttribute('aria-busy') === 'false');
   assert.equal(await page.locator('.history-row').count(), 9);
+  assert.equal(await page.locator('#historyBody .fold-toggle').count(), 0);
   assert.deepEqual(await page.locator('.history-group').allInnerTexts(), ['台股', '美股', '其他']);
   await page.locator('#showLegacy').click();
   assert.equal(await page.locator('.history-row').count(), 8);
   assert.equal(requests.filter(request => new URL(request.url).pathname === '/api/jobs').length, 1);
   assert.equal(requests.filter(request => new URL(request.url).pathname === '/api/history').length, 1);
+});
+
+test('UX-2 folds dated rows, preserves workflow semantics, counts, and History identities without extra requests', async () => {
+  const dated = ['2026-09-18', '2026-09-21', '2026-09-22'];
+  const names = [
+    'AIStockHunter-UnexplainedVolume-Daily', ...dated.map(date => `AIStockHunter-Accumulation-Check-${date}`),
+    'AIStockHunter-Accumulation-Check-2026-02-29', 'AIStockHunter-Accumulation-Weekly-Check',
+    'InsiderTracker-Market', 'InsiderTracker-SyncImport', 'InsiderTracker-SEC',
+    'AIStockHunter-UnexplainedVolume-HealthCheck'
+  ];
+  const jobs = names.map((name, index) => fixtureJob(index === 0 ? 'FAILED' : index >= 6 && index !== 7 && index !== 8 ? 'DISABLED' : 'READY',
+    { id: `ux2-${index}`, name }));
+  const requests = await mock(snapshot(jobs));
+  const today = page.locator('#jobList .job-row:visible');
+  assert.equal(await page.locator('#showLegacy').innerText(), '顯示舊版排程');
+  assert.equal(await page.locator('#count-monitored').innerText(), '10');
+  assert.equal(await page.locator('#view-visible').innerText(), '7');
+  assert.equal(await page.locator('#view-legacyHidden').innerText(), '1');
+  assert.equal(await page.locator('#view-folded').innerText(), '2');
+  assert.equal(await today.count(), 7);
+  assert.equal(await page.locator('#jobList .job-row[data-job="ux2-3"]').isVisible(), true);
+  assert.equal(await page.locator('#jobList .job-row[data-job="ux2-1"]').isVisible(), false);
+  assert.equal(await page.locator('#jobList .job-row[data-job="ux2-4"]').isVisible(), true);
+  assert.equal(await page.locator('#jobList .fold-toggle').getAttribute('aria-expanded'), 'false');
+  const workflow = await page.locator('#workflowView').innerText();
+  assert.match(workflow, /台股流程.*異常成交量每日掃描.*資料前置：異常成交量每日掃描.*籌碼累積每週檢查/s);
+  assert.match(workflow, /可能影響：籌碼累積上線檢查、籌碼累積每週檢查/);
+  assert.match(workflow, /美股流程.*市場資料更新.*獨立追蹤既有訊號.*外部前置：外部 AI 日報已產生並進 Git.*僅顯示順序：內部人資料同步，非硬依賴/s);
+  assert.equal(await page.locator('.workflow-card[data-job="ux2-5"] .status').innerText(), 'Ready');
+  assert.equal(await page.locator('.workflow-card[data-job="ux2-0"] .status').innerText(), 'Failed');
+  await page.locator('.workflow-card[data-job="ux2-5"]').click();
+  assert.equal(await page.locator('#drawerTitle').innerText(), '籌碼累積每週檢查');
+  await page.keyboard.press('Escape');
+  assert.equal(await page.locator('.workflow-card[data-job="ux2-5"]').evaluate(node => node === document.activeElement), true);
+  await page.locator('#jobList .fold-toggle').focus();
+  await page.keyboard.press('Enter');
+  assert.equal(await page.locator('#jobList .fold-toggle').getAttribute('aria-expanded'), 'true');
+  assert.deepEqual(await page.locator('#jobList .job-row:visible').evaluateAll(nodes => nodes
+    .filter(node => node.dataset.job.startsWith('ux2-') && [1, 2, 3].includes(Number(node.dataset.job.slice(4))))
+    .map(node => node.dataset.job)), ['ux2-3', 'ux2-2', 'ux2-1']);
+  assert.equal(await page.locator('#view-visible').innerText(), '9');
+  assert.equal(requests.length, 1);
+  await page.locator('[data-filter="DISABLED"]').click();
+  assert.equal(await today.count(), 1);
+  assert.equal(await page.locator('#jobList .job-row[data-job="ux2-6"]').isVisible(), true);
+  assert.equal(await page.locator('#view-visible').innerText(), '1');
+  assert.equal(await page.locator('#view-legacyHidden').innerText(), '1');
+  assert.equal(await page.locator('#view-filteredOut').innerText(), '8');
+  await page.locator('#showLegacy').click();
+  assert.equal(await today.count(), 2);
+  assert.equal(await page.locator('#view-legacyHidden').innerText(), '0');
+  await page.locator('#showLegacy').click();
+  await page.locator('[data-filter="all"]').click();
+
+  let historyRequests = 0;
+  await page.route('**/api/history?*', route => {
+    historyRequests++;
+    const url = new URL(route.request().url());
+    return route.fulfill({ json: { from: url.searchParams.get('from'), to: url.searchParams.get('to'),
+      jobs: [1, 2, 3].map(index => ({ id: `ux2-${index}`, taskName: names[index], taskPath: '\\', enabled: true,
+        runs: [{ id: 100 + index, observedRunAt: new Date().toISOString().replace(/\.\d{3}Z$/, 'Z'),
+          outcome: 'SUCCESS', schedulerResult: 0, durationMs: 10, message: null }] })) } });
+  });
+  await page.locator('#historyTab').click();
+  await page.waitForFunction(() => document.getElementById('historyView').getAttribute('aria-busy') === 'false');
+  assert.equal(await page.locator('.history-row:visible').count(), 7);
+  assert.equal(await page.locator('.history-row[data-job="ux2-1"]').isVisible(), false);
+  assert.equal(await page.locator('#historyBody .fold-toggle').getAttribute('aria-expanded'), 'false');
+  await page.locator('#historyBody .fold-toggle').focus();
+  await page.keyboard.press('Space');
+  assert.equal(await page.locator('#historyBody .fold-toggle').getAttribute('aria-expanded'), 'true');
+  assert.equal(await page.locator('.history-row:visible').count(), 9);
+  assert.deepEqual(await page.locator('.history-row:visible').evaluateAll(nodes => nodes
+    .filter(node => [1, 2, 3].includes(Number(node.dataset.job.slice(4)))).map(node => node.dataset.job)),
+    ['ux2-3', 'ux2-2', 'ux2-1']);
+  await page.locator('.history-row[data-job="ux2-1"] button.day-cell').click();
+  assert.equal(await page.locator('#drawer').getAttribute('data-mode'), 'history');
+  assert.equal(await page.locator('.history-execution').getAttribute('data-run-id'), '101');
+  assert.match(await page.locator('#drawerSubtitle').innerText(), /2026-09-18/);
+  await page.keyboard.press('Escape');
+  assert.equal(await page.locator('.history-row[data-job="ux2-1"] button.day-cell').evaluate(node => node === document.activeElement), true);
+  for (const width of [375, 320]) {
+    await page.setViewportSize({ width, height: 900 });
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+    await page.locator('#todayTab').click();
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+    await page.screenshot({ path: `${artifactDir}/ux2-${width}.png`, fullPage: true });
+    await page.locator('#historyTab').click();
+  }
+  assert.equal(requests.filter(request => new URL(request.url).pathname === '/api/jobs').length, 1);
+  assert.equal(historyRequests, 1);
 });

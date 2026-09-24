@@ -658,6 +658,30 @@
       .history-table { min-width: 650px; }
       .history-table th:first-child { width: 140px; }
     }
+    .view-counts { display: flex; flex-wrap: wrap; gap: 7px 14px; margin: 7px 12px 16px; color: var(--muted); font-size: 12px; }
+    .view-counts strong { color: var(--pink-deep); font-variant-numeric: tabular-nums; }
+    .today-list-title, .workflow-heading { margin: 0 12px 8px; color: #604651; font-size: 17px; }
+    .workflow { margin: 6px 0 22px; }
+    .workflow-copy { margin: 0 12px 12px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .workflow-markets { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .workflow-market { min-width: 0; padding: 14px; border: 1px solid var(--border); border-radius: 18px; background: #fffafd; }
+    .workflow-market h3 { margin: 0 0 12px; color: var(--pink-deep); font-size: 14px; }
+    .workflow-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+    .workflow-item { min-width: 0; }
+    .workflow-card { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px; text-align: left;
+      border: 1px solid var(--border); border-radius: 14px; background: #fff; padding: 10px; color: var(--text); cursor: pointer; }
+    .workflow-card:hover { background: var(--panel-soft); }
+    .workflow-name { min-width: 0; font-size: 13px; font-weight: 800; overflow-wrap: anywhere; }
+    .workflow-card .status { flex: 0 0 auto; }
+    .workflow-relation { margin: 5px 4px 0; color: var(--muted); font-size: 11px; line-height: 1.5; overflow-wrap: anywhere; }
+    .dated-heading { margin: 16px 12px 4px; color: var(--pink-deep); font-size: 13px; }
+    .fold-toggle { border: 1px solid var(--border); border-radius: 12px; background: var(--panel-soft); color: var(--pink-deep);
+      padding: 9px 12px; margin: 7px 12px 12px; cursor: pointer; font-size: 12px; font-weight: 700; }
+    .dated-history-heading th { background: #fff0f6; color: var(--pink-deep); text-align: left; padding: 9px; }
+    .dated-history-toggle td { text-align: left; }
+    .fold-toggle:focus-visible, .workflow-card:focus-visible { outline: 3px solid var(--pink-dark); outline-offset: 2px; }
+    @media (max-width: 700px) { .workflow-markets { grid-template-columns: 1fr; } }
+    @media (max-width: 375px) { .workflow-card { align-items: flex-start; flex-direction: column; } }
   </style>
 </head>
 <body>
@@ -684,7 +708,7 @@
       </aside>
     </section>
     <section class="stats" aria-label="目前收集摘要">
-      <article class="stat total"><div class="stat-label">Monitored</div><div class="stat-value" id="count-monitored">—</div></article>
+      <article class="stat total"><div class="stat-label">監控總數 · Monitored</div><div class="stat-value" id="count-monitored">—</div></article>
       <article class="stat success"><div class="stat-label">Last run success</div><div class="stat-value" id="count-success">—</div></article>
       <article class="stat failed"><div class="stat-label">Last run failed</div><div class="stat-value" id="count-failed">—</div></article>
       <article class="stat missed"><div class="stat-label">Attention · current status</div><div class="stat-value" id="count-attention">—</div></article>
@@ -710,9 +734,21 @@
           <button class="filter" type="button" data-filter="UNKNOWN" aria-pressed="false">Unknown</button>
           <button class="filter" type="button" data-filter="MISSED" aria-pressed="false">Missed</button>
         </div>
-        <button class="legacy-switch" id="showLegacy" type="button" role="switch" aria-checked="false">顯示舊版／停用排程</button>
+        <button class="legacy-switch" id="showLegacy" type="button" role="switch" aria-checked="false">顯示舊版排程</button>
       </div>
       <div class="content" id="todayView" role="tabpanel" aria-labelledby="todayTab" aria-busy="true">
+        <section class="workflow" id="workflowView" aria-labelledby="workflowHeading" hidden>
+          <h2 class="workflow-heading" id="workflowHeading">工作流程概覽</h2>
+          <p class="workflow-copy">關係來自 Dashboard 顯示資料；狀態為各工作目前的 Scheduler 狀態。箭頭旁文字說明資料、外部前置或顯示順序。</p>
+          <div class="workflow-markets" id="workflowMarkets"></div>
+        </section>
+        <h2 class="today-list-title">詳細工作列表</h2>
+        <div class="view-counts" aria-label="Today 列表數量">
+          <span>目前顯示 <strong id="view-visible">—</strong></span>
+          <span>舊版隱藏 <strong id="view-legacyHidden">—</strong></span>
+          <span>篩選排除 <strong id="view-filteredOut">—</strong></span>
+          <span>日期收納 <strong id="view-folded">—</strong></span>
+        </div>
         <div id="jobList"></div>
         <div class="empty" id="emptyState">正在讀取排程…</div>
       </div>

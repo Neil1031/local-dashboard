@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import { summarize, jobDisplayName, jobSubtitle, orderedJobs, visibleJobs } from '../dashboard.mjs';
+import { summarize, jobDisplayName, jobSubtitle, orderedJobs, visibleJobs, foldDatedJobs, viewCounts } from '../dashboard.mjs';
 
 // Explicit opt-in. This uses the packaged service and real configured collector;
 // no routes, mocked responses, task mutations, or additional detail requests.
@@ -37,11 +37,14 @@ test('packaged UI renders the actual list response and refreshes once', { skip: 
     assert.equal(snapshot.collectionStatus, 'OK');
     assert.ok(snapshot.jobs.length > 0, 'Configure real tasks for this opt-in acceptance test');
     await page.waitForFunction(() => !document.getElementById('refreshBtn').disabled);
-    const rows = page.locator('.job-row');
-    const displayedJobs = orderedJobs(visibleJobs(snapshot.jobs));
+    const rows = page.locator('.job-row:visible');
+    const displayedJobs = foldDatedJobs(orderedJobs(visibleJobs(snapshot.jobs)))
+      .flatMap(entry => entry.kind === 'dated' ? entry.latest : [entry.job]);
     assert.equal(await rows.count(), displayedJobs.length);
     const counts = summarize(snapshot.jobs);
     for (const [key, value] of Object.entries(counts)) assert.equal(await page.locator(`#count-${key}`).innerText(), String(value));
+    const presentationCounts = viewCounts(snapshot.jobs, false, 'all');
+    for (const [key, value] of Object.entries(presentationCounts)) assert.equal(await page.locator(`#view-${key}`).innerText(), String(value));
     const title = value => value.charAt(0) + value.slice(1).toLowerCase();
     for (let index = 0; index < displayedJobs.length; index++) {
       const job = displayedJobs[index];
