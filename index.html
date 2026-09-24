@@ -300,6 +300,11 @@
       background: #fff8fb;
       color: var(--pink-deep);
     }
+    .legacy-switch { border: 1px solid var(--border); border-radius: 999px; background: #fff8fb; color: var(--pink-deep); padding: 8px 12px; font: inherit; font-size: 12px; cursor: pointer; }
+    .legacy-switch[aria-checked="true"] { background: var(--panel-strong); }
+    .market-group { margin: 12px 12px 4px; padding: 8px 4px; color: var(--pink-deep); font-size: 13px; font-weight: 800; }
+    .history-group th { text-align: left; background: #fff8fb; }
+    .job-description { display: block; color: var(--muted); font-size: 11px; margin-top: 4px; overflow-wrap: anywhere; }
 
     .content { padding: 10px; }
 
@@ -705,6 +710,7 @@
           <button class="filter" type="button" data-filter="UNKNOWN" aria-pressed="false">Unknown</button>
           <button class="filter" type="button" data-filter="MISSED" aria-pressed="false">Missed</button>
         </div>
+        <button class="legacy-switch" id="showLegacy" type="button" role="switch" aria-checked="false">顯示舊版／停用排程</button>
       </div>
       <div class="content" id="todayView" role="tabpanel" aria-labelledby="todayTab" aria-busy="true">
         <div id="jobList"></div>
@@ -731,6 +737,7 @@
         <button class="close" id="closeDrawer" type="button" aria-label="Close">×</button>
       </div>
       <div class="detail-grid" id="detailGrid"></div>
+      <div class="detail-grid" id="metadataGrid"></div>
       <div id="currentWarnings"><div class="log-title">Warnings</div>
       <div class="warnings" id="jobWarnings"></div></div>
       <ol class="history-executions" id="historyExecutions" hidden></ol>

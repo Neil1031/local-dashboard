@@ -2,6 +2,7 @@
 
 Windows Task Scheduler 的本機唯讀觀測服務。目前另提供 **Stage 5A 獨立 Runner Core**（待 Manager Review）。
 `index.html` 保留原有粉色 UI，透過 `dashboard.mjs` 讀取真實 `/api/jobs`；runtime 不含 mock scheduler data。
+UI job metadata、台股／美股分組、排序與舊版顯示切換見 [Stage UX-1](docs/STAGE-UX-1.md)。
 
 ## 環境與啟動
 

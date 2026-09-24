@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
+import { jobDisplayName, visibleJobs } from '../dashboard.mjs';
 
 test('packaged history UI matches every persisted API execution without another collection', { skip: !process.env.DASHBOARD_LIVE_URL }, async () => {
   const require = createRequire(new URL('../.tools/browser-tests/package.json', import.meta.url));
@@ -27,7 +28,7 @@ test('packaged history UI matches every persisted API execution without another 
     assert.equal(actualResponse.headers()['cache-control'], 'no-store');
     const history = await actualResponse.json();
     await page.waitForFunction(() => document.getElementById('historyView').getAttribute('aria-busy') === 'false');
-    const expectedIds = new Set([...snapshot.jobs, ...history.jobs].map(job => job.id));
+    const expectedIds = new Set(visibleJobs([...snapshot.jobs, ...history.jobs]).map(job => job.id));
     assert.equal(await page.locator('.history-row').count(), expectedIds.size);
     let checkedExecutions = 0, checkedCells = 0;
     const details = [];
@@ -35,7 +36,7 @@ test('packaged history UI matches every persisted API execution without another 
       const row = page.locator(`.history-row[data-job="${id}"]`);
       const current = snapshot.jobs.find(job => job.id === id);
       const saved = history.jobs.find(job => job.id === id);
-      assert.equal(await row.locator('.history-job-name').innerText(), current?.name ?? saved.taskName);
+      assert.equal(await row.locator('.history-job-name').innerText(), jobDisplayName(current ?? saved));
       // Independent browser-local grouping (no imports from production mapping code).
       const groups = await page.evaluate(({ runs, from }) => {
         const first = new Date(from);
@@ -77,7 +78,7 @@ test('packaged history UI matches every persisted API execution without another 
       await page.screenshot({ path: `${artifactDir}/live-history-${width}.png`, fullPage: true });
     }
     await page.locator('#todayTab').click();
-    assert.equal(await page.locator('.job-row').count(), snapshot.jobs.length);
+    assert.equal(await page.locator('.job-row').count(), visibleJobs(snapshot.jobs).length);
     await page.locator('#historyTab').click();
     assert.equal(requests.length, 2);
     assert.equal(requests.filter(url => new URL(url).pathname === '/api/jobs').length, 1);

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { currentStatus, lastStatus, summarize, filterJobs, formatDate, displayValue, jobDisplayName, jobSubtitle, readSnapshot } from '../dashboard.mjs';
+import { currentStatus, lastStatus, summarize, filterJobs, formatDate, displayValue, jobDisplayName, jobSubtitle, readSnapshot, jobMetadata, metadataFor, jobMarket, orderedJobs, visibleJobs, downstreamJobs } from '../dashboard.mjs';
 
 test('current status and previous execution outcome remain independent', () => {
   const jobs = [
@@ -87,4 +87,30 @@ test('daily and dated aliases apply to current and history without changing iden
       assert.equal(job[field], name);
     }
   }
+});
+
+test('versioned metadata groups by market, orders jobs, and preserves unknown jobs', () => {
+  const names = ['Other-Task', 'InsiderTracker-SEC', 'AIStockHunter-Accumulation-Weekly-Check',
+    'InsiderTracker-Market', 'AIStockHunter-UnexplainedVolume-Daily',
+    'AIStockHunter-UnexplainedVolume-HealthCheck', 'AIStockHunter-Accumulation-Check-2026-09-22',
+    'InsiderTracker-SyncImport'];
+  const jobs = names.map((name, id) => Object.freeze({ name, id: String(id) }));
+  assert.deepEqual(orderedJobs(visibleJobs(jobs)).map(job => job.name), [
+    'AIStockHunter-UnexplainedVolume-Daily', 'AIStockHunter-Accumulation-Check-2026-09-22',
+    'AIStockHunter-Accumulation-Weekly-Check', 'InsiderTracker-Market',
+    'InsiderTracker-SyncImport', 'InsiderTracker-SEC', 'Other-Task']);
+  assert.equal(visibleJobs(jobs, true).length, names.length);
+  assert.equal(jobMarket(jobs[0]), '其他');
+  assert.equal(metadataFor(jobs[0]), null);
+  assert.equal(jobDisplayName(jobs[0]), 'Other-Task');
+  assert.equal(metadataFor({ name: 'AIStockHunter-Accumulation-Check-custom' }), null);
+  assert.equal(metadataFor({ name: 'AIStockHunter-Accumulation-Check-2026-09-22' }), jobMetadata['AIStockHunter-Accumulation-Check-*']);
+  assert.deepEqual(downstreamJobs(jobs[4], jobs).map(job => job.name), [
+    'AIStockHunter-Accumulation-Check-2026-09-22', 'AIStockHunter-Accumulation-Weekly-Check']);
+  assert.deepEqual(downstreamJobs(jobs[7], jobs).map(job => job.name), ['InsiderTracker-SEC']);
+  assert.equal(jobMetadata['InsiderTracker-SEC'].dependsOn[0].kind, 'orderOnly');
+  assert.equal(jobMetadata['InsiderTracker-SyncImport'].dependsOn[0].kind, 'external');
+  assert.equal(jobMetadata['AIStockHunter-Accumulation-Weekly-Check'].dependsOn[0].note, '本週已有 Daily 資料');
+  assert.equal(jobMetadata['AIStockHunter-UnexplainedVolume-V2-Weekly'].hidden, true);
+  assert.equal(visibleJobs([{ name: 'AIStockHunter-UnexplainedVolume-V2-Weekly' }]).length, 0);
 });
