@@ -33,9 +33,9 @@ public final class OccurrenceCorrelation {
         INCOMPLETE_EXECUTION_EVIDENCE }
     public enum Source { SCHEDULER, RUNNER, COMBINED, MANUAL }
     public enum ExecutionOutcome { EXECUTED_SUCCESS, EXECUTED_FAILED, INCOMPLETE, UNKNOWN }
-    public record ExecutionEvidence(String evidenceId, String jobId, Instant startedAt,
-                                    ExecutionOutcome outcome, Source source, String schedulerTask,
-                                    String profileId) {}
+    public record ExecutionEvidence(String evidenceId, String schedulerJobId, String schedulerTask,
+                                    String runnerJobId, String profileId, String runnerExecutionId,
+                                    Instant startedAt, ExecutionOutcome outcome, Source source) {}
     public record CorrelationResult(String evidenceId, State state, Reason reason,
                                     String occurrenceId, List<String> candidateOccurrenceIds,
                                     ExecutionOutcome executionOutcome, String relation) {}
@@ -126,7 +126,7 @@ public final class OccurrenceCorrelation {
         Set<String> primary = new HashSet<>();
         List<CorrelationResult> results = new ArrayList<>();
         for (ExecutionEvidence run : ordered) {
-            List<Version> history = byJob.getOrDefault(run.jobId(), List.of());
+            List<Version> history = byJob.getOrDefault(run.schedulerJobId(), List.of());
             if (history.isEmpty()) {
                 results.add(result(run, State.INSUFFICIENT_EVIDENCE, Reason.NO_SCHEDULE_HISTORY, null, List.of(), null));
                 continue;
@@ -144,22 +144,25 @@ public final class OccurrenceCorrelation {
             for (Version version : history) {
                 Generation generated = generate(version, run.startedAt().minus(POSSIBLE_CATCH_UP).minus(NORMAL_LATE),
                         run.startedAt().plus(EARLY).plusSeconds(1));
-                unsupported.addAll(generated.diagnostics());
+                if (relevantUnsupportedVersion(version, run.startedAt()))
+                    unsupported.addAll(generated.diagnostics());
                 candidates.addAll(generated.occurrences());
             }
             candidates.sort(Comparator.comparing(NominalOccurrence::scheduledFor).thenComparing(NominalOccurrence::occurrenceId));
-            List<NominalOccurrence> possible = new ArrayList<>();
-            boolean uncertainLate = false;
-            boolean uncertainEarly = false;
-            for (NominalOccurrence occurrence : candidates) {
+            List<NominalOccurrence> eligible = candidates.stream().filter(occurrence -> {
                 Version own = history.stream().filter(v -> v.id() == occurrence.scheduleVersionId()).findFirst().orElseThrow();
                 boolean observed = !occurrence.scheduledFor().isBefore(own.firstObservedAt())
                         && !occurrence.scheduledFor().isAfter(own.lastObservedAt());
                 boolean inGap = history.stream().anyMatch(v -> v.previousLastObservedAt() != null
                         && occurrence.scheduledFor().isAfter(v.previousLastObservedAt())
                         && !occurrence.scheduledFor().isAfter(v.firstObservedAt()));
-                if (!observed && !inGap) continue;
-                Instant next = candidates.stream().filter(other -> other.jobId().equals(occurrence.jobId())
+                return observed || inGap;
+            }).toList();
+            List<NominalOccurrence> possible = new ArrayList<>();
+            boolean uncertainLate = false;
+            boolean uncertainEarly = false;
+            for (NominalOccurrence occurrence : eligible) {
+                Instant next = eligible.stream().filter(other -> other.jobId().equals(occurrence.jobId())
                         && other.scheduledFor().isAfter(occurrence.scheduledFor()))
                         .map(NominalOccurrence::scheduledFor).min(Instant::compareTo).orElse(null);
                 boolean normal = !run.startedAt().isBefore(occurrence.windowStart())
@@ -174,7 +177,10 @@ public final class OccurrenceCorrelation {
                 uncertainEarly |= run.startedAt().isBefore(occurrence.scheduledFor());
             }
             List<String> ids = possible.stream().map(NominalOccurrence::occurrenceId).distinct().toList();
-            boolean versionGap = possible.stream().anyMatch(o -> history.stream().anyMatch(v -> v.previousLastObservedAt() != null
+            boolean versionGap = history.stream().anyMatch(v -> v.previousLastObservedAt() != null
+                    && run.startedAt().isAfter(v.previousLastObservedAt())
+                    && !run.startedAt().isAfter(v.firstObservedAt()))
+                    || possible.stream().anyMatch(o -> history.stream().anyMatch(v -> v.previousLastObservedAt() != null
                     && o.scheduledFor().isAfter(v.previousLastObservedAt())
                     && !o.scheduledFor().isAfter(v.firstObservedAt())));
             if (versionGap) results.add(result(run, State.AMBIGUOUS, Reason.AMBIGUOUS_SCHEDULE_VERSION, null, ids, null));
@@ -201,28 +207,56 @@ public final class OccurrenceCorrelation {
         return List.copyOf(results);
     }
 
+    private static boolean relevantUnsupportedVersion(Version version, Instant executionAt) {
+        return !executionAt.isBefore(version.firstObservedAt().minus(EARLY))
+                && !executionAt.isAfter(version.lastObservedAt().plus(POSSIBLE_CATCH_UP));
+    }
+
     /** Join only mutually unique, mapped evidence. Timestamp proximity alone is insufficient. */
     public static List<ExecutionEvidence> combine(List<ExecutionEvidence> scheduler,
-                                                   List<ExecutionEvidence> runner, Map<String, String> taskToProfile) {
+                                                   List<ExecutionEvidence> runner,
+                                                   List<RunnerReceiptService.JobExecutions> trustedMappings) {
         List<ExecutionEvidence> combined = new ArrayList<>();
         Set<String> usedRunner = new HashSet<>();
         for (ExecutionEvidence scheduled : scheduler) {
-            String mapped = taskToProfile.get(scheduled.schedulerTask());
-            List<ExecutionEvidence> matching = runner.stream().filter(r -> Objects.equals(r.jobId(), scheduled.jobId())
-                    && Objects.equals(r.profileId(), mapped) && mapped != null && r.startedAt() != null
-                    && scheduled.startedAt() != null
-                    && (scheduled.outcome() == ExecutionOutcome.UNKNOWN || r.outcome() == ExecutionOutcome.UNKNOWN
-                        || scheduled.outcome() == r.outcome())
-                    && Math.abs(Duration.between(r.startedAt(), scheduled.startedAt()).toSeconds()) <= 30).toList();
+            if (scheduled.source() != Source.SCHEDULER || scheduled.schedulerTask() == null
+                    || scheduled.startedAt() == null || scheduled.outcome() == ExecutionOutcome.INCOMPLETE) {
+                combined.add(scheduled); continue;
+            }
+            List<RunnerReceiptService.JobExecutions> mappings = trustedMappings.stream()
+                    .filter(m -> "AVAILABLE".equals(m.profileStatus())
+                            && Objects.equals(m.schedulerTask(), scheduled.schedulerTask())
+                            && Objects.equals(scheduled.schedulerJobId(), canonicalMappingId(m.schedulerTask()))
+                            && m.jobId() != null && !m.jobId().isBlank()
+                            && m.profileId() != null && !m.profileId().isBlank()).toList();
+            if (mappings.size() != 1) {
+                combined.add(scheduled); continue;
+            }
+            RunnerReceiptService.JobExecutions mapping = mappings.getFirst();
+            List<ExecutionEvidence> matching = runner.stream().filter(r -> r.source() == Source.RUNNER
+                    && Objects.equals(r.schedulerJobId(), scheduled.schedulerJobId())
+                    && Objects.equals(r.schedulerTask(), scheduled.schedulerTask())
+                    && Objects.equals(r.runnerJobId(), mapping.jobId())
+                    && Objects.equals(r.profileId(), mapping.profileId())
+                    && r.runnerExecutionId() != null && r.startedAt() != null
+                    && r.outcome() != ExecutionOutcome.INCOMPLETE && r.outcome() == scheduled.outcome()
+                    && withinMergeWindow(r.startedAt(), scheduled.startedAt())).toList();
             if (matching.size() == 1) {
                 ExecutionEvidence match = matching.getFirst();
-                long competitors = scheduler.stream().filter(s -> Objects.equals(s.jobId(), match.jobId())
-                        && Objects.equals(taskToProfile.get(s.schedulerTask()), match.profileId())
-                        && s.startedAt() != null && Math.abs(Duration.between(match.startedAt(), s.startedAt()).toSeconds()) <= 30).count();
-                if (competitors == 1 && usedRunner.add(match.evidenceId())) {
+                long competingScheduler = scheduler.stream().filter(s -> s.source() == Source.SCHEDULER
+                        && Objects.equals(s.schedulerJobId(), scheduled.schedulerJobId())
+                        && Objects.equals(s.schedulerTask(), scheduled.schedulerTask())
+                        && s.startedAt() != null && withinMergeWindow(match.startedAt(), s.startedAt())).count();
+                long competingRunner = runner.stream().filter(r -> r.source() == Source.RUNNER
+                        && Objects.equals(r.schedulerJobId(), scheduled.schedulerJobId())
+                        && Objects.equals(r.schedulerTask(), scheduled.schedulerTask())
+                        && Objects.equals(r.runnerJobId(), mapping.jobId())
+                        && Objects.equals(r.profileId(), mapping.profileId())
+                        && r.startedAt() != null && withinMergeWindow(r.startedAt(), scheduled.startedAt())).count();
+                if (competingScheduler == 1 && competingRunner == 1 && usedRunner.add(match.evidenceId())) {
                     combined.add(new ExecutionEvidence("combined:" + scheduled.evidenceId() + "+" + match.evidenceId(),
-                            scheduled.jobId(), match.startedAt(), match.outcome(), Source.COMBINED,
-                            scheduled.schedulerTask(), match.profileId()));
+                            scheduled.schedulerJobId(), scheduled.schedulerTask(), match.runnerJobId(),
+                            match.profileId(), match.runnerExecutionId(), match.startedAt(), match.outcome(), Source.COMBINED));
                     continue;
                 }
             }
@@ -232,20 +266,32 @@ public final class OccurrenceCorrelation {
         return List.copyOf(combined);
     }
 
+    private static boolean withinMergeWindow(Instant a, Instant b) {
+        return Duration.between(a, b).abs().compareTo(Duration.ofSeconds(30)) <= 0;
+    }
+
+    private static String canonicalMappingId(String schedulerTask) {
+        try { return JobNormalizer.canonicalIdFromFullTask(schedulerTask); }
+        catch (IllegalArgumentException invalid) { return null; }
+    }
+
     /** Adapter preserves the distinction between a Runner invocation and a started child process. */
     public static ExecutionEvidence fromRunner(RunnerReceiptService.JobExecutions mapping,
                                                RunnerReceiptService.Execution run) {
-        if (!Objects.equals(mapping.jobId(), run.jobId())
-                || !Objects.equals(mapping.profileId(), run.commandProfileId()))
+        if (!"AVAILABLE".equals(mapping.profileStatus()) || !Objects.equals(mapping.jobId(), run.jobId())
+                || !Objects.equals(mapping.profileId(), run.commandProfileId())
+                || mapping.jobId() == null || mapping.jobId().isBlank()
+                || mapping.profileId() == null || mapping.profileId().isBlank())
             throw new IllegalArgumentException("Runner mapping does not identify this execution");
+        String schedulerJobId = JobNormalizer.canonicalIdFromFullTask(mapping.schedulerTask());
         boolean child = Boolean.TRUE.equals(run.childStarted()) && run.processStartedAt() != null;
         ExecutionOutcome outcome = !child || run.terminalAt() == null ? ExecutionOutcome.INCOMPLETE
                 : "SUCCESS".equals(run.runnerOutcome()) ? ExecutionOutcome.EXECUTED_SUCCESS
                 : ("FAILED".equals(run.runnerOutcome()) || "TIMEOUT".equals(run.runnerOutcome()))
                     ? ExecutionOutcome.EXECUTED_FAILED : ExecutionOutcome.UNKNOWN;
         Instant started = child ? Instant.parse(run.processStartedAt()) : Instant.parse(run.startedAt());
-        return new ExecutionEvidence("runner:" + run.executionId(), run.jobId(), started, outcome,
-                Source.RUNNER, mapping.schedulerTask(), mapping.profileId());
+        return new ExecutionEvidence("runner:" + run.executionId(), schedulerJobId, mapping.schedulerTask(),
+                run.jobId(), mapping.profileId(), run.executionId(), started, outcome, Source.RUNNER);
     }
 
     private static CorrelationResult result(ExecutionEvidence e, State state, Reason reason, String id,

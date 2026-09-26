@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.github.neil1031.dashboard.runner.RunnerReceiptService;
 import java.time.Instant;
 import java.util.List;
-import java.util.Map;
 import org.junit.jupiter.api.Test;
 import static io.github.neil1031.dashboard.OccurrenceCorrelation.*;
 import static org.assertj.core.api.Assertions.*;
@@ -33,7 +32,10 @@ class OccurrenceCorrelationTest {
 
     private ExecutionEvidence run(String id, String localTime, ExecutionOutcome outcome, Source source) {
         Instant at = java.time.OffsetDateTime.parse(localTime + "+08:00").toInstant();
-        return new ExecutionEvidence(id, "job", at, outcome, source, "\\Market", "market-profile");
+        return new ExecutionEvidence(id, "job", "\\Market",
+                source == Source.RUNNER ? "runner-native" : null,
+                source == Source.RUNNER ? "market-profile" : null,
+                source == Source.RUNNER ? id : null, at, outcome, source);
     }
 
     private CorrelationResult one(List<Version> versions, ExecutionEvidence run) {
@@ -142,18 +144,29 @@ class OccurrenceCorrelationTest {
     }
 
     @Test void retriesKeepFirstValidPrimaryAndCombinedEvidenceRequiresUniqueMapping() throws Exception {
-        var first = run("scheduler", "2026-09-28T06:30:05", ExecutionOutcome.EXECUTED_SUCCESS, Source.SCHEDULER);
-        var runner = run("runner", "2026-09-28T06:30:07", ExecutionOutcome.EXECUTED_SUCCESS, Source.RUNNER);
-        var joined = combine(List.of(first), List.of(runner), Map.of("\\Market", "market-profile"));
+        String canonical = JobNormalizer.canonicalIdFromFullTask("\\Market");
+        var first = new ExecutionEvidence("scheduler", canonical, "\\Market", null, null, null,
+                Instant.parse("2026-09-27T22:30:05Z"), ExecutionOutcome.EXECUTED_SUCCESS, Source.SCHEDULER);
+        var runner = new ExecutionEvidence("runner", canonical, "\\Market", "runner-native", "market-profile", "runner",
+                Instant.parse("2026-09-27T22:30:07Z"), ExecutionOutcome.EXECUTED_SUCCESS, Source.RUNNER);
+        var mapping = new RunnerReceiptService.JobExecutions("\\Market", "market-profile", "runner-native",
+                "AVAILABLE", "COMPLETE", null, List.of(), List.of());
+        var joined = combine(List.of(first), List.of(runner), List.of(mapping));
         assertThat(joined).hasSize(1);
         assertThat(joined.getFirst().source()).isEqualTo(Source.COMBINED);
         assertThat(joined.getFirst().outcome()).isEqualTo(ExecutionOutcome.EXECUTED_SUCCESS);
-        assertThat(combine(List.of(first), List.of(runner), Map.of())).hasSize(2);
-        assertThat(combine(List.of(first), List.of(run("conflict", "2026-09-28T06:30:07",
-                ExecutionOutcome.EXECUTED_FAILED, Source.RUNNER)), Map.of("\\Market", "market-profile"))).hasSize(2);
-        assertThat(combine(List.of(first, run("competing", "2026-09-28T06:30:08", ExecutionOutcome.EXECUTED_SUCCESS, Source.SCHEDULER)),
-                List.of(runner), Map.of("\\Market", "market-profile"))).hasSize(3);
-        var results = correlate(List.of(market()), List.of(first, runner));
+        assertThat(combine(List.of(first), List.of(runner), List.of())).hasSize(2);
+        var conflicting = new ExecutionEvidence("conflict", canonical, "\\Market", "runner-native", "market-profile", "conflict",
+                runner.startedAt(), ExecutionOutcome.EXECUTED_FAILED, Source.RUNNER);
+        assertThat(combine(List.of(first), List.of(conflicting), List.of(mapping))).hasSize(2);
+        var competing = new ExecutionEvidence("competing", canonical, "\\Market", null, null, null,
+                Instant.parse("2026-09-27T22:30:08Z"), ExecutionOutcome.EXECUTED_SUCCESS, Source.SCHEDULER);
+        assertThat(combine(List.of(first, competing), List.of(runner), List.of(mapping))).hasSize(3);
+        assertThat(combine(List.of(first), List.of(runner, conflicting), List.of(mapping))).hasSize(3);
+        var original = market();
+        var sameSchedule = new Version(original.id(), canonical, original.definitionJson(), original.firstObservedAt(),
+                original.lastObservedAt(), original.previousLastObservedAt());
+        var results = correlate(List.of(sameSchedule), List.of(first, runner));
         assertThat(results).extracting(CorrelationResult::relation).containsExactly("PRIMARY_EXECUTION", "ADDITIONAL_EXECUTION");
     }
 
@@ -174,20 +187,56 @@ class OccurrenceCorrelationTest {
         assertThat(java.util.Arrays.toString(State.values())).doesNotContain("MISSED");
     }
 
+    @Test void historicalUnsupportedVersionDoesNotPoisonCurrentDailyOccurrence() throws Exception {
+        ObjectNode time = task("InsiderTracker-Market");
+        ((ObjectNode) time.path("Triggers").get(0)).put("type", "MSFT_TaskTimeTrigger");
+        Instant oldEnd = START.minusSeconds(3600);
+        Version old = version(10, time, START.minusSeconds(86400), oldEnd, null);
+        Version current = version(11, task("InsiderTracker-Market"), START, END, oldEnd);
+        var execution = run("current", "2026-09-28T06:31:00", ExecutionOutcome.EXECUTED_SUCCESS, Source.SCHEDULER);
+        assertThat(one(List.of(old, current), execution).state()).isEqualTo(State.CORRELATED);
+        Version older = version(9, time, START.minusSeconds(172800), START.minusSeconds(90000), null);
+        assertThat(one(List.of(older, old, current), execution).state()).isEqualTo(State.CORRELATED);
+        ObjectNode oldDaily = task("InsiderTracker-Market");
+        ((ObjectNode) oldDaily.path("Triggers").get(0)).put("StartBoundary", "2026-09-19T07:00:00+08:00");
+        Version unrelatedSeven = version(8, oldDaily, START.minusSeconds(86400), oldEnd, null);
+        var late = run("current-late", "2026-09-28T07:20:00", ExecutionOutcome.EXECUTED_SUCCESS, Source.SCHEDULER);
+        assertThat(one(List.of(unrelatedSeven, current), late).reason()).isEqualTo(Reason.LATE_CATCH_UP_UNPROVEN);
+    }
+
+    @Test void relevantUnsupportedVersionRemainsUnsupportedAndGapTakesPriority() throws Exception {
+        ObjectNode time = task("InsiderTracker-Market");
+        ((ObjectNode) time.path("Triggers").get(0)).put("type", "MSFT_TaskTimeTrigger");
+        var execution = run("during", "2026-09-28T06:31:00", ExecutionOutcome.EXECUTED_SUCCESS, Source.SCHEDULER);
+        assertThat(one(List.of(version(10, time, START, END, null)), execution).state()).isEqualTo(State.UNSUPPORTED);
+        Instant six = Instant.parse("2026-09-27T22:00:00Z");
+        Instant seven = Instant.parse("2026-09-27T23:00:00Z");
+        Version old = version(10, time, START.minusSeconds(3600), six, null);
+        Version current = version(11, task("InsiderTracker-Market"), seven, END, six);
+        var gap = one(List.of(old, current), execution);
+        assertThat(gap.state()).isEqualTo(State.AMBIGUOUS);
+        assertThat(gap.reason()).isEqualTo(Reason.AMBIGUOUS_SCHEDULE_VERSION);
+    }
+
     @Test void runnerAdapterRequiresExactMappingAndChildStart() throws Exception {
-        var mapping = new RunnerReceiptService.JobExecutions("\\Market", "market-profile", "job", "AVAILABLE",
+        var mapping = new RunnerReceiptService.JobExecutions("\\Market", "market-profile", "runner-native", "AVAILABLE",
                 "COMPLETE", null, List.of(), List.of());
-        var started = new RunnerReceiptService.Execution("execution-1", "job", "market-profile", "TERMINAL",
+        var started = new RunnerReceiptService.Execution("execution-1", "runner-native", "market-profile", "TERMINAL",
                 "2026-09-27T22:30:00Z", "2026-09-27T22:30:02Z", "2026-09-27T22:30:10Z",
                 8000L, true, 1, 1, "FAILED", "COMPLETE", "primary", null, List.of(), List.of());
         var execution = fromRunner(mapping, started);
         assertThat(execution.startedAt()).isEqualTo(Instant.parse("2026-09-27T22:30:02Z"));
-        assertThat(one(List.of(market()), execution).executionOutcome()).isEqualTo(ExecutionOutcome.EXECUTED_FAILED);
-        var noChild = new RunnerReceiptService.Execution("execution-2", "job", "market-profile", "TERMINAL",
+        assertThat(execution.schedulerJobId()).isEqualTo(JobNormalizer.canonicalIdFromFullTask("\\Market"));
+        assertThat(execution.runnerJobId()).isEqualTo("runner-native");
+        var original = market();
+        var mappedSchedule = new Version(original.id(), execution.schedulerJobId(), original.definitionJson(),
+                original.firstObservedAt(), original.lastObservedAt(), original.previousLastObservedAt());
+        assertThat(one(List.of(mappedSchedule), execution).executionOutcome()).isEqualTo(ExecutionOutcome.EXECUTED_FAILED);
+        var noChild = new RunnerReceiptService.Execution("execution-2", "runner-native", "market-profile", "TERMINAL",
                 "2026-09-27T22:30:00Z", null, "2026-09-27T22:30:10Z", 10000L,
                 false, null, 127, "START_FAILED", "NEVER_STARTED_CHILD", "primary", null, List.of(), List.of());
-        assertThat(one(List.of(market()), fromRunner(mapping, noChild)).state()).isEqualTo(State.INSUFFICIENT_EVIDENCE);
-        assertThatThrownBy(() -> fromRunner(new RunnerReceiptService.JobExecutions("\\Other", "other", "job",
+        assertThat(one(List.of(mappedSchedule), fromRunner(mapping, noChild)).state()).isEqualTo(State.INSUFFICIENT_EVIDENCE);
+        assertThatThrownBy(() -> fromRunner(new RunnerReceiptService.JobExecutions("\\Other", "other", "runner-native",
                 "AVAILABLE", "COMPLETE", null, List.of(), List.of()), started)).isInstanceOf(IllegalArgumentException.class);
     }
 }

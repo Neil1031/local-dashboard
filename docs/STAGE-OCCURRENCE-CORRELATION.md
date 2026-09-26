@@ -10,6 +10,20 @@ Goal: determine which nominal scheduled occurrence an observed execution could b
 
 No `job`, `job_run`, `schedule_version`, `schedule_observation`, Runner receipt, or Scheduler schema/contract is changed. Correlation is recalculated, so a new table is not warranted yet. Persist only if future measured query cost or audit requirements justify a versioned, append-only shadow result with source evidence references and policy version. Never overwrite `job_run` or reuse its identity as an occurrence ID.
 
+## Identity namespaces
+
+These values have separate meanings and are retained separately in `ExecutionEvidence`:
+
+| Field | Source and meaning |
+| --- | --- |
+| `schedulerJobId` | Dashboard `JobNormalizer` canonical identity: Base64URL without padding of lowercase `TaskPath + TaskName`. Stage A `schedule_version.job_id` and `job_run.job_id` use this namespace. |
+| `schedulerTask` | Full Scheduler task path, for example `\\AIStockHunter-Accumulation-Weekly-Check`. It is `task_path + task_name` from the `job` row or the trusted Runner mapping. |
+| `runnerJobId` | Native Runner profile job ID, for example `aistockhunter-accumulation-weekly`; absent on Scheduler-only evidence. |
+| `profileId` | Native Runner command profile ID; absent on Scheduler-only evidence. |
+| `runnerExecutionId` | Native Runner receipt execution ID; absent on Scheduler-only evidence. |
+
+The Runner adapter verifies receipt `jobId` and `commandProfileId` against the trusted `RunnerReceiptService.JobExecutions` mapping, derives `schedulerJobId` from that mapping's full `schedulerTask` with the **same** `JobNormalizer` rule, and preserves the Runner's three native identifiers. The repository joins `job_run` to `job` to obtain the full Scheduler task path. No code equates a Runner job ID with a Dashboard job ID.
+
 ## NominalOccurrence
 
 The model contains `occurrenceId`, `jobId`, `scheduleVersionId`, `triggerIdentity`, `scheduledFor`, `windowStart`, `windowEnd`, `graceUntil`, `timezoneResolution`, and `startWhenAvailable`. `graceUntil` is context for future missed-run research and is not used as the correlation window. A diagnostic request generates at most 32 days; it neither backfills unobserved history nor produces a missing-run judgment.
@@ -68,7 +82,11 @@ Results are sorted by start instant then evidence ID. For multiple uniquely corr
 
 ## Scheduler + Runner evidence
 
-`combine` merges only a mutually unique Scheduler/Runner pair with the same exact job ID, configured task-to-profile mapping, compatible known outcomes, and start instants within 30 seconds. A competing execution, mapping mismatch, conflicting outcome, or uncertain pair remains as separate evidence. Thirty seconds is a correlation guard, not proof of common origin. Runner-only and Scheduler-only evidence may be evaluated separately. A `COMBINED` record uses the Runner child start and retains both source IDs in its diagnostic ID.
+`combine` merges only a mutually unique Scheduler/Runner pair whose canonical Dashboard job ID and full Scheduler task path agree, whose Runner native job ID and profile ID agree with one `AVAILABLE` trusted mapping, whose known outcomes agree, and whose start instants are within 30 seconds. A competing Scheduler or Runner execution, duplicate mapping, mapping mismatch, conflicting outcome, or uncertain pair remains as separate evidence. Thirty seconds is a correlation guard, not proof of common origin. Runner-only and Scheduler-only evidence may be evaluated separately. A `COMBINED` record uses the Runner child start, retains Runner native IDs, and retains both source IDs in its diagnostic ID.
+
+## Unsupported version scoping
+
+An unsupported trigger diagnostic applies only if that version's observed episode could affect the execution time: from two minutes before `firstObservedAt` through three hours after `lastObservedAt` (the shadow early/catch-up bounds). Nominal candidates outside their observed episode and outside every recorded change gap are excluded before choosing the next trigger that caps a possible catch-up. An old unsupported episode that ended the previous day cannot taint a current supported Daily candidate or shorten its catch-up window. An execution inside the unsupported episode remains `UNSUPPORTED`. If the execution or a supported nominal candidate lies in a recorded version-change observation gap, `AMBIGUOUS_SCHEDULE_VERSION` takes priority over unsupported semantics because the effective version is unknown. An unsupported episode within the possible late catch-up bound can still make a nearby execution unsupported; the bound is conservative and does not prove trigger provenance.
 
 ## Correlation matrix
 
@@ -89,7 +107,7 @@ An authenticated, Scheduler-origin invocation envelope could carry `scheduledFor
 
 ## Tests
 
-`OccurrenceCorrelationTest` covers live fixture daily/weekly masks, two independent weekday triggers, deterministic ID, explicit +08:00 resolution, observation-gap ambiguity, normal same-version match, window inside/outside, failed child, early and late ambiguity, manual run, retries, Runner-only and Scheduler-only evidence, unique combined evidence, unsupported one-time and offset-less definitions, missing history, incomplete child, and no `MISSED` state. `OccurrenceEvidenceRepositoryTest` checks Stage A version reading, unchanged `job_run` identity, and refusal to create an absent DB on the read path. Full Maven regression covers Stage A, Runner diagnostics, and history. No UI/API was changed, so browser behavior is outside this stage's changed surface.
+`OccurrenceCorrelationTest` covers live fixture daily/weekly masks, two independent weekday triggers, deterministic ID, explicit +08:00 resolution, observation-gap ambiguity, normal same-version match, window inside/outside, failed child, early and late ambiguity, manual run, retries, Runner-only and Scheduler-only evidence, unique combined evidence, unsupported one-time and offset-less definitions, historical unsupported scoping, relevant unsupported episodes, gap priority, missing history, incomplete child, and no `MISSED` state. `OccurrenceEvidenceRepositoryTest` checks Stage A version reading, unchanged `job_run` identity, actual task path from the joined `job` row, no database creation on the read path, and an integration-style weekly task with different real Scheduler and Runner identity namespaces. The latter rejects mismatched task paths, profile IDs, and Runner job IDs. Full Maven regression covers Stage A, Runner diagnostics, and history. No UI/API was changed, so Node/browser tests are not required for this code-only correction.
 
 ## Limitations
 

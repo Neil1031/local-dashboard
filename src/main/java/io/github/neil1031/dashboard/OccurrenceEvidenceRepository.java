@@ -44,9 +44,10 @@ public final class OccurrenceEvidenceRepository {
     public List<OccurrenceCorrelation.ExecutionEvidence> schedulerRuns(String jobId, Instant from, Instant to) {
         if (from == null || to == null || !from.isBefore(to)) throw new IllegalArgumentException("Invalid range");
         try (Connection db = open(); PreparedStatement sql = db.prepareStatement("""
-                SELECT id, job_id, observed_run_at, outcome FROM job_run
-                WHERE job_id = ? AND observed_run_at >= ? AND observed_run_at < ?
-                ORDER BY observed_run_at, id LIMIT 1001
+                SELECT r.id, r.job_id, j.task_path, j.task_name, r.observed_run_at, r.outcome
+                FROM job_run r JOIN job j ON j.id = r.job_id
+                WHERE r.job_id = ? AND r.observed_run_at >= ? AND r.observed_run_at < ?
+                ORDER BY r.observed_run_at, r.id LIMIT 1001
                 """)) {
             sql.setString(1, jobId);
             sql.setString(2, UTC.format(from));
@@ -54,10 +55,11 @@ public final class OccurrenceEvidenceRepository {
             List<OccurrenceCorrelation.ExecutionEvidence> found = new ArrayList<>();
             try (ResultSet rows = sql.executeQuery()) {
                 while (rows.next()) found.add(new OccurrenceCorrelation.ExecutionEvidence("job_run:" + rows.getLong(1),
-                        rows.getString(2), Instant.parse(rows.getString(3)),
-                        "FAILED".equals(rows.getString(4)) ? OccurrenceCorrelation.ExecutionOutcome.EXECUTED_FAILED
+                        rows.getString(2), rows.getString(3) + rows.getString(4), null, null, null,
+                        Instant.parse(rows.getString(5)),
+                        "FAILED".equals(rows.getString(6)) ? OccurrenceCorrelation.ExecutionOutcome.EXECUTED_FAILED
                                 : OccurrenceCorrelation.ExecutionOutcome.EXECUTED_SUCCESS,
-                        OccurrenceCorrelation.Source.SCHEDULER, rows.getString(2), null));
+                        OccurrenceCorrelation.Source.SCHEDULER));
             }
             if (found.size() > 1000) throw new IllegalStateException("Execution diagnostic limit exceeded");
             return List.copyOf(found);
