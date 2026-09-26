@@ -56,11 +56,27 @@ public class JobNormalizer {
         else if (lastStatus == Status.FAILED) status = Status.FAILED;
         else status = Status.READY;
         // READY remains READY even after a successful last run. No execution-window inference in Stage 1.
-        String id = Base64.getUrlEncoder().withoutPadding().encodeToString(
-                (path + name).toLowerCase(Locale.ROOT).getBytes(StandardCharsets.UTF_8));
+        String id = canonicalId(path, name);
         return new Job(id, name, path, raw.path("Description").asText(""), enabled, state,
                 status, lastStatus, null, last, next, null, result, text,
                 "WINDOWS_TASK_SCHEDULER", raw.path("Triggers"), raw.deepCopy(), List.copyOf(warnings));
+    }
+
+    /** Shared identity rule for collector rows and trusted full Scheduler task mappings. */
+    public static String canonicalId(String taskPath, String taskName) {
+        if (taskPath == null || !taskPath.startsWith("\\") || !taskPath.endsWith("\\")
+                || taskName == null || taskName.isBlank() || taskName.indexOf('\\') >= 0)
+            throw new IllegalArgumentException("Invalid Scheduler task identity");
+        return Base64.getUrlEncoder().withoutPadding().encodeToString(
+                (taskPath + taskName).toLowerCase(Locale.ROOT).getBytes(StandardCharsets.UTF_8));
+    }
+
+    public static String canonicalIdFromFullTask(String schedulerTask) {
+        if (schedulerTask == null) throw new IllegalArgumentException("Missing Scheduler task identity");
+        int separator = schedulerTask.lastIndexOf('\\');
+        if (separator < 0 || separator == schedulerTask.length() - 1)
+            throw new IllegalArgumentException("Invalid Scheduler task identity");
+        return canonicalId(schedulerTask.substring(0, separator + 1), schedulerTask.substring(separator + 1));
     }
 
     private static String state(String value) {
