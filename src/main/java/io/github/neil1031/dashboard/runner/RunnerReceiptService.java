@@ -7,6 +7,8 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -32,13 +34,16 @@ public class RunnerReceiptService {
                             Boolean childStarted, Integer childExitCode, Integer runnerExitCode, String runnerOutcome,
                             String receiptCompleteness, String source, String reason,
                             List<String> phases, List<String> warnings) {}
-    public record JobExecutions(String schedulerTask, String profileId, List<Execution> executions,
+    public record JobExecutions(String schedulerTask, String profileId, String jobId, String profileStatus,
+                                String coverageState, String latestEvidenceAt, List<Execution> executions,
                                 List<String> warnings) {}
-    public record Response(String status, List<JobExecutions> jobs, List<String> warnings) {}
+    public record Roots(String primary, String fallback) {}
+    public record Response(String status, String configStatus, Roots roots,
+                           List<JobExecutions> jobs, List<String> warnings) {}
 
     public Response recent() {
         if (properties.configPath() == null || properties.configPath().isBlank())
-            return new Response("NOT_CONFIGURED", List.of(), List.of());
+            return new Response("NOT_CONFIGURED", "NOT_CONFIGURED", new Roots("NOT_CONFIGURED", "NOT_CONFIGURED"), List.of(), List.of());
         final RunnerConfig config;
         final Path configPath;
         try {
@@ -47,7 +52,7 @@ public class RunnerReceiptService {
                 throw new IOException("Runner config path is unavailable");
             config = RunnerConfig.load(configPath);
         } catch (Exception invalid) {
-            return new Response("UNAVAILABLE", List.of(), List.of("Runner config unavailable or invalid"));
+            return new Response("UNAVAILABLE", "UNAVAILABLE", new Roots("NOT_CONFIGURED", "NOT_CONFIGURED"), List.of(), List.of("Runner config unavailable or invalid"));
         }
         List<Path> roots = new ArrayList<>();
         try {
@@ -56,8 +61,9 @@ public class RunnerReceiptService {
                     ? Path.of(System.getProperty("user.home"), ".local-dashboard", "runner-fallback")
                     : configPath.getParent().resolve(config.fallbackDirectory()).normalize());
         } catch (RuntimeException invalid) {
-            return new Response("UNAVAILABLE", List.of(), List.of("Runner receipt roots invalid"));
+            return new Response("UNAVAILABLE", "CONFIGURED", new Roots("INVALID", "INVALID"), List.of(), List.of("Runner receipt roots invalid"));
         }
+        Roots rootStatus = new Roots(rootStatus(roots.get(0)), rootStatus(roots.get(1)));
         List<JobExecutions> jobs = new ArrayList<>();
         List<String> warnings = new ArrayList<>();
         Set<String> mappedTasks = new HashSet<>();
@@ -74,22 +80,36 @@ public class RunnerReceiptService {
             }
             RunnerConfig.Profile profile = config.profiles().get(mapping.profileId());
             if (profile == null) {
-                jobs.add(new JobExecutions(mapping.schedulerTask(), mapping.profileId(), List.of(),
+                jobs.add(new JobExecutions(mapping.schedulerTask(), mapping.profileId(), null, "MISSING",
+                        "MAPPED_PROFILE_MISSING", null, List.of(),
                         List.of("Runner profile is absent from trusted config")));
                 continue;
             }
             JobExecutions result = profileResults.computeIfAbsent(mapping.profileId(), unused ->
-                    scan(mapping.schedulerTask(), mapping.profileId(), profile.jobId(), roots));
-            jobs.add(new JobExecutions(mapping.schedulerTask(), mapping.profileId(), result.executions(), result.warnings()));
+                    scan(mapping.schedulerTask(), mapping.profileId(), profile.jobId(), roots, rootStatus));
+            jobs.add(new JobExecutions(mapping.schedulerTask(), mapping.profileId(), profile.jobId(), "AVAILABLE",
+                    result.coverageState(), result.latestEvidenceAt(), result.executions(), result.warnings()));
         }
-        return new Response("OK", List.copyOf(jobs), List.copyOf(warnings));
+        return new Response("OK", "CONFIGURED", rootStatus, List.copyOf(jobs), List.copyOf(warnings));
     }
 
-    private JobExecutions scan(String task, String profileId, String jobId, List<Path> roots) {
+    private static String rootStatus(Path root) {
+        try {
+            for (Path part = root.toAbsolutePath(); part != null; part = part.getParent())
+                if (Files.isSymbolicLink(part)) return "UNSAFE";
+            if (!Files.readAttributes(root, BasicFileAttributes.class, LinkOption.NOFOLLOW_LINKS).isDirectory()) return "INVALID";
+            try (DirectoryStream<Path> ignored = Files.newDirectoryStream(root)) { return "AVAILABLE"; }
+        } catch (NoSuchFileException missing) { return "NOT_CREATED_YET";
+        } catch (IOException | SecurityException unavailable) { return "UNREADABLE"; }
+    }
+
+    private JobExecutions scan(String task, String profileId, String jobId, List<Path> roots, Roots rootStatus) {
         Map<String, Evidence> grouped = new HashMap<>();
         List<String> warnings = new ArrayList<>();
         for (int index = 0; index < roots.size(); index++) {
             Path root = roots.get(index);
+            String status = index == 0 ? rootStatus.primary() : rootStatus.fallback();
+            if (!status.equals("AVAILABLE")) continue;
             try {
                 if (!Files.exists(root, LinkOption.NOFOLLOW_LINKS)) continue;
                 if (!Files.isDirectory(root, LinkOption.NOFOLLOW_LINKS)) {
@@ -126,7 +146,13 @@ public class RunnerReceiptService {
                 .sorted(Comparator.comparing((Execution execution) -> Instant.parse(execution.startedAt())).reversed()
                         .thenComparing(Execution::executionId, Comparator.reverseOrder()))
                 .limit(RECENT_LIMIT).toList();
-        return new JobExecutions(task, profileId, executions, List.copyOf(warnings));
+        boolean rootsUsable = List.of(rootStatus.primary(), rootStatus.fallback()).stream()
+                .allMatch(status -> status.equals("AVAILABLE") || status.equals("NOT_CREATED_YET"));
+        String coverage = executions.isEmpty()
+                ? rootsUsable ? "MAPPED_NO_RECEIPT" : "RUNNER_UNAVAILABLE"
+                : "RUNNER_EVIDENCE_AVAILABLE";
+        return new JobExecutions(task, profileId, jobId, "AVAILABLE", coverage,
+                executions.isEmpty() ? null : executions.getFirst().startedAt(), executions, List.copyOf(warnings));
     }
 
     private static final class Evidence {

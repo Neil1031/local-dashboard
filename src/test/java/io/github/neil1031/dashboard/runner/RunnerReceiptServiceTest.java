@@ -156,4 +156,55 @@ class RunnerReceiptServiceTest {
         assertThat(result.warnings()).hasSize(8);
         assertThat(Files.readString(unknownDirectory.resolve("03-future.json"))).isEqualTo("{}");
     }
+
+    @Test void diagnosticsDistinguishConfigurationRootsAndCoverage() throws Exception {
+        var absent = new RunnerReceiptService(new RunnerReceiptProperties(null, List.of())).recent();
+        assertThat(absent.configStatus()).isEqualTo("NOT_CONFIGURED");
+        assertThat(absent.roots().primary()).isEqualTo("NOT_CONFIGURED");
+        var invalid = service(temp.resolve("missing.json")).recent();
+        assertThat(invalid.configStatus()).isEqualTo("UNAVAILABLE");
+        assertThat(invalid.toString()).doesNotContain(temp.toString());
+
+        Path config = config();
+        var empty = job(service(config));
+        assertThat(empty.coverageState()).isEqualTo("MAPPED_NO_RECEIPT");
+        assertThat(service(config).recent().roots().primary()).isEqualTo("NOT_CREATED_YET");
+        assertThat(empty.latestEvidenceAt()).isNull();
+        String id = id(1);
+        write(temp.resolve("fallback"), id, receipt(id, Phase.STARTED, Outcome.UNKNOWN, 0));
+        var result = service(config).recent();
+        assertThat(result.roots().fallback()).isEqualTo("AVAILABLE");
+        assertThat(result.jobs().getFirst().coverageState()).isEqualTo("RUNNER_EVIDENCE_AVAILABLE");
+        assertThat(result.jobs().getFirst().latestEvidenceAt()).isEqualTo(START);
+        assertThat(result.toString()).doesNotContain(temp.toString(), "child.exe");
+        String json = RunnerConfig.JSON.writeValueAsString(result);
+        assertThat(json).doesNotContain(temp.toString(), "child.exe", "executable", "args", "workingDirectory");
+    }
+
+    @Test void missingProfileDuplicateMappingAndUnsafeRootAreExplicit() throws Exception {
+        Path config = config();
+        var mappings = List.of(new RunnerReceiptProperties.Mapping(TASK, "absent"),
+                new RunnerReceiptProperties.Mapping(TASK, PROFILE));
+        var result = new RunnerReceiptService(new RunnerReceiptProperties(config.toString(), mappings)).recent();
+        assertThat(result.jobs()).hasSize(1);
+        assertThat(result.jobs().getFirst().coverageState()).isEqualTo("MAPPED_PROFILE_MISSING");
+        assertThat(result.warnings()).contains("Duplicate Scheduler mapping ignored");
+        Path link = temp.resolve("receipts");
+        try { Files.createSymbolicLink(link, temp.resolve("elsewhere")); }
+        catch (UnsupportedOperationException | java.nio.file.FileSystemException unsupported) { return; }
+        assertThat(service(config).recent().roots().primary()).isEqualTo("UNSAFE");
+        assertThat(service(config).recent().jobs().getFirst().coverageState()).isEqualTo("RUNNER_UNAVAILABLE");
+    }
+
+    @Test void sharedProfileMapsTwoTasksToTheSameEvidence() throws Exception {
+        Path config = config(); String id = id(1);
+        write(temp.resolve("receipts"), id, receipt(id, Phase.STARTED, Outcome.UNKNOWN, 0));
+        var result = new RunnerReceiptService(new RunnerReceiptProperties(config.toString(), List.of(
+                new RunnerReceiptProperties.Mapping(TASK, PROFILE),
+                new RunnerReceiptProperties.Mapping("\\Second-Task", PROFILE)))).recent();
+        assertThat(result.jobs()).hasSize(2);
+        assertThat(result.jobs().get(0).executions()).isSameAs(result.jobs().get(1).executions());
+        assertThat(result.jobs()).extracting(RunnerReceiptService.JobExecutions::coverageState)
+                .containsExactly("RUNNER_EVIDENCE_AVAILABLE", "RUNNER_EVIDENCE_AVAILABLE");
+    }
 }

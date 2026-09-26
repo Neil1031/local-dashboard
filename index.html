@@ -479,6 +479,10 @@
     .runner-entry { min-width: 0; border: 1px solid #ead7df; border-radius: 12px; padding: 9px 12px; }
     .runner-entry summary { cursor: pointer; overflow-wrap: anywhere; }
     .runner-entry .detail-grid { margin-top: 10px; }
+    .runner-coverage { margin: 12px 0; padding: 14px; border: 1px solid #ead7df; border-radius: 16px; background: #fff8fb; overflow-wrap: anywhere; }
+    .runner-coverage h2 { margin: 0 0 7px; font-size: 14px; }
+    .runner-coverage p { margin: 4px 0; font-size: 12px; }
+    .runner-coverage ul { margin: 6px 0 0; padding-left: 20px; font-size: 12px; }
 
     .drawer-card {
       width: min(500px, 100%);
@@ -741,6 +745,10 @@
       <ul id="collectionDetails"></ul>
     </section>
     <noscript><p class="collection-notice error">請啟用 JavaScript 以讀取 /api/jobs；目前沒有載入排程資料。</p></noscript>
+    <section class="runner-coverage" id="runnerCoverage" aria-labelledby="runnerCoverageTitle" role="status">
+      <h2 id="runnerCoverageTitle">Runner coverage</h2><div id="runnerCoverageBody">正在讀取 Runner 診斷…</div>
+      <div id="runnerDiagnosticsWarnings"></div>
+    </section>
     <section class="panel settings-panel" id="settingsPanel" aria-labelledby="settingsHeading" hidden>
       <h2 id="settingsHeading">顯示設定</h2>
       <p>只修改 Dashboard 顯示方式；Windows 排程名稱與設定保持原樣。</p>
@@ -820,6 +828,7 @@
       <section class="runner-execution" id="runnerExecution" aria-labelledby="runnerTitle" hidden>
         <h3 class="log-title" id="runnerTitle">Runner execution</h3>
         <div id="runnerSummary" role="status"></div>
+        <div class="detail-grid" id="runnerDiagnostics"></div>
         <ol class="runner-recent" id="runnerRecent"></ol>
       </section>
       <div id="currentWarnings"><div class="log-title">Warnings</div>

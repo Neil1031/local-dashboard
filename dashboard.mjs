@@ -180,6 +180,51 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
   let runnerSnapshot = null;
   let runnerRequest = null;
   let runnerJob = null, runnerRevision = 0;
+  const runnerKey = job => `${job.taskPath ?? ''}${originalJobName(job)}`;
+  const mappedRunner = job => runnerSnapshot?.jobs?.find(item => item?.schedulerTask === runnerKey(job));
+  function evidenceAge(value) {
+    if (!value) return '—';
+    const elapsed = Date.now() - new Date(value).getTime();
+    if (!Number.isFinite(elapsed)) return '—';
+    if (elapsed < 0) return '時間在未來';
+    if (elapsed < 3600000) return '未滿 1 小時前';
+    if (elapsed < 86400000) return `${Math.floor(elapsed / 3600000)} 小時前`;
+    return `${Math.floor(elapsed / 86400000)} 天前`;
+  }
+  function renderCoverage() {
+    const body = get('runnerCoverageBody');
+    const warnings = get('runnerDiagnosticsWarnings');
+    warnings.replaceChildren();
+    if (!snapshot || !runnerSnapshot) { body.textContent = '正在讀取 Runner 診斷…'; return; }
+    if (runnerSnapshot.status !== 'OK') {
+      body.textContent = runnerSnapshot.status === 'NOT_CONFIGURED'
+        ? 'Runner coverage unavailable · Runner config 尚未設定'
+        : 'Runner coverage unavailable · Runner config 或 receipt 來源無法讀取';
+    } else {
+      const rows = snapshot.jobs.map(job => mappedRunner(job));
+      const count = state => rows.filter(item => item?.coverageState === state).length;
+      const mapped = rows.filter(Boolean).length;
+      body.textContent = `Monitored jobs: ${rows.length} · Mapped: ${mapped} · With evidence: ${count('RUNNER_EVIDENCE_AVAILABLE')} · No receipt yet: ${count('MAPPED_NO_RECEIPT')} · Profile missing: ${count('MAPPED_PROFILE_MISSING')} · Runner unavailable: ${count('RUNNER_UNAVAILABLE')} · Unmapped: ${rows.length - mapped}`;
+      const roots = runnerSnapshot.roots ?? {};
+      const root = element('p', '', `Runner config: Configured · Primary receipts: ${roots.primary ?? 'Unknown'} · Fallback receipts: ${roots.fallback ?? 'Unknown'}`);
+      const readiness = element('p', '', `MISSED detection readiness: NOT_READY · ${rows.length - mapped} monitored jobs unmapped; expected schedule, nominal occurrence and grace period are not established here.`);
+      body.append(root, readiness);
+      if (runnerSnapshot.jobs.length) {
+        const mappings = document.createElement('details');
+        mappings.append(element('summary', '', `Runner mappings (${runnerSnapshot.jobs.length})`));
+        const list = element('ul', '');
+        list.append(...runnerSnapshot.jobs.map(item => element('li', '',
+          `${item.schedulerTask} → ${item.profileId} · Profile: ${item.profileStatus ?? 'Unknown'} · Job ID: ${displayValue(item.jobId)} · Latest evidence: ${formatDate(item.latestEvidenceAt)}`)));
+        mappings.append(list); body.append(mappings);
+      }
+    }
+    if (Array.isArray(runnerSnapshot.warnings) && runnerSnapshot.warnings.length) {
+      warnings.append(element('strong', '', 'Runner diagnostics warnings'));
+      const list = element('ul', '');
+      list.append(...runnerSnapshot.warnings.map(warning => element('li', '', warning)));
+      warnings.append(list);
+    }
+  }
   let activeFilter = 'all';
   let showLegacy = false;
   let todayExpanded = false, historyExpanded = false;
@@ -381,6 +426,8 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
     section.hidden = false;
     const summary = get('runnerSummary');
     const recent = get('runnerRecent');
+    const diagnostics = get('runnerDiagnostics');
+    diagnostics.replaceChildren();
     recent.replaceChildren();
     if (!runnerSnapshot) { summary.textContent = '正在讀取 Runner receipt…'; return; }
     if (runnerSnapshot.status === 'UNAVAILABLE') {
@@ -389,9 +436,20 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
     if (runnerSnapshot.status === 'NOT_CONFIGURED') {
       summary.textContent = 'Runner receipt 來源尚未設定'; return;
     }
-    const key = `${job.taskPath ?? ''}${originalJobName(job)}`;
-    const mapped = runnerSnapshot.jobs.find(item => item?.schedulerTask === key);
-    if (!mapped) { summary.textContent = '此排程尚未設定 Runner 對應'; return; }
+    const mapped = mappedRunner(job);
+    if (!mapped) { summary.textContent = 'Runner mapping: Not configured'; return; }
+    const fields = [
+      ['Mapping', 'Configured'], ['Runner profile', mapped.profileId],
+      ['Profile', mapped.profileStatus === 'MISSING' ? 'Missing' : 'Available'],
+      ['Job ID', mapped.jobId], ['Receipt source', `${runnerSnapshot.roots?.primary ?? 'Unknown'} / ${runnerSnapshot.roots?.fallback ?? 'Unknown'}`],
+      ['Coverage', mapped.coverageState], ['Latest evidence', formatDate(mapped.latestEvidenceAt)],
+      ['Evidence age', evidenceAge(mapped.latestEvidenceAt)]
+    ];
+    diagnostics.append(...fields.map(([title, value]) => {
+      const field = element('div', 'detail');
+      field.append(element('small', '', title), element('strong', '', value));
+      return field;
+    }));
     if (!Array.isArray(mapped.executions) || !Array.isArray(mapped.warnings)) {
       summary.textContent = 'Runner receipt 目前無法讀取'; return;
     }
@@ -434,20 +492,6 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
     renderMetadata(job, snapshot?.jobs ?? []);
     runnerJob = job;
     renderRunner(job);
-    if (!runnerRequest) {
-      const revision = runnerRevision;
-      runnerRequest = (async () => {
-        try {
-          const response = await fetchJobs('/api/runner/executions', { cache: 'no-store' });
-          const payload = await response.json();
-          if (!response.ok || !['OK', 'NOT_CONFIGURED', 'UNAVAILABLE'].includes(payload?.status)
-              || !Array.isArray(payload.jobs)) throw new Error('INVALID_RUNNER_RESPONSE');
-          if (revision === runnerRevision) runnerSnapshot = payload;
-        } catch { if (revision === runnerRevision) runnerSnapshot = { status: 'UNAVAILABLE', jobs: [] }; }
-        if (revision === runnerRevision && runnerJob && get('drawer').classList.contains('open')
-            && get('drawer').dataset.mode === 'current') renderRunner(runnerJob);
-      })();
-    }
     const details = [
       ['Current status', label(currentStatus(job))], ['Scheduler state', job.state],
       ['Enabled', job.enabled === true ? 'Yes' : job.enabled === false ? 'No' : null],
@@ -627,6 +671,10 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
       const name = element('span', 'job-text');
       const metadata = metadataFor(job);
       name.append(element('span', 'job-name', jobDisplayName(job)), element('span', 'job-sub', jobSubtitle(job)));
+      const coverage = mappedRunner(job)?.coverageState;
+      if (runnerSnapshot?.status === 'OK') name.append(element('span', 'job-sub',
+        coverage === 'RUNNER_EVIDENCE_AVAILABLE' ? 'Runner ✓' : coverage === 'MAPPED_NO_RECEIPT' ? 'Runner mapped'
+          : coverage === 'MAPPED_PROFILE_MISSING' ? 'Runner profile missing' : coverage === 'RUNNER_UNAVAILABLE' ? 'Runner unavailable' : 'Runner —'));
       if (metadata) name.append(element('span', 'job-description', metadata.description));
       main.append(icon, name);
       row.append(main);
@@ -717,6 +765,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
     runnerRequest = null;
     runnerJob = null;
     runnerRevision++;
+    renderCoverage();
     summary(null);
     renderRows();
     get('refreshBtn').disabled = true;
@@ -733,6 +782,20 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
       catch { throw new Error(response.ok ? 'INVALID_API_RESPONSE' : `HTTP ${response.status}`); }
       if (!response.ok) throw new Error([`HTTP ${response.status}`, payload?.code, payload?.message].filter(Boolean).join(' · '));
       snapshot = readSnapshot(payload);
+      const runnerRevisionAtRequest = runnerRevision;
+      runnerRequest = (async () => {
+        try {
+          const response = await fetchJobs('/api/runner/executions', { cache: 'no-store' });
+          const payload = await response.json();
+          if (!response.ok || !['OK', 'NOT_CONFIGURED', 'UNAVAILABLE'].includes(payload?.status)
+              || !Array.isArray(payload.jobs)) throw new Error('INVALID_RUNNER_RESPONSE');
+          if (runnerRevisionAtRequest === runnerRevision) runnerSnapshot = payload;
+        } catch { if (runnerRevisionAtRequest === runnerRevision) runnerSnapshot = { status: 'UNAVAILABLE', jobs: [], warnings: [] }; }
+        if (runnerRevisionAtRequest === runnerRevision) {
+          renderCoverage(); renderRows();
+          if (runnerJob && get('drawer').classList.contains('open') && get('drawer').dataset.mode === 'current') renderRunner(runnerJob);
+        }
+      })();
       renderSettingList();
       historyCurrentJobs = snapshot.jobs;
       historyRevision++;

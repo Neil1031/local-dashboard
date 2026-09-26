@@ -224,6 +224,8 @@ for (const scenario of ['offline', '503', 'ERROR', 'invalid-json', 'invalid-cont
   test(`${scenario} after success removes old rows/counts and recovers`, async () => {
     let count = 0;
     await page.route('**/api/**', async route => {
+      if (new URL(route.request().url()).pathname === '/api/runner/executions')
+        return route.fulfill({ contentType: 'application/json', body: JSON.stringify({ status: 'NOT_CONFIGURED', jobs: [], warnings: [] }) });
       count++;
       if (count !== 2) return route.fulfill({ contentType: 'application/json', body: JSON.stringify(snapshot([fixtureJob('READY', { lastRunStatus: 'SUCCESS' })])) });
       if (scenario === 'offline') return route.abort('connectionfailed');
@@ -432,19 +434,36 @@ test('Runner drawer shows five bounded executions, conservative evidence, safe t
     const pathname = new URL(route.request().url()).pathname;
     if (pathname === '/api/runner/executions') {
       runnerRequests.push(pathname);
-      return route.fulfill({ contentType: 'application/json', body: JSON.stringify({ status: 'OK', warnings: [], jobs: [
-        { schedulerTask: task, profileId: 'aistockhunter-accumulation-weekly', executions: Array.from({ length: 5 }, (_, i) => execution(i)), warnings: [] },
-        { schedulerTask: '\\InsiderTracker-Market', profileId: 'market', executions: [], warnings: [] }
+      return route.fulfill({ contentType: 'application/json', body: JSON.stringify({ status: 'OK', configStatus: 'CONFIGURED',
+        roots: { primary: 'AVAILABLE', fallback: 'NOT_CREATED_YET' },
+        warnings: ['<img src=x onerror=alert(1)> Invalid mapping ignored'], jobs: [
+        { schedulerTask: task, profileId: 'aistockhunter-accumulation-weekly', jobId: 'aistockhunter-accumulation-weekly',
+          profileStatus: 'AVAILABLE', coverageState: 'RUNNER_EVIDENCE_AVAILABLE', latestEvidenceAt: '2026-09-25T02:45:00Z',
+          executions: Array.from({ length: 5 }, (_, i) => execution(i)), warnings: [] },
+        { schedulerTask: '\\InsiderTracker-Market', profileId: 'market', jobId: 'market', profileStatus: 'AVAILABLE',
+          coverageState: 'MAPPED_NO_RECEIPT', latestEvidenceAt: null, executions: [], warnings: [] }
       ] }) });
     }
     return route.fulfill({ contentType: 'application/json', body: JSON.stringify(snapshot(jobs)) });
   });
   await settingsRoute();
   await page.goto(baseUrl); await ready();
+  await page.waitForFunction(() => document.getElementById('runnerCoverageBody').textContent.includes('With evidence: 1'));
+  assert.match(await page.locator('#runnerCoverageBody').innerText(), /Monitored jobs: 3.*Mapped: 2.*With evidence: 1.*No receipt yet: 1.*Unmapped: 1/);
+  assert.match(await page.locator('#runnerCoverageBody').innerText(), /MISSED detection readiness: NOT_READY/);
+  assert.match(await page.locator('#runnerDiagnosticsWarnings').innerText(), /Invalid mapping ignored/);
+  assert.equal(await page.locator('#runnerCoverage img').count(), 0);
+  await page.locator('#runnerCoverage details summary').click();
+  assert.match(await page.locator('#runnerCoverage details').innerText(), /AIStockHunter-Accumulation-Weekly-Check.*Profile: AVAILABLE.*Job ID: aistockhunter-accumulation-weekly/s);
+  assert.match(await page.locator('.job-row[data-job="mapped"]').innerText(), /Runner ✓/);
+  assert.match(await page.locator('.job-row[data-job="no-receipt"]').innerText(), /Runner mapped/);
+  assert.equal(await page.locator('.job-row[data-job="mapped"]').getAttribute('data-status'), 'READY');
   await page.locator('.job-row[data-job="mapped"]').click();
   await page.waitForFunction(() => document.getElementById('runnerSummary').textContent.includes('INCOMPLETE'));
   assert.equal(await page.locator('#runnerRecent > li').count(), 5);
   assert.match(await page.locator('#runnerSummary').innerText(), /INCOMPLETE/);
+  assert.match(await page.locator('#runnerDiagnostics').innerText(), /Latest evidence/);
+  assert.match(await page.locator('#runnerDiagnostics').innerText(), /Evidence age/);
   await page.locator('#closeDrawer').focus();
   await page.keyboard.press('Tab');
   assert.equal(await page.locator('#runnerRecent summary').first().evaluate(node => node === document.activeElement), true);
@@ -460,6 +479,6 @@ test('Runner drawer shows five bounded executions, conservative evidence, safe t
   assert.match(await page.locator('#runnerSummary').innerText(), /尚無 Runner 執行紀錄/);
   await page.keyboard.press('Escape');
   await page.locator('.job-row[data-job="unmapped"]').click();
-  assert.match(await page.locator('#runnerSummary').innerText(), /尚未設定 Runner 對應/);
+  assert.match(await page.locator('#runnerSummary').innerText(), /Runner mapping: Not configured/);
   assert.equal(runnerRequests.length, 1);
 });
