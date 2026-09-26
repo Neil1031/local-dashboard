@@ -41,7 +41,7 @@ class HistoryRepositoryTest {
         assertThat(database()).doesNotExist();
         repository.initialize();
         assertThat(database()).exists();
-        assertThat(number("PRAGMA user_version")).isEqualTo(1);
+        assertThat(number("PRAGMA user_version")).isEqualTo(2);
         assertThat(number("SELECT count(*) FROM job")).isZero();
         var job = normalizer.normalize(row());
         repository.observe(List.of(job), first);
@@ -90,7 +90,7 @@ class HistoryRepositoryTest {
         assertThat(prefix.jobs()).isEqualTo(exact.jobs());
         assertThat(repository.recentRuns(id, 10)).containsExactly(saved);
         assertThat(number("SELECT count(*) FROM job_run")).isEqualTo(1);
-        assertThat(number("PRAGMA user_version")).isEqualTo(1);
+        assertThat(number("PRAGMA user_version")).isEqualTo(2);
     }
 
     @Test void distinctExecutionsAndJobsRemainDistinctIncludingFailureAndDisabledHistory() throws Exception {
@@ -219,7 +219,7 @@ class HistoryRepositoryTest {
         assertThat(number("PRAGMA user_version")).isZero();
         assertThat(number("SELECT count(*) FROM sqlite_schema WHERE name NOT GLOB 'sqlite_*'")).isZero();
         repository().initialize();
-        assertThat(number("PRAGMA user_version")).isEqualTo(1);
+        assertThat(number("PRAGMA user_version")).isEqualTo(2);
     }
 
     @Test void unsupportedOrUnversionedExistingDatabaseFailsWithoutDeletingHistory() throws Exception {
@@ -238,7 +238,7 @@ class HistoryRepositoryTest {
         execute("ALTER TABLE job_run RENAME TO original_job_run");
         execute("CREATE TABLE job_run AS SELECT * FROM original_job_run");
         assertThatThrownBy(() -> repository().initialize()).isInstanceOf(HistoryPersistenceException.class);
-        assertThat(number("PRAGMA user_version")).isEqualTo(1);
+        assertThat(number("PRAGMA user_version")).isEqualTo(2);
         assertThat(number("SELECT count(*) FROM sqlite_schema WHERE name = 'original_job_run'")).isEqualTo(1);
     }
 

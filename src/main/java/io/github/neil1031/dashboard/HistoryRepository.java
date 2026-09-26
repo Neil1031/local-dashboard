@@ -20,7 +20,7 @@ import static io.github.neil1031.dashboard.Models.*;
 /** Short-lived JDBC connections; database constraints coordinate independent instances. */
 @Repository
 public class HistoryRepository {
-    private static final int SCHEMA_VERSION = 1;
+    private static final int SCHEMA_VERSION = 2;
     // Fixed fractional width keeps UTC text ordering independent of source offset/precision.
     private static final DateTimeFormatter UTC = new DateTimeFormatterBuilder().appendInstant(9).toFormatter();
     private final HistoryProperties properties;
@@ -81,7 +81,14 @@ public class HistoryRepository {
                 }
                 statement.execute("PRAGMA user_version = 1");
             }
-            // Future versions append sequential migrations inside this same transaction.
+            if (version < 2) {
+                try (var input = new ClassPathResource("db/migration/V2__schedule_snapshots.sql").getInputStream()) {
+                    for (String sql : new String(input.readAllBytes(), StandardCharsets.UTF_8).split(";")) {
+                        if (!sql.isBlank()) statement.execute(sql);
+                    }
+                }
+                statement.execute("PRAGMA user_version = 2");
+            }
             // Preparing UPSERT also verifies the required columns and UNIQUE conflict target.
             try (var ignored = connection.prepareStatement(RUN_UPSERT);
                  var ignoredJob = connection.prepareStatement(JOB_UPSERT)) { /* fail explicitly on schema damage */ }

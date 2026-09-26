@@ -65,6 +65,12 @@ class PowerShellCollectorTest {
         assertThat(snapshot.path("tasks")).hasSize(2);
         assertThat(snapshot.path("tasks").get(0).path("TaskName").asText()).isEqualTo("報告 [daily] '; Write-Error injected; '");
         assertThat(snapshot.path("tasks").get(0).path("Triggers").get(0).path("DaysInterval").asInt()).isEqualTo(1);
+        assertThat(snapshot.path("windowsTimezoneId").asText()).isNotBlank();
+        assertThat(snapshot.path("timezoneObservedAt").asText()).isEqualTo(snapshot.path("collectedAt").asText());
+        assertThat(snapshot.path("tasks").get(0).path("StartWhenAvailable").isBoolean()).isTrue();
+        assertThat(snapshot.path("tasks").get(0).path("WakeToRun").isBoolean()).isTrue();
+        assertThat(snapshot.path("tasks").get(0).path("RunOnlyIfIdle").isBoolean()).isTrue();
+        assertThat(snapshot.path("tasks").get(0).path("RunOnlyIfNetworkAvailable").isBoolean()).isTrue();
         assertThat(snapshot.path("errors").get(0).path("code").asText()).isEqualTo("PERMISSION_DENIED");
         assertThat(snapshot.path("tasks").get(1).path("LastTaskResult").isNull()).isTrue();
         assertThat(new JobNormalizer().normalize(snapshot.path("tasks").get(0)).status()).isEqualTo(Models.Status.FAILED);

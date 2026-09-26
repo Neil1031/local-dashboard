@@ -1,0 +1,10 @@
+{
+  "windowsTimezoneId": "Taipei Standard Time",
+  "tasks": [
+    {"TaskName":"InsiderTracker-Market","TaskPath":"\\","Enabled":true,"StartWhenAvailable":true,"Triggers":[{"type":"MSFT_TaskDailyTrigger","StartBoundary":"2026-09-19T06:30:00+08:00","DaysInterval":1}]},
+    {"TaskName":"InsiderTracker-SyncImport","TaskPath":"\\","Enabled":true,"StartWhenAvailable":true,"Triggers":[{"type":"MSFT_TaskDailyTrigger","StartBoundary":"2026-09-19T10:40:00+08:00","DaysInterval":1}]},
+    {"TaskName":"InsiderTracker-SEC","TaskPath":"\\","Enabled":true,"StartWhenAvailable":true,"Triggers":[{"type":"MSFT_TaskDailyTrigger","StartBoundary":"2026-09-19T11:15:00+08:00","DaysInterval":1}]},
+    {"TaskName":"AIStockHunter-UnexplainedVolume-Daily","TaskPath":"\\","Enabled":true,"StartWhenAvailable":true,"Triggers":[{"type":"MSFT_TaskWeeklyTrigger","StartBoundary":"2026-09-21T14:30:00+08:00","DaysOfWeek":62,"WeeksInterval":1},{"type":"MSFT_TaskWeeklyTrigger","StartBoundary":"2026-09-21T17:00:00+08:00","DaysOfWeek":62,"WeeksInterval":1}]},
+    {"TaskName":"AIStockHunter-Accumulation-Weekly-Check","TaskPath":"\\","Enabled":true,"StartWhenAvailable":true,"Triggers":[{"type":"MSFT_TaskWeeklyTrigger","StartBoundary":"2026-09-18T22:00:00+08:00","DaysOfWeek":32,"WeeksInterval":1}]}
+  ]
+}
