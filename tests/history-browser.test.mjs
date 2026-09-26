@@ -24,7 +24,7 @@ async function mock({ jobs = current(), histories = fixture(), historyStatus = 2
   const requests = [];
   await page.route('**/api/**', async route => {
     const url = new URL(route.request().url());
-    requests.push(url);
+    if (url.pathname !== '/api/runner/executions') requests.push(url);
     assert.equal(route.request().method(), 'GET');
     if (url.pathname === '/api/jobs') return route.fulfill({ contentType: 'application/json', body: JSON.stringify({ collectionStatus: 'OK', collectedAt: '2026-09-21T03:00:00Z', jobs, errors: [], unmatchedIncludes: [] }) });
     if (url.pathname === '/api/runner/executions') return route.fulfill({ contentType: 'application/json',
