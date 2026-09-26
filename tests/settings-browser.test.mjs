@@ -84,6 +84,11 @@ test('settings save applies cached snapshot, remains safe, and rejects stale tab
     await pageA.locator('#resetSettings').click();
     await assertEventually(async () => assert.equal(await pageA.locator('.job-row[data-job="id-2"]').count(), 1));
     assert.equal(Object.hasOwn(overrides, 'My-New-Task'), false);
+    await pageA.locator('#settingsJobs button').filter({ hasText: 'AIStockHunter-Accumulation-Weekly-Check' }).click();
+    await pageA.locator('#settingDisplayName').fill('每週新名稱');
+    await pageA.locator('#settingsForm button[type=submit]').click();
+    await assertEventually(async () => assert.equal(overrides['AIStockHunter-Accumulation-Weekly-Check']?.displayName, '每週新名稱'));
+    assert.equal(Object.hasOwn(overrides['AIStockHunter-Accumulation-Weekly-Check'], 'dependsOn'), false);
     pageA.once('dialog', dialog => dialog.accept());
     await pageA.locator('#resetAllSettings').click();
     await assertEventually(async () => assert.match(await pageA.locator('#settingsMessage').innerText(), /已儲存/));

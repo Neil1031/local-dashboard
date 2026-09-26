@@ -218,6 +218,9 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
   }
   function dependencyRow(dependency = { task: '', kind: 'data' }) {
     const row = element('div', 'dependency-row');
+    if (dependency.note) row.dataset.note = dependency.note;
+    row.dataset.originalTask = dependency.task;
+    row.dataset.originalKind = dependency.kind;
     const task = document.createElement('input');
     task.value = dependency.task;
     task.maxLength = 200;
@@ -745,7 +748,11 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
     if (!selectedSetting) return;
     const order = Number(get('settingOrder').value);
     if (!Number.isInteger(order) || order < 0 || order > 10000) { settingsMessage('排序須為 0–10000 的整數。', true); return; }
-    const dependencies = [...get('settingDependencies').children].map(row => ({ task: row.querySelector('input').value.trim(), kind: row.querySelector('select').value }));
+    const dependencies = [...get('settingDependencies').children].map(row => {
+      const task = row.querySelector('input').value.trim(), kind = row.querySelector('select').value;
+      return { task, kind, ...(row.dataset.note && task === row.dataset.originalTask && kind === row.dataset.originalKind
+        ? { note: row.dataset.note } : {}) };
+    });
     const fields = { displayName: get('settingDisplayName').value.trim(), market: get('settingMarket').value,
       description: get('settingDescription').value, order, hidden: get('settingHidden').checked, dependsOn: dependencies };
     const baseline = (Object.hasOwn(jobMetadata, selectedSetting) ? jobMetadata[selectedSetting] : null) ?? (selectedSetting.startsWith(datedPrefix) && datedTaskDate({ name: selectedSetting })
