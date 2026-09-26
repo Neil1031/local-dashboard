@@ -682,6 +682,22 @@
     .fold-toggle:focus-visible, .workflow-card:focus-visible { outline: 3px solid var(--pink-dark); outline-offset: 2px; }
     @media (max-width: 700px) { .workflow-markets { grid-template-columns: 1fr; } }
     @media (max-width: 375px) { .workflow-card { align-items: flex-start; flex-direction: column; } }
+    .settings-panel { margin: 18px 0; padding: 20px; }
+    .settings-grid { display: grid; grid-template-columns: minmax(180px, 1fr) minmax(0, 2fr); gap: 18px; }
+    .settings-list { display: grid; gap: 5px; align-content: start; max-height: 60vh; overflow: auto; }
+    .settings-list button { text-align: left; overflow-wrap: anywhere; border: 1px solid var(--border); border-radius: 10px; background: white; padding: 9px; cursor: pointer; }
+    .settings-list button[aria-current="true"] { background: var(--panel-strong); border-color: var(--pink); }
+    .settings-form { display: grid; gap: 12px; min-width: 0; }
+    .settings-form label { display: grid; gap: 5px; font-size: 13px; font-weight: 700; }
+    .settings-form input:not([type="checkbox"]), .settings-form textarea, .settings-form select { width: 100%; min-width: 0; padding: 9px; border: 1px solid var(--border); border-radius: 9px; background: #fff; color: var(--text); font: inherit; }
+    .settings-form textarea { min-height: 70px; resize: vertical; }
+    .settings-actions, .dependency-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .dependency-row select { flex: 0 0 130px; }
+    .dependency-row input { flex: 1 1 160px; }
+    .settings-actions button, .dependency-row button { border: 1px solid var(--border); border-radius: 10px; background: #fff; padding: 9px 12px; cursor: pointer; color: var(--text); }
+    .settings-actions button:focus-visible, .dependency-row button:focus-visible, .settings-list button:focus-visible { outline: 3px solid var(--pink-dark); }
+    .settings-message { min-height: 1.5em; overflow-wrap: anywhere; }
+    @media (max-width: 600px) { .settings-grid { grid-template-columns: 1fr; } .settings-list { max-height: 170px; } }
   </style>
 </head>
 <body>
@@ -693,6 +709,7 @@
       </div>
       <div class="toolbar">
         <span class="pill">Last refresh <strong id="refreshTime">—</strong></span>
+        <button class="refresh" id="settingsToggle" type="button" aria-expanded="false" aria-controls="settingsPanel">⚙ 顯示設定</button>
         <button class="refresh" id="refreshBtn" type="button" disabled>↻ Refreshing…</button>
       </div>
     </header>
@@ -719,6 +736,27 @@
       <ul id="collectionDetails"></ul>
     </section>
     <noscript><p class="collection-notice error">請啟用 JavaScript 以讀取 /api/jobs；目前沒有載入排程資料。</p></noscript>
+    <section class="panel settings-panel" id="settingsPanel" aria-labelledby="settingsHeading" hidden>
+      <h2 id="settingsHeading">顯示設定</h2>
+      <p>只修改 Dashboard 顯示方式；Windows 排程名稱與設定保持原樣。</p>
+      <p class="settings-message" id="settingsMessage" role="status" aria-live="polite"></p>
+      <div class="settings-grid">
+        <div class="settings-list" id="settingsJobs" aria-label="選擇工作"></div>
+        <datalist id="knownSettingJobs"></datalist>
+        <form class="settings-form" id="settingsForm" hidden>
+          <label>Windows 排程名稱（唯讀）<input id="settingRawName" readonly></label>
+          <label>中文顯示名稱<input id="settingDisplayName" maxlength="100" required></label>
+          <label>市場<select id="settingMarket"><option>台股</option><option>美股</option><option>其他</option></select></label>
+          <label>中文用途說明<textarea id="settingDescription" maxlength="1000"></textarea></label>
+          <label>排序（0–10000）<input id="settingOrder" type="number" min="0" max="10000" step="1" required></label>
+          <label><span><input id="settingHidden" type="checkbox"> 隱藏於 Dashboard</span></label>
+          <div><strong>前置關係</strong><div id="settingDependencies"></div><button id="addDependency" type="button">＋ 新增前置</button></div>
+          <div class="settings-actions"><button type="submit">儲存</button><button id="cancelSettings" type="button">取消</button><button id="resetSettings" type="button">恢復預設值</button></div>
+        </form>
+      </div>
+      <div class="settings-actions"><button id="resetAllSettings" type="button">全部恢復預設值</button></div>
+    </section>
+    <p class="collection-notice warning" id="settingsWarning" role="alert" hidden>自訂顯示設定無法載入，已使用預設值</p>
     <section class="panel">
       <div class="panel-head">
         <div class="tabs" role="tablist" aria-label="Dashboard views">

@@ -4,6 +4,7 @@ Windows Task Scheduler 的本機唯讀觀測服務。目前另提供 **Stage 5A 
 `index.html` 保留原有粉色 UI，透過 `dashboard.mjs` 讀取真實 `/api/jobs`；runtime 不含 mock scheduler data。
 UI job metadata、台股／美股分組、排序與舊版顯示切換見 [Stage UX-1](docs/STAGE-UX-1.md)。
 流程概覽、日期型工作收納與 Today 列表數量語意見 [Stage UX-2](docs/STAGE-UX-2.md)。
+可編輯的 Dashboard 顯示設定、外部持久化與衝突處理見 [Stage UX-3](docs/STAGE-UX-3.md)。
 
 ## 環境與啟動
 

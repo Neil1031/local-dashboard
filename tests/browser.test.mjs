@@ -20,6 +20,10 @@ const fixtureJob = (status = 'READY', extra = {}) => ({
 });
 const snapshot = (jobs = [], extra = {}) => ({ collectionStatus: 'OK', collectedAt: '2026-09-21T01:23:45Z', jobs, errors: [], unmatchedIncludes: [], ...extra });
 const rows = () => page.locator('.job-row');
+async function settingsRoute() {
+  await page.route('**/api/settings/job-metadata', route => route.fulfill({ contentType: 'application/json',
+    body: JSON.stringify({ version: 1, revision: '0', overrides: {}, warning: null }) }));
+}
 async function ready() { await page.waitForFunction(() => !document.getElementById('refreshBtn').disabled); }
 async function mock(payload, status = 200) {
   const requests = [];
@@ -31,6 +35,7 @@ async function mock(payload, status = 200) {
     }) });
     return route.fulfill({ status, contentType: 'application/json', body: JSON.stringify(payload) });
   });
+  await settingsRoute();
   await page.goto(baseUrl);
   await ready();
   return requests;
@@ -72,6 +77,7 @@ test('initial loading, one GET, refresh coalescing, new response, no detail coll
       fixtureJob(count === 1 ? 'READY' : 'FAILED', { lastRunStatus: count === 1 ? 'SUCCESS' : 'FAILED' })
     ], { collectedAt: count === 1 ? '2026-09-21T01:23:45Z' : '2026-09-21T02:24:46Z' })) });
   });
+  await settingsRoute();
   await page.goto(baseUrl);
   await page.waitForFunction(() => document.getElementById('refreshBtn').disabled);
   assert.equal(await rows().count(), 0);
@@ -174,6 +180,7 @@ for (const offline of [true, false]) {
     await page.route('**/api/**', route => offline ? route.abort('connectionfailed') : route.fulfill({
       status: 503, contentType: 'application/json', body: JSON.stringify({ collectionStatus: 'ERROR', code: 'COLLECTOR_TIMEOUT' })
     }));
+    await settingsRoute();
     await page.goto(baseUrl);
     await ready();
     assert.equal(await rows().count(), 0);
@@ -218,6 +225,7 @@ for (const scenario of ['offline', '503', 'ERROR', 'invalid-json', 'invalid-cont
       return route.fulfill({ status: scenario === '503' ? 503 : 200, contentType: 'application/json', body:
         scenario === 'invalid-json' ? '<html>Proxy error</html>' : JSON.stringify(scenario === 'invalid-contract' ? {} : { collectionStatus: 'ERROR', code: 'COLLECTOR_TIMEOUT', message: 'Timed out' }) });
     });
+    await settingsRoute();
     await page.goto(baseUrl);
     await ready();
     const lastRefresh = await page.locator('#refreshTime').innerText();

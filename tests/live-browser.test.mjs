@@ -64,7 +64,7 @@ test('packaged UI renders the actual list response and refreshes once', { skip: 
       assert.equal(values['Last run'], localDate);
       await page.keyboard.press('Escape');
     }
-    assert.equal(requests.length, 1);
+    assert.equal(requests.filter(request => new URL(request.url).pathname === '/api/jobs').length, 1);
     const artifactDir = fileURLToPath(new URL('../target/stage-2/', import.meta.url));
     await mkdir(artifactDir, { recursive: true });
     await page.screenshot({ path: `${artifactDir}/live-desktop.png`, fullPage: true });
@@ -76,8 +76,8 @@ test('packaged UI renders the actual list response and refreshes once', { skip: 
     const refreshed = await (await refreshResponse).json();
     await page.waitForFunction(() => !document.getElementById('refreshBtn').disabled);
     assert.notEqual(refreshed.collectedAt, snapshot.collectedAt);
-    assert.equal(requests.length, 2);
-    assert.ok(requests.every(request => request.method === 'GET' && new URL(request.url).pathname === '/api/jobs'));
+    assert.equal(requests.filter(request => new URL(request.url).pathname === '/api/jobs').length, 2);
+    assert.ok(requests.every(request => request.method === 'GET' && ['/api/jobs', '/api/settings/job-metadata'].includes(new URL(request.url).pathname)));
     assert.deepEqual(errors, []);
     await writeFile(`${artifactDir}/live-ui.json`, JSON.stringify({ verifiedAt: new Date().toISOString(), requests, snapshot, refreshed, errors }, null, 2));
   } finally { await browser.close(); }

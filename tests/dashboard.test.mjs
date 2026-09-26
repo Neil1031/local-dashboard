@@ -1,7 +1,42 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { currentStatus, lastStatus, summarize, filterJobs, formatDate, displayValue, jobDisplayName, jobSubtitle, readSnapshot, jobMetadata, metadataFor, jobMarket, orderedJobs, visibleJobs, downstreamJobs, datedTaskDate, foldDatedJobs, viewCounts } from '../dashboard.mjs';
+import { currentStatus, lastStatus, summarize, filterJobs, formatDate, displayValue, jobDisplayName, jobSubtitle, readSnapshot, jobMetadata, metadataFor, jobMarket, orderedJobs, visibleJobs, downstreamJobs, datedTaskDate, foldDatedJobs, viewCounts, setMetadataOverrides, effectiveMetadataWithoutExactUserOverride } from '../dashboard.mjs';
+
+test('partial user overrides preserve defaults and exact beats pattern', () => {
+  const dated = { id: 'dated-id', name: 'AIStockHunter-Accumulation-Check-2026-09-22' };
+  try {
+    setMetadataOverrides({
+      'AIStockHunter-Accumulation-Check-*': { displayName: '共用名稱', market: '美股' },
+      'AIStockHunter-Accumulation-Check-2026-09-22': { displayName: '指定名稱' },
+      'My-New-Task': { displayName: '新工作', market: '台股', order: 4, hidden: true }
+    });
+    assert.equal(metadataFor(dated).displayName, '指定名稱');
+    assert.equal(metadataFor(dated).market, '美股');
+    assert.deepEqual(metadataFor(dated).dependsOn, jobMetadata['AIStockHunter-Accumulation-Check-*'].dependsOn);
+    assert.equal(metadataFor({ name: 'AIStockHunter-Accumulation-Check-2026-09-23' }).displayName, '共用名稱');
+    assert.equal(jobDisplayName({ name: 'My-New-Task' }), '新工作');
+    assert.deepEqual(visibleJobs([{ name: 'My-New-Task' }]), []);
+  } finally { setMetadataOverrides({}); }
+});
+
+test('lower-precedence dated baseline excludes exact user fields and includes pattern user fields', () => {
+  const exact = 'AIStockHunter-Accumulation-Check-2026-09-22';
+  try {
+    setMetadataOverrides({
+      'AIStockHunter-Accumulation-Check-*': { displayName: '共用名稱', market: '美股' },
+      [exact]: { displayName: '特定日期' }
+    });
+    assert.equal(metadataFor({ name: exact }).displayName, '特定日期');
+    const baseline = effectiveMetadataWithoutExactUserOverride(exact);
+    assert.equal(baseline.displayName, '共用名稱');
+    assert.equal(baseline.market, '美股');
+    assert.deepEqual(baseline.dependsOn, jobMetadata['AIStockHunter-Accumulation-Check-*'].dependsOn);
+    assert.equal(effectiveMetadataWithoutExactUserOverride('AIStockHunter-Accumulation-Check-*').displayName,
+      jobMetadata['AIStockHunter-Accumulation-Check-*'].displayName);
+    assert.deepEqual(effectiveMetadataWithoutExactUserOverride('My-New-Task'), {});
+  } finally { setMetadataOverrides({}); }
+});
 
 test('current status and previous execution outcome remain independent', () => {
   const jobs = [

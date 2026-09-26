@@ -15,6 +15,8 @@ export const jobMetadata = Object.freeze({
   'AIStockHunter-UnexplainedVolume-HealthCheck': { displayName: '舊版異常成交量健康檢查', market: '台股', description: '舊版異常成交量健康檢查排程。', order: 90, dependsOn: [], legacy: true, hidden: true },
   'AIStockHunter-UnexplainedVolume-V2-Weekly': { displayName: '舊版異常成交量每週檢查', market: '台股', description: '舊版異常成交量 V2 每週排程。', order: 100, dependsOn: [], legacy: true, hidden: true }
 });
+let userOverrides = {};
+export function setMetadataOverrides(overrides = {}) { userOverrides = overrides; }
 const originalJobName = job => job?.taskName ?? job?.name ?? '';
 const datedPrefix = 'AIStockHunter-Accumulation-Check-';
 export const datedTaskDate = job => {
@@ -28,11 +30,18 @@ export const datedTaskDate = job => {
     31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   return month >= 1 && month <= 12 && day >= 1 && day <= days[month - 1] ? date : null;
 };
-export const metadataFor = job => {
-  const name = originalJobName(job);
-  if (Object.hasOwn(jobMetadata, name)) return jobMetadata[name];
-  return datedTaskDate(job) ? jobMetadata['AIStockHunter-Accumulation-Check-*'] : null;
-};
+function resolveMetadata(name, withoutExactUserOverride = false) {
+  const pattern = datedTaskDate({ name }) ? 'AIStockHunter-Accumulation-Check-*' : null;
+  const exactDefault = Object.hasOwn(jobMetadata, name) ? jobMetadata[name] : null;
+  const patternDefault = pattern && jobMetadata[pattern];
+  const patternOverride = pattern && Object.hasOwn(userOverrides, pattern) ? userOverrides[pattern] : null;
+  const exactOverride = !withoutExactUserOverride && Object.hasOwn(userOverrides, name) ? userOverrides[name] : null;
+  if (!exactDefault && !patternDefault && !patternOverride && !exactOverride) return null;
+  if (!patternOverride && !exactOverride) return exactDefault ?? patternDefault;
+  return { ...(patternDefault || {}), ...(exactDefault || {}), ...(patternOverride || {}), ...(exactOverride || {}) };
+}
+export const metadataFor = job => resolveMetadata(originalJobName(job));
+export const effectiveMetadataWithoutExactUserOverride = key => resolveMetadata(key, true) ?? {};
 export const jobDisplayName = job => {
   const metadata = metadataFor(job);
   return metadata ? `${metadata.displayName}${originalJobName(job).startsWith('AIStockHunter-Accumulation-Check-') ? ` · ${originalJobName(job).slice(-10)}` : ''}` : displayValue(originalJobName(job));
@@ -46,12 +55,16 @@ export const jobSubtitle = job => {
 };
 const marketRank = Object.freeze({ '台股': 0, '美股': 1, '其他': 2 });
 export const jobMarket = job => metadataFor(job)?.market ?? '其他';
-export const visibleJobs = (jobs, showLegacy = false) => jobs.filter(job => showLegacy || !metadataFor(job)?.hidden);
+export const visibleJobs = (jobs, showLegacy = false) => jobs.filter(job => {
+  const metadata = metadataFor(job);
+  return !metadata?.hidden || (showLegacy && metadata.legacy && !userOverrides[originalJobName(job)]?.hidden);
+});
 export const orderedJobs = jobs => [...jobs].sort((a, b) =>
   marketRank[jobMarket(a)] - marketRank[jobMarket(b)]
-  || (metadataFor(a)?.order ?? Number.MAX_SAFE_INTEGER) - (metadataFor(b)?.order ?? Number.MAX_SAFE_INTEGER));
+  || (metadataFor(a)?.order ?? Number.MAX_SAFE_INTEGER) - (metadataFor(b)?.order ?? Number.MAX_SAFE_INTEGER)
+  || (metadataFor(a) && metadataFor(b) ? originalJobName(a).localeCompare(originalJobName(b)) : 0));
 export const downstreamJobs = (job, jobs) => orderedJobs(jobs.filter(candidate =>
-  metadataFor(candidate)?.dependsOn.some(dependency => dependency.task === originalJobName(job))
+  metadataFor(candidate)?.dependsOn?.some(dependency => dependency.task === originalJobName(job))
   || false));
 // Presentation grouping only: every member remains the original job object and ID.
 export function foldDatedJobs(jobs) {
@@ -172,6 +185,9 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
   let phase = 'loading';
   let historyCache = null, historyBusy = false, historyRevision = 0;
   let historyCurrentJobs = [];
+  let settingsRevision = null;
+  let selectedSetting = null;
+  let settingsAvailable = false;
   const label = status => status.charAt(0) + status.slice(1).toLowerCase();
   function element(tag, className, text) {
     const node = document.createElement(tag);
@@ -181,6 +197,106 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
   }
   function badge(status) {
     return element('span', `status ${status.toLowerCase()}`, label(status));
+  }
+  const settingKeys = () => [...new Set([...Object.keys(jobMetadata), ...Object.keys(userOverrides),
+    ...(snapshot?.jobs ?? []).map(originalJobName).filter(Boolean)])];
+  function settingsMessage(message, error = false) {
+    get('settingsMessage').textContent = message;
+    get('settingsMessage').setAttribute('role', error ? 'alert' : 'status');
+  }
+  function renderSettingList() {
+    get('knownSettingJobs').replaceChildren(...settingKeys().map(key => {
+      const option = document.createElement('option'); option.value = key; return option;
+    }));
+    get('settingsJobs').replaceChildren(...settingKeys().map(key => {
+      const item = element('button', '', key);
+      item.type = 'button';
+      item.setAttribute('aria-current', String(key === selectedSetting));
+      item.addEventListener('click', () => selectSetting(key));
+      return item;
+    }));
+    get('settingsForm').hidden = !selectedSetting;
+  }
+  function dependencyRow(dependency = { task: '', kind: 'data' }) {
+    const row = element('div', 'dependency-row');
+    if (dependency.note) row.dataset.note = dependency.note;
+    row.dataset.originalTask = dependency.task;
+    row.dataset.originalKind = dependency.kind;
+    const task = document.createElement('input');
+    task.value = dependency.task;
+    task.maxLength = 200;
+    task.required = true;
+    task.setAttribute('aria-label', '前置 task 名稱或外部文字');
+    task.setAttribute('list', 'knownSettingJobs');
+    const kind = document.createElement('select');
+    kind.setAttribute('aria-label', '前置關係類型');
+    for (const [value, title] of [['data', '資料前置'], ['external', '外部前置'], ['orderOnly', '僅顯示順序']]) {
+      const option = document.createElement('option'); option.value = value; option.textContent = title; kind.append(option);
+    }
+    kind.value = dependency.kind;
+    const remove = element('button', '', '移除'); remove.type = 'button';
+    remove.addEventListener('click', () => row.remove());
+    row.append(task, kind, remove);
+    return row;
+  }
+  function selectSetting(key) {
+    selectedSetting = key;
+    const metadata = metadataFor({ name: key }) ?? {};
+    get('settingRawName').value = key;
+    get('settingDisplayName').value = metadata.displayName ?? key;
+    get('settingMarket').value = metadata.market ?? '其他';
+    get('settingDescription').value = metadata.description ?? '';
+    get('settingOrder').value = metadata.order ?? 10000;
+    get('settingHidden').checked = metadata.hidden ?? false;
+    get('settingDependencies').replaceChildren(...(metadata.dependsOn ?? []).map(dependencyRow));
+    renderSettingList();
+    settingsMessage('');
+  }
+  async function loadSettings() {
+    try {
+      const response = await fetchJobs('/api/settings/job-metadata', { cache: 'no-store' });
+      if (!response.ok) throw new Error('SETTINGS_UNAVAILABLE');
+      const state = await response.json();
+      if (state.version !== 1 || !state.overrides || typeof state.overrides !== 'object' || Array.isArray(state.overrides)) throw new Error('INVALID_SETTINGS_RESPONSE');
+      setMetadataOverrides(state.overrides);
+      settingsRevision = state.revision;
+      settingsAvailable = !state.warning;
+      settingsMessage(state.warning ?? '');
+      get('settingsWarning').hidden = !state.warning;
+    } catch {
+      setMetadataOverrides({}); settingsRevision = null; settingsAvailable = false;
+      settingsMessage('自訂顯示設定無法載入，已使用預設值', true);
+      get('settingsWarning').hidden = false;
+    }
+    renderSettingList();
+    if (selectedSetting) selectSetting(selectedSetting);
+    if (snapshot) { renderRows(); if (historyCache && !get('historyView').hidden) renderHistory(); }
+  }
+  async function saveSettings(next) {
+    if (!settingsAvailable || settingsRevision === null) { settingsMessage('設定檔不可用，請先重新載入設定。', true); return; }
+    try {
+      const response = await fetchJobs('/api/settings/job-metadata', { method: 'PUT', cache: 'no-store',
+        headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ expectedRevision: settingsRevision, overrides: next }) });
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({}));
+        if (error.code === 'REVISION_CONFLICT') {
+          await loadSettings(); settingsMessage('設定已由其他分頁修改，已重新載入，請檢查後再儲存。', true);
+        } else if (error.code === 'INVALID_DEPENDENCY') settingsMessage('前置 task 必須是已設定 metadata 的原始名稱；未知工作請先設定它，或改選「外部前置」。自我依賴也不能儲存。', true);
+        else if (error.code === 'DEPENDENCY_CYCLE') settingsMessage('前置關係形成循環，請調整後再儲存。', true);
+        else if (error.code === 'INVALID_ORDER') settingsMessage('排序須為 0–10000 的整數。', true);
+        else if (error.code === 'INVALID_FILE') { await loadSettings(); settingsMessage('自訂顯示設定無法載入，已使用預設值；原檔案已保留。', true); }
+        else settingsMessage('儲存失敗，請檢查欄位內容；原設定仍保留。', true);
+        return;
+      }
+      const state = await response.json();
+      settingsRevision = state.revision;
+      setMetadataOverrides(state.overrides);
+      renderSettingList();
+      if (selectedSetting) selectSetting(selectedSetting);
+      renderRows();
+      if (historyCache && !get('historyView').hidden) renderHistory();
+      settingsMessage('顯示設定已儲存並套用。');
+    } catch { settingsMessage('儲存失敗，原設定仍保留。', true); }
   }
   function renderWorkflow() {
     const entries = snapshot ? foldDatedJobs(orderedJobs(visibleJobs(snapshot.jobs))) : [];
@@ -200,7 +316,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
         card.append(element('span', 'workflow-name', jobDisplayName(job)), badge(currentStatus(job)));
         card.addEventListener('click', () => openDrawer(job, card));
         item.append(card);
-        const dependencies = metadataFor(job).dependsOn;
+        const dependencies = metadataFor(job).dependsOn ?? [];
         for (const dependency of dependencies) {
           const upstream = metadataFor({ name: dependency.task })?.displayName ?? dependency.task;
           const kind = dependency.kind === 'data' ? `→ 資料前置：${upstream}${dependency.note ? `（${dependency.note}）` : ''}`
@@ -546,6 +662,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
       catch { throw new Error(response.ok ? 'INVALID_API_RESPONSE' : `HTTP ${response.status}`); }
       if (!response.ok) throw new Error([`HTTP ${response.status}`, payload?.code, payload?.message].filter(Boolean).join(' · '));
       snapshot = readSnapshot(payload);
+      renderSettingList();
       historyCurrentJobs = snapshot.jobs;
       historyRevision++;
       phase = 'ready';
@@ -625,7 +742,40 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
   });
   get('refreshBtn').addEventListener('click', refresh);
   get('historyRetry').addEventListener('click', loadHistory);
-  return refresh();
+  get('settingsToggle').addEventListener('click', () => {
+    const open = get('settingsPanel').hidden;
+    get('settingsPanel').hidden = !open;
+    get('settingsToggle').setAttribute('aria-expanded', String(open));
+    if (open) { renderSettingList(); get('settingsHeading').focus?.(); }
+  });
+  get('addDependency').addEventListener('click', () => get('settingDependencies').append(dependencyRow()));
+  get('cancelSettings').addEventListener('click', () => selectSetting(selectedSetting));
+  get('settingsForm').addEventListener('submit', event => {
+    event.preventDefault();
+    if (!selectedSetting) return;
+    const order = Number(get('settingOrder').value);
+    if (!Number.isInteger(order) || order < 0 || order > 10000) { settingsMessage('排序須為 0–10000 的整數。', true); return; }
+    const dependencies = [...get('settingDependencies').children].map(row => {
+      const task = row.querySelector('input').value.trim(), kind = row.querySelector('select').value;
+      return { task, kind, ...(row.dataset.note && task === row.dataset.originalTask && kind === row.dataset.originalKind
+        ? { note: row.dataset.note } : {}) };
+    });
+    const fields = { displayName: get('settingDisplayName').value.trim(), market: get('settingMarket').value,
+      description: get('settingDescription').value, order, hidden: get('settingHidden').checked, dependsOn: dependencies };
+    const baseline = effectiveMetadataWithoutExactUserOverride(selectedSetting);
+    const partial = Object.fromEntries(Object.entries(fields).filter(([key, value]) => JSON.stringify(value) !== JSON.stringify(baseline[key])));
+    const next = { ...userOverrides };
+    if (Object.keys(partial).length) next[selectedSetting] = partial; else delete next[selectedSetting];
+    void saveSettings(next);
+  });
+  get('resetSettings').addEventListener('click', () => {
+    if (!selectedSetting) return;
+    const next = { ...userOverrides }; delete next[selectedSetting]; void saveSettings(next);
+  });
+  get('resetAllSettings').addEventListener('click', () => {
+    if (globalThis.confirm('確定要將全部顯示設定恢復預設值？')) void saveSettings({});
+  });
+  return loadSettings().then(refresh);
 }
 
 if (typeof document !== 'undefined') mountDashboard(document);
