@@ -82,7 +82,7 @@ test('packaged history UI matches every persisted API execution without another 
     await page.locator('#todayTab').click();
     assert.equal(await page.locator('.job-row').count(), visibleJobs(snapshot.jobs).length);
     await page.locator('#historyTab').click();
-    assert.equal(requests.length, 2);
+    assert.equal(requests.filter(url => ['/api/jobs', '/api/history'].includes(new URL(url).pathname)).length, 2);
     assert.equal(requests.filter(url => new URL(url).pathname === '/api/jobs').length, 1);
     assert.deepEqual(errors, []);
     await writeFile(`${artifactDir}/live-history.json`, JSON.stringify({ verifiedAt: new Date().toISOString(), snapshot, history, requests, checkedCells, checkedExecutions, details, errors }, null, 2));

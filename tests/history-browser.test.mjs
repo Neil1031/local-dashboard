@@ -31,6 +31,8 @@ async function mock({ jobs = current(), histories = fixture(), historyStatus = 2
     if (hold) await hold;
     return route.fulfill({ status: historyStatus, contentType: 'application/json', body: JSON.stringify({ from: url.searchParams.get('from'), to: url.searchParams.get('to'), jobs: histories, message: 'SECRET C:/private.db SELECT * FROM job_run' }) });
   });
+  await page.route('**/api/settings/job-metadata', route => route.fulfill({ contentType: 'application/json',
+    body: JSON.stringify({ version: 1, revision: '0', overrides: {}, warning: null }) }));
   await page.goto(base);
   await ready();
   return requests;
