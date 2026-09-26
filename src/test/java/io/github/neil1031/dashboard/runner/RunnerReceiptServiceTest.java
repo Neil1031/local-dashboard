@@ -4,12 +4,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.AccessDeniedException;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import static io.github.neil1031.dashboard.runner.ExecutionReceipt.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.CALLS_REAL_METHODS;
+import static org.mockito.Mockito.mockStatic;
 
 class RunnerReceiptServiceTest {
     @TempDir Path temp;
@@ -206,5 +209,18 @@ class RunnerReceiptServiceTest {
         assertThat(result.jobs().get(0).executions()).isSameAs(result.jobs().get(1).executions());
         assertThat(result.jobs()).extracting(RunnerReceiptService.JobExecutions::coverageState)
                 .containsExactly("RUNNER_EVIDENCE_AVAILABLE", "RUNNER_EVIDENCE_AVAILABLE");
+    }
+
+    @Test void unreadableFallbackIsUnavailableRatherThanNoReceipt() throws Exception {
+        Path config = config();
+        Path fallback = temp.resolve("fallback");
+        Files.createDirectory(fallback);
+        try (var files = mockStatic(Files.class, CALLS_REAL_METHODS)) {
+            files.when(() -> Files.newDirectoryStream(fallback))
+                    .thenThrow(new AccessDeniedException("redacted"));
+            var result = service(config).recent();
+            assertThat(result.roots().fallback()).isEqualTo("UNREADABLE");
+            assertThat(result.jobs().getFirst().coverageState()).isEqualTo("RUNNER_UNAVAILABLE");
+        }
     }
 }

@@ -45,9 +45,9 @@ Each refresh requests `/api/jobs` once, then `/api/runner/executions` once. Hist
 
 ## Tests
 
-Backend tests cover config absence and invalidity, natural missing and available roots, unsafe root, evidence and empty mapping, missing profile, duplicate mapping, shared profile reuse, timestamp, and response redaction. Browser tests cover summary counts, warnings rendered as text, row and drawer diagnostics, narrow widths, unchanged Scheduler status, and one shared Runner request. Full Maven, Node/browser, package, and Git results are recorded in the final review report.
+Backend tests cover config absence and invalidity, natural missing and available roots, an access-denied fallback root, unsafe root, evidence and empty mapping, missing profile, duplicate mapping, shared profile reuse, timestamp, and response redaction. Browser tests cover summary counts, warnings rendered as text, row and drawer diagnostics, narrow widths, unchanged Scheduler status, and one shared Runner request. Full Maven, Node/browser, package, and Git results are recorded in the final review report.
 
-On 2026-09-26, Maven `verify` passed 155 tests using JDK 25 and in-process Surefire. The full Node suite passed 41 tests with four existing conditional skips. A focused browser rerun after the last UI edit passed 25 tests, including History and 320/375 px layouts. The isolated Windows app-image passed the packaged startup and safe-stop smoke checks, and its packaged `/api/runner/executions` returned the expected path-free `NOT_CONFIGURED` diagnostics. `git diff --check` passed. No Scheduled Task or Runner action was invoked.
+On 2026-09-26, Maven `verify` passed 156 tests using JDK 25 and in-process Surefire. The full Node suite passed 41 tests with four existing conditional skips. A focused browser rerun after the last UI edit passed 25 tests, including History and 320/375 px layouts; the final Runner browser rerun passed all 19 tests. The isolated Windows app-image passed the packaged startup and safe-stop smoke checks, and its packaged `/api/runner/executions` returned the expected path-free `NOT_CONFIGURED` diagnostics. `git diff --check` passed. No Scheduled Task or Runner action was invoked.
 
 ## Limitations
 
