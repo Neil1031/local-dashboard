@@ -76,14 +76,21 @@ try {
             NextRunTime = if ($null -ne $info) { Convert-Date $info.NextRunTime } else { $null }
             NumberOfMissedRuns = if ($null -ne $info) { $info.NumberOfMissedRuns } else { $null }
             StartWhenAvailable = [bool]$task.Settings.StartWhenAvailable
+            WakeToRun = [bool]$task.Settings.WakeToRun
+            MultipleInstances = [string]$task.Settings.MultipleInstances
+            RunOnlyIfIdle = [bool]$task.Settings.RunOnlyIfIdle
+            RunOnlyIfNetworkAvailable = [bool]$task.Settings.RunOnlyIfNetworkAvailable
             Triggers = @($task.Triggers | ForEach-Object { Convert-Trigger $_ })
             CollectionError = $taskError
         }
     }
     $unmatched = @($config.include | Where-Object { -not $matched.ContainsKey($_) })
+    $observedAt = [DateTimeOffset]::UtcNow.ToString('o')
     [ordered]@{
         schemaVersion = 1
-        collectedAt = [DateTimeOffset]::UtcNow.ToString('o')
+        collectedAt = $observedAt
+        windowsTimezoneId = [TimeZoneInfo]::Local.Id
+        timezoneObservedAt = $observedAt
         tasks = @($rows)
         errors = @($errors)
         unmatchedIncludes = @($unmatched)

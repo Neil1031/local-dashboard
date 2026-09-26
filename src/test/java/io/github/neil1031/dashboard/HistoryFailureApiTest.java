@@ -79,7 +79,8 @@ class HistoryFailureApiTest {
             fixture.withArray("unmatchedIncludes").add("Missing task");
             fixture.withArray("errors").addObject().put("code", "FIXTURE_COLLECTION_DIAGNOSTIC");
             var broken = partial();
-            assertThat(broken.path("errors")).hasSize(2);
+            assertThat(broken.path("errors")).hasSize(3);
+            assertThat(broken.toString()).contains("SCHEDULE_SNAPSHOT_PERSISTENCE_FAILED");
             assertThat(broken.path("unmatchedIncludes").get(0).asText()).isEqualTo("Missing task");
             assertThat(Files.readAllBytes(database)).isEqualTo(corrupt);
             when(collector.collect()).thenThrow(new CollectionException("COLLECTOR_TIMEOUT", "Timed out"));

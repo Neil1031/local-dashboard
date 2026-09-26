@@ -1,6 +1,7 @@
 package io.github.neil1031.dashboard;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.OffsetDateTime;
@@ -13,12 +14,21 @@ public class JobService {
     private final SchedulerProperties properties;
     private final JobNormalizer normalizer;
     private final HistoryObserver history;
+    private final ScheduleSnapshotObserver schedules;
 
-    public JobService(SchedulerCollector collector, SchedulerProperties properties, JobNormalizer normalizer, HistoryObserver history) {
+    @Autowired
+    public JobService(SchedulerCollector collector, SchedulerProperties properties, JobNormalizer normalizer,
+                      HistoryObserver history, ScheduleSnapshotObserver schedules) {
         this.collector = collector;
         this.properties = properties;
         this.normalizer = normalizer;
         this.history = history;
+        this.schedules = schedules;
+    }
+
+    // Direct service tests keep their existing construction contract.
+    JobService(SchedulerCollector collector, SchedulerProperties properties, JobNormalizer normalizer, HistoryObserver history) {
+        this(collector, properties, normalizer, history, null);
     }
 
     public JobsResponse jobs() {
@@ -54,6 +64,13 @@ public class JobService {
         for (JsonNode selector : snapshot.path("unmatchedIncludes")) unmatched.add(selector.asText());
         jobs.sort(Comparator.comparing(j -> (j.taskPath() + j.name()).toLowerCase(Locale.ROOT)));
         history.observe(jobs, collectedAt).ifPresent(errors::add);
+        boolean complete = errors.isEmpty() && unmatched.isEmpty();
+        if (schedules != null) {
+            String timezone = snapshot.path("windowsTimezoneId").isTextual()
+                    ? snapshot.path("windowsTimezoneId").textValue() : null;
+            schedules.observe(jobs, collectedAt, timezone, complete, properties.include(), properties.exclude())
+                    .ifPresent(errors::add);
+        }
         return new JobsResponse(errors.isEmpty() && unmatched.isEmpty() ? "OK" : "PARTIAL", collectedAt,
                 List.copyOf(jobs), List.copyOf(errors), List.copyOf(unmatched));
     }
