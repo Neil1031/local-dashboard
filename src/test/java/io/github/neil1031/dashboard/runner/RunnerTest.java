@@ -49,7 +49,9 @@ class RunnerTest {
         return ReceiptFiles.read(temp.resolve(root), dirs.getFirst().getFileName().toString()).orElseThrow();
     }
     Process cli(Path config, String id) throws Exception {
-        return new ProcessBuilder(java, "-cp", System.getProperty("java.class.path"), RunnerMain.class.getName(),
+        // In-process Surefire keeps Maven on java.class.path; use its actual test classpath for the CLI probe.
+        String classpath = System.getProperty("surefire.test.class.path", System.getProperty("java.class.path"));
+        return new ProcessBuilder(java, "-cp", classpath, RunnerMain.class.getName(),
                 "run", config.toString(), id).redirectError(temp.resolve("cli-" + UUID.randomUUID() + ".log").toFile())
                 .redirectOutput(ProcessBuilder.Redirect.DISCARD).start();
     }

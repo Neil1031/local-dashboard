@@ -5,6 +5,11 @@ spring:
   application:
     name: local-dashboard
 dashboard:
+  runner:
+    config-path: ""
+    mappings:
+      - scheduler-task: '\AIStockHunter-Accumulation-Weekly-Check'
+        profile-id: aistockhunter-accumulation-weekly
   history:
     database-path: data/local-dashboard.db
     busy-timeout-ms: 2000

@@ -27,6 +27,8 @@ async function mock({ jobs = current(), histories = fixture(), historyStatus = 2
     requests.push(url);
     assert.equal(route.request().method(), 'GET');
     if (url.pathname === '/api/jobs') return route.fulfill({ contentType: 'application/json', body: JSON.stringify({ collectionStatus: 'OK', collectedAt: '2026-09-21T03:00:00Z', jobs, errors: [], unmatchedIncludes: [] }) });
+    if (url.pathname === '/api/runner/executions') return route.fulfill({ contentType: 'application/json',
+      body: JSON.stringify({ status: 'NOT_CONFIGURED', jobs: [], warnings: [] }) });
     assert.equal(url.pathname, '/api/history');
     if (hold) await hold;
     return route.fulfill({ status: historyStatus, contentType: 'application/json', body: JSON.stringify({ from: url.searchParams.get('from'), to: url.searchParams.get('to'), jobs: histories, message: 'SECRET C:/private.db SELECT * FROM job_run' }) });

@@ -474,6 +474,11 @@
     }
 
     .drawer.open { display: flex; }
+    .runner-execution { margin-top: 18px; border-top: 1px solid var(--border, #ead7df); padding-top: 14px; }
+    .runner-recent { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 8px; }
+    .runner-entry { min-width: 0; border: 1px solid #ead7df; border-radius: 12px; padding: 9px 12px; }
+    .runner-entry summary { cursor: pointer; overflow-wrap: anywhere; }
+    .runner-entry .detail-grid { margin-top: 10px; }
 
     .drawer-card {
       width: min(500px, 100%);
@@ -812,6 +817,11 @@
       </div>
       <div class="detail-grid" id="detailGrid"></div>
       <div class="detail-grid" id="metadataGrid"></div>
+      <section class="runner-execution" id="runnerExecution" aria-labelledby="runnerTitle" hidden>
+        <h3 class="log-title" id="runnerTitle">Runner execution</h3>
+        <div id="runnerSummary" role="status"></div>
+        <ol class="runner-recent" id="runnerRecent"></ol>
+      </section>
       <div id="currentWarnings"><div class="log-title">Warnings</div>
       <div class="warnings" id="jobWarnings"></div></div>
       <ol class="history-executions" id="historyExecutions" hidden></ol>

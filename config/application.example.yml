@@ -1,4 +1,10 @@
 dashboard:
+  runner:
+    # Set this to the private Stage 5A runner.json deployed with the Runner.
+    # Leave empty until its location is known. The browser cannot select a path.
+    config-path: ""
+    # Exact pilot mapping is provided by the packaged application default.
+    # To expand coverage, define the full mappings list here.
   history:
     database-path: data/local-dashboard.db
     busy-timeout-ms: 2000

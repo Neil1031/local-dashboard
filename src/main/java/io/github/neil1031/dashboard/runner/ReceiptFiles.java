@@ -8,6 +8,11 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
 import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.LinkOption;
+import java.nio.channels.Channels;
+import java.util.EnumMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.Optional;
 import java.util.List;
 import static io.github.neil1031.dashboard.runner.ExecutionReceipt.*;
@@ -51,15 +56,34 @@ public final class ReceiptFiles {
 
     /** Read published evidence only. An empty/pending-only claim is not an incomplete execution receipt. */
     public static Optional<ExecutionReceipt> read(Path root, String executionId) throws IOException {
+        Map<Phase, ExecutionReceipt> phases = readPhases(root, executionId);
+        ExecutionReceipt latest = null;
+        for (Phase phase : Phase.values()) if (phases.containsKey(phase)) latest = phases.get(phase);
+        return Optional.ofNullable(latest);
+    }
+
+    /** Published phase snapshots; rejects links and identity conflicts. */
+    static Map<Phase, ExecutionReceipt> readPhases(Path root, String executionId) throws IOException {
         validateId(executionId);
         Path directory = root.resolve(executionId);
-        if (!Files.exists(directory)) return Optional.empty();
+        if (!Files.exists(directory, LinkOption.NOFOLLOW_LINKS)) return Map.of();
+        if (!Files.isDirectory(directory, LinkOption.NOFOLLOW_LINKS)) throw new IOException("Receipt directory is not a directory");
+        try (var entries = Files.newDirectoryStream(directory, "*.json")) {
+            for (Path entry : entries) {
+                String name = entry.getFileName().toString();
+                if (!name.equals(filename(Phase.STARTED)) && !name.equals(filename(Phase.PROCESS_STARTED))
+                        && !name.equals(filename(Phase.TERMINAL))) throw new IOException("Unknown receipt phase");
+            }
+        }
         ExecutionReceipt latest = null;
+        Map<Phase, ExecutionReceipt> phases = new EnumMap<>(Phase.class);
         for (Phase phase : Phase.values()) {
             Path file = directory.resolve(filename(phase));
-            if (!Files.exists(file)) continue;
+            if (!Files.exists(file, LinkOption.NOFOLLOW_LINKS)) continue;
+            if (!Files.isRegularFile(file, LinkOption.NOFOLLOW_LINKS)) throw new IOException("Receipt file is not regular");
             ExecutionReceipt receipt;
-            try (var input = Files.newInputStream(file)) {
+            try (var channel = Files.newByteChannel(file, Set.of(StandardOpenOption.READ, LinkOption.NOFOLLOW_LINKS));
+                 var input = Channels.newInputStream(channel)) {
                 byte[] bytes = input.readNBytes(MAX_RECEIPT_BYTES + 1);
                 if (bytes.length > MAX_RECEIPT_BYTES) throw new IOException("Receipt exceeds size limit");
                 receipt = RunnerConfig.JSON.readValue(bytes, ExecutionReceipt.class);
@@ -70,10 +94,16 @@ public final class ReceiptFiles {
                     || !latest.commandProfileId().equals(receipt.commandProfileId())))
                 throw new IOException("Conflicting execution identity");
             latest = receipt;
+            phases.put(phase, receipt);
         }
+        var process = phases.get(Phase.PROCESS_STARTED);
+        var terminal = phases.get(Phase.TERMINAL);
+        if (process != null && terminal != null && (terminal.outcome() == Outcome.START_FAILED
+                || !process.processStartedAt().equals(terminal.processStartedAt())))
+            throw new IOException("Conflicting receipt lifecycle");
         // A failed first publication can leave only the claim or pending files in this root.
         // No evidence here must not hide another root's valid fallback receipt.
-        return Optional.ofNullable(latest);
+        return phases;
     }
 
     /** Coalesce primary/fallback copies by execution ID. Never count lifecycle snapshots as new runs. */
@@ -100,10 +130,13 @@ public final class ReceiptFiles {
                 || receipt.createdAt() == null || !RunnerConfig.safeId(receipt.jobId())
                 || !RunnerConfig.safeId(receipt.commandProfileId())) throw new IOException("Unsupported or invalid receipt");
         try {
-            java.time.Instant.parse(receipt.startedAt());
+            var started = java.time.Instant.parse(receipt.startedAt());
             java.time.Instant.parse(receipt.createdAt());
-            if (receipt.processStartedAt() != null) java.time.Instant.parse(receipt.processStartedAt());
-            if (receipt.finishedAt() != null) java.time.Instant.parse(receipt.finishedAt());
+            var process = receipt.processStartedAt() == null ? null : java.time.Instant.parse(receipt.processStartedAt());
+            var finished = receipt.finishedAt() == null ? null : java.time.Instant.parse(receipt.finishedAt());
+            if ((process != null && process.isBefore(started)) || (finished != null && finished.isBefore(started))
+                    || (process != null && finished != null && finished.isBefore(process)))
+                throw new IOException("Impossible receipt timestamp ordering");
         } catch (java.time.format.DateTimeParseException invalid) { throw new IOException("Invalid receipt timestamp"); }
         if (phase != Phase.TERMINAL && (receipt.outcome() != Outcome.UNKNOWN || receipt.finishedAt() != null
                 || receipt.exitCode() != null || receipt.runnerExitCode() != null || receipt.durationMs() != null))
