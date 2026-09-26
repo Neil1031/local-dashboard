@@ -33,6 +33,8 @@ async function mock(payload, status = 200) {
     if (url.pathname === '/api/history') return route.fulfill({ contentType: 'application/json', body: JSON.stringify({
       from: url.searchParams.get('from'), to: url.searchParams.get('to'), jobs: []
     }) });
+    if (url.pathname === '/api/runner/executions') return route.fulfill({ contentType: 'application/json',
+      body: JSON.stringify({ status: 'NOT_CONFIGURED', jobs: [], warnings: [] }) });
     return route.fulfill({ status, contentType: 'application/json', body: JSON.stringify(payload) });
   });
   await settingsRoute();
@@ -69,6 +71,9 @@ test('initial loading, one GET, refresh coalescing, new response, no detail coll
   let release;
   const wait = new Promise(resolve => { release = resolve; });
   await page.route('**/api/**', async route => {
+    if (new URL(route.request().url()).pathname === '/api/runner/executions') return route.fulfill({
+      contentType: 'application/json', body: JSON.stringify({ status: 'NOT_CONFIGURED', jobs: [], warnings: [] })
+    });
     count++;
     assert.equal(route.request().method(), 'GET');
     assert.equal(new URL(route.request().url()).pathname, '/api/jobs');
@@ -136,7 +141,7 @@ test('all statuses, keyboard filters, no inferred MISSED, real drawer null value
   assert.match(await page.locator('#historyView').innerText(), /Observed completed executions/);
   assert.equal(await page.locator('#todayView').isVisible(), false);
   assert.equal(await page.locator('.day-cell.none').count(), 35);
-  assert.equal(requests.length, 2);
+  assert.equal(requests.filter(request => new URL(request.url).pathname !== '/api/runner/executions').length, 2);
   assert.equal(requests.filter(request => new URL(request.url).pathname === '/api/jobs').length, 1);
 });
 
@@ -172,7 +177,7 @@ test('history persistence failure retains current jobs and displays its diagnost
   await page.waitForFunction(() => document.getElementById('historyView').getAttribute('aria-busy') === 'false');
   assert.equal(await page.locator('.day-cell.none').count(), 7);
   assert.match(await page.locator('#historyView').innerText(), /Observed completed executions/);
-  assert.equal(requests.length, 2);
+  assert.equal(requests.filter(request => new URL(request.url).pathname !== '/api/runner/executions').length, 2);
 });
 
 for (const offline of [true, false]) {
@@ -357,7 +362,7 @@ test('UX-2 folds dated rows, preserves workflow semantics, counts, and History i
     .filter(node => node.dataset.job.startsWith('ux2-') && [1, 2, 3].includes(Number(node.dataset.job.slice(4))))
     .map(node => node.dataset.job)), ['ux2-3', 'ux2-2', 'ux2-1']);
   assert.equal(await page.locator('#view-visible').innerText(), '9');
-  assert.equal(requests.length, 1);
+  assert.equal(requests.filter(request => new URL(request.url).pathname !== '/api/runner/executions').length, 1);
   await page.locator('[data-filter="DISABLED"]').click();
   assert.equal(await today.count(), 1);
   assert.equal(await page.locator('#jobList .job-row[data-job="ux2-6"]').isVisible(), true);
@@ -407,4 +412,54 @@ test('UX-2 folds dated rows, preserves workflow semantics, counts, and History i
   }
   assert.equal(requests.filter(request => new URL(request.url).pathname === '/api/jobs').length, 1);
   assert.equal(historyRequests, 1);
+});
+
+test('Runner drawer shows five bounded executions, conservative evidence, safe text, and one shared read', async () => {
+  const runnerRequests = [];
+  const task = '\\AIStockHunter-Accumulation-Weekly-Check';
+  const jobs = [fixtureJob('READY', { id: 'mapped', name: task.slice(1), taskPath: '\\' }),
+    fixtureJob('READY', { id: 'no-receipt', name: 'InsiderTracker-Market', taskPath: '\\' }),
+    fixtureJob('READY', { id: 'unmapped', name: 'Unmapped', taskPath: '\\' })];
+  const execution = index => ({ executionId: `<img src=x onerror=alert(1)>-${index}`,
+    jobId: 'aistockhunter-accumulation-weekly', commandProfileId: 'aistockhunter-accumulation-weekly',
+    state: index === 0 ? 'PROCESS_STARTED' : 'TERMINAL', startedAt: `2026-09-${String(25 - index).padStart(2, '0')}T02:45:00Z`,
+    processStartedAt: '2026-09-22T02:45:01Z', terminalAt: index === 0 ? null : '2026-09-22T02:45:03Z',
+    durationMs: index === 0 ? null : 1437, childStarted: true, childExitCode: index === 0 ? null : 1, runnerExitCode: index === 0 ? null : 1,
+    runnerOutcome: index === 0 ? 'UNKNOWN' : 'FAILED', receiptCompleteness: index === 0 ? 'INCOMPLETE' : 'COMPLETE',
+    source: 'fallback', reason: null, phases: index === 0 ? ['STARTED', 'PROCESS_STARTED'] : ['STARTED', 'PROCESS_STARTED', 'TERMINAL'],
+    warnings: [`<img src=x onerror=alert(1)> warning ${index}`] });
+  await page.route('**/api/**', route => {
+    const pathname = new URL(route.request().url()).pathname;
+    if (pathname === '/api/runner/executions') {
+      runnerRequests.push(pathname);
+      return route.fulfill({ contentType: 'application/json', body: JSON.stringify({ status: 'OK', warnings: [], jobs: [
+        { schedulerTask: task, profileId: 'aistockhunter-accumulation-weekly', executions: Array.from({ length: 5 }, (_, i) => execution(i)), warnings: [] },
+        { schedulerTask: '\\InsiderTracker-Market', profileId: 'market', executions: [], warnings: [] }
+      ] }) });
+    }
+    return route.fulfill({ contentType: 'application/json', body: JSON.stringify(snapshot(jobs)) });
+  });
+  await settingsRoute();
+  await page.goto(baseUrl); await ready();
+  await page.locator('.job-row[data-job="mapped"]').click();
+  await page.waitForFunction(() => document.getElementById('runnerSummary').textContent.includes('INCOMPLETE'));
+  assert.equal(await page.locator('#runnerRecent > li').count(), 5);
+  assert.match(await page.locator('#runnerSummary').innerText(), /INCOMPLETE/);
+  await page.locator('#closeDrawer').focus();
+  await page.keyboard.press('Tab');
+  assert.equal(await page.locator('#runnerRecent summary').first().evaluate(node => node === document.activeElement), true);
+  await page.keyboard.press('Shift+Tab');
+  assert.equal(await page.locator('#closeDrawer').evaluate(node => node === document.activeElement), true);
+  await page.locator('#runnerRecent summary').first().click();
+  assert.match(await page.locator('#runnerRecent').innerText(), /Child exit code\s+—/);
+  assert.equal(await page.locator('#drawer img').count(), 0);
+  assert.equal(await page.locator('#detailGrid').innerText().then(text => text.includes('Ready')), true);
+  for (const width of [320, 375]) { await page.setViewportSize({ width, height: 780 }); await noOverflow(); }
+  await page.keyboard.press('Escape');
+  await page.locator('.job-row[data-job="no-receipt"]').click();
+  assert.match(await page.locator('#runnerSummary').innerText(), /尚無 Runner 執行紀錄/);
+  await page.keyboard.press('Escape');
+  await page.locator('.job-row[data-job="unmapped"]').click();
+  assert.match(await page.locator('#runnerSummary').innerText(), /尚未設定 Runner 對應/);
+  assert.equal(runnerRequests.length, 1);
 });

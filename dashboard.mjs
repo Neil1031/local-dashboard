@@ -177,6 +177,9 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
   const tabs = [...document.querySelectorAll('.tab')];
   const filters = [...document.querySelectorAll('.filter')];
   let snapshot = null;
+  let runnerSnapshot = null;
+  let runnerRequest = null;
+  let runnerJob = null, runnerRevision = 0;
   let activeFilter = 'all';
   let showLegacy = false;
   let todayExpanded = false, historyExpanded = false;
@@ -373,6 +376,53 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
     if (returnFocus?.isConnected) returnFocus.focus();
     returnFocus = null;
   }
+  function renderRunner(job) {
+    const section = get('runnerExecution');
+    section.hidden = false;
+    const summary = get('runnerSummary');
+    const recent = get('runnerRecent');
+    recent.replaceChildren();
+    if (!runnerSnapshot) { summary.textContent = '正在讀取 Runner receipt…'; return; }
+    if (runnerSnapshot.status === 'UNAVAILABLE') {
+      summary.textContent = 'Runner receipt 目前無法讀取'; return;
+    }
+    if (runnerSnapshot.status === 'NOT_CONFIGURED') {
+      summary.textContent = 'Runner receipt 來源尚未設定'; return;
+    }
+    const key = `${job.taskPath ?? ''}${originalJobName(job)}`;
+    const mapped = runnerSnapshot.jobs.find(item => item?.schedulerTask === key);
+    if (!mapped) { summary.textContent = '此排程尚未設定 Runner 對應'; return; }
+    if (!Array.isArray(mapped.executions) || !Array.isArray(mapped.warnings)) {
+      summary.textContent = 'Runner receipt 目前無法讀取'; return;
+    }
+    if (!mapped.executions.length) {
+      summary.textContent = mapped.warnings.length ? `尚無可用 Runner receipt · ${mapped.warnings.join('；')}` : '尚無 Runner 執行紀錄';
+      return;
+    }
+    summary.textContent = `最近一次：${formatDate(mapped.executions[0].startedAt)} · ${mapped.executions[0].receiptCompleteness}${mapped.warnings.length ? ` · ${mapped.warnings.length} warning(s)` : ''}`;
+    for (const execution of mapped.executions.slice(0, 5)) {
+      const item = element('li', 'runner-entry');
+      const detail = document.createElement('details');
+      const headline = element('summary', '', `${formatDate(execution.startedAt)} · ${execution.runnerOutcome} · Child exit: ${displayValue(execution.childExitCode)} · ${execution.durationMs == null ? 'Duration: —' : `Runner duration: ${(execution.durationMs / 1000).toFixed(3)} s`}`);
+      const fields = [
+        ['Execution ID', execution.executionId], ['Phase', execution.state], ['Receipt', execution.receiptCompleteness],
+        ['Evidence', execution.phases.join(' → ')], ['Started', formatDate(execution.startedAt)],
+        ['Process started', formatDate(execution.processStartedAt)],
+        ['Child started', execution.childStarted === true ? 'Yes' : execution.childStarted === false ? 'No' : 'Unknown'],
+        ['Terminal', formatDate(execution.terminalAt)], ['Child exit code', execution.childExitCode],
+        ['Runner exit code', execution.runnerExitCode], ['Runner outcome', execution.runnerOutcome],
+        ['Reason', execution.reason], ['Source', execution.source],
+        ['Warnings', [...(execution.warnings ?? []), ...(mapped.warnings ?? [])].join('；') || '—']
+      ];
+      const grid = element('div', 'detail-grid');
+      grid.append(...fields.map(([title, value]) => {
+        const field = element('div', 'detail');
+        field.append(element('small', '', title), element('strong', '', value));
+        return field;
+      }));
+      detail.append(headline, grid); item.append(detail); recent.append(item);
+    }
+  }
   function openDrawer(job, row) {
     get('drawer').dataset.mode = 'current';
     get('detailGrid').hidden = false;
@@ -382,6 +432,22 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
     get('drawerTitle').textContent = jobDisplayName(job);
     get('drawerSubtitle').textContent = jobSubtitle(job);
     renderMetadata(job, snapshot?.jobs ?? []);
+    runnerJob = job;
+    renderRunner(job);
+    if (!runnerRequest) {
+      const revision = runnerRevision;
+      runnerRequest = (async () => {
+        try {
+          const response = await fetchJobs('/api/runner/executions', { cache: 'no-store' });
+          const payload = await response.json();
+          if (!response.ok || !['OK', 'NOT_CONFIGURED', 'UNAVAILABLE'].includes(payload?.status)
+              || !Array.isArray(payload.jobs)) throw new Error('INVALID_RUNNER_RESPONSE');
+          if (revision === runnerRevision) runnerSnapshot = payload;
+        } catch { if (revision === runnerRevision) runnerSnapshot = { status: 'UNAVAILABLE', jobs: [] }; }
+        if (revision === runnerRevision && runnerJob && get('drawer').classList.contains('open')
+            && get('drawer').dataset.mode === 'current') renderRunner(runnerJob);
+      })();
+    }
     const details = [
       ['Current status', label(currentStatus(job))], ['Scheduler state', job.state],
       ['Enabled', job.enabled === true ? 'Yes' : job.enabled === false ? 'No' : null],
@@ -408,6 +474,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
     get('drawerSubtitle').textContent = `${day.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })} · Observed executions · ${jobSubtitle(job)}`;
     renderMetadata(job, historyRows(historyCurrentJobs, historyCache.payload.jobs, historyCache.range));
     get('detailGrid').hidden = true;
+    get('runnerExecution').hidden = true;
     get('currentWarnings').hidden = true;
     get('historyExecutions').hidden = false;
     get('historyExecutions').replaceChildren(...cell.runs.map(run => {
@@ -646,6 +713,10 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
     historyExpanded = false;
     closeDrawer();
     snapshot = null;
+    runnerSnapshot = null;
+    runnerRequest = null;
+    runnerJob = null;
+    runnerRevision++;
     summary(null);
     renderRows();
     get('refreshBtn').disabled = true;
@@ -737,8 +808,13 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
   document.addEventListener('keydown', event => {
     if (!get('drawer').classList.contains('open')) return;
     if (event.key === 'Escape') closeDrawer();
-    // Close is the only interactive element in this read-only drawer.
-    if (event.key === 'Tab') { event.preventDefault(); get('closeDrawer').focus(); }
+    if (event.key === 'Tab') {
+      const focusable = [get('closeDrawer'), ...get('drawer').querySelectorAll('#runnerRecent summary:not([hidden])')]
+        .filter(node => !node.closest('[hidden]'));
+      const index = focusable.indexOf(document.activeElement);
+      event.preventDefault();
+      focusable[(index + (event.shiftKey ? -1 : 1) + focusable.length) % focusable.length].focus();
+    }
   });
   get('refreshBtn').addEventListener('click', refresh);
   get('historyRetry').addEventListener('click', loadHistory);

@@ -331,6 +331,12 @@ $LASTEXITCODE
 範例只執行 `java -version`；不是正式 task，也不建立 Task Scheduler entry。設定檔採 UTF-8 JSON，完整範例見
 [`config/runner.example.json`](config/runner.example.json)。`config/runner.json`、`data/` 與測試 artifacts 已忽略，不提交秘密設定。
 
+Dashboard 的 Today drawer 可唯讀顯示 Runner receipts。將私人 Dashboard `application.yml` 的
+`dashboard.runner.config-path` 設為已部署 Runner `config/runner.json` 的絕對路徑；
+它會從該設定讀取 primary/fallback receipt roots。內建只對應每週檢查 pilot，
+其他 task 須以 `dashboard.runner.mappings` 明確列出完整 Scheduler task 路徑與 profile ID。
+詳見 [`docs/STAGE-RUNNER-RECEIPTS-UI.md`](docs/STAGE-RUNNER-RECEIPTS-UI.md)。
+
 - CLI 僅接受 `run <trusted-config.json> <profile-id>`。沒有動態 args、web command endpoint 或 HTTP dependency。
 - Profile ID / job ID 為 1–64 字元小寫英文字母、數字、連字號，首字母須為英文字母；使用無秘密的穩定名稱。
 - `executable` 與 `workingDirectory` 必須是絕對路徑；`args` 是必填字串陣列，不做 shell interpolation。
