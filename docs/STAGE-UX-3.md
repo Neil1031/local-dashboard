@@ -25,6 +25,8 @@ The endpoint accepts at most 128 KiB and at most 256 metadata keys. Editable fie
 
 `hidden=true` hides a job only in Dashboard views. An explicit user hide cannot be undone through the legacy toggle. Collection, counts, history storage, and raw API identities remain unchanged. User overrides are local to this machine and are not synced with Git or the package.
 
+For an unknown current task used as an internal upstream dependency, save that task's metadata first so its raw name becomes a known metadata key. The editor reports unknown internal references and suggests `外部前置` for an external condition.
+
 ## Verification and review boundary
 
 Focused Java, Node, browser, packaged HTTP/UI, restart persistence, 320/375 layout, and read-only Scheduler definition comparisons are the stage gates. A complete Maven run requires an environment where `cmd.exe` can start normally, because Surefire's fork and one existing Runner test launch subprocesses. No Scheduler task is run or changed for this stage. Stop after pushing the implementation branch; merging into `main` requires Manager Review.

@@ -277,8 +277,14 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
       const response = await fetchJobs('/api/settings/job-metadata', { method: 'PUT', cache: 'no-store',
         headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ expectedRevision: settingsRevision, overrides: next }) });
       if (!response.ok) {
-        if (response.status === 409) { await loadSettings(); settingsMessage('設定已由其他分頁修改，已重新載入，請檢查後再儲存。', true); }
-        else settingsMessage('儲存失敗，原設定仍保留。', true);
+        const error = await response.json().catch(() => ({}));
+        if (error.code === 'REVISION_CONFLICT') {
+          await loadSettings(); settingsMessage('設定已由其他分頁修改，已重新載入，請檢查後再儲存。', true);
+        } else if (error.code === 'INVALID_DEPENDENCY') settingsMessage('前置 task 必須是已設定 metadata 的原始名稱；未知工作請先設定它，或改選「外部前置」。自我依賴也不能儲存。', true);
+        else if (error.code === 'DEPENDENCY_CYCLE') settingsMessage('前置關係形成循環，請調整後再儲存。', true);
+        else if (error.code === 'INVALID_ORDER') settingsMessage('排序須為 0–10000 的整數。', true);
+        else if (error.code === 'INVALID_FILE') { await loadSettings(); settingsMessage('自訂顯示設定無法載入，已使用預設值；原檔案已保留。', true); }
+        else settingsMessage('儲存失敗，請檢查欄位內容；原設定仍保留。', true);
         return;
       }
       const state = await response.json();
