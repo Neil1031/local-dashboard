@@ -21,6 +21,14 @@ class JobMetadataControllerTest {
         mvc.perform(put("/api/settings/job-metadata").contentType(MediaType.APPLICATION_JSON)
                 .content("{\"expectedRevision\":\"0\",\"overrides\":{\"A\":{\"order\":10001}}}"))
                 .andExpect(status().isBadRequest()).andExpect(jsonPath("$.code").value("INVALID_ORDER"));
+        mvc.perform(put("/api/settings/job-metadata").contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                    {"expectedRevision":"0","overrides":{
+                      "AIStockHunter-Accumulation-Check-2026-09-22":{"displayName":"特定日期"},
+                      "AIStockHunter-UnexplainedVolume-Daily":{"dependsOn":[{"task":"AIStockHunter-Accumulation-Check-2026-09-22","kind":"data"}]}
+                    }}
+                    """))
+                .andExpect(status().isBadRequest()).andExpect(jsonPath("$.code").value("DEPENDENCY_CYCLE"));
         String put = "{\"expectedRevision\":\"0\",\"overrides\":{\"My-New-Task\":{\"displayName\":\"新工作\"}}}";
         mvc.perform(put("/api/settings/job-metadata").contentType(MediaType.APPLICATION_JSON).content(put))
                 .andExpect(status().isOk()).andExpect(jsonPath("$.overrides.My-New-Task.displayName").value("新工作"));

@@ -15,9 +15,13 @@
 
 The file schema is `{ "version": 1, "overrides": { ... } }`. A user entry contains only changed fields. Effective metadata uses field-level precedence: exact user override > pattern user override > exact default > pattern default > unknown fallback. The dated pattern applies only to valid `AIStockHunter-Accumulation-Check-YYYY-MM-DD` dates; exact dated keys take precedence. Raw Scheduler names, paths, IDs, and dated folding remain unchanged. Equal configured orders are resolved by raw task name; unknown fallback jobs retain incoming order.
 
+The editor compares each submitted field with the effective metadata **without that key's own user override**. For a dated exact task this baseline still includes the pattern user override, followed by versioned defaults. Saving unchanged inherited values creates no exact override; a later pattern edit therefore still reaches the exact task. For a pattern key the baseline is its versioned pattern default, and for an ordinary exact key it is its versioned exact default.
+
 `GET /api/settings/job-metadata` returns `{version,revision,overrides,warning}` with no-store caching. `PUT` accepts `{expectedRevision,overrides}`. Revision is the SHA-256 of the existing file bytes (`0` when absent); stale writes return HTTP 409. The server validates the complete new document, writes a temporary file in the destination directory, flushes it, then atomically replaces the old file. A failed write leaves the previous file in place and removes the temporary file. Corrupt JSON, unsupported versions, or invalid content are preserved without overwrite; the UI uses defaults and shows `自訂顯示設定無法載入，已使用預設值`.
 
 The endpoint accepts at most 128 KiB and at most 256 metadata keys. Editable fields are `displayName` (1–100 chars), `market` (台股/美股/其他), `description` (up to 1000 chars), `order` (integer 0–10000), `hidden` (boolean), and `dependsOn` (up to 32 entries). Internal dependency identities use raw task names or metadata keys; external dependencies use text. Self references, unknown internal references, and cycles are rejected. The API accepts no file path, command, or Scheduler mutation input and returns error codes without filesystem paths. It is served on the existing loopback-only server.
+
+Cycle validation uses the effective dependency graph across versioned metadata keys and user override keys, including exact dated tasks. Dependency field precedence is exact user > pattern user > exact default > pattern default > no dependency. An explicit `dependsOn: []` clears inheritance; an omitted field inherits it. `data` and `orderOnly` add internal graph edges, while `external` does not. The backend mirrors the versioned internal dependency defaults in `dashboard.mjs`; focused tests cover the dated pattern, weekly, and SEC order-only edges.
 
 ## Settings UI
 
@@ -29,4 +33,4 @@ For an unknown current task used as an internal upstream dependency, save that t
 
 ## Verification and review boundary
 
-Focused Java, Node, browser, packaged HTTP/UI, restart persistence, 320/375 layout, and read-only Scheduler definition comparisons are the stage gates. A complete Maven run requires an environment where `cmd.exe` can start normally, because Surefire's fork and one existing Runner test launch subprocesses. No Scheduler task is run or changed for this stage. Stop after pushing the implementation branch; merging into `main` requires Manager Review.
+Focused Java, Node, browser, packaged HTTP/UI, restart persistence, 320/375 layout, and read-only Scheduler definition comparisons are the stage gates. On this machine `cmd.exe` cannot start without elevation; Maven's complete suite was run without a fork and with the project's test dependency classpath supplied to the JVM so the existing Runner subprocess test could run. No Scheduler task is run or changed for this stage. Stop after pushing the implementation branch; merging into `main` requires Manager Review.

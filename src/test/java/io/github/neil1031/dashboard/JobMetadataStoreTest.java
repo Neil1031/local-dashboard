@@ -67,4 +67,87 @@ class JobMetadataStoreTest {
         assertArrayEquals(before, Files.readAllBytes(path));
         assertEquals(1, Files.list(path.getParent()).count());
     }
+
+    @Test void exactDatedOmissionInheritsDefaultAndReverseEdgeIsCycle() throws Exception {
+        String exact = "AIStockHunter-Accumulation-Check-2026-09-22";
+        var onlyExactName = mapper.readTree("{\"" + exact + "\":{\"displayName\":\"特定日期\"}}");
+        JobMetadataStore.validate(onlyExactName);
+        var cycle = mapper.readTree("""
+            {
+              "AIStockHunter-Accumulation-Check-2026-09-22": {"displayName":"特定日期"},
+              "AIStockHunter-UnexplainedVolume-Daily": {"dependsOn":[{"task":"AIStockHunter-Accumulation-Check-2026-09-22","kind":"data"}]}
+            }
+            """);
+        assertEquals("DEPENDENCY_CYCLE", assertThrows(JobMetadataStore.Invalid.class,
+                () -> JobMetadataStore.validate(cycle)).getMessage());
+    }
+
+    @Test void explicitEmptyExactDependenciesClearInheritedPatternEdge() throws Exception {
+        var overrides = mapper.readTree("""
+            {
+              "AIStockHunter-Accumulation-Check-2026-09-22": {"dependsOn":[]},
+              "AIStockHunter-UnexplainedVolume-Daily": {"dependsOn":[{"task":"AIStockHunter-Accumulation-Check-2026-09-22","kind":"data"}]}
+            }
+            """);
+        JobMetadataStore.validate(overrides);
+    }
+
+    @Test void patternUserDependencyIsInheritedUnlessExactExplicitlyOverridesIt() throws Exception {
+        var inheritedCycle = mapper.readTree("""
+            {
+              "AIStockHunter-Accumulation-Check-*": {"dependsOn":[{"task":"Other","kind":"orderOnly"}]},
+              "AIStockHunter-Accumulation-Check-2026-09-22": {"displayName":"特定日期"},
+              "Other": {"dependsOn":[{"task":"AIStockHunter-Accumulation-Check-2026-09-22","kind":"data"}]}
+            }
+            """);
+        assertEquals("DEPENDENCY_CYCLE", assertThrows(JobMetadataStore.Invalid.class,
+                () -> JobMetadataStore.validate(inheritedCycle)).getMessage());
+        ((com.fasterxml.jackson.databind.node.ObjectNode) inheritedCycle.path("AIStockHunter-Accumulation-Check-2026-09-22"))
+                .set("dependsOn", mapper.createArrayNode());
+        JobMetadataStore.validate(inheritedCycle);
+    }
+
+    @Test void patternUserWithoutDependencyFieldStillInheritsDefault() throws Exception {
+        var overrides = mapper.readTree("""
+            {
+              "AIStockHunter-Accumulation-Check-*": {"displayName":"共用名稱"},
+              "AIStockHunter-Accumulation-Check-2026-09-22": {},
+              "AIStockHunter-UnexplainedVolume-Daily": {"dependsOn":[{"task":"AIStockHunter-Accumulation-Check-2026-09-22","kind":"data"}]}
+            }
+            """);
+        assertEquals("DEPENDENCY_CYCLE", assertThrows(JobMetadataStore.Invalid.class,
+                () -> JobMetadataStore.validate(overrides)).getMessage());
+    }
+
+    @Test void externalReverseRelationDoesNotCreateCycle() throws Exception {
+        var overrides = mapper.readTree("""
+            {
+              "AIStockHunter-Accumulation-Check-2026-09-22": {},
+              "AIStockHunter-UnexplainedVolume-Daily": {"dependsOn":[{"task":"AIStockHunter-Accumulation-Check-2026-09-22","kind":"external"}]}
+            }
+            """);
+        JobMetadataStore.validate(overrides);
+    }
+
+    @Test void secOrderOnlyDefaultParticipatesInCycleValidation() throws Exception {
+        var overrides = mapper.readTree("""
+            {"InsiderTracker-SyncImport":{"dependsOn":[{"task":"InsiderTracker-SEC","kind":"data"}]}}
+            """);
+        assertEquals("DEPENDENCY_CYCLE", assertThrows(JobMetadataStore.Invalid.class,
+                () -> JobMetadataStore.validate(overrides)).getMessage());
+        ((com.fasterxml.jackson.databind.node.ObjectNode) overrides).set("InsiderTracker-SEC",
+                mapper.readTree("{\"dependsOn\":[]}"));
+        JobMetadataStore.validate(overrides);
+    }
+
+    @Test void weeklyDataDefaultParticipatesInCycleValidation() throws Exception {
+        var overrides = mapper.readTree("""
+            {"AIStockHunter-UnexplainedVolume-Daily":{"dependsOn":[{"task":"AIStockHunter-Accumulation-Weekly-Check","kind":"data"}]}}
+            """);
+        assertEquals("DEPENDENCY_CYCLE", assertThrows(JobMetadataStore.Invalid.class,
+                () -> JobMetadataStore.validate(overrides)).getMessage());
+        ((com.fasterxml.jackson.databind.node.ObjectNode) overrides).set("AIStockHunter-Accumulation-Weekly-Check",
+                mapper.readTree("{\"dependsOn\":[]}"));
+        JobMetadataStore.validate(overrides);
+    }
 }

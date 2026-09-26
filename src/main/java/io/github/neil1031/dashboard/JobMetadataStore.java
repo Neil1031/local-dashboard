@@ -12,6 +12,8 @@ import java.nio.channels.FileChannel;
 import java.nio.file.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 import static java.nio.file.StandardOpenOption.*;
@@ -24,6 +26,13 @@ public class JobMetadataStore {
             "AIStockHunter-UnexplainedVolume-Daily", "AIStockHunter-Accumulation-Weekly-Check",
             "AIStockHunter-Accumulation-Check-*", "AIStockHunter-UnexplainedVolume-HealthCheck",
             "AIStockHunter-UnexplainedVolume-V2-Weekly");
+    private static final String DATED_PATTERN = "AIStockHunter-Accumulation-Check-*";
+    private static final String DATED_PREFIX = "AIStockHunter-Accumulation-Check-";
+    // Mirror the versioned internal dependency defaults in dashboard.mjs. External defaults have no graph edge.
+    private static final Map<String, Set<String>> DEFAULT_INTERNAL_DEPENDENCIES = Map.of(
+            "InsiderTracker-SEC", Set.of("InsiderTracker-SyncImport"),
+            "AIStockHunter-Accumulation-Weekly-Check", Set.of("AIStockHunter-UnexplainedVolume-Daily"),
+            DATED_PATTERN, Set.of("AIStockHunter-UnexplainedVolume-Daily"));
     private final ObjectMapper mapper;
     private final Path path;
 
@@ -93,10 +102,6 @@ public class JobMetadataStore {
 
     static void validate(JsonNode overrides) {
         if (overrides == null || !overrides.isObject() || overrides.size() > 256) throw new Invalid("INVALID_CONFIG");
-        Map<String, Set<String>> edges = new HashMap<>();
-        edges.put("InsiderTracker-SEC", new HashSet<>(Set.of("InsiderTracker-SyncImport")));
-        edges.put("AIStockHunter-Accumulation-Weekly-Check", new HashSet<>(Set.of("AIStockHunter-UnexplainedVolume-Daily")));
-        edges.put("AIStockHunter-Accumulation-Check-*", new HashSet<>(Set.of("AIStockHunter-UnexplainedVolume-Daily")));
         Set<String> valid = new HashSet<>(KNOWN);
         overrides.fieldNames().forEachRemaining(valid::add);
         overrides.fields().forEachRemaining(entry -> {
@@ -104,7 +109,6 @@ public class JobMetadataStore {
             JsonNode value = entry.getValue();
             if (key.isBlank() || key.length() > 200 || key.indexOf('*') >= 0 && !key.equals("AIStockHunter-Accumulation-Check-*")
                     || !value.isObject() || value.size() > FIELDS.size()) throw new Invalid("INVALID_CONFIG");
-            Set<String> dependencies = new HashSet<>();
             if (value.has("dependsOn")) {
                 JsonNode list = value.get("dependsOn");
                 if (!list.isArray() || list.size() > 32) throw new Invalid("INVALID_DEPENDENCY");
@@ -114,12 +118,8 @@ public class JobMetadataStore {
                     if (!Set.of("data", "external", "orderOnly").contains(kind) || task.isBlank()
                             || item.has("note") && (item.get("note").isNull() || string(item.get("note"), 200).isBlank())
                             || item.fieldNames().hasNext() && !fieldsOnly(item, Set.of("task", "kind", "note"))) throw new Invalid("INVALID_DEPENDENCY");
-                    if (!kind.equals("external")) {
-                        if (task.equals(key) || !valid.contains(task)) throw new Invalid("INVALID_DEPENDENCY");
-                        dependencies.add(task);
-                    }
+                    if (!kind.equals("external") && (task.equals(key) || !valid.contains(task))) throw new Invalid("INVALID_DEPENDENCY");
                 }
-                edges.put(key, dependencies);
             }
             value.fields().forEachRemaining(field -> {
                 String name = field.getKey(); JsonNode fieldValue = field.getValue();
@@ -134,7 +134,36 @@ public class JobMetadataStore {
                 }
             });
         });
-        for (String node : edges.keySet()) visit(node, edges, new HashSet<>(), new HashSet<>());
+        Map<String, Set<String>> edges = new HashMap<>();
+        for (String key : valid) edges.put(key, effectiveInternalDependencies(key, overrides, valid));
+        Set<String> active = new HashSet<>(), done = new HashSet<>();
+        for (String node : edges.keySet()) visit(node, edges, active, done);
+    }
+
+    private static Set<String> effectiveInternalDependencies(String key, JsonNode overrides, Set<String> valid) {
+        String pattern = datedPatternFor(key);
+        JsonNode exact = overrides.path(key);
+        JsonNode patternUser = pattern == null ? null : overrides.path(pattern);
+        JsonNode selected = exact.has("dependsOn") ? exact.get("dependsOn")
+                : patternUser != null && patternUser.has("dependsOn") ? patternUser.get("dependsOn") : null;
+        if (selected == null) return DEFAULT_INTERNAL_DEPENDENCIES.getOrDefault(key,
+                pattern == null ? Set.of() : DEFAULT_INTERNAL_DEPENDENCIES.getOrDefault(pattern, Set.of()));
+        Set<String> targets = new HashSet<>();
+        for (JsonNode dependency : selected) {
+            if (dependency.path("kind").asText().equals("external")) continue;
+            String target = dependency.path("task").asText();
+            if (target.equals(key) || !valid.contains(target)) throw new Invalid("INVALID_DEPENDENCY");
+            targets.add(target);
+        }
+        return targets;
+    }
+
+    private static String datedPatternFor(String key) {
+        if (!key.startsWith(DATED_PREFIX)) return null;
+        String date = key.substring(DATED_PREFIX.length());
+        if (!date.matches("\\d{4}-\\d{2}-\\d{2}")) return null;
+        try { LocalDate.parse(date); return DATED_PATTERN; }
+        catch (DateTimeParseException ex) { return null; }
     }
 
     private static boolean fieldsOnly(JsonNode node, Set<String> allowed) {

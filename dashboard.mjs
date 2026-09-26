@@ -30,17 +30,18 @@ export const datedTaskDate = job => {
     31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   return month >= 1 && month <= 12 && day >= 1 && day <= days[month - 1] ? date : null;
 };
-export const metadataFor = job => {
-  const name = originalJobName(job);
-  const pattern = datedTaskDate(job) ? 'AIStockHunter-Accumulation-Check-*' : null;
+function resolveMetadata(name, withoutExactUserOverride = false) {
+  const pattern = datedTaskDate({ name }) ? 'AIStockHunter-Accumulation-Check-*' : null;
   const exactDefault = Object.hasOwn(jobMetadata, name) ? jobMetadata[name] : null;
   const patternDefault = pattern && jobMetadata[pattern];
-  const patternOverride = pattern && userOverrides[pattern];
-  const exactOverride = Object.hasOwn(userOverrides, name) ? userOverrides[name] : null;
+  const patternOverride = pattern && Object.hasOwn(userOverrides, pattern) ? userOverrides[pattern] : null;
+  const exactOverride = !withoutExactUserOverride && Object.hasOwn(userOverrides, name) ? userOverrides[name] : null;
   if (!exactDefault && !patternDefault && !patternOverride && !exactOverride) return null;
   if (!patternOverride && !exactOverride) return exactDefault ?? patternDefault;
   return { ...(patternDefault || {}), ...(exactDefault || {}), ...(patternOverride || {}), ...(exactOverride || {}) };
-};
+}
+export const metadataFor = job => resolveMetadata(originalJobName(job));
+export const effectiveMetadataWithoutExactUserOverride = key => resolveMetadata(key, true) ?? {};
 export const jobDisplayName = job => {
   const metadata = metadataFor(job);
   return metadata ? `${metadata.displayName}${originalJobName(job).startsWith('AIStockHunter-Accumulation-Check-') ? ` · ${originalJobName(job).slice(-10)}` : ''}` : displayValue(originalJobName(job));
@@ -761,8 +762,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
     });
     const fields = { displayName: get('settingDisplayName').value.trim(), market: get('settingMarket').value,
       description: get('settingDescription').value, order, hidden: get('settingHidden').checked, dependsOn: dependencies };
-    const baseline = (Object.hasOwn(jobMetadata, selectedSetting) ? jobMetadata[selectedSetting] : null) ?? (selectedSetting.startsWith(datedPrefix) && datedTaskDate({ name: selectedSetting })
-      ? jobMetadata['AIStockHunter-Accumulation-Check-*'] : {});
+    const baseline = effectiveMetadataWithoutExactUserOverride(selectedSetting);
     const partial = Object.fromEntries(Object.entries(fields).filter(([key, value]) => JSON.stringify(value) !== JSON.stringify(baseline[key])));
     const next = { ...userOverrides };
     if (Object.keys(partial).length) next[selectedSetting] = partial; else delete next[selectedSetting];
