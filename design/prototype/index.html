@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Local Dashboard · Product Space Prototype</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="主要導覽">
+      <div class="brand"><span class="brand-mark">L<span class="mark-dot">.</span></span><span><strong>Local Dashboard</strong><small>RESEARCH CONSOLE</small></span></div>
+      <p class="nav-label">WORKSPACE</p>
+      <nav class="side-nav" id="side-nav"></nav>
+      <div class="sidebar-bottom"><span class="tiny-dot"></span> Design space <span class="muted">·</span> v0.1<br><small>Static concept for Manager Review</small></div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark">L<span class="mark-dot">.</span></span><strong>Local Dashboard</strong></div>
+        <div class="topbar-context">INVESTMENT RESEARCH <span>/</span> <strong id="top-section">Overview</strong></div>
+        <div class="topbar-right"><span class="sample-pill">SAMPLE / PROTOTYPE DATA</span><span class="top-avatar" aria-hidden="true">ND</span></div>
+      </header>
+      <nav class="mobile-nav" aria-label="主要導覽" id="mobile-nav"></nav>
+      <main id="main" tabindex="-1"></main>
+      <footer class="footer"><span>Local Dashboard · Product design preview</span><span>All values are illustrative. No live source connection.</span></footer>
+    </div>
+  </div>
+  <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+  <aside class="drawer" id="drawer" aria-modal="true" role="dialog" aria-labelledby="drawer-title" hidden>
+    <div class="drawer-head"><span class="eyebrow">SAMPLE / PROTOTYPE DATA</span><button class="icon-button" id="drawer-close" type="button" aria-label="關閉詳細資料">×</button></div>
+    <div id="drawer-body"></div>
+  </aside>
+</body>
+</html>
