@@ -8,6 +8,7 @@
 .project-intro code,.mono{font-family:ui-monospace,Consolas,monospace;overflow-wrap:anywhere}
 .project-card{max-width:900px}
 .project-card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.project-overall-status{display:grid;justify-items:end;gap:5px}.project-overall-status small{font-size:9px;font-weight:800;letter-spacing:.07em;color:#819492;text-align:right}
 .project-card h2{font-size:26px;letter-spacing:-.04em;margin:6px 0 5px}
 .project-card p,.project-copy{font-size:13px;line-height:1.65;color:#56706f}
 .project-counts{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:20px 0}

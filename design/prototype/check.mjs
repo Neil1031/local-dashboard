@@ -60,6 +60,10 @@ for (const width of [1280, 375, 320]) test(`Projects landing and six detail view
   assert.equal(await page.locator('.project-card').getByText(/% Complete/).count(), 0);
   const total = await page.locator('.project-count strong').allTextContents();
   assert.equal(total.reduce((sum, value) => sum + Number(value), 0), 33);
+  const byStatus = await page.locator('.project-count').evaluateAll(nodes => Object.fromEntries(nodes.map(node => [
+    node.querySelector('span').textContent, Number(node.querySelector('strong').textContent)
+  ])));
+  assert.deepEqual(byStatus, { DONE: 19, 'BACKEND READY': 3, DESIGNED: 8, 'NOT STARTED': 2, BLOCKED: 1 });
   await page.screenshot({ path: `${screenshots}projects-landing-${width}.png`, fullPage: true });
   await page.getByRole('button', { name: 'Open project →' }).focus();
   await page.keyboard.press('Enter');
@@ -70,11 +74,18 @@ for (const width of [1280, 375, 320]) test(`Projects landing and six detail view
     await page.getByRole('tab', { name: view, exact: true }).click();
     assert.equal(await page.getByRole('tab', { name: view, exact: true }).getAttribute('aria-selected'), 'true');
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, `Projects/${view} overflows ${width}px`);
-    if (view === 'Features') assert.equal(await page.locator('.project-feature').count(), 33);
+    if (view === 'Features') {
+      assert.equal(await page.locator('.project-feature').count(), 33);
+      assert.match(await page.locator('.project-feature summary').filter({ hasText: 'Projects' }).textContent(), /DESIGNED/);
+    }
     if (view === 'Architecture') assert.equal(await page.locator('.architecture-node').count(), 8);
     if (view === 'Problems') assert.equal(await page.locator('.project-problem').count(), 5);
     if (view === 'Changes') assert.equal(await page.locator('.project-timeline li').count(), 7);
-    if (view === 'Remaining') assert.equal(await page.locator('.project-remaining section').count(), 4);
+    if (view === 'Remaining') {
+      assert.equal(await page.locator('.project-remaining section').count(), 4);
+      assert.equal(await page.getByText('Review Local Dashboard Project Design pilot').count(), 0);
+      assert.equal(await page.getByText('Release 1 — Product Shell / Projects Viewer implementation').count(), 1);
+    }
     if (width === 1280 && ['Features','Problems','Changes','Remaining'].includes(view)) {
       await page.screenshot({ path: `${screenshots}projects-${view.toLowerCase()}-1280.png`, fullPage: true });
     }

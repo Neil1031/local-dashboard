@@ -30,7 +30,7 @@ flowchart LR
   RA -.已驗證的 Runner view.-> O
 ```
 
-**目前限制：** 這不是股票分析總控台的八頁成品。`design/prototype/index.html` 是已核准的靜態設計原型；US Stocks、TW Stocks 等新版頁面尚未進入正式 `index.html`。沒有自動 `MISSED`；Dashboard 不修改 Scheduler task 或正式 Runner config，也不把 correlation 結果寫入資料庫。參照 [`DASHBOARD-DESIGN-SPACE.md`](DASHBOARD-DESIGN-SPACE.md) 時，應將其視為產品設計，勿誤當現況畫面。
+**目前限制：** 這不是股票分析總控台的九頁成品。`design/prototype/index.html` 是已核准的靜態設計原型；US Stocks、TW Stocks 等新版頁面尚未進入正式 `index.html`。沒有自動 `MISSED`；Dashboard 不修改 Scheduler task 或正式 Runner config，也不把 correlation 結果寫入資料庫。參照 [`DASHBOARD-DESIGN-SPACE.md`](DASHBOARD-DESIGN-SPACE.md) 時，應將其視為產品設計，勿誤當現況畫面。
 
 ## 2. 啟動、設定與安全停止
 
@@ -54,7 +54,7 @@ flowchart LR
 
 **它怎麼運作：** `dashboard.mjs` 把 `/api/jobs` 快照顯示於 Today，按市場、狀態與 metadata 排列；摘要的「需留意」來自當前 status，不是漏跑判斷。Workflow 在 Today 內按台股／美股呈現預設順序與依賴文字，點卡片進同一工作詳情；這是工作關係的**展示**，不會啟動或阻擋下游工作。History tab 以瀏覽器本地七個日曆日算出 UTC 查詢界線，讀 `GET /api/history?from=...&to=...`，將當前工作與只在歷史存在的工作按 canonical ID 合併。日期格可展開該日全部已觀察執行；有日期的舊檢查工作可摺疊。現在的 UI 另讀一次 `/api/runner/executions` 以顯示 coverage 與詳情。
 
-**目前限制：** History 不是 Windows Event Log 全量紀錄；空格只表示資料庫沒有該日可顯示的已觀察執行，絕不代表漏跑。Workflow 依賴圖不是執行引擎；預設只呈現設定順序中前段工作。正式 UI 只有 Today／History 兩個 tab，新版八頁仍是 prototype。
+**目前限制：** History 不是 Windows Event Log 全量紀錄；空格只表示資料庫沒有該日可顯示的已觀察執行，絕不代表漏跑。Workflow 依賴圖不是執行引擎；預設只呈現設定順序中前段工作。正式 UI 只有 Today／History 兩個 tab，新版九頁仍是 prototype。
 
 ## 5. SQLite：工作身分與已觀察執行
 
@@ -192,9 +192,9 @@ sequenceDiagram
 | 使用者 metadata 設定 | 已完成 | 只改顯示，不改 Scheduler/Runner。 |
 | Schedule Snapshot History | 已完成保存 | 無正式 UI／API；觀察時間不等於實際變更時間。 |
 | Occurrence Correlation | shadow research model 已完成 | 無正式 UI／API、未驗證為 Windows provenance、無 MISSED。 |
-| 八頁新產品畫面與外部股票來源 adapter | 設計／靜態原型 | 不是目前正式 Dashboard runtime。 |
+| 九頁新產品畫面與外部股票來源 adapter | 設計／靜態原型 | 不是目前正式 Dashboard runtime。 |
 
-**目前限制：** 上表的「已完成」指 repo 中有正式程式與既有 Stage gate；不代表目前這台機器所有 Scheduler task、Runner mapping、資料庫或外部來源均已在本文件撰寫時實機驗收。外部股票專案的 adapter 與新版八頁屬已核准設計，非本次 As-Built 範圍。`MISSED` 不可由現有 shadow 時間 heuristics 直接啟用。
+**目前限制：** 上表的「已完成」指 repo 中有正式程式與既有 Stage gate；不代表目前這台機器所有 Scheduler task、Runner mapping、資料庫或外部來源均已在本文件撰寫時實機驗收。外部股票專案的 adapter 與新版九頁屬已核准設計，非本次 As-Built 範圍。`MISSED` 不可由現有 shadow 時間 heuristics 直接啟用。
 
 ## 14. 功能到 class／API／table 的索引
 

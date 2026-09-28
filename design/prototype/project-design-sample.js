@@ -1,4 +1,4 @@
-// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: 9b96802d7ddf53eb8aa99359bca3fc18df5bd1f82663b2c565d522ebe845b877
+// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: 0e14297b94feede94ee997f5a2f74b91f335efb4d28a335507637d9f2d6ee0c6
 window.PROJECT_DESIGN_SAMPLE = Object.freeze({
   "metadata": {
     "project_id": "local-dashboard",
@@ -315,10 +315,10 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "area": "Product expansion",
       "name": "Projects",
       "originalIntent": "原設計無跨專案設計檢視",
-      "implementation": "本次 Local Dashboard 靜態 pilot，讀本主檔產生樣本",
-      "status": "IN_PROGRESS",
+      "implementation": "Local Dashboard Living Project Design contract 與靜態 pilot 已通過 Manager Review",
+      "status": "DESIGNED",
       "limitation": "無 production Viewer／aggregation",
-      "remaining": "review pilot 後另開正式 stage",
+      "remaining": "實作 production Projects Viewer / aggregation，須另開正式 stage",
       "evidence": "docs/PROJECT-DESIGN.md"
     },
     {
@@ -485,14 +485,8 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
   "remaining": [
     {
       "horizon": "NEXT",
-      "work": "Review Local Dashboard Project Design pilot",
-      "gate": "確認主檔、feature 狀態與六個 Projects 檢視對專案擁有者有用",
-      "evidence": "docs/PROJECT-DESIGN.md"
-    },
-    {
-      "horizon": "NEXT",
-      "work": "Product Shell／Projects 正式 viewer 規劃",
-      "gate": "同一 repo 主檔 parser/export、來源錯誤與權限、鍵盤／手機 gate；另開實作 stage",
+      "work": "Release 1 — Product Shell / Projects Viewer implementation",
+      "gate": "同一 repo 主檔 parser/export、來源錯誤與權限、鍵盤／手機 gate；須另開實作 stage",
       "evidence": "docs/DASHBOARD-DESIGN-SPACE.md"
     },
     {

@@ -1,6 +1,6 @@
 # Local Dashboard — Product Design Space
 
-Status: **Product Design Space approved; Projects pilot awaiting Manager Review**. Original design baseline: `dcfbd033110aca0d3f2250c4f7fd0faa560bb863`; Projects pilot baseline: `main` at `085757affe2c2dc0c1de45663395e418ad702e3e` (2026-09-28). This document and `design/prototype/` describe a product direction; they do not change production behavior. Every number and event in the prototype is **SAMPLE / PROTOTYPE DATA**.
+Status: **Product Design Space approved; Projects static pilot Manager Review PASSED; production Viewer not implemented**. Original design baseline: `dcfbd033110aca0d3f2250c4f7fd0faa560bb863`; Projects pilot baseline: `main` at `085757affe2c2dc0c1de45663395e418ad702e3e` (2026-09-28). This document and `design/prototype/` describe a product direction; they do not change production behavior. Every number and event in the prototype is **SAMPLE / PROTOTYPE DATA**.
 
 ## Product definition and decisions
 
@@ -37,7 +37,7 @@ The status wording in this screen specification records the approved **page desi
 | Page | Main question and composition | Current basis / gap | Status |
 | --- | --- | --- | --- |
 | Overview | In five seconds: automation, US/TW freshness and new findings, attention, next run. Pipeline timeline, today's US/TW findings, source freshness, recent reports. Each section names its source and observation time. | Existing jobs/history/Runner can fill operations; cross-project normalized feeds and source-health aggregation need backend. Counts cannot be inferred from Scheduler success. | DESIGNED |
-| Projects | What is each project for, what is done, what changed, and what remains? Landing uses status counts without a completion percentage; detail has six views. | Local Dashboard pilot reads a generated sample from its `docs/PROJECT-DESIGN.md`; no production viewer or other project onboarding. | IN_PROGRESS (static pilot); production DESIGNED |
+| Projects | What is each project for, what is done, what changed, and what remains? Landing uses status counts without a completion percentage; detail has six views. | Local Dashboard static pilot passed Manager Review and reads a generated sample from its `docs/PROJECT-DESIGN.md`; no production viewer or other project onboarding. | DESIGNED (reviewed static pilot); production NOT_STARTED |
 | Automations · Today | Workflow and grouped jobs; status, last/next run, short Runner indicator, legacy folding. | Existing Today UI and `/api/jobs`. | DONE (relocation DESIGNED) |
 | Automations · History | Observed executions and seven-day grid; preserve source identity and failed execution. 7D exists; 30D/90D are design only and need bounded pagination/query. | `/api/history`, SQLite observed history, existing UI. | DONE (30D/90D NOT_STARTED) |
 | Automations · Schedule | Job detail: current version, first/last observed, timezone, enabled state, exact triggers, previous versions, observation gaps. A gap is uncertainty, never evidence of a missed run. | Stage A SQLite schedule snapshots exist without a public UI/API. | BACKEND_READY |
