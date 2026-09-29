@@ -1,15 +1,16 @@
 # Local Dashboard — Product Design Space
 
-Status: **DESIGNED; Manager Review pending**. Baseline: `main` at `dcfbd033110aca0d3f2250c4f7fd0faa560bb863` (2026-09-28). This document and `design/prototype/` describe a product direction; they do not change production behavior. Every number and event in the prototype is **SAMPLE / PROTOTYPE DATA**.
+Status: **Product Design Space approved; Projects static pilot Manager Review PASSED; production Viewer not implemented**. Original design baseline: `dcfbd033110aca0d3f2250c4f7fd0faa560bb863`; Projects pilot baseline: `main` at `085757affe2c2dc0c1de45663395e418ad702e3e` (2026-09-28). This document and `design/prototype/` describe a product direction; they do not change production behavior. Every number and event in the prototype is **SAMPLE / PROTOTYPE DATA**.
 
 ## Product definition and decisions
 
 Local Dashboard is the local control center for investment research data and automation. It answers three separate questions: **Operations** — is the system working; **Research Data** — what was collected; **Evidence** — why is a status shown. It observes and diagnoses. It does not run pipelines, trade, alter source data, or infer an execution from missing evidence.
 
-The proposed eight-item navigation is retained. `Automations` owns the existing Today/History experience; `Data & Evidence` is the cross-source diagnostic destination. Schedule and execution evidence are also reachable inside Automations, where a user investigates a job. That deliberate overlap is one shared view/model, not two independent contracts.
+The approved eight-page direction is extended to **nine primary pages** for the Projects pilot. `Automations` owns the existing Today/History experience; `Data & Evidence` is the cross-source diagnostic destination. Schedule and execution evidence are also reachable inside Automations, where a user investigates a job. That deliberate overlap is one shared view/model, not two independent contracts.
 
 ```text
 Overview
+Projects          Landing · project detail: Overview · Features · Architecture · Problems · Changes · Remaining
 Automations       Today · History · Schedule · Evidence
 US Stocks         Signals · SEC Transactions · Ticker Detail
 TW Stocks         Daily Scan · Accumulation · Candidates
@@ -21,18 +22,29 @@ Settings          Job Display · Data Sources · Refresh · Default View · Appe
 
 At desktop width, use a persistent side navigation, page header, compact summary cards, filter bar and a detail panel. At 375/320 px, use a compact top header and horizontally scrollable primary navigation; content stacks, tables scroll within their own region, and detail is a full-width panel. A persistent data-mode label distinguishes prototype samples from live production data.
 
+### Projects — one design source per repository
+
+Every managed project owns **its own** `docs/PROJECT-DESIGN.md` in its own repository, with a stable `project_id`, parseable versioned metadata, feature status matrix, major issues, changes and remaining work. That file is the project's **Single Project Design Source of Truth**. Dashboard is a **viewer / aggregator only**: it must not separately maintain another project status list or infer completion percentages. An absent, unreadable, stale or unsupported source stays explicitly unavailable; it must not become zero progress or a fabricated status.
+
+The static pilot uses only Local Dashboard's [PROJECT-DESIGN.md](PROJECT-DESIGN.md). `design/prototype/generate-project-design.mjs` derives its committed browser sample from that document; `--check` rejects drift. Status counts on the card and Features view are calculated from the same parsed feature rows. Future production Projects Viewer should parse or consume a versioned export of each repository's own file with source revision and review time; the pilot is not a live repository reader.
+
+Future onboarding requires at least a stable ID and `docs/PROJECT-DESIGN.md` in the **source repository**. Candidate IDs include `local-dashboard`, `insider-signal-tracker` and `ai-stock-hunter`; only the first is onboarded in this pilot. Onboarding the others requires their own design/review stage and does not authorize writing to those repositories here. Projects detail has Overview, Features, Architecture, Problems, Changes and Remaining views; Architecture and Changes need legible visual treatments, and every feature can expose purpose, mechanism, limitation and remaining work.
+
 ## Screen specification
+
+The status wording in this screen specification records the approved **page design gate**, including mixed backend/data/UI readiness at that time. It is not a second maintained project feature inventory. For current per-feature status and counts, read [PROJECT-DESIGN.md](PROJECT-DESIGN.md).
 
 | Page | Main question and composition | Current basis / gap | Status |
 | --- | --- | --- | --- |
 | Overview | In five seconds: automation, US/TW freshness and new findings, attention, next run. Pipeline timeline, today's US/TW findings, source freshness, recent reports. Each section names its source and observation time. | Existing jobs/history/Runner can fill operations; cross-project normalized feeds and source-health aggregation need backend. Counts cannot be inferred from Scheduler success. | DESIGNED |
+| Projects | What is each project for, what is done, what changed, and what remains? Landing uses status counts without a completion percentage; detail has six views. | Local Dashboard static pilot passed Manager Review and reads a generated sample from its `docs/PROJECT-DESIGN.md`; no production viewer or other project onboarding. | DESIGNED (reviewed static pilot); production NOT_STARTED |
 | Automations · Today | Workflow and grouped jobs; status, last/next run, short Runner indicator, legacy folding. | Existing Today UI and `/api/jobs`. | DONE (relocation DESIGNED) |
-| Automations · History | Observed executions and seven-day grid; preserve source identity and failed execution. 7D exists; 30D/90D are design only and need bounded pagination/query. | `/api/history`, SQLite observed history, existing UI. | DONE (30D/90D PLANNED) |
+| Automations · History | Observed executions and seven-day grid; preserve source identity and failed execution. 7D exists; 30D/90D are design only and need bounded pagination/query. | `/api/history`, SQLite observed history, existing UI. | DONE (30D/90D NOT_STARTED) |
 | Automations · Schedule | Job detail: current version, first/last observed, timezone, enabled state, exact triggers, previous versions, observation gaps. A gap is uncertainty, never evidence of a missed run. | Stage A SQLite schedule snapshots exist without a public UI/API. | BACKEND_READY |
 | Automations · Evidence | Execution row links Scheduler observation, Runner receipt/coverage and candidate occurrence. Show `CORRELATED`, `AMBIGUOUS`, `UNSUPPORTED` and reason; retain unmatched records. | Runner UI exists; Stage B correlation is shadow only and has no production endpoint. | BACKEND_READY (correlation visualization DESIGNED) |
 | US Stocks · Signals | Card/table toggle, source/status filters, search, ticker, report/event date, scores and origin, buyers/amount only when source supplies them, discovered time/basis, warnings, performance or —. | Insider Tracker `list-signals` v1 is read-only JSON; aggregation/detail and performance joins need an adapter. | DATA_READY / DESIGNED |
 | US Stocks · SEC Transactions | Issuer, insider, code/type, shares, price, amount, filing date/form, review flags; detail shows transaction, filing, owner and source metadata. Keep amendments and unresolved 4/4A reconciliation visible. | Source SQLite records exist; normalized signal feed is not a transaction-list contract. | DATA_READY / DESIGNED |
-| US Stocks · Ticker Detail | One ticker's signals, transactions, report references and performance, with separate dates and provenance. No cross-source identity inference. | Needs read-only aggregate API and pagination. | PLANNED |
+| US Stocks · Ticker Detail | One ticker's signals, transactions, report references and performance, with separate dates and provenance. No cross-source identity inference. | Needs read-only aggregate API and pagination. | DESIGNED |
 | TW Stocks · Daily Scan | Run result, covered date, classification, anomaly measures, source coverage, warning/partial state; summary is distinct from per-ticker findings. | AIStockHunter DB/run artifacts exist; no stable Dashboard-facing contract found. | DATA_READY / DESIGNED |
 | TW Stocks · Accumulation | Scope/start date, completed/incomplete days, source-level statuses and observed signals. Show `PARTIAL`, `WARMING_UP`, unknown explicitly. | Daily accumulation results/sources and weekly-check output exist. | DATA_READY / DESIGNED |
 | TW Stocks · Candidates | Only candidates the source explicitly labels; show score provenance and eligibility. Do not treat legacy `candidate_signal` as current daily accumulation output. | Existing `unexplained_volume_signal`; contract and semantics must be exported. | DATA_READY / DESIGNED |
@@ -62,19 +74,7 @@ Every list gets a common search/filter row, result count, loading/empty/error tr
 
 ## Current completion inventory
 
-This inventory was checked against `main` history and source/docs, including `docs/STAGE-SCHEDULE-SNAPSHOT-HISTORY.md`, `docs/STAGE-OCCURRENCE-CORRELATION.md`, `docs/STAGE-RUNNER-RECEIPTS-UI.md`, `docs/STAGE-RUNNER-COVERAGE-DIAGNOSTICS.md`, `docs/STAGE-UX-1.md` through `STAGE-UX-3.md`, and current API/UI files. `DONE` means existing production capability, not that the proposed layout exists.
-
-| Capability | Status | Evidence / boundary |
-| --- | --- | --- |
-| Scheduler collector; `/api/jobs`; Today; History; SQLite execution history | DONE | Collector/service, `index.html`, `dashboard.mjs`, history migration/API |
-| UX metadata/grouping, workflow, editable display settings | DONE | UX stage docs and metadata endpoint/UI |
-| Runner core, launcher, safe stop | DONE | Runner/launcher packages and stage docs |
-| Runner receipt UI; coverage and diagnostics | DONE | Runner receipt endpoint/UI and stage docs |
-| Schedule Snapshot History | DONE (Stage A backend); BACKEND_READY (screen) | Stage A repository and V2 migration are complete; no screen/API |
-| Occurrence Correlation shadow | DONE (Stage B shadow); BACKEND_READY (screen) | Pure shadow correlation/repository complete; no production status publication |
-| Machine availability evidence | PLANNED | Required for trustworthy absence reasoning |
-| Automatic `MISSED`; production correlation | BLOCKED | Requires provenance and shadow false-positive gate; 2-min early/5-min late/3-hour catch-up/30-sec merge are research policies only |
-| Notification; retry/remediation | LATER | No authorization or product contract |
+The **maintained feature status matrix** now lives in [PROJECT-DESIGN.md](PROJECT-DESIGN.md). Its feature IDs, one-status-per-feature vocabulary, remaining work and evidence links are the source for the Projects pilot's counts and expanded feature cards. This Design Space keeps the approved screen direction and architecture decisions; it no longer maintains a competing completion list. Historical Stage documents remain review evidence, and [As-Built](DASHBOARD-AS-BUILT-ARCHITECTURE.md) explains the currently merged runtime.
 
 ## Architecture and integration decisions
 
@@ -106,7 +106,7 @@ External integrations are observation only. No source DB writes, Git changes, Sc
 
 | Release | Deliverable | Gate before proceeding |
 | --- | --- | --- |
-| 1 — Product Shell | Navigation, Overview operations slice, Automations split, Stage A Schedule UI, read-only Evidence UI and Dashboard source health | Existing Today/History behavior preserved; no new MISSED; keyboard/mobile/accessibility checks; API/view model contract |
+| 1 — Product Shell | Navigation, Projects viewer after pilot review, Overview operations slice, Automations split, Stage A Schedule UI, read-only Evidence UI and Dashboard source health | Existing Today/History behavior preserved; source-owned Project Design contract; no new MISSED; keyboard/mobile/accessibility checks; API/view model contract |
 | 2 — Investment Data | US signals/SEC transactions/reports and TW daily/accumulation through read-only adapters | Source contract version, provenance, partial/null behavior, formal DB read safety, data freshness evidence |
 | 3 — Research Analytics | Performance, ticker detail, score analysis, report revisions | Read-only performance/report contract; observed vs pending horizons; source-supported revision comparison |
 | 4 — Reliability | Availability evidence, shadow MISSED, false-positive evaluation, separate production decision | Real machine availability/catch-up provenance and representative shadow evidence; explicit Manager approval before production MISSED |
@@ -127,4 +127,4 @@ Release 1 is intentionally a UI/product slice before further external backend ex
 
 No brokerage/trading or automatic orders, cloud deployment, source DB writes, AI inference inside Dashboard, production MISSED without evidence, large frontend framework migration, arbitrary command runner, notification or retry/remediation in this stage. The prototype's sample data is presentation evidence only.
 
-Manager Review can verify: final sitemap and all eight screens, actual source-contract inventory, normalized models in `DASHBOARD-DATA-CONTRACTS.md`, architecture, shared states/components, completion matrix, roadmap, refactor thresholds, static desktop/mobile/keyboard prototype, unchanged production entrypoints and clean Git state. This stage stops at design branch review; it does not start Release 1.
+Manager Review can verify: revised nine-page sitemap and Projects pilot with six detail views, source-owned Project Design model, actual source-contract inventory, normalized models in `DASHBOARD-DATA-CONTRACTS.md`, architecture, shared states/components, completion matrix, roadmap, refactor thresholds, static desktop/mobile/keyboard prototype, unchanged production entrypoints and clean Git state. This stage stops at design branch review; it does not start Release 1.
