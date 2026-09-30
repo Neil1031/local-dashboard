@@ -2,7 +2,7 @@
 
 範圍僅 Windows 一鍵停止；不包含 Stage 5B、Runner migration、Service、tray、auto-start 或 scheduler 修改。
 
-2026-09-30 候選整合：Start／Stop 共用 **43871**，專用 worktree 隔離候選已驗證；正式安裝與捷徑未替換，仍待初審／Manager Review。原計畫與 2026-09-21 驗收中的 8080 為歷史紀錄。
+Start／Stop 的正式 source target 為 **43871**，已通過獨立初審與 Manager Review 並合併 main `eba1003`。Repository／package 核准不代表桌面目前安裝版本；實際 installed version 須由獨立 deployment evidence 驗證。原計畫與 2026-09-21 驗收中的 8080 為歷史紀錄。
 
 ## Plan / Stage / Gate
 
@@ -87,7 +87,7 @@ target 或 arguments 不同就拒絕，兩份都不改。只有明確 `-Replace`
 
 ## Reproducible verification
 
-目前 Stage 使用 [43871 隔離候選流程](STAGE-PORT-43871-CURRENT-MAIN.md)。以下為歷史驗收命令；舊 `verify-safe-stop.py` 相依流程未全面隔離 LOCALAPPDATA，還會接觸正式排程／捷徑。本 Stage 未原樣執行，不得用於候選隔離驗收。
+隔離候選驗證使用 [43871 隔離候選流程](STAGE-PORT-43871-CURRENT-MAIN.md)。以下為歷史驗收命令；舊 `verify-safe-stop.py` 相依流程未全面隔離 LOCALAPPDATA，還會接觸正式排程／捷徑。不得原樣用於候選隔離驗收。
 
 ```powershell
 python scripts/verify-safe-stop.py --prepare
