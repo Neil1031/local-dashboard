@@ -15,7 +15,7 @@ current_design: Local investment research and automation console
 
 這份文件是 **Local Dashboard 自己的專案設計主檔**，供專案擁有者、GPT／Astra／Work 和未來的 Dashboard Projects Viewer 使用。它記錄為何建造、原設計、現況、重大改變、未解問題與下一步。使用者主要應由 Projects 畫面閱讀；Stage 文件與 [As-Built 現況說明](DASHBOARD-AS-BUILT-ARCHITECTURE.md) 是可追查的 evidence，不取代這份主檔。
 
-`baseline_commit` 是本次盤點所依據的 `main`，不是本文件最後提交的 SHA。`last_reviewed_at` 是設計盤點日期，不表示當天實機重新驗收所有排程或外部資料。`overall_status: IN_PROGRESS` 指**整個專案**；Feature Matrix 的 `product-projects: DESIGNED` 指**已通過審查的靜態 pilot**，正式 Viewer 尚未實作。Prototype 是樣本畫面，不能被視為正式功能已上線。
+`baseline_commit` 是本次盤點所依據的 `main`，不是本文件最後提交的 SHA。`last_reviewed_at` 是設計盤點日期，不表示當天實機重新驗收所有排程或外部資料。`overall_status: IN_PROGRESS` 指**整個專案**；Feature Matrix 的 `product-projects: PARTIAL` 指 Release 1A-1 的**本專案建置快照 Viewer 最小切片**，待 Astra 初審與 Manager 終審，尚未部署驗收；跨專案 aggregation 與完整 Projects 閱讀面板仍未實作。Prototype 是獨立樣本畫面。
 
 ## Project Identity
 
@@ -41,7 +41,7 @@ current_design: Local investment research and automation console
 
 **目前設計：本機投資研究資料與自動化流程總控制台。** 產品設計把 Overview、Projects、Automations、US Stocks、TW Stocks、Performance、Reports、Data & Evidence、Settings 視為九個主要入口。Scheduler 只屬於 Automations 的一個資料來源；Runner 是另一種執行證據。股票來源須透過來源專案的唯讀版本化契約與 Dashboard adapter，不能讓畫面直接解讀外部 SQLite schema。
 
-目前正式 runtime **尚未**變成九頁。正式 `index.html`／`dashboard.mjs` 仍提供 Today／History 與既有設定；`design/prototype/` 是靜態樣本。Projects Viewer 本次只做 Local Dashboard pilot 原型，不上正式入口。每個未來受管理專案應在**自己的 repository** 保存 `docs/PROJECT-DESIGN.md` 與 stable `project_id`；Dashboard 只做 viewer／aggregator，不在自己的 repo 再維護另一套該專案 status。未來正式 Viewer 應解析或由來源產生同一主檔的版本化匯出，保留來源 repo、版本、檢查時間與讀取失敗狀態。
+目前正式 runtime **尚未**變成九頁。正式 `index.html`／`dashboard.mjs` 提供 Today／History、既有設定及 Release 1A-1 Projects 最小入口；`ui/projects.mjs` 讀取建置時原樣複製的 Local Dashboard 主檔，不即時讀 Git 工作目錄。`design/prototype/` 仍是獨立靜態樣本。每個未來受管理專案應在**自己的 repository** 保存 `docs/PROJECT-DESIGN.md` 與 stable `project_id`；Dashboard 只做 viewer／aggregator，不在自己的 repo 再維護另一套該專案 status。最小 Viewer 與 prototype generator 共用 `ui/project-design.mjs` v1 parser，保留來源 repo、歷史 baseline、設計版本、SHA-256 及讀取時間；固定同站單檔來源，拒絕轉址、格式錯誤、不支援版本及超過 256 KiB 的資料。未來跨專案來源仍須另審版本化匯出。
 
 ## Goals
 
@@ -54,7 +54,7 @@ current_design: Local investment research and automation console
 
 - 不從 Dashboard 執行交易、修改股票來源正式資料、執行任意指令或替來源做投資判斷。
 - 不由缺少 History／receipt 推論 production `MISSED`；不靠研究時間視窗改 Scheduler 狀態。
-- 本 pilot 不修改正式 UI、後端、Scheduler task、正式 Runner config／receipt 或其他 repository。
+- Release 1A-1 僅新增正式 Projects 最小入口及固定建置資源；不修改 Scheduler task、正式 Runner config／receipt 或其他 repository。
 - 不把靜態 prototype 的樣本數值當成真實投資資料、產品完成度百分比或實機驗收結果。
 
 ## Current Architecture
@@ -84,7 +84,7 @@ flowchart TD
 
 | ID | Area | Feature | Original intent | Current implementation | Status | Current limitation | Remaining work | Evidence |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| desktop-launcher | Desktop / Runtime | Launcher | 雙擊開本機監控畫面 | 包裝版 EXE 啟動 loopback Spring server，已執行則開既有頁面 | DONE | 固定本機 8080，非 Windows Service | 維持啟動身分驗證 | docs/WINDOWS-LAUNCHER.md |
+| desktop-launcher | Desktop / Runtime | Launcher | 雙擊開本機監控畫面 | 包裝版 EXE 啟動 loopback Spring server，已執行則開既有頁面 | DONE | 目前程式基準 8080；已確定正式目標 43871，本階段未遷移，非 Windows Service | 維持啟動身分驗證 | docs/WINDOWS-LAUNCHER.md |
 | desktop-browser | Desktop / Runtime | Browser auto-open | 啟動後可直接看畫面 | readiness 成功後交給 Windows 預設瀏覽器 | DONE | 關瀏覽器不停止服務 | 維持 readiness 與錯誤提示 | docs/WINDOWS-LAUNCHER.md |
 | desktop-stop | Desktop / Runtime | Safe Stop | 安全結束本機服務 | PID、建立時間、命令與 listener 身分核對後停止 | DONE | Windows 不保證 graceful termination；身分不明會拒絕 | 維持安全拒絕與回歸檢查 | docs/WINDOWS-SAFE-STOP.md |
 | desktop-runtime | Desktop / Runtime | Bundled runtime | 使用者無須安裝 Java | app-image 內含 Java runtime 與 Dashboard JAR | DONE | 不是 installer 或 updater | 依部署 gate 更新 image | docs/WINDOWS-LAUNCHER.md |
@@ -109,9 +109,9 @@ flowchart TD
 | schedule-availability | Schedule semantics | Machine availability evidence | 分辨漏跑與電腦／服務不可用 | 需求與研究邊界已有文件；無正式證據時間線 | NOT_STARTED | 缺 boot、sleep、service、session、條件連續性 | 建立可驗證 availability contract | docs/STAGE-SCHEDULE-SEMANTICS-MISSED-READINESS.md |
 | schedule-shadow-missed | Schedule semantics | Shadow MISSED | 先以研究方式測量誤判 | Stage B 只關聯已執行證據，沒有缺席評估器 | NOT_STARTED | availability／catch-up closure 未解 | 在獨立 gate 評估 WOULD_BE_MISSED 與 UNKNOWN | docs/STAGE-SCHEDULE-SEMANTICS-MISSED-READINESS.md |
 | schedule-prod-missed | Schedule semantics | Production MISSED | 可相信的自動漏跑狀態 | 正式程式不產生新 MISSED | BLOCKED | 缺真實來源證據與 shadow false-positive review | 先過 availability、provenance、shadow 與 Manager gate | docs/STAGE-OCCURRENCE-CORRELATION.md |
-| product-shell | Product expansion | Product Shell | 原本只需 Today／History | 九頁 shell 已有靜態 prototype 設計，未進正式 UI | DESIGNED | production 仍是兩個 tab | 獨立 Release 1 實作與驗收 | docs/DASHBOARD-DESIGN-SPACE.md |
+| product-shell | Product expansion | Product Shell | 原本只需 Today／History | 九頁 shell 已有靜態 prototype 設計，未進正式 UI | DESIGNED | production 保留 Today／History 並加 Projects 最小入口，尚非九頁 shell | 獨立 Release 1 實作與驗收 | docs/DASHBOARD-DESIGN-SPACE.md |
 | product-overview | Product expansion | Overview | 原本由 Today 看排程摘要 | 原型規劃 operations、US／TW findings、freshness | DESIGNED | 跨來源 normalized feeds 未接入 | 先做來源有據的 operations slice | docs/DASHBOARD-DESIGN-SPACE.md |
-| product-projects | Product expansion | Projects | 原設計無跨專案設計檢視 | Local Dashboard Living Project Design contract 與靜態 pilot 已通過 Manager Review | DESIGNED | 無 production Viewer／aggregation | 實作 production Projects Viewer / aggregation，須另開正式 stage | docs/PROJECT-DESIGN.md |
+| product-projects | Product expansion | Projects | 原設計無跨專案設計檢視 | Release 1A-1 正式入口讀本專案建置設計快照，共用 v1 parser 並呈現功能／狀態數量 | PARTIAL | 最小切片待 Astra／Manager 審查，未部署；跨專案 aggregation／完整閱讀面板未實作 | 完成本階段審查；後續完整 Projects／aggregation 另審 | docs/STAGE-PROJECTS-VIEWER-R1A1.md |
 | product-us | Product expansion | US Stocks | 原設計只看 Insider 相關排程 | Signals／SEC／Ticker 頁面已有設計樣本 | DESIGNED | read-only adapter 未整合；source list-signals v1 可作首個輸入 | 建立版本化 adapter 與 partial 契約 | docs/DASHBOARD-DATA-CONTRACTS.md |
 | product-tw | Product expansion | TW Stocks | 原設計只看 AIStockHunter 排程 | Daily Scan／Accumulation／Candidates 已設計 | DESIGNED | AIStockHunter 尚無穩定 Dashboard-facing export | 來源 repo 另審 ai-stock-hunter-export-v1 | docs/DASHBOARD-DATA-CONTRACTS.md |
 | product-performance | Product expansion | Performance | 原設計不分析選股效果 | 時距與觀測成熟度畫面已設計 | DESIGNED | 現有 performance-summary 非核准唯讀介面 | 取得來源唯讀 contract 後接入 | docs/DASHBOARD-DATA-CONTRACTS.md |
@@ -151,7 +151,7 @@ flowchart TD
 - Scheduler `LastRunTime` 是最近一次值，Dashboard History 是**已觀察**結果；缺一筆不等於沒執行。Schedule version 的觀察時間也不是 Windows 實際修改時間。
 - Runner coverage 僅限有可信映射和可讀 receipts 的工作；缺 receipt 不代表 child 未執行。
 - Insider／AIStockHunter 的正式 Dashboard read-only adapters 尚未整合；AIStockHunter 尚無穩定 `ai-stock-hunter-export-v1`。`DEFAULT 0` 不等於 observed 0；`latest` artifact 不是完整性保證。
-- 九頁 Product Shell／Projects Viewer 尚未在 production。此 pilot 只用 Local Dashboard 文件與靜態樣本，不連接其他 repo。
+- 九頁 Product Shell 尚未實作。Projects 只有 Local Dashboard 建置快照最小入口，待獨立審查／部署；不連接其他 repo。
 
 ## Remaining Work
 
@@ -159,7 +159,7 @@ flowchart TD
 
 | Horizon | Work | Why / gate | Evidence |
 | --- | --- | --- | --- |
-| NEXT | Release 1 — Product Shell / Projects Viewer implementation | 同一 repo 主檔 parser/export、來源錯誤與權限、鍵盤／手機 gate；須另開實作 stage | docs/DASHBOARD-DESIGN-SPACE.md |
+| NEXT | Release 1 — Product Shell / complete Projects Viewer implementation | Release 1A-1 最小 Viewer 已實作待審；完整面板／aggregation 與其他 Release 1 能力仍須獨立 gate | docs/DASHBOARD-DESIGN-SPACE.md |
 | DESIGNED | Overview operations slice | 只用現有 Scheduler／History／Runner 真實證據，不虛構股票資料 | docs/DASHBOARD-DESIGN-SPACE.md |
 | DESIGNED | US Stocks／TW Stocks／Performance／Reports | 來源版控唯讀 contract、adapter、partial/null/provenance gate | docs/DASHBOARD-DATA-CONTRACTS.md |
 | DESIGNED | Data & Evidence／Schedule view | 對已保存版本與 Runner coverage 建唯讀檢視，保留 UNKNOWN | docs/STAGE-SCHEDULE-SNAPSHOT-HISTORY.md |
@@ -170,7 +170,8 @@ flowchart TD
 
 | 類型 | 名稱 | 用途 |
 | --- | --- | --- |
-| UI | `index.html`、`dashboard.mjs` | 目前正式 Today／History／設定畫面 |
+| UI | `index.html`、`dashboard.mjs`、`ui/projects.mjs` | Today／History／設定及 Projects 最小入口 |
+| Resource / parser | `/project-design/PROJECT-DESIGN.md`、`ui/project-design.mjs` | canonical 建置快照／共用 v1 契約，不是 live Git reader |
 | Prototype | `design/prototype/` | 九頁靜態產品樣本；Projects 由本文件生成資料 |
 | API | `/api/jobs` | 當次 Scheduler snapshot 與收集診斷 |
 | API | `/api/history` | SQLite 已觀察 execution history |
@@ -194,3 +195,4 @@ flowchart TD
 | Date | Design version | Change | Review state |
 | --- | --- | --- | --- |
 | 2026-09-28 | 1 | 建立並審核 Local Dashboard Living Project Design pilot；彙整 As-Built、Design Space、feature status、重大問題與待辦分類，供 Projects 靜態原型讀取。 | Manager Review PASSED |
+| 2026-09-30 | 1 | Release 1A-1：Projects 本專案建置快照最小入口，33 IDs 保留，僅 product-projects DESIGNED → PARTIAL；目標 Port 已定 43871，現行程式 8080 未遷移。 | Implementation ready for Astra / Manager review; not deployed |

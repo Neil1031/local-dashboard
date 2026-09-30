@@ -2,6 +2,7 @@ import { test, before, after, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { createServer } from 'node:http';
+import { serveStaticAsset } from './static-assets.mjs';
 import { readFile, mkdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
@@ -41,11 +42,7 @@ async function mock({ jobs = current(), histories = fixture(), historyStatus = 2
 }
 before(async () => {
   await mkdir(artifacts, { recursive: true });
-  server = createServer(async (request, response) => {
-    const file = request.url === '/dashboard.mjs' ? 'dashboard.mjs' : 'index.html';
-    response.setHeader('Content-Type', file.endsWith('mjs') ? 'text/javascript' : 'text/html; charset=utf-8');
-    response.end(await readFile(new URL(`../${file}`, import.meta.url)));
-  });
+  server = createServer(serveStaticAsset);
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   base = `http://127.0.0.1:${server.address().port}`;
   browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL || 'msedge', headless: true });

@@ -1,6 +1,6 @@
 # Local Dashboard 現況系統設計（As-Built）
 
-> 核對基準：`main` 的 `085757affe2c2dc0c1de45663395e418ad702e3e`；本文件只描述已合併的正式程式與其研究元件。這是程式與既有 Stage 文件的對照，不是對某一天 Windows 排程實際執行的驗收紀錄。文中的時間例子是說明，不是投資資料或實際執行證據。
+> 歷史盤點基準：`main` 的 `085757affe2c2dc0c1de45663395e418ad702e3e`；既有系統敘述依該基準與 Stage 文件。2026-09-30 的 Release 1A-1 補充描述本分支待獨立審查的 Projects 最小入口，尚未合併或部署。這是程式與既有 Stage 文件的對照，不是對某一天 Windows 排程實際執行的驗收紀錄。文中的時間例子是說明，不是投資資料或實際執行證據。
 
 先記住四件事：**Today 是現在讀到的 Scheduler 快照；History 是 Dashboard 曾看見並存下的結果；Runner 是有映射工作才可能有的另一份執行證據；Schedule Snapshot／Correlation 目前沒有正式畫面。** 想查某個欄位時可直接看第 12 節，想找對應程式可看第 14 節。
 
@@ -8,7 +8,7 @@
 
 **這功能解決什麼問題：** 在同一個本機畫面查看受監控 Windows 排程的現況、最近一次結果、已觀察到的執行歷史，以及有設定的 Runner 執行證據。
 
-**它怎麼運作：** 正式畫面目前是 **Today + 7-day History**；Today 內有 Workflow、Runner coverage 與設定。Windows Task Scheduler 是排程現況的來源；Dashboard 自己的 SQLite 保存「看見過什麼」；Runner receipts 是另一套執行證據。三者的身分與語意分開保存。排程版本與 occurrence correlation 已在程式中，但 correlation 仍是 shadow research，沒有正式 UI／HTTP API。
+**它怎麼運作：** 正式畫面提供 **Today + 7-day History + Projects 最小入口**；Today 內有 Workflow、Runner coverage 與設定。Windows Task Scheduler 是排程現況的來源；Dashboard 自己的 SQLite 保存「看見過什麼」；Runner receipts 是另一套執行證據。三者的身分與語意分開保存。排程版本與 occurrence correlation 已在程式中，但 correlation 仍是 shadow research，沒有正式 UI／HTTP API。
 
 ```mermaid
 flowchart LR
@@ -25,6 +25,8 @@ flowchart LR
   RA --> UI
   M[本機 metadata JSON] <-->|讀取 / 編輯| MA["/api/settings/job-metadata"]
   MA --> UI
+  PD[canonical PROJECT-DESIGN 主檔] -->|Maven 原樣複製| PS[固定建置設計快照]
+  PS -->|共用 v1 parser| PV[Projects 最小入口]
   H -.唯讀、明確啟用.-> O[Occurrence Correlation shadow]
   S -.唯讀、明確啟用.-> O
   RA -.已驗證的 Runner view.-> O
@@ -38,7 +40,9 @@ flowchart LR
 
 **它怎麼運作：** 包裝版的 `LocalDashboard.exe` 使用內含 Java runtime；無參數啟動時取得共用 lock，先檢查是否已有本產品服務，缺少外部 `config/application.yml` 才從包裝範本 create-only 建立；再啟動 Spring server，等待 `127.0.0.1:8080/api/launcher/status` 回傳精確 readiness 字串，最後用預設瀏覽器開啟頁面。既有服務會直接開瀏覽器，不再啟第二份。預設外部工作目錄是 `%LOCALAPPDATA%\LocalDashboard`，資料庫在 `data/local-dashboard.db`，可用絕對路徑 `LOCAL_DASHBOARD_HOME` 調整；config、DB、logs 不放在 app-image 內。`--stop`／Stop shortcut 取得同一 lock，依 PID 與建立時間、bundled executable/JAR/命令、8080 listener 所屬 PID、readiness 身分交叉驗證後才終止單一 server。設定清單由外部 YAML 控制；repo 的 `application.yml` 預設 `include: []` 表示不監控任何工作，包裝版首次建立的範本另有既有監控項目。
 
-**目前限制：** 包裝版固定 loopback／8080；瀏覽器關閉不等於服務停止。`--stop` 身分不明時拒絕，不能用來停止任意 Java 或 Windows Scheduled Task。Windows bundled JDK 不保證 graceful shutdown；停止可能是強制程序終止。沒有 installer、Service、開機自啟或 updater。細節見 [`WINDOWS-LAUNCHER.md`](WINDOWS-LAUNCHER.md) 與 [`WINDOWS-SAFE-STOP.md`](WINDOWS-SAFE-STOP.md)。
+**Port 決策：** 已確定正式目標為 43871；目前 main 程式／本階段基準仍為 8080，Release 1A-1 未遷移，也未重新驗收正式安裝包。
+
+**目前限制：** 此基準的包裝程式固定 loopback／8080；瀏覽器關閉不等於服務停止。`--stop` 身分不明時拒絕，不能用來停止任意 Java 或 Windows Scheduled Task。Windows bundled JDK 不保證 graceful shutdown；停止可能是強制程序終止。沒有 installer、Service、開機自啟或 updater。細節見 [`WINDOWS-LAUNCHER.md`](WINDOWS-LAUNCHER.md) 與 [`WINDOWS-SAFE-STOP.md`](WINDOWS-SAFE-STOP.md)。
 
 ## 3. Scheduler 收集到 `/api/jobs`
 
@@ -54,7 +58,7 @@ flowchart LR
 
 **它怎麼運作：** `dashboard.mjs` 把 `/api/jobs` 快照顯示於 Today，按市場、狀態與 metadata 排列；摘要的「需留意」來自當前 status，不是漏跑判斷。Workflow 在 Today 內按台股／美股呈現預設順序與依賴文字，點卡片進同一工作詳情；這是工作關係的**展示**，不會啟動或阻擋下游工作。History tab 以瀏覽器本地七個日曆日算出 UTC 查詢界線，讀 `GET /api/history?from=...&to=...`，將當前工作與只在歷史存在的工作按 canonical ID 合併。日期格可展開該日全部已觀察執行；有日期的舊檢查工作可摺疊。現在的 UI 另讀一次 `/api/runner/executions` 以顯示 coverage 與詳情。
 
-**目前限制：** History 不是 Windows Event Log 全量紀錄；空格只表示資料庫沒有該日可顯示的已觀察執行，絕不代表漏跑。Workflow 依賴圖不是執行引擎；預設只呈現設定順序中前段工作。正式 UI 只有 Today／History 兩個 tab，新版九頁仍是 prototype。
+**目前限制：** History 不是 Windows Event Log 全量紀錄；空格只表示資料庫沒有該日可顯示的已觀察執行，絕不代表漏跑。Workflow 依賴圖不是執行引擎；預設只呈現設定順序中前段工作。正式 UI 保留 Today／History 並新增 Projects 最小入口，完整九頁仍未實作，新版九頁仍是 prototype。
 
 ## 5. SQLite：工作身分與已觀察執行
 
@@ -192,9 +196,16 @@ sequenceDiagram
 | 使用者 metadata 設定 | 已完成 | 只改顯示，不改 Scheduler/Runner。 |
 | Schedule Snapshot History | 已完成保存 | 無正式 UI／API；觀察時間不等於實際變更時間。 |
 | Occurrence Correlation | shadow research model 已完成 | 無正式 UI／API、未驗證為 Windows provenance、無 MISSED。 |
+| Projects 本專案建置快照入口 | Release 1A-1 最小切片待審 | 尚未部署，完整面板與跨專案 aggregation 未完成。 |
 | 九頁新產品畫面與外部股票來源 adapter | 設計／靜態原型 | 不是目前正式 Dashboard runtime。 |
 
 **目前限制：** 上表的「已完成」指 repo 中有正式程式與既有 Stage gate；不代表目前這台機器所有 Scheduler task、Runner mapping、資料庫或外部來源均已在本文件撰寫時實機驗收。外部股票專案的 adapter 與新版九頁屬已核准設計，非本次 As-Built 範圍。`MISSED` 不可由現有 shadow 時間 heuristics 直接啟用。
+
+## Release 1A-1：Projects 最小正式入口（待獨立審查，未部署）
+
+Projects 頁從固定同站 `/project-design/PROJECT-DESIGN.md` 讀取 Maven 本次建置原樣複製的唯一 canonical 主檔。`ui/project-design.mjs` 是正式頁與 prototype generator 共用的 v1 parser；`ui/projects.mjs` 只呈現 Local Dashboard 的 feature ID、名稱、狀態、實作、限制、目的和剩餘工作，counts 從同一份 rows 計算。來源 path、design version、原始 bytes SHA-256、讀取時間與歷史 baseline 都保留，baseline 不是本次實作 SHA。
+
+Loader 僅用固定 same-origin URL、拒絕 redirect、10 秒 timeout、256 KiB streaming 上限；資料缺檔、格式錯誤、不支援版本或服務不可用會清除舊 rows/counts 並顯示安全錯誤，重試可恢復。Markdown 欄位作安全文字顯示，不執行 HTML 或連結來源命令。此路徑不讀外部 repo／DB、不調用 Scheduler／Runner，既有監控接線保留。這是建置快照，不是即時 Git reader 或完整六面板／跨專案 aggregation；驗證與限制見 [Stage evidence](STAGE-PROJECTS-VIEWER-R1A1.md)。
 
 ## 14. 功能到 class／API／table 的索引
 
@@ -206,6 +217,7 @@ sequenceDiagram
 | --- | --- | --- |
 | 啟動與停止 | `launcher/WindowsLauncher.java`、`WindowsStopLauncher.java`、`SafeStop.java`、`ConfigBootstrap.java`、`LauncherStatusController.java` | `/api/launcher/status`；外部 `config/application.yml`、`server.pid`、logs |
 | Scheduler 目前快照 | `PowerShellCollector.java`、`src/main/resources/collect-scheduler.ps1`、`TaskSelection.java`、`JobNormalizer.java`、`JobService.java`、`JobsController.java` | `GET /api/jobs`、`GET /api/jobs/{id}` |
+| Projects 最小 Viewer | `ui/projects.mjs`、`ui/project-design.mjs`、`pom.xml` | 固定建置資源 `/project-design/PROJECT-DESIGN.md`；無 DB／新 API |
 | Today／Workflow／History UI | `index.html`、`dashboard.mjs` | `/api/jobs`、`/api/history`、`/api/runner/executions` |
 | History | `HistoryObserver.java`、`HistoryRepository.java`、`HistoryController.java`、`HistoryRange.java`、`src/main/resources/db/migration/V1__observed_history.sql` | `GET /api/history`；`job`、`job_run` |
 | Runner | `runner/RunnerMain.java`、`RunnerConfig.java`、`ReceiptFiles.java`、`RunnerReceiptService.java`、`RunnerReceiptController.java` | `GET /api/runner/executions`；primary/fallback receipt 目錄 |

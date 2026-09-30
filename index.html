@@ -645,6 +645,24 @@
       .toolbar { width: 100%; justify-content: space-between; }
       .toolbar .pill { display: inline-flex; font-size: 11px; padding: 7px 11px; }
     }
+    .projects { padding: 24px; min-width: 0; }
+    .projects h2 { margin: 0 0 12px; }
+    .projects p { line-height: 1.7; }
+    .project-source, .project-feature-content { overflow-wrap: anywhere; }
+    .project-source dt, .project-feature-content dt { font-weight: 700; margin-top: 12px; }
+    .project-source dd, .project-feature-content dd { margin: 4px 0 0; line-height: 1.7; }
+    .project-counts { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin: 20px 0; }
+    .project-count { display: grid; gap: 8px; border: 1px solid var(--border); border-radius: 12px; padding: 14px; background: var(--panel-strong); }
+    .project-count span { font-size: 12px; overflow-wrap: anywhere; }
+    .project-count strong { font-size: 24px; }
+    .project-feature { border: 1px solid var(--border); border-radius: 12px; margin: 10px 0; overflow-wrap: anywhere; }
+    .project-feature summary { padding: 16px; cursor: pointer; }
+    .project-feature summary:focus-visible, .project-source-summary:focus-visible { outline: 3px solid var(--pink-dark); outline-offset: 2px; }
+    .project-feature-name { display: inline-grid; gap: 5px; max-width: 100%; vertical-align: middle; }
+    .project-feature-name code { font-size: 12px; color: var(--muted); }
+    .project-status { display: inline-block; margin: 8px 0 0 12px; border-radius: 6px; padding: 4px 8px; background: var(--panel-strong); font-size: 12px; font-weight: 700; }
+    .project-feature-content { padding: 0 16px 16px; margin: 0; }
+    @media (max-width: 400px) { .projects { padding: 16px; } .project-counts { grid-template-columns: 1fr 1fr; } .project-status { margin-left: 0; } }
   </style>
   <style>
     /* History keeps horizontal scrolling inside the panel, with a readable row heading. */
@@ -775,6 +793,7 @@
         <div class="tabs" role="tablist" aria-label="Dashboard views">
           <button class="tab active" id="todayTab" type="button" data-tab="today" role="tab" aria-controls="todayView" aria-selected="true">Today</button>
           <button class="tab" id="historyTab" type="button" data-tab="history" role="tab" aria-controls="historyView" aria-selected="false" tabindex="-1">7-day history</button>
+          <button class="tab" id="projectsTab" type="button" data-tab="projects" role="tab" aria-controls="projectsView" aria-selected="false" tabindex="-1">Projects</button>
         </div>
         <div class="filters" role="group" aria-label="Current status filters">
           <button class="filter active" type="button" data-filter="all" aria-pressed="true">All</button>
@@ -813,6 +832,22 @@
           </table>
         </div>
         <div class="legend"><span>✓ All observed runs succeeded</span><span>! At least one failed</span><span>— No observed runs</span><span>Number = observed runs</span></div>
+      </div>
+      <div class="projects" id="projectsView" role="tabpanel" aria-labelledby="projectsTab" aria-busy="false" hidden>
+        <h2>Projects · 專案設計</h2>
+        <p>正式專案設計／本次建置快照 · 僅 Local Dashboard。來源是建置時複製的工程主檔，並非即時讀取 Git 工作目錄，也不是 Scheduler 實測結果。</p>
+        <p>九頁產品方向與跨專案 aggregation 仍有待完成；靜態 prototype 保留為獨立樣本。各狀態數量不是整體完成百分比。</p>
+        <p id="projectsStatus" role="status" aria-live="polite">尚未讀取專案設計。</p>
+        <button class="refresh" id="projectsRetry" type="button">重新讀取專案設計</button>
+        <section id="projectsData" aria-labelledby="projectIdentity" hidden>
+          <h3 id="projectIdentity"></h3>
+          <p id="projectPurpose"></p>
+          <p class="project-source" id="projectReadInfo"></p>
+          <details><summary class="project-source-summary">來源、版本與讀取資訊</summary><dl class="project-source" id="projectSourceInfo"></dl></details>
+          <div class="project-counts" id="projectCounts" aria-label="各功能狀態數量"></div>
+          <p>展開功能，閱讀原始目的、目前實作、限制及剩餘工作。</p>
+          <div id="projectFeatures"></div>
+        </section>
       </div>
     </section>
     <div class="footer-note">Local · read-only · dates shown in your local time zone</div>

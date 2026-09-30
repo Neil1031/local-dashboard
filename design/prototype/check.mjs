@@ -2,12 +2,14 @@ import { test, after, before } from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
-import { mkdir } from 'node:fs/promises';
+import { mkdir, readFile } from 'node:fs/promises';
+import { parseProjectDesign, featureCounts } from '../../ui/project-design.mjs';
 
 const require = createRequire(new URL('./index.html', import.meta.url));
 const { chromium } = require('playwright');
 const url = new URL('./index.html', import.meta.url).href;
-const screenshots = fileURLToPath(new URL('./screenshots/', import.meta.url));
+const screenshots = process.env.PROTOTYPE_SCREENSHOT_DIR || fileURLToPath(new URL('./screenshots/', import.meta.url));
+const design = parseProjectDesign(await readFile(new URL('../../docs/PROJECT-DESIGN.md', import.meta.url), 'utf8'));
 let browser;
 before(async () => { browser = await chromium.launch({ channel: 'msedge', headless: true }); await mkdir(screenshots, { recursive: true }); });
 after(async () => { await browser?.close(); });
@@ -63,7 +65,8 @@ for (const width of [1280, 375, 320]) test(`Projects landing and six detail view
   const byStatus = await page.locator('.project-count').evaluateAll(nodes => Object.fromEntries(nodes.map(node => [
     node.querySelector('span').textContent, Number(node.querySelector('strong').textContent)
   ])));
-  assert.deepEqual(byStatus, { DONE: 19, 'BACKEND READY': 3, DESIGNED: 8, 'NOT STARTED': 2, BLOCKED: 1 });
+  assert.deepEqual(byStatus, Object.fromEntries(Object.entries(featureCounts(design.features))
+    .filter(([, count]) => count > 0).map(([status, count]) => [status.replaceAll('_', ' '), count])));
   await page.screenshot({ path: `${screenshots}projects-landing-${width}.png`, fullPage: true });
   await page.getByRole('button', { name: 'Open project →' }).focus();
   await page.keyboard.press('Enter');
@@ -76,7 +79,8 @@ for (const width of [1280, 375, 320]) test(`Projects landing and six detail view
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, `Projects/${view} overflows ${width}px`);
     if (view === 'Features') {
       assert.equal(await page.locator('.project-feature').count(), 33);
-      assert.match(await page.locator('.project-feature summary').filter({ hasText: 'Projects' }).textContent(), /DESIGNED/);
+      assert.ok((await page.locator('.project-feature summary').filter({ hasText: 'Projects' }).textContent())
+        .includes(design.features.find(feature => feature.id === 'product-projects').status));
     }
     if (view === 'Architecture') assert.equal(await page.locator('.architecture-node').count(), 8);
     if (view === 'Problems') assert.equal(await page.locator('.project-problem').count(), 5);
@@ -84,7 +88,7 @@ for (const width of [1280, 375, 320]) test(`Projects landing and six detail view
     if (view === 'Remaining') {
       assert.equal(await page.locator('.project-remaining section').count(), 4);
       assert.equal(await page.getByText('Review Local Dashboard Project Design pilot').count(), 0);
-      assert.equal(await page.getByText('Release 1 — Product Shell / Projects Viewer implementation').count(), 1);
+      assert.equal(await page.getByText(design.remaining[0].work, { exact: true }).count(), 1);
     }
     if (width === 1280 && ['Features','Problems','Changes','Remaining'].includes(view)) {
       await page.screenshot({ path: `${screenshots}projects-${view.toLowerCase()}-1280.png`, fullPage: true });
