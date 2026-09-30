@@ -1,5 +1,7 @@
 // Current scheduler state and last execution result are separate API concepts.
 import { mountProjects } from './ui/projects.mjs';
+import { mountShell } from './ui/shell.mjs';
+import { mountOverview } from './ui/overview.mjs';
 const currentStatuses = new Set(['READY', 'RUNNING', 'FAILED', 'DISABLED', 'UNKNOWN', 'MISSED']);
 const lastStatuses = new Set(['SUCCESS', 'FAILED', 'UNKNOWN']);
 export const currentStatus = job => currentStatuses.has(job.status) ? job.status : 'UNKNOWN';
@@ -234,7 +236,16 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
   let returnFocus = null;
   let phase = 'loading';
   let historyCache = null, historyBusy = false, historyRevision = 0;
-  let historyCurrentJobs = [];
+  let historyCurrentJobs = [], historyState = 'loading';
+  const overview = mountOverview(document, { summarize, runnerKey, displayName: jobDisplayName, formatDate, openJob: openDrawer });
+  const needsHistory = () => shell.current === 'overview' || (shell.current === 'automations' && !get('historyView').hidden);
+  const renderOverview = () => overview.render({ snapshot, phase, historyCache, historyRevision, historyState, runnerSnapshot });
+  const shell = mountShell(document, page => {
+    if (page === 'projects') projects.show();
+    if (page === 'settings') renderSettingList();
+    if (phase !== 'loading' && !busy && needsHistory()) void loadHistory();
+    renderOverview();
+  });
   let settingsRevision = null;
   let selectedSetting = null;
   let settingsAvailable = false;
@@ -321,6 +332,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
     renderSettingList();
     if (selectedSetting) selectSetting(selectedSetting);
     if (snapshot) { renderRows(); if (historyCache && !get('historyView').hidden) renderHistory(); }
+    renderOverview();
   }
   async function saveSettings(next) {
     if (!settingsAvailable || settingsRevision === null) { settingsMessage('設定檔不可用，請先重新載入設定。', true); return; }
@@ -345,6 +357,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
       if (selectedSetting) selectSetting(selectedSetting);
       renderRows();
       if (historyCache && !get('historyView').hidden) renderHistory();
+      renderOverview();
       settingsMessage('顯示設定已儲存並套用。');
     } catch { settingsMessage('儲存失敗，原設定仍保留。', true); }
   }
@@ -627,14 +640,17 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
     get('historyStatus').setAttribute('role', 'status');
   }
   async function loadHistory() {
-    if (historyBusy) return;
+    if (historyBusy || busy) return;
     const range = historyWindow();
     if (historyCache?.revision === historyRevision && historyCache.range.from === range.from && historyCache.range.to === range.to) {
       renderHistory();
+      renderOverview();
       return;
     }
     const revision = historyRevision;
     historyBusy = true;
+    historyState = 'loading';
+    renderOverview();
     get('historyView').setAttribute('aria-busy', 'true');
     get('historyTableWrap').hidden = true;
     get('historyStatus').setAttribute('role', 'status');
@@ -645,10 +661,15 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       let payload;
       try { payload = await response.json(); } catch { throw new Error('INVALID_HISTORY_RESPONSE'); }
-      historyCache = { payload: readHistory(payload, range), range, revision };
-      if (revision === historyRevision) renderHistory();
+      const validated = readHistory(payload, range);
+      if (revision !== historyRevision) return;
+      historyCache = { payload: validated, range, revision };
+      historyState = 'ready';
+      renderHistory();
     } catch (error) {
+      if (revision !== historyRevision) return;
       historyCache = null;
+      historyState = 'error';
       // Never reflect arbitrary proxy/database response bodies into this error UI.
       const reason = /^(HTTP \d{3}|INVALID_HISTORY_RESPONSE)$/.test(error.message) ? error.message : 'Unable to read history. Please retry.';
       get('historyStatus').textContent = `History unavailable · ${reason}`;
@@ -657,7 +678,8 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
     } finally {
       historyBusy = false;
       get('historyView').setAttribute('aria-busy', 'false');
-      if (revision !== historyRevision && !get('historyView').hidden) void loadHistory();
+      renderOverview();
+      if (revision !== historyRevision && needsHistory() && !busy) void loadHistory();
     }
   }
   function makeJobRow(job) {
@@ -759,6 +781,12 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
     if (busy) return;
     busy = true;
     phase = 'loading';
+    historyRevision++;
+    historyCache = null;
+    historyCurrentJobs = [];
+    historyState = 'loading';
+    get('historyTableWrap').hidden = true;
+    get('historyStatus').textContent = 'Loading history…';
     todayExpanded = false;
     historyExpanded = false;
     closeDrawer();
@@ -768,6 +796,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
     runnerJob = null;
     runnerRevision++;
     renderCoverage();
+    renderOverview();
     summary(null);
     renderRows();
     get('refreshBtn').disabled = true;
@@ -794,13 +823,12 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
           if (runnerRevisionAtRequest === runnerRevision) runnerSnapshot = payload;
         } catch { if (runnerRevisionAtRequest === runnerRevision) runnerSnapshot = { status: 'UNAVAILABLE', jobs: [], warnings: [] }; }
         if (runnerRevisionAtRequest === runnerRevision) {
-          renderCoverage(); renderRows();
+          renderCoverage(); renderRows(); renderOverview();
           if (runnerJob && get('drawer').classList.contains('open') && get('drawer').dataset.mode === 'current') renderRunner(runnerJob);
         }
       })();
       renderSettingList();
       historyCurrentJobs = snapshot.jobs;
-      historyRevision++;
       phase = 'ready';
       summary(summarize(snapshot.jobs));
       get('refreshTime').textContent = formatDate(snapshot.collectedAt);
@@ -828,7 +856,8 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
       get('refreshBtn').textContent = '↻ Refresh';
       get('todayView').setAttribute('aria-busy', 'false');
       renderRows();
-      if (!get('historyView').hidden) void loadHistory();
+      renderOverview();
+      if (needsHistory()) void loadHistory();
     }
   }
   tabs.forEach((tab, index) => {
@@ -843,11 +872,9 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
       const history = tab.dataset.tab === 'history';
       get('todayView').hidden = !today;
       get('historyView').hidden = !history;
-      get('projectsView').hidden = today || history;
       document.querySelector('.filters').hidden = !today;
       get('showLegacy').hidden = !today && !history;
-      if (history) void loadHistory();
-      if (!today && !history) projects.show();
+      if (history && !busy) void loadHistory();
     });
     tab.addEventListener('keydown', event => {
       if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
@@ -887,12 +914,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
   });
   get('refreshBtn').addEventListener('click', refresh);
   get('historyRetry').addEventListener('click', loadHistory);
-  get('settingsToggle').addEventListener('click', () => {
-    const open = get('settingsPanel').hidden;
-    get('settingsPanel').hidden = !open;
-    get('settingsToggle').setAttribute('aria-expanded', String(open));
-    if (open) { renderSettingList(); get('settingsHeading').focus?.(); }
-  });
+  get('overviewHistoryRetry').addEventListener('click', loadHistory);
   get('addDependency').addEventListener('click', () => get('settingDependencies').append(dependencyRow()));
   get('cancelSettings').addEventListener('click', () => selectSetting(selectedSetting));
   get('settingsForm').addEventListener('submit', event => {
@@ -920,6 +942,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
   get('resetAllSettings').addEventListener('click', () => {
     if (globalThis.confirm('確定要將全部顯示設定恢復預設值？')) void saveSettings({});
   });
+  shell.start();
   return loadSettings().then(refresh);
 }
 

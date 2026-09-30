@@ -14,16 +14,16 @@ test('packaged settings API and UI apply without collecting tasks', { skip: !pro
       return route.fulfill({ contentType: 'application/json', body: JSON.stringify({ collectionStatus: 'OK', collectedAt: '2026-09-22T01:00:00Z',
         jobs: [{ id: 'live-1', name: 'My-New-Task', taskPath: '\\', status: 'READY', lastRunStatus: 'UNKNOWN' }], errors: [], unmatchedIncludes: [] }) });
     });
-    await page.goto(process.env.DASHBOARD_LIVE_URL);
+    await page.goto(process.env.DASHBOARD_LIVE_URL + "#automations");
     await page.waitForFunction(() => !document.getElementById('refreshBtn').disabled);
-    await page.locator('#settingsToggle').click();
+    await page.locator('#settingsPage').click();
     await page.locator('#settingsJobs button').filter({ hasText: 'My-New-Task' }).click();
     await page.locator('#settingDisplayName').fill('封裝驗收工作');
     await page.locator('#settingsForm button[type=submit]').click();
     await page.waitForFunction(() => document.getElementById('settingsMessage').textContent.includes('已儲存'));
     assert.equal(await page.locator('.job-row .job-name').innerText(), '封裝驗收工作');
     assert.equal(collections, 1);
-    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), true);
     await page.reload();
     await page.waitForFunction(() => !document.getElementById('refreshBtn').disabled);
     assert.equal(await page.locator('.job-row .job-name').innerText(), '封裝驗收工作');
