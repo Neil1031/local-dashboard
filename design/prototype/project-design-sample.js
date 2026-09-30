@@ -1,4 +1,4 @@
-// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: 5d810046ad06d2f0199c7ca9e1839f5174ac62be18854361c3fbc027a491d56b
+// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: 0345bbd445e3689f5c3444203d13a8475ac5fe848ea3bcd118d7a1838c0f889c
 window.PROJECT_DESIGN_SAMPLE = Object.freeze({
   "metadata": {
     "project_id": "local-dashboard",
@@ -317,8 +317,8 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "originalIntent": "原設計無跨專案設計檢視",
       "implementation": "Release 1A-1 正式入口讀本專案建置設計快照，共用 v1 parser 並呈現功能／狀態數量",
       "status": "PARTIAL",
-      "limitation": "最小切片待 Astra／Manager 審查，未部署；跨專案 aggregation／完整閱讀面板未實作",
-      "remaining": "完成本階段審查；後續完整 Projects／aggregation 另審",
+      "limitation": "最小切片已通過獨立初審及 Manager Review，合併 main `9e3c8cb`，未部署；完整閱讀面板／跨專案 aggregation／九頁 shell 未完成",
+      "remaining": "後續完成完整 Projects 閱讀面板／跨專案 aggregation，依九頁 shell 設計另審與驗證",
       "evidence": "docs/STAGE-PROJECTS-VIEWER-R1A1.md"
     },
     {
@@ -486,7 +486,7 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
     {
       "horizon": "NEXT",
       "work": "Release 1 — Product Shell / complete Projects Viewer implementation",
-      "gate": "Release 1A-1 最小 Viewer 已實作待審；完整面板／aggregation 與其他 Release 1 能力仍須獨立 gate",
+      "gate": "Release 1A-1 最小 Viewer 已通過獨立初審及 Manager Review，合併 main `9e3c8cb`，未部署；後續完整面板／aggregation／九頁 shell 與其他 Release 1 能力仍須獨立 gate",
       "evidence": "docs/DASHBOARD-DESIGN-SPACE.md"
     },
     {

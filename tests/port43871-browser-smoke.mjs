@@ -6,6 +6,7 @@ import { readFile, mkdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { parseProjectDesign, featureCounts } from '../ui/project-design.mjs';
 const base = 'http://127.0.0.1:43871';
+const correction = process.env.PORT_QA_CORRECTION === '1';
 const bytes = await readFile(new URL('../docs/PROJECT-DESIGN.md', import.meta.url));
 assert.deepEqual(Buffer.from(await (await fetch(base + '/project-design/PROJECT-DESIGN.md')).arrayBuffer()), bytes);
 for (const file of ['index.html', 'dashboard.mjs', 'ui/projects.mjs', 'ui/project-design.mjs']) {
@@ -37,13 +38,27 @@ try {
     for(const value of [design.metadata.repository,design.metadata.baseline_commit,createHash('sha256').update(bytes).digest('hex'),'docs/PROJECT-DESIGN.md','歷史盤點 baseline（非本次實作 SHA）','本次讀取時間']) assert.ok(provenance.includes(value),value);
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
     assert.deepEqual(errors,[]);
+    if(correction){
+      const feature=design.features.find(f=>f.id==='product-projects');
+      assert.equal(feature.status,'PARTIAL');
+      assert.match(feature.limitation,/已通過獨立初審.*Manager Review.*合併 main.*9e3c8cb.*未部署/);
+      assert.match(feature.remaining,/完整 Projects.*aggregation.*九頁 shell/);
+      assert.doesNotMatch(feature.limitation+' '+feature.remaining,/最小切片待 Astra|完成本階段審查/);
+      const card=page.locator('[data-feature-id="product-projects"]');
+      await card.locator('summary').click();
+      const fields=await card.locator('dl').evaluate(dl=>Object.fromEntries([...dl.querySelectorAll('dt')].map(dt=>[dt.textContent,dt.nextElementSibling.textContent])));
+      assert.equal(fields['目前限制'],feature.limitation);
+      assert.equal(fields['剩餘工作'],feature.remaining);
+    }
     if(width===1280){
       await page.locator('#projectsData').evaluate(el=>el.scrollIntoView({block:'start'}));
-      const output=new URL('../docs/evidence/port43871-projects.png',import.meta.url);
+      const output=new URL(correction ? '../docs/evidence/port43871-correction-projects.png' : '../docs/evidence/port43871-projects.png',import.meta.url);
       await mkdir(fileURLToPath(new URL('../docs/evidence/',import.meta.url)),{recursive:true});
-      await page.screenshot({path:fileURLToPath(output),fullPage:false});
+      if(correction) await page.locator('[data-feature-id="product-projects"]').screenshot({path:fileURLToPath(output)});
+      else await page.screenshot({path:fileURLToPath(output),fullPage:false});
     }
     await page.close();
   }
   console.log('PASS real isolated candidate static bytes, DOM 33 IDs/statuses/counts/provenance, Projects 1280/375/320 and screenshot');
+  if(correction) console.log('PASS corrected product-projects DOM: reviewed/merged/undeployed, PARTIAL/full views/aggregation/nine-page scope retained');
 } finally { await browser.close(); }
