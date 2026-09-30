@@ -15,7 +15,7 @@ test('bootstrapped packaged UI shows current Chinese aliases with original sched
       page.on('pageerror', error => errors.push(error.message));
       const [response] = await Promise.all([
         page.waitForResponse(response => new URL(response.url()).pathname === '/api/jobs'),
-        page.goto(process.env.DASHBOARD_BOOTSTRAP_LIVE_URL)
+        page.goto(process.env.DASHBOARD_BOOTSTRAP_LIVE_URL + "#automations")
       ]);
       assert.equal(response.status(), 200);
       const snapshot = await response.json();

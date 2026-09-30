@@ -41,13 +41,13 @@ test('settings save applies cached snapshot, remains safe, and rejects stale tab
       return page;
     };
     const pageA = await route(async page => {
-      await page.locator('#settingsToggle').click();
+      await page.locator('#settingsPage').click();
       await page.locator('#settingsJobs button').filter({ hasText: 'My-New-Task' }).click();
       assert.equal(await page.locator('#settingRawName').inputValue(), 'My-New-Task');
       assert.equal(await page.locator('#settingRawName').getAttribute('readonly'), '');
     });
     const pageB = await route(async page => {
-      await page.locator('#settingsToggle').click();
+      await page.locator('#settingsPage').click();
       await page.locator('#settingsJobs button').filter({ hasText: 'My-New-Task' }).click();
     });
     await pageA.locator('#settingDisplayName').fill('<img src=x onerror=window.injected=true>');
@@ -62,6 +62,7 @@ test('settings save applies cached snapshot, remains safe, and rejects stale tab
     assert.equal(await pageA.evaluate(() => window.injected), undefined);
     assert.equal(await pageA.locator('.job-row').first().getAttribute('data-job'), 'id-2');
     assert.match(await pageA.locator('#workflowView').innerText(), /資料前置/);
+    await pageA.locator('#automationsPage').click();
     await pageA.locator('#historyTab').click();
     await pageA.waitForFunction(() => document.getElementById('historyView').getAttribute('aria-busy') === 'false');
     assert.match(await pageA.locator('#historyView').innerText(), /<img src=x/);
@@ -70,14 +71,15 @@ test('settings save applies cached snapshot, remains safe, and rejects stale tab
     await pageB.locator('#settingsForm button[type=submit]').click();
     await assertEventually(async () => assert.match(await pageB.locator('#settingsMessage').innerText(), /其他分頁/));
     assert.equal(overrides['My-New-Task'].displayName, '<img src=x onerror=window.injected=true>');
+    await pageA.locator('#settingsPage').click();
     await pageA.locator('#settingHidden').check();
     await pageA.locator('#settingsForm button[type=submit]').click();
     await assertEventually(async () => assert.equal(await pageA.locator('.job-row[data-job="id-2"]').count(), 0));
     assert.equal(await pageA.locator('#count-monitored').innerText(), '3');
     assert.equal(collectionCount, 2);
-    assert.equal(await pageA.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+    assert.equal(await pageA.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), true);
     await pageA.setViewportSize({ width: 320, height: 900 });
-    assert.equal(await pageA.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+    assert.equal(await pageA.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), true);
     await pageA.locator('#resetSettings').click();
     await assertEventually(async () => assert.equal(await pageA.locator('.job-row[data-job="id-2"]').count(), 1));
     assert.equal(Object.hasOwn(overrides, 'My-New-Task'), false);

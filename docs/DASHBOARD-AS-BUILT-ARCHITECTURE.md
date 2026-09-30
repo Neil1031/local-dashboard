@@ -8,7 +8,7 @@
 
 **這功能解決什麼問題：** 在同一個本機畫面查看受監控 Windows 排程的現況、最近一次結果、已觀察到的執行歷史，以及有設定的 Runner 執行證據。
 
-**它怎麼運作：** 正式畫面提供 **Today + 7-day History + Projects 最小入口**；Today 內有 Workflow、Runner coverage 與設定。Windows Task Scheduler 是排程現況的來源；Dashboard 自己的 SQLite 保存「看見過什麼」；Runner receipts 是另一套執行證據。三者的身分與語意分開保存。排程版本與 occurrence correlation 已在程式中，但 correlation 仍是 shadow research，沒有正式 UI／HTTP API。
+**它怎麼運作：** Release 1B 開發版本提供 **九頁主要導覽**。Overview 讀現有 jobs／History／Runner；Automations 提供 Today／7-day History、Workflow 與 Runner coverage；Settings 提供原有顯示 metadata 編輯；Projects 保留最小建置快照 Viewer。本輪待管理初審、未合併／部署。Windows Task Scheduler 是排程現況的來源；Dashboard 自己的 SQLite 保存「看見過什麼」；Runner receipts 是另一套執行證據。三者的身分與語意分開保存。排程版本與 occurrence correlation 已在程式中，但 correlation 仍是 shadow research，沒有正式 UI／HTTP API。
 
 ```mermaid
 flowchart LR
@@ -20,11 +20,20 @@ flowchart LR
   H --> HA["/api/history"]
   R[獨立 Runner Core] --> F[primary / fallback receipts]
   F --> RA["/api/runner/executions"]
-  A --> UI[正式 Today / Workflow / History]
+  A --> UI[Automations: Today / Workflow / History]
+  A --> OV[Overview operations]
+  HA --> OV
+  RA --> OV
+  SH[Product Shell 九頁導覽] --> UI
+  SH --> OV
+  SH --> PV
+  SH --> SET[Settings display metadata]
   HA --> UI
   RA --> UI
   M[本機 metadata JSON] <-->|讀取 / 編輯| MA["/api/settings/job-metadata"]
   MA --> UI
+  MA --> OV
+  MA --> SET
   PD[canonical PROJECT-DESIGN 主檔] -->|Maven 原樣複製| PS[固定建置設計快照]
   PS -->|共用 v1 parser| PV[Projects 最小入口]
   H -.唯讀、明確啟用.-> O[Occurrence Correlation shadow]
@@ -32,7 +41,7 @@ flowchart LR
   RA -.已驗證的 Runner view.-> O
 ```
 
-**目前限制：** 這不是股票分析總控台的九頁成品。`design/prototype/index.html` 是已核准的靜態設計原型；US Stocks、TW Stocks 等新版頁面尚未進入正式 `index.html`。沒有自動 `MISSED`；Dashboard 不修改 Scheduler task 或正式 Runner config，也不把 correlation 結果寫入資料庫。參照 [`DASHBOARD-DESIGN-SPACE.md`](DASHBOARD-DESIGN-SPACE.md) 時，應將其視為產品設計，勿誤當現況畫面。
+**目前限制：** 九頁導覽已實作部分功能；US Stocks／TW Stocks／Performance／Reports／Data & Evidence 只有 DESIGNED、尚未接資料的入口。Overview 僅涵蓋 operations，不顯示投資 metrics 或完成百分比。`design/prototype/index.html` 仍是獨立靜態設計原型。沒有自動 `MISSED`；Dashboard 不修改 Scheduler task 或正式 Runner config，也不把 correlation 結果寫入資料庫。參照 [`DASHBOARD-DESIGN-SPACE.md`](DASHBOARD-DESIGN-SPACE.md) 時，應將其視為產品設計，勿誤當現況畫面。
 
 ## 2. 啟動、設定與安全停止
 
@@ -52,13 +61,15 @@ flowchart LR
 
 **目前限制：** `LastTaskResult=0` 只表示 Scheduler 回報 exit code 0，不驗證應用程式的業務結果；READY 不表示今天已跑。`NextRunTime` 是當次 Scheduler 提供的下次時間，`scheduledAt`／duration 目前不由 Normalizer 推算。空 include 直接回 `NOT_CONFIGURED`，不觸碰 Scheduler。收集失敗可能回 503；部分 task 失敗則保留可取得資料並標 `PARTIAL`。目前完全不產生 `MISSED`。
 
-## 4. Today、Workflow、History 畫面
+## 4. Overview、Automations、Workflow、History 畫面
+
+Release 1B 的 `ui/shell.mjs` 管主要導覽；`ui/overview.mjs` 只從已驗證的 Dashboard snapshot 衍生摘要。Refresh 開始即清空舊 counts／History，丟棄過期 History 回應；recent 依完整 UTC 小數秒排序。monitored count 不受 Today filters／metadata hidden 影響，PARTIAL 僅表示已收集 jobs，NOT_CONFIGURED／error 不顯示假零。Upcoming 排除過去或停用工作的 nextRunAt。Settings 保存仍使用既有 revision／validation API。詳見 [Release 1B](STAGE-RELEASE-1B.md)。
 
 **這功能解決什麼問題：** 讓使用者快速看目前有哪些受監控工作、最後狀態、最近七天 Dashboard 實際觀察到的執行。
 
 **它怎麼運作：** `dashboard.mjs` 把 `/api/jobs` 快照顯示於 Today，按市場、狀態與 metadata 排列；摘要的「需留意」來自當前 status，不是漏跑判斷。Workflow 在 Today 內按台股／美股呈現預設順序與依賴文字，點卡片進同一工作詳情；這是工作關係的**展示**，不會啟動或阻擋下游工作。History tab 以瀏覽器本地七個日曆日算出 UTC 查詢界線，讀 `GET /api/history?from=...&to=...`，將當前工作與只在歷史存在的工作按 canonical ID 合併。日期格可展開該日全部已觀察執行；有日期的舊檢查工作可摺疊。現在的 UI 另讀一次 `/api/runner/executions` 以顯示 coverage 與詳情。
 
-**目前限制：** History 不是 Windows Event Log 全量紀錄；空格只表示資料庫沒有該日可顯示的已觀察執行，絕不代表漏跑。Workflow 依賴圖不是執行引擎；預設只呈現設定順序中前段工作。正式 UI 保留 Today／History 並新增 Projects 最小入口，完整九頁仍未實作，新版九頁仍是 prototype。
+**目前限制：** History 不是 Windows Event Log 全量紀錄；空格只表示資料庫沒有該日可顯示的已觀察執行，絕不代表漏跑。Workflow 依賴圖不是執行引擎；預設只呈現設定順序中前段工作。Release 1B 把 Today／History 搬至 Automations，保留原有功能；九頁導覽已有開發實作，五個資料入口仍未接入。
 
 ## 5. SQLite：工作身分與已觀察執行
 
@@ -104,7 +115,7 @@ flowchart LR
 
 **這功能解決什麼問題：** 讓工作顯示名稱、中文用途、市場、順序、隱藏與依賴關係可按個人理解調整。
 
-**它怎麼運作：** `dashboard.mjs` 有預設 metadata（含名稱模式）；`JobMetadataStore` 預設將使用者覆寫存於 `%LOCALAPPDATA%\LocalDashboard\config\job-metadata.json`，`GET/PUT /api/settings/job-metadata` 以 revision 做衝突檢查、驗證依賴及循環，並原子替換檔案。畫面把預設與使用者覆寫合併，按原始 TaskName 對應顯示設定；可重設個別或全部。這些欄位只改 Today／Workflow／History 的呈現。
+**它怎麼運作：** `dashboard.mjs` 有預設 metadata（含名稱模式）；`JobMetadataStore` 預設將使用者覆寫存於 `%LOCALAPPDATA%\LocalDashboard\config\job-metadata.json`，`GET/PUT /api/settings/job-metadata` 以 revision 做衝突檢查、驗證依賴及循環，並原子替換檔案。畫面把預設與使用者覆寫合併，按原始 TaskName 對應顯示設定；可重設個別或全部。這些欄位只改 Today／Workflow／History 與 Overview labels 的呈現；Overview monitored count 仍涵蓋完整收集快照。
 
 **目前限制：** 編輯顯示名稱或依賴不會改 Scheduler task、trigger、Runner config、SQLite canonical job ID，也不會執行依賴控制。設定毀損會以警告與預設值退回；revision 衝突須重新讀取後再存。metadata 預設路徑由 `LOCALAPPDATA` 決定，**不隨** `LOCAL_DASHBOARD_HOME` 移動；測試／部署可用 `dashboard.metadata.path` JVM property 明確覆寫。`config/application.yml` 的監控 include/exclude 仍是外部部署設定，不是這個 metadata 表單。
 
@@ -196,10 +207,11 @@ sequenceDiagram
 | 使用者 metadata 設定 | 已完成 | 只改顯示，不改 Scheduler/Runner。 |
 | Schedule Snapshot History | 已完成保存 | 無正式 UI／API；觀察時間不等於實際變更時間。 |
 | Occurrence Correlation | shadow research model 已完成 | 無正式 UI／API、未驗證為 Windows provenance、無 MISSED。 |
-| Projects 本專案建置快照入口 | Release 1A-1 最小切片已核准並合併 | 安裝版本須另有 deployment evidence；完整面板、跨專案 aggregation 與九頁 shell 未完成。 |
-| 九頁新產品畫面與外部股票來源 adapter | 設計／靜態原型 | 不是目前正式 Dashboard runtime。 |
+| Projects 本專案建置快照入口 | Release 1A-1 最小切片已核准並合併 | 安裝版本須另有 deployment evidence；完整面板與跨專案 aggregation 未完成；九頁 shell 已由 Release 1B 開發實作。 |
+| Product Shell／Overview operations | Release 1B 部分實作，待管理初審 | 九頁導覽／既有 API，尚未合併／部署。 |
+| 外部股票來源／其他五頁資料功能 | DESIGNED | 尚未接入 adapter，只有導覽 destination。 |
 
-**目前限制：** 上表的「已完成」指 repo 中有正式程式與既有 Stage gate；不代表目前這台機器所有 Scheduler task、Runner mapping、資料庫或外部來源均已在本文件撰寫時實機驗收。外部股票專案的 adapter 與新版九頁屬已核准設計，非本次 As-Built 範圍。`MISSED` 不可由現有 shadow 時間 heuristics 直接啟用。
+**目前限制：** 上表的「已完成」指 repo 中有正式程式與既有 Stage gate；不代表目前這台機器所有 Scheduler task、Runner mapping、資料庫或外部來源均已在本文件撰寫時實機驗收。外部股票專案的 adapter 仍是後續設計；Release 1B 九頁導覽／operations 實作與已合併安裝版分開標明。`MISSED` 不可由現有 shadow 時間 heuristics 直接啟用。
 
 ## Release 1A-1：Projects 最小正式入口（已核准並合併）
 

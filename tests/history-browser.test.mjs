@@ -36,7 +36,7 @@ async function mock({ jobs = current(), histories = fixture(), historyStatus = 2
   });
   await page.route('**/api/settings/job-metadata', route => route.fulfill({ contentType: 'application/json',
     body: JSON.stringify({ version: 1, revision: '0', overrides: {}, warning: null }) }));
-  await page.goto(base);
+  await page.goto(base + "#automations");
   await ready();
   return requests;
 }
@@ -167,7 +167,7 @@ test('long Unicode names, injection-looking messages, sticky names and narrow ho
   await page.locator('#historyTab').click(); await historyReady();
   for (const width of [1280, 820, 375, 320]) {
     await page.setViewportSize({ width, height: 1000 });
-    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), true);
     await page.locator('#historyTableWrap').evaluate(node => { node.scrollLeft = node.scrollWidth; });
     const name = await page.locator('.history-name').first().boundingBox();
     const wrap = await page.locator('#historyTableWrap').boundingBox();

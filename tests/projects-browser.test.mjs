@@ -38,8 +38,8 @@ for (const width of [1280, 375, 320]) test(`canonical Projects and keyboard deta
   page.on('request', r => { if (new URL(r.url()).pathname === '/project-design/PROJECT-DESIGN.md') requests.push(r.method()); });
   await page.goto(base);
   assert.equal(requests.length, 0);
-  await page.locator('#todayTab').focus(); await page.keyboard.press('End');
-  assert.equal(await page.locator('#projectsTab').getAttribute('aria-selected'), 'true');
+  await page.locator('#projectsTab').focus(); await page.keyboard.press('Enter');
+  assert.equal(await page.locator('#projectsTab').getAttribute('aria-current'), 'page');
   await settled();
   assert.deepEqual(requests, ['GET']);
   assert.deepEqual(await page.locator('.project-feature').evaluateAll(nodes => nodes.map(n => n.dataset.featureId)), model.features.map(f => f.id));
@@ -53,16 +53,16 @@ for (const width of [1280, 375, 320]) test(`canonical Projects and keyboard deta
   await feature.locator('summary').focus(); await page.keyboard.press('Enter');
   assert.equal(await feature.getAttribute('open'), '');
   assert.match(await feature.innerText(), /原始目的[\s\S]*目前實作[\s\S]*目前限制[\s\S]*剩餘工作/);
-  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), true);
   await page.screenshot({ path: fileURLToPath(new URL(`../target/projects-r1a1/projects-${width}.png`, import.meta.url)), fullPage: true });
   await page.locator('#projectsView').screenshot({ path: fileURLToPath(new URL(`../target/projects-r1a1/projects-panel-${width}.png`, import.meta.url)) });
   await page.locator('#projectsView').evaluate(node => node.scrollIntoView());
   await page.screenshot({ path: fileURLToPath(new URL(`../target/projects-r1a1/projects-header-${width}.png`, import.meta.url)) });
-  await page.locator('#projectsTab').focus(); await page.keyboard.press('Home');
+  await page.locator('#automationsPage').focus(); await page.keyboard.press('Space');
   assert.equal(await page.locator('#todayTab').getAttribute('aria-selected'), 'true');
   assert.equal(await page.locator('#todayView').isVisible(), true);
   assert.equal(await page.locator('#projectsView').isVisible(), false);
-  await page.locator('#settingsToggle').click(); assert.equal(await page.locator('#settingsPanel').isVisible(), true);
+  await page.locator('#settingsPage').click(); assert.equal(await page.locator('#settingsPanel').isVisible(), true);
 });
 test('loading clears old data; missing/format/unsupported/unavailable/oversize errors recover with retry', async () => {
   await open(); await settled();

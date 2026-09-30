@@ -1,0 +1,153 @@
+{
+  "result": "PASS",
+  "stage": "Release 1B",
+  "base": "7c000b5b51712c7bca489a7b8042e7d9cfc09948",
+  "maven": {
+    "tests": 184,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "build": "SUCCESS"
+  },
+  "frontend": {
+    "total": 64,
+    "passed": 60,
+    "failed": 0,
+    "skipped": 4,
+    "skipReason": "Opt-in live/package smoke environment URLs not provided"
+  },
+  "chrome": {
+    "fixtureProvenance": "tests/release1b-preview.mjs; synthetic API data clearly labeled QA FIXTURE; metadata in memory only",
+    "viewportWidths": [
+      1280,
+      375,
+      320
+    ],
+    "pageAndClientWidths": {
+      "1280": [
+        1265,
+        1265
+      ],
+      "375": [
+        360,
+        360
+      ],
+      "320": [
+        305,
+        305
+      ]
+    },
+    "history375": {
+      "containerWidth": 298,
+      "tableWidth": 658,
+      "observedScrollLeft": 40
+    },
+    "keyboardEnterSpace": true,
+    "visibleFocusPx": 3,
+    "drawerEscapeFocusReturn": true,
+    "settingsSaveReset": true,
+    "consoleWarningsErrors": [],
+    "managementIndependentUiReview": "Reported PASS; final exact-SHA review pending"
+  },
+  "isolatedSpring": {
+    "url": "Historical QA endpoint http://127.0.0.1:43872 (stopped)",
+    "readiness": "local-dashboard:ready:v1",
+    "jobs": "NOT_CONFIGURED",
+    "runner": "NOT_CONFIGURED",
+    "productionAccess": false,
+    "databaseMetadataLocalAppDataHomeIsolated": true,
+    "chrome320PageAndClientWidths": [
+      305,
+      305
+    ]
+  },
+  "canonical": {
+    "ids": 33,
+    "statusChanges": {
+      "product-shell": [
+        "DESIGNED",
+        "PARTIAL"
+      ],
+      "product-overview": [
+        "DESIGNED",
+        "PARTIAL"
+      ]
+    },
+    "product-projects": "PARTIAL",
+    "counts": {
+      "DONE": 19,
+      "PARTIAL": 3,
+      "BACKEND_READY": 3,
+      "DATA_READY": 0,
+      "DESIGNED": 5,
+      "IN_PROGRESS": 0,
+      "NOT_STARTED": 2,
+      "DEFERRED": 0,
+      "BLOCKED": 1,
+      "DROPPED": 0
+    }
+  },
+  "assets": {
+    "index.html": {
+      "sha256": "c32a735f1bcf8669272dccfd90bd3f679ed9ead4df4ff1679c34b6558551619f",
+      "sourceJarHttpEqual": true
+    },
+    "dashboard.mjs": {
+      "sha256": "619db1f7d772f572912fa0aa12fd48db47fa3c04419b9adc5c97988071c90320",
+      "sourceJarHttpEqual": true
+    },
+    "ui/shell.mjs": {
+      "sha256": "ec3fc4a8e15c680906d687a68a7f4f27713a30425cdfd19625dbc36a13075359",
+      "sourceJarHttpEqual": true
+    },
+    "ui/overview.mjs": {
+      "sha256": "f103ee6741bbdcbcdedab692b5b92136de6ea89a52518c8763a46c82f75d4fcb",
+      "sourceJarHttpEqual": true
+    },
+    "ui/projects.mjs": {
+      "sha256": "b9270305851fa9a9ec31fde08afb8f560e65749e32a9eb96eba9378286cb91ba",
+      "sourceJarHttpEqual": true
+    },
+    "ui/project-design.mjs": {
+      "sha256": "9f2fd3ad7246fe3d6e99bc54c1e888a3868b9dfe7aadaabfc8872dfef01ca3bd",
+      "sourceJarHttpEqual": true
+    },
+    "project-design/PROJECT-DESIGN.md": {
+      "sha256": "bba3dcfc6c170293d721ef427253457bebe248afaeb45a3977e7695833595f2e",
+      "sourceJarHttpEqual": true
+    }
+  },
+  "screenshots": {
+    "chrome-history-375.jpg": {
+      "sha256": "cf01ce6e2d10578f9a495115624fd7a208bba0ab810882d83e72d9564d7d2ac5",
+      "bytes": 30431
+    },
+    "chrome-overview-1280.jpg": {
+      "sha256": "9dc4e16e8d2400244b29d68b5451c3024bfe8463d819630826ee6c016cd0de92",
+      "bytes": 66330
+    },
+    "chrome-overview-320.jpg": {
+      "sha256": "f8bf2c39aa7cf52af15b52996178f0a812599c0faba5a4a33b1c30085e95cf5b",
+      "bytes": 30469
+    },
+    "chrome-overview-375.jpg": {
+      "sha256": "54722f4ce3d9f7d81eaf6b10a558c2e68c49703023f8c814132cbcad1e1117ad",
+      "bytes": 35670
+    }
+  },
+  "scope": "Development only; no merge/deploy/next Stage; installed app, formal Scheduler/Runner/DB not operated",
+  "finalResourceValidation": {
+    "tests": "ProjectsResourceHttpTest",
+    "passed": 3,
+    "failed": 0,
+    "sourceJarAndSpringHttpBytes": "PASS"
+  },
+  "previewCleanup": {
+    "identityVerifiedOwnedProcessesStopped": true,
+    "ports": [
+      43872,
+      43873
+    ],
+    "formalInstanceOperated": false
+  }
+}

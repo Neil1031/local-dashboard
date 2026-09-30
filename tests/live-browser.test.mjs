@@ -29,7 +29,7 @@ test('packaged UI renders the actual list response and refreshes once', { skip: 
     page.on('request', request => { if (new URL(request.url()).pathname.startsWith('/api/')) requests.push({ url: request.url(), method: request.method() }); });
     const [response] = await Promise.all([
       page.waitForResponse(response => new URL(response.url()).pathname === '/api/jobs'),
-      page.goto(process.env.DASHBOARD_LIVE_URL)
+      page.goto(process.env.DASHBOARD_LIVE_URL + "#automations")
     ]);
     assert.equal(response.status(), 200);
     assert.equal(response.headers()['cache-control'], 'no-store');
@@ -69,7 +69,7 @@ test('packaged UI renders the actual list response and refreshes once', { skip: 
     await mkdir(artifactDir, { recursive: true });
     await page.screenshot({ path: `${artifactDir}/live-desktop.png`, fullPage: true });
     await page.setViewportSize({ width: 375, height: 900 });
-    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), true);
     await page.screenshot({ path: `${artifactDir}/live-mobile.png`, fullPage: true });
     const refreshResponse = page.waitForResponse(response => new URL(response.url()).pathname === '/api/jobs');
     await page.locator('#refreshBtn').click();

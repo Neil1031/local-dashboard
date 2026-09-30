@@ -6,16 +6,16 @@ import { createHash } from 'node:crypto';
 import { parseProjectDesign, featureCounts, MAX_DESIGN_BYTES } from '../ui/project-design.mjs';
 import { loadProjectDesign, PROJECT_SOURCE } from '../ui/projects.mjs';
 const source = await readFile(new URL('../docs/PROJECT-DESIGN.md', import.meta.url), 'utf8');
-const baseline = execFileSync('git', ['show', 'f1dac729c72db5e636a762b9f5f505b91074537e:docs/PROJECT-DESIGN.md'], { encoding: 'utf8' });
+const baseline = execFileSync('git', ['show', '7c000b5b51712c7bca489a7b8042e7d9cfc09948:docs/PROJECT-DESIGN.md'], { encoding: 'utf8' });
 const valid = text => async () => new Response(text, { headers: { 'content-type': 'text/markdown' } });
 const errorCode = code => error => error.code === code && error.message === code;
-test('all 33 baseline IDs remain; only product-projects may become PARTIAL; counts derive from rows', () => {
+test('all 33 baseline IDs remain; only authorized shell/overview status promotions; counts derive from rows', () => {
   const old = parseProjectDesign(baseline).features, current = parseProjectDesign(source).features;
   assert.equal(current.length, 33);
   assert.deepEqual(current.map(f => f.id), old.map(f => f.id));
   for (let i = 0; i < current.length; i++) {
-    if (current[i].id !== 'product-projects') assert.equal(current[i].status, old[i].status);
-    else assert.ok(['DESIGNED', 'PARTIAL'].includes(current[i].status));
+    if (['product-shell', 'product-overview'].includes(current[i].id)) { assert.equal(old[i].status, 'DESIGNED'); assert.equal(current[i].status, 'PARTIAL'); }
+    else assert.equal(current[i].status, old[i].status);
     for (const field of ['name', 'originalIntent', 'implementation', 'limitation', 'remaining', 'evidence']) assert.ok(current[i][field]);
   }
   assert.equal(Object.values(featureCounts(current)).reduce((a, b) => a + b, 0), 33);

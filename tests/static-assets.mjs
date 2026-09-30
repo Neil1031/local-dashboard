@@ -4,6 +4,8 @@ const routes = new Map([
   ['/', ['index.html', 'text/html; charset=utf-8']],
   ['/index.html', ['index.html', 'text/html; charset=utf-8']],
   ['/dashboard.mjs', ['dashboard.mjs', 'text/javascript']],
+  ['/ui/shell.mjs', ['ui/shell.mjs', 'text/javascript']],
+  ['/ui/overview.mjs', ['ui/overview.mjs', 'text/javascript']],
   ['/ui/projects.mjs', ['ui/projects.mjs', 'text/javascript']],
   ['/ui/project-design.mjs', ['ui/project-design.mjs', 'text/javascript']],
   ['/project-design/PROJECT-DESIGN.md', ['docs/PROJECT-DESIGN.md', 'text/markdown; charset=utf-8']]

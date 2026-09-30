@@ -39,12 +39,12 @@ async function mock(payload, status = 200) {
     return route.fulfill({ status, contentType: 'application/json', body: JSON.stringify(payload) });
   });
   await settingsRoute();
-  await page.goto(baseUrl);
+  await page.goto(baseUrl + "#automations");
   await ready();
   return requests;
 }
 async function noOverflow() {
-  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), true);
 }
 
 before(async () => {
@@ -80,7 +80,7 @@ test('initial loading, one GET, refresh coalescing, new response, no detail coll
     ], { collectedAt: count === 1 ? '2026-09-21T01:23:45Z' : '2026-09-21T02:24:46Z' })) });
   });
   await settingsRoute();
-  await page.goto(baseUrl);
+  await page.goto(baseUrl + "#automations");
   await page.waitForFunction(() => document.getElementById('refreshBtn').disabled);
   assert.equal(await rows().count(), 0);
   assert.equal(await page.locator('#count-success').innerText(), '—');
@@ -183,7 +183,7 @@ for (const offline of [true, false]) {
       status: 503, contentType: 'application/json', body: JSON.stringify({ collectionStatus: 'ERROR', code: 'COLLECTOR_TIMEOUT' })
     }));
     await settingsRoute();
-    await page.goto(baseUrl);
+    await page.goto(baseUrl + "#automations");
     await ready();
     assert.equal(await rows().count(), 0);
     assert.equal(await page.locator('#count-success').innerText(), '—');
@@ -230,7 +230,7 @@ for (const scenario of ['offline', '503', 'ERROR', 'invalid-json', 'invalid-cont
         scenario === 'invalid-json' ? '<html>Proxy error</html>' : JSON.stringify(scenario === 'invalid-contract' ? {} : { collectionStatus: 'ERROR', code: 'COLLECTOR_TIMEOUT', message: 'Timed out' }) });
     });
     await settingsRoute();
-    await page.goto(baseUrl);
+    await page.goto(baseUrl + "#automations");
     await ready();
     const lastRefresh = await page.locator('#refreshTime').innerText();
     await page.locator('#refreshBtn').click();
@@ -403,9 +403,9 @@ test('UX-2 folds dated rows, preserves workflow semantics, counts, and History i
   assert.equal(await page.locator('.history-row[data-job="ux2-1"] button.day-cell').evaluate(node => node === document.activeElement), true);
   for (const width of [375, 320]) {
     await page.setViewportSize({ width, height: 900 });
-    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), true);
     await page.locator('#todayTab').click();
-    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), true);
     await page.screenshot({ path: `${artifactDir}/ux2-${width}.png`, fullPage: true });
     await page.locator('#historyTab').click();
   }
@@ -444,7 +444,7 @@ test('Runner drawer shows five bounded executions, conservative evidence, safe t
     return route.fulfill({ contentType: 'application/json', body: JSON.stringify(snapshot(jobs)) });
   });
   await settingsRoute();
-  await page.goto(baseUrl); await ready();
+  await page.goto(baseUrl + "#automations"); await ready();
   await page.waitForFunction(() => document.getElementById('runnerCoverageBody').textContent.includes('With evidence: 1'));
   assert.match(await page.locator('#runnerCoverageBody').innerText(), /Monitored jobs: 3.*Mapped: 2.*With evidence: 1.*No receipt yet: 1.*Unmapped: 1/);
   assert.match(await page.locator('#runnerCoverageBody').innerText(), /MISSED detection readiness: NOT_READY/);

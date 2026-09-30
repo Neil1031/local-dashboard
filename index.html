@@ -33,7 +33,7 @@
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      min-width: 320px;
+      min-width: 0;
       color: var(--text);
       background:
         radial-gradient(circle at 7% 4%, rgba(245, 177, 205, .28), transparent 23rem),
@@ -726,20 +726,86 @@
     .settings-message { min-height: 1.5em; overflow-wrap: anywhere; }
     @media (max-width: 600px) { .settings-grid { grid-template-columns: 1fr; } .settings-list { max-height: 170px; } }
   </style>
+  <style>
+    .product-shell { display:grid;grid-template-columns:200px minmax(0,1fr);gap:24px;width:min(1440px,calc(100% - 40px)); }
+    .shell-sidebar { min-width:0;align-self:start;position:sticky;top:24px; }
+    .shell-brand { font-weight:800;color:var(--pink-deep);padding:10px 8px 24px; }
+    .primary-nav { display:flex;flex-direction:column;gap:6px; }
+    .primary-nav button { text-align:left;border:1px solid transparent;background:transparent;color:var(--text);padding:12px 14px;border-radius:14px;cursor:pointer; }
+    .primary-nav button.active { background:var(--panel-strong);border-color:var(--border);color:var(--pink-deep);font-weight:700; }
+    button:focus-visible,summary:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible { outline:3px solid var(--pink-deep);outline-offset:3px; }
+    .shell-content,.page-heading,[data-page-view],.overview-card { min-width:0; }
+    .page-heading h1 { font-size:28px;margin:0 0 8px; }
+    .page-heading p { color:var(--muted);margin:0; }
+    .overview-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px; }
+    .overview-card { padding:22px;overflow-wrap:anywhere; }
+    .overview-card h2 { margin:0 0 12px;font-size:19px; }
+    .overview-card p { line-height:1.6; }
+    .overview-wide { grid-column:1/-1; }
+    .overview-list { list-style:none;margin:0;padding:0; }
+    .overview-list li { padding:14px 0;border-top:1px solid var(--border);line-height:1.5; }
+    .overview-list button { border:0;background:transparent;color:var(--pink-deep);padding:2px 0;text-align:left;cursor:pointer;font-weight:700;overflow-wrap:anywhere; }
+    .overview-list time { display:block;font-size:13px;color:var(--muted);margin-top:5px; }
+    .planned-page { padding:24px; }
+    .shell-content > .projects { padding:24px; }
+    .shell-content [hidden] { display:none!important; }
+    @media(max-width:900px) {
+      .product-shell { display:block;width:calc(100% - 24px);padding-top:12px; }
+      .shell-sidebar { position:static;margin-bottom:22px; }
+      .shell-brand { padding:4px 4px 12px; }
+      .primary-nav { flex-direction:row;overflow-x:auto;max-width:100%;padding:4px 4px 8px; }
+      .primary-nav button { flex:0 0 auto;padding:10px 12px;white-space:nowrap; }
+      .topbar { flex-direction:column;align-items:stretch;gap:14px; }
+      .toolbar { flex-wrap:wrap;justify-content:space-between; }
+      .page-heading h1 { font-size:24px; }
+      .overview-grid { grid-template-columns:minmax(0,1fr); }
+      .overview-card { padding:18px; }
+    }
+  </style>
 </head>
 <body>
-  <main class="page">
-    <header class="topbar">
-      <div class="brand">
-        <div class="brand-mark" aria-hidden="true">✿</div>
-        <div><h1>Local Dashboard</h1><small>Your little scheduler garden</small></div>
+  <div class="page product-shell">
+    <aside class="shell-sidebar">
+      <div class="shell-brand">✿ Local Dashboard</div>
+      <nav class="primary-nav" aria-label="Primary navigation">
+      <button type="button" data-page="overview" id="overviewPage" aria-controls="overviewView">Overview</button>
+      <button type="button" data-page="projects" id="projectsTab" aria-controls="projectsView">Projects</button>
+      <button type="button" data-page="automations" id="automationsPage" aria-controls="automationsView">Automations</button>
+      <button type="button" data-page="us" id="usPage" aria-controls="usView">US Stocks</button>
+      <button type="button" data-page="tw" id="twPage" aria-controls="twView">TW Stocks</button>
+      <button type="button" data-page="performance" id="performancePage" aria-controls="performanceView">Performance</button>
+      <button type="button" data-page="reports" id="reportsPage" aria-controls="reportsView">Reports</button>
+      <button type="button" data-page="evidence" id="evidencePage" aria-controls="evidenceView">Data & Evidence</button>
+      <button type="button" data-page="settings" id="settingsPage" aria-controls="settingsPanel">Settings</button>
+      </nav>
+    </aside>
+    <main class="shell-content">
+      <header class="topbar">
+        <div class="page-heading"><h1 id="pageTitle">Overview</h1><p id="pageDescription">排程現況、接下來的工作與已觀察執行。</p></div>
+        <div class="toolbar"><span class="pill">Last refresh <strong id="refreshTime">—</strong></span><button class="refresh" id="refreshBtn" type="button" disabled>↻ Refreshing…</button></div>
+      </header>
+    <section class="collection-notice" id="collectionNotice" role="status" aria-live="polite" aria-atomic="true">
+      <strong id="collectionTitle">正在讀取 Windows Task Scheduler…</strong>
+      <ul id="collectionDetails"></ul>
+    </section>
+    <noscript><p class="collection-notice error">請啟用 JavaScript 以讀取 /api/jobs；目前沒有載入排程資料。</p></noscript>
+    <p class="collection-notice warning" id="settingsWarning" role="alert" hidden>自訂顯示設定無法載入，已使用預設值</p>
+    <section id="overviewView" data-page-view="overview" aria-label="Operations overview" aria-busy="true">
+      <section class="stats" aria-label="完整收集快照摘要">
+      <article class="stat total"><div class="stat-label">Monitored automations</div><div class="stat-value" id="overview-monitored">—</div></article>
+      <article class="stat missed"><div class="stat-label">Attention · current status</div><div class="stat-value" id="overview-attention">—</div></article>
+      <article class="stat failed"><div class="stat-label">Failed last result</div><div class="stat-value" id="overview-failed">—</div></article>
+      <article class="stat success"><div class="stat-label">Successful last result</div><div class="stat-value" id="overview-success">—</div></article>
+      </section>
+      <p class="summary-note" id="overviewSnapshot" role="status">正在讀取排程快照…</p>
+      <p class="summary-note">Attention 涵蓋 Failed / Unknown / Missed current status；READY 不代表今天已執行。Scheduler Success 不保證應用程式業務成功。</p>
+      <div class="overview-grid">
+        <section class="panel overview-card"><h2>Upcoming runs</h2><p id="overviewUpcomingStatus" role="status"></p><ul class="overview-list" id="overviewUpcoming"></ul></section>
+        <section class="panel overview-card"><h2>Recent observed executions</h2><p id="overviewHistoryStatus" role="status"></p><button class="refresh" id="overviewHistoryRetry" type="button" hidden>Retry history</button><ul class="overview-list" id="overviewRecent"></ul></section>
+        <section class="panel overview-card overview-wide"><h2>Runner coverage</h2><p id="overviewRunner" role="status"></p><ul id="overviewRunnerWarnings"></ul><p class="summary-note">Receipt coverage 是診斷資訊；不證明今天已執行，也不啟用 MISSED 推算。</p></section>
       </div>
-      <div class="toolbar">
-        <span class="pill">Last refresh <strong id="refreshTime">—</strong></span>
-        <button class="refresh" id="settingsToggle" type="button" aria-expanded="false" aria-controls="settingsPanel">⚙ 顯示設定</button>
-        <button class="refresh" id="refreshBtn" type="button" disabled>↻ Refreshing…</button>
-      </div>
-    </header>
+    </section>
+    <section id="automationsView" data-page-view="automations" hidden>
     <section class="hero" aria-label="目前排程摘要">
       <div class="hero-card">
         <div class="eyebrow">Current scheduler overview</div>
@@ -758,42 +824,15 @@
       <article class="stat missed"><div class="stat-label">Attention · current status</div><div class="stat-value" id="count-attention">—</div></article>
     </section>
     <p class="summary-note">Attention: Failed / Unknown / Missed jobs. Collection warnings are shown below.</p>
-    <section class="collection-notice" id="collectionNotice" role="status" aria-live="polite" aria-atomic="true">
-      <strong id="collectionTitle">正在讀取 Windows Task Scheduler…</strong>
-      <ul id="collectionDetails"></ul>
-    </section>
-    <noscript><p class="collection-notice error">請啟用 JavaScript 以讀取 /api/jobs；目前沒有載入排程資料。</p></noscript>
     <section class="runner-coverage" id="runnerCoverage" aria-labelledby="runnerCoverageTitle" role="status">
       <h2 id="runnerCoverageTitle">Runner coverage</h2><div id="runnerCoverageBody">正在讀取 Runner 診斷…</div>
       <div id="runnerDiagnosticsWarnings"></div>
     </section>
-    <section class="panel settings-panel" id="settingsPanel" aria-labelledby="settingsHeading" hidden>
-      <h2 id="settingsHeading">顯示設定</h2>
-      <p>只修改 Dashboard 顯示方式；Windows 排程名稱與設定保持原樣。</p>
-      <p class="settings-message" id="settingsMessage" role="status" aria-live="polite"></p>
-      <div class="settings-grid">
-        <div class="settings-list" id="settingsJobs" aria-label="選擇工作"></div>
-        <datalist id="knownSettingJobs"></datalist>
-        <form class="settings-form" id="settingsForm" hidden>
-          <label>Windows 排程名稱（唯讀）<input id="settingRawName" readonly></label>
-          <label>中文顯示名稱<input id="settingDisplayName" maxlength="100" required></label>
-          <label>市場<select id="settingMarket"><option>台股</option><option>美股</option><option>其他</option></select></label>
-          <label>中文用途說明<textarea id="settingDescription" maxlength="1000"></textarea></label>
-          <label>排序（0–10000）<input id="settingOrder" type="number" min="0" max="10000" step="1" required></label>
-          <label><span><input id="settingHidden" type="checkbox"> 隱藏於 Dashboard</span></label>
-          <div><strong>前置關係</strong><div id="settingDependencies"></div><button id="addDependency" type="button">＋ 新增前置</button></div>
-          <div class="settings-actions"><button type="submit">儲存</button><button id="cancelSettings" type="button">取消</button><button id="resetSettings" type="button">恢復預設值</button></div>
-        </form>
-      </div>
-      <div class="settings-actions"><button id="resetAllSettings" type="button">全部恢復預設值</button></div>
-    </section>
-    <p class="collection-notice warning" id="settingsWarning" role="alert" hidden>自訂顯示設定無法載入，已使用預設值</p>
     <section class="panel">
       <div class="panel-head">
-        <div class="tabs" role="tablist" aria-label="Dashboard views">
+        <div class="tabs" role="tablist" aria-label="Automations views">
           <button class="tab active" id="todayTab" type="button" data-tab="today" role="tab" aria-controls="todayView" aria-selected="true">Today</button>
           <button class="tab" id="historyTab" type="button" data-tab="history" role="tab" aria-controls="historyView" aria-selected="false" tabindex="-1">7-day history</button>
-          <button class="tab" id="projectsTab" type="button" data-tab="projects" role="tab" aria-controls="projectsView" aria-selected="false" tabindex="-1">Projects</button>
         </div>
         <div class="filters" role="group" aria-label="Current status filters">
           <button class="filter active" type="button" data-filter="all" aria-pressed="true">All</button>
@@ -833,10 +872,12 @@
         </div>
         <div class="legend"><span>✓ All observed runs succeeded</span><span>! At least one failed</span><span>— No observed runs</span><span>Number = observed runs</span></div>
       </div>
-      <div class="projects" id="projectsView" role="tabpanel" aria-labelledby="projectsTab" aria-busy="false" hidden>
+    </section>
+    </section>
+      <div class="projects panel" data-page-view="projects" id="projectsView" role="region" aria-labelledby="projectsTab" aria-busy="false" hidden>
         <h2>Projects · 專案設計</h2>
         <p>正式專案設計／本次建置快照 · 僅 Local Dashboard。來源是建置時複製的工程主檔，並非即時讀取 Git 工作目錄，也不是 Scheduler 實測結果。</p>
-        <p>九頁產品方向與跨專案 aggregation 仍有待完成；靜態 prototype 保留為獨立樣本。各狀態數量不是整體完成百分比。</p>
+        <p>九頁導覽與 operations Overview 已有部分實作；跨專案 aggregation 尚未接入。各狀態數量不是整體完成百分比。</p>
         <p id="projectsStatus" role="status" aria-live="polite">尚未讀取專案設計。</p>
         <button class="refresh" id="projectsRetry" type="button">重新讀取專案設計</button>
         <section id="projectsData" aria-labelledby="projectIdentity" hidden>
@@ -849,9 +890,34 @@
           <div id="projectFeatures"></div>
         </section>
       </div>
+    <section class="panel settings-panel" id="settingsPanel" data-page-view="settings" aria-labelledby="settingsHeading" hidden>
+      <h2 id="settingsHeading">顯示設定</h2>
+      <p>只修改 Dashboard 顯示方式；Windows 排程名稱與設定保持原樣。</p>
+      <p class="settings-message" id="settingsMessage" role="status" aria-live="polite"></p>
+      <div class="settings-grid">
+        <div class="settings-list" id="settingsJobs" aria-label="選擇工作"></div>
+        <datalist id="knownSettingJobs"></datalist>
+        <form class="settings-form" id="settingsForm" hidden>
+          <label>Windows 排程名稱（唯讀）<input id="settingRawName" readonly></label>
+          <label>中文顯示名稱<input id="settingDisplayName" maxlength="100" required></label>
+          <label>市場<select id="settingMarket"><option>台股</option><option>美股</option><option>其他</option></select></label>
+          <label>中文用途說明<textarea id="settingDescription" maxlength="1000"></textarea></label>
+          <label>排序（0–10000）<input id="settingOrder" type="number" min="0" max="10000" step="1" required></label>
+          <label><span><input id="settingHidden" type="checkbox"> 隱藏於 Dashboard</span></label>
+          <div><strong>前置關係</strong><div id="settingDependencies"></div><button id="addDependency" type="button">＋ 新增前置</button></div>
+          <div class="settings-actions"><button type="submit">儲存</button><button id="cancelSettings" type="button">取消</button><button id="resetSettings" type="button">恢復預設值</button></div>
+        </form>
+      </div>
+      <div class="settings-actions"><button id="resetAllSettings" type="button">全部恢復預設值</button></div>
     </section>
-    <div class="footer-note">Local · read-only · dates shown in your local time zone</div>
-  </main>
+    <section class="panel planned-page" id="usView" data-page-view="us" hidden><p class="eyebrow">DESIGNED</p><h2>US Stocks</h2><p>尚未接入資料。此入口目前只提供導覽，相關資料來源與閱讀功能仍待實作。</p></section>
+    <section class="panel planned-page" id="twView" data-page-view="tw" hidden><p class="eyebrow">DESIGNED</p><h2>TW Stocks</h2><p>尚未接入資料。此入口目前只提供導覽，相關資料來源與閱讀功能仍待實作。</p></section>
+    <section class="panel planned-page" id="performanceView" data-page-view="performance" hidden><p class="eyebrow">DESIGNED</p><h2>Performance</h2><p>尚未接入資料。此入口目前只提供導覽，相關資料來源與閱讀功能仍待實作。</p></section>
+    <section class="panel planned-page" id="reportsView" data-page-view="reports" hidden><p class="eyebrow">DESIGNED</p><h2>Reports</h2><p>尚未接入資料。此入口目前只提供導覽，相關資料來源與閱讀功能仍待實作。</p></section>
+    <section class="panel planned-page" id="evidenceView" data-page-view="evidence" hidden><p class="eyebrow">DESIGNED</p><h2>Data & Evidence</h2><p>尚未接入資料。此入口目前只提供導覽，相關資料來源與閱讀功能仍待實作。</p></section>
+    <div class="footer-note">Local · dates shown in your local time zone · Settings changes display metadata only</div>
+    </main>
+  </div>
   <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
     <section class="drawer-card">
       <div class="drawer-head">

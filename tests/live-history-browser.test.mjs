@@ -17,7 +17,7 @@ test('packaged history UI matches every persisted API execution without another 
     page.on('request', request => { if (new URL(request.url()).pathname.startsWith('/api/')) requests.push(request.url()); });
     page.on('pageerror', error => errors.push(error.message));
     const response = page.waitForResponse(response => new URL(response.url()).pathname === '/api/jobs');
-    await page.goto(process.env.DASHBOARD_LIVE_URL);
+    await page.goto(process.env.DASHBOARD_LIVE_URL + "#automations");
     const snapshot = await (await response).json();
     assert.equal(snapshot.collectionStatus, 'OK');
     await page.waitForFunction(() => !document.getElementById('refreshBtn').disabled);
@@ -76,7 +76,7 @@ test('packaged history UI matches every persisted API execution without another 
     assert.ok(checkedExecutions > 0, 'Requires actual previously persisted history within the current window');
     for (const width of [1280, 820, 375, 320]) {
       await page.setViewportSize({ width, height: 1100 });
-      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), true);
       await page.screenshot({ path: `${artifactDir}/live-history-${width}.png`, fullPage: true });
     }
     await page.locator('#todayTab').click();

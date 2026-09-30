@@ -1,4 +1,4 @@
-// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: f53134092e0094517c583e513bd0b811f7a20f75246e2443b2f50e561c01ba2a
+// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: 618997059118bf352f754965ed7f3c0d789db2a6fb5804470eeb3061fa5f843c
 window.PROJECT_DESIGN_SAMPLE = Object.freeze({
   "metadata": {
     "project_id": "local-dashboard",
@@ -98,7 +98,7 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "implementation": "Today 依 metadata 顯示台／美股與依賴文字",
       "status": "DONE",
       "limitation": "只展示，不調度或阻擋下游",
-      "remaining": "未來移入 Automations 頁時保留語意",
+      "remaining": "維持 Automations 搬移後的回歸，保留 Workflow 語意",
       "evidence": "docs/STAGE-UX-2.md"
     },
     {
@@ -293,22 +293,22 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "area": "Product expansion",
       "name": "Product Shell",
       "originalIntent": "原本只需 Today／History",
-      "implementation": "九頁 shell 已有靜態 prototype 設計，未進正式 UI",
-      "status": "DESIGNED",
-      "limitation": "production 保留 Today／History 並加 Projects 最小入口，尚非九頁 shell",
-      "remaining": "獨立 Release 1 實作與驗收",
-      "evidence": "docs/DASHBOARD-DESIGN-SPACE.md"
+      "implementation": "Release 1B 九頁主要導覽，desktop sidebar／mobile 水平導覽，Automations／Settings 使用既有功能",
+      "status": "PARTIAL",
+      "limitation": "五頁只有 DESIGNED 入口；新 preferences 與後續資料頁未實作，本輪未合併／部署",
+      "remaining": "後續來源功能另行 gate；本輪管理初審",
+      "evidence": "docs/STAGE-RELEASE-1B.md"
     },
     {
       "id": "product-overview",
       "area": "Product expansion",
       "name": "Overview",
       "originalIntent": "原本由 Today 看排程摘要",
-      "implementation": "原型規劃 operations、US／TW findings、freshness",
-      "status": "DESIGNED",
-      "limitation": "跨來源 normalized feeds 未接入",
-      "remaining": "先做來源有據的 operations slice",
-      "evidence": "docs/DASHBOARD-DESIGN-SPACE.md"
+      "implementation": "現有 jobs 全快照計數／未來 next run、七天已觀察 History、Runner coverage／diagnostics",
+      "status": "PARTIAL",
+      "limitation": "僅 operations；無股票 findings／freshness／reports。PARTIAL／unavailable 明示；缺 History 不推 MISSED",
+      "remaining": "本輪管理初審；跨來源 normalized feeds 後續另審",
+      "evidence": "docs/STAGE-RELEASE-1B.md"
     },
     {
       "id": "product-projects",
@@ -317,8 +317,8 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "originalIntent": "原設計無跨專案設計檢視",
       "implementation": "Release 1A-1 正式入口讀本專案建置設計快照，共用 v1 parser 並呈現功能／狀態數量",
       "status": "PARTIAL",
-      "limitation": "最小切片已通過獨立初審及 Manager Review，合併 main `9e3c8cb`；安裝版本須另有 deployment evidence；完整閱讀面板／跨專案 aggregation／九頁 shell 未完成",
-      "remaining": "後續完成完整 Projects 閱讀面板／跨專案 aggregation，依九頁 shell 設計另審與驗證",
+      "limitation": "最小切片已通過獨立初審及 Manager Review，合併 main `9e3c8cb`；安裝版本須另有 deployment evidence；完整閱讀面板／跨專案 aggregation 未完成",
+      "remaining": "後續完成完整 Projects 閱讀面板／跨專案 aggregation，後續另審與驗證",
       "evidence": "docs/STAGE-PROJECTS-VIEWER-R1A1.md"
     },
     {
@@ -485,15 +485,15 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
   "remaining": [
     {
       "horizon": "NEXT",
-      "work": "Release 1 — Product Shell / complete Projects Viewer implementation",
-      "gate": "Release 1A-1 最小 Viewer 已通過獨立初審及 Manager Review，合併 main `9e3c8cb`；安裝版本須另有 deployment evidence；後續完整面板／aggregation／九頁 shell 與其他 Release 1 能力仍須獨立 gate",
+      "work": "Complete Projects Viewer / remaining Release 1 implementation",
+      "gate": "Release 1A-1 最小 Viewer 已通過獨立初審及 Manager Review，合併 main `9e3c8cb`；安裝版本須另有 deployment evidence；後續完整面板／aggregation 與其他 Release 1 能力仍須獨立 gate",
       "evidence": "docs/DASHBOARD-DESIGN-SPACE.md"
     },
     {
-      "horizon": "DESIGNED",
+      "horizon": "PARTIAL",
       "work": "Overview operations slice",
-      "gate": "只用現有 Scheduler／History／Runner 真實證據，不虛構股票資料",
-      "evidence": "docs/DASHBOARD-DESIGN-SPACE.md"
+      "gate": "現有真實 API 已接入；本輪待管理初審，外部 feeds 仍未接入",
+      "evidence": "docs/STAGE-RELEASE-1B.md"
     },
     {
       "horizon": "DESIGNED",
