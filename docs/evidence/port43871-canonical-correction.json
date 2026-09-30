@@ -1,0 +1,176 @@
+{
+  "scope": "bounded canonical current-state correction to existing Port 43871 Stage",
+  "status": "READY_FOR_FIRST_REVIEW",
+  "managerFinding": "https://github.com/Neil1031/local-dashboard/pull/3#issuecomment-5908494121",
+  "reviewedBeforeHead": "d9283efb34e3cf04812c9b495f216e9dc5863181",
+  "correctionSourceCommit": "f317ac87c5dccb374529aaddd00c723746aee760",
+  "originalRuntimeSourceCommit": "3e076590f7d6a2e6d35a0e9083c353c39b0770ae",
+  "priorCandidateEvidence": "docs/evidence/port43871-current-main.json",
+  "priorEvidencePreserved": true,
+  "canonical": {
+    "beforeRawWorkingAndPackagedSha256": "60b86ed7219bd9ed4dc2426e1c53f446a43fbfe397a3f7d8983fbeda516c7ffc",
+    "afterRawWorkingAndPackagedSha256": "4cf6e25cfd652db57a8e9417b4b580855705b9eddf5d2f65e3715cc6883918ae",
+    "gitBlobLfNormalizedSha256": "0345bbd445e3689f5c3444203d13a8475ac5fe848ea3bcd118d7a1838c0f889c",
+    "generatorLfNormalizedSha256": "0345bbd445e3689f5c3444203d13a8475ac5fe848ea3bcd118d7a1838c0f889c",
+    "rawWorkingEqualsPackaged": true,
+    "normalizedWorkingEqualsGitBlob": true,
+    "semantics": "Maven copies raw working-tree bytes; Git and generator use LF-normalized content. Generator header digest is not the raw packaged canonical digest.",
+    "historySections": {
+      "## Design Changes": {
+        "beforeRawSha256": "895314913319e7cf13bd67713b0efcc818678ef9ce74213331b218060f046f02",
+        "afterRawSha256": "895314913319e7cf13bd67713b0efcc818678ef9ce74213331b218060f046f02",
+        "byteEqual": true
+      },
+      "## Change Log": {
+        "beforeRawSha256": "e5f184de96211a37b37fceeccd70d7c9eb5fb20dfc76f36aeea8c46a0ff4bb35",
+        "afterRawSha256": "e5f184de96211a37b37fceeccd70d7c9eb5fb20dfc76f36aeea8c46a0ff4bb35",
+        "byteEqual": true
+      }
+    }
+  },
+  "priorCandidateHashes": {
+    "LocalDashboard.exe": "a56efe7eee546dd261b86d708cde597c307c5fe471946640eba35373a0dccb59",
+    "app/launcher.jar": "3e02ca2d60b10b6627e4bb429f4021821e66cb1ee3b8bbf6bf80f25d1f4d6ec3",
+    "app/dashboard.jar": "f9ef1b5b2afc9d6913b08bfae8b3fa4eba026fdfa8cdf789c078a4852538a6e0"
+  },
+  "freshCandidateHashes": {
+    "LocalDashboard.exe": "a56efe7eee546dd261b86d708cde597c307c5fe471946640eba35373a0dccb59",
+    "app/launcher.jar": "ccb8777ec28d615831d0807f27c21bdf603830ae023d95c61292cd3aaf6cb29d",
+    "app/dashboard.jar": "4cc8fc717057d0e1fb2dc79d3df54bbfef8da1874f7b47a1d5946411d8d3c68d"
+  },
+  "launcherClassBytesUnchanged": true,
+  "launcherClassCount": 11,
+  "runtimeSourceDelta": "NONE",
+  "packagedResourceEquality": {
+    "docs/PROJECT-DESIGN.md": {
+      "packagedRawSha256": "4cf6e25cfd652db57a8e9417b4b580855705b9eddf5d2f65e3715cc6883918ae",
+      "workingRawSha256": "4cf6e25cfd652db57a8e9417b4b580855705b9eddf5d2f65e3715cc6883918ae",
+      "byteEqual": true
+    },
+    "index.html": {
+      "packagedRawSha256": "0cb460242cb0e00842a19a951880eee83a1e39ce8cf191a70f569ad9a4df1af3",
+      "workingRawSha256": "0cb460242cb0e00842a19a951880eee83a1e39ce8cf191a70f569ad9a4df1af3",
+      "byteEqual": true
+    },
+    "dashboard.mjs": {
+      "packagedRawSha256": "f7f839fa6dda303881ad08e0c7409d75106a5343ce19bee5f60be9c957ad2b93",
+      "workingRawSha256": "f7f839fa6dda303881ad08e0c7409d75106a5343ce19bee5f60be9c957ad2b93",
+      "byteEqual": true
+    },
+    "ui/projects.mjs": {
+      "packagedRawSha256": "b9270305851fa9a9ec31fde08afb8f560e65749e32a9eb96eba9378286cb91ba",
+      "workingRawSha256": "b9270305851fa9a9ec31fde08afb8f560e65749e32a9eb96eba9378286cb91ba",
+      "byteEqual": true
+    },
+    "ui/project-design.mjs": {
+      "packagedRawSha256": "9f2fd3ad7246fe3d6e99bc54c1e888a3868b9dfe7aadaabfc8872dfef01ca3bd",
+      "workingRawSha256": "9f2fd3ad7246fe3d6e99bc54c1e888a3868b9dfe7aadaabfc8872dfef01ca3bd",
+      "byteEqual": true
+    }
+  },
+  "featureState": {
+    "stableIds": 33,
+    "statusCountsUnchanged": true,
+    "productProjectsStatus": "PARTIAL",
+    "r1a1": "independent first review + Manager Review passed; merged main 9e3c8cb; not deployed",
+    "remaining": "full Projects views / aggregation / nine-page shell remain incomplete"
+  },
+  "verification": {
+    "actualSupportedPackaging": "scripts/package-windows.ps1 -JdkHome <JDK24>, child-scoped LOCALAPPDATA/HOME + PROJECTS_NODE/NODE_PATH",
+    "maven": {
+      "passed": 184,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "focusedParserLoader": {
+      "command": "node --test tests/projects.test.mjs",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    "generator": "regenerated through existing generator; --check PASS",
+    "focusedBrowser": {
+      "result": "PASSED",
+      "isolatedPaths": true,
+      "emptyMonitoringAndRunner": true,
+      "actualExeStartAndStop": true,
+      "readinessAndBrowserUri": 43871,
+      "focusedProjectsWidths": [
+        1280,
+        375,
+        320
+      ],
+      "domWordingIdsCountsAndProvenance": "PASS",
+      "portReleasedAndPidCleaned": true,
+      "negativeScenariosRerun": false
+    },
+    "focusedBrowserCommand": "tests/port43871-browser-smoke.mjs with PORT_QA_CORRECTION=1 against fresh actual app-image",
+    "diffCheck": "PASS",
+    "negativeProcessScenariosRerun": false,
+    "unrelatedNodePrototypeSuitesRerun": false
+  },
+  "protection": {
+    "newCorrectionBaselineSeparateFromPriorRound": true,
+    "files": 6991,
+    "relatedTasks": 7,
+    "externalProjectGitSnapshots": 4,
+    "checkpoints": [
+      {
+        "Phase": "package",
+        "FileCount": 6991,
+        "TaskCount": 7,
+        "ProjectCount": 4,
+        "FileDrift": 0,
+        "DefinitionDrift": 0,
+        "ExecutionStateDrift": 0,
+        "ProjectGitDrift": 0,
+        "Listeners": [],
+        "At": "2026-09-30T09:48:19.3534629+00:00"
+      },
+      {
+        "Phase": "final",
+        "FileCount": 6991,
+        "TaskCount": 7,
+        "ProjectCount": 4,
+        "FileDrift": 0,
+        "DefinitionDrift": 0,
+        "ExecutionStateDrift": 0,
+        "ProjectGitDrift": 0,
+        "Listeners": [],
+        "At": "2026-09-30T09:50:43.3841506+00:00"
+      }
+    ],
+    "allMutableCandidateStateIsolated": true,
+    "installedAppAndShortcutsNotReplaced": true,
+    "formalTaskRunnerDbOperations": false,
+    "priorRoundExecutionDriftEvidencePreserved": true,
+    "externalProjectCoverage": "Git HEAD/status only"
+  },
+  "googleDoc": {
+    "mode": "READ_ONLY_NO_WRITE_NEEDED",
+    "revisionBeforeAndAfter": "ANLCKQnn8csRkT40tDlEWib9CIxZpFqKuPg4fkjBdpdly7iM3v9KeNhNhkagDU5u0DUAxBFU2DJfI8BGMt0GnV91B-_iC2Z80ltkx4IgVNc",
+    "currentR1a1ParagraphsAlreadyCorrect": true,
+    "previousDocEngineeringSnapshot": "3e076590f7d6a2e6d35a0e9083c353c39b0770ae",
+    "newGitSourceShaNotWrittenToDoc": true
+  },
+  "screenshot": {
+    "path": "docs/evidence/port43871-correction-projects.png",
+    "sha256": "93d5245a2e2237122b491d09b39d024b4e1265989c05abc4c05a79a0c1526d83",
+    "visuallyInspected": true,
+    "actualCandidateProductProjectsRow": true,
+    "priorScreenshotPreserved": true
+  },
+  "selfQa": {
+    "firstAdapterAttempt": "environment key case issue before any candidate launch; fixed using case-insensitive os.environ and separate final-run directory",
+    "successfulRunDiagnostic": "PowerShell CLIXML progress rendering warning; read-only reproduction captured only progress streams with exit 0 and no listener. Product/browser/cleanup assertions and verification JSON passed."
+  },
+  "notPerformed": [
+    "main merge",
+    "installed deployment",
+    "shortcut replacement",
+    "Scheduler/Runner/receipt/production DB mutation",
+    "next Stage",
+    "Google Doc write"
+  ]
+}

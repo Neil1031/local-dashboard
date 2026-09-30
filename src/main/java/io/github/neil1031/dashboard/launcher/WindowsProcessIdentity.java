@@ -16,13 +16,17 @@ import java.util.regex.Pattern;
  * all termination decisions/operations remain in the Java launcher. */
 final class WindowsProcessIdentity {
     static boolean matches(ProcessHandle handle, Path java, Path jar) throws Exception {
+        return matches(handle, java, jar, null);
+    }
+
+    static boolean matches(ProcessHandle handle, Path java, Path jar, Path home) throws Exception {
         String executable = handle.info().command().orElse("");
         if (executable.isEmpty() || !sameFile(executable, java)) return false;
         long pid = handle.pid();
         String script = " $ErrorActionPreference='Stop'; "
                 + "$p=Get-CimInstance Win32_Process -Filter 'ProcessId=" + pid + "'; "
                 + "if (!$p -or !$p.ExecutablePath -or !$p.CommandLine) { exit 2 }; "
-                + "$listeners=@(Get-NetTCPConnection -LocalPort 8080 -State Listen -ErrorAction Stop); "
+                + "$listeners=@(Get-NetTCPConnection -LocalPort " + WindowsLauncher.PORT + " -State Listen -ErrorAction Stop); "
                 + "if ($listeners.Count -ne 1 -or $listeners[0].LocalAddress -ne '127.0.0.1' "
                 + "-or $listeners[0].OwningProcess -ne " + pid + ") { exit 3 }; "
                 + "[Console]::WriteLine([Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($p.ExecutablePath))); "
@@ -45,7 +49,7 @@ final class WindowsProcessIdentity {
                 var lines = new String(bytes, StandardCharsets.US_ASCII).lines().toList();
                 if (lines.size() != 2) return false;
                 String actualJava = decode(lines.get(0));
-                return sameFile(actualJava, java) && commandMatches(decode(lines.get(1)), java, jar);
+                return sameFile(actualJava, java) && commandMatches(decode(lines.get(1)), java, jar, home);
             } finally {
                 // Only this read-only helper's retained child handle, never a process search.
                 if (probe.isAlive()) probe.destroyForcibly();
@@ -59,15 +63,20 @@ final class WindowsProcessIdentity {
     }
 
     static boolean commandMatches(String command, Path java, Path jar) {
+        return commandMatches(command, java, jar, null);
+    }
+
+    static boolean commandMatches(String command, Path java, Path jar, Path home) {
         try {
             List<String> args = arguments(command);
             if (args.size() != 6 || !sameFile(args.get(0), java) || !args.get(1).equals("-jar")
                     || !sameFile(args.get(2), jar) || !args.get(3).equals("--server.address=127.0.0.1")
-                    || !args.get(4).equals("--server.port=8080")) return false;
+                    || !args.get(4).equals("--server.port=" + WindowsLauncher.PORT)) return false;
             String prefix = "--spring.config.location=classpath:/application.yml,optional:";
             if (!args.get(5).startsWith(prefix)) return false;
             Path config = Path.of(URI.create(args.get(5).substring(prefix.length())));
-            return config.isAbsolute() && config.endsWith(Path.of("config", "application.yml"));
+            return config.isAbsolute() && config.endsWith(Path.of("config", "application.yml"))
+                    && (home == null || Files.isSameFile(config, home.resolve("config/application.yml")));
         } catch (Exception invalid) { return false; }
     }
 

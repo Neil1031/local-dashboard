@@ -35,7 +35,7 @@ final class SafeStop {
     static Result stop(Path file, Path log, SystemAccess system) throws Exception {
         WindowsLauncher.append(log, "STOP_REQUESTED");
         if (!Files.exists(file)) {
-            if (system.portOccupied()) throw refused(log, -1, "No recorded server; port 8080 is occupied.");
+            if (system.portOccupied()) throw refused(log, -1, "No recorded server; port " + WindowsLauncher.PORT + " is occupied.");
             return Result.NOT_RUNNING;
         }
         String record = Files.readString(file);
@@ -53,7 +53,7 @@ final class SafeStop {
         Target target = system.find(pid);
         if (target == null || !target.alive()) {
             cleanup(file, record, log, pid, "process_absent");
-            if (system.portOccupied()) throw refused(log, pid, "Recorded server is absent; port 8080 belongs to an unverified service.");
+            if (system.portOccupied()) throw refused(log, pid, "Recorded server is absent; port " + WindowsLauncher.PORT + " belongs to an unverified service.");
             return Result.NOT_RUNNING;
         }
         if (target.started() != null && !started.equals(target.started())) {
@@ -78,7 +78,7 @@ final class SafeStop {
         }
         WindowsLauncher.append(log, "EXITED pid=" + pid);
         cleanup(file, record, log, pid, "exited");
-        if (system.portOccupied()) throw new IOException("Dashboard exited, but port 8080 is still occupied. No other process was stopped.");
+        if (system.portOccupied()) throw new IOException("Dashboard exited, but port " + WindowsLauncher.PORT + " is still occupied. No other process was stopped.");
         return Result.STOPPED;
     }
 

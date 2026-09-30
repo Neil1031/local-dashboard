@@ -1,19 +1,22 @@
 # Windows app-image / launcher
 
+本候選分支預設連接埠為 **43871**；已在專用 worktree 隔離驗證，正式安裝與桌面捷徑未替換。下方 2026-09-21 驗收保留當時的 8080 歷史紀錄。
+未來獲准升級前，須先用與舊 instance 匹配的舊版 Safe Stop 停止 8080，再另行驗證與替換 app-image；本 Stage 不執行這些部署步驟。
+
 ## 日常使用
 
 把整個 `dist/LocalDashboard` 資料夾放在固定位置（不要只複製 EXE），雙擊
 `LocalDashboard.exe`。它使用內含 runtime，等待 HTTP readiness 後以 Windows
-預設瀏覽器開啟 `http://127.0.0.1:8080`。使用者不需 Java、JAVA_HOME、Maven 或 command line。
+預設瀏覽器開啟 `http://127.0.0.1:43871`。使用者不需 Java、JAVA_HOME、Maven 或 command line。
 預設 jpackage application icon；沒有 installer、WiX、Service、登入自動啟動或 updater。
 
-連續雙擊會等待同一次啟動，已執行時則直接開既有 Dashboard，不建立另一個 Spring instance。
-若其他程式占用 8080，會顯示錯誤，不會終止該程式。啟動最多等待 90 秒，失敗顯示 log 路徑。
-包裝版固定 loopback / 8080；YAML 不能把它改成 LAN listener 或另一個 port。
+連續雙擊會等待同一次啟動；已執行時，先核對記錄 PID／精確建立時間、此 image 的 executable/JAR、完整命令、指定 home 的 config URI、43871 loopback listener owner 與 readiness，開瀏覽器前再驗一次，才重用既有 Dashboard。不一致時拒絕，不建立另一個 Spring instance。
+若其他程式占用 43871，會顯示錯誤，不會終止該程式。啟動最多等待 90 秒，失敗顯示 log 路徑。
+包裝版固定 loopback / 43871；YAML 不能把它改成 LAN listener 或另一個 port。
 
 關閉瀏覽器不會停止服務。需要停止時，雙擊桌面的 **Stop Local Dashboard**。
 它執行 `LocalDashboard.exe --stop`，核對記錄的 PID、建立時間、bundled executable/JAR、完整命令形狀、
-8080 listener 的 PID 與 readiness 身分後才停止；不關閉瀏覽器、不終止其他 Java 或 descendants。
+43871 listener 的 PID 與 readiness 身分後才停止；不關閉瀏覽器、不終止其他 Java 或 descendants。
 已停止時顯示 `Local Dashboard is not running.`。身分無法確認時會拒絕並提示 log 位置。
 下次雙擊 **Local Dashboard** 可重新啟動。更新 app-image 前先停止服務。
 停止行為、Windows termination 限制與驗收詳見 [Safe Stop](WINDOWS-SAFE-STOP.md)。
@@ -106,7 +109,7 @@ Debug 可先停服務，使用內含 Java 在 PowerShell 中執行（Ctrl+C 停�
 ```powershell
 $image = 'D:\Apps\LocalDashboard' # 改成 image 的絕對位置
 Set-Location "$env:LOCALAPPDATA\LocalDashboard" # 或自己的 LOCAL_DASHBOARD_HOME
-& "$image\runtime\bin\java.exe" -jar "$image\app\dashboard.jar" --server.address=127.0.0.1 --server.port=8080
+& "$image\runtime\bin\java.exe" -jar "$image\app\dashboard.jar" --server.address=127.0.0.1 --server.port=43871
 ```
 
 readiness endpoint `GET /api/launcher/status` 不收集 tasks、不寫 DB；在 ApplicationReadyEvent 前回 503，
@@ -123,6 +126,10 @@ HTTP polling 驗證 ready，再呼叫 `Desktop.browse`。Log 記錄 `READINESS_P
 
 ## 可重現驗收
 
+目前的隔離候選流程見 [43871 Stage](STAGE-PORT-43871-CURRENT-MAIN.md)。只在專用 worktree 執行 `package-windows.ps1`，再執行 `verify-port43871-candidate.py`；所有 child 的 LOCALAPPDATA／LOCAL_DASHBOARD_HOME 與 mutable state 都隔離，監控與 Runner 清單為空，不安裝捷徑、不取正式 history。`validate-windows-package.ps1` 在第一個 child 前也隔離兩個環境路徑，結束後只還原本 process 的環境。
+
+以下為 **2026-09-21 歷史驗收流程**。舊 `verify-windows-launcher.py` 會讀正式排程並安裝真實桌面捷徑，且未全面隔離 LOCALAPPDATA；本 Stage 未原樣執行，不能當作安全候選測試命令。
+
 ```powershell
 .\scripts\package-windows.ps1 # 含 Maven full clean verify 與 packaged-runtime smoke check
 node --test tests/dashboard.test.mjs tests/history.test.mjs tests/browser.test.mjs tests/history-browser.test.mjs
@@ -132,7 +139,7 @@ git diff --check
 
 Node/browser tests 的 Node 22+／Playwright 設定沿用主 README。Python 3.11+ 僅用於驗收。
 驗收優先使用 PATH 中的 `pwsh.exe`，否則使用 Windows PowerShell，保持原 execution policy。
-`verify-windows-launcher.py` 要求 8080 空閒，以及範例設定中五個既有 tasks 有可讀取的 completed history；
+`verify-windows-launcher.py` 要求 43871 空閒，以及範例設定中五個既有 tasks 有可讀取的 completed history；
 缺少這些前置條件會明確失敗，不建立 tasks 或偽造 history。它會：
 
 - 在忽略的 `.tools/windows-launcher-acceptance/<id>/external home 中文` 建立隔離設定與資料，保留證據於同層 `verification.json`。

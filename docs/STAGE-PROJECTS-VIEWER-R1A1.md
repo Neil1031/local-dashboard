@@ -2,6 +2,8 @@
 
 Implementation and Self-QA complete; awaiting independent Astra first review and Manager final review. This record is not an approval, merge or deployment acceptance.
 
+**Later closeout, 2026-09-30:** independent first review and Manager Review subsequently passed. Accepted head `83596ff68b2970e6d07d3f00af7acd7cea16ae1a` was merged with `--no-ff` at `9e3c8cbf159e5d29ecd3ce19d1fb287797949101`, PR [#2](https://github.com/Neil1031/local-dashboard/pull/2). Installed deployment was not performed. The original pre-review record below is retained as history; the later [43871 candidate integration](STAGE-PORT-43871-CURRENT-MAIN.md) is a separate review boundary.
+
 ## Plan, stages and gates
 
 Baseline: clean `main` at `f1dac729c72db5e636a762b9f5f505b91074537e`, repository `Neil1031/local-dashboard`. Implementation branch: `implement/dashboard-projects-viewer-r1a1`. The implementation Work's actual session `turn_context` was `gpt-6.1-sol / high`. Astra manages and reviews in its separate visible Work. No subagents were used.

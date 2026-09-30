@@ -1,6 +1,6 @@
 # Local Dashboard 現況系統設計（As-Built）
 
-> 歷史盤點基準：`main` 的 `085757affe2c2dc0c1de45663395e418ad702e3e`；既有系統敘述依該基準與 Stage 文件。2026-09-30 的 Release 1A-1 補充描述本分支待獨立審查的 Projects 最小入口，尚未合併或部署。這是程式與既有 Stage 文件的對照，不是對某一天 Windows 排程實際執行的驗收紀錄。文中的時間例子是說明，不是投資資料或實際執行證據。
+> 歷史盤點基準：`main` 的 `085757affe2c2dc0c1de45663395e418ad702e3e`；既有系統敘述依該基準與 Stage 文件。2026-09-30 的 Release 1A-1 Projects 最小入口已通過初審與 Manager Review，合併至 main `9e3c8cb`，尚未部署。後續 43871 候選分支整合及隔離驗證仍須獨立初審與 Manager Review。這是程式與既有 Stage 文件的對照，不是對某一天 Windows 排程實際執行的驗收紀錄。文中的時間例子是說明，不是投資資料或實際執行證據。
 
 先記住四件事：**Today 是現在讀到的 Scheduler 快照；History 是 Dashboard 曾看見並存下的結果；Runner 是有映射工作才可能有的另一份執行證據；Schedule Snapshot／Correlation 目前沒有正式畫面。** 想查某個欄位時可直接看第 12 節，想找對應程式可看第 14 節。
 
@@ -38,11 +38,11 @@ flowchart LR
 
 **這功能解決什麼問題：** 不需要使用者自行安裝 Java 或開命令列，也能啟動／停止一個可識別的本機 Dashboard，並保留設定與歷史。
 
-**它怎麼運作：** 包裝版的 `LocalDashboard.exe` 使用內含 Java runtime；無參數啟動時取得共用 lock，先檢查是否已有本產品服務，缺少外部 `config/application.yml` 才從包裝範本 create-only 建立；再啟動 Spring server，等待 `127.0.0.1:8080/api/launcher/status` 回傳精確 readiness 字串，最後用預設瀏覽器開啟頁面。既有服務會直接開瀏覽器，不再啟第二份。預設外部工作目錄是 `%LOCALAPPDATA%\LocalDashboard`，資料庫在 `data/local-dashboard.db`，可用絕對路徑 `LOCAL_DASHBOARD_HOME` 調整；config、DB、logs 不放在 app-image 內。`--stop`／Stop shortcut 取得同一 lock，依 PID 與建立時間、bundled executable/JAR/命令、8080 listener 所屬 PID、readiness 身分交叉驗證後才終止單一 server。設定清單由外部 YAML 控制；repo 的 `application.yml` 預設 `include: []` 表示不監控任何工作，包裝版首次建立的範本另有既有監控項目。
+**它怎麼運作：** 包裝版的 `LocalDashboard.exe` 使用內含 Java runtime；無參數啟動時取得共用 lock，先檢查是否已有本產品服務，缺少外部 `config/application.yml` 才從包裝範本 create-only 建立；再啟動 Spring server，等待 `127.0.0.1:43871/api/launcher/status` 回傳精確 readiness 字串，最後用預設瀏覽器開啟頁面。既有服務須先核對 server.pid、精確建立時間、此 image 的 bundled executable/JAR、完整 command、指定 home 的 config URI、listener owner 與 readiness，開瀏覽器前再驗一次；身分不一致即拒絕，不再啟第二份。預設外部工作目錄是 `%LOCALAPPDATA%\LocalDashboard`，資料庫在 `data/local-dashboard.db`，可用絕對路徑 `LOCAL_DASHBOARD_HOME` 調整；config、DB、logs 不放在 app-image 內。`--stop`／Stop shortcut 取得同一 lock，依 PID 與建立時間、bundled executable/JAR/命令、43871 listener 所屬 PID、readiness 身分交叉驗證後才終止單一 server。設定清單由外部 YAML 控制；repo 的 `application.yml` 預設 `include: []` 表示不監控任何工作，包裝版首次建立的範本另有既有監控項目。
 
-**Port 決策：** 已確定正式目標為 43871；目前 main 程式／本階段基準仍為 8080，Release 1A-1 未遷移，也未重新驗收正式安裝包。
+**Port 決策與部署界線：** 正式目標已定為 43871，已在後續專用候選分支整合與隔離驗證；Release 1A-1 合併基準仍是歷史 8080。正式 app-image／桌面捷徑未替換，候選實測不代表正式部署驗收。見 [43871 Stage](STAGE-PORT-43871-CURRENT-MAIN.md)。
 
-**目前限制：** 此基準的包裝程式固定 loopback／8080；瀏覽器關閉不等於服務停止。`--stop` 身分不明時拒絕，不能用來停止任意 Java 或 Windows Scheduled Task。Windows bundled JDK 不保證 graceful shutdown；停止可能是強制程序終止。沒有 installer、Service、開機自啟或 updater。細節見 [`WINDOWS-LAUNCHER.md`](WINDOWS-LAUNCHER.md) 與 [`WINDOWS-SAFE-STOP.md`](WINDOWS-SAFE-STOP.md)。
+**目前限制：** 此候選分支的包裝程式固定 loopback／43871；瀏覽器關閉不等於服務停止。`--stop` 身分不明時拒絕，不能用來停止任意 Java 或 Windows Scheduled Task。Windows bundled JDK 不保證 graceful shutdown；停止可能是強制程序終止。沒有 installer、Service、開機自啟或 updater。細節見 [`WINDOWS-LAUNCHER.md`](WINDOWS-LAUNCHER.md) 與 [`WINDOWS-SAFE-STOP.md`](WINDOWS-SAFE-STOP.md)。
 
 ## 3. Scheduler 收集到 `/api/jobs`
 

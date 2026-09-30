@@ -7,12 +7,39 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.URI;
 import java.nio.file.Path;
+import java.nio.file.Files;
 import java.time.Duration;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.*;
 
 class WindowsLauncherTest {
     @TempDir Path temp;
+
+    @Test void livePidNeedsExactStartTimeAndWellFormedRecordBeforeReuse() throws Exception {
+        Path file = temp.resolve("server.pid");
+        assertThat(WindowsLauncher.recordedServer(file)).isNull();
+        ProcessHandle current = ProcessHandle.current();
+        Files.writeString(file, current.pid() + "\n" + current.info().startInstant().orElseThrow() + "\n");
+        assertThat(WindowsLauncher.recordedServer(file).pid()).isEqualTo(current.pid());
+        Files.writeString(file, current.pid() + "\n2000-01-01T00:00:00Z\n");
+        assertThatThrownBy(() -> WindowsLauncher.recordedServer(file)).isInstanceOf(IOException.class).hasMessageContaining("start time");
+        Files.writeString(file, "invalid\n");
+        assertThatThrownBy(() -> WindowsLauncher.recordedServer(file)).isInstanceOf(IOException.class).hasMessageContaining("Invalid");
+    }
+
+    @Test void reuseCommandRequiresTheExactExternalConfigFile() throws Exception {
+        Path java = Files.createFile(temp.resolve("javaw.exe"));
+        Path jar = Files.createFile(temp.resolve("dashboard.jar"));
+        Path home = Files.createDirectories(temp.resolve("data home/config")).getParent();
+        Files.createFile(home.resolve("config/application.yml"));
+        String command = WindowsLauncher.serverCommand(java, jar, home).stream()
+                .map(s -> "\"" + s + "\"").collect(Collectors.joining(" "));
+        assertThat(WindowsProcessIdentity.commandMatches(command, java, jar, home)).isTrue();
+        Path other = Files.createDirectories(temp.resolve("other/config")).getParent();
+        Files.createFile(other.resolve("config/application.yml"));
+        assertThat(WindowsProcessIdentity.commandMatches(command, java, jar, other)).isFalse();
+    }
 
     @Test void readinessRequiresExactApplicationIdentityAndSuccessfulStatus() throws Exception {
         var server = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
@@ -55,7 +82,8 @@ class WindowsLauncherTest {
         assertThat(WindowsLauncher.applicationHome(home.toString(), null)).isEqualTo(home);
         assertThatThrownBy(() -> WindowsLauncher.applicationHome("relative", temp.toString())).isInstanceOf(IOException.class);
         var command = WindowsLauncher.serverCommand(temp.resolve("runtime/bin/javaw.exe"), temp.resolve("app/dashboard.jar"), home);
-        assertThat(command).contains("--server.address=127.0.0.1", "--server.port=8080",
+        assertThat(WindowsLauncher.URL).isEqualTo(URI.create("http://127.0.0.1:43871"));
+        assertThat(command).contains("--server.address=127.0.0.1", "--server.port=43871",
                 "--spring.config.location=classpath:/application.yml,optional:" + home.resolve("config/application.yml").toUri());
         assertThat(command.get(2)).isEqualTo(temp.resolve("app/dashboard.jar").toString());
     }
