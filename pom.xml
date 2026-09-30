@@ -21,7 +21,8 @@
     <resources>
       <resource><directory>src/main/resources</directory></resource>
       <resource><directory>${project.basedir}/config</directory><includes><include>application.example.yml</include></includes><targetPath>bootstrap</targetPath></resource>
-      <resource><directory>${project.basedir}</directory><includes><include>index.html</include><include>dashboard.mjs</include></includes><targetPath>static</targetPath></resource>
+      <resource><directory>${project.basedir}</directory><includes><include>index.html</include><include>dashboard.mjs</include><include>ui/*.mjs</include></includes><targetPath>static</targetPath></resource>
+      <resource><directory>${project.basedir}/docs</directory><includes><include>PROJECT-DESIGN.md</include></includes><targetPath>static/project-design</targetPath></resource>
     </resources>
     <plugins>
       <plugin>

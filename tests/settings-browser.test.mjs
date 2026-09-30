@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { createServer } from 'node:http';
+import { serveStaticAsset } from './static-assets.mjs';
 import { readFile } from 'node:fs/promises';
 
 const require = createRequire(new URL('../.tools/browser-tests/package.json', import.meta.url));
@@ -10,11 +11,7 @@ const jobs = ['AIStockHunter-UnexplainedVolume-Daily', 'AIStockHunter-Accumulati
   ({ id: `id-${index}`, name, taskPath: '\\', status: 'READY', lastRunStatus: 'UNKNOWN' }));
 
 test('settings save applies cached snapshot, remains safe, and rejects stale tab', async () => {
-  const server = createServer(async (request, response) => {
-    const file = request.url === '/dashboard.mjs' ? 'dashboard.mjs' : 'index.html';
-    response.setHeader('Content-Type', file.endsWith('mjs') ? 'text/javascript' : 'text/html; charset=utf-8');
-    response.end(await readFile(new URL(`../${file}`, import.meta.url)));
-  });
+  const server = createServer(serveStaticAsset);
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL || 'msedge', headless: true });
   try {

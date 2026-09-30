@@ -1,4 +1,4 @@
-// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: 0e14297b94feede94ee997f5a2f74b91f335efb4d28a335507637d9f2d6ee0c6
+// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: f012cdc3dea9747375c21e1d2603c6099584c19cc304f2a6d2ebbe6f99f0c9f7
 window.PROJECT_DESIGN_SAMPLE = Object.freeze({
   "metadata": {
     "project_id": "local-dashboard",
@@ -20,7 +20,7 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "originalIntent": "雙擊開本機監控畫面",
       "implementation": "包裝版 EXE 啟動 loopback Spring server，已執行則開既有頁面",
       "status": "DONE",
-      "limitation": "固定本機 8080，非 Windows Service",
+      "limitation": "目前程式基準 8080；已確定正式目標 43871，本階段未遷移，非 Windows Service",
       "remaining": "維持啟動身分驗證",
       "evidence": "docs/WINDOWS-LAUNCHER.md"
     },
@@ -295,7 +295,7 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "originalIntent": "原本只需 Today／History",
       "implementation": "九頁 shell 已有靜態 prototype 設計，未進正式 UI",
       "status": "DESIGNED",
-      "limitation": "production 仍是兩個 tab",
+      "limitation": "production 保留 Today／History 並加 Projects 最小入口，尚非九頁 shell",
       "remaining": "獨立 Release 1 實作與驗收",
       "evidence": "docs/DASHBOARD-DESIGN-SPACE.md"
     },
@@ -315,11 +315,11 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "area": "Product expansion",
       "name": "Projects",
       "originalIntent": "原設計無跨專案設計檢視",
-      "implementation": "Local Dashboard Living Project Design contract 與靜態 pilot 已通過 Manager Review",
-      "status": "DESIGNED",
-      "limitation": "無 production Viewer／aggregation",
-      "remaining": "實作 production Projects Viewer / aggregation，須另開正式 stage",
-      "evidence": "docs/PROJECT-DESIGN.md"
+      "implementation": "Release 1A-1 正式入口讀本專案建置設計快照，共用 v1 parser 並呈現功能／狀態數量",
+      "status": "PARTIAL",
+      "limitation": "最小切片待 Astra／Manager 審查，未部署；跨專案 aggregation／完整閱讀面板未實作",
+      "remaining": "完成本階段審查；後續完整 Projects／aggregation 另審",
+      "evidence": "docs/STAGE-PROJECTS-VIEWER-R1A1.md"
     },
     {
       "id": "product-us",
@@ -485,8 +485,8 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
   "remaining": [
     {
       "horizon": "NEXT",
-      "work": "Release 1 — Product Shell / Projects Viewer implementation",
-      "gate": "同一 repo 主檔 parser/export、來源錯誤與權限、鍵盤／手機 gate；須另開實作 stage",
+      "work": "Release 1 — Product Shell / complete Projects Viewer implementation",
+      "gate": "Release 1A-1 最小 Viewer 已實作待審；完整面板／aggregation 與其他 Release 1 能力仍須獨立 gate",
       "evidence": "docs/DASHBOARD-DESIGN-SPACE.md"
     },
     {

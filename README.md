@@ -391,3 +391,11 @@ python scripts/verify-runner.py --java "$env:JAVA_HOME/bin/java.exe"
 
 使用 `target/test-classes` 的 fixture，驗證 exit、Unicode、雙 stream 大輸出、fallback、併發、crash/restart 與 descendants；
 只中止 verifier 自己啟動的 runner，finite fixture child 會自行結束。結果寫入 `target/stage-5a/runner-*/verification.json`。
+
+## Projects — Release 1A-1 minimal viewer
+
+The production page adds a Projects tab beside Today/History and keeps existing display settings. It reads only Local Dashboard's canonical `docs/PROJECT-DESIGN.md`, copied unchanged into `/project-design/PROJECT-DESIGN.md` at Maven build time. This is explicitly a **build snapshot**, with design version, historical inventory baseline, raw-byte SHA-256 and read time; it is not a live Git reader or fresh Scheduler/deployment acceptance.
+
+The production viewer and static prototype generator share `ui/project-design.mjs` v1 validation. All 33 stable feature IDs remain; only `product-projects` moves from DESIGNED to PARTIAL because full Projects detail views and aggregation remain pending. Status counts come from parsed rows, without completion percentages. Missing/invalid/unsupported/unavailable/oversized data clears old results and offers retry. See [contract](docs/DASHBOARD-DATA-CONTRACTS.md#project-design-v1-build-snapshot) and [stage evidence](docs/STAGE-PROJECTS-VIEWER-R1A1.md).
+
+The decided formal port target is **43871**. This stage keeps the current program baseline **8080**; it does not migrate the port, merge the old port branch, build an app-image, or validate the installed application. Independent Astra review and Manager final review remain required before merge.

@@ -1,4 +1,5 @@
 // Current scheduler state and last execution result are separate API concepts.
+import { mountProjects } from './ui/projects.mjs';
 const currentStatuses = new Set(['READY', 'RUNNING', 'FAILED', 'DISABLED', 'UNKNOWN', 'MISSED']);
 const lastStatuses = new Set(['SUCCESS', 'FAILED', 'UNKNOWN']);
 export const currentStatus = job => currentStatuses.has(job.status) ? job.status : 'UNKNOWN';
@@ -175,6 +176,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
   const get = id => document.getElementById(id);
   const page = document.querySelector('.page');
   const tabs = [...document.querySelectorAll('.tab')];
+  const projects = mountProjects(document, fetchJobs);
   const filters = [...document.querySelectorAll('.filter')];
   let snapshot = null;
   let runnerSnapshot = null;
@@ -838,10 +840,14 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
         candidate.tabIndex = active ? 0 : -1;
       });
       const today = tab.dataset.tab === 'today';
+      const history = tab.dataset.tab === 'history';
       get('todayView').hidden = !today;
-      get('historyView').hidden = today;
+      get('historyView').hidden = !history;
+      get('projectsView').hidden = today || history;
       document.querySelector('.filters').hidden = !today;
-      if (!today) void loadHistory();
+      get('showLegacy').hidden = !today && !history;
+      if (history) void loadHistory();
+      if (!today && !history) projects.show();
     });
     tab.addEventListener('keydown', event => {
       if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
