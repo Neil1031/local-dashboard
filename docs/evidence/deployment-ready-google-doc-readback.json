@@ -1,0 +1,40 @@
+{
+  "result": "PASSED",
+  "sourceEngineeringCommit": "4c762ff4ad1cca569da4e4546f7ef3440045664e",
+  "approvedMainBaseline": "eba10039d19eb23157c7bd02925800712faef4a6",
+  "beforeRevision": "ANLCKQnn8csRkT40tDlEWib9CIxZpFqKuPg4fkjBdpdly7iM3v9KeNhNhkagDU5u0DUAxBFU2DJfI8BGMt0GnV91B-_iC2Z80ltkx4IgVNc",
+  "afterRevision": "ANLCKQmOZe__WJs85J2S0FK_nW3Mbl8rqacm07d88o_1u4ppBxCjsBdJzuNvpWTaWjs0IcgRDmfSLaYJCQ17PdCd9q9KMzUmuxSW1xpcUUA",
+  "uniqueChangedParagraphs": 8,
+  "changedParagraphIds": [
+    "P00003",
+    "P00165",
+    "P00298",
+    "P00316",
+    "P00484",
+    "P00502",
+    "P00521",
+    "P00690"
+  ],
+  "guardedBatches": 1,
+  "nativeReplacementOperations": 8,
+  "eachNativeOccurrenceChanged": 1,
+  "paragraphs": 769,
+  "h1Headings": 24,
+  "allHeadings": 76,
+  "tabs": [
+    {
+      "tabId": "t.0",
+      "title": "Tab 1",
+      "parentTabId": null,
+      "index": 0,
+      "nestingLevel": null,
+      "iconEmoji": null
+    }
+  ],
+  "unchangedOtherParagraphs": 761,
+  "previousCandidateTestAndExternalDriftParagraph": "PRESERVED",
+  "paragraphTextStylesLinksNamedStylesTopologySharing": "PRESERVED",
+  "protectedControlsDetected": false,
+  "documentVisualQa": "NOT_PERFORMED; native readback only",
+  "readbackSha256": "2bd0f50b97119aef27577b8c4ac2560d1f9640fb331915e4fd7f4a48ce08e76d"
+}
