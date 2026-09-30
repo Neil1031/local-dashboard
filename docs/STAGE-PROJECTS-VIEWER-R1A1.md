@@ -38,8 +38,11 @@ Logs are local ignored files: `.tools/projects-r1a1-node-final.log`, `.tools/pro
 - Explicit `mode: same-origin` / `redirect: error` added to the fixed source fetch; options covered by loader test.
 - Removed an ineffective Spring metadata path property; the HTTP test mocks `JobMetadataStore` and proves no interactions, without changing production behavior.
 - Corrected screenshot URL-to-filesystem conversion with `fileURLToPath`.
+- Corrected a stale As-Built two-tab statement; added only the canonical-file-to-Projects flow and minimal Viewer table row.
 
 These are early feedback corrections, not a formal first-review verdict.
+
+After the final source formatting change, focused `ProjectsResourceHttpTest` verify passed **3/3**, parser tests passed **4/4**, and the built JAR's canonical/index/module bytes were independently compared with repository bytes. Only the one design file is present under its resource directory. Google Doc native synchronization/readback is complete against engineering source `76f38277d290c2040710becd6beec8dca5ef46d7`; exact before/after revisions and preservation checks are in `GOOGLE-DOCS.md`. The follow-up Git commit records this evidence without changing the engineering snapshot.
 
 ## Limits and protected scope
 

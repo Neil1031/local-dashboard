@@ -71,3 +71,16 @@ Google Doc sync source: `4c6fddf5890551f35865b907f1ac15f977d0c722` plus the scop
 - [x] Apply the documentation policy in this reconciliation and record actual connector synchronization evidence; final acceptance remains with the Manager after independent lead review.
 
 This is a documentation-only index. It does not authorize Release 1, source integration, Runner migration, Scheduler operations, production MISSED, or a merge to `main`.
+
+## Release 1A-1 synchronization — 2026-09-30
+
+The existing Doc was updated in place for the authorized minimal Local Dashboard Projects Viewer. Engineering source commit: `76f38277d290c2040710becd6beec8dca5ef46d7` (implementation `45a4969c735273a3f0425a77bde0c4069b95e6ce` plus As-Built consistency correction). The subsequent Git commit only records synchronization/evidence; it does not change that engineering snapshot. Final handoff SHA is reported in the PR and direct Astra delivery, avoiding a self-referential SHA.
+
+- Before revision: `ANLCKQl6uZrsSB3SMlTA_d9V0OcUfT3CKhL-2vyJhn16SIYBoh2leNC2p4m93j3HcIsL-MpjbxJ0BH9RYkojBcxIUbEaXt8UriCM3n656XI`.
+- After revision: `ANLCKQmHSHP11zd4gO8J96_21f_m0QjxGqzm8cdFbXao_XtGVNjrq4vK37O3nLIMVB3r8mfSRJafC1QQLWRzc7x_7ShVySEDvmeW-nXjI_E`.
+- Initial read used the checked-in Google Docs trusted-read bridge 3.6 with its supported `fileIO` injection for Windows. Connector responses passed programmatically through the checked-in trusted detector/normalizer into ignored local files; no model reconstruction of rich JSON. Manifest complete, no protected controls/warnings.
+- Thirteen uniquely matched native paragraph replacements, scoped to `t.0`, guarded by `requiredRevisionId`; each reported exactly one occurrence. Updated introduction/source SHA, fixed Stage 11 and Release 1 paragraphs/checklist items, actual build-snapshot/parser/error behavior, 33 IDs/only PARTIAL status transition, test evidence and target/current port distinction. Full nine-page and aggregation plans remain incomplete in their fixed locations.
+- Native readback verified all 13 intended edits and unchanged remaining paragraphs, **24 H1 headings/text/order**, **769 paragraphs**, `t.0 / Tab 1` topology/order, named styles, paragraph/text styles and links. Drive metadata readback confirms unchanged parent/sharing; no permission update was made.
+- Formal port target is decided **43871**, while this stage keeps the **8080** program baseline without migration or installed-package acceptance. The Doc accurately marks the minimal implementation as awaiting Astra/Manager review and not deployed.
+
+Local evidence: `.tools/projects-r1a1-doc/before/manifest.json` and `.tools/projects-r1a1-doc/readback-verification.json`. Native content/style/topology verification is complete; no PDF or browser visual inspection of the Doc is claimed. No new Doc, Chinese Markdown companion, stage renumbering or automatic synchronization was introduced.
