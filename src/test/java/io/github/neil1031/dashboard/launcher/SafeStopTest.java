@@ -118,7 +118,7 @@ class SafeStopTest {
         assertThat(WindowsProcessIdentity.commandMatches(command, java, jar)).isTrue();
         assertThat(WindowsProcessIdentity.commandMatches(command + " --other=true", java, jar)).isFalse();
         assertThat(WindowsProcessIdentity.commandMatches(command.replace("-jar", "-cp"), java, jar)).isFalse();
-        assertThat(WindowsProcessIdentity.commandMatches(command.replace("8080", "8081"), java, jar)).isFalse();
+        assertThat(WindowsProcessIdentity.commandMatches(command.replace("43871", "8080"), java, jar)).isFalse();
         Path wrong = Files.createFile(temp.resolve("prefix-dashboard 中文.jar"));
         assertThat(WindowsProcessIdentity.commandMatches(command.replace(jar.toString(), wrong.toString()), java, jar)).isFalse();
         assertThatThrownBy(() -> WindowsProcessIdentity.arguments("\"unclosed")).isInstanceOf(IllegalArgumentException.class);

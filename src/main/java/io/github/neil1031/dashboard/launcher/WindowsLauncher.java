@@ -21,7 +21,8 @@ import static java.nio.file.StandardOpenOption.*;
 
 /** JDK-only bootstrap. The server runs with a stable, writable working directory. */
 public final class WindowsLauncher {
-    static final URI URL = URI.create("http://127.0.0.1:8080");
+    static final int PORT = 43871;
+    static final URI URL = URI.create("http://127.0.0.1:" + PORT);
     private static final Duration START_TIMEOUT = Duration.ofSeconds(90);
 
     public static void main(String[] args) {
@@ -60,7 +61,7 @@ public final class WindowsLauncher {
                         browse(log);
                         return;
                     }
-                    if (portOccupied()) throw new IOException("Port 8080 is in use by a service that is not a ready Local Dashboard. Close it and retry.");
+                    if (portOccupied()) throw new IOException("Port " + PORT + " is in use by a service that is not a ready Local Dashboard. Close it and retry.");
                     Path java = Path.of(System.getProperty("java.home"), "bin", "javaw.exe");
                     Path jar = app.resolve("dashboard.jar");
                     if (!Files.isRegularFile(java) || !Files.isRegularFile(jar)) {
@@ -109,7 +110,7 @@ public final class WindowsLauncher {
 
     static List<String> serverCommand(Path java, Path jar, Path home) {
         return List.of(java.toString(), "-jar", jar.toString(),
-                "--server.address=127.0.0.1", "--server.port=8080",
+                "--server.address=127.0.0.1", "--server.port=" + PORT,
                 "--spring.config.location=classpath:/application.yml,optional:" + home.resolve("config/application.yml").toUri());
     }
 
@@ -149,7 +150,7 @@ public final class WindowsLauncher {
 
     static boolean portOccupied() {
         try (Socket socket = new Socket()) {
-            socket.connect(new InetSocketAddress("127.0.0.1", 8080), 500);
+            socket.connect(new InetSocketAddress("127.0.0.1", PORT), 500);
             return true;
         } catch (IOException unavailable) { return false; }
     }

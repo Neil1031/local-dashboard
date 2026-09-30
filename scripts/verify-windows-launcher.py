@@ -62,7 +62,7 @@ def stage(name, evidence):
 
 def state():
     return json.loads(ps("[Console]::OutputEncoding=[Text.Encoding]::UTF8; "
-        "$listeners=@(Get-NetTCPConnection -LocalPort 8080 -State Listen -ErrorAction SilentlyContinue | "
+        "$listeners=@(Get-NetTCPConnection -LocalPort 43871 -State Listen -ErrorAction SilentlyContinue | "
         "Select-Object LocalAddress,OwningProcess); "
         "$processes=@(Get-CimInstance Win32_Process -Filter \"Name='javaw.exe' OR Name='LocalDashboard.exe'\" | "
         "Select-Object ProcessId,ExecutablePath,CommandLine,@{n='Created';e={$_.CreationDate.ToUniversalTime().ToString('o')}}); "
@@ -76,7 +76,7 @@ def servers(snapshot):
 
 
 def http(path):
-    with HTTP.open("http://127.0.0.1:8080" + path, timeout=35) as response:
+    with HTTP.open("http://127.0.0.1:43871" + path, timeout=35) as response:
         assert response.status == 200
         return response.read().decode("utf-8")
 
@@ -199,7 +199,7 @@ def main():
     before = task_hashes()
     assert len(before) >= 7
     REPORT["taskDefinitionsBefore"] = before
-    assert not state()["listeners"], "8080 already in use; never stop an unknown process"
+    assert not state()["listeners"], "43871 already in use; never stop an unknown process"
     try:
         # PE Windows GUI subsystem (2), not console subsystem (3).
         for path in (EXE, IMAGE / "runtime/bin/javaw.exe"):

@@ -55,7 +55,8 @@ class WindowsLauncherTest {
         assertThat(WindowsLauncher.applicationHome(home.toString(), null)).isEqualTo(home);
         assertThatThrownBy(() -> WindowsLauncher.applicationHome("relative", temp.toString())).isInstanceOf(IOException.class);
         var command = WindowsLauncher.serverCommand(temp.resolve("runtime/bin/javaw.exe"), temp.resolve("app/dashboard.jar"), home);
-        assertThat(command).contains("--server.address=127.0.0.1", "--server.port=8080",
+        assertThat(WindowsLauncher.URL).isEqualTo(URI.create("http://127.0.0.1:43871"));
+        assertThat(command).contains("--server.address=127.0.0.1", "--server.port=43871",
                 "--spring.config.location=classpath:/application.yml,optional:" + home.resolve("config/application.yml").toUri());
         assertThat(command.get(2)).isEqualTo(temp.resolve("app/dashboard.jar").toString());
     }
