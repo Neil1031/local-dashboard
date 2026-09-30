@@ -1,7 +1,7 @@
 # Windows app-image / launcher
 
-本候選分支預設連接埠為 **43871**；已在專用 worktree 隔離驗證，正式安裝與桌面捷徑未替換。下方 2026-09-21 驗收保留當時的 8080 歷史紀錄。
-未來獲准升級前，須先用與舊 instance 匹配的舊版 Safe Stop 停止 8080，再另行驗證與替換 app-image；本 Stage 不執行這些部署步驟。
+Launcher／Safe Stop 的正式 source target 為 **43871**，已通過獨立初審與 Manager Review 並合併 main `eba1003`。Repository／package 核准不代表桌面目前安裝版本；實際 installed version 須由獨立 deployment evidence 驗證。下方 2026-09-21 驗收保留當時的 8080 歷史紀錄。
+正式升級須另行核准，先確認 installed version 並以匹配的 Safe Stop 處理既有 instance，再驗證 image 替換與 rollback；不得只依 repository 的 port 判斷既有 instance。
 
 ## 日常使用
 
@@ -126,9 +126,9 @@ HTTP polling 驗證 ready，再呼叫 `Desktop.browse`。Log 記錄 `READINESS_P
 
 ## 可重現驗收
 
-目前的隔離候選流程見 [43871 Stage](STAGE-PORT-43871-CURRENT-MAIN.md)。只在專用 worktree 執行 `package-windows.ps1`，再執行 `verify-port43871-candidate.py`；所有 child 的 LOCALAPPDATA／LOCAL_DASHBOARD_HOME 與 mutable state 都隔離，監控與 Runner 清單為空，不安裝捷徑、不取正式 history。`validate-windows-package.ps1` 在第一個 child 前也隔離兩個環境路徑，結束後只還原本 process 的環境。
+隔離候選驗證流程見 [43871 Stage](STAGE-PORT-43871-CURRENT-MAIN.md)。只在專用 worktree 執行 `package-windows.ps1`，再執行 `verify-port43871-candidate.py`；所有 child 的 LOCALAPPDATA／LOCAL_DASHBOARD_HOME 與 mutable state 都隔離，監控與 Runner 清單為空，不安裝捷徑、不取正式 history。`validate-windows-package.ps1` 在第一個 child 前也隔離兩個環境路徑，結束後只還原本 process 的環境。
 
-以下為 **2026-09-21 歷史驗收流程**。舊 `verify-windows-launcher.py` 會讀正式排程並安裝真實桌面捷徑，且未全面隔離 LOCALAPPDATA；本 Stage 未原樣執行，不能當作安全候選測試命令。
+以下為 **2026-09-21 歷史驗收流程**。舊 `verify-windows-launcher.py` 會讀正式排程並安裝真實桌面捷徑，且未全面隔離 LOCALAPPDATA；不得原樣用於隔離候選測試。
 
 ```powershell
 .\scripts\package-windows.ps1 # 含 Maven full clean verify 與 packaged-runtime smoke check

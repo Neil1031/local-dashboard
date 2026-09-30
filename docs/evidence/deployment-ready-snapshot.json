@@ -1,0 +1,281 @@
+{
+  "stage": "Deployment-ready stable source/package snapshot",
+  "status": "READY_FOR_FIRST_REVIEW",
+  "managerAuthorization": "https://github.com/Neil1031/local-dashboard/pull/3#issuecomment-5909392235",
+  "approvedMainBaseline": "eba10039d19eb23157c7bd02925800712faef4a6",
+  "engineeringSourceCommit": "4c762ff4ad1cca569da4e4546f7ef3440045664e",
+  "reviewHeadPolicy": "Final review SHA is reported in the PR and handoff after the evidence-only commit; no self-referential hash.",
+  "scope": "current-state wording, generated sample, bounded QA/evidence; no runtime delta",
+  "canonical": {
+    "beforeApprovedMainGitLfSha256": "0345bbd445e3689f5c3444203d13a8475ac5fe848ea3bcd118d7a1838c0f889c",
+    "beforeAcceptedPackagedRawSha256": "4cf6e25cfd652db57a8e9417b4b580855705b9eddf5d2f65e3715cc6883918ae",
+    "afterRawWorkingAndPackagedSha256": "bffdae6c76d01981e9d22b19b09fc474f205c1d847d89102c6e32665332a75e7",
+    "afterGitAndGeneratorLfSha256": "f53134092e0094517c583e513bd0b811f7a20f75246e2443b2f50e561c01ba2a",
+    "generatorHeaderSha256": "f53134092e0094517c583e513bd0b811f7a20f75246e2443b2f50e561c01ba2a",
+    "rawWorkingEqualsPackaged": true,
+    "normalizedWorkingEqualsFrozenGitBlob": true,
+    "fullParsedModelEqualsGenerated": "PASS tests/deployment-ready-model.mjs",
+    "historySections": {
+      "## Design Changes": {
+        "gitLfBytesEqual": true,
+        "beforeAndAfterSha256": "be54c841e9eba3970a7efea6de58bf6e1e3b85bf528325b47f37496788d441a9"
+      },
+      "## Change Log": {
+        "gitLfBytesEqual": true,
+        "beforeAndAfterSha256": "136e4c1a2bc50f0da1af1587fdde01da7868544db37c3d5e837e3bce47cda2c7"
+      }
+    },
+    "digestSemantics": "Maven copies raw working-tree bytes. Git/generator normalize CRLF to LF. These hashes are deliberately distinct."
+  },
+  "featureState": {
+    "stableOrderedIds": 33,
+    "statusCounts": {
+      "DONE": 19,
+      "PARTIAL": 1,
+      "BACKEND_READY": 3,
+      "DATA_READY": 0,
+      "DESIGNED": 7,
+      "NOT_STARTED": 2,
+      "IN_PROGRESS": 0,
+      "BLOCKED": 1,
+      "DEFERRED": 0,
+      "DROPPED": 0
+    },
+    "idsOrderStatusesMetadataUnchanged": true,
+    "productProjects": "PARTIAL",
+    "pending": "full Projects views / aggregation / nine-page shell"
+  },
+  "candidate": {
+    "path": "dist/LocalDashboard in dedicated worktree; not installed desktop image",
+    "freshCandidateHashes": {
+      "LocalDashboard.exe": "a56efe7eee546dd261b86d708cde597c307c5fe471946640eba35373a0dccb59",
+      "app/launcher.jar": "122e03345c4718aaea5cd317fe1190ead7aae2a9bf0851d9a7bee2deae96e161",
+      "app/dashboard.jar": "2a9bd046ac6674566233671a0333e087b8041897a0e892f1621a1e58bdbb89d4"
+    },
+    "priorApprovedCandidateHashes": {
+      "LocalDashboard.exe": "a56efe7eee546dd261b86d708cde597c307c5fe471946640eba35373a0dccb59",
+      "app/launcher.jar": "ccb8777ec28d615831d0807f27c21bdf603830ae023d95c61292cd3aaf6cb29d",
+      "app/dashboard.jar": "4cc8fc717057d0e1fb2dc79d3df54bbfef8da1874f7b47a1d5946411d8d3c68d"
+    },
+    "priorCandidateUnmodified": true,
+    "sourceAndPackageIdentity": "Source frozen before supported clean verify/jpackage. Subsequent commits contain evidence only.",
+    "sourceRollback": "Approved parent main eba1003 remains available; prior accepted 43871 candidate retained. Any installed-image rollback belongs to a separately approved deployment."
+  },
+  "runtimeParity": {
+    "sourceDelta": "NONE relative to approved main",
+    "referenceCandidateSource": "f317ac87c5dccb374529aaddd00c723746aee760",
+    "referenceHeadTreeEqualsApprovedMain": true,
+    "referenceArchiveHashesMatchRecordedAcceptedCandidate": true,
+    "logicalArchives": {
+      "launcher.jar": {
+        "entryNamesEqual": true,
+        "nonDirectoryEntryCount": 15,
+        "changedLogicalEntries": [],
+        "runtimeClassCount": 11,
+        "allRuntimeClassBytesEqual": true,
+        "allOtherLogicalEntryBytesEqual": true
+      },
+      "dashboard.jar": {
+        "entryNamesEqual": true,
+        "nonDirectoryEntryCount": 227,
+        "changedLogicalEntries": [
+          "BOOT-INF/classes/static/project-design/PROJECT-DESIGN.md"
+        ],
+        "runtimeClassCount": 176,
+        "allRuntimeClassBytesEqual": true,
+        "allOtherLogicalEntryBytesEqual": true
+      }
+    },
+    "archiveHashSemantics": "Container hashes may change on rebuild; parity compares every named logical entry byte, excluding the intended canonical resource change."
+  },
+  "packagedResourceEquality": {
+    "docs/PROJECT-DESIGN.md": {
+      "rawBytesEqual": true,
+      "workingAndPackagedSha256": "bffdae6c76d01981e9d22b19b09fc474f205c1d847d89102c6e32665332a75e7"
+    },
+    "index.html": {
+      "rawBytesEqual": true,
+      "workingAndPackagedSha256": "0cb460242cb0e00842a19a951880eee83a1e39ce8cf191a70f569ad9a4df1af3"
+    },
+    "dashboard.mjs": {
+      "rawBytesEqual": true,
+      "workingAndPackagedSha256": "f7f839fa6dda303881ad08e0c7409d75106a5343ce19bee5f60be9c957ad2b93"
+    },
+    "ui/projects.mjs": {
+      "rawBytesEqual": true,
+      "workingAndPackagedSha256": "b9270305851fa9a9ec31fde08afb8f560e65749e32a9eb96eba9378286cb91ba"
+    },
+    "ui/project-design.mjs": {
+      "rawBytesEqual": true,
+      "workingAndPackagedSha256": "9f2fd3ad7246fe3d6e99bc54c1e888a3868b9dfe7aadaabfc8872dfef01ca3bd"
+    }
+  },
+  "packagedWindowsDocsRawEquality": true,
+  "verification": {
+    "supportedPackaging": "PASS scripts/package-windows.ps1 + validate-windows-package.ps1",
+    "maven": {
+      "tests": 184,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "focusedParserLoader": {
+      "passed": 4,
+      "skipped": 0
+    },
+    "generatorCheck": "PASS",
+    "modelHistoryAndRuntimeGate": "PASS",
+    "actualCandidate": {
+      "result": "PASSED",
+      "isolatedPaths": true,
+      "emptyMonitoringAndRunner": true,
+      "actualExeStartAndStop": true,
+      "readinessAndBrowserUri": 43871,
+      "focusedProjectsWidths": [
+        1280,
+        375,
+        320
+      ],
+      "domWordingIdsCountsAndProvenance": "PASS",
+      "portReleasedAndPidCleaned": true,
+      "negativeScenariosRerun": false
+    },
+    "visualQa": "All six real card screenshots inspected at 1280/375/320",
+    "screenshots": {
+      "deployment-ready-desktop-launcher-1280.png": "9008e3a40287574c3323ae2ff8796a35670cff8a569c6a1bbc79da1466c91dba",
+      "deployment-ready-desktop-launcher-320.png": "4ae2612bbf19e10fbf058ff2f6782855948d46439739ef41b5774f707980b270",
+      "deployment-ready-desktop-launcher-375.png": "da3001c79a4b7e9f75de37d66a349d469e5e94bc5eee7c03fd0d6ccc72bc8d99",
+      "deployment-ready-product-projects-1280.png": "822177ebcaccc0ad37911675e0f9d52ec9df7add88f518e4d8c085b9d01da897",
+      "deployment-ready-product-projects-320.png": "d94528387d277b78640aaaf646b062d9eb5e58ef0c2c9bbffd9b083aff7a69ce",
+      "deployment-ready-product-projects-375.png": "9f43e725a8f84077f173d8b9215d2ec7f39a83142a55ad504eae1e115e24a559"
+    },
+    "previousNegativeProcessCasesRerun": false,
+    "previousNode50AndPrototype7Rerun": false
+  },
+  "googleDoc": {
+    "url": "https://docs.google.com/document/d/1GgEEjKTNPTJ5ACMXQ6TIaXSUFYH9OugdP9LAOIQcgNs/edit",
+    "mode": "8 targeted native replacements with requiredRevisionId; native readback PASS",
+    "receipt": "docs/evidence/deployment-ready-google-doc-readback.json",
+    "beforeRevision": "ANLCKQnn8csRkT40tDlEWib9CIxZpFqKuPg4fkjBdpdly7iM3v9KeNhNhkagDU5u0DUAxBFU2DJfI8BGMt0GnV91B-_iC2Z80ltkx4IgVNc",
+    "afterRevision": "ANLCKQmOZe__WJs85J2S0FK_nW3Mbl8rqacm07d88o_1u4ppBxCjsBdJzuNvpWTaWjs0IcgRDmfSLaYJCQ17PdCd9q9KMzUmuxSW1xpcUUA",
+    "structureStylesHistorySharingPreserved": true,
+    "visualQa": "NOT_PERFORMED"
+  },
+  "protection": {
+    "boundedSnapshots": {
+      "before": {
+        "At": "2026-09-30T10:52:35.8340636+00:00",
+        "FileCount": 6991,
+        "TaskCount": 7,
+        "ProjectCount": 4
+      },
+      "resume": {
+        "Phase": "resume",
+        "FileCount": 6991,
+        "TaskCount": 7,
+        "ProjectCount": 4,
+        "FileDrift": 0,
+        "DefinitionDrift": 0,
+        "ExecutionStateDrift": 0,
+        "ProjectGitDrift": 0,
+        "Listeners": [],
+        "At": "2026-09-30T12:09:53.2946805+00:00"
+      },
+      "package": {
+        "Phase": "package",
+        "FileCount": 6991,
+        "TaskCount": 7,
+        "ProjectCount": 4,
+        "FileDrift": 0,
+        "DefinitionDrift": 0,
+        "ExecutionStateDrift": 0,
+        "ProjectGitDrift": 0,
+        "Listeners": [],
+        "At": "2026-09-30T12:14:33.5869160+00:00"
+      },
+      "final": {
+        "Phase": "final",
+        "FileCount": 6991,
+        "TaskCount": 7,
+        "ProjectCount": 4,
+        "FileDrift": 0,
+        "DefinitionDrift": 0,
+        "ExecutionStateDrift": 0,
+        "ProjectGitDrift": 0,
+        "Listeners": [],
+        "At": "2026-09-30T12:14:58.7865045+00:00"
+      }
+    },
+    "knownFormalRunnerRoots": {
+      "package": {
+        "Phase": "package",
+        "At": "2026-09-30T12:14:34.3782024+00:00",
+        "ConfigHashMatchesBefore": true,
+        "Roots": [
+          {
+            "Field": "receiptDirectory",
+            "Configured": true,
+            "Absolute": true,
+            "WithinProtectedHome": true,
+            "BaselineFiles": 0,
+            "ExistsAtCheckpoint": false,
+            "FilesAtCheckpoint": 0
+          },
+          {
+            "Field": "fallbackDirectory",
+            "Configured": true,
+            "Absolute": true,
+            "WithinProtectedHome": true,
+            "BaselineFiles": 0,
+            "ExistsAtCheckpoint": false,
+            "FilesAtCheckpoint": 0
+          }
+        ],
+        "FirstBaselineDirectoryEntryExistence": "NOT_RECORDED; baseline recorded files, not empty directory entries",
+        "PrivateConfigUploaded": false
+      },
+      "final": {
+        "Phase": "final",
+        "At": "2026-09-30T12:14:59.5217912+00:00",
+        "ConfigHashMatchesBefore": true,
+        "Roots": [
+          {
+            "Field": "receiptDirectory",
+            "Configured": true,
+            "Absolute": true,
+            "WithinProtectedHome": true,
+            "BaselineFiles": 0,
+            "ExistsAtCheckpoint": false,
+            "FilesAtCheckpoint": 0
+          },
+          {
+            "Field": "fallbackDirectory",
+            "Configured": true,
+            "Absolute": true,
+            "WithinProtectedHome": true,
+            "BaselineFiles": 0,
+            "ExistsAtCheckpoint": false,
+            "FilesAtCheckpoint": 0
+          }
+        ],
+        "FirstBaselineDirectoryEntryExistence": "NOT_RECORDED; baseline recorded files, not empty directory entries",
+        "PrivateConfigUploaded": false
+      }
+    },
+    "coverage": "Installed app-image, formal LocalDashboard files including DB/config/metadata, two real shortcuts, seven related task definitions/execution snapshots and four external project Git states. No external production DB coverage is inferred from Git states.",
+    "uploadedProductionData": false,
+    "installedVersionAcceptance": "NOT_PERFORMED; no deployment"
+  },
+  "findingsAndFixes": [
+    "Current Windows upgrade text stabilized before freeze; no assumption an old 8080 instance must exist.",
+    "Model parity gate normalizes both object representations before comparing; parser metadata intentionally has a null prototype.",
+    "Maven wrapper/Surefire failures were Windows environment CreateProcess 740, then sandbox Maven-home access; supported retry passed after approved tool execution with process-local compatibility/cache variables. No registry/system/runtime/pom changes.",
+    "Draft Doc output cp950 UnicodeEncodeError resolved using UTF-8 output environment; no native write occurred during the pause."
+  ],
+  "limits": [
+    "No merge, desktop deployment, shortcut replacement, legacy instance stop, formal Scheduler/Runner/receipt/DB operation or new feature.",
+    "Initial protection inventory recorded files, not existence of empty directory entries; configured Runner roots were absent when checked at package/final.",
+    "No claim to repeat the prior complete negative process matrix, Node50/prototype7 suite or native Doc visual QA."
+  ],
+  "blockers": []
+}

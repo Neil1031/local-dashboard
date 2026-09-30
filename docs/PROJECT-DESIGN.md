@@ -15,7 +15,7 @@ current_design: Local investment research and automation console
 
 這份文件是 **Local Dashboard 自己的專案設計主檔**，供專案擁有者、GPT／Astra／Work 和未來的 Dashboard Projects Viewer 使用。它記錄為何建造、原設計、現況、重大改變、未解問題與下一步。使用者主要應由 Projects 畫面閱讀；Stage 文件與 [As-Built 現況說明](DASHBOARD-AS-BUILT-ARCHITECTURE.md) 是可追查的 evidence，不取代這份主檔。
 
-`baseline_commit` 是歷史設計盤點所依據的 `main`，不是本文件最後提交的 SHA。`last_reviewed_at` 是設計盤點日期，不表示當天實機重新驗收所有排程或外部資料。`overall_status: IN_PROGRESS` 指**整個專案**；Feature Matrix 的 `product-projects: PARTIAL` 指 Release 1A-1 的**本專案建置快照 Viewer 最小切片**，已通過獨立初審與 Manager Review 並合併至 `main`（`9e3c8cb`），尚未部署驗收；跨專案 aggregation 與完整 Projects 閱讀面板仍未實作。Prototype 是獨立樣本畫面。後續 43871 整合僅在專用分支驗證隔離候選，正式安裝與桌面捷徑未替換，仍須另行初審及 Manager Review。
+`baseline_commit` 是歷史設計盤點所依據的 `main`，不是本文件最後提交的 SHA。`last_reviewed_at` 是設計盤點日期，不表示當天實機重新驗收所有排程或外部資料。`overall_status: IN_PROGRESS` 指**整個專案**；Feature Matrix 的 `product-projects: PARTIAL` 指 Release 1A-1 的**本專案建置快照 Viewer 最小切片**，已通過獨立初審與 Manager Review 並合併至 `main`（`9e3c8cb`）；跨專案 aggregation 與完整 Projects 閱讀面板仍未實作。Prototype 是獨立樣本畫面。Port 43871 已通過獨立初審與 Manager Review，合併至 main `eba1003`。Repository／package 核准不代表桌面目前安裝版本；實際 installed version 須由獨立 deployment evidence 驗證。Launcher／Safe Stop 的正式 source target 為 43871，非 Windows Service／installer／updater。
 
 ## Project Identity
 
@@ -84,7 +84,7 @@ flowchart TD
 
 | ID | Area | Feature | Original intent | Current implementation | Status | Current limitation | Remaining work | Evidence |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| desktop-launcher | Desktop / Runtime | Launcher | 雙擊開本機監控畫面 | 包裝版 EXE 啟動 loopback Spring server，完整驗證既有 instance 才開頁面 | DONE | 43871 已整合至候選分支；正式安裝未替換，非 Windows Service | 完成候選初審／Manager Review 後另審部署 | docs/WINDOWS-LAUNCHER.md |
+| desktop-launcher | Desktop / Runtime | Launcher | 雙擊開本機監控畫面 | 包裝版 EXE 啟動 loopback Spring server，完整驗證既有 instance 才開頁面 | DONE | 43871 已核准並合併 main `eba1003`；安裝版本須另有 deployment evidence，非 Windows Service／installer／updater | 正式部署須獨立核准並驗證 installed version／rollback | docs/WINDOWS-LAUNCHER.md |
 | desktop-browser | Desktop / Runtime | Browser auto-open | 啟動後可直接看畫面 | readiness 成功後交給 Windows 預設瀏覽器 | DONE | 關瀏覽器不停止服務 | 維持 readiness 與錯誤提示 | docs/WINDOWS-LAUNCHER.md |
 | desktop-stop | Desktop / Runtime | Safe Stop | 安全結束本機服務 | PID、建立時間、命令與 listener 身分核對後停止 | DONE | Windows 不保證 graceful termination；身分不明會拒絕 | 維持安全拒絕與回歸檢查 | docs/WINDOWS-SAFE-STOP.md |
 | desktop-runtime | Desktop / Runtime | Bundled runtime | 使用者無須安裝 Java | app-image 內含 Java runtime 與 Dashboard JAR | DONE | 不是 installer 或 updater | 依部署 gate 更新 image | docs/WINDOWS-LAUNCHER.md |
@@ -111,7 +111,7 @@ flowchart TD
 | schedule-prod-missed | Schedule semantics | Production MISSED | 可相信的自動漏跑狀態 | 正式程式不產生新 MISSED | BLOCKED | 缺真實來源證據與 shadow false-positive review | 先過 availability、provenance、shadow 與 Manager gate | docs/STAGE-OCCURRENCE-CORRELATION.md |
 | product-shell | Product expansion | Product Shell | 原本只需 Today／History | 九頁 shell 已有靜態 prototype 設計，未進正式 UI | DESIGNED | production 保留 Today／History 並加 Projects 最小入口，尚非九頁 shell | 獨立 Release 1 實作與驗收 | docs/DASHBOARD-DESIGN-SPACE.md |
 | product-overview | Product expansion | Overview | 原本由 Today 看排程摘要 | 原型規劃 operations、US／TW findings、freshness | DESIGNED | 跨來源 normalized feeds 未接入 | 先做來源有據的 operations slice | docs/DASHBOARD-DESIGN-SPACE.md |
-| product-projects | Product expansion | Projects | 原設計無跨專案設計檢視 | Release 1A-1 正式入口讀本專案建置設計快照，共用 v1 parser 並呈現功能／狀態數量 | PARTIAL | 最小切片已通過獨立初審及 Manager Review，合併 main `9e3c8cb`，未部署；完整閱讀面板／跨專案 aggregation／九頁 shell 未完成 | 後續完成完整 Projects 閱讀面板／跨專案 aggregation，依九頁 shell 設計另審與驗證 | docs/STAGE-PROJECTS-VIEWER-R1A1.md |
+| product-projects | Product expansion | Projects | 原設計無跨專案設計檢視 | Release 1A-1 正式入口讀本專案建置設計快照，共用 v1 parser 並呈現功能／狀態數量 | PARTIAL | 最小切片已通過獨立初審及 Manager Review，合併 main `9e3c8cb`；安裝版本須另有 deployment evidence；完整閱讀面板／跨專案 aggregation／九頁 shell 未完成 | 後續完成完整 Projects 閱讀面板／跨專案 aggregation，依九頁 shell 設計另審與驗證 | docs/STAGE-PROJECTS-VIEWER-R1A1.md |
 | product-us | Product expansion | US Stocks | 原設計只看 Insider 相關排程 | Signals／SEC／Ticker 頁面已有設計樣本 | DESIGNED | read-only adapter 未整合；source list-signals v1 可作首個輸入 | 建立版本化 adapter 與 partial 契約 | docs/DASHBOARD-DATA-CONTRACTS.md |
 | product-tw | Product expansion | TW Stocks | 原設計只看 AIStockHunter 排程 | Daily Scan／Accumulation／Candidates 已設計 | DESIGNED | AIStockHunter 尚無穩定 Dashboard-facing export | 來源 repo 另審 ai-stock-hunter-export-v1 | docs/DASHBOARD-DATA-CONTRACTS.md |
 | product-performance | Product expansion | Performance | 原設計不分析選股效果 | 時距與觀測成熟度畫面已設計 | DESIGNED | 現有 performance-summary 非核准唯讀介面 | 取得來源唯讀 contract 後接入 | docs/DASHBOARD-DATA-CONTRACTS.md |
@@ -151,7 +151,7 @@ flowchart TD
 - Scheduler `LastRunTime` 是最近一次值，Dashboard History 是**已觀察**結果；缺一筆不等於沒執行。Schedule version 的觀察時間也不是 Windows 實際修改時間。
 - Runner coverage 僅限有可信映射和可讀 receipts 的工作；缺 receipt 不代表 child 未執行。
 - Insider／AIStockHunter 的正式 Dashboard read-only adapters 尚未整合；AIStockHunter 尚無穩定 `ai-stock-hunter-export-v1`。`DEFAULT 0` 不等於 observed 0；`latest` artifact 不是完整性保證。
-- 九頁 Product Shell 尚未實作。Projects 只有 Local Dashboard 建置快照最小入口，Release 1A-1 已通過獨立初審及 Manager Review，合併 main `9e3c8cb`，未部署；完整閱讀面板／aggregation 尚未完成，不連接其他 repo。
+- 九頁 Product Shell 尚未實作。Projects 只有 Local Dashboard 建置快照最小入口，Release 1A-1 已通過獨立初審及 Manager Review，合併 main `9e3c8cb`；安裝版本須另有 deployment evidence；完整閱讀面板／aggregation 尚未完成，不連接其他 repo。
 
 ## Remaining Work
 
@@ -159,7 +159,7 @@ flowchart TD
 
 | Horizon | Work | Why / gate | Evidence |
 | --- | --- | --- | --- |
-| NEXT | Release 1 — Product Shell / complete Projects Viewer implementation | Release 1A-1 最小 Viewer 已通過獨立初審及 Manager Review，合併 main `9e3c8cb`，未部署；後續完整面板／aggregation／九頁 shell 與其他 Release 1 能力仍須獨立 gate | docs/DASHBOARD-DESIGN-SPACE.md |
+| NEXT | Release 1 — Product Shell / complete Projects Viewer implementation | Release 1A-1 最小 Viewer 已通過獨立初審及 Manager Review，合併 main `9e3c8cb`；安裝版本須另有 deployment evidence；後續完整面板／aggregation／九頁 shell 與其他 Release 1 能力仍須獨立 gate | docs/DASHBOARD-DESIGN-SPACE.md |
 | DESIGNED | Overview operations slice | 只用現有 Scheduler／History／Runner 真實證據，不虛構股票資料 | docs/DASHBOARD-DESIGN-SPACE.md |
 | DESIGNED | US Stocks／TW Stocks／Performance／Reports | 來源版控唯讀 contract、adapter、partial/null/provenance gate | docs/DASHBOARD-DATA-CONTRACTS.md |
 | DESIGNED | Data & Evidence／Schedule view | 對已保存版本與 Runner coverage 建唯讀檢視，保留 UNKNOWN | docs/STAGE-SCHEDULE-SNAPSHOT-HISTORY.md |

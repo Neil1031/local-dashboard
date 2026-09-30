@@ -1,4 +1,4 @@
-// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: 0345bbd445e3689f5c3444203d13a8475ac5fe848ea3bcd118d7a1838c0f889c
+// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: f53134092e0094517c583e513bd0b811f7a20f75246e2443b2f50e561c01ba2a
 window.PROJECT_DESIGN_SAMPLE = Object.freeze({
   "metadata": {
     "project_id": "local-dashboard",
@@ -20,8 +20,8 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "originalIntent": "雙擊開本機監控畫面",
       "implementation": "包裝版 EXE 啟動 loopback Spring server，完整驗證既有 instance 才開頁面",
       "status": "DONE",
-      "limitation": "43871 已整合至候選分支；正式安裝未替換，非 Windows Service",
-      "remaining": "完成候選初審／Manager Review 後另審部署",
+      "limitation": "43871 已核准並合併 main `eba1003`；安裝版本須另有 deployment evidence，非 Windows Service／installer／updater",
+      "remaining": "正式部署須獨立核准並驗證 installed version／rollback",
       "evidence": "docs/WINDOWS-LAUNCHER.md"
     },
     {
@@ -317,7 +317,7 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "originalIntent": "原設計無跨專案設計檢視",
       "implementation": "Release 1A-1 正式入口讀本專案建置設計快照，共用 v1 parser 並呈現功能／狀態數量",
       "status": "PARTIAL",
-      "limitation": "最小切片已通過獨立初審及 Manager Review，合併 main `9e3c8cb`，未部署；完整閱讀面板／跨專案 aggregation／九頁 shell 未完成",
+      "limitation": "最小切片已通過獨立初審及 Manager Review，合併 main `9e3c8cb`；安裝版本須另有 deployment evidence；完整閱讀面板／跨專案 aggregation／九頁 shell 未完成",
       "remaining": "後續完成完整 Projects 閱讀面板／跨專案 aggregation，依九頁 shell 設計另審與驗證",
       "evidence": "docs/STAGE-PROJECTS-VIEWER-R1A1.md"
     },
@@ -486,7 +486,7 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
     {
       "horizon": "NEXT",
       "work": "Release 1 — Product Shell / complete Projects Viewer implementation",
-      "gate": "Release 1A-1 最小 Viewer 已通過獨立初審及 Manager Review，合併 main `9e3c8cb`，未部署；後續完整面板／aggregation／九頁 shell 與其他 Release 1 能力仍須獨立 gate",
+      "gate": "Release 1A-1 最小 Viewer 已通過獨立初審及 Manager Review，合併 main `9e3c8cb`；安裝版本須另有 deployment evidence；後續完整面板／aggregation／九頁 shell 與其他 Release 1 能力仍須獨立 gate",
       "evidence": "docs/DASHBOARD-DESIGN-SPACE.md"
     },
     {
