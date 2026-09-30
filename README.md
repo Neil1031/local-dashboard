@@ -6,6 +6,9 @@ UI job metadata、台股／美股分組、排序與舊版顯示切換見 [Stage 
 流程概覽、日期型工作收納與 Today 列表數量語意見 [Stage UX-2](docs/STAGE-UX-2.md)。
 可編輯的 Dashboard 顯示設定、外部持久化與衝突處理見 [Stage UX-3](docs/STAGE-UX-3.md)。
 
+專案設計與固定閱讀章節對照見 [Google Docs reading index](docs/GOOGLE-DOCS.md)；
+中文版閱讀內容保存在該頁連結的既有 Google Doc，工程功能狀態與證據以 Git 文件為準。
+
 ## 環境與啟動
 
 **Windows 雙擊使用**：建置者執行 `.\scripts\package-windows.ps1`，使用者雙擊
