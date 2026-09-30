@@ -2,6 +2,8 @@
 
 **READY_FOR_FIRST_REVIEW.** Implementation and bounded Self-QA are complete. This is not independent review approval, Manager approval, a main merge or installed deployment. The management Work is `[Dashboard] 管理與初審`; implementation is `[Dashboard] Sol 實作`, both GPT-6.1 Sol/high under the owner's later instruction. No new Work/subagent was created.
 
+**Later bounded correction:** Manager requested only stale current-state canonical wording to be corrected. The [canonical correction receipt](PORT-43871-CANONICAL-CORRECTION.md) records source `f317ac8`, a fresh supported isolated package, revised raw canonical/artifact hashes and focused browser wording parity. The original evidence below describes the prior `3e07659` candidate; its hashes, Doc receipt and screenshot remain preserved as that earlier snapshot. The correction still requires management verification and Manager review; it is not a new Stage or deployment.
+
 ## Plan / Stage / Gate
 
 | Stage | Goal / scope | Dependencies | Gate / done when | Self-QA |
