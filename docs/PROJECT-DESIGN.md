@@ -15,7 +15,7 @@ current_design: Local investment research and automation console
 
 這份文件是 **Local Dashboard 自己的專案設計主檔**，供專案擁有者、GPT／Astra／Work 和未來的 Dashboard Projects Viewer 使用。它記錄為何建造、原設計、現況、重大改變、未解問題與下一步。使用者主要應由 Projects 畫面閱讀；Stage 文件與 [As-Built 現況說明](DASHBOARD-AS-BUILT-ARCHITECTURE.md) 是可追查的 evidence，不取代這份主檔。
 
-`baseline_commit` 是本次盤點所依據的 `main`，不是本文件最後提交的 SHA。`last_reviewed_at` 是設計盤點日期，不表示當天實機重新驗收所有排程或外部資料。`overall_status: IN_PROGRESS` 指**整個專案**；Feature Matrix 的 `product-projects: PARTIAL` 指 Release 1A-1 的**本專案建置快照 Viewer 最小切片**，待 Astra 初審與 Manager 終審，尚未部署驗收；跨專案 aggregation 與完整 Projects 閱讀面板仍未實作。Prototype 是獨立樣本畫面。
+`baseline_commit` 是歷史設計盤點所依據的 `main`，不是本文件最後提交的 SHA。`last_reviewed_at` 是設計盤點日期，不表示當天實機重新驗收所有排程或外部資料。`overall_status: IN_PROGRESS` 指**整個專案**；Feature Matrix 的 `product-projects: PARTIAL` 指 Release 1A-1 的**本專案建置快照 Viewer 最小切片**，已通過獨立初審與 Manager Review 並合併至 `main`（`9e3c8cb`），尚未部署驗收；跨專案 aggregation 與完整 Projects 閱讀面板仍未實作。Prototype 是獨立樣本畫面。後續 43871 整合僅在專用分支驗證隔離候選，正式安裝與桌面捷徑未替換，仍須另行初審及 Manager Review。
 
 ## Project Identity
 
@@ -84,7 +84,7 @@ flowchart TD
 
 | ID | Area | Feature | Original intent | Current implementation | Status | Current limitation | Remaining work | Evidence |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| desktop-launcher | Desktop / Runtime | Launcher | 雙擊開本機監控畫面 | 包裝版 EXE 啟動 loopback Spring server，已執行則開既有頁面 | DONE | 目前程式基準 8080；已確定正式目標 43871，本階段未遷移，非 Windows Service | 維持啟動身分驗證 | docs/WINDOWS-LAUNCHER.md |
+| desktop-launcher | Desktop / Runtime | Launcher | 雙擊開本機監控畫面 | 包裝版 EXE 啟動 loopback Spring server，完整驗證既有 instance 才開頁面 | DONE | 43871 已整合至候選分支；正式安裝未替換，非 Windows Service | 完成候選初審／Manager Review 後另審部署 | docs/WINDOWS-LAUNCHER.md |
 | desktop-browser | Desktop / Runtime | Browser auto-open | 啟動後可直接看畫面 | readiness 成功後交給 Windows 預設瀏覽器 | DONE | 關瀏覽器不停止服務 | 維持 readiness 與錯誤提示 | docs/WINDOWS-LAUNCHER.md |
 | desktop-stop | Desktop / Runtime | Safe Stop | 安全結束本機服務 | PID、建立時間、命令與 listener 身分核對後停止 | DONE | Windows 不保證 graceful termination；身分不明會拒絕 | 維持安全拒絕與回歸檢查 | docs/WINDOWS-SAFE-STOP.md |
 | desktop-runtime | Desktop / Runtime | Bundled runtime | 使用者無須安裝 Java | app-image 內含 Java runtime 與 Dashboard JAR | DONE | 不是 installer 或 updater | 依部署 gate 更新 image | docs/WINDOWS-LAUNCHER.md |
@@ -196,3 +196,4 @@ flowchart TD
 | --- | --- | --- | --- |
 | 2026-09-28 | 1 | 建立並審核 Local Dashboard Living Project Design pilot；彙整 As-Built、Design Space、feature status、重大問題與待辦分類，供 Projects 靜態原型讀取。 | Manager Review PASSED |
 | 2026-09-30 | 1 | Release 1A-1：Projects 本專案建置快照最小入口，33 IDs 保留，僅 product-projects DESIGNED → PARTIAL；目標 Port 已定 43871，現行程式 8080 未遷移。 | Implementation ready for Astra / Manager review; not deployed |
+| 2026-09-30 | 1 | Release 1A-1 已通過初審及 Manager Review，保留歷史合併至 main `9e3c8cb`；後續專用分支整合舊來源 43871，補完整啟動重用身分門檻並驗證隔離候選。33 IDs／status counts 不變，正式安裝／捷徑未替換。 | Port candidate awaiting independent first review / Manager Review; not deployed |

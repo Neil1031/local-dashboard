@@ -1,0 +1,157 @@
+{
+  "stage": "port43871-current-main",
+  "reviewState": "READY_FOR_FIRST_REVIEW",
+  "installedDeployment": false,
+  "source": {
+    "acceptedMain": "9e3c8cbf159e5d29ecd3ce19d1fb287797949101",
+    "originalPortCommit": "96fd763d1281f1d3461e862c5b59b79a5e05445e",
+    "integrationMerge": "9ec09d875105117a4315c601350a75a7c38e7d6d",
+    "method": "explicit --no-ff merge; both parents preserved"
+  },
+  "candidateHashes": {
+    "LocalDashboard.exe": "a56efe7eee546dd261b86d708cde597c307c5fe471946640eba35373a0dccb59",
+    "app/launcher.jar": "3e02ca2d60b10b6627e4bb429f4021821e66cb1ee3b8bbf6bf80f25d1f4d6ec3",
+    "app/dashboard.jar": "f9ef1b5b2afc9d6913b08bfae8b3fa4eba026fdfa8cdf789c078a4852538a6e0"
+  },
+  "resourceBytes": {
+    "docs/PROJECT-DESIGN.md": {
+      "sourceSha256": "60b86ed7219bd9ed4dc2426e1c53f446a43fbfe397a3f7d8983fbeda516c7ffc",
+      "packagedSha256": "60b86ed7219bd9ed4dc2426e1c53f446a43fbfe397a3f7d8983fbeda516c7ffc",
+      "equal": true
+    },
+    "index.html": {
+      "sourceSha256": "0cb460242cb0e00842a19a951880eee83a1e39ce8cf191a70f569ad9a4df1af3",
+      "packagedSha256": "0cb460242cb0e00842a19a951880eee83a1e39ce8cf191a70f569ad9a4df1af3",
+      "equal": true
+    },
+    "dashboard.mjs": {
+      "sourceSha256": "f7f839fa6dda303881ad08e0c7409d75106a5343ce19bee5f60be9c957ad2b93",
+      "packagedSha256": "f7f839fa6dda303881ad08e0c7409d75106a5343ce19bee5f60be9c957ad2b93",
+      "equal": true
+    },
+    "ui/projects.mjs": {
+      "sourceSha256": "b9270305851fa9a9ec31fde08afb8f560e65749e32a9eb96eba9378286cb91ba",
+      "packagedSha256": "b9270305851fa9a9ec31fde08afb8f560e65749e32a9eb96eba9378286cb91ba",
+      "equal": true
+    },
+    "ui/project-design.mjs": {
+      "sourceSha256": "9f2fd3ad7246fe3d6e99bc54c1e888a3868b9dfe7aadaabfc8872dfef01ca3bd",
+      "packagedSha256": "9f2fd3ad7246fe3d6e99bc54c1e888a3868b9dfe7aadaabfc8872dfef01ca3bd",
+      "equal": true
+    }
+  },
+  "screenshot": {
+    "path": "docs/evidence/port43871-projects.png",
+    "sha256": "cbf19002e25beaa57051901f20672551aa0be41bd8d64adcbbb11e1bbe838df4",
+    "visuallyInspected": true,
+    "actualCandidateBrowser": true,
+    "unrelatedApisFixtureRouted": true
+  },
+  "tests": {
+    "maven": {
+      "passed": 184,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "node": {
+      "passed": 50,
+      "failed": 0,
+      "skipped": 0
+    },
+    "prototype": {
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0
+    },
+    "generator": "PASS",
+    "candidate": {
+      "result": "PASSED",
+      "port": 43871,
+      "isolatedState": true,
+      "emptyMonitoringAndRunner": true,
+      "gates": {
+        "preflight_paths_and_port_available": true,
+        "occupied_matching_readiness_unrelated_process_preserved": true,
+        "actual_exe_browser_uri_readiness_duplicate_same_instance": true,
+        "old8080_never_reused_or_stopped": true,
+        "live_wrong_pid_start_time_config_image_missing_record_refused": true,
+        "real_candidate_projects_browser_33_ids_counts_resource_bytes_screenshot": true,
+        "safe_stop_port_release_isolated_config_metadata_marker_history_preserved": true,
+        "live_exact_executable_jar_but_extra_command_refused": true,
+        "restart_safe_stop_unrelated_fixture_preserved": true,
+        "final_no_candidate_listener_or_pid": true
+      }
+    },
+    "focusedBrowserDomAndProvenance": "PASS",
+    "updatedValidatorRetainedHandle": "PASS"
+  },
+  "protection": {
+    "scope": "known installed image and Dashboard state including Runner; two shortcuts; seven related tasks; four external project Git snapshots",
+    "beforeFileCount": 6991,
+    "taskCount": 7,
+    "projectCount": 4,
+    "baselineManifestSha256": "a93472152398baed31dfa000aee09222ff18b14156b748a4aff72abb643b0176",
+    "checkpoints": [
+      {
+        "Phase": "package",
+        "FileCount": 6991,
+        "TaskCount": 7,
+        "ProjectCount": 4,
+        "FileDrift": 0,
+        "DefinitionDrift": 0,
+        "ExecutionStateDrift": 0,
+        "ProjectGitDrift": 0,
+        "Listeners": [],
+        "At": "2026-09-30T08:58:43.9288391+00:00"
+      },
+      {
+        "Phase": "live",
+        "FileCount": 6991,
+        "TaskCount": 7,
+        "ProjectCount": 4,
+        "FileDrift": 0,
+        "DefinitionDrift": 0,
+        "ExecutionStateDrift": 2,
+        "ProjectGitDrift": 0,
+        "Listeners": [],
+        "At": "2026-09-30T09:04:28.6840461+00:00"
+      }
+    ],
+    "executionDrift": "EXTERNAL_DRIFT_OBSERVED",
+    "changedTaskRecords": 1,
+    "actor": "UNKNOWN",
+    "cause": "UNKNOWN",
+    "noTaskExecutionOrMutationRequested": true
+  },
+  "coverageLimits": {
+    "positiveStart": "actual packaged EXE",
+    "stop": "actual packaged EXE --stop --quiet",
+    "negativeStart": "packaged WindowsLauncher.main with bundled Java/headless=true",
+    "configImageJarNegative": "direct packaged identity method; valid isolated child environment",
+    "wrongReadiness": "unit HTTP fixture and Stop policy test; not a real Windows wrong-readiness gate",
+    "installedApp": "not replaced/tested as new deployment",
+    "old8080": "owned fixture preserved; existing production instance never stopped",
+    "externalProjects": "Git state/HEAD only; not every external data file"
+  },
+  "featureCounts": {
+    "DONE": 19,
+    "PARTIAL": 1,
+    "BACKEND_READY": 3,
+    "DESIGNED": 7,
+    "NOT_STARTED": 2,
+    "BLOCKED": 1,
+    "DATA_READY": 0,
+    "IN_PROGRESS": 0,
+    "DEFERRED": 0,
+    "DROPPED": 0
+  },
+  "stableIdCount": 33,
+  "productProjectsStatus": "PARTIAL",
+  "googleDocSync": "PENDING_CURRENT_STAGE",
+  "installedProtectedHashes": {
+    "LocalDashboard.exe": "057513578e2c6ce1203dc243e0826057f940c2394bb8328512d89e37fad766aa",
+    "app/launcher.jar": "e6bc225d92e70dcfed52e7b0a309484d5a5b4dc654b3d2116a9da3c0d919afa2",
+    "app/dashboard.jar": "2db077001d33465da2c384433fe0da759e74e6fb0e1a167c0b91715ae35a4205"
+  }
+}

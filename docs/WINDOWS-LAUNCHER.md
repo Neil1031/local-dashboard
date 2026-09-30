@@ -1,7 +1,7 @@
 # Windows app-image / launcher
 
-目前預設連接埠為 **43871**；下方 2026-09-21 驗收保留當時的 8080 歷史紀錄。
-從舊版升級前，先用舊版 Stop 停止 8080 instance，再更新 app-image。
+本候選分支預設連接埠為 **43871**；已在專用 worktree 隔離驗證，正式安裝與桌面捷徑未替換。下方 2026-09-21 驗收保留當時的 8080 歷史紀錄。
+未來獲准升級前，須先用與舊 instance 匹配的舊版 Safe Stop 停止 8080，再另行驗證與替換 app-image；本 Stage 不執行這些部署步驟。
 
 ## 日常使用
 
@@ -10,7 +10,7 @@
 預設瀏覽器開啟 `http://127.0.0.1:43871`。使用者不需 Java、JAVA_HOME、Maven 或 command line。
 預設 jpackage application icon；沒有 installer、WiX、Service、登入自動啟動或 updater。
 
-連續雙擊會等待同一次啟動，已執行時則直接開既有 Dashboard，不建立另一個 Spring instance。
+連續雙擊會等待同一次啟動；已執行時，先核對記錄 PID／精確建立時間、此 image 的 executable/JAR、完整命令、指定 home 的 config URI、43871 loopback listener owner 與 readiness，開瀏覽器前再驗一次，才重用既有 Dashboard。不一致時拒絕，不建立另一個 Spring instance。
 若其他程式占用 43871，會顯示錯誤，不會終止該程式。啟動最多等待 90 秒，失敗顯示 log 路徑。
 包裝版固定 loopback / 43871；YAML 不能把它改成 LAN listener 或另一個 port。
 
@@ -125,6 +125,10 @@ HTTP polling 驗證 ready，再呼叫 `Desktop.browse`。Log 記錄 `READINESS_P
 本版明確保留 runtime native Java commands，不採預設 `--strip-native-commands`。
 
 ## 可重現驗收
+
+目前的隔離候選流程見 [43871 Stage](STAGE-PORT-43871-CURRENT-MAIN.md)。只在專用 worktree 執行 `package-windows.ps1`，再執行 `verify-port43871-candidate.py`；所有 child 的 LOCALAPPDATA／LOCAL_DASHBOARD_HOME 與 mutable state 都隔離，監控與 Runner 清單為空，不安裝捷徑、不取正式 history。`validate-windows-package.ps1` 在第一個 child 前也隔離兩個環境路徑，結束後只還原本 process 的環境。
+
+以下為 **2026-09-21 歷史驗收流程**。舊 `verify-windows-launcher.py` 會讀正式排程並安裝真實桌面捷徑，且未全面隔離 LOCALAPPDATA；本 Stage 未原樣執行，不能當作安全候選測試命令。
 
 ```powershell
 .\scripts\package-windows.ps1 # 含 Maven full clean verify 與 packaged-runtime smoke check

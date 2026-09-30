@@ -2,7 +2,7 @@
 
 範圍僅 Windows 一鍵停止；不包含 Stage 5B、Runner migration、Service、tray、auto-start 或 scheduler 修改。
 
-2026-09-22：目前 Start／Stop 共用連接埠 **43871**。原計畫與 2026-09-21 驗收中的 8080 為歷史紀錄。
+2026-09-30 候選整合：Start／Stop 共用 **43871**，專用 worktree 隔離候選已驗證；正式安裝與捷徑未替換，仍待初審／Manager Review。原計畫與 2026-09-21 驗收中的 8080 為歷史紀錄。
 
 ## Plan / Stage / Gate
 
@@ -86,6 +86,8 @@ target 或 arguments 不同就拒絕，兩份都不改。只有明確 `-Replace`
 封裝附同一安裝腳本；既有 Start shortcut 不必變更 target。
 
 ## Reproducible verification
+
+目前 Stage 使用 [43871 隔離候選流程](STAGE-PORT-43871-CURRENT-MAIN.md)。以下為歷史驗收命令；舊 `verify-safe-stop.py` 相依流程未全面隔離 LOCALAPPDATA，還會接觸正式排程／捷徑。本 Stage 未原樣執行，不得用於候選隔離驗收。
 
 ```powershell
 python scripts/verify-safe-stop.py --prepare

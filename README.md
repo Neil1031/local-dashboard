@@ -37,6 +37,8 @@ $env:JAVA_HOME = 'C:\path\to\jdk-21'
 
 瀏覽 <http://127.0.0.1:43871/>，或查詢 API：
 
+43871 是已決定的正式目標，已在本整合分支實作並驗證隔離候選；正式桌面 app-image／捷徑尚未替換。候選測試不等於部署，仍需獨立初審與 Manager Review。
+
 ```powershell
 Invoke-RestMethod http://127.0.0.1:43871/api/jobs | ConvertTo-Json -Depth 16
 ```
@@ -398,4 +400,4 @@ The production page adds a Projects tab beside Today/History and keeps existing 
 
 The production viewer and static prototype generator share `ui/project-design.mjs` v1 validation. All 33 stable feature IDs remain; only `product-projects` moves from DESIGNED to PARTIAL because full Projects detail views and aggregation remain pending. Status counts come from parsed rows, without completion percentages. Missing/invalid/unsupported/unavailable/oversized data clears old results and offers retry. See [contract](docs/DASHBOARD-DATA-CONTRACTS.md#project-design-v1-build-snapshot) and [stage evidence](docs/STAGE-PROJECTS-VIEWER-R1A1.md).
 
-The decided formal port target is **43871**. This stage keeps the current program baseline **8080**; it does not migrate the port, merge the old port branch, build an app-image, or validate the installed application. Independent Astra review and Manager final review remain required before merge.
+Release 1A-1 passed independent first review and Manager Review and was merged at `9e3c8cb`; it remains undeployed. The subsequent [43871 integration stage](docs/STAGE-PORT-43871-CURRENT-MAIN.md) combines the original port change with that accepted baseline in a dedicated branch/worktree. This branch defaults to **127.0.0.1:43871**, with identity-verified reuse and an isolated candidate app-image. The real installed app-image and desktop shortcuts remain unchanged. Independent first review and Manager Review are required for this new branch.

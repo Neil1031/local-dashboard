@@ -15,13 +15,21 @@ $listener.Stop()
 $oldJavaHome = $env:JAVA_HOME
 $oldPath = $env:PATH
 $oldLocalAppData = $env:LOCALAPPDATA
+$oldDashboardHome = $env:LOCAL_DASHBOARD_HOME
 $process = $null
 try {
+    $env:LOCALAPPDATA = Join-Path $probe 'localappdata'
+    $env:LOCAL_DASHBOARD_HOME = Join-Path $probe 'home'
+    New-Item -ItemType Directory -Path $env:LOCALAPPDATA,$env:LOCAL_DASHBOARD_HOME -Force | Out-Null
+    foreach ($isolated in @($env:LOCALAPPDATA,$env:LOCAL_DASHBOARD_HOME)) {
+        if (!(Resolve-Path -LiteralPath $isolated).Path.StartsWith($probe + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)) { throw 'Probe state escaped isolation.' }
+    }
     $env:JAVA_HOME = $null
     $env:PATH = "$env:SystemRoot\System32;$env:SystemRoot\System32\WindowsPowerShell\v1.0"
     $arguments = @('-jar', ('"' + $image + '\app\dashboard.jar"'), '--server.address=127.0.0.1', "--server.port=$port", '--spring.config.location=classpath:/application.yml')
     $process = Start-Process -FilePath "$image/runtime/bin/javaw.exe" -ArgumentList $arguments `
         -WorkingDirectory $probe -WindowStyle Hidden -PassThru -RedirectStandardOutput "$probe/server.log" -RedirectStandardError "$probe/stderr.log"
+    $null = $process.Handle
     $deadline = [DateTime]::UtcNow.AddSeconds(90)
     $ready = $false
     while ([DateTime]::UtcNow -lt $deadline) {
@@ -36,8 +44,7 @@ try {
     if (!(Test-Path -LiteralPath "$probe/data/local-dashboard.db")) { throw 'SQLite initialization failed.' }
     Write-Host "PASS: bundled runtime, no JAVA_HOME/Java PATH, HTTP readiness, safe defaults, writable SQLite. Logs: $probe"
     # Exercise the packaged entry point without creating config or touching the user's PID.
-    $env:LOCALAPPDATA = Join-Path $probe 'stop-localappdata'
-    $occupied43871 = @(Get-NetTCPConnection -LocalPort 43871 -State Listen -ErrorAction SilentlyContinue).Count -gt 0
+    $occupied43871 = @(Get-NetTCPConnection -State Listen -ErrorAction Stop | Where-Object LocalPort -eq 43871).Count -gt 0
     $stop = Start-Process -FilePath "$image/LocalDashboard.exe" -ArgumentList '--stop','--quiet' -WindowStyle Hidden -PassThru
     $null = $stop.Handle
     if (!$stop.WaitForExit(30000)) { $stop.Kill(); throw 'Packaged stop entry point timed out.' }
@@ -48,8 +55,10 @@ try {
     if (Test-Path -LiteralPath "$env:LOCALAPPDATA/LocalDashboard/config/application.yml") { throw 'Stop must not bootstrap configuration.' }
     Write-Host "PASS: packaged --stop entry point (exit $expectedStopExit), no configuration bootstrap, no unrecorded process termination."
 } finally {
-    if ($process -and !$process.HasExited) { Stop-Process -Id $process.Id; $process.WaitForExit() }
+    # Retain the native child handle; never resolve a searched/reused PID for cleanup.
+    if ($process -and !$process.HasExited) { $process.Kill(); $process.WaitForExit() }
     $env:JAVA_HOME = $oldJavaHome
     $env:PATH = $oldPath
     $env:LOCALAPPDATA = $oldLocalAppData
+    $env:LOCAL_DASHBOARD_HOME = $oldDashboardHome
 }

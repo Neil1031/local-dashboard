@@ -16,6 +16,10 @@ import java.util.regex.Pattern;
  * all termination decisions/operations remain in the Java launcher. */
 final class WindowsProcessIdentity {
     static boolean matches(ProcessHandle handle, Path java, Path jar) throws Exception {
+        return matches(handle, java, jar, null);
+    }
+
+    static boolean matches(ProcessHandle handle, Path java, Path jar, Path home) throws Exception {
         String executable = handle.info().command().orElse("");
         if (executable.isEmpty() || !sameFile(executable, java)) return false;
         long pid = handle.pid();
@@ -45,7 +49,7 @@ final class WindowsProcessIdentity {
                 var lines = new String(bytes, StandardCharsets.US_ASCII).lines().toList();
                 if (lines.size() != 2) return false;
                 String actualJava = decode(lines.get(0));
-                return sameFile(actualJava, java) && commandMatches(decode(lines.get(1)), java, jar);
+                return sameFile(actualJava, java) && commandMatches(decode(lines.get(1)), java, jar, home);
             } finally {
                 // Only this read-only helper's retained child handle, never a process search.
                 if (probe.isAlive()) probe.destroyForcibly();
@@ -59,6 +63,10 @@ final class WindowsProcessIdentity {
     }
 
     static boolean commandMatches(String command, Path java, Path jar) {
+        return commandMatches(command, java, jar, null);
+    }
+
+    static boolean commandMatches(String command, Path java, Path jar, Path home) {
         try {
             List<String> args = arguments(command);
             if (args.size() != 6 || !sameFile(args.get(0), java) || !args.get(1).equals("-jar")
@@ -67,7 +75,8 @@ final class WindowsProcessIdentity {
             String prefix = "--spring.config.location=classpath:/application.yml,optional:";
             if (!args.get(5).startsWith(prefix)) return false;
             Path config = Path.of(URI.create(args.get(5).substring(prefix.length())));
-            return config.isAbsolute() && config.endsWith(Path.of("config", "application.yml"));
+            return config.isAbsolute() && config.endsWith(Path.of("config", "application.yml"))
+                    && (home == null || Files.isSameFile(config, home.resolve("config/application.yml")));
         } catch (Exception invalid) { return false; }
     }
 

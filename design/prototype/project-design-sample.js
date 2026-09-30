@@ -1,4 +1,4 @@
-// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: f012cdc3dea9747375c21e1d2603c6099584c19cc304f2a6d2ebbe6f99f0c9f7
+// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: 5d810046ad06d2f0199c7ca9e1839f5174ac62be18854361c3fbc027a491d56b
 window.PROJECT_DESIGN_SAMPLE = Object.freeze({
   "metadata": {
     "project_id": "local-dashboard",
@@ -18,10 +18,10 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "area": "Desktop / Runtime",
       "name": "Launcher",
       "originalIntent": "雙擊開本機監控畫面",
-      "implementation": "包裝版 EXE 啟動 loopback Spring server，已執行則開既有頁面",
+      "implementation": "包裝版 EXE 啟動 loopback Spring server，完整驗證既有 instance 才開頁面",
       "status": "DONE",
-      "limitation": "目前程式基準 8080；已確定正式目標 43871，本階段未遷移，非 Windows Service",
-      "remaining": "維持啟動身分驗證",
+      "limitation": "43871 已整合至候選分支；正式安裝未替換，非 Windows Service",
+      "remaining": "完成候選初審／Manager Review 後另審部署",
       "evidence": "docs/WINDOWS-LAUNCHER.md"
     },
     {

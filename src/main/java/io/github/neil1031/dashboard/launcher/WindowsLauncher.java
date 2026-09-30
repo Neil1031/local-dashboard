@@ -48,25 +48,22 @@ public final class WindowsLauncher {
             Files.createDirectories(lockDirectory);
             try (var channel = FileChannel.open(lockDirectory.resolve("launcher.lock"), CREATE, WRITE)) {
                 try (var lock = acquireLock(channel, log)) {
-                    if (ready(URL)) {
-                        append(log, "EXISTING_INSTANCE_READY " + URL);
-                        browse(log);
-                        return;
+                    Path java = Path.of(System.getProperty("java.home"), "bin", "javaw.exe");
+                    Path jar = app.resolve("dashboard.jar");
+                    if (!Files.isRegularFile(java) || !Files.isRegularFile(jar)) {
+                        throw new IOException("Incomplete application image. Keep LocalDashboard.exe, app and runtime together.");
                     }
                     // A prior launcher may have exited while its server was still starting.
                     ProcessHandle previous = recordedServer(lockDirectory.resolve("server.pid"));
                     if (previous != null && previous.isAlive()) {
                         append(log, "WAIT_EXISTING_INSTANCE pid=" + previous.pid());
                         awaitReadyLogged(log, previous::isAlive);
+                        confirmReadyInstance(lockDirectory.resolve("server.pid"), java, jar, home);
+                        append(log, "EXISTING_INSTANCE_READY " + URL);
                         browse(log);
                         return;
                     }
                     if (portOccupied()) throw new IOException("Port " + PORT + " is in use by a service that is not a ready Local Dashboard. Close it and retry.");
-                    Path java = Path.of(System.getProperty("java.home"), "bin", "javaw.exe");
-                    Path jar = app.resolve("dashboard.jar");
-                    if (!Files.isRegularFile(java) || !Files.isRegularFile(jar)) {
-                        throw new IOException("Incomplete application image. Keep LocalDashboard.exe, app and runtime together.");
-                    }
                     Process server = new ProcessBuilder(serverCommand(java, jar, home))
                             .directory(home.toFile()).redirectErrorStream(true)
                             .redirectOutput(ProcessBuilder.Redirect.appendTo(home.resolve("logs/server.log").toFile())).start();
@@ -76,6 +73,7 @@ public final class WindowsLauncher {
                                 + server.info().startInstant().orElseThrow() + "\n");
                         append(log, "Server started pid=" + server.pid() + " home=" + home);
                         awaitReadyLogged(log, server::isAlive);
+                        confirmReadyInstance(lockDirectory.resolve("server.pid"), java, jar, home);
                     } catch (Exception failure) {
                         // Only terminate the child created by this invocation; never an unknown listener.
                         server.destroy();
@@ -155,13 +153,27 @@ public final class WindowsLauncher {
         } catch (IOException unavailable) { return false; }
     }
 
-    private static ProcessHandle recordedServer(Path file) {
+    static ProcessHandle recordedServer(Path file) throws IOException {
+        if (!Files.exists(file)) return null;
         try {
             var lines = Files.readAllLines(file);
+            if (lines.size() != 2) throw new IllegalArgumentException("Invalid record");
             var handle = ProcessHandle.of(Long.parseLong(lines.get(0))).orElse(null);
-            return handle != null && handle.info().startInstant().filter(Instant.parse(lines.get(1))::equals).isPresent()
-                    ? handle : null;
-        } catch (Exception absentOrStale) { return null; }
+            if (handle == null || !handle.isAlive()) return null;
+            if (handle.info().startInstant().filter(Instant.parse(lines.get(1))::equals).isEmpty())
+                throw new IOException("Recorded server start time does not match; refusing reuse.");
+            return handle;
+        } catch (RuntimeException invalid) { throw new IOException("Invalid server.pid; refusing reuse.", invalid); }
+    }
+
+    static void confirmReadyInstance(Path file, Path java, Path jar, Path home) throws Exception {
+        String record = Files.readString(file);
+        ProcessHandle handle = recordedServer(file);
+        if (handle == null || !WindowsProcessIdentity.matches(handle, java, jar, home) || !ready(URL)
+                || !record.equals(Files.readString(file)) || !handle.isAlive()
+                || handle.info().startInstant().filter(Instant.parse(record.lines().toList().get(1))::equals).isEmpty()
+                || !WindowsProcessIdentity.matches(handle, java, jar, home))
+            throw new IOException("Ready listener is not the recorded instance from this image and data home; refusing reuse.");
     }
 
     private static void browse(Path log) throws IOException {
