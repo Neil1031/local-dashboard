@@ -2,8 +2,11 @@
   "result": "PASSED",
   "sourceEngineeringCommit": "3e076590f7d6a2e6d35a0e9083c353c39b0770ae",
   "beforeRevision": "ANLCKQmLruTA9zHeHK0rYWIJgLg0y9lz054UBRnO6W6T35sEmtU6EVl3w0uI8dykfUt8BMpcmcxAy0fAXBQs4kCRt4RMRr4CbpksGG2-RyI",
-  "afterRevision": "ANLCKQlc1Xt-onbALcpqw9UXpVkl8H2oQzecDTDEcPp1u9douihqy6NLCY8h3Ihm4jpCmx-nTq6iQ_7L4yUB_AogSwygaHPWA5XudHL77tY",
-  "targetedReplacements": 10,
+  "intermediateRevision": "ANLCKQlc1Xt-onbALcpqw9UXpVkl8H2oQzecDTDEcPp1u9douihqy6NLCY8h3Ihm4jpCmx-nTq6iQ_7L4yUB_AogSwygaHPWA5XudHL77tY",
+  "afterRevision": "ANLCKQnn8csRkT40tDlEWib9CIxZpFqKuPg4fkjBdpdly7iM3v9KeNhNhkagDU5u0DUAxBFU2DJfI8BGMt0GnV91B-_iC2Z80ltkx4IgVNc",
+  "uniqueChangedParagraphs": 10,
+  "totalNativeReplacementOperations": 11,
+  "guardedBatches": 2,
   "eachNativeOccurrenceChanged": 1,
   "paragraphs": 769,
   "h1Headings": 24,
@@ -22,5 +25,6 @@
   "paragraphTextStylesLinksNamedStylesTopologySharing": "PRESERVED",
   "protectedControlsDetected": false,
   "documentVisualQa": "NOT_PERFORMED",
-  "readbackSha256": "970d56df72f27f4504aa86312b666e8fa6966707693684b4db6c536fe70842f6"
+  "followupCorrection": "Start expected-home file identity vs Stop existing config-URI command-shape policy",
+  "readbackSha256": "7335f8811c52fc6819b55e07d44a2ff1ee8dcd7f6f51cd340ee8daf56f3b0c6a"
 }
