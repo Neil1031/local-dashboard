@@ -1,0 +1,325 @@
+{
+  "result": "READY_FOR_MANAGER_REVIEW — DEPLOYMENT_SUCCEEDED",
+  "observedUtc": "2026-09-30T15:39:34.111155+00:00",
+  "source": {
+    "approvedEngineeringCommit": "4c762ff4ad1cca569da4e4546f7ef3440045664e",
+    "acceptedSnapshotCommit": "1db387f9ee1411d5a2984ba282f7e51ca93a4afb",
+    "approvedMergedMain": "38092190f0e44bd32317dba66b1a6e70afd550ff",
+    "reviewedPR": 4
+  },
+  "installed": {
+    "criticalSHA256": {
+      "LocalDashboard.exe": "a56efe7eee546dd261b86d708cde597c307c5fe471946640eba35373a0dccb59",
+      "app/launcher.jar": "122e03345c4718aaea5cd317fe1190ead7aae2a9bf0851d9a7bee2deae96e161",
+      "app/dashboard.jar": "2a9bd046ac6674566233671a0333e087b8041897a0e892f1621a1e58bdbb89d4"
+    },
+    "rawCanonicalSHA256": "bffdae6c76d01981e9d22b19b09fc474f205c1d847d89102c6e32665332a75e7",
+    "fullTree": {
+      "sha256": "706a6df045c9c07dc2a90a7b534cc3a4f50c09ea9e474d27f6a7ebed0d424b73",
+      "files": 221,
+      "directories": 37,
+      "bytes": 123700993
+    },
+    "exactReviewedImageMatch": true,
+    "rebuilt": false
+  },
+  "backup": {
+    "completeIndependentBackupRetained": true,
+    "oldImageRetained": true,
+    "image": {
+      "sha256": "033e3091e42164664ba853b3185f26f027ee53e1c9fdbbd0680306b8f183497c",
+      "files": 225,
+      "directories": 37,
+      "bytes": 121817290
+    },
+    "externalHome": {
+      "sha256": "0a059f2b99a8c36f26ec4976aabba65b5ee521cbb70cca28e98b314b9a6efd8d",
+      "files": 6764,
+      "directories": 105,
+      "bytes": 142911339
+    },
+    "readbackMatch": true,
+    "baselineSchema": 1,
+    "baselineJobs": 6,
+    "baselineRuns": 18
+  },
+  "runtime": {
+    "address": "127.0.0.1",
+    "port": 43871,
+    "matchingServerPid": 34628,
+    "readiness": "local-dashboard:ready:v1",
+    "readinessHTTP": 200,
+    "browserAutoOpenLog": "BROWSER_DISPATCHED",
+    "launch": "exact installed EXE / approved image working directory",
+    "literalShortcutClickRequired": false,
+    "no8080Listener": true
+  },
+  "database": {
+    "schemaVersion": 2,
+    "integrity": "ok",
+    "counts": {
+      "job": 6,
+      "job_run": 22,
+      "schedule_observation": 15,
+      "schedule_version": 5
+    },
+    "originalJobIDsPreserved": 6,
+    "originalRunIDsPreserved": 18,
+    "originalImportantFieldsPreserved": true,
+    "newObservedRuns": 4,
+    "normalObservationChanges": {
+      "jobsLastSeenUpdated": 5,
+      "runsLastObservedUpdated": 1,
+      "oneRunRawResultEnrichmentKeys": [
+        "MultipleInstances",
+        "RunOnlyIfIdle",
+        "RunOnlyIfNetworkAvailable",
+        "WakeToRun"
+      ],
+      "allOriginalRawKeysAndValuesPreserved": true
+    },
+    "manualDBWrites": false,
+    "originalRowsByteIdentical": false
+  },
+  "ui": {
+    "utc": "2026-09-30T15:27:41.927Z",
+    "browser": "Chrome extension",
+    "url": "http://127.0.0.1:43871/",
+    "fixtures": false,
+    "today": {
+      "monitored": 5,
+      "lastRunSuccess": 3,
+      "lastRunFailed": 2,
+      "currentAttention": 2,
+      "failedFilterVisible": 2,
+      "filteredOut": 3,
+      "drawerOpened": true,
+      "escapeClosed": true
+    },
+    "history": {
+      "localDays": 7,
+      "window": [
+        "2026-09-24",
+        "2026-09-30"
+      ],
+      "visibleJobs": 5,
+      "actualObservedCellOpened": true,
+      "executionTime": "2026-09-30 09:40:24 Asia/Taipei",
+      "result": "Success / 0; application-level success unverified",
+      "escapeClosed": true
+    },
+    "projects": {
+      "count": 33,
+      "exactIDsAndStatusesMatch": true,
+      "reloadReadAtUpdated": true,
+      "sourceHash": "bffdae6c76d01981e9d22b19b09fc474f205c1d847d89102c6e32665332a75e7",
+      "launcher": "DONE",
+      "projects": "PARTIAL",
+      "historicalBaseline": "085757affe2c2dc0c1de45663395e418ad702e3e"
+    },
+    "consoleWarningsOrErrors": [],
+    "visualInspection": [
+      "Today",
+      "History table",
+      "History drawer",
+      "Projects card",
+      "Projects counts",
+      "Projects provenance"
+    ],
+    "settingsWritten": false
+  },
+  "projects": {
+    "features": [
+      {
+        "id": "desktop-launcher",
+        "status": "DONE"
+      },
+      {
+        "id": "desktop-browser",
+        "status": "DONE"
+      },
+      {
+        "id": "desktop-stop",
+        "status": "DONE"
+      },
+      {
+        "id": "desktop-runtime",
+        "status": "DONE"
+      },
+      {
+        "id": "desktop-bootstrap",
+        "status": "DONE"
+      },
+      {
+        "id": "auto-collector",
+        "status": "DONE"
+      },
+      {
+        "id": "auto-today",
+        "status": "DONE"
+      },
+      {
+        "id": "auto-workflow",
+        "status": "DONE"
+      },
+      {
+        "id": "auto-grouping",
+        "status": "DONE"
+      },
+      {
+        "id": "auto-history",
+        "status": "DONE"
+      },
+      {
+        "id": "auto-metadata",
+        "status": "DONE"
+      },
+      {
+        "id": "auto-settings",
+        "status": "DONE"
+      },
+      {
+        "id": "auto-folding",
+        "status": "DONE"
+      },
+      {
+        "id": "runner-core",
+        "status": "DONE"
+      },
+      {
+        "id": "runner-receipts",
+        "status": "DONE"
+      },
+      {
+        "id": "runner-fallback",
+        "status": "DONE"
+      },
+      {
+        "id": "runner-ui",
+        "status": "DONE"
+      },
+      {
+        "id": "runner-coverage",
+        "status": "DONE"
+      },
+      {
+        "id": "runner-diagnostics",
+        "status": "DONE"
+      },
+      {
+        "id": "schedule-snapshot",
+        "status": "BACKEND_READY"
+      },
+      {
+        "id": "schedule-version",
+        "status": "BACKEND_READY"
+      },
+      {
+        "id": "schedule-correlation",
+        "status": "BACKEND_READY"
+      },
+      {
+        "id": "schedule-availability",
+        "status": "NOT_STARTED"
+      },
+      {
+        "id": "schedule-shadow-missed",
+        "status": "NOT_STARTED"
+      },
+      {
+        "id": "schedule-prod-missed",
+        "status": "BLOCKED"
+      },
+      {
+        "id": "product-shell",
+        "status": "DESIGNED"
+      },
+      {
+        "id": "product-overview",
+        "status": "DESIGNED"
+      },
+      {
+        "id": "product-projects",
+        "status": "PARTIAL"
+      },
+      {
+        "id": "product-us",
+        "status": "DESIGNED"
+      },
+      {
+        "id": "product-tw",
+        "status": "DESIGNED"
+      },
+      {
+        "id": "product-performance",
+        "status": "DESIGNED"
+      },
+      {
+        "id": "product-reports",
+        "status": "DESIGNED"
+      },
+      {
+        "id": "product-evidence",
+        "status": "DESIGNED"
+      }
+    ],
+    "statusCounts": {
+      "DONE": 19,
+      "PARTIAL": 1,
+      "BACKEND_READY": 3,
+      "DATA_READY": 0,
+      "DESIGNED": 7,
+      "IN_PROGRESS": 0,
+      "NOT_STARTED": 2,
+      "DEFERRED": 0,
+      "BLOCKED": 1,
+      "DROPPED": 0
+    },
+    "repository": "Neil1031/local-dashboard",
+    "historicalBaseline": "085757affe2c2dc0c1de45663395e418ad702e3e",
+    "sourceHash": "bffdae6c76d01981e9d22b19b09fc474f205c1d847d89102c6e32665332a75e7",
+    "exactDOMPackageMatch": true
+  },
+  "safeStop": {
+    "invocations": 1,
+    "command": "exact installed EXE --stop --quiet",
+    "exitCode": 0,
+    "identityConfirmedTwice": true,
+    "targetPid": 34628,
+    "termination": "normal termination unsupported; matching forced fallback",
+    "exited": true,
+    "pidCleanup": true,
+    "finalState": "STOPPED",
+    "finalProductProcesses": 0,
+    "finalListeners8080And43871": 0
+  },
+  "protection": {
+    "fullExternalHomeCompared": true,
+    "onlyChangedRelativePaths": [
+      "data/local-dashboard.db",
+      "logs/launcher.log",
+      "logs/server.log",
+      "logs/stop.log",
+      "server.pid"
+    ],
+    "allOtherHomeEntriesMatch": true,
+    "applicationConfigPreserved": true,
+    "runnerConfigPreserved": true,
+    "formalPrimaryAndFallbackRootsRemainAbsent": true,
+    "runnerReceiptFilesChanged": 0,
+    "taskDefinitionsCompared": 7,
+    "taskDefinitionDrift": 0,
+    "shortcutWiringAndHashesCompared": 2,
+    "shortcutDrift": 0,
+    "primaryAndAcceptedSourceClean": true,
+    "mainUnchanged": true
+  },
+  "limits": [
+    "This is installed desktop acceptance; no scheduled job or Runner was triggered. Scheduler Success does not prove application business success.",
+    "Projects remains PARTIAL; full nine-page product and cross-project aggregation remain unfinished.",
+    "Literal shortcut clicking was not required; actual target/args/working-directory/hashes were checked.",
+    "Earlier presumed human startup was invalidated by owner correction. Actual successful launch used the approved installed EXE.",
+    "Earlier platform/browser refusals were not product failures. Owner requested retry after installing Chrome extension; supported Chrome connection succeeded.",
+    "Old-JAR/v2 compatibility and automatic rollback were excluded by owner strategy. Backups and previous image remain retained."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "result": "PASSED",
+  "documentId": "1GgEEjKTNPTJ5ACMXQ6TIaXSUFYH9OugdP9LAOIQcgNs",
+  "beforeRevision": "ANLCKQmOZe__WJs85J2S0FK_nW3Mbl8rqacm07d88o_1u4ppBxCjsBdJzuNvpWTaWjs0IcgRDmfSLaYJCQ17PdCd9q9KMzUmuxSW1xpcUUA",
+  "afterRevision": "ANLCKQn8uuSWkol7fI-EHxrBEdG5rJUL2i-cpMJD2QAnppO2lEC0o2uCLCKpkeNJv3lhHbeLrpYS-B0sK3g0jnAgSlllT5CXdQS3T1Qy3V8",
+  "successfulGuardedReplacementBatches": 1,
+  "nativeOccurrencesChanged": 1,
+  "changedParagraphs": [
+    "P00298"
+  ],
+  "unchangedOtherParagraphs": 768,
+  "paragraphs": 769,
+  "headings": 76,
+  "h1Headings": 24,
+  "topologyStylesLinksListsAndNativeObjects": "PRESERVED",
+  "sharingAndParents": "PRESERVED",
+  "firstAttempt": "NO_TEXT_CHANGE due to Windows stdout encoding; corrected using ASCII JSON Unicode escapes",
+  "visualQA": "NOT_PERFORMED; native content and structure readback",
+  "readbackSHA256": "8218734d27d373234d71d9c79617993d0bfea8d7fc75236458322f5424b3be1f"
+}
