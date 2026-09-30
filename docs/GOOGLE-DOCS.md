@@ -85,3 +85,17 @@ The existing Doc was updated in place for the authorized minimal Local Dashboard
 - Formal port target is decided **43871**, while this stage keeps the **8080** program baseline without migration or installed-package acceptance. The Doc accurately marks the minimal implementation as awaiting Astra/Manager review and not deployed.
 
 Local evidence: `.tools/projects-r1a1-doc/before/manifest.json` and `.tools/projects-r1a1-doc/readback-verification.json`. Native content/style/topology verification is complete; no PDF or browser visual inspection of the Doc is claimed. No new Doc, Chinese Markdown companion, stage renumbering or automatic synchronization was introduced.
+
+## Port 43871 current-main integration synchronization — 2026-09-30
+
+Release 1A-1 subsequently passed independent first review and Manager Review and merged at `9e3c8cbf159e5d29ecd3ce19d1fb287797949101` (PR #2); it remains undeployed. The earlier pre-review synchronization record above is historical. This later Stage implements the decided 43871 target and verifies an isolated candidate, without replacing the installed app-image/shortcuts. Management is now `[Dashboard] 管理與初審`, same thread; both existing Works use GPT-6.1 Sol/high under the later owner instruction. The new candidate still requires independent first review and Manager Review.
+
+Engineering source: `3e076590f7d6a2e6d35a0e9083c353c39b0770ae`, following the ancestry-preserving port merge `9ec09d875105117a4315c601350a75a7c38e7d6d`. The subsequent sync/evidence commit records these observations without a self-referential source SHA or change to packaged runtime/canonical design bytes.
+
+- Trusted-read bridge 3.6 ran before writing with supported Windows `fileIO`, complete immutable files and no protected controls/warnings. Before revision: `ANLCKQmLruTA9zHeHK0rYWIJgLg0y9lz054UBRnO6W6T35sEmtU6EVl3w0uI8dykfUt8BMpcmcxAy0fAXBQs4kCRt4RMRr4CbpksGG2-RyI`.
+- Ten unique replacements in the existing `t.0` tab, one guarded batch using `requiredRevisionId`; each native reply reports exactly one occurrence. Scoped to source/approval/merge/deployment distinction, existing Stage 6 launcher identity/43871 candidate verification, Stage 11 and Release 1 minimal Viewer state, and source mapping. No chapter/checklist relocation or scope/status promotion.
+- After revision: `ANLCKQlc1Xt-onbALcpqw9UXpVkl8H2oQzecDTDEcPp1u9douihqy6NLCY8h3Ihm4jpCmx-nTq6iQ_7L4yUB_AogSwygaHPWA5XudHL77tY`.
+- Full native readback verified all ten exact edits and **759 unchanged other paragraphs**, **769 total paragraphs**, **24 H1/all 76 headings with identical text/order**, `t.0 / Tab 1` topology, paragraph/text styles, links, named styles and sharing/parent metadata. No sharing mutation was made. [Sanitized readback receipt](evidence/port43871-google-doc-readback.json).
+- The Doc distinguishes actual packaged EXE positive Start/Stop from packaged-main headless negative tests and unit wrong-readiness tests. It records the one external task-state drift as actor/cause unknown, rather than claiming execution states unchanged. Formal files/definitions, installed package and shortcut targets remain protected.
+
+Ignored local artifacts: `.tools/port43871-doc/before/manifest.json`, `after-document.json`, `readback-verification.json`. Native structure/content checks do not claim PDF/browser visual inspection of the Doc or installed deployment. No new document, Chinese Markdown companion, permission change or automatic sync.

@@ -42,6 +42,8 @@ The bounded protection inventory covers **6,991 files** in the known installed a
 - One related task execution state changed from its earlier snapshot to a 17:00 run, consistent with the previously recorded next-run time. Record as `EXTERNAL_DRIFT_OBSERVED`, actor/cause `UNKNOWN`; no Scheduler execution/mutation request was made by this Stage. Do not call execution states unchanged or attribute causation from timing alone. Detailed delta stays private.
 - Final checkpoint and candidate/installed hash evidence are in [sanitized JSON](evidence/port43871-current-main.json). Preserve the baseline; do not replace it with the after-state.
 
+Read-only parsing of the unchanged formal Runner config confirms both configured absolute primary/fallback roots are inside the protected Dashboard state boundary. The baseline has zero files under either root; both directories are currently absent. Before-directory-entry existence was not separately recorded, so this is file/inventory coverage, not a retroactive claim of baseline directory absence. The four external project snapshots cover Git only, not their DB/receipt contents. Final task state is Ready with the later 17:00 execution/result retained; actor/cause remain unknown.
+
 ## Current verification
 
 Runtime: bundled Node 24.19.0, JDK 24.0.2, Maven Wrapper 3.9.11, bundled Playwright/Edge headless, bundled Python. No dependency installation. The following commands ran in the dedicated worktree with explicit bundled runtime paths; log files are ignored under `.tools/port43871/`.
@@ -75,5 +77,7 @@ Safe Stop releases 43871, removes the candidate PID and preserves isolated confi
 33 feature IDs and all status counts remain unchanged: 19 DONE, 1 PARTIAL, 3 BACKEND_READY, 7 DESIGNED, 2 NOT_STARTED, 1 BLOCKED; the other four statuses remain zero. `product-projects` stays PARTIAL. Full Projects/aggregation and the nine-page product remain pending in fixed locations. Canonical design, As-Built, README and launcher/Stop current explanations were updated; historical 8080 acceptance records and unrelated 18080/18081 services remain historical. Active references in code/tests/current docs use 43871; a deliberate 8080 wrong-port rejection test remains.
 
 The existing Chinese Google Doc is edited in place through a native, revision-guarded connector; exact engineering source SHA, revision/readback and structure/sharing preservation are recorded in [GOOGLE-DOCS.md](GOOGLE-DOCS.md). No new Doc, Chinese Markdown duplicate, chapter move, permission change or automatic sync is introduced.
+
+Synchronization is verified against engineering commit `3e076590f7d6a2e6d35a0e9083c353c39b0770ae`. Subsequent changes only record synchronization/final evidence; frozen canonical/generated sample and candidate runtime bytes remain unchanged. Final protection checkpoint has zero file/definition/external-project Git drift, one externally changed task execution record, and no 43871/8080 listener.
 
 Deliver a new PR and exact final SHA to the management Work; only confirmed direct tool delivery becomes HANDOFF_DELIVERED. Management performs independent first review and routes to Manager. No self-review PASS, main merge, installed upgrade, old-8080 shutdown/migration, Scheduler/Runner production action, installer/Service/auto-start/firewall or next Release is authorized by this Stage.

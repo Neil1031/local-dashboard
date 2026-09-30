@@ -6,7 +6,8 @@
     "acceptedMain": "9e3c8cbf159e5d29ecd3ce19d1fb287797949101",
     "originalPortCommit": "96fd763d1281f1d3461e862c5b59b79a5e05445e",
     "integrationMerge": "9ec09d875105117a4315c601350a75a7c38e7d6d",
-    "method": "explicit --no-ff merge; both parents preserved"
+    "method": "explicit --no-ff merge; both parents preserved",
+    "engineeringCommit": "3e076590f7d6a2e6d35a0e9083c353c39b0770ae"
   },
   "candidateHashes": {
     "LocalDashboard.exe": "a56efe7eee546dd261b86d708cde597c307c5fe471946640eba35373a0dccb59",
@@ -103,7 +104,7 @@
         "ExecutionStateDrift": 0,
         "ProjectGitDrift": 0,
         "Listeners": [],
-        "At": "2026-09-30T08:58:43.9288391+00:00"
+        "At": "2026-09-30T16:58:43.9288391+08:00"
       },
       {
         "Phase": "live",
@@ -115,14 +116,43 @@
         "ExecutionStateDrift": 2,
         "ProjectGitDrift": 0,
         "Listeners": [],
-        "At": "2026-09-30T09:04:28.6840461+00:00"
+        "At": "2026-09-30T17:04:28.6840461+08:00"
+      },
+      {
+        "Phase": "final",
+        "FileCount": 6991,
+        "TaskCount": 7,
+        "ProjectCount": 4,
+        "FileDrift": 0,
+        "DefinitionDrift": 0,
+        "ExecutionStateDrift": 2,
+        "ProjectGitDrift": 0,
+        "Listeners": [],
+        "At": "2026-09-30T17:19:08.0233204+08:00"
       }
     ],
     "executionDrift": "EXTERNAL_DRIFT_OBSERVED",
     "changedTaskRecords": 1,
     "actor": "UNKNOWN",
     "cause": "UNKNOWN",
-    "noTaskExecutionOrMutationRequested": true
+    "noTaskExecutionOrMutationRequested": true,
+    "formalRunnerRootCoverage": [
+      {
+        "Field": "receiptDirectory",
+        "Configured": true,
+        "WithinBaselineRoot": true,
+        "BaselineFiles": 0,
+        "Exists": false
+      },
+      {
+        "Field": "fallbackDirectory",
+        "Configured": true,
+        "WithinBaselineRoot": true,
+        "BaselineFiles": 0,
+        "Exists": false
+      }
+    ],
+    "baselineDirectoryEntryExistence": "NOT_SEPARATELY_RECORDED; zero files under covered roots, current directories absent"
   },
   "coverageLimits": {
     "positiveStart": "actual packaged EXE",
@@ -148,10 +178,11 @@
   },
   "stableIdCount": 33,
   "productProjectsStatus": "PARTIAL",
-  "googleDocSync": "PENDING_CURRENT_STAGE",
+  "googleDocSync": "VERIFIED_NATIVE_READBACK",
   "installedProtectedHashes": {
     "LocalDashboard.exe": "057513578e2c6ce1203dc243e0826057f940c2394bb8328512d89e37fad766aa",
     "app/launcher.jar": "e6bc225d92e70dcfed52e7b0a309484d5a5b4dc654b3d2116a9da3c0d919afa2",
     "app/dashboard.jar": "2db077001d33465da2c384433fe0da759e74e6fb0e1a167c0b91715ae35a4205"
-  }
+  },
+  "googleDocReadbackEvidence": "docs/evidence/port43871-google-doc-readback.json"
 }
