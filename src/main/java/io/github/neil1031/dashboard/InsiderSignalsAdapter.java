@@ -16,7 +16,9 @@ import java.util.concurrent.*;
 public class InsiderSignalsAdapter {
     private enum Operation {
         REPORTS("reports", "report:", "ai_report_assessment", "Imported AI report"),
-        SEC("sec", "sec:", "insider_transaction", "SEC Transactions · partial");
+        SEC("sec", "sec:", "insider_transaction", "SEC Transactions · partial"),
+        REPORT_LIST("reports", "report:", "", "US Insider / AI report"),
+        REPORT_DETAIL("reports", "report:", "", "US Insider / AI report");
         final String source, prefix, type, label;
         Operation(String source, String prefix, String type, String label) {
             this.source = source; this.prefix = prefix; this.type = type; this.label = label;
@@ -43,7 +45,21 @@ public class InsiderSignalsAdapter {
     List<String> secCommand(String ticker, int limit, int offset) {
         return command(Operation.SEC, ticker, limit, offset);
     }
+    List<String> reportsCommand(String date, int limit, int offset) {
+        return command(Operation.REPORT_LIST, date, limit, offset);
+    }
+    List<String> reportCommand(String date, int limit, int offset) {
+        return command(Operation.REPORT_DETAIL, date, limit, offset);
+    }
     private List<String> command(Operation operation, String ticker, int limit, int offset) {
+        if (operation == Operation.REPORT_LIST) {
+            var args = new ArrayList<>(List.of(config.cliPath(), "--db", config.databasePath(), "list-reports",
+                    "--limit", String.valueOf(limit), "--offset", String.valueOf(offset)));
+            if (ticker != null) args.addAll(List.of("--date", ticker));
+            return args;
+        }
+        if (operation == Operation.REPORT_DETAIL) return List.of(config.cliPath(), "--db", config.databasePath(), "get-report",
+                "--report-date", ticker, "--revision-limit", String.valueOf(limit), "--revision-offset", String.valueOf(offset));
         var args = new ArrayList<>(List.of(config.cliPath(), "--db", config.databasePath(),
                 "list-signals", "--source", operation.source, "--limit", String.valueOf(limit), "--offset", String.valueOf(offset)));
         if (ticker != null) args.addAll(List.of("--ticker", ticker));
@@ -55,8 +71,15 @@ public class InsiderSignalsAdapter {
     public ObjectNode readSec(String inputTicker, int limit, int offset) {
         return read(Operation.SEC, inputTicker, limit, offset);
     }
+    public ObjectNode readReports(String date, int limit, int offset) {
+        return read(Operation.REPORT_LIST, date, limit, offset);
+    }
+    public ObjectNode readReport(String date, int revisionLimit, int revisionOffset) {
+        return read(Operation.REPORT_DETAIL, date, revisionLimit, revisionOffset);
+    }
     private ObjectNode read(Operation operation, String inputTicker, int limit, int offset) {
-        String ticker = ticker(inputTicker);
+        String ticker = operation == Operation.REPORT_LIST || operation == Operation.REPORT_DETAIL
+                ? ReportProjection.date(inputTicker, operation == Operation.REPORT_DETAIL) : ticker(inputTicker);
         if (limit < 1 || limit > 100 || offset < 0 || offset > MAX_OFFSET) throw new IllegalArgumentException();
         if (!config.enabled()) return unavailable(operation, limit, offset, "SOURCE_DISABLED");
         if (!configured()) return unavailable(operation, limit, offset, "SOURCE_NOT_CONFIGURED");
@@ -141,6 +164,8 @@ public class InsiderSignalsAdapter {
         return normalize(Operation.SEC, source, filter, limit, offset);
     }
     private ObjectNode normalize(Operation operation, JsonNode source, String filter, int limit, int offset) {
+        if (operation == Operation.REPORT_LIST || operation == Operation.REPORT_DETAIL)
+            return ReportProjection.normalize(source, filter, limit, offset, operation == Operation.REPORT_DETAIL, json);
         if (source == null || !source.isObject()) throw new IllegalStateException();
         if (!integer(source.path("contract_version"), 1)
                 || !source.path("source").isTextual() || !source.path("source").textValue().equals(operation.source)) throw new InvalidContract();
@@ -238,6 +263,8 @@ public class InsiderSignalsAdapter {
         for (var v : n) { if (!v.isTextual() || v.textValue().length() > 32768) throw new IllegalStateException(); values.add(safeText(v.textValue())); }
     }
     private ObjectNode envelope(Operation operation, String state, int limit, int offset) {
+        if (operation == Operation.REPORT_LIST || operation == Operation.REPORT_DETAIL)
+            return ReportProjection.envelope(state, limit, offset, operation == Operation.REPORT_DETAIL, json);
         var result = json.createObjectNode(); String observed = Instant.now().toString();
         result.put("contractVersion", 1).put("dataState", state).put("observedAt", observed);
         result.putArray("items"); result.putObject("page").put("limit", limit).put("offset", offset).put("hasMore", false).putNull("nextOffset");

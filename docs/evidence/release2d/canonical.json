@@ -1,0 +1,17 @@
+{
+  "base": "44823aba93f7035c4b4cc7f1e3175067660d29c4",
+  "featureIds": 33,
+  "onlyStatusTransition": "product-reports DESIGNED→PARTIAL",
+  "productUs": "PARTIAL",
+  "other31FeatureRowsUnchanged": true,
+  "counts": {
+    "DONE": 19,
+    "BACKEND_READY": 3,
+    "NOT_STARTED": 2,
+    "BLOCKED": 1,
+    "PARTIAL": 5,
+    "DESIGNED": 3
+  },
+  "historicalDesignChangeRowsPreserved": true,
+  "historicalChangeLogRowsPreserved": true
+}

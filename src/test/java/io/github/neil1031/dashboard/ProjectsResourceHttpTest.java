@@ -35,6 +35,7 @@ class ProjectsResourceHttpTest {
             {"/ui/us-signals.mjs", "ui/us-signals.mjs"},
             {"/ui/us-stocks.mjs", "ui/us-stocks.mjs"}, {"/ui/us-sec-transactions.mjs", "ui/us-sec-transactions.mjs"},
             {"/ui/us-ticker-detail.mjs", "ui/us-ticker-detail.mjs"},
+            {"/ui/reports.mjs", "ui/reports.mjs"}, {"/ui/safe-markdown.mjs", "ui/safe-markdown.mjs"},
             {"/dashboard.mjs", "dashboard.mjs"}, {"/index.html", "index.html"}}) {
             var response = http.getForEntity(asset[0], byte[].class);
             assertEquals(200, response.getStatusCode().value(), asset[0]);
