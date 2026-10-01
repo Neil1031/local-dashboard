@@ -9,6 +9,7 @@ const routes = new Map([
   ['/ui/us-signals.mjs', ['ui/us-signals.mjs', 'text/javascript']],
   ['/ui/us-stocks.mjs', ['ui/us-stocks.mjs', 'text/javascript']],
   ['/ui/us-sec-transactions.mjs', ['ui/us-sec-transactions.mjs', 'text/javascript']],
+  ['/ui/us-ticker-detail.mjs', ['ui/us-ticker-detail.mjs', 'text/javascript']],
   ['/ui/projects.mjs', ['ui/projects.mjs', 'text/javascript']],
   ['/ui/project-design.mjs', ['ui/project-design.mjs', 'text/javascript']],
   ['/project-design/PROJECT-DESIGN.md', ['docs/PROJECT-DESIGN.md', 'text/markdown; charset=utf-8']]

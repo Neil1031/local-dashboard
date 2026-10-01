@@ -1,16 +1,19 @@
 import { mountUsSignals } from './us-signals.mjs';
 import { mountUsSecTransactions } from './us-sec-transactions.mjs';
+import { mountUsTickerDetail } from './us-ticker-detail.mjs';
 
-// Two fixed subpages. Ticker Detail stays visibly DESIGNED.
+// Ticker carries only a filter/navigation key; never source IDs or event linkage.
 export function mountUsStocks(document, fetcher) {
-  const pages = { signals: mountUsSignals(document, fetcher), sec: mountUsSecTransactions(document, fetcher) };
+  const ticker = mountUsTickerDetail(document, fetcher);
+  const navigateTicker = value => { if (ticker.setTicker(value)) { select('ticker'); document.getElementById('tickerInput').focus(); } };
+  const pages = { signals: mountUsSignals(document, fetcher, navigateTicker), sec: mountUsSecTransactions(document, fetcher, navigateTicker), ticker };
   const buttons = [...document.querySelectorAll('[data-us-page]')];
   let current = 'signals', active = false;
   function select(page) {
     if (!Object.hasOwn(pages, page)) return;
     current = page;
     for (const [key, controller] of Object.entries(pages)) {
-      controller.hide(); document.getElementById(key === 'signals' ? 'signalsPanel' : 'secPanel').hidden = key !== page;
+      controller.hide(); document.getElementById({ signals: 'signalsPanel', sec: 'secPanel', ticker: 'tickerPanel' }[key]).hidden = key !== page;
     }
     for (const button of buttons) {
       const selected = button.dataset.usPage === page;

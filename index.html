@@ -923,20 +923,23 @@
       .signal-facts dt { color:var(--muted); } .signal-facts dd { margin:0; min-width:0; overflow-wrap:anywhere; }
       .signal-origin, .signal-source, .signal-planned { font-size:12px; color:var(--muted); line-height:1.6; }
       .signal-prose { white-space:pre-wrap; }
-      #signalDetail { width:min(760px,calc(100vw - 24px)); max-width:calc(100vw - 24px); max-height:85vh; box-sizing:border-box; padding:20px; border:1px solid var(--border); border-radius:20px; color:var(--text); overflow:auto; overflow-wrap:anywhere; }
-      #signalDetail::backdrop { background:rgba(50,30,43,.35); }
+      #signalDetail, #tickerSignalDetail { width:min(760px,calc(100vw - 24px)); max-width:calc(100vw - 24px); max-height:85vh; box-sizing:border-box; padding:20px; border:1px solid var(--border); border-radius:20px; color:var(--text); overflow:auto; overflow-wrap:anywhere; }
+      #signalDetail::backdrop, #tickerSignalDetail::backdrop { background:rgba(50,30,43,.35); }
       .signals-detail-head { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
       .signals-detail-head h2 { font-size:19px; min-width:0; } .signals-detail-head button { flex-shrink:0; }
       .us-subnav { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:18px; }
       .us-subnav button { padding:9px 14px; border:1px solid var(--border); border-radius:10px; background:#fff; color:var(--text); cursor:pointer; }
       .us-subnav button.active { background:var(--pink-soft); font-weight:800; }
-      #secDetail { width:min(720px,calc(100vw - 32px)); max-height:85vh; box-sizing:border-box; overflow:auto; border:1px solid var(--border); border-radius:18px; padding:22px; overflow-wrap:anywhere; color:var(--text); }
-      #secDetail::backdrop { background:rgba(40,22,35,.45); }
-      @media(max-width:400px) { .signals-panel { padding:14px; } #signalDetail, #secDetail { padding:14px; } }
+      #secDetail, #tickerSecDetail { width:min(720px,calc(100vw - 32px)); max-height:85vh; box-sizing:border-box; overflow:auto; border:1px solid var(--border); border-radius:18px; padding:22px; overflow-wrap:anywhere; color:var(--text); }
+      #secDetail::backdrop, #tickerSecDetail::backdrop { background:rgba(40,22,35,.45); }
+      .ticker-section { margin-top:24px; padding-top:16px; border-top:1px solid var(--border); min-width:0; }
+      .ticker-limitations { margin-top:24px; border:1px solid var(--border); border-radius:12px; padding:14px; background:var(--pink-soft); }
+      .ticker-link { margin-top:8px; padding:6px 10px; border:1px solid var(--border); border-radius:8px; background:#fff; color:var(--pink-dark); cursor:pointer; }
+      @media(max-width:400px) { .signals-panel { padding:14px; } #signalDetail, #secDetail, #tickerSignalDetail, #tickerSecDetail { padding:14px; } }
     </style>
     <section class="panel signals-panel" id="usView" data-page-view="us" hidden aria-label="US Stocks">
       <p class="eyebrow">US Stocks · PARTIAL</p>
-      <nav class="us-subnav" aria-label="US Stocks pages"><button type="button" data-us-page="signals" aria-controls="signalsPanel">Signals</button><button type="button" data-us-page="sec" aria-controls="secPanel">SEC Transactions</button><span class="signal-planned">Ticker Detail · DESIGNED / 尚未接</span></nav>
+      <nav class="us-subnav" aria-label="US Stocks pages"><button type="button" data-us-page="signals" aria-controls="signalsPanel">Signals</button><button type="button" data-us-page="sec" aria-controls="secPanel">SEC Transactions</button><button type="button" data-us-page="ticker" aria-controls="tickerPanel">Ticker Detail</button></nav>
       <section id="signalsPanel" aria-labelledby="signalsTitle"><h2 id="signalsTitle">Signals</h2>
       <p>Insider report assessments · 分數由外部 AI report 匯入。此頁保留來源資料與限制，不產生投資建議。</p>
       <form id="signalsFilter" class="signals-controls"><label for="signalsTicker">Exact ticker</label><input id="signalsTicker" name="ticker" maxlength="16" placeholder="例如 COO" autocomplete="off"><button type="submit">搜尋</button><button type="button" id="signalsReload">重新讀取</button></form>
@@ -954,6 +957,20 @@
       <div class="signals-controls"><button id="secPrevious" type="button" disabled>上一頁</button><button id="secNext" type="button" disabled>下一頁</button></div>
       <p class="signal-source">sec:&lt;accession&gt;:&lt;transaction_index&gt; 是來源位置 ID，非 immutable business-event ID；來源重排或修正可能改變對應。交易日、申報日、accepted time、local discovered time 分開。空值顯示 —；不推算 freshness，不是 PIT snapshot。</p>
       </section>
+      <section id="tickerPanel" hidden aria-labelledby="tickerTitle">
+        <h2 id="tickerTitle">Ticker Detail</h2>
+        <form id="tickerFilter" class="signals-controls"><label for="tickerInput">Exact ticker · 必填</label><input id="tickerInput" name="ticker" maxlength="16" placeholder="例如 COO" autocomplete="off"><button type="submit">查看來源</button><button id="tickerReload" type="button">重新讀取</button></form>
+        <p id="tickerValidation" role="alert"></p><p id="tickerStatus" role="status" aria-live="polite"></p><p id="tickerSummary" class="signal-source"></p>
+        <section id="tickerSignalsPanel" class="ticker-section" aria-labelledby="tickerSignalsTitle"><h3 id="tickerSignalsTitle">Reports Signals</h3><p>Imported AI report · 分數、reasons／risks 只屬於 Reports，不套用至 SEC。</p>
+          <p id="tickerSignalsStatus" role="status" aria-live="polite"></p><p id="tickerSignalsSource" class="signal-source"></p><p id="tickerSignalsWarnings"></p><div id="tickerSignalsRows" class="signals-grid"></div><p id="tickerSignalsPage" role="status"></p>
+          <div class="signals-controls"><button id="tickerSignalsPrevious" type="button" disabled>Reports 上一頁</button><button id="tickerSignalsNext" type="button" disabled>Reports 下一頁</button></div>
+        </section>
+        <section id="tickerSecPanel" class="ticker-section" aria-labelledby="tickerSecTitle"><h3 id="tickerSecTitle">SEC Transactions · partial</h3><p>P／Candidate 尚未認證；保留 non-P、derivative 與未對帳的 Form 4/A 來源列。SEC 無分數，內部人成交價非策略進場價。</p>
+          <p id="tickerSecStatus" role="status" aria-live="polite"></p><p id="tickerSecSource" class="signal-source"></p><p id="tickerSecWarnings"></p><div id="tickerSecRows" class="signals-grid"></div><p id="tickerSecPage" role="status"></p>
+          <div class="signals-controls"><button id="tickerSecPrevious" type="button" disabled>SEC 上一頁</button><button id="tickerSecNext" type="button" disabled>SEC 下一頁</button></div>
+        </section>
+        <aside class="ticker-limitations" aria-label="Ticker Detail limitations"><h3>閱讀限制</h3><p>相同 ticker 不代表同一個 business event；不跨來源連結、合併身分或去重，不產生合併分數或投資建議。各來源 ID、日期、觀察時間及 provenance 保持分開。</p><p>顯示的是各來源已載入／本頁筆數，不是完整群體；不自動讀取全部頁面，跨頁不是 PIT snapshot。</p><h3>Performance · DESIGNED</h3><p>尚未接入唯讀來源。沒有 return／win rate 等推算或假資料。</p></aside>
+      </section>
     </section>
     <section class="panel planned-page" id="twView" data-page-view="tw" hidden><p class="eyebrow">DESIGNED</p><h2>TW Stocks</h2><p>尚未接入資料。此入口目前只提供導覽，相關資料來源與閱讀功能仍待實作。</p></section>
     <section class="panel planned-page" id="performanceView" data-page-view="performance" hidden><p class="eyebrow">DESIGNED</p><h2>Performance</h2><p>尚未接入資料。此入口目前只提供導覽，相關資料來源與閱讀功能仍待實作。</p></section>
@@ -964,6 +981,8 @@
   </div>
   <dialog id="signalDetail" aria-labelledby="signalDetailTitle"><div class="signals-detail-head"><h2 id="signalDetailTitle"></h2><button id="signalDetailClose" type="button">關閉</button></div><div id="signalDetailBody"></div></dialog>
   <dialog id="secDetail" aria-labelledby="secDetailTitle"><div class="signals-detail-head"><h2 id="secDetailTitle"></h2><button id="secDetailClose" type="button">關閉</button></div><div id="secDetailBody"></div></dialog>
+  <dialog id="tickerSignalDetail" aria-labelledby="tickerSignalDetailTitle"><div class="signals-detail-head"><h2 id="tickerSignalDetailTitle"></h2><button id="tickerSignalDetailClose" type="button">關閉</button></div><div id="tickerSignalDetailBody"></div></dialog>
+  <dialog id="tickerSecDetail" aria-labelledby="tickerSecDetailTitle"><div class="signals-detail-head"><h2 id="tickerSecDetailTitle"></h2><button id="tickerSecDetailClose" type="button">關閉</button></div><div id="tickerSecDetailBody"></div></dialog>
   <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
     <section class="drawer-card">
       <div class="drawer-head">
