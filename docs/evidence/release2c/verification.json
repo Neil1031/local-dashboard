@@ -79,24 +79,27 @@
     "originalParagraphsChanged": 10
   },
   "screenshots": {
-    "ticker-1280.png": {
+    "ticker-1280.jpg": {
       "sha256": "5524db7c3c25b8d918b648021357e572ef0b47e65039df6206bc75bf62346130",
-      "imageWidth": 65536,
-      "imageHeight": 4292542531,
+      "format": "JPEG",
+      "imageWidth": 1265,
+      "imageHeight": 889,
       "requestedViewportWidth": 1280,
       "source": "management independent Chrome fixture QA"
     },
-    "ticker-375.png": {
+    "ticker-375.jpg": {
       "sha256": "5c21d1b510804c9bf4e30a9d89201a3e47bdd57b5369ba37e06548f926061811",
-      "imageWidth": 65536,
-      "imageHeight": 4292542531,
+      "format": "JPEG",
+      "imageWidth": 360,
+      "imageHeight": 864,
       "requestedViewportWidth": 375,
       "source": "management independent Chrome fixture QA"
     },
-    "ticker-320.png": {
+    "ticker-320.jpg": {
       "sha256": "bf15c9628f94d5c4e10a2cba3ec91ea8d47e47f4033c9fec10a8439f639ccb39",
-      "imageWidth": 65536,
-      "imageHeight": 4292542531,
+      "format": "JPEG",
+      "imageWidth": 305,
+      "imageHeight": 858,
       "requestedViewportWidth": 320,
       "source": "management independent Chrome fixture QA"
     }
