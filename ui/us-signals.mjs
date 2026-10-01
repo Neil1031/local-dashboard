@@ -29,10 +29,9 @@ export function readSignals(payload, query) {
   return payload;
 }
 
-export function mountUsSignals(document, fetcher = globalThis.fetch.bind(globalThis)) {
-  const get = id => document.getElementById(id);
-  const panel = get('signalsPanel'), dialog = get('signalDetail');
-  let query = { limit: 50, offset: 0 }, revision = 0, controller, active = false, returnFocus;
+export function createSignalsView(document, get = id => document.getElementById(id), onTicker = null) {
+  const dialog = get('signalDetail');
+  let returnFocus;
   function element(tag, text, className) {
     const node = document.createElement(tag); if (text != null) node.textContent = String(text);
     if (className) node.className = className; return node;
@@ -72,7 +71,7 @@ export function mountUsSignals(document, fetcher = globalThis.fetch.bind(globalT
     }
     dialog.showModal(); get('signalDetailClose').focus();
   }
-  function render(payload) {
+  function render(payload, query) {
     const sourceObserved = payload.sources.find(s => s.sourceId === 'insider-reports')?.lastObservedAt;
     get('signalsSource').textContent = `Insider reports · Imported AI report · contract v1 · 本次查詢 ${payload.observedAt} · 成功來源觀察 ${value(sourceObserved)}`;
     const messages = { READY: 'READY', EMPTY: 'EMPTY · 此頁沒有符合條件的 report signals。',
@@ -85,6 +84,10 @@ export function mountUsSignals(document, fetcher = globalThis.fetch.bind(globalT
       const card = element('article', null, 'signal-card');
       const open = element('button', `${value(item.ticker)} · ${value(item.company)}`, 'signal-open');
       open.type = 'button'; open.addEventListener('click', () => detail(item, open)); card.append(open);
+      if (onTicker && typeof item.ticker === 'string' && /^[A-Z0-9][A-Z0-9.\-]{0,15}$/.test(item.ticker.toUpperCase())) {
+        const navigate = element('button', 'View ticker', 'ticker-link'); navigate.type = 'button';
+        navigate.addEventListener('click', () => onTicker(item.ticker)); card.append(navigate);
+      }
       const facts = element('dl', null, 'signal-facts');
       for (const [label, data] of [['Report date', item.reportDate], ['Event date · 交易日', item.eventDate],
         ['Investment Score', item.scores.investment.value], ['Signal Score', item.scores.signal.value],
@@ -98,6 +101,13 @@ export function mountUsSignals(document, fetcher = globalThis.fetch.bind(globalT
     get('signalsPrevious').disabled = query.offset === 0 || !['READY', 'EMPTY'].includes(payload.dataState);
     get('signalsNext').disabled = !payload.page.hasMore;
   }
+  return { render, close };
+}
+
+export function mountUsSignals(document, fetcher = globalThis.fetch.bind(globalThis), onTicker = null) {
+  const get = id => document.getElementById(id), panel = get('signalsPanel');
+  let query = { limit: 50, offset: 0 }, revision = 0, controller, active = false;
+  const { render, close } = createSignalsView(document, get, onTicker);
   async function load() {
     controller?.abort(); const request = ++revision; const requestController = new AbortController(); controller = requestController;
     const requestedQuery = { ...query };
@@ -111,7 +121,7 @@ export function mountUsSignals(document, fetcher = globalThis.fetch.bind(globalT
       const response = await fetcher(`/api/us/signals?${new URLSearchParams(requestedQuery)}`, { cache: 'no-store', signal: requestController.signal });
       if (!response.ok) throw new Error('SOURCE_REQUEST_FAILED');
       const payload = readSignals(await response.json(), requestedQuery);
-      if (request === revision && active) render(payload);
+      if (request === revision && active) render(payload, requestedQuery);
     } catch {
       if (request !== revision || !active) return;
       get('signalsStatus').textContent = 'ERROR · 無法取得 Signals；請重試。'; get('signalsStatus').setAttribute('role', 'alert');

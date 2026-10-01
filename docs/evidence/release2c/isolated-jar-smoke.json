@@ -1,0 +1,38 @@
+{
+  "syntheticFixtureOnly": true,
+  "formalSourceRead": false,
+  "jarSha256": "bda9d74591acd3be9fb888310cb4e1a208abaa480176262d53a8b315cfdeeb30",
+  "aggregateStates": [
+    "READY",
+    "READY",
+    "PARTIAL"
+  ],
+  "independentPaging": true,
+  "reportRows": 1,
+  "secRows": 3,
+  "fixedSourceOperations": [
+    "reports:QA:50:0",
+    "sec:QA:50:0",
+    "reports:QA:1:1",
+    "sec:QA:2:0",
+    "reports:QA:50:0",
+    "sec:QA:50:0"
+  ],
+  "fixtureFileUnchangedByAdapter": true,
+  "safeMalformedSectionPreservedReports": true,
+  "sourceJarHttpAssetsExact": {
+    "index.html": "dee1faa036d2608a888cf23adb0d04a53f697515e1e833d9fa6a7da1ad69a20a",
+    "dashboard.mjs": "d7abfb7287eeb44be2aefef88a3ec0305fe9b500cd358517b473d0c9986d0e8c",
+    "ui/shell.mjs": "e90efc48a7dbc129de9ff45bce07c56527904dc0e91a83bdc6b8cacdfb8e917a",
+    "ui/overview.mjs": "2d6fd817e2b9bd30176ae067a000dc242a1b03e96fa392ef67791f35b32866f4",
+    "ui/projects.mjs": "b9270305851fa9a9ec31fde08afb8f560e65749e32a9eb96eba9378286cb91ba",
+    "ui/project-design.mjs": "9f2fd3ad7246fe3d6e99bc54c1e888a3868b9dfe7aadaabfc8872dfef01ca3bd",
+    "ui/us-signals.mjs": "6e2bb71d361b2483e502b48a6adf87fbb944fa597ac54901d8f2b022dd787021",
+    "ui/us-sec-transactions.mjs": "b523fadfc0515e3744721f30edd9f8c8c770d7d9dd76c9cf1aebec56489c48c6",
+    "ui/us-stocks.mjs": "67a7cd111854df4481e0e304fe10931740c719d583f17e3a9c6787136fb9898f",
+    "ui/us-ticker-detail.mjs": "b42ad950b2c99edd62554992e7416d50d68e9158a80e9826567073ec9925dae0"
+  },
+  "canonicalSha256": "99234de211a512297a63969dc0e32debb690848f66e08a5c6c4b7d91bfd32a29",
+  "noStore": true,
+  "ownedIsolatedProcessExited": true
+}

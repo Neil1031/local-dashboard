@@ -1,0 +1,133 @@
+{
+  "stage": "Release 2C",
+  "date": "2026-10-01",
+  "base": "e0aa592b4db3c57c1cdf4bf429e7b082ca7a8641",
+  "branch": "implement/dashboard-release2c",
+  "scope": "development/pre-install; source-separated exact-ticker aggregate",
+  "mavenVerify": {
+    "tests": 219,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "build": "SUCCESS"
+  },
+  "frontend": {
+    "total": 104,
+    "pass": 100,
+    "fail": 0,
+    "skipped": 4,
+    "skipReason": "explicit packaged/live endpoint environment not configured",
+    "skippedTests": [
+      "bootstrap packaged Chinese aliases",
+      "actual packaged list and refresh",
+      "packaged persisted History",
+      "packaged Settings"
+    ]
+  },
+  "tickerBrowser": {
+    "pass": 6,
+    "fail": 0,
+    "widths": [
+      1280,
+      375,
+      320
+    ],
+    "keyboardFocusEscape": true,
+    "sourceSpecificPaging": true,
+    "newestTickerWinsAndLeaveCancelsRender": true,
+    "sourceFailureAndMalformedCoverage": true,
+    "pageAndDialogNoOverflow": true
+  },
+  "prototype": {
+    "pass": 7,
+    "fail": 0
+  },
+  "generatorCheck": "PASS",
+  "diffCheck": "PASS",
+  "canonical": {
+    "featureIdsAndStatusesUnchanged": true,
+    "other32FeatureRowsUnchanged": true,
+    "featureCount": 33,
+    "productUs": "PARTIAL",
+    "counts": {
+      "DONE": 19,
+      "BACKEND_READY": 3,
+      "NOT_STARTED": 2,
+      "BLOCKED": 1,
+      "PARTIAL": 4,
+      "DESIGNED": 4
+    }
+  },
+  "isolatedJarReceipt": "isolated-jar-smoke.json",
+  "googleDoc": {
+    "documentId": "1GgEEjKTNPTJ5ACMXQ6TIaXSUFYH9OugdP9LAOIQcgNs",
+    "revisionBefore": "ANLCKQkaNrledbAWO4NrZric_HK8sb_Tx8roh8lH8k5QMVAEAzWFfH1XsNlIGu2IQ_isns1TGJ7o90JCcOdlDl9Q65g69PMDb6Fj116alaQ",
+    "revisionAfter": "ANLCKQnBPivxdab5IKXI3o_3Nh9ZOIJunYr-hkdJKe3xfVsNz9a-Msa5VcJY_dtfhc54h99vW_QguLTrVhDZzabWgsUFy8G34b8XbYiHd44",
+    "revisionGuarded": true,
+    "replacements": 11,
+    "addedTickerParagraph": 1,
+    "paragraphsBefore": 769,
+    "paragraphsAfter": 770,
+    "headingsBefore": 76,
+    "headingsAfter": 76,
+    "tabs": 1,
+    "unchangedOriginalParagraphs": 759,
+    "originalParagraphStylesAndTextStylesPreserved": true,
+    "outOfScopeNativeStructurePreservedIgnoringIndexShift": true,
+    "tabTopologyPreserved": true,
+    "newTickerUsesPeerBodyStyle": true,
+    "originalParagraphsChanged": 10
+  },
+  "screenshots": {
+    "ticker-1280.png": {
+      "sha256": "5524db7c3c25b8d918b648021357e572ef0b47e65039df6206bc75bf62346130",
+      "imageWidth": 65536,
+      "imageHeight": 4292542531,
+      "requestedViewportWidth": 1280,
+      "source": "management independent Chrome fixture QA"
+    },
+    "ticker-375.png": {
+      "sha256": "5c21d1b510804c9bf4e30a9d89201a3e47bdd57b5369ba37e06548f926061811",
+      "imageWidth": 65536,
+      "imageHeight": 4292542531,
+      "requestedViewportWidth": 375,
+      "source": "management independent Chrome fixture QA"
+    },
+    "ticker-320.png": {
+      "sha256": "bf15c9628f94d5c4e10a2cba3ec91ea8d47e47f4033c9fec10a8439f639ccb39",
+      "imageWidth": 65536,
+      "imageHeight": 4292542531,
+      "requestedViewportWidth": 320,
+      "source": "management independent Chrome fixture QA"
+    }
+  },
+  "independentManualQa": {
+    "widths": [
+      1280,
+      375,
+      320
+    ],
+    "readySourceRowsEach": 50,
+    "keyboardTabSpaceEscapeFocusReturn": true,
+    "reportsNextOffset": 50,
+    "reportsNextRows": 1,
+    "secUnchangedOffset": 0,
+    "secUnchangedRows": 50,
+    "failureStateSwitch": "NOT_VERIFIED; Chrome net::ERR_BLOCKED_BY_CLIENT; no alternate retry",
+    "ownedPreviewClosedAndPortReleased": true
+  },
+  "testCorrections": [
+    "keyboard test uses actual Tab before focus-visible assertion",
+    "synthetic .NET source accepts ArrayList via IEnumerable; shared adapter unchanged"
+  ],
+  "unchangedProductFiles": [
+    "dashboard.mjs",
+    "InsiderSignalsAdapter.java"
+  ],
+  "formalSourceRead": false,
+  "installedDeployment": false,
+  "protectedSystemsOperatedOn": false,
+  "nextStageStarted": false,
+  "solOwnedUnusedPreviewStoppedAndPortReleased": true,
+  "remainingGate": "Independent exact-SHA management review and handoff receipt; no self approval"
+}

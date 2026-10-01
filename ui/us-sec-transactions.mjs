@@ -35,9 +35,9 @@ export function readSecTransactions(payload, query) {
   return payload;
 }
 
-export function mountUsSecTransactions(document, fetcher = globalThis.fetch.bind(globalThis)) {
-  const get = id => document.getElementById(id), panel = get('secPanel'), dialog = get('secDetail');
-  let query = { limit: 50, offset: 0 }, revision = 0, controller, active = false, returnFocus;
+export function createSecTransactionsView(document, get = id => document.getElementById(id), onTicker = null) {
+  const dialog = get('secDetail');
+  let returnFocus;
   function element(tag, text, className) {
     const node = document.createElement(tag); if (text != null) node.textContent = String(text);
     if (className) node.className = className; return node;
@@ -81,7 +81,7 @@ export function mountUsSecTransactions(document, fetcher = globalThis.fetch.bind
     }
     dialog.showModal(); get('secDetailClose').focus();
   }
-  function render(payload) {
+  function render(payload, query) {
     get('secSource').textContent = `Insider SEC · contract v1 · 本次查詢 ${payload.observedAt} · 成功來源觀察 ${value(payload.sources.find(s => s.sourceId === 'insider-sec')?.lastObservedAt)}`;
     const messages = { READY: 'READY', EMPTY: 'EMPTY · 此頁沒有符合條件的 SEC transactions。', UNAVAILABLE: 'UNAVAILABLE · 來源未設定或目前無法唯讀讀取。', ERROR: 'ERROR · 來源回應無法安全解析。' };
     get('secStatus').textContent = messages[payload.dataState]; get('secStatus').setAttribute('role', ['UNAVAILABLE', 'ERROR'].includes(payload.dataState) ? 'alert' : 'status');
@@ -91,6 +91,10 @@ export function mountUsSecTransactions(document, fetcher = globalThis.fetch.bind
       const card = element('article', null, 'signal-card sec-card');
       const open = element('button', `${value(item.ticker)} · ${value(item.company)}`, 'signal-open sec-open'); open.type = 'button';
       open.addEventListener('click', () => detail(item, open)); card.append(open);
+      if (onTicker && typeof item.ticker === 'string' && /^[A-Z0-9][A-Z0-9.\-]{0,15}$/.test(item.ticker.toUpperCase())) {
+        const navigate = element('button', 'View ticker', 'ticker-link'); navigate.type = 'button';
+        navigate.addEventListener('click', () => onTicker(item.ticker)); card.append(navigate);
+      }
       const facts = element('dl', null, 'signal-facts');
       for (const [label, data] of [['Reporting owner(s)', item.reportingOwners.map(o => value(o.name)).join(' · ') || null], ['Transaction date', item.eventDate],
         ['Transaction code', item.transactionCode], ['Shares', item.shares], ['Insider execution price · 非策略進場價', item.insiderExecutionPrice],
@@ -101,6 +105,13 @@ export function mountUsSecTransactions(document, fetcher = globalThis.fetch.bind
     get('secPage').textContent = `本頁 ${payload.items.length} 筆 · offset ${query.offset} · 每頁 ${query.limit}；非總筆數`;
     get('secPrevious').disabled = query.offset === 0 || !['READY', 'EMPTY'].includes(payload.dataState); get('secNext').disabled = !payload.page.hasMore;
   }
+  return { render, close };
+}
+
+export function mountUsSecTransactions(document, fetcher = globalThis.fetch.bind(globalThis), onTicker = null) {
+  const get = id => document.getElementById(id), panel = get('secPanel');
+  let query = { limit: 50, offset: 0 }, revision = 0, controller, active = false;
+  const { render, close } = createSecTransactionsView(document, get, onTicker);
   async function load() {
     controller?.abort(); const request = ++revision, requestController = new AbortController(); controller = requestController;
     const requestedQuery = { ...query }; close(); panel.setAttribute('aria-busy', 'true');
@@ -111,7 +122,7 @@ export function mountUsSecTransactions(document, fetcher = globalThis.fetch.bind
     try {
       const response = await fetcher(`/api/us/sec-transactions?${new URLSearchParams(requestedQuery)}`, { cache: 'no-store', signal: requestController.signal });
       if (!response.ok) throw new Error('SOURCE_REQUEST_FAILED');
-      const payload = readSecTransactions(await response.json(), requestedQuery); if (request === revision && active) render(payload);
+      const payload = readSecTransactions(await response.json(), requestedQuery); if (request === revision && active) render(payload, requestedQuery);
     } catch {
       if (request !== revision || !active) return;
       get('secStatus').textContent = 'ERROR · 無法取得 SEC Transactions；請重試。'; get('secStatus').setAttribute('role', 'alert');

@@ -1,4 +1,4 @@
-// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: 7cca615d8c44670c12e2ab3bbd64423477dbb00c429ad8298b5174257a9629ff
+// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: 77cfb103660100fef50ce58e820f3f56e56afb32c55d77aaf8984e7e21fb3d14
 window.PROJECT_DESIGN_SAMPLE = Object.freeze({
   "metadata": {
     "project_id": "local-dashboard",
@@ -326,11 +326,11 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "area": "Product expansion",
       "name": "US Stocks",
       "originalIntent": "原設計只看 Insider 相關排程",
-      "implementation": "Release 2A reports Signals 已合併；Release 2B fixed SEC CLI v1 adapter／API／filter／分頁／明細已實作",
+      "implementation": "Release 2A reports Signals、2B SEC Transactions partial 已合併；2C exact ticker source-separated aggregate／獨立分頁／既有明細已實作",
       "status": "PARTIAL",
-      "limitation": "SEC 為 partial facts，P／candidate 尚未認證，4/A 未對帳，來源位置 ID 非 immutable event ID；Ticker Detail 未接；跨頁非 PIT，無 freshness policy；2B 已合併 main `4acd568`；實際安裝狀態另由 deployment evidence 確認",
-      "remaining": "Ticker Detail／amendment reconciliation／broader analytics 另行 gate",
-      "evidence": "docs/STAGE-RELEASE-2B.md"
+      "limitation": "SEC P／candidate 尚未認證、4/A 未對帳，來源位置 ID 非 immutable event ID；相同 ticker 不推定來源關聯，不 join／dedupe／combined score；Performance 未接、跨頁非 PIT、無 freshness policy；2C 待管理初審、未合併／部署；實際安裝狀態由獨立 deployment evidence 確認",
+      "remaining": "Performance 唯讀 contract／amendment reconciliation／PIT／broader analytics 另行 gate",
+      "evidence": "docs/STAGE-RELEASE-2C.md"
     },
     {
       "id": "product-tw",
@@ -497,9 +497,9 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
     },
     {
       "horizon": "PARTIAL",
-      "work": "US Stocks Signals／SEC Transactions",
-      "gate": "2A reports Signals 已合併；2B SEC partial 已合併 main `4acd568`；Ticker Detail、4/A reconciliation／broader analytics 另審",
-      "evidence": "docs/STAGE-RELEASE-2B.md"
+      "work": "US Stocks Signals／SEC Transactions／Ticker Detail",
+      "gate": "2A／2B 已合併；2C source-separated aggregate 已實作待審，不建立跨來源 identity；Performance／4/A reconciliation／PIT／broader analytics 另審",
+      "evidence": "docs/STAGE-RELEASE-2C.md"
     },
     {
       "horizon": "DESIGNED",

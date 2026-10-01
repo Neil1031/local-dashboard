@@ -1,6 +1,6 @@
 # Local Dashboard — Data Contracts and Source Mapping
 
-Design proposal, version `dashboard-domain-v1`, except the implemented Release 2A reports Signals and Release 2B SEC Transactions APIs below. Cross-source identity and provenance are mandatory. A field marked nullable must remain `null`/— when not observed; zero means an actual measured zero. Source event time, filing time, report date, run time and data-effective date are distinct.
+Design proposal, version `dashboard-domain-v1`, except the implemented Release 2A reports Signals, Release 2B SEC Transactions and Release 2C Ticker Detail APIs below. Cross-source identity and provenance are mandatory. A field marked nullable must remain `null`/— when not observed; zero means an actual measured zero. Source event time, filing time, report date, run time and data-effective date are distinct.
 
 ## Release 2A implemented reports slice
 
@@ -23,6 +23,29 @@ SEC-specific items: signalId, transactionIndex, ticker/company, eventDate (trans
 Provenance accepts only sec_filing / filing_date_provenance, table filing_raw and positive record IDs; retains document ID, content hash, first/last observed timestamps. Raw URL/location, local paths, configured paths and stderr are excluded; local path text is redacted. Successful source lastObservedAt is set only for READY/EMPTY, while observedAt is the adapter attempt. The warnings include `SEC_PARTIAL_NOT_RECONCILED_OR_CERTIFIED` even when transport succeeds.
 
 This is current SEC transaction facts, **not complete Form 4/4A reconciliation**. Non-P, derivative, amendment/review/quality uncertainty and all supplied owners/footnotes remain visible. No default buys filter, amendment/correction collapse or report/date join. Code P / candidateOpenMarketPurchase is Candidate / 尚未認證, never a certified open-market buy. Insider execution price is not a strategy entry price. sec:<accession>:<transaction_index> identifies source position, not a globally immutable business event; source reordering/correction can change its association. Transaction date, filing date, accepted time and local discovery time remain distinct; pages are not a PIT snapshot. The source's schema-2 mode=ro/query_only/WAL rejection and no init/migrate/ingest remain intact. See [Release 2B evidence](STAGE-RELEASE-2B.md).
+
+## Release 2C implemented Ticker Detail aggregate
+
+`GET /api/us/ticker-detail?ticker=COO&signalsLimit=50&signalsOffset=0&secLimit=50&secOffset=0` requires one exact ticker: trim, uppercase, `[A-Z0-9][A-Z0-9.\-]{0,15}`. Each source limit defaults to 50 (1..100), each offset to 0 (0..1,000,000). Invalid/missing ticker, non-integer values or out-of-range values return no-store 400 / `INVALID_TICKER_DETAIL_QUERY` before either source is read. All successful HTTP responses are also no-store; section failures are represented in the normalized 200 response.
+
+Envelope: `{contractVersion:1,ticker,observedAt,dataState,sections:{signals,secTransactions},warnings}`. `signals` and `secTransactions` retain their complete independent Release 2A/2B normalized envelopes, including items, pages, source/version, source observation and warnings. Root `observedAt` records completion of the aggregate attempt; it does not replace either source's observation or any event/report/filing/discovery date. There is no root items list, merged identity, combined score or recommendation.
+
+Aggregate state is derived only from the two section transport states:
+
+| Reports / SEC | READY | EMPTY | UNAVAILABLE | ERROR |
+| --- | --- | --- | --- | --- |
+| READY | READY | READY | PARTIAL | PARTIAL |
+| EMPTY | READY | EMPTY | PARTIAL | PARTIAL |
+| UNAVAILABLE | PARTIAL | PARTIAL | UNAVAILABLE | ERROR |
+| ERROR | PARTIAL | PARTIAL | ERROR | ERROR |
+
+READY/EMPTY sections are usable; one usable section plus an unavailable/error section is PARTIAL, including EMPTY+ERROR. Both EMPTY is EMPTY. If neither is usable, any ERROR yields ERROR; otherwise both UNAVAILABLE yields UNAVAILABLE. A malformed section or internal source-read exception becomes only that section's safe ERROR envelope (`SOURCE_SECTION_INVALID`, empty items, requested page, no successful source observation); a valid other section remains intact. Individual source states are not reinterpreted.
+
+Only the existing fixed `adapter.read` reports and `adapter.readSec` SEC operations run, sequentially. Shared adapter process slots, configured timeout (1..30 seconds per operation), arguments, output limits, validation, redaction and cleanup are unchanged. The composite UI deadline is 75 seconds to cover both existing operation budgets and bounded stream drain; individual Signals/SEC deadlines remain unchanged. Browser cancellation stops stale rendering but does not claim to cancel an already running server read.
+
+Pagination controls change only the selected source offset and request both bounded pages. No automatic all-pages fetch or total-population claim. Counts are loaded/displayed page counts; current-state pages across requests are not a PIT snapshot. Navigation from a source card carries only the exact ticker string. Same ticker/date/person does not establish a shared business event, and report/SEC source IDs, dates, provenance, null semantics, score origins and SEC partial/review limitations remain distinct. The root warnings are `SAME_TICKER_IS_NOT_EVENT_LINKAGE`, `PAGES_ARE_NOT_COMPLETE_POPULATION` and `NOT_PIT_SNAPSHOT`.
+
+Performance remains **DESIGNED / 尚未接入唯讀來源**. No `performance-summary`, direct external DB access, invented returns/win rate, Reports/revision reader, linking, dedupe, amendment reconciliation or broader analytics is added. Development evidence uses normalized deterministic fixtures and one isolated JAR with a synthetic fixed-process source; no formal DB re-read or installed deployment. See [Release 2C evidence](STAGE-RELEASE-2C.md).
 
 ## Shared response contract
 
