@@ -9,12 +9,12 @@ const source = await readFile(new URL('../docs/PROJECT-DESIGN.md', import.meta.u
 const baseline = execFileSync('git', ['show', '7c000b5b51712c7bca489a7b8042e7d9cfc09948:docs/PROJECT-DESIGN.md'], { encoding: 'utf8' });
 const valid = text => async () => new Response(text, { headers: { 'content-type': 'text/markdown' } });
 const errorCode = code => error => error.code === code && error.message === code;
-test('all 33 baseline IDs remain; only authorized shell/overview status promotions; counts derive from rows', () => {
+test('all 33 baseline IDs remain; only authorized shell/overview/us status promotions; counts derive from rows', () => {
   const old = parseProjectDesign(baseline).features, current = parseProjectDesign(source).features;
   assert.equal(current.length, 33);
   assert.deepEqual(current.map(f => f.id), old.map(f => f.id));
   for (let i = 0; i < current.length; i++) {
-    if (['product-shell', 'product-overview'].includes(current[i].id)) { assert.equal(old[i].status, 'DESIGNED'); assert.equal(current[i].status, 'PARTIAL'); }
+    if (['product-shell', 'product-overview', 'product-us'].includes(current[i].id)) { assert.equal(old[i].status, 'DESIGNED'); assert.equal(current[i].status, 'PARTIAL'); }
     else assert.equal(current[i].status, old[i].status);
     for (const field of ['name', 'originalIntent', 'implementation', 'limitation', 'remaining', 'evidence']) assert.ok(current[i][field]);
   }

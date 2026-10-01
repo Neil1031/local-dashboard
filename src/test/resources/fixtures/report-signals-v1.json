@@ -1,0 +1,16 @@
+{
+  "contract_version": 1, "source": "reports", "limit": 50, "offset": 0, "has_more": false, "next_offset": null,
+  "signals": [{
+    "signal_id": "report:2026-09-30:QA", "signal_type": "ai_report_assessment", "ticker": "QA", "company_name": "QA 中文 fixture",
+    "event_date": "2026-09-28", "event_at": null, "filing_date": null, "filing_accepted_at": null,
+    "discovered_at": "2026-09-30T02:30:00Z", "discovery_basis": "report_date_assumed_publication",
+    "recorded_at": "2026-09-30T03:00:00Z", "updated_at": "2026-09-30T03:00:00Z",
+    "scores": {"signal":{"value":95,"origin":"imported_ai_report","breakdown":null}, "investment":{"value":null,"origin":"imported_ai_report","breakdown":null}},
+    "positive_reasons": "QA fixture positive reasons", "negative_reasons": "QA fixture risk, no recommendation", "confidence":null,
+    "data_quality_flags": ["ASSUMED_PUBLICATION_TIME", "SCORE_BREAKDOWN_UNAVAILABLE"],
+    "source_references": [{"kind":"git_report", "table":"report_revision", "record_id":1, "document_id":"2026-09-30", "content_hash":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "location":"C:\\private\\report.md", "first_observed_at":"2026-09-30T03:00:00Z", "last_observed_at":"2026-09-30T03:00:00Z"}],
+    "metadata": {"report_id":1,"report_date":"2026-09-30","active":true,"buyers":[{"person_name":"Fixture buyer", "person_role":null, "transaction_date":"2026-09-28", "filing_date":null, "shares":100, "insider_execution_price":null, "transaction_amount":null}],
+      "source_excerpt":"private raw excerpt", "person_name":null,"person_role":null,"approximate_purchase_amount":null,"action":"excluded", "suggested_position_min_pct":null, "suggested_position_max_pct":null,"confirmed_catalysts":null}
+  }]
+}

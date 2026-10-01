@@ -2,6 +2,7 @@
 import { mountProjects } from './ui/projects.mjs';
 import { mountShell } from './ui/shell.mjs';
 import { mountOverview } from './ui/overview.mjs';
+import { mountUsSignals } from './ui/us-signals.mjs';
 const currentStatuses = new Set(['READY', 'RUNNING', 'FAILED', 'DISABLED', 'UNKNOWN', 'MISSED']);
 const lastStatuses = new Set(['SUCCESS', 'FAILED', 'UNKNOWN']);
 export const currentStatus = job => currentStatuses.has(job.status) ? job.status : 'UNKNOWN';
@@ -179,6 +180,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
   const page = document.querySelector('.page');
   const tabs = [...document.querySelectorAll('.tab')];
   const projects = mountProjects(document, fetchJobs);
+  const signals = mountUsSignals(document, fetchJobs);
   const filters = [...document.querySelectorAll('.filter')];
   let snapshot = null;
   let runnerSnapshot = null;
@@ -241,6 +243,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
   const needsHistory = () => shell.current === 'overview' || (shell.current === 'automations' && !get('historyView').hidden);
   const renderOverview = () => overview.render({ snapshot, phase, historyCache, historyRevision, historyState, runnerSnapshot });
   const shell = mountShell(document, page => {
+    if (page === 'us') signals.show(); else signals.hide();
     if (page === 'projects') projects.show();
     if (page === 'settings') renderSettingList();
     if (phase !== 'loading' && !busy && needsHistory()) void loadHistory();

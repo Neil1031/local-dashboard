@@ -1,0 +1,33 @@
+{
+  "sourceContractVersion": 1,
+  "dataState": "READY",
+  "returnedCount": 22,
+  "page": {
+    "limit": 50,
+    "offset": 0,
+    "hasMore": false,
+    "nextOffset": null
+  },
+  "warnings": [],
+  "observedAt": "2026-10-01T02:16:43.022968100Z",
+  "sourceLastObservedAt": "2026-10-01T02:16:43.022968100Z",
+  "formalSourceWalHeader": false,
+  "cliSha256": "09d0752aa3031c3cfb952f38a7191e08736dca58664bdf19f4191cdf660459a4",
+  "containsNonAsciiRecordText": true,
+  "databaseAndSidecarsUnchanged": true,
+  "before": {
+    "main": {
+      "bytes": 132067328,
+      "sha256": "b7a3e026f1d5c555f613fec5b8b3f8116f63c0af46172a3b582ee6e35788fbf8",
+      "mtime_ns": 1790819291791053900
+    }
+  },
+  "after": {
+    "main": {
+      "bytes": 132067328,
+      "sha256": "b7a3e026f1d5c555f613fec5b8b3f8116f63c0af46172a3b582ee6e35788fbf8",
+      "mtime_ns": 1790819291791053900
+    }
+  },
+  "isolatedProcessExited": true
+}

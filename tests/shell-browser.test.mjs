@@ -39,7 +39,7 @@ for (const width of [1280, 375, 320]) test(`nine-page shell, truthful overview a
   assert.match(await page.locator('#overviewRunner').innerText(), /尚未設定.*unavailable/);
   await page.locator('#overviewUpcoming button').click(); await page.keyboard.press('Escape');
   assert.equal(await page.locator('#overviewUpcoming button').evaluate(n => n === document.activeElement), true);
-  for (const key of ['us', 'tw', 'performance', 'reports', 'evidence']) {
+  for (const key of ['tw', 'performance', 'reports', 'evidence']) {
     await page.locator(`[data-page="${key}"]`).focus(); await page.keyboard.press('Enter');
     assert.match(await page.locator(`[data-page-view="${key}"]`).innerText(), /DESIGNED[\s\S]*尚未接入資料/);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), true);

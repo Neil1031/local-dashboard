@@ -1,4 +1,12 @@
 dashboard:
+  sources:
+    insider:
+      enabled: false
+      # Set local absolute paths to the trusted Insider CLI executable and existing schema-2 DB.
+      # No shell, arbitrary arguments, initialization or migration. WAL is refused by the source.
+      cli-path: ""
+      database-path: ""
+      timeout-seconds: 10 # 1..30; invalid configuration returns UNAVAILABLE
   runner:
     # Set this to the private Stage 5A runner.json deployed with the Runner.
     # Leave empty until its location is known. The browser cannot select a path.

@@ -1,4 +1,4 @@
-// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: 618997059118bf352f754965ed7f3c0d789db2a6fb5804470eeb3061fa5f843c
+// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: 616c2f19d2806f8ff07ddc80c6c95c73fb8d25f30981152bfc8ce51e03c8eabd
 window.PROJECT_DESIGN_SAMPLE = Object.freeze({
   "metadata": {
     "project_id": "local-dashboard",
@@ -293,10 +293,10 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "area": "Product expansion",
       "name": "Product Shell",
       "originalIntent": "原本只需 Today／History",
-      "implementation": "Release 1B 九頁主要導覽，desktop sidebar／mobile 水平導覽，Automations／Settings 使用既有功能",
+      "implementation": "Release 1B 九頁主要導覽，desktop sidebar／mobile 水平導覽，Automations／Settings 使用既有功能；已合併 main 654fc84",
       "status": "PARTIAL",
-      "limitation": "五頁只有 DESIGNED 入口；新 preferences 與後續資料頁未實作，本輪未合併／部署",
-      "remaining": "後續來源功能另行 gate；本輪管理初審",
+      "limitation": "四頁只有 DESIGNED 入口；新 preferences 與後續資料頁未實作，installed app 未更新",
+      "remaining": "後續來源功能另行 gate",
       "evidence": "docs/STAGE-RELEASE-1B.md"
     },
     {
@@ -304,10 +304,10 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "area": "Product expansion",
       "name": "Overview",
       "originalIntent": "原本由 Today 看排程摘要",
-      "implementation": "現有 jobs 全快照計數／未來 next run、七天已觀察 History、Runner coverage／diagnostics",
+      "implementation": "現有 jobs 全快照計數／未來 next run、七天已觀察 History、Runner coverage／diagnostics；Release 1B 已合併",
       "status": "PARTIAL",
       "limitation": "僅 operations；無股票 findings／freshness／reports。PARTIAL／unavailable 明示；缺 History 不推 MISSED",
-      "remaining": "本輪管理初審；跨來源 normalized feeds 後續另審",
+      "remaining": "跨來源 normalized feeds 後續另審",
       "evidence": "docs/STAGE-RELEASE-1B.md"
     },
     {
@@ -326,11 +326,11 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "area": "Product expansion",
       "name": "US Stocks",
       "originalIntent": "原設計只看 Insider 相關排程",
-      "implementation": "Signals／SEC／Ticker 頁面已有設計樣本",
-      "status": "DESIGNED",
-      "limitation": "read-only adapter 未整合；source list-signals v1 可作首個輸入",
-      "remaining": "建立版本化 adapter 與 partial 契約",
-      "evidence": "docs/DASHBOARD-DATA-CONTRACTS.md"
+      "implementation": "Release 2A reports-only CLI v1 adapter、Signals API／filter／分頁／明細；正式唯讀 smoke 22 筆",
+      "status": "PARTIAL",
+      "limitation": "Imported AI report 分數；SEC／Ticker Detail 未接；跨頁非 PIT，無 freshness policy；本輪待審、未合併／部署",
+      "remaining": "管理初審；其他來源與資料頁另行 gate",
+      "evidence": "docs/STAGE-RELEASE-2A.md"
     },
     {
       "id": "product-tw",
@@ -492,12 +492,18 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
     {
       "horizon": "PARTIAL",
       "work": "Overview operations slice",
-      "gate": "現有真實 API 已接入；本輪待管理初審，外部 feeds 仍未接入",
+      "gate": "現有真實 API 已接入且 Release 1B 已合併；不含股票 metrics",
       "evidence": "docs/STAGE-RELEASE-1B.md"
     },
     {
+      "horizon": "PARTIAL",
+      "work": "US Stocks reports Signals",
+      "gate": "Release 2A 唯讀切片已實作、正式 smoke 通過，待管理初審；SEC／Ticker Detail 另審",
+      "evidence": "docs/STAGE-RELEASE-2A.md"
+    },
+    {
       "horizon": "DESIGNED",
-      "work": "US Stocks／TW Stocks／Performance／Reports",
+      "work": "TW Stocks／Performance／Reports",
       "gate": "來源版控唯讀 contract、adapter、partial/null/provenance gate",
       "evidence": "docs/DASHBOARD-DATA-CONTRACTS.md"
     },
