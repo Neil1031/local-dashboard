@@ -1,0 +1,71 @@
+{
+  "formalSourceRead": true,
+  "syntheticFixtureOnly": false,
+  "sourceBaseline": "cdacf8653fa4dce2fee857e57ffdf447f3d04efe",
+  "jarSha256": "f8b200480a4b48eee95bb03f7f9686173d01d7ee2e2cf3e2fa7a88d251eeb263",
+  "formalSourceWalHeader": false,
+  "listState": "READY",
+  "listPage": {
+    "limit": 1,
+    "offset": 0,
+    "hasMore": true,
+    "nextOffset": 1
+  },
+  "returnedCount": 1,
+  "sourceContractVersion": 1,
+  "sourceId": "insider-report-documents",
+  "detailState": "READY",
+  "reportDate": "2026-09-30",
+  "parseWarningCount": 0,
+  "storedSignalCount": 5,
+  "activeSignalCount": 5,
+  "revisionCount": 1,
+  "currentRevisionStatus": "MATCHED",
+  "revisionPage": {
+    "limit": 1,
+    "offset": 0,
+    "hasMore": false,
+    "nextOffset": null
+  },
+  "sourceReads": {
+    "list": 1,
+    "get": 1
+  },
+  "formalBodyPersisted": false,
+  "before": {
+    "main": {
+      "exists": true,
+      "bytes": 138809344,
+      "sha256": "0154596b08de5720349fc3764c3dbe3a72d32b2ecd87c66b91ed609e324bafef",
+      "mtime_ns": 1790824586961175300
+    },
+    "-wal": {
+      "exists": false
+    },
+    "-shm": {
+      "exists": false
+    },
+    "-journal": {
+      "exists": false
+    }
+  },
+  "after": {
+    "main": {
+      "exists": true,
+      "bytes": 138809344,
+      "sha256": "0154596b08de5720349fc3764c3dbe3a72d32b2ecd87c66b91ed609e324bafef",
+      "mtime_ns": 1790824586961175300
+    },
+    "-wal": {
+      "exists": false
+    },
+    "-shm": {
+      "exists": false
+    },
+    "-journal": {
+      "exists": false
+    }
+  },
+  "databaseAndSidecarsUnchanged": true,
+  "ownedIsolatedProcessExited": true
+}

@@ -1,0 +1,178 @@
+{
+  "stage": "Release 2D",
+  "date": "2026-10-01",
+  "base": "44823aba93f7035c4b4cc7f1e3175067660d29c4",
+  "branch": "implement/dashboard-release2d",
+  "sourceBaseline": "cdacf8653fa4dce2fee857e57ffdf447f3d04efe",
+  "actualModel": "gpt-6.1-sol",
+  "reasoningEffort": "high",
+  "scope": "Development/pre-install Reports All/US Insider only",
+  "mavenVerify": {
+    "tests": 229,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "build": "SUCCESS"
+  },
+  "focusedBackend": {
+    "pass": 41,
+    "fail": 0
+  },
+  "frontend": {
+    "total": 117,
+    "pass": 113,
+    "fail": 0,
+    "skipped": 4,
+    "skipReason": "Existing opt-in packaged/live endpoint variables not configured; no installed QA",
+    "skippedTests": [
+      "bootstrap packaged Chinese aliases",
+      "actual packaged list and refresh",
+      "packaged persisted History",
+      "packaged Settings"
+    ]
+  },
+  "reportsFrontend": {
+    "contractTests": 5,
+    "browserTests": 8,
+    "pass": 13,
+    "fail": 0
+  },
+  "prototype": {
+    "pass": 7,
+    "fail": 0
+  },
+  "generatorCheck": "PASS",
+  "diffCheck": "PASS",
+  "canonical": {
+    "base": "44823aba93f7035c4b4cc7f1e3175067660d29c4",
+    "featureIds": 33,
+    "onlyStatusTransition": "product-reports DESIGNED→PARTIAL",
+    "productUs": "PARTIAL",
+    "other31FeatureRowsUnchanged": true,
+    "counts": {
+      "DONE": 19,
+      "BACKEND_READY": 3,
+      "NOT_STARTED": 2,
+      "BLOCKED": 1,
+      "PARTIAL": 5,
+      "DESIGNED": 3
+    },
+    "historicalDesignChangeRowsPreserved": true,
+    "historicalChangeLogRowsPreserved": true
+  },
+  "googleDoc": {
+    "documentId": "1GgEEjKTNPTJ5ACMXQ6TIaXSUFYH9OugdP9LAOIQcgNs",
+    "revisionBefore": "ANLCKQnBPivxdab5IKXI3o_3Nh9ZOIJunYr-hkdJKe3xfVsNz9a-Msa5VcJY_dtfhc54h99vW_QguLTrVhDZzabWgsUFy8G34b8XbYiHd44",
+    "revisionAfter": "ANLCKQm_RvFECoGaDpCWceH3ktoCMtQn7bUnbRK3yP71Z1dHqhTBgxdSVedv731cm6290Kov3xfaDF6We63h7qNSwuSRSSfk0ZePNeNKWj0",
+    "paragraphsBefore": 770,
+    "paragraphsAfter": 770,
+    "targetParagraphsChanged": 11,
+    "allOtherParagraphsPreserved": 759,
+    "headings": 76,
+    "tabs": 1,
+    "nativeStylesLinksListsTopologyPreserved": true,
+    "newDocument": false,
+    "newParagraph": false,
+    "sharingOperation": false,
+    "visualDocumentQa": "Not claimed; native targeted text/style verification"
+  },
+  "browser": {
+    "syntheticFixtureOnly": true,
+    "consoleErrors": [],
+    "receipts": [
+      {
+        "requestedViewportWidth": 1280,
+        "height": 900,
+        "dimensions": {
+          "clientWidth": 1280,
+          "scrollWidth": 1280
+        },
+        "detail": {
+          "clientWidth": 838,
+          "scrollWidth": 838
+        },
+        "realTabEnterEscapeFocusReturn": true
+      },
+      {
+        "requestedViewportWidth": 375,
+        "height": 900,
+        "dimensions": {
+          "clientWidth": 375,
+          "scrollWidth": 375
+        },
+        "detail": {
+          "clientWidth": 335,
+          "scrollWidth": 335
+        },
+        "realTabEnterEscapeFocusReturn": true
+      },
+      {
+        "requestedViewportWidth": 320,
+        "height": 900,
+        "dimensions": {
+          "clientWidth": 320,
+          "scrollWidth": 320
+        },
+        "detail": {
+          "clientWidth": 280,
+          "scrollWidth": 280
+        },
+        "realTabEnterEscapeFocusReturn": true
+      }
+    ]
+  },
+  "screenshots": {
+    "reports-1280.png": {
+      "format": "PNG",
+      "imageWidth": 1280,
+      "imageHeight": 900,
+      "sha256": "632b600bbddf3c7a9d0af486f71031e10c6227a2958e8c930fc89e147dc2610f",
+      "syntheticFixtureOnly": true,
+      "solVisuallyInspected": true
+    },
+    "reports-375.png": {
+      "format": "PNG",
+      "imageWidth": 375,
+      "imageHeight": 900,
+      "sha256": "169d9964b25b79ffa93d593239199a865fdfa05d7471a565171163f42b9772bf",
+      "syntheticFixtureOnly": true,
+      "solVisuallyInspected": true
+    },
+    "reports-320.png": {
+      "format": "PNG",
+      "imageWidth": 320,
+      "imageHeight": 900,
+      "sha256": "da58147d146efff662af972e132f071044ea1e78c2dd2a0278851c792d5a77bb",
+      "syntheticFixtureOnly": true,
+      "solVisuallyInspected": true
+    },
+    "report-detail-375.png": {
+      "format": "PNG",
+      "imageWidth": 375,
+      "imageHeight": 900,
+      "sha256": "18625cc381820f9f949062aaef843bf59c59a8f7eccc9981ad11c95554b469e0",
+      "syntheticFixtureOnly": true,
+      "solVisuallyInspected": true
+    }
+  },
+  "formalSourceReceipt": "formal-source-smoke.json",
+  "isolatedJarReceipt": "isolated-jar-smoke.json",
+  "buildContinuityReceipt": "build-continuity.json",
+  "managementFindingsFixed": [
+    "Faithful untrusted body, explicit warning redaction",
+    "Existing control styles",
+    "Current Reports PARTIAL / three DESIGNED wording preserving31feature rows"
+  ],
+  "protection": {
+    "primaryMainCleanUnchanged": true,
+    "insiderCheckoutCleanUnchanged": true,
+    "formalSourceDatabaseAndSidecarsUnchanged": true,
+    "formalBodyPersisted": false,
+    "installedDeploymentOrQa": false,
+    "shortcutEdits": false,
+    "schedulerRunnerReceiptsModified": false,
+    "merge": false,
+    "nextStage": false
+  },
+  "remainingGate": "Exact-SHA independent management review and handoff receipt; no self approval"
+}

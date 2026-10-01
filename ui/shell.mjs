@@ -5,7 +5,7 @@ export const primaryPages = Object.freeze({
   us: ['US Stocks', 'Signals 與 SEC Transactions · 唯讀 partial slices。'],
   tw: ['TW Stocks', 'DESIGNED · 尚未接入資料來源。'],
   performance: ['Performance', 'DESIGNED · 尚未接入資料來源。'],
-  reports: ['Reports', 'DESIGNED · 尚未接入資料來源。'],
+  reports: ['Reports', 'US Insider 唯讀報告 · All 只包含已接入來源。'],
   evidence: ['Data & Evidence', 'DESIGNED · 尚未接入閱讀介面。'],
   settings: ['Settings', '只修改 Dashboard 顯示 metadata。']
 });

@@ -747,6 +747,18 @@
     .overview-list button { border:0;background:transparent;color:var(--pink-deep);padding:2px 0;text-align:left;cursor:pointer;font-weight:700;overflow-wrap:anywhere; }
     .overview-list time { display:block;font-size:13px;color:var(--muted);margin-top:5px; }
     .planned-page { padding:24px; }
+    .reports { padding:24px;min-width:0;overflow-wrap:anywhere; }
+    #reportDetail { width:min(840px,calc(100vw - 32px));max-height:calc(100dvh - 32px);box-sizing:border-box;padding:24px;border:1px solid var(--border);border-radius:20px;background:var(--surface,#fff);color:var(--text);overflow:auto;overflow-wrap:anywhere; }
+    #reportDetail::backdrop { background:rgba(40,20,35,.42); }
+    .report-detail-head { display:flex;align-items:center;justify-content:space-between;gap:12px; }
+    .report-detail-head h2 { min-width:0;overflow-wrap:anywhere; }
+    .report-markdown { min-width:0;line-height:1.7;overflow-wrap:anywhere; }
+    .report-markdown p { white-space:pre-wrap; }
+    .report-markdown pre { max-width:100%;overflow:auto;white-space:pre;background:var(--pink-soft,#fff3f8);padding:12px;box-sizing:border-box; }
+    .report-markdown h1 { font-size:24px; }.report-markdown h2 { font-size:21px; }
+    .report-limitations { margin-top:20px;padding-top:16px;border-top:1px solid var(--border);line-height:1.6; }
+    #reportRevisions { padding-left:20px; }
+    @media(max-width:600px) { .reports { padding:16px; }#reportDetail { padding:14px;width:calc(100vw - 24px); }.report-detail-head { flex-wrap:wrap; } }
     .shell-content > .projects { padding:24px; }
     .shell-content [hidden] { display:none!important; }
     @media(max-width:900px) {
@@ -974,7 +986,26 @@
     </section>
     <section class="panel planned-page" id="twView" data-page-view="tw" hidden><p class="eyebrow">DESIGNED</p><h2>TW Stocks</h2><p>尚未接入資料。此入口目前只提供導覽，相關資料來源與閱讀功能仍待實作。</p></section>
     <section class="panel planned-page" id="performanceView" data-page-view="performance" hidden><p class="eyebrow">DESIGNED</p><h2>Performance</h2><p>尚未接入資料。此入口目前只提供導覽，相關資料來源與閱讀功能仍待實作。</p></section>
-    <section class="panel planned-page" id="reportsView" data-page-view="reports" hidden><p class="eyebrow">DESIGNED</p><h2>Reports</h2><p>尚未接入資料。此入口目前只提供導覽，相關資料來源與閱讀功能仍待實作。</p></section>
+    <section class="panel reports" id="reportsView" data-page-view="reports" hidden>
+      <p class="eyebrow">Reports · PARTIAL</p>
+      <nav class="us-subnav" aria-label="Reports sources"><button type="button" data-reports-page="all">All</button><button type="button" data-reports-page="us">US Insider</button><button type="button" data-reports-page="tw-daily">TW Daily</button><button type="button" data-reports-page="tw-weekly">TW Weekly</button></nav>
+      <p>All 只顯示已接入來源，目前只有 US Insider。TW Daily／TW Weekly 尚未接入；沒有未接來源的假報告。</p>
+      <div id="reportsConnected">
+        <h2 id="reportsConnectedTitle">All · 所有已接入來源（目前只有 US Insider）</h2>
+        <form id="reportsFilter" class="signals-controls"><label for="reportsDate">Exact report date</label><input id="reportsDate" type="text" placeholder="YYYY-MM-DD" maxlength="10" autocomplete="off"><button type="submit">篩選</button><button id="reportsReload" type="button">重新讀取</button></form>
+        <p id="reportsValidation" role="alert"></p><p id="reportsStatus" role="status"></p><p id="reportsSource" class="signal-source"></p><ul id="reportsWarnings" class="signal-warnings"></ul>
+        <p>Stored signals 是目前保留的 ai_signal 列；active signals 是目前 active subset，均不是某個歷史正文的 ticker membership。</p>
+        <div id="reportsRows" class="signals-grid"></div>
+        <div class="signals-controls"><button id="reportsPrevious" type="button" disabled>Previous</button><span id="reportsPageCount"></span><button id="reportsNext" type="button" disabled>Next</button></div>
+      </div>
+      <div id="reportsTw" hidden><h2 id="reportsTwTitle">TW Daily · DESIGNED</h2><p>尚未接入唯讀來源；此來源沒有報告資料。</p></div>
+      <dialog id="reportDetail" aria-labelledby="reportDetailTitle"><header class="report-detail-head signals-detail-head"><h2 id="reportDetailTitle">US Insider report</h2><button id="reportDetailClose" type="button" aria-label="Close report detail">Close</button></header>
+        <p id="reportDetailStatus" role="status"></p><p id="reportDetailSource"></p><div class="signals-controls"><button id="reportDetailReload" type="button">重新讀取明細</button></div><dl id="reportMetadata" class="signal-facts"></dl><ul id="reportWarnings"></ul>
+        <h3>Current report body · untrusted source text</h3><div id="reportBody" class="report-markdown"></div>
+        <h3>Retained body/hash revision metadata</h3><p id="reportRevisionState"></p><ul id="reportRevisions"></ul><div class="signals-controls"><button id="reportRevisionPrevious" type="button" disabled>Previous revisions</button><span id="reportRevisionPage"></span><button id="reportRevisionNext" type="button" disabled>Next revisions</button></div>
+        <aside class="report-limitations"><h3>Revision 閱讀限制</h3><p>Revision history 是 body／hash／首次觀察的保留紀錄，不是完整切換 timeline；A → B → A 回到原保留 revision。Current revision 可在目前頁之外；MISSING／null 是合法的未匹配狀態，MATCHED 只表示來源儲存關係，不驗證正文 hash。</p><p>不重建歷史 ticker／score，不從 inactive signal 推論舊版 membership，沒有 per-signal PIT reconstruction 或 semantic diff；各次分頁可能觀察到不同 import，跨頁不是 PIT snapshot。</p><p>本文只以安全 Markdown 子集／純文字顯示；HTML、圖片與連結語法保留為文字，沒有 HTML 執行或檔案／來源連結。</p></aside>
+      </dialog>
+    </section>
     <section class="panel planned-page" id="evidenceView" data-page-view="evidence" hidden><p class="eyebrow">DESIGNED</p><h2>Data & Evidence</h2><p>尚未接入資料。此入口目前只提供導覽，相關資料來源與閱讀功能仍待實作。</p></section>
     <div class="footer-note">Local · dates shown in your local time zone · Settings changes display metadata only</div>
     </main>

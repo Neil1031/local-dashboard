@@ -1,4 +1,4 @@
-// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: 77cfb103660100fef50ce58e820f3f56e56afb32c55d77aaf8984e7e21fb3d14
+// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: 2d4a03ca5484b927bec4a3df137ad4329a10d1f645e1de216474451e7d29fd25
 window.PROJECT_DESIGN_SAMPLE = Object.freeze({
   "metadata": {
     "project_id": "local-dashboard",
@@ -328,7 +328,7 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "originalIntent": "原設計只看 Insider 相關排程",
       "implementation": "Release 2A reports Signals、2B SEC Transactions partial 已合併；2C exact ticker source-separated aggregate／獨立分頁／既有明細已實作",
       "status": "PARTIAL",
-      "limitation": "SEC P／candidate 尚未認證、4/A 未對帳，來源位置 ID 非 immutable event ID；相同 ticker 不推定來源關聯，不 join／dedupe／combined score；Performance 未接、跨頁非 PIT、無 freshness policy；2C 待管理初審、未合併／部署；實際安裝狀態由獨立 deployment evidence 確認",
+      "limitation": "SEC P／candidate 尚未認證、4/A 未對帳，來源位置 ID 非 immutable event ID；相同 ticker 不推定來源關聯，不 join／dedupe／combined score；Performance 未接、跨頁非 PIT、無 freshness policy；2C 已合併 main `44823ab`、尚未部署；實際安裝狀態由獨立 deployment evidence 確認",
       "remaining": "Performance 唯讀 contract／amendment reconciliation／PIT／broader analytics 另行 gate",
       "evidence": "docs/STAGE-RELEASE-2C.md"
     },
@@ -359,11 +359,11 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "area": "Product expansion",
       "name": "Reports",
       "originalIntent": "原設計不集中報告",
-      "implementation": "來源、版本、警告與 sanitized Markdown 畫面已設計",
-      "status": "DESIGNED",
-      "limitation": "正式 report adapter 與 revision 比較尚無",
-      "remaining": "建立唯讀輸出與安全呈現",
-      "evidence": "docs/DASHBOARD-DESIGN-SPACE.md"
+      "implementation": "Release 2D All／US Insider 使用固定 list-reports／get-report v1；日期篩選、摘要、完整安全正文與獨立 revision metadata 分頁已實作",
+      "status": "PARTIAL",
+      "limitation": "All 僅已接入 US Insider；TW Daily／Weekly 未接；counts 為目前保留列，revision 為正文/hash history、current 可在頁外或 MISSING，無 PIT／semantic diff／歷史 ticker score；2D 待管理初審、未合併／部署",
+      "remaining": "TW 唯讀 contract、broader report sources 另行 gate",
+      "evidence": "docs/STAGE-RELEASE-2D.md"
     },
     {
       "id": "product-evidence",
@@ -498,12 +498,18 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
     {
       "horizon": "PARTIAL",
       "work": "US Stocks Signals／SEC Transactions／Ticker Detail",
-      "gate": "2A／2B 已合併；2C source-separated aggregate 已實作待審，不建立跨來源 identity；Performance／4/A reconciliation／PIT／broader analytics 另審",
+      "gate": "2A／2B 已合併；2C source-separated aggregate 已合併 main `44823ab`、尚未部署，不建立跨來源 identity；Performance／4/A reconciliation／PIT／broader analytics 另審",
       "evidence": "docs/STAGE-RELEASE-2C.md"
     },
     {
+      "horizon": "PARTIAL",
+      "work": "Reports · All／US Insider",
+      "gate": "source-owned Reports v1 固定 list/get、safe DOM Markdown／revision paging；TW 未接，無 PIT／semantic diff；2D 待審、未合併／部署",
+      "evidence": "docs/STAGE-RELEASE-2D.md"
+    },
+    {
       "horizon": "DESIGNED",
-      "work": "TW Stocks／Performance／Reports",
+      "work": "TW Stocks／Performance",
       "gate": "來源版控唯讀 contract、adapter、partial/null/provenance gate",
       "evidence": "docs/DASHBOARD-DATA-CONTRACTS.md"
     },

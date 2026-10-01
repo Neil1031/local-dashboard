@@ -1,0 +1,97 @@
+{
+  "formalSourceRead": false,
+  "syntheticFixtureOnly": true,
+  "sourceBaseline": "cdacf8653fa4dce2fee857e57ffdf447f3d04efe",
+  "jarSha256": "efda307881fcab462afd53f5dc37b6d83ad832ae82d1dfa01b3164caaf37987b",
+  "formalSourceWalHeader": false,
+  "listState": "READY",
+  "listPage": {
+    "limit": 1,
+    "offset": 0,
+    "hasMore": false,
+    "nextOffset": null
+  },
+  "returnedCount": 1,
+  "sourceContractVersion": 1,
+  "sourceId": "insider-report-documents",
+  "detailState": "READY",
+  "reportDate": "2026-09-30",
+  "parseWarningCount": 1,
+  "storedSignalCount": 3,
+  "activeSignalCount": 2,
+  "revisionCount": 3,
+  "currentRevisionStatus": "MATCHED",
+  "revisionPage": {
+    "limit": 1,
+    "offset": 0,
+    "hasMore": true,
+    "nextOffset": 1
+  },
+  "sourceReads": {
+    "list": 1,
+    "get": 1
+  },
+  "formalBodyPersisted": false,
+  "exactSyntheticBodyRoundTrip": true,
+  "currentOutsideFirstPage": true,
+  "revisionPaging": true,
+  "missingReportBoundedPreflight": true,
+  "sourceJarHttpAssetsExact": {
+    "index.html": "a92328d1a83022884f675c0a8d9e6c5a5b5301a9ab52453cf11ffd20fa2f3a98",
+    "dashboard.mjs": "18a45cfcb33d394b5232c15b1fb35837ed6eb92846457e7df25ac4dce3eef6a8",
+    "ui/overview.mjs": "2d6fd817e2b9bd30176ae067a000dc242a1b03e96fa392ef67791f35b32866f4",
+    "ui/project-design.mjs": "9f2fd3ad7246fe3d6e99bc54c1e888a3868b9dfe7aadaabfc8872dfef01ca3bd",
+    "ui/projects.mjs": "b9270305851fa9a9ec31fde08afb8f560e65749e32a9eb96eba9378286cb91ba",
+    "ui/reports.mjs": "1db3bae99a299adc4b256990cc745e6906df6e8c61fe72fae213826947227b66",
+    "ui/safe-markdown.mjs": "8eb2a41f314c65255643008602cfc091b0dde79a02b5e16366e60deaba91fb82",
+    "ui/shell.mjs": "e40a2bb12db7c629ca1467e54552a215e3144c00ec1995c0b61657089111125f",
+    "ui/us-sec-transactions.mjs": "3a53e456dadfcf70ef60070d76c72f96816f4c5475010c48f577097b6dd3ecea",
+    "ui/us-signals.mjs": "d17a11a1cda5edd33de2d9e9f513a6d3eb74a7e3685160591ab17240cff4dc45",
+    "ui/us-stocks.mjs": "bac0958face54df945e7498d9249115ec43191681158479c62e2a95a5e5dc7e6",
+    "ui/us-ticker-detail.mjs": "57faf499b11a55ca74b28e117961d7bb3fb328531218d45ca0967c77bc78f2cd",
+    "docs/PROJECT-DESIGN.md": "0d5e329c80530726a9be9014ddaecd3901930915e2bce9ff4bb52a683e50a372"
+  },
+  "fixedSyntheticSourceCalls": [
+    "list-reports::1:0",
+    "get-report:2026-09-30:1:0",
+    "get-report:2026-09-30:1:2",
+    "get-report:2020-01-01:1:0",
+    "list-reports:2020-01-01:1:0"
+  ],
+  "before": {
+    "main": {
+      "exists": true,
+      "bytes": 1785,
+      "sha256": "22c78b03218979af236cc591cdf291fb712b21182026737f6afe0964f0dc0e31",
+      "mtime_ns": 1790851320071158600
+    },
+    "-wal": {
+      "exists": false
+    },
+    "-shm": {
+      "exists": false
+    },
+    "-journal": {
+      "exists": false
+    }
+  },
+  "after": {
+    "main": {
+      "exists": true,
+      "bytes": 1785,
+      "sha256": "22c78b03218979af236cc591cdf291fb712b21182026737f6afe0964f0dc0e31",
+      "mtime_ns": 1790851320071158600
+    },
+    "-wal": {
+      "exists": false
+    },
+    "-shm": {
+      "exists": false
+    },
+    "-journal": {
+      "exists": false
+    }
+  },
+  "databaseAndSidecarsUnchanged": true,
+  "ownedIsolatedProcessExited": true
+}

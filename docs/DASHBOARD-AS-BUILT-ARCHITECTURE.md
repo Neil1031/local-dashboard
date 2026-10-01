@@ -8,7 +8,7 @@
 
 **這功能解決什麼問題：** 在同一個本機畫面查看受監控 Windows 排程的現況、最近一次結果、已觀察到的執行歷史，以及有設定的 Runner 執行證據。
 
-**它怎麼運作：** Release 1B 已合併並提供 **九頁主要導覽**。Overview 讀現有 jobs／History／Runner；Automations 提供 Today／7-day History、Workflow 與 Runner coverage；Settings 提供原有顯示 metadata 編輯；Projects 保留最小建置快照 Viewer。已合併 Release 2A 的 US Signals 切片由獨立 `ui/us-signals.mjs` → `/api/us/signals` → 固定 ProcessBuilder → Insider reports contract v1 唯讀 CLI；不直接開外部 SQLite，不執行 pipeline。分數來源是 Imported AI report，交易／報告日期、null／quality flags 與 sanitized provenance 保留。Release 2B 另加獨立 `ui/us-sec-transactions.mjs` → `/api/us/sec-transactions` → 固定 sec operation，共用相同 process bounds；無 SEC scoring、不 join reports，保留 non-P／derivative／owners／footnotes／review／null。P／candidate 尚未認證，4/A 未對帳；來源位置 ID 非 immutable event ID，execution price 非策略進場價。Release 2B 已通過 Manager Review，合併 main `4acd568`；實際安裝狀態由獨立 deployment evidence 確認。Release 2C 專用 `ui/us-ticker-detail.mjs` → `/api/us/ticker-detail` → `UsTickerDetailService` 順序重用既有兩個 adapter operations，保留 process bounds，各來源 failure 不抹除另一成功 section；前端 deadline 75 秒涵蓋兩次 max-30s 與 bounded drains。未部署。Windows Task Scheduler 是排程現況的來源；Dashboard 自己的 SQLite 保存「看見過什麼」；Runner receipts 是另一套執行證據。三者的身分與語意分開保存。排程版本與 occurrence correlation 已在程式中，但 correlation 仍是 shadow research，沒有正式 UI／HTTP API。
+**它怎麼運作：** Release 1B 已合併並提供 **九頁主要導覽**。Overview 讀現有 jobs／History／Runner；Automations 提供 Today／7-day History、Workflow 與 Runner coverage；Settings 提供原有顯示 metadata 編輯；Projects 保留最小建置快照 Viewer。已合併 Release 2A 的 US Signals 切片由獨立 `ui/us-signals.mjs` → `/api/us/signals` → 固定 ProcessBuilder → Insider reports contract v1 唯讀 CLI；不直接開外部 SQLite，不執行 pipeline。分數來源是 Imported AI report，交易／報告日期、null／quality flags 與 sanitized provenance 保留。Release 2B 另加獨立 `ui/us-sec-transactions.mjs` → `/api/us/sec-transactions` → 固定 sec operation，共用相同 process bounds；無 SEC scoring、不 join reports，保留 non-P／derivative／owners／footnotes／review／null。P／candidate 尚未認證，4/A 未對帳；來源位置 ID 非 immutable event ID，execution price 非策略進場價。Release 2B 已通過 Manager Review，合併 main `4acd568`；實際安裝狀態由獨立 deployment evidence 確認。Release 2C 專用 `ui/us-ticker-detail.mjs` → `/api/us/ticker-detail` → `UsTickerDetailService` 順序重用既有兩個 adapter operations，保留 process bounds，各來源 failure 不抹除另一成功 section；前端 deadline 75 秒涵蓋兩次 max-30s 與 bounded drains。2C 尚未部署。Release 2D `ui/reports.mjs` → `/api/reports/us-insider` 與 `/detail` → 同一 adapter 的固定 list-reports／get-report，沿用兩個共用 process slots／輸出與逾時界線。All 只涵蓋已接入 US Insider，TW Daily／Weekly 未接；`safe-markdown.mjs` 以 DOM 文字呈現完整 untrusted 正文，無 innerHTML／可執行連結。Counts 為目前保留／active 列；revision 是正文/hash history、current 可在頁外或 MISSING，無 PIT／semantic diff。2D 待管理初審、未合併／部署。Windows Task Scheduler 是排程現況的來源；Dashboard 自己的 SQLite 保存「看見過什麼」；Runner receipts 是另一套執行證據。三者的身分與語意分開保存。排程版本與 occurrence correlation 已在程式中，但 correlation 仍是 shadow research，沒有正式 UI／HTTP API。
 
 ```mermaid
 flowchart LR
@@ -41,7 +41,7 @@ flowchart LR
   RA -.已驗證的 Runner view.-> O
 ```
 
-**目前限制：** 九頁導覽已實作部分功能；US Stocks 已有 reports Signals／SEC Transactions partial 切片（PARTIAL），Release 2C Ticker Detail source-separated aggregate 已實作待管理初審；Reports／SEC 分頁／日期／ID 獨立，無 cross-source join；Performance 尚未接。SEC amendments/corrections 不 collapse；來源完整性與完整 4/A reconciliation 尚未驗證。TW Stocks／Performance／Reports／Data & Evidence 仍是 DESIGNED 入口。Overview 僅涵蓋 operations，不顯示投資 metrics 或完成百分比。`design/prototype/index.html` 仍是獨立靜態設計原型。沒有自動 `MISSED`；Dashboard 不修改 Scheduler task 或正式 Runner config，也不把 correlation 結果寫入資料庫。參照 [`DASHBOARD-DESIGN-SPACE.md`](DASHBOARD-DESIGN-SPACE.md) 時，應將其視為產品設計，勿誤當完整現況畫面。Signals 跨頁非 PIT、無 freshness policy，來源讀失敗保持 unavailable，詳見 [Release 2A](STAGE-RELEASE-2A.md)。
+**目前限制：** 九頁導覽已實作部分功能；US Stocks 已有 reports Signals／SEC Transactions partial 切片（PARTIAL），Release 2C Ticker Detail source-separated aggregate 已合併 main `44823ab`、尚未部署；Reports／SEC 分頁／日期／ID 獨立，無 cross-source join；Performance 尚未接。SEC amendments/corrections 不 collapse；來源完整性與完整 4/A reconciliation 尚未驗證。Reports · All／US Insider 在 Release 2D 為 PARTIAL；TW Daily／Weekly 未接，無 PIT／semantic diff。TW Stocks／Performance／Data & Evidence 仍是 DESIGNED 入口。Overview 僅涵蓋 operations，不顯示投資 metrics 或完成百分比。`design/prototype/index.html` 仍是獨立靜態設計原型。沒有自動 `MISSED`；Dashboard 不修改 Scheduler task 或正式 Runner config，也不把 correlation 結果寫入資料庫。參照 [`DASHBOARD-DESIGN-SPACE.md`](DASHBOARD-DESIGN-SPACE.md) 時，應將其視為產品設計，勿誤當完整現況畫面。Signals 跨頁非 PIT、無 freshness policy，來源讀失敗保持 unavailable，詳見 [Release 2A](STAGE-RELEASE-2A.md)。
 
 ## 2. 啟動、設定與安全停止
 
@@ -69,7 +69,7 @@ Release 1B 的 `ui/shell.mjs` 管主要導覽；`ui/overview.mjs` 只從已驗�
 
 **它怎麼運作：** `dashboard.mjs` 把 `/api/jobs` 快照顯示於 Today，按市場、狀態與 metadata 排列；摘要的「需留意」來自當前 status，不是漏跑判斷。Workflow 在 Today 內按台股／美股呈現預設順序與依賴文字，點卡片進同一工作詳情；這是工作關係的**展示**，不會啟動或阻擋下游工作。History tab 以瀏覽器本地七個日曆日算出 UTC 查詢界線，讀 `GET /api/history?from=...&to=...`，將當前工作與只在歷史存在的工作按 canonical ID 合併。日期格可展開該日全部已觀察執行；有日期的舊檢查工作可摺疊。現在的 UI 另讀一次 `/api/runner/executions` 以顯示 coverage 與詳情。
 
-**目前限制：** History 不是 Windows Event Log 全量紀錄；空格只表示資料庫沒有該日可顯示的已觀察執行，絕不代表漏跑。Workflow 依賴圖不是執行引擎；預設只呈現設定順序中前段工作。Release 1B 把 Today／History 搬至 Automations，保留原有功能；Release 2A 已合併 reports Signals；Release 2B 新增 SEC partial，四個資料入口仍未接入。
+**目前限制：** History 不是 Windows Event Log 全量紀錄；空格只表示資料庫沒有該日可顯示的已觀察執行，絕不代表漏跑。Workflow 依賴圖不是執行引擎；預設只呈現設定順序中前段工作。Release 1B 把 Today／History 搬至 Automations，保留原有功能；Release 2A 已合併 reports Signals；Release 2B 新增 SEC partial；2C Ticker Detail 已合併但尚未部署，2D Reports · US Insider 已實作待審、未合併／部署，其他三個資料入口仍未接入。
 
 ## 5. SQLite：工作身分與已觀察執行
 
@@ -209,10 +209,11 @@ sequenceDiagram
 | Occurrence Correlation | shadow research model 已完成 | 無正式 UI／API、未驗證為 Windows provenance、無 MISSED。 |
 | Projects 本專案建置快照入口 | Release 1A-1 最小切片已核准並合併 | 安裝版本須另有 deployment evidence；完整面板與跨專案 aggregation 未完成；九頁 shell 已由 Release 1B 開發實作。 |
 | Product Shell／Overview operations | Release 1B PARTIAL 已合併 | 九頁導覽／既有 API 已隨 1B／2A／2B 累積 image 安裝；2C 尚未部署，installed 狀態由 deployment evidence 確認。 |
-| US Stocks Signals／SEC Transactions | PARTIAL | reports Signals 已合併；SEC partial 已合併 main `4acd568`，2C Ticker Detail source-separated aggregate 已實作待管理初審；Performance／4A 對帳／PIT 尚未完成。 |
-| 其他四頁資料功能 | DESIGNED | 尚未接入 adapter，只有導覽 destination。 |
+| US Stocks Signals／SEC Transactions | PARTIAL | reports Signals 已合併；SEC partial 已合併 main `4acd568`，2C Ticker Detail source-separated aggregate 已合併 main `44823ab`、尚未部署；Performance／4A 對帳／PIT 尚未完成。 |
+| Reports · All／US Insider | PARTIAL | Release 2D 固定 list/get v1、exact date、完整安全正文與獨立 revision metadata 分頁；All 目前只有 US Insider，TW 未接、current 可在頁外或 MISSING、無 PIT／semantic diff；待管理初審，未合併／部署。 |
+| 其他三頁資料功能 | DESIGNED | TW Stocks／Performance／Data & Evidence 尚未接入閱讀 adapter，只有導覽 destination。 |
 
-**目前限制：** 上表的「已完成」指 repo 中有正式程式與既有 Stage gate；不代表目前這台機器所有 Scheduler task、Runner mapping、資料庫或外部來源均已在本文件撰寫時實機驗收。外部來源只實作 reports Signals 與 SEC Transactions partial；Release 1B／2A／2B 已通過 Manager Review 並合併，均與已安裝版本分開標明。`MISSED` 不可由現有 shadow 時間 heuristics 直接啟用。
+**目前限制：** 上表的「已完成」指 repo 中有正式程式與既有 Stage gate；不代表目前這台機器所有 Scheduler task、Runner mapping、資料庫或外部來源均已在本文件撰寫時實機驗收。外部來源已實作 reports Signals、SEC Transactions partial、2C source-separated Ticker Detail，以及2D Reports · US Insider 第一切片；Release 1B／2A／2B 已通過 Manager Review 並合併，均與已安裝版本分開標明。`MISSED` 不可由現有 shadow 時間 heuristics 直接啟用。
 
 ## Release 1A-1：Projects 最小正式入口（已核准並合併）
 

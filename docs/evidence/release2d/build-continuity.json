@@ -1,0 +1,17 @@
+{
+  "formalJarSha256": "f8b200480a4b48eee95bb03f7f9686173d01d7ee2e2cf3e2fa7a88d251eeb263",
+  "originalFormalArchiveRetained": false,
+  "originalFormalArchiveComparedToFinal": false,
+  "formalReadNotRepeated": true,
+  "reportsBackendProcessQuerySourceChangedAfterFormal": false,
+  "finalPackageCompiler": "Nothing to compile - all classes are up to date",
+  "finalJarSha256": "efda307881fcab462afd53f5dc37b6d83ad832ae82d1dfa01b3164caaf37987b",
+  "intermediateArchiveSha256": "b0c229ba47ccdadf6c35cdac1c2e453f0fad6ff287208cbfdabe473cb3920766",
+  "intermediateComparedToFinal": true,
+  "intermediateToFinalRuntimeEntriesIdentical": 223,
+  "intermediateToFinalChangedEntries": [
+    "BOOT-INF/classes/static/project-design/PROJECT-DESIGN.md"
+  ],
+  "finalSourceJarHttpParity": true,
+  "limit": "Original formal archive unavailable; source/build continuity and intermediate runtime parity are evidence, not original-formal archive byte comparison."
+}
