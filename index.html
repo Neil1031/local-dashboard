@@ -927,17 +927,33 @@
       #signalDetail::backdrop { background:rgba(50,30,43,.35); }
       .signals-detail-head { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
       .signals-detail-head h2 { font-size:19px; min-width:0; } .signals-detail-head button { flex-shrink:0; }
-      @media(max-width:400px) { .signals-panel { padding:14px; } #signalDetail { padding:14px; } }
+      .us-subnav { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:18px; }
+      .us-subnav button { padding:9px 14px; border:1px solid var(--border); border-radius:10px; background:#fff; color:var(--text); cursor:pointer; }
+      .us-subnav button.active { background:var(--pink-soft); font-weight:800; }
+      #secDetail { width:min(720px,calc(100vw - 32px)); max-height:85vh; box-sizing:border-box; overflow:auto; border:1px solid var(--border); border-radius:18px; padding:22px; overflow-wrap:anywhere; color:var(--text); }
+      #secDetail::backdrop { background:rgba(40,22,35,.45); }
+      @media(max-width:400px) { .signals-panel { padding:14px; } #signalDetail, #secDetail { padding:14px; } }
     </style>
-    <section class="panel signals-panel" id="usView" data-page-view="us" hidden aria-labelledby="signalsTitle">
-      <p class="eyebrow">US Stocks · PARTIAL</p><h2 id="signalsTitle">Signals</h2>
+    <section class="panel signals-panel" id="usView" data-page-view="us" hidden aria-label="US Stocks">
+      <p class="eyebrow">US Stocks · PARTIAL</p>
+      <nav class="us-subnav" aria-label="US Stocks pages"><button type="button" data-us-page="signals" aria-controls="signalsPanel">Signals</button><button type="button" data-us-page="sec" aria-controls="secPanel">SEC Transactions</button><span class="signal-planned">Ticker Detail · DESIGNED / 尚未接</span></nav>
+      <section id="signalsPanel" aria-labelledby="signalsTitle"><h2 id="signalsTitle">Signals</h2>
       <p>Insider report assessments · 分數由外部 AI report 匯入。此頁保留來源資料與限制，不產生投資建議。</p>
-      <p class="signal-planned">SEC Transactions · planned / 尚未接資料　／　Ticker Detail · planned / 尚未接資料</p>
       <form id="signalsFilter" class="signals-controls"><label for="signalsTicker">Exact ticker</label><input id="signalsTicker" name="ticker" maxlength="16" placeholder="例如 COO" autocomplete="off"><button type="submit">搜尋</button><button type="button" id="signalsReload">重新讀取</button></form>
       <p id="signalsStatus" role="status" aria-live="polite"></p><p id="signalsSource" class="signal-source"></p><p id="signalsWarnings"></p>
       <div id="signalsRows" class="signals-grid"></div>
       <p id="signalsPage" role="status"></p><div class="signals-controls"><button id="signalsPrevious" type="button" disabled>上一頁</button><button id="signalsNext" type="button" disabled>下一頁</button></div>
       <p class="signal-source">頁面是目前來源狀態，跨頁讀取期間匯入可能改變結果；不是歷史 PIT snapshot。空值顯示 —，不推算 freshness。</p>
+      </section>
+      <section id="secPanel" hidden aria-labelledby="secTitle"><h2 id="secTitle">SEC Transactions</h2>
+      <p>Partial slice · 保留全部來源交易，包括 non-P 與 derivative。P code 或 Candidate / 尚未認證，不代表已確認乾淨 open-market purchase。</p>
+      <p class="signal-source">Form 4/A amendments/corrections 尚未完成 reconciliation，來源列不自動合併或去重。Insider execution price 是內部人成交價，非策略進場價。</p>
+      <form id="secFilter" class="signals-controls"><label for="secTicker">Exact ticker</label><input id="secTicker" name="ticker" maxlength="16" placeholder="例如 COO" autocomplete="off"><button type="submit">搜尋</button><button type="button" id="secReload">重新讀取</button></form>
+      <p id="secStatus" role="status" aria-live="polite"></p><p id="secSource" class="signal-source"></p><p id="secWarnings"></p>
+      <div id="secRows" class="signals-grid"></div><p id="secPage" role="status"></p>
+      <div class="signals-controls"><button id="secPrevious" type="button" disabled>上一頁</button><button id="secNext" type="button" disabled>下一頁</button></div>
+      <p class="signal-source">sec:&lt;accession&gt;:&lt;transaction_index&gt; 是來源位置 ID，非 immutable business-event ID；來源重排或修正可能改變對應。交易日、申報日、accepted time、local discovered time 分開。空值顯示 —；不推算 freshness，不是 PIT snapshot。</p>
+      </section>
     </section>
     <section class="panel planned-page" id="twView" data-page-view="tw" hidden><p class="eyebrow">DESIGNED</p><h2>TW Stocks</h2><p>尚未接入資料。此入口目前只提供導覽，相關資料來源與閱讀功能仍待實作。</p></section>
     <section class="panel planned-page" id="performanceView" data-page-view="performance" hidden><p class="eyebrow">DESIGNED</p><h2>Performance</h2><p>尚未接入資料。此入口目前只提供導覽，相關資料來源與閱讀功能仍待實作。</p></section>
@@ -947,6 +963,7 @@
     </main>
   </div>
   <dialog id="signalDetail" aria-labelledby="signalDetailTitle"><div class="signals-detail-head"><h2 id="signalDetailTitle"></h2><button id="signalDetailClose" type="button">關閉</button></div><div id="signalDetailBody"></div></dialog>
+  <dialog id="secDetail" aria-labelledby="secDetailTitle"><div class="signals-detail-head"><h2 id="secDetailTitle"></h2><button id="secDetailClose" type="button">關閉</button></div><div id="secDetailBody"></div></dialog>
   <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
     <section class="drawer-card">
       <div class="drawer-head">

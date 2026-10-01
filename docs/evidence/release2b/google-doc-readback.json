@@ -1,0 +1,31 @@
+{
+  "documentId": "1GgEEjKTNPTJ5ACMXQ6TIaXSUFYH9OugdP9LAOIQcgNs",
+  "beforeRevision": "ANLCKQl-UBIovTCvJtuAybwNvLeWkmyznuK4h4OZ1dR8kzkFOsLoeeLFKYbSlscGMMHIK-ZOhRv0UIBAJJl6bzKX-r2fmkosCi8tRHTmKHE",
+  "afterRevision": "ANLCKQkwbKTJMSntE8eW5ha67myDGLqvnQh4XbHzOG0UgNkDuLvekt8S2mdm15E_PXDqqFUwXaGcuCj_cT1_kBhU4IXej59v0C8RFPdr4j0",
+  "paragraphs": 769,
+  "headings": 76,
+  "heading1": 24,
+  "tabs": 1,
+  "changedParagraphs": [
+    "P00165",
+    "P00298",
+    "P00484",
+    "P00521",
+    "P00524",
+    "P00532",
+    "P00533",
+    "P00544",
+    "P00547",
+    "P00549",
+    "P00557",
+    "P00559",
+    "P00560"
+  ],
+  "unchangedParagraphs": 756,
+  "allParagraphAndTextStylesPreserved": true,
+  "topologyLinksListsNativeStructurePreserved": true,
+  "noPermissionMutation": true,
+  "visualDocQA": false,
+  "historicalRowsPreserved": true,
+  "writeRevisionGuarded": true
+}

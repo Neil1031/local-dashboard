@@ -1,6 +1,6 @@
 # Release 2A — US Stocks · report Signals
 
-Status: **READY_FOR_MANAGER_REVIEW** (implementation / Self-QA complete, independent review pending). Dashboard base `654fc848d748fb966bb047f9e4259ed13e248447`; branch `implement/dashboard-release2a`. Manager authorization: [PR #6 comment](https://github.com/Neil1031/local-dashboard/pull/6#issuecomment-5916948806). This Stage stops before merge, installed deployment or another Stage.
+Status: **COMPLETE / MERGED**. [Manager PASS](https://github.com/Neil1031/local-dashboard/pull/7#issuecomment-5923738052) accepted exact head `4d9e92facd89390cd37fef1ef66b9e4982c44427`; explicit no-ff merge `479a767989d17ba65200ae4ea83ed1f73ff0b4ba` completed Git closeout. Installed app was not updated. The implementation / Self-QA record below is retained as submitted; later SEC work belongs to [Release 2B](STAGE-RELEASE-2B.md).
 
 ## Plan and implemented boundary
 

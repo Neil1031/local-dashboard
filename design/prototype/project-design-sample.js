@@ -1,4 +1,4 @@
-// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: 616c2f19d2806f8ff07ddc80c6c95c73fb8d25f30981152bfc8ce51e03c8eabd
+// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: fe19d9d2a05ee96029125ba898fc430492f66bdc9c123696979c1b779245d6d2
 window.PROJECT_DESIGN_SAMPLE = Object.freeze({
   "metadata": {
     "project_id": "local-dashboard",
@@ -326,11 +326,11 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "area": "Product expansion",
       "name": "US Stocks",
       "originalIntent": "原設計只看 Insider 相關排程",
-      "implementation": "Release 2A reports-only CLI v1 adapter、Signals API／filter／分頁／明細；正式唯讀 smoke 22 筆",
+      "implementation": "Release 2A reports Signals 已合併；Release 2B fixed SEC CLI v1 adapter／API／filter／分頁／明細已實作",
       "status": "PARTIAL",
-      "limitation": "Imported AI report 分數；SEC／Ticker Detail 未接；跨頁非 PIT，無 freshness policy；本輪待審、未合併／部署",
-      "remaining": "管理初審；其他來源與資料頁另行 gate",
-      "evidence": "docs/STAGE-RELEASE-2A.md"
+      "limitation": "SEC 為 partial facts，P／candidate 尚未認證，4/A 未對帳，來源位置 ID 非 immutable event ID；Ticker Detail 未接；跨頁非 PIT，無 freshness policy；2B 待審未合併／部署",
+      "remaining": "管理初審；Ticker Detail／amendment reconciliation／broader analytics 另行 gate",
+      "evidence": "docs/STAGE-RELEASE-2B.md"
     },
     {
       "id": "product-tw",
@@ -497,9 +497,9 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
     },
     {
       "horizon": "PARTIAL",
-      "work": "US Stocks reports Signals",
-      "gate": "Release 2A 唯讀切片已實作、正式 smoke 通過，待管理初審；SEC／Ticker Detail 另審",
-      "evidence": "docs/STAGE-RELEASE-2A.md"
+      "work": "US Stocks Signals／SEC Transactions",
+      "gate": "2A reports Signals 已合併；2B SEC partial 待審；Ticker Detail、4/A reconciliation／broader analytics 另審",
+      "evidence": "docs/STAGE-RELEASE-2B.md"
     },
     {
       "horizon": "DESIGNED",

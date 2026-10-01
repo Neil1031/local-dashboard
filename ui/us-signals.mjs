@@ -31,7 +31,7 @@ export function readSignals(payload, query) {
 
 export function mountUsSignals(document, fetcher = globalThis.fetch.bind(globalThis)) {
   const get = id => document.getElementById(id);
-  const panel = get('usView'), dialog = get('signalDetail');
+  const panel = get('signalsPanel'), dialog = get('signalDetail');
   let query = { limit: 50, offset: 0 }, revision = 0, controller, active = false, returnFocus;
   function element(tag, text, className) {
     const node = document.createElement(tag); if (text != null) node.textContent = String(text);
