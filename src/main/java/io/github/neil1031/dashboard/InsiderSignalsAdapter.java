@@ -14,6 +14,14 @@ import java.util.concurrent.*;
 /** Fixed read-only source command. No database driver, shell or configurable arguments. */
 @Service
 public class InsiderSignalsAdapter {
+    private enum Operation {
+        REPORTS("reports", "report:", "ai_report_assessment", "Imported AI report"),
+        SEC("sec", "sec:", "insider_transaction", "SEC Transactions · partial");
+        final String source, prefix, type, label;
+        Operation(String source, String prefix, String type, String label) {
+            this.source = source; this.prefix = prefix; this.type = type; this.label = label;
+        }
+    }
     static final int MAX_STDOUT = 2 * 1024 * 1024, MAX_STDERR = 64 * 1024, MAX_OFFSET = 1_000_000;
     private final InsiderProperties config;
     private final ObjectMapper json;
@@ -30,46 +38,58 @@ public class InsiderSignalsAdapter {
         return value;
     }
     List<String> command(String ticker, int limit, int offset) {
+        return command(Operation.REPORTS, ticker, limit, offset);
+    }
+    List<String> secCommand(String ticker, int limit, int offset) {
+        return command(Operation.SEC, ticker, limit, offset);
+    }
+    private List<String> command(Operation operation, String ticker, int limit, int offset) {
         var args = new ArrayList<>(List.of(config.cliPath(), "--db", config.databasePath(),
-                "list-signals", "--source", "reports", "--limit", String.valueOf(limit), "--offset", String.valueOf(offset)));
+                "list-signals", "--source", operation.source, "--limit", String.valueOf(limit), "--offset", String.valueOf(offset)));
         if (ticker != null) args.addAll(List.of("--ticker", ticker));
         return args;
     }
     public ObjectNode read(String inputTicker, int limit, int offset) {
+        return read(Operation.REPORTS, inputTicker, limit, offset);
+    }
+    public ObjectNode readSec(String inputTicker, int limit, int offset) {
+        return read(Operation.SEC, inputTicker, limit, offset);
+    }
+    private ObjectNode read(Operation operation, String inputTicker, int limit, int offset) {
         String ticker = ticker(inputTicker);
         if (limit < 1 || limit > 100 || offset < 0 || offset > MAX_OFFSET) throw new IllegalArgumentException();
-        if (!config.enabled()) return unavailable(limit, offset, "SOURCE_DISABLED");
-        if (!configured()) return unavailable(limit, offset, "SOURCE_NOT_CONFIGURED");
-        if (!slots.tryAcquire()) return unavailable(limit, offset, "SOURCE_BUSY");
+        if (!config.enabled()) return unavailable(operation, limit, offset, "SOURCE_DISABLED");
+        if (!configured()) return unavailable(operation, limit, offset, "SOURCE_NOT_CONFIGURED");
+        if (!slots.tryAcquire()) return unavailable(operation, limit, offset, "SOURCE_BUSY");
         Process process = null;
         Thread outThread = null, errThread = null;
         try {
-            process = start(command(ticker, limit, offset));
+            process = start(command(operation, ticker, limit, offset));
             process.getOutputStream().close();
             var out = new Capture(process.getInputStream(), MAX_STDOUT);
             var err = new Capture(process.getErrorStream(), MAX_STDERR);
             outThread = Thread.startVirtualThread(out); errThread = Thread.startVirtualThread(err);
             if (!process.waitFor(config.timeoutSeconds(), TimeUnit.SECONDS)) {
-                stop(process); return unavailable(limit, offset, "SOURCE_TIMEOUT");
+                stop(process); return unavailable(operation, limit, offset, "SOURCE_TIMEOUT");
             }
             outThread.join(1000); errThread.join(1000);
             if (outThread.isAlive() || errThread.isAlive() || out.failed || err.failed)
-                return failure(limit, offset, "SOURCE_OUTPUT_ERROR");
-            if (out.overflow || err.overflow) return failure(limit, offset, "SOURCE_OUTPUT_LIMIT");
-            if (process.exitValue() != 0) return unavailable(limit, offset, "SOURCE_READ_FAILED");
+                return failure(operation, limit, offset, "SOURCE_OUTPUT_ERROR");
+            if (out.overflow || err.overflow) return failure(operation, limit, offset, "SOURCE_OUTPUT_LIMIT");
+            if (process.exitValue() != 0) return unavailable(operation, limit, offset, "SOURCE_READ_FAILED");
             String text = StandardCharsets.UTF_8.newDecoder().onMalformedInput(CodingErrorAction.REPORT)
                     .decode(java.nio.ByteBuffer.wrap(out.bytes.toByteArray())).toString();
-            return normalize(json.readTree(text), ticker, limit, offset);
+            return normalize(operation, json.readTree(text), ticker, limit, offset);
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt(); return unavailable(limit, offset, "SOURCE_INTERRUPTED");
+            Thread.currentThread().interrupt(); return unavailable(operation, limit, offset, "SOURCE_INTERRUPTED");
         } catch (com.fasterxml.jackson.core.JsonProcessingException | java.nio.charset.CharacterCodingException e) {
-            return failure(limit, offset, "SOURCE_INVALID_OUTPUT");
+            return failure(operation, limit, offset, "SOURCE_INVALID_OUTPUT");
         } catch (IOException e) {
-            return unavailable(limit, offset, "SOURCE_READ_FAILED");
+            return unavailable(operation, limit, offset, "SOURCE_READ_FAILED");
         } catch (InvalidContract e) {
-            return unavailable(limit, offset, "SOURCE_CONTRACT_UNSUPPORTED");
+            return unavailable(operation, limit, offset, "SOURCE_CONTRACT_UNSUPPORTED");
         } catch (RuntimeException e) {
-            return failure(limit, offset, "SOURCE_INVALID_OUTPUT");
+            return failure(operation, limit, offset, "SOURCE_INVALID_OUTPUT");
         } finally {
             if (process != null) { if (process.isAlive()) stop(process); close(process.getInputStream()); close(process.getErrorStream()); }
             if (outThread != null) outThread.interrupt();
@@ -115,9 +135,15 @@ public class InsiderSignalsAdapter {
     }
     static class InvalidContract extends RuntimeException {}
     ObjectNode normalize(JsonNode source, String filter, int limit, int offset) {
+        return normalize(Operation.REPORTS, source, filter, limit, offset);
+    }
+    ObjectNode normalizeSec(JsonNode source, String filter, int limit, int offset) {
+        return normalize(Operation.SEC, source, filter, limit, offset);
+    }
+    private ObjectNode normalize(Operation operation, JsonNode source, String filter, int limit, int offset) {
         if (source == null || !source.isObject()) throw new IllegalStateException();
         if (!integer(source.path("contract_version"), 1)
-                || !source.path("source").isTextual() || !source.path("source").textValue().equals("reports")) throw new InvalidContract();
+                || !source.path("source").isTextual() || !source.path("source").textValue().equals(operation.source)) throw new InvalidContract();
         if (!integer(source.path("limit"), limit)
                 || !integer(source.path("offset"), offset)
                 || !source.path("has_more").isBoolean() || !source.path("signals").isArray()
@@ -126,7 +152,7 @@ public class InsiderSignalsAdapter {
         JsonNode next = source.get("next_offset");
         if (next == null || (more ? !integer(next, (long) offset + limit)
                 || source.path("signals").size() != limit : !next.isNull())) throw new IllegalStateException();
-        var response = envelope(source.path("signals").isEmpty() ? "EMPTY" : "READY", limit, offset);
+        var response = envelope(operation, source.path("signals").isEmpty() ? "EMPTY" : "READY", limit, offset);
         ((ObjectNode) response.withArray("sources").get(0)).put("lastObservedAt", response.path("observedAt").textValue());
         // The source can advance beyond our public offset cap; expose only queryable pages.
         response.withObject("page").put("hasMore", more && offset + limit <= MAX_OFFSET);
@@ -135,7 +161,8 @@ public class InsiderSignalsAdapter {
         var ids = new HashSet<String>();
         for (JsonNode row : source.path("signals")) {
             String id = required(row, "signal_id");
-            if (!id.startsWith("report:") || !ids.add(id) || !required(row, "signal_type").equals("ai_report_assessment")) throw new IllegalStateException();
+            if (!id.startsWith(operation.prefix) || id.length() == operation.prefix.length()
+                    || !ids.add(id) || !required(row, "signal_type").equals(operation.type)) throw new IllegalStateException();
             if (filter != null && !filter.equalsIgnoreCase(row.path("ticker").asText())) throw new IllegalStateException();
             var item = response.withArray("items").addObject();
             copyText(row, item, "signal_id", "signalId"); copyText(row, item, "ticker", "ticker");
@@ -143,6 +170,10 @@ public class InsiderSignalsAdapter {
             copyText(row, item, "filing_date", "filingDate"); copyText(row, item, "discovered_at", "discoveredAt");
             copyText(row, item, "discovery_basis", "discoveryBasis"); copyText(row, item, "recorded_at", "recordedAt");
             copyText(row, item, "updated_at", "updatedAt");
+            if (operation == Operation.SEC) {
+                SecTransactionProjection.map(row, item);
+                continue;
+            }
             copyText(row, item, "positive_reasons", "positiveReasons"); copyText(row, item, "negative_reasons", "risks");
             var scores = item.putObject("scores");
             for (String key : List.of("signal", "investment")) {
@@ -183,12 +214,12 @@ public class InsiderSignalsAdapter {
     private static boolean integer(JsonNode n, long expected) {
         return n.isIntegralNumber() && n.canConvertToLong() && n.longValue() == expected;
     }
-    private String required(JsonNode row, String key) {
+    static String required(JsonNode row, String key) {
         JsonNode n = row.get(key);
         if (n == null || !n.isTextual() || n.textValue().isBlank() || n.textValue().length() > 32768) throw new IllegalStateException();
         return n.textValue();
     }
-    private void copyText(JsonNode row, ObjectNode dest, String from, String to) {
+    static void copyText(JsonNode row, ObjectNode dest, String from, String to) {
         JsonNode n = row.get(from);
         if (n == null || (!n.isNull() && (!n.isTextual() || n.textValue().length() > 32768))) throw new IllegalStateException();
         if (n.isNull()) dest.putNull(to); else dest.put(to, safeText(n.textValue()));
@@ -196,24 +227,26 @@ public class InsiderSignalsAdapter {
     static String safeText(String text) {
         return text.replaceAll("(?i)(?:file://[^\\s<>\"']+|[a-z]:[\\\\/][^\\s<>\"']+|\\\\\\\\[^\\s<>\"']+|(?<![\\w:])/(?:[^\\s/]+/)+[^\\s<>\"']*)", "[local path omitted]");
     }
-    private void number(JsonNode row, ObjectNode dest, String from, String to) {
+    static void number(JsonNode row, ObjectNode dest, String from, String to) {
         JsonNode n = row.get(from);
         if (n == null || (!n.isNull() && (!n.isNumber() || !Double.isFinite(n.doubleValue())))) throw new IllegalStateException();
         dest.set(to, n);
     }
-    private void copyStrings(JsonNode row, ObjectNode dest, String from, String to) {
+    static void copyStrings(JsonNode row, ObjectNode dest, String from, String to) {
         JsonNode n = row.path(from); if (!n.isArray()) throw new IllegalStateException();
         var values = dest.putArray(to);
         for (var v : n) { if (!v.isTextual() || v.textValue().length() > 32768) throw new IllegalStateException(); values.add(safeText(v.textValue())); }
     }
-    private ObjectNode envelope(String state, int limit, int offset) {
+    private ObjectNode envelope(Operation operation, String state, int limit, int offset) {
         var result = json.createObjectNode(); String observed = Instant.now().toString();
         result.put("contractVersion", 1).put("dataState", state).put("observedAt", observed);
         result.putArray("items"); result.putObject("page").put("limit", limit).put("offset", offset).put("hasMore", false).putNull("nextOffset");
-        result.putArray("sources").addObject().put("sourceId", "insider-reports").put("sourceVersion", 1)
-                .put("sourceType", "Imported AI report").putNull("lastObservedAt");
-        result.putArray("warnings"); return result;
+        result.putArray("sources").addObject().put("sourceId", "insider-" + operation.source).put("sourceVersion", 1)
+                .put("sourceType", operation.label).putNull("lastObservedAt");
+        result.putArray("warnings");
+        if (operation == Operation.SEC) result.withArray("warnings").add("SEC_PARTIAL_NOT_RECONCILED_OR_CERTIFIED");
+        return result;
     }
-    private ObjectNode unavailable(int limit, int offset, String warning) { var r = envelope("UNAVAILABLE", limit, offset); r.withArray("warnings").add(warning); return r; }
-    private ObjectNode failure(int limit, int offset, String warning) { var r = envelope("ERROR", limit, offset); r.withArray("warnings").add(warning); return r; }
+    private ObjectNode unavailable(Operation op, int limit, int offset, String warning) { var r = envelope(op, "UNAVAILABLE", limit, offset); r.withArray("warnings").add(warning); return r; }
+    private ObjectNode failure(Operation op, int limit, int offset, String warning) { var r = envelope(op, "ERROR", limit, offset); r.withArray("warnings").add(warning); return r; }
 }

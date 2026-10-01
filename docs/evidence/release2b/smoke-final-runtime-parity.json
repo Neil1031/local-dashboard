@@ -1,0 +1,10 @@
+{
+  "formalSmokeJarSha256": "657237e9a70245f9c43e49a2d5fe227a57c8ff762222e538bc45ff29a924d43b",
+  "finalJarSha256": "17d4460866a55d10071c7cbfcd2fd5d287667ea156b8a4fff53df54fa59d925d",
+  "runtimeEntries": 220,
+  "allRuntimeClassAndDependencyBytesIdentical": true,
+  "changedContentEntries": [
+    "BOOT-INF/classes/static/project-design/PROJECT-DESIGN.md"
+  ],
+  "formalSourceSmokeNotRepeated": true
+}

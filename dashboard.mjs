@@ -2,7 +2,7 @@
 import { mountProjects } from './ui/projects.mjs';
 import { mountShell } from './ui/shell.mjs';
 import { mountOverview } from './ui/overview.mjs';
-import { mountUsSignals } from './ui/us-signals.mjs';
+import { mountUsStocks } from './ui/us-stocks.mjs';
 const currentStatuses = new Set(['READY', 'RUNNING', 'FAILED', 'DISABLED', 'UNKNOWN', 'MISSED']);
 const lastStatuses = new Set(['SUCCESS', 'FAILED', 'UNKNOWN']);
 export const currentStatus = job => currentStatuses.has(job.status) ? job.status : 'UNKNOWN';
@@ -180,7 +180,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
   const page = document.querySelector('.page');
   const tabs = [...document.querySelectorAll('.tab')];
   const projects = mountProjects(document, fetchJobs);
-  const signals = mountUsSignals(document, fetchJobs);
+  const signals = mountUsStocks(document, fetchJobs);
   const filters = [...document.querySelectorAll('.filter')];
   let snapshot = null;
   let runnerSnapshot = null;

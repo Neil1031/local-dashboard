@@ -1,0 +1,72 @@
+{
+  "sourceContractVersion": 1,
+  "dataState": "READY",
+  "returnedCount": 50,
+  "page": {
+    "limit": 50,
+    "offset": 0,
+    "hasMore": true,
+    "nextOffset": 50
+  },
+  "warnings": [
+    "SEC_PARTIAL_NOT_RECONCILED_OR_CERTIFIED"
+  ],
+  "observedAt": "2026-10-01T03:51:53.746543300Z",
+  "sourceLastObservedAt": "2026-10-01T03:51:53.746543300Z",
+  "formalSourceWalHeader": false,
+  "cliSha256": "09d0752aa3031c3cfb952f38a7191e08736dca58664bdf19f4191cdf660459a4",
+  "containsNonAsciiRecordText": false,
+  "source": "sec",
+  "sourceSchemaHeaderVersion": 2,
+  "jarSha256": "657237e9a70245f9c43e49a2d5fe227a57c8ff762222e538bc45ff29a924d43b",
+  "singleRequest": true,
+  "fieldPresence": {
+    "ticker": 50,
+    "company": 50,
+    "eventDate": 50,
+    "filingDate": 50,
+    "filingAcceptedAt": 50,
+    "discoveredAt": 50,
+    "reportingOwners": 50,
+    "transactionCode": 50,
+    "securityType": 50,
+    "shares": 50,
+    "insiderExecutionPrice": 49,
+    "transactionAmount": 49,
+    "ownershipAfter": 50,
+    "ownershipIncreasePct": 29,
+    "isDirect": 50,
+    "is10b51": 50,
+    "footnotes": 50,
+    "filingDateSource": 50,
+    "qualityFlags": 50,
+    "provenance": 50
+  },
+  "naturalCases": {
+    "nonP": 41,
+    "candidate": 9,
+    "reviewRequired": 45,
+    "qualityFlags": 50,
+    "derivative": 11,
+    "amendmentFlag": 0
+  },
+  "limits": [
+    "Current read path only; source completeness, 20-filing live validation, Form 4/4A reconciliation and investment validity not verified"
+  ],
+  "databaseAndSidecarsUnchanged": true,
+  "before": {
+    "main": {
+      "bytes": 138809344,
+      "sha256": "0154596b08de5720349fc3764c3dbe3a72d32b2ecd87c66b91ed609e324bafef",
+      "mtime_ns": 1790824586961175300
+    }
+  },
+  "after": {
+    "main": {
+      "bytes": 138809344,
+      "sha256": "0154596b08de5720349fc3764c3dbe3a72d32b2ecd87c66b91ed609e324bafef",
+      "mtime_ns": 1790824586961175300
+    }
+  },
+  "isolatedProcessExited": true
+}

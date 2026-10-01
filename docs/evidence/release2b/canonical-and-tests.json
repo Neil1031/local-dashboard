@@ -1,0 +1,24 @@
+{
+  "base": "479a767989d17ba65200ae4ea83ed1f73ff0b4ba",
+  "featureIds": 33,
+  "allStatusesUnchanged": true,
+  "counts": {
+    "BACKEND_READY": 3,
+    "BLOCKED": 1,
+    "DESIGNED": 4,
+    "DONE": 19,
+    "NOT_STARTED": 2,
+    "PARTIAL": 4
+  },
+  "productUs": "PARTIAL",
+  "existingChangeLogRowsPreserved": true,
+  "oneRelease2bRowAppended": true,
+  "designChangesPreserved": true,
+  "canonicalSha256": "e4a89403751701a4cba26a8e310be7bc84bb496278dc5bc191c522ad6e06526a",
+  "normalMavenVerify": {
+    "tests": 198,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  }
+}

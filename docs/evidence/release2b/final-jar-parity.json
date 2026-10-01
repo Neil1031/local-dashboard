@@ -1,0 +1,58 @@
+{
+  "assets": [
+    {
+      "source": "index.html",
+      "sha256": "f06e1c2ad1b270d8ced8b8bc5605d3ec485af311f69958e0934ac5c286db34d2",
+      "exactSourceJarHttp": true
+    },
+    {
+      "source": "dashboard.mjs",
+      "sha256": "db01431758c041c1cfde4038af6f3d5901ecc5ff211cf78fb41a6759ecec41a1",
+      "exactSourceJarHttp": true
+    },
+    {
+      "source": "ui/shell.mjs",
+      "sha256": "8b66060299c354d497c9aaebc0e80b0fa6f356dec793fab3c986ebf5daacca92",
+      "exactSourceJarHttp": true
+    },
+    {
+      "source": "ui/overview.mjs",
+      "sha256": "2d6fd817e2b9bd30176ae067a000dc242a1b03e96fa392ef67791f35b32866f4",
+      "exactSourceJarHttp": true
+    },
+    {
+      "source": "ui/projects.mjs",
+      "sha256": "b9270305851fa9a9ec31fde08afb8f560e65749e32a9eb96eba9378286cb91ba",
+      "exactSourceJarHttp": true
+    },
+    {
+      "source": "ui/project-design.mjs",
+      "sha256": "9f2fd3ad7246fe3d6e99bc54c1e888a3868b9dfe7aadaabfc8872dfef01ca3bd",
+      "exactSourceJarHttp": true
+    },
+    {
+      "source": "ui/us-signals.mjs",
+      "sha256": "1530b85cb86232dffd44a4887547de61e1c040acd6bc5f505918aa4e4fa9fcaa",
+      "exactSourceJarHttp": true
+    },
+    {
+      "source": "ui/us-stocks.mjs",
+      "sha256": "ece21cf88cf3f6fa84de2bbad0c7a453b8813e93f0b4253dc57395236834ad17",
+      "exactSourceJarHttp": true
+    },
+    {
+      "source": "ui/us-sec-transactions.mjs",
+      "sha256": "335a97646d15c640c352ea4428808b205601746ea403737b7490658e62304fa5",
+      "exactSourceJarHttp": true
+    },
+    {
+      "source": "docs/PROJECT-DESIGN.md",
+      "sha256": "e4a89403751701a4cba26a8e310be7bc84bb496278dc5bc191c522ad6e06526a",
+      "exactSourceJarHttp": true
+    }
+  ],
+  "jarSha256": "17d4460866a55d10071c7cbfcd2fd5d287667ea156b8a4fff53df54fa59d925d",
+  "sourcesDisabledStates": "UNAVAILABLE",
+  "sourceFixture": false,
+  "isolatedPort": 62963
+}

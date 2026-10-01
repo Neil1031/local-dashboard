@@ -1,0 +1,30 @@
+{
+  "stage": "Release 2B SEC Transactions partial slice",
+  "date": "2026-10-01",
+  "status": "READY_FOR_MANAGER_REVIEW",
+  "base": "479a767989d17ba65200ae4ea83ed1f73ff0b4ba",
+  "branch": "implement/dashboard-release2b",
+  "sourceBaseline": "d8221904c58e355f1d0a70f782d646d2b14a7069",
+  "normalMavenVerify": {"tests": 198, "failures": 0, "errors": 0, "skipped": 0},
+  "frontend": {"tests": 78, "passed": 74, "failed": 0, "skipped": 4, "skipReason": "Existing opt-in URL-dependent live/package tests"},
+  "prototype": {"tests": 7, "passed": 7, "failed": 0, "skipped": 0},
+  "generatorRegeneratedAndCheckPassed": true,
+  "gitDiffCheckPassed": true,
+  "chrome": {
+    "fixtureOnly": true,
+    "widths": [1280, 375, 320],
+    "clientScrollWidths": [[1265, 1265], [360, 360], [305, 305]],
+    "solVisualInspection": ["desktop/mobile cards", "literal HTML text", "nullable derivative/amendment detail", "Space open", "Escape close", "focus return with 3px outline"],
+    "solConsoleWarningsErrors": [],
+    "managementIndependentPreliminaryInspection": ["all widths", "Enter/Space/Escape/focus", "50+1 pagination", "exact ticker", "EMPTY/UNAVAILABLE/ERROR", "Signals", "Overview", "Automations Today/History", "Settings", "Projects", "real JAR source-disabled states"],
+    "screenshots": ["chrome-sec-1280.png", "chrome-sec-375.png", "chrome-sec-320.png", "chrome-detail-375.png"]
+  },
+  "formalSmoke": {"receipt": "formal-source-smoke.json", "singleRequest": true, "dataState": "READY", "returnedCount": 50, "databaseAndSidecarsUnchanged": true, "scope": "Current SEC read path only"},
+  "jarParity": {"receipt": "final-jar-parity.json", "assets": 10, "exactSourceJarHttp": true, "finalJarSha256": "17d4460866a55d10071c7cbfcd2fd5d287667ea156b8a4fff53df54fa59d925d", "canonicalSha256": "e4a89403751701a4cba26a8e310be7bc84bb496278dc5bc191c522ad6e06526a"},
+  "smokeFinalRuntimeParity": {"receipt": "smoke-final-runtime-parity.json", "allRuntimeClassAndDependencyBytesIdentical": true, "runtimeEntries": 220, "onlyChangedContent": "Canonical Project Design resource", "formalSourceSmokeNotRepeated": true},
+  "canonical": {"receipt": "canonical-and-tests.json", "ids": 33, "allStatusesUnchanged": true, "productUs": "PARTIAL", "existingHistoricalRowsPreserved": true, "oneRelease2bChangeLogRowAdded": true},
+  "googleDoc": {"receipt": "google-doc-readback.json", "targetedParagraphs": 13, "paragraphs": 769, "headings": 76, "tabs": 1, "revisionGuarded": true, "nativeReadbackVerified": true, "managementIndependentReadback": true, "visualDocQA": false},
+  "cleanup": {"receipt": "owned-qa-cleanup.json", "matchingOwnedPreviewsExited": true, "portsReleased": true, "browserViewportReset": true, "solTabClosed": true},
+  "notVerified": ["SEC source completeness", "20-filing live validation", "Form 4/4A reconciliation", "certified open-market purchases", "investment validity", "PIT", "Google Doc visual layout"],
+  "noMergeDeploymentOrNextStage": true
+}
