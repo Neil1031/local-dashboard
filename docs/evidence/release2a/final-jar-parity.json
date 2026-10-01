@@ -1,0 +1,45 @@
+{
+  "assets": [
+    {
+      "source": "index.html",
+      "sha256": "499482b88f216198c3d8b87b6104c39e75a3705ade8ef3ac5cef5808613a4211",
+      "exactSourceJarHttp": true
+    },
+    {
+      "source": "dashboard.mjs",
+      "sha256": "60ab5b8c3ccc26c30a3a2b07309d12e07112572830cf8124cfc8d1de67505301",
+      "exactSourceJarHttp": true
+    },
+    {
+      "source": "ui/shell.mjs",
+      "sha256": "4410e60000248e86733e42ea71cf468f4ff118528b4560ea5b5b7674f3afa56a",
+      "exactSourceJarHttp": true
+    },
+    {
+      "source": "ui/overview.mjs",
+      "sha256": "2d6fd817e2b9bd30176ae067a000dc242a1b03e96fa392ef67791f35b32866f4",
+      "exactSourceJarHttp": true
+    },
+    {
+      "source": "ui/projects.mjs",
+      "sha256": "b9270305851fa9a9ec31fde08afb8f560e65749e32a9eb96eba9378286cb91ba",
+      "exactSourceJarHttp": true
+    },
+    {
+      "source": "ui/project-design.mjs",
+      "sha256": "9f2fd3ad7246fe3d6e99bc54c1e888a3868b9dfe7aadaabfc8872dfef01ca3bd",
+      "exactSourceJarHttp": true
+    },
+    {
+      "source": "ui/us-signals.mjs",
+      "sha256": "7c4cf929e082d0589222828a532f8bd1a5fed1303999436dde28a1ac1765c903",
+      "exactSourceJarHttp": true
+    },
+    {
+      "source": "docs/PROJECT-DESIGN.md",
+      "sha256": "77accecb3f00cd1010bc833399a596dd9ff060aa71c6489b3e3557c1c3437f3f",
+      "exactSourceJarHttp": true
+    }
+  ],
+  "jarSha256": "a754e94934098058ef8ffbca8d60cab77786accc9841e75d7e1bf15cca19d84a"
+}

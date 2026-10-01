@@ -1,6 +1,18 @@
 # Local Dashboard — Data Contracts and Source Mapping
 
-Design proposal, version `dashboard-domain-v1`; not an implemented API. Cross-source identity and provenance are mandatory. A field marked nullable must remain `null`/— when not observed; zero means an actual measured zero. `observedAt` is when the adapter saw data, while source event time, filing time, report date, run time and data-effective date are distinct.
+Design proposal, version `dashboard-domain-v1`, except the implemented Release 2A reports Signals API below. Cross-source identity and provenance are mandatory. A field marked nullable must remain `null`/— when not observed; zero means an actual measured zero. Source event time, filing time, report date, run time and data-effective date are distinct.
+
+## Release 2A implemented reports slice
+
+`GET /api/us/signals?ticker=COO&limit=50&offset=0` reads only Insider `list-signals --source reports`, contract v1. Ticker is optional, trim/case-insensitive exact matching, restricted to 1..16 ASCII letters/digits/dot/hyphen with a letter/digit first. Limit defaults to 50, range 1..100; offset defaults to 0, range 0..1,000,000. Invalid query returns 400 / `INVALID_SIGNALS_QUERY`; all responses are no-store.
+
+Envelope: `{contractVersion:1,dataState,items,page:{limit,offset,hasMore,nextOffset},observedAt,sources,warnings}`. `observedAt` is this adapter attempt; `sources[0]` identifies `insider-reports`, sourceVersion 1 and Imported AI report. `lastObservedAt` is populated only on successful READY/EMPTY reads, otherwise null; it does not assert source freshness or report-effective time. READY means nonempty valid data, EMPTY successful zero rows, UNAVAILABLE disabled/missing/unreadable/unsupported/timeout source, ERROR malformed/oversized output. Record quality flags do not change transport state. STALE is not inferred. Source offsets outside Dashboard's cap end pagination with `PAGINATION_BOUND_REACHED`.
+
+Items retain `signalId`, ticker/company, **eventDate = transaction date** separately from metadata `reportDate` and `filingDate`; discoveredAt/discoveryBasis and recordedAt/updatedAt; separate signal/investment scores with origin `imported_ai_report`; positiveReasons/risks; qualityFlags; nullable approximatePurchaseAmount; personName/personRole and whitelisted buyer facts. `listedBuyerCount` is the length of the source's buyers list, not a certified complete buyer population. Zero listed rows does not prove no buyers. Buyer insider execution price is not a strategy entry price. No suggested positions/actions/scoring engine/recommendation is mapped.
+
+Provenance retains sourceType/table/recordId/documentId/contentHash/firstObservedAt/lastObservedAt. `source_references.location`, raw source excerpts, unlisted metadata, CLI/DB paths and raw stderr are never passed through. Returned text additionally redacts local absolute-path patterns. Dates/hashes/identity remain source-owned; each read shares the source's transaction snapshot, but pages across requests are current-state browsing, not a PIT snapshot. Source schema 2, mode=ro/query_only, WAL rejection and no initialize/migration remain enforced by the existing source CLI.
+
+Configuration `dashboard.sources.insider.{enabled,cli-path,database-path,timeout-seconds}` is local: default disabled; both paths must be absolute existing files; timeout 1..30 seconds (default 10). Executable is trusted owner configuration, not user API input. Arguments are constructed by Dashboard without a shell/arbitrary options. Stdout 2 MiB, stderr 64 KiB, at most two concurrent source processes, concurrent draining, timeout termination and strict UTF-8 JSON/version/page/record validation bound the reader. Python UTF-8 and no-bytecode environment settings support the existing Windows CLI without source writes. No source DB driver or external repository writer is added.
 
 ## Shared response contract
 

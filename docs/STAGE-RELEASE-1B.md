@@ -1,6 +1,6 @@
 # Release 1B — Product Shell and operations Overview
 
-Status: **READY_FOR_MANAGER_REVIEW**. Development base: `7c000b5b51712c7bca489a7b8042e7d9cfc09948`; branch `implement/dashboard-release1b`. This stage stops before merge, installed deployment or another Stage.
+Status: **MERGED / GIT CLOSEOUT COMPLETE** at `654fc848d748fb966bb047f9e4259ed13e248447` (PR #6). Development base: `7c000b5b51712c7bca489a7b8042e7d9cfc09948`; branch `implement/dashboard-release1b`. The historical verification below describes Release 1B; installed deployment was not part of its closeout. Release 2A is a separately authorized Stage.
 
 ## Implemented scope
 

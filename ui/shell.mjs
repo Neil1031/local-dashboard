@@ -2,7 +2,7 @@ export const primaryPages = Object.freeze({
   overview: ['Overview', '排程現況、接下來的工作與已觀察執行。'],
   projects: ['Projects', 'Local Dashboard 的工程設計建置快照。'],
   automations: ['Automations', '目前 Scheduler 快照與七天已觀察歷史。'],
-  us: ['US Stocks', 'DESIGNED · 尚未接入資料來源。'],
+  us: ['US Stocks', 'Signals · Insider reports 唯讀資料；Imported AI report。'],
   tw: ['TW Stocks', 'DESIGNED · 尚未接入資料來源。'],
   performance: ['Performance', 'DESIGNED · 尚未接入資料來源。'],
   reports: ['Reports', 'DESIGNED · 尚未接入資料來源。'],

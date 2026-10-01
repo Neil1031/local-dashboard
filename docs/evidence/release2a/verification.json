@@ -1,0 +1,72 @@
+{
+  "stage": "Release 2A reports Signals",
+  "dashboardBase": "654fc848d748fb966bb047f9e4259ed13e248447",
+  "sourceRemoteContractRevision": "d8221904c58e355f1d0a70f782d646d2b14a7069",
+  "sourceInspectedLocalHead": "22d69c3ccf2bd9d5f725c6a03deea871f0daf9a2",
+  "sourceContractFilesIdenticalBetweenHeads": true,
+  "maven": {
+    "realSpringResourceBrowser": true,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 191
+  },
+  "frontend": {
+    "skipReason": "Existing opt-in live/package URLs not configured",
+    "failed": 0,
+    "skipped": 4,
+    "passed": 67
+  },
+  "chrome": {
+    "consoleErrorsWarnings": [],
+    "nativeDialogEscapeFocus": true,
+    "noPageOverflow": true,
+    "clientScrollWidths": [
+      1265,
+      360,
+      305
+    ],
+    "textHtmlSafe": true,
+    "fixtureOnly": true,
+    "viewportWidths": [
+      1280,
+      375,
+      320
+    ]
+  },
+  "canonical": {
+    "historyRowsPreserved": true,
+    "counts": {
+      "DESIGNED": 4,
+      "BLOCKED": 1,
+      "DONE": 19,
+      "BACKEND_READY": 3,
+      "PARTIAL": 4,
+      "NOT_STARTED": 2
+    },
+    "ids": 33,
+    "statusChanges": [
+      "product-us DESIGNED -> PARTIAL"
+    ],
+    "generatorCheck": true
+  },
+  "sourceSmoke": "formal-source-smoke.json",
+  "jarParity": "final-jar-parity.json",
+  "googleDoc": "google-doc-readback.json",
+  "ownedPreviewCleanup": {
+    "portsReleased": [
+      62978,
+      64179
+    ],
+    "matchingIdentityStopped": true
+  },
+  "notPerformed": [
+    "merge",
+    "installed deployment/runtime/shortcut changes",
+    "Insider repo/DB writes",
+    "Scheduler/Runner/receipts operations",
+    "SEC/performance/reports/TW integration",
+    "next Stage"
+  ],
+  "remainingGate": "Independent exact-SHA management review"
+}
