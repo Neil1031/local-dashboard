@@ -1,4 +1,4 @@
-// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: fe19d9d2a05ee96029125ba898fc430492f66bdc9c123696979c1b779245d6d2
+// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: 7cca615d8c44670c12e2ab3bbd64423477dbb00c429ad8298b5174257a9629ff
 window.PROJECT_DESIGN_SAMPLE = Object.freeze({
   "metadata": {
     "project_id": "local-dashboard",
@@ -295,7 +295,7 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "originalIntent": "原本只需 Today／History",
       "implementation": "Release 1B 九頁主要導覽，desktop sidebar／mobile 水平導覽，Automations／Settings 使用既有功能；已合併 main 654fc84",
       "status": "PARTIAL",
-      "limitation": "四頁只有 DESIGNED 入口；新 preferences 與後續資料頁未實作，installed app 未更新",
+      "limitation": "四頁只有 DESIGNED 入口；新 preferences 與後續資料頁未實作，實際安裝狀態由獨立 deployment evidence 確認",
       "remaining": "後續來源功能另行 gate",
       "evidence": "docs/STAGE-RELEASE-1B.md"
     },
@@ -328,8 +328,8 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "originalIntent": "原設計只看 Insider 相關排程",
       "implementation": "Release 2A reports Signals 已合併；Release 2B fixed SEC CLI v1 adapter／API／filter／分頁／明細已實作",
       "status": "PARTIAL",
-      "limitation": "SEC 為 partial facts，P／candidate 尚未認證，4/A 未對帳，來源位置 ID 非 immutable event ID；Ticker Detail 未接；跨頁非 PIT，無 freshness policy；2B 待審未合併／部署",
-      "remaining": "管理初審；Ticker Detail／amendment reconciliation／broader analytics 另行 gate",
+      "limitation": "SEC 為 partial facts，P／candidate 尚未認證，4/A 未對帳，來源位置 ID 非 immutable event ID；Ticker Detail 未接；跨頁非 PIT，無 freshness policy；2B 已合併 main `4acd568`；實際安裝狀態另由 deployment evidence 確認",
+      "remaining": "Ticker Detail／amendment reconciliation／broader analytics 另行 gate",
       "evidence": "docs/STAGE-RELEASE-2B.md"
     },
     {
@@ -498,7 +498,7 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
     {
       "horizon": "PARTIAL",
       "work": "US Stocks Signals／SEC Transactions",
-      "gate": "2A reports Signals 已合併；2B SEC partial 待審；Ticker Detail、4/A reconciliation／broader analytics 另審",
+      "gate": "2A reports Signals 已合併；2B SEC partial 已合併 main `4acd568`；Ticker Detail、4/A reconciliation／broader analytics 另審",
       "evidence": "docs/STAGE-RELEASE-2B.md"
     },
     {

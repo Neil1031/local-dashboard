@@ -1,0 +1,117 @@
+{
+  "stage": "Cumulative installed deployment of merged Release 1B / 2A / 2B",
+  "status": "READY_FOR_MANAGER_REVIEW — CUMULATIVE_DEPLOYMENT_COMPLETED",
+  "ownerFinalPolicy": "Development/pre-install validation only; installed-version acceptance removed by direct owner instruction",
+  "engineeringBase": "4acd5684b9b5b1381591900f48f7cf7f4f51f302",
+  "packageSourceSha": "1b07309582c544072fae29c3b6667d66fac79194",
+  "packageIdentity": {
+    "installedFiles": 225,
+    "installedDirectories": 37,
+    "allCandidateFilesAndDirectoriesMatch": true,
+    "criticalSha256": {
+      "LocalDashboard.exe": "057513578e2c6ce1203dc243e0826057f940c2394bb8328512d89e37fad766aa",
+      "app/launcher.jar": "4a6be5c2c30b58efc37693b277a94fe691b7eb080df0fac615cca26e72a27715",
+      "app/dashboard.jar": "74e537bfef4086c1480be60721f0f9080b36a00f906d01ed01e83210df2d9960",
+      "runtime/bin/java.exe": "63267782812f84001922687feeaa93c3218c7a1f03409f0650dcdbef2e7bc8cb",
+      "runtime/bin/javaw.exe": "4296df628d57e4efed8afd5e0cf6109862a186b825e6fe85721b3c028f663cfd"
+    },
+    "canonicalSha256": "264e06a5d9893dcbefdc675ef4eec8267dc036049096dedbb335abfb09e9fae0",
+    "rebuiltAfterSwap": false
+  },
+  "backup": {
+    "id": "20261001-cumulative-4acd568",
+    "fullPreInstallReadbackVerified": true,
+    "retained": true,
+    "files": 6986,
+    "oldImageFiles": 221,
+    "oldImageDirectories": 37,
+    "externalHomeFiles": 6763,
+    "externalHomeDirectories": 105,
+    "shortcuts": 2,
+    "scope": "Entire installed image, external home including DB/config/logs/runner/receipts, both actual shortcuts; hidden files and empty directories included"
+  },
+  "imageSwap": {
+    "inPlace": true,
+    "completePreviousImageRetained": true,
+    "previousImageMatchesBaseline": true
+  },
+  "configDelta": {
+    "onlyChange": "Approved dashboard.sources.insider block",
+    "enabled": true,
+    "timeoutSeconds": 10,
+    "beforeSha256": "b767c45cb9a36c1876018ce2b3fc2463c387e283825cfde86473d00dbdefe93e",
+    "afterSha256": "463a3028d7f7045f9957ad8bdd8c2966346f2e95915ff3138e1d3f4e74ba1575",
+    "allOriginalBytesRetained": true,
+    "unrelatedKeysUnchanged": true
+  },
+  "finalState": {
+    "original": "STOPPED",
+    "final": "STOPPED",
+    "checkedAtUtc": "2026-10-01T06:29:31.2967809Z",
+    "alreadyStoppedOnIdentityCheck": true,
+    "matchingDashboardProcesses": 0,
+    "listeners43871": 0,
+    "serverPidFilePresent": false,
+    "duplicateStopInvoked": false,
+    "stopActor": "Not attributed by this final checkpoint; no new Work stop invocation",
+    "startInvokedDuringCloseout": false
+  },
+  "preInstallValidation": {
+    "normalMaven": {
+      "tests": 198,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "frontend": {
+      "passed": 74,
+      "failed": 0,
+      "skipped": 4
+    },
+    "packageWindowsValidationPassed": true,
+    "sourceJarStaticAssetsExact": 10,
+    "isolatedBrowserAndRealSourceSmoke": "Retained Release 2B development evidence; not relabeled as installed acceptance",
+    "generatorCheck": "Passed before packaging"
+  },
+  "protectedScope": {
+    "noTaskDefinitionRunnerConfigOrReceiptMutationsRequestedOrPerformed": true,
+    "priorPreStartCheckpoint": "Seven Task definitions, two shortcuts, runner/receipts, source repo/CLI/DB/sidecars matched baseline",
+    "noKnownDestructiveIssueInCollectedEvidence": true,
+    "noNewInstalledDbAcceptancePerformed": true
+  },
+  "historicalOnly": {
+    "ownerStartupRecorded": true,
+    "priorInstalledApiAndReadonlyDbObservations": "Retained privately; not completion gates or proof of full installed acceptance",
+    "actualInstalledVisualQa": "NOT_PERFORMED; NOT_REQUIRED_BY_OWNER_FINAL_POLICY",
+    "priorBrowserPlatformLimit": "Not a deployment blocker under final owner policy"
+  },
+  "googleDoc": {
+    "documentId": "1GgEEjKTNPTJ5ACMXQ6TIaXSUFYH9OugdP9LAOIQcgNs",
+    "beforeRevision": "ANLCKQkwbKTJMSntE8eW5ha67myDGLqvnQh4XbHzOG0UgNkDuLvekt8S2mdm15E_PXDqqFUwXaGcuCj_cT1_kBhU4IXej59v0C8RFPdr4j0",
+    "afterRevision": "ANLCKQkaNrledbAWO4NrZric_HK8sb_Tx8roh8lH8k5QMVAEAzWFfH1XsNlIGu2IQ_isns1TGJ7o90JCcOdlDl9Q65g69PMDb6Fj116alaQ",
+    "targetParagraphs": [
+      "P00165",
+      "P00298",
+      "P00484",
+      "P00521",
+      "P00544",
+      "P00560"
+    ],
+    "targetedOccurrences": 6,
+    "paragraphs": 769,
+    "unchangedParagraphs": 763,
+    "headings": 76,
+    "tabs": 1,
+    "revisionGuarded": true,
+    "nativeReadbackVerified": true,
+    "stylesLinksListsAndTabTopologyPreserved": true,
+    "sharingOperationPerformed": false,
+    "visualDocumentQa": false
+  },
+  "limits": [
+    "No full installed runtime/API/UI/DB/Safe Stop acceptance claim",
+    "US Stocks and Projects remain PARTIAL; other deferred features unchanged",
+    "No rollback/repackage, operational evidence PR merge, next Stage, Scheduler/Runner execution or source ingestion",
+    "Google Doc PDF/browser visual QA not performed"
+  ]
+}

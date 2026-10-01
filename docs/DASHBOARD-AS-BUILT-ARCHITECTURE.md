@@ -8,7 +8,7 @@
 
 **這功能解決什麼問題：** 在同一個本機畫面查看受監控 Windows 排程的現況、最近一次結果、已觀察到的執行歷史，以及有設定的 Runner 執行證據。
 
-**它怎麼運作：** Release 1B 已合併並提供 **九頁主要導覽**。Overview 讀現有 jobs／History／Runner；Automations 提供 Today／7-day History、Workflow 與 Runner coverage；Settings 提供原有顯示 metadata 編輯；Projects 保留最小建置快照 Viewer。已合併 Release 2A 的 US Signals 切片由獨立 `ui/us-signals.mjs` → `/api/us/signals` → 固定 ProcessBuilder → Insider reports contract v1 唯讀 CLI；不直接開外部 SQLite，不執行 pipeline。分數來源是 Imported AI report，交易／報告日期、null／quality flags 與 sanitized provenance 保留。Release 2B 另加獨立 `ui/us-sec-transactions.mjs` → `/api/us/sec-transactions` → 固定 sec operation，共用相同 process bounds；無 SEC scoring、不 join reports，保留 non-P／derivative／owners／footnotes／review／null。P／candidate 尚未認證，4/A 未對帳；來源位置 ID 非 immutable event ID，execution price 非策略進場價。本輪 2B 待管理初審、未合併／部署。Windows Task Scheduler 是排程現況的來源；Dashboard 自己的 SQLite 保存「看見過什麼」；Runner receipts 是另一套執行證據。三者的身分與語意分開保存。排程版本與 occurrence correlation 已在程式中，但 correlation 仍是 shadow research，沒有正式 UI／HTTP API。
+**它怎麼運作：** Release 1B 已合併並提供 **九頁主要導覽**。Overview 讀現有 jobs／History／Runner；Automations 提供 Today／7-day History、Workflow 與 Runner coverage；Settings 提供原有顯示 metadata 編輯；Projects 保留最小建置快照 Viewer。已合併 Release 2A 的 US Signals 切片由獨立 `ui/us-signals.mjs` → `/api/us/signals` → 固定 ProcessBuilder → Insider reports contract v1 唯讀 CLI；不直接開外部 SQLite，不執行 pipeline。分數來源是 Imported AI report，交易／報告日期、null／quality flags 與 sanitized provenance 保留。Release 2B 另加獨立 `ui/us-sec-transactions.mjs` → `/api/us/sec-transactions` → 固定 sec operation，共用相同 process bounds；無 SEC scoring、不 join reports，保留 non-P／derivative／owners／footnotes／review／null。P／candidate 尚未認證，4/A 未對帳；來源位置 ID 非 immutable event ID，execution price 非策略進場價。Release 2B 已通過 Manager Review，合併 main `4acd568`；實際安裝狀態由獨立 deployment evidence 確認。Windows Task Scheduler 是排程現況的來源；Dashboard 自己的 SQLite 保存「看見過什麼」；Runner receipts 是另一套執行證據。三者的身分與語意分開保存。排程版本與 occurrence correlation 已在程式中，但 correlation 仍是 shadow research，沒有正式 UI／HTTP API。
 
 ```mermaid
 flowchart LR
@@ -209,10 +209,10 @@ sequenceDiagram
 | Occurrence Correlation | shadow research model 已完成 | 無正式 UI／API、未驗證為 Windows provenance、無 MISSED。 |
 | Projects 本專案建置快照入口 | Release 1A-1 最小切片已核准並合併 | 安裝版本須另有 deployment evidence；完整面板與跨專案 aggregation 未完成；九頁 shell 已由 Release 1B 開發實作。 |
 | Product Shell／Overview operations | Release 1B PARTIAL 已合併 | 九頁導覽／既有 API，installed app 未更新。 |
-| US Stocks Signals／SEC Transactions | PARTIAL | reports Signals 已合併；SEC partial 待本輪初審，Ticker Detail／4A 對帳尚未實作。 |
+| US Stocks Signals／SEC Transactions | PARTIAL | reports Signals 已合併；SEC partial 已合併 main `4acd568`，Ticker Detail／4A 對帳尚未實作。 |
 | 其他四頁資料功能 | DESIGNED | 尚未接入 adapter，只有導覽 destination。 |
 
-**目前限制：** 上表的「已完成」指 repo 中有正式程式與既有 Stage gate；不代表目前這台機器所有 Scheduler task、Runner mapping、資料庫或外部來源均已在本文件撰寫時實機驗收。外部來源只實作 reports Signals 與 SEC Transactions partial；Release 1B／2A 已合併、本輪 2B 待審，均與已安裝版本分開標明。`MISSED` 不可由現有 shadow 時間 heuristics 直接啟用。
+**目前限制：** 上表的「已完成」指 repo 中有正式程式與既有 Stage gate；不代表目前這台機器所有 Scheduler task、Runner mapping、資料庫或外部來源均已在本文件撰寫時實機驗收。外部來源只實作 reports Signals 與 SEC Transactions partial；Release 1B／2A／2B 已通過 Manager Review 並合併，均與已安裝版本分開標明。`MISSED` 不可由現有 shadow 時間 heuristics 直接啟用。
 
 ## Release 1A-1：Projects 最小正式入口（已核准並合併）
 
