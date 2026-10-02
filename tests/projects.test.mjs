@@ -9,17 +9,19 @@ const source = await readFile(new URL('../docs/PROJECT-DESIGN.md', import.meta.u
 const baseline = execFileSync('git', ['show', '7c000b5b51712c7bca489a7b8042e7d9cfc09948:docs/PROJECT-DESIGN.md'], { encoding: 'utf8' });
 const valid = text => async () => new Response(text, { headers: { 'content-type': 'text/markdown' } });
 const errorCode = code => error => error.code === code && error.message === code;
-test('all 33 baseline IDs remain; only authorized shell/overview/us status promotions; counts derive from rows', () => {
+test('all 33 baseline IDs remain; only approved shell/overview/us/reports/tw promotions', () => {
   const old = parseProjectDesign(baseline).features, current = parseProjectDesign(source).features;
   assert.equal(current.length, 33);
   assert.deepEqual(current.map(f => f.id), old.map(f => f.id));
   for (let i = 0; i < current.length; i++) {
-    if (['product-shell', 'product-overview', 'product-us'].includes(current[i].id)) { assert.equal(old[i].status, 'DESIGNED'); assert.equal(current[i].status, 'PARTIAL'); }
+    if (['product-shell', 'product-overview', 'product-us', 'product-reports', 'product-tw'].includes(current[i].id)) { assert.equal(old[i].status, 'DESIGNED'); assert.equal(current[i].status, 'PARTIAL'); }
     else assert.equal(current[i].status, old[i].status);
     for (const field of ['name', 'originalIntent', 'implementation', 'limitation', 'remaining', 'evidence']) assert.ok(current[i][field]);
   }
   assert.equal(Object.values(featureCounts(current)).reduce((a, b) => a + b, 0), 33);
   assert.equal(featureCounts(current).DONE, 19);
+  assert.equal(current.find(f => f.id === 'product-tw').status, 'PARTIAL');
+  assert.deepEqual(featureCounts(current), { DONE: 19, PARTIAL: 6, BACKEND_READY: 3, DATA_READY: 0, DESIGNED: 2, IN_PROGRESS: 0, NOT_STARTED: 2, DEFERRED: 0, BLOCKED: 1, DROPPED: 0 });
   assert.deepEqual(parseProjectDesign(source.replace(/\r\n/g, '\n')), parseProjectDesign(source));
 });
 test('v1 rejects malformed metadata, duplicate IDs, missing/unknown status and broken tables', () => {

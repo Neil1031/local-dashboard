@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { createServer } from 'node:http';
 import { serveStaticAsset } from './static-assets.mjs';
+import { twFixture } from './tw-stocks-fixture.mjs';
 const { chromium } = createRequire(import.meta.url)('playwright');
 let browser, server, base, page, errors;
 const snapshot = (extra = {}) => ({ collectionStatus: 'PARTIAL', collectedAt: new Date().toISOString(), errors: ['collector warning'], unmatchedIncludes: [],
@@ -20,7 +21,7 @@ beforeEach(async () => {
   page = await browser.newPage(); errors = []; page.on('pageerror', e => errors.push(e.message));
   await page.route('**/api/**', route => {
     const url = new URL(route.request().url());
-    const payload = url.pathname === '/api/jobs' ? snapshot() : url.pathname === '/api/history' ? history(url)
+    const payload = url.pathname === '/api/tw/stocks' ? twFixture(null, 'PARTIAL') : url.pathname === '/api/jobs' ? snapshot() : url.pathname === '/api/history' ? history(url)
       : url.pathname === '/api/runner/executions' ? { status: 'NOT_CONFIGURED', jobs: [], warnings: [] }
         : { version: 1, revision: '0', overrides: {}, warning: null };
     return route.fulfill({ contentType: 'application/json', body: JSON.stringify(payload) });
@@ -39,7 +40,11 @@ for (const width of [1280, 375, 320]) test(`nine-page shell, truthful overview a
   assert.match(await page.locator('#overviewRunner').innerText(), /尚未設定.*unavailable/);
   await page.locator('#overviewUpcoming button').click(); await page.keyboard.press('Escape');
   assert.equal(await page.locator('#overviewUpcoming button').evaluate(n => n === document.activeElement), true);
-  for (const key of ['tw', 'performance', 'evidence']) {
+  await page.locator('#twPage').focus(); await page.keyboard.press('Enter');
+  await page.waitForFunction(() => document.getElementById('twStatus').textContent.startsWith('PARTIAL'));
+  assert.equal(await page.locator('.tw-candidate').count(), 1);
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), true);
+  for (const key of ['performance', 'evidence']) {
     await page.locator(`[data-page="${key}"]`).focus(); await page.keyboard.press('Enter');
     assert.match(await page.locator(`[data-page-view="${key}"]`).innerText(), /DESIGNED[\s\S]*尚未接入資料/);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), true);

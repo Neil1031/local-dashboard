@@ -1,6 +1,6 @@
 # Local Dashboard — Data Contracts and Source Mapping
 
-Design proposal, version `dashboard-domain-v1`, except the implemented Release 2A reports Signals, Release 2B SEC Transactions and Release 2C Ticker Detail and Release 2D Reports APIs below. Cross-source identity and provenance are mandatory. A field marked nullable must remain `null`/— when not observed; zero means an actual measured zero. Source event time, filing time, report date, run time and data-effective date are distinct.
+Design proposal, version `dashboard-domain-v1`, except the implemented Release 2A reports Signals, Release 2B SEC Transactions and Release 2C Ticker Detail, Release 2D Reports and TW Stocks v1 APIs below. Cross-source identity and provenance are mandatory. A field marked nullable must remain `null`/— when not observed; zero means an actual measured zero. Source event time, filing time, report date, run time and data-effective date are distinct.
 
 ## Release 2A implemented reports slice
 
@@ -49,7 +49,7 @@ Performance remains **DESIGNED / 尚未接入唯讀來源**. No `performance-sum
 
 ## Shared response contract
 
-Each future collection response uses `{contractVersion, dataState, items, page:{limit,offset,hasMore}, observedAt, sources:[{sourceId,sourceVersion,lastObservedAt,warning}], warnings}`. Detail responses retain `dataState`, `observedAt`, `sources`, `warnings` and one `item`. Supported state vocabulary: `LOADING` (client only), `READY`, `EMPTY`, `PARTIAL`, `STALE`, `UNAVAILABLE`, `ERROR`. Source-specific flags remain separate: a quality warning is not a transport error; an observed failed job is not missing execution. Unsupported contract versions fail closed with `UNAVAILABLE`, never silently map unknown fields.
+The future shared collection proposal below does not replace the source-specific TW Stocks envelope or its COHERENT vocabulary. Each future collection response uses `{contractVersion, dataState, items, page:{limit,offset,hasMore}, observedAt, sources:[{sourceId,sourceVersion,lastObservedAt,warning}], warnings}`. Detail responses retain `dataState`, `observedAt`, `sources`, `warnings` and one `item`. Supported state vocabulary: `LOADING` (client only), `READY`, `EMPTY`, `PARTIAL`, `STALE`, `UNAVAILABLE`, `ERROR`. Source-specific flags remain separate: a quality warning is not a transport error; an observed failed job is not missing execution. Unsupported contract versions fail closed with `UNAVAILABLE`, never silently map unknown fields.
 
 The models below list **required** core fields; `null` in optional fields indicates unavailable/not observed, not a negative assertion. Version fields describe the source contract/snapshot, not a promise that historical state is complete.
 
@@ -82,6 +82,8 @@ Inspection was static and read-only in the Insider Signal Tracker source reposit
 Recommended mapping: `list-signals` supplies initial US Signals rows directly after a bounded adapter translation. Buyer/amount only when `source=reports` metadata is explicit. Release 2B implements the carefully bounded SEC facts projection; complete amendment/business-event reconciliation still needs a source-owned contract. Release 2D consumes the now-approved source-owned Reports v1 list/get contract on cdacf865; performance still requires an approved read-only contract. The adapter must carry `source_references` and `quality_flags`, not infer absent values. Use `report:`/`sec:` IDs as separate namespaces and prevent accidental joins on ticker/date alone.
 
 ## Source inventory: AIStockHunter
+
+Historical design inventory, retained as originally inspected; not the current TW Stocks v1 source or an authorized Dashboard read of private tables. Current Taiwan consumer contract is documented below.
 
 Inspection was static and read-only in the AIStockHunter source repository. The self-contained, sanitized field/status/identity evidence is in [`evidence/AISTOCKHUNTER-DATA-CONTRACT-EVIDENCE.md`](evidence/AISTOCKHUNTER-DATA-CONTRACT-EVIDENCE.md). It cites repository-relative `README.md`, `stock_hunter/db.py`, `stock_hunter/daily_accumulation.py`, `stock_hunter/unexplained_volume.py`, `stock_hunter/unexplained_volume_daily.py`, `stock_hunter/anomaly_modes.py`, `stock_hunter/weekly_accumulation_check.py` and `stock_hunter/operation_journal.py`. The source working tree includes uncommitted changes; the evidence records its checked revision and file hashes. No formal DB or real output was opened. The old daily status path calls `initialize`, so it was not run as a read-only probe.
 
@@ -124,3 +126,44 @@ Summary allowlist: reportId=`report:<date>`, reportDate, importedAt, contentHash
 Detail adds currentRevisionId/status MATCHED or MISSING/null, revisions[{revisionId,contentHash,importedAt,isCurrent}] and independent bounded revisionPage. Current can be outside the page; empty revision page does not mean report missing. Hash/import metadata is retained body/hash history, importedAt first observation per body/hash, A→B→A returns to retained A; no complete switch timeline or hash recomputation. Counts are currently retained signal rows/current active subset, not historical ticker membership. No per-signal PIT, historical score/ticker reconstruction, semantic diff or inactive-row version inference. Separate calls/pages are current-state observations, not stable snapshot tokens.
 
 All includes connected sources only, presently US Insider. TW Daily/Weekly are DESIGNED/not connected and make no report reads. Small Markdown subset creates DOM text nodes for headings/paragraphs/lists/fenced and inline code. Unsupported syntax, HTML and link syntax are literal; no innerHTML/anchors/images/framework. Above4000 lines, complete plain text prevents excessive nodes; inline token flood falls back to full text. Loading/failure clears stale rows/body, latest response wins, leaving closes/cancels, pages are independent; native dialog supports keyboard/focus/Escape. Development/pre-install only. [Stage evidence](STAGE-RELEASE-2D.md).
+
+## TW Stocks v1 implemented consumer
+
+Accepted Dashboard implementation `e2bbbd85e6f3f5ac9464e8f0af688c64cc7113a0` is Manager approved, NOT MERGED, NOT DEPLOYED. Stable feature `product-tw` is PARTIAL: this is a real bounded read-only consumer slice, not the complete Taiwan roadmap. Architecture: Taiwan Volume Watch → source-owned `tw-daily-accumulation-v1` → fixed `TaiwanStocksAdapter` ProcessBuilder → normalized `/api/tw/stocks` → `ui/tw-stocks.mjs`. Source owns identity, selection and semantics; Dashboard never opens its private SQLite schema, journal, latest*.json or internal tables directly.
+
+Source provenance is separate: Taiwan canonical main `1406ff78d40a748ed9edaada8802354514df593c`; deployed Stage 2 image `dad7b4978a4a15823abef641f9440d07bfc0fe11`. The installed source Git checkout has an intentional dirty state; it is not clean main and must not be equated to the complete deployment image. Captured installed CLI/exporter byte checks are compatibility evidence, not whole-checkout equality. No Taiwan owner Doc or repository is updated by this consumer sync.
+
+### Queries, process and exits
+
+`GET /api/tw/stocks` selects LATEST_FINALIZED. Only optional, single `date=YYYY-MM-DD` selects exact TARGET_DATE. Canonical calendar date/year 0001..9999 required; impossible/whitespace/year-zero/repeated date or any extra parameter returns no-store HTTP 400 `{code:TARGET_DATE_INVALID}` before source invocation. No range, pagination, arbitrary paths/flags, browser Python/CLI/DB/output selection or private DB access. Valid source PARTIAL/UNAVAILABLE remain HTTP 200 with explicit dataState; all responses are no-store.
+
+Server-only `dashboard.sources.taiwan` keys: enabled, python-path, cli-path, database-path, output-dir, timeout-seconds. Repository/example defaults: disabled, empty paths, 10 seconds. Existing absolute executable basename is allowlisted; CLI must be existing absolute `export_tw_readonly.py`. DB/output must be absolute; missing ones are left to the source's UNAVAILABLE semantics, not created. Fixed vector is `<Python> -B <CLI> --db <configured DB> --output-dir <configured root> [--target-date <canonical date>]`; `py.exe` additionally gets fixed `-3.11`. No shell or runtime pip; UTF-8/no-bytecode environment. Dedicated two nonblocking process slots, timeout 1..30 seconds, stdout 16 MiB, stderr 64 KiB, bounded drains/child-tree cleanup. Strict UTF-8, duplicate keys and trailing JSON tokens fail closed; oversized output is rejected, not truncated into data.
+
+| Source exit / stdout | Consumer meaning |
+| --- | --- |
+| 0 + valid COHERENT | 200 / COHERENT; saved business status remains separate |
+| 2 + valid PARTIAL | 200 / PARTIAL; retain valid facts |
+| 2 + valid UNAVAILABLE | 200 / source-declared UNAVAILABLE; no empty-success conversion |
+| 2 + exact error-only TARGET_DATE_INVALID | Safe ERROR / SOURCE_TARGET_DATE_INVALID; not a snapshot |
+| 2 + argparse/no valid JSON contract | Safe ERROR / SOURCE_INVALID_OUTPUT; raw stderr omitted |
+| Other unexpected exit | Safe UNAVAILABLE / SOURCE_READ_FAILED |
+| Exit contradicts valid snapshot state | Safe ERROR / SOURCE_INVALID_OUTPUT |
+| Unsupported source contract | Safe ERROR / SOURCE_CONTRACT_UNSUPPORTED |
+
+Do not regress to `exit != 0 => failure`: exit 2 has both valid snapshot and error cases. Disabled/unconfigured/busy/timeout/interrupted/start failure uses a safe Dashboard failure envelope with null source sections. No local path, raw stderr, host/PID, raw private payload, cache, stale fallback or Dashboard Taiwan persistence is published/created by this slice.
+
+### Normalized allowlist and truth
+
+Envelope: contractVersion=1, sourceContractVersion=`tw-daily-accumulation-v1`, dataState=COHERENT/PARTIAL/UNAVAILABLE/ERROR, observedAt (Dashboard completion), generatedAt (source export, null on adapter failure), query{mode,targetDate}, snapshot{state,readOnly,reasonCodes,readStartedAt,readFinishedAt}, scope{state,mode,startDate}, latestAttempt{runId,state,status,createdAt,startedAt,finishedAt,scheduledDates,businessFinalized}, latestFinalized{runId,targetDate,finishedAt,status}, observation, responsibility, weeklyCheck and safe warnings.
+
+Observation retains source run/date/finished/status/identity, classificationStatus, strategyStatus, sources, markets, baselineSessionDiagnostics, mappingDiagnostics, readiness, candidates and candidateSummary. Responsibility retains state, nullable pendingCount/unfinishedCount, truncated, pendingRevalidation and unfinishedRuns. Weekly retains state, checkRunId, checkedAt, weekStart/weekEnd, status, nullable problemCount/dayStatusCounts/pendingRevalidationCount/unfinishedRunCount, binding and pointerState. `TwStocksProjection` explicitly validates consumed enums, aware timestamps, dates, IDs, finite numbers/nulls, run/date/status agreement, unique source/candidate identities, totals/truncation, mapping exclusions, public-info consistency and Mon–Fri weekly identity. It does not duplicate the full source schema or proxy arbitrary private fields. Critical conflicting identity is rejected; other non-consumed fields are omitted; path-like stock text is redacted with SOURCE_TEXT_LOCAL_PATH_REDACTED.
+
+**COHERENT != business SUCCESS; PARTIAL != SUCCESS; UNKNOWN != NO; null != 0.** `WARMING_UP` with 0 candidates does not prove no anomaly. Baseline READY/INSUFFICIENT_HISTORY/BASELINE_SESSION_GAP, legacy unavailable diagnostics, market completeness and mapping exclusions remain source facts, not Dashboard recomputation. Valid scope may survive missing observation; missing journal is UNKNOWN, never zero pending. Truncated responsibility totals remain null. Latest attempt can be newer/FAILED while an older latest finalized observation is usable; neither identity/time/status replaces the other. Weekly Check uses an independent identity namespace and may be FAILED while daily data is usable. SELECTED_RESULT binding is shown only when explicitly supplied by the source, never inferred from matching dates.
+
+Candidates are only saved source-export observation rows: no Taiwan candidate_signal, unexplained_volume_signal active rows, present-day master reconstruction or private DB joins. Anomaly score is **source anomaly score**, not investment/buy/recommendation score. Daily `analysis_eligible=null` with `NOT_APPLICABLE_DAILY_OBSERVATION` is retained as analysisEligible/analysisEligibleSemantics; public-info SUCCESS is a source check, not analysis completion or investment readiness.
+
+### UI and evidence limits
+
+Seven real areas: source/snapshot state, Daily Observation, accumulation/readiness, source completeness, candidates/watchlist, responsibility, Weekly Check. First visit one latest request; explicit Refresh deduplicates in-flight requests; exact-date Apply/Latest abort prior rendering, newest response wins. Returning to a completed view makes no implicit read; leaving pending view aborts/reset. No automatic polling. Loading/failure clears stale facts/detail; PARTIAL retains valid facts; native dialog uses safe DOM text and keyboard/focus/Escape, with 1280/375/320 synthetic acceptance recorded on accepted implementation. Browser abort is not proof of cancellation of an already running server read. No Overview Taiwan metrics, Performance, TW Reports or Data & Evidence integration, history/range, recommendations, paper trading or backtesting.
+
+Sole formal cross-project evidence: exactly one GET `/api/tw/stocks`, candidate non-installed Dashboard JAR, deployed Taiwan Stage 2 source, 2026-10-03 approximately 01:04 Asia/Taipei. Captured 200/no-store/PARTIAL, selected 2026-10-02, saved daily PARTIAL/WARMING_UP, 0 candidates, independent latest attempt and weekly FAILED with source-declared SELECTED_RESULT. Consumer compatibility PASS only: not Stage 1 natural-writer acceptance, market completeness, no anomaly, recommendation, future stability or installed Dashboard acceptance. This docs-only sync reuses captures, performs no new source read/build/deployment. See [Stage evidence](STAGE-TW-STOCKS-V1.md); Git closeout/deployment and later Taiwan roadmap require separate authorization.

@@ -41,7 +41,7 @@ flowchart LR
   RA -.已驗證的 Runner view.-> O
 ```
 
-**目前限制：** 九頁導覽已實作部分功能；US Stocks 已有 reports Signals／SEC Transactions partial 切片（PARTIAL），Release 2C Ticker Detail source-separated aggregate 已合併 main `44823ab`、尚未部署；Reports／SEC 分頁／日期／ID 獨立，無 cross-source join；Performance 尚未接。SEC amendments/corrections 不 collapse；來源完整性與完整 4/A reconciliation 尚未驗證。Reports · All／US Insider 在 Release 2D 為 PARTIAL；TW Daily／Weekly 未接，無 PIT／semantic diff。TW Stocks／Performance／Data & Evidence 仍是 DESIGNED 入口。Overview 僅涵蓋 operations，不顯示投資 metrics 或完成百分比。`design/prototype/index.html` 仍是獨立靜態設計原型。沒有自動 `MISSED`；Dashboard 不修改 Scheduler task 或正式 Runner config，也不把 correlation 結果寫入資料庫。參照 [`DASHBOARD-DESIGN-SPACE.md`](DASHBOARD-DESIGN-SPACE.md) 時，應將其視為產品設計，勿誤當完整現況畫面。Signals 跨頁非 PIT、無 freshness policy，來源讀失敗保持 unavailable，詳見 [Release 2A](STAGE-RELEASE-2A.md)。
+**目前限制：** 九頁導覽已實作部分功能；US Stocks 已有 reports Signals／SEC Transactions partial 切片（PARTIAL），Release 2C Ticker Detail source-separated aggregate 已合併 main `44823ab`、尚未部署；Reports／SEC 分頁／日期／ID 獨立，無 cross-source join；Performance 尚未接。SEC amendments/corrections 不 collapse；來源完整性與完整 4/A reconciliation 尚未驗證。Reports · All／US Insider 在 Release 2D 為 PARTIAL；TW Daily／Weekly 未接，無 PIT／semantic diff。TW Stocks v1 已通過 Manager 實作核准，`product-tw` 為 PARTIAL、未合併／部署；Performance／Data & Evidence 仍是 DESIGNED 入口。Overview 僅涵蓋 operations，不顯示投資 metrics 或完成百分比。`design/prototype/index.html` 仍是獨立靜態設計原型。沒有自動 `MISSED`；Dashboard 不修改 Scheduler task 或正式 Runner config，也不把 correlation 結果寫入資料庫。參照 [`DASHBOARD-DESIGN-SPACE.md`](DASHBOARD-DESIGN-SPACE.md) 時，應將其視為產品設計，勿誤當完整現況畫面。Signals 跨頁非 PIT、無 freshness policy，來源讀失敗保持 unavailable，詳見 [Release 2A](STAGE-RELEASE-2A.md)。
 
 ## 2. 啟動、設定與安全停止
 
@@ -69,7 +69,7 @@ Release 1B 的 `ui/shell.mjs` 管主要導覽；`ui/overview.mjs` 只從已驗�
 
 **它怎麼運作：** `dashboard.mjs` 把 `/api/jobs` 快照顯示於 Today，按市場、狀態與 metadata 排列；摘要的「需留意」來自當前 status，不是漏跑判斷。Workflow 在 Today 內按台股／美股呈現預設順序與依賴文字，點卡片進同一工作詳情；這是工作關係的**展示**，不會啟動或阻擋下游工作。History tab 以瀏覽器本地七個日曆日算出 UTC 查詢界線，讀 `GET /api/history?from=...&to=...`，將當前工作與只在歷史存在的工作按 canonical ID 合併。日期格可展開該日全部已觀察執行；有日期的舊檢查工作可摺疊。現在的 UI 另讀一次 `/api/runner/executions` 以顯示 coverage 與詳情。
 
-**目前限制：** History 不是 Windows Event Log 全量紀錄；空格只表示資料庫沒有該日可顯示的已觀察執行，絕不代表漏跑。Workflow 依賴圖不是執行引擎；預設只呈現設定順序中前段工作。Release 1B 把 Today／History 搬至 Automations，保留原有功能；Release 2A 已合併 reports Signals；Release 2B 新增 SEC partial；2C Ticker Detail 已合併但尚未部署，2D Reports · US Insider 已實作待審、未合併／部署，其他三個資料入口仍未接入。
+**目前限制：** History 不是 Windows Event Log 全量紀錄；空格只表示資料庫沒有該日可顯示的已觀察執行，絕不代表漏跑。Workflow 依賴圖不是執行引擎；預設只呈現設定順序中前段工作。Release 1B 把 Today／History 搬至 Automations，保留原有功能；Release 2A 已合併 reports Signals；Release 2B 新增 SEC partial；2C Ticker Detail 已合併但尚未部署，2D Reports · US Insider 已實作待審、未合併／部署，TW Stocks v1 consumer 已核准實作、未合併／部署；其他兩個資料入口仍未接入。
 
 ## 5. SQLite：工作身分與已觀察執行
 
@@ -211,9 +211,10 @@ sequenceDiagram
 | Product Shell／Overview operations | Release 1B PARTIAL 已合併 | 九頁導覽／既有 API 已隨 1B／2A／2B 累積 image 安裝；2C 尚未部署，installed 狀態由 deployment evidence 確認。 |
 | US Stocks Signals／SEC Transactions | PARTIAL | reports Signals 已合併；SEC partial 已合併 main `4acd568`，2C Ticker Detail source-separated aggregate 已合併 main `44823ab`、尚未部署；Performance／4A 對帳／PIT 尚未完成。 |
 | Reports · All／US Insider | PARTIAL | Release 2D 固定 list/get v1、exact date、完整安全正文與獨立 revision metadata 分頁；All 目前只有 US Insider，TW 未接、current 可在頁外或 MISSING、無 PIT／semantic diff；待管理初審，未合併／部署。 |
-| 其他三頁資料功能 | DESIGNED | TW Stocks／Performance／Data & Evidence 尚未接入閱讀 adapter，只有導覽 destination。 |
+| TW Stocks v1 | PARTIAL | 實作 e2bbbd85 已獲 Manager 核准，未合併／部署；source-owned Taiwan contract 七區唯讀 consumer，非完整 Taiwan roadmap。 |
+| 其他兩頁資料功能 | DESIGNED | Performance／Data & Evidence 尚未接入閱讀 adapter，只有導覽 destination。 |
 
-**目前限制：** 上表的「已完成」指 repo 中有正式程式與既有 Stage gate；不代表目前這台機器所有 Scheduler task、Runner mapping、資料庫或外部來源均已在本文件撰寫時實機驗收。外部來源已實作 reports Signals、SEC Transactions partial、2C source-separated Ticker Detail，以及2D Reports · US Insider 第一切片；Release 1B／2A／2B 已通過 Manager Review 並合併，均與已安裝版本分開標明。`MISSED` 不可由現有 shadow 時間 heuristics 直接啟用。
+**目前限制：** 上表的「已完成」指 repo 中有正式程式與既有 Stage gate；不代表目前這台機器所有 Scheduler task、Runner mapping、資料庫或外部來源均已在本文件撰寫時實機驗收。外部來源已實作 reports Signals、SEC Transactions partial、2C source-separated Ticker Detail，以及2D Reports · US Insider 第一切片和已核准的 TW Stocks v1 consumer；Release 1B／2A／2B 已通過 Manager Review 並合併，均與已安裝版本分開標明。`MISSED` 不可由現有 shadow 時間 heuristics 直接啟用。
 
 ## Release 1A-1：Projects 最小正式入口（已核准並合併）
 
@@ -237,6 +238,27 @@ Loader 僅用固定 same-origin URL、拒絕 redirect、10 秒 timeout、256 KiB
 | Runner | `runner/RunnerMain.java`、`RunnerConfig.java`、`ReceiptFiles.java`、`RunnerReceiptService.java`、`RunnerReceiptController.java` | `GET /api/runner/executions`；primary/fallback receipt 目錄 |
 | Schedule Snapshot | `ScheduleDefinition.java`、`ScheduleSnapshotObserver.java`、`ScheduleSnapshotRepository.java`、`src/main/resources/db/migration/V2__schedule_snapshots.sql` | `schedule_version`、`schedule_observation`；無正式 API |
 | Occurrence shadow | `OccurrenceEvidenceRepository.java`、`OccurrenceCorrelation.java` | SQLite `mode=ro` + 已驗證 Runner view；無正式 API／table |
+| TW Stocks v1 | `TaiwanProperties.java`、`TaiwanStocksAdapter.java`、`TwStocksProjection.java`、`TwStocksController.java`、`ui/tw-stocks.mjs` | `GET /api/tw/stocks`；固定 source-owned CLI，Dashboard 無 Taiwan DB／cache |
 | 顯示設定 | `JobMetadataStore.java`、`JobMetadataController.java`、`dashboard.mjs` | `GET/PUT /api/settings/job-metadata`；外部 `config/job-metadata.json` |
 
 **目前限制：** 本索引是理解與追查入口；具體欄位／錯誤碼仍以對應 class、migration 與 Stage 文件為準。`docs/DASHBOARD-DESIGN-SPACE.md` 和 `design/prototype/` 是未來產品設計材料，與上述正式檔案有意分開。
+
+## 15. TW Stocks v1：已核准的 Taiwan 唯讀 consumer
+
+**目的與狀態：** 讓使用者看懂來源已保存的每日觀察、累積成熟度、候選及待處理責任，保留部分／未知資料。核准實作 `e2bbbd85e6f3f5ac9464e8f0af688c64cc7113a0`；implementation approved / NOT MERGED / NOT DEPLOYED，`product-tw` PARTIAL。這是跨專案 Taiwan workflow 的 consumer Stage 3，歷史 Local Dashboard Stage 3A／3B 不改名。
+
+```mermaid
+flowchart LR
+  TVW[Taiwan Volume Watch] --> SC[source-owned tw-daily-accumulation-v1]
+  SC --> PB[fixed TaiwanStocksAdapter ProcessBuilder]
+  PB --> API[bounded /api/tw/stocks]
+  API --> TW[ui/tw-stocks.mjs]
+```
+
+**實際路徑：** 來源擁有契約 identity／業務語意。`TaiwanProperties` 的 server-only enabled/Python/CLI/DB/output/timeout 預設停用、空路徑、10 秒，未修改已安裝 config。`TwStocksController` 無 date 選 LATEST_FINALIZED，單一 canonical date 選 TARGET_DATE；無 range／paging／任意 path。非法日期／多值／額外參數在讀來源前回 400/TARGET_DATE_INVALID。固定 Python `-B`（py.exe 加 -3.11）→ export_tw_readonly.py 的 --db／--output-dir／optional --target-date；無 shell/runtime pip，來源路徑不能由 browser 選。兩個 dedicated nonblocking process slots、timeout 1..30 秒、stdout16MiB/stderr64KiB、strict UTF-8/JSON 和 child cleanup。Dashboard 不直接讀 Taiwan private SQLite schema、journal、latest*.json 或 internal tables，不新增 Taiwan persistence/cache。
+
+**資料與失敗：** `TwStocksProjection` 只驗證並組裝 allowlisted consumed fields；不曝露 paths、stderr、host/PID 或 raw private payload。0+COHERENT、2+PARTIAL、2+UNAVAILABLE 都可為合法 contract，HTTP200/no-store 且 dataState 明示。exit2 error-only/argparse 不是有效 snapshot；unexpected failure 回安全 failure envelope/null sections。COHERENT 不等於 business SUCCESS、PARTIAL 不等於 SUCCESS、UNKNOWN 不等於 NO、null 不等於 0。latest attempt 和 latest finalized 的身分／時間獨立；scope 可在 observation 缺席時仍有效。Weekly Check 是另一 identity namespace，FAILED 可與 daily usable facts 共存；SELECTED_RESULT 只接受 source 明示。
+
+**七個畫面區域：** source/snapshot、Daily Observation、accumulation/readiness、source completeness、candidates/watchlist、responsibility、Weekly Check。首次一次 latest；Refresh／exact date／Latest、無 polling，最新請求優先、離頁取消過期呈現、loading／error 清除舊 facts，PARTIAL 保留有效 facts。窄螢幕與 candidate native dialog 的 Tab/Space/Enter/Escape/focus 已在 accepted implementation 合成驗證。WARMING_UP 下零候選不等於無異常；缺 journal 是 UNKNOWN。Candidate 只取 source 保存 observation rows，不讀 candidate_signal／active unexplained_volume_signal、不依今日 master 或私有 join 重建。來源 anomaly score 不代表 investment/buy/recommendation score；daily analysis_eligible=null/NOT_APPLICABLE_DAILY_OBSERVATION，public-info SUCCESS 只代表來源檢查。
+
+**Provenance 與驗證界線：** Taiwan clean canonical main `1406ff78d40a748ed9edaada8802354514df593c`、deployed Stage2 image `dad7b4978a4a15823abef641f9440d07bfc0fe11` 分開；installed Git checkout 有預期 dirty state，不能等同 clean main 或完整 image。唯一正式 GET 經非安裝 candidate Dashboard 與 deployed source，captured 200/no-store/PARTIAL、target2026-10-02、daily PARTIAL/WARMING_UP、0 candidates、獨立 latest attempt、weekly FAILED/source SELECTED_RESULT。只證明 consumer compatibility，不證明 Stage1 natural writer／市場完整性／無異常／投資建議／未來穩定／installed Dashboard 驗收。本輪只同步文件、不重讀正式來源或 rebuild。沒有 Overview Taiwan metrics、Performance、TW Reports、Data & Evidence、history/range 或 trading/backtesting；後續分別 gate。完整欄位／exit mapping 見 [Data Contracts](DASHBOARD-DATA-CONTRACTS.md#tw-stocks-v1-implemented-consumer)，captured evidence 見 [Stage](STAGE-TW-STOCKS-V1.md)。
