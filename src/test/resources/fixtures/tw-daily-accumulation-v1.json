@@ -1,0 +1,170 @@
+{
+  "contract_version": "tw-daily-accumulation-v1",
+  "generated_at": "2026-09-25T15:00:00+00:00",
+  "query": {
+    "mode": "LATEST_FINALIZED",
+    "target_date": null
+  },
+  "pagination": {
+    "mode": "NONE"
+  },
+  "snapshot": {
+    "state": "COHERENT",
+    "read_only": true,
+    "reason_codes": [],
+    "read_started_at": "2026-09-25T15:00:00+00:00",
+    "read_finished_at": "2026-09-25T15:00:00+00:00"
+  },
+  "scope": {
+    "state": "AVAILABLE",
+    "mode": "DAILY_ACCUMULATION",
+    "start_date": "2026-09-21"
+  },
+  "status_summary": {
+    "latest_attempt": {
+      "run_id": "11111111111111111111111111111111",
+      "state": "DONE",
+      "status": "PARTIAL",
+      "created_at": "2026-09-25T06:30:00+00:00",
+      "started_at": null,
+      "finished_at": "2026-09-25T07:30:00+00:00",
+      "scheduled_dates": [
+        "2026-09-25"
+      ],
+      "business_finalized": true
+    },
+    "latest_finalized": {
+      "run_id": "11111111111111111111111111111111",
+      "target_date": "2026-09-25",
+      "finished_at": "2026-09-25T07:30:00+00:00",
+      "status": "PARTIAL"
+    }
+  },
+  "observation": {
+    "run_id": "11111111111111111111111111111111",
+    "target_date": "2026-09-25",
+    "finished_at": "2026-09-25T07:30:00+00:00",
+    "identity": {
+      "run_id": "11111111111111111111111111111111",
+      "target_date": "2026-09-25"
+    },
+    "status": "PARTIAL",
+    "classification_status": "OBSERVATIONS_AVAILABLE",
+    "strategy_status": "OUT_OF_SCOPE",
+    "sources": [
+      {
+        "name": "TWSE:master",
+        "status": "SUCCESS",
+        "started_at": "2026-09-25T06:30:00+00:00",
+        "finished_at": "2026-09-25T07:30:00+00:00",
+        "reason_code": "SOURCE_SUCCESS"
+      }
+    ],
+    "markets": [
+      {
+        "market": "TWSE",
+        "complete": false,
+        "quote_scope_complete": true,
+        "rows": 1,
+        "expected_master_symbols": 2,
+        "fresh_rows": 1,
+        "unpriced_unknown_count": 1,
+        "status_unknown_count": 0,
+        "quote_scope_status": "NOT_REQUESTED"
+      }
+    ],
+    "candidates": [
+      {
+        "symbol": "2330",
+        "market": "TWSE",
+        "signal_date": "2026-09-25",
+        "classification": "UNEXPLAINED_VOLUME",
+        "classification_basis": "LATEST_FINALIZABLE",
+        "coverage_status": "PARTIAL",
+        "analysis_eligible": null,
+        "analysis_eligible_semantics": "NOT_APPLICABLE_DAILY_OBSERVATION",
+        "public_info_check": {
+          "record_exists": true,
+          "status": "SUCCESS",
+          "succeeded": true,
+          "checked_at": "2026-09-25T07:30:00+00:00",
+          "as_of": null,
+          "coverage_status": "PARTIAL",
+          "reason_code": "SAVED_PUBLIC_INFO_CHECK"
+        },
+        "risk_flags": [
+          "PUBLIC_INFO_COVERAGE_INCOMPLETE"
+        ],
+        "stock_name": "台積電",
+        "anomaly_rank": 1,
+        "anomaly_score": 72.0,
+        "volume_ratio": 2.2,
+        "volume_zscore": 3.1,
+        "baseline_volume": 1234.0
+      }
+    ],
+    "baseline_session_diagnostics": {
+      "state": "AVAILABLE",
+      "records": [
+        {
+          "symbol": "2330",
+          "status": "READY",
+          "reason_code": "READY",
+          "expected_dates": [
+            "2026-09-24"
+          ],
+          "actual_dates": [
+            "2026-09-24"
+          ],
+          "lower_bound": "2026-09-21"
+        }
+      ]
+    },
+    "mapping_diagnostics": {
+      "state": "AVAILABLE",
+      "unmapped_symbols": [],
+      "recognized_exclusions": []
+    },
+    "candidate_summary": {
+      "state": "AVAILABLE",
+      "saved_candidate_count": 1,
+      "saved_total_candidates_before_limit": 1,
+      "saved_truncated": false,
+      "exported_count": 1
+    },
+    "readiness": {
+      "skipped_counts": {
+        "ZERO_VOLUME_OR_RECENT_HALT": 2
+      },
+      "warming_symbols": 0,
+      "pending_candidate_news": [
+        "2330"
+      ],
+      "reason_code": "SAVED_READINESS"
+    }
+  },
+  "responsibility": {
+    "state": "AVAILABLE",
+    "pending_revalidation": [],
+    "unfinished_runs": [],
+    "pending_count": 0,
+    "unfinished_count": 0,
+    "truncated": false
+  },
+  "weekly_check": {
+    "state": "AVAILABLE",
+    "check_run_id": "33333333333333333333333333333333",
+    "checked_at": "2026-09-25T14:30:00+00:00",
+    "week_start": "2026-09-21",
+    "week_end": "2026-09-25",
+    "status": "FAILED",
+    "problem_count": 1,
+    "day_status_counts": {
+      "FAILED": 1
+    },
+    "pending_revalidation_count": 0,
+    "unfinished_run_count": 0,
+    "binding": "SELECTED_RESULT",
+    "pointer_state": "CORROBORATED"
+  }
+}

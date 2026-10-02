@@ -748,6 +748,18 @@
     .overview-list time { display:block;font-size:13px;color:var(--muted);margin-top:5px; }
     .planned-page { padding:24px; }
     .reports { padding:24px;min-width:0;overflow-wrap:anywhere; }
+    .tw-stocks { padding:24px;min-width:0;overflow-wrap:anywhere; }
+    .tw-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px;margin-bottom:24px; }
+    .tw-card { border:1px solid var(--border);background:#fff8fb;border-radius:14px;padding:16px;min-width:0; }
+    .tw-card h3 { margin-top:0;font-size:15px; }
+    .tw-stocks details { margin:12px 0;padding:12px;border:1px solid var(--border);border-radius:12px; }
+    .tw-stocks summary { cursor:pointer; }
+    .tw-stocks button:focus-visible,.tw-stocks summary:focus-visible,.tw-stocks input:focus-visible { outline:3px solid var(--pink);outline-offset:3px; }
+    .tw-candidate-open { width:100%;text-align:left;white-space:normal;overflow-wrap:anywhere;border:1px solid var(--border);border-radius:10px;padding:10px;background:#fff;color:var(--pink-dark);font:inherit;font-weight:700;cursor:pointer; }
+    #twCandidates > p { grid-column:1/-1;margin:0; }
+    #twCandidateDetail { width:min(720px,calc(100vw - 40px));box-sizing:border-box;max-height:85vh;overflow:auto;overflow-wrap:anywhere;border:1px solid var(--border);border-radius:18px;padding:24px;color:var(--text);background:#fff8fb; }
+    #twCandidateDetail::backdrop { background:rgba(65,35,50,.35); }
+    @media(max-width:600px) { .tw-stocks { padding:16px; }#twCandidateDetail { padding:14px;width:calc(100vw - 24px); } }
     #reportDetail { width:min(840px,calc(100vw - 32px));max-height:calc(100dvh - 32px);box-sizing:border-box;padding:24px;border:1px solid var(--border);border-radius:20px;background:var(--surface,#fff);color:var(--text);overflow:auto;overflow-wrap:anywhere; }
     #reportDetail::backdrop { background:rgba(40,20,35,.42); }
     .report-detail-head { display:flex;align-items:center;justify-content:space-between;gap:12px; }
@@ -984,7 +996,19 @@
         <aside class="ticker-limitations" aria-label="Ticker Detail limitations"><h3>閱讀限制</h3><p>相同 ticker 不代表同一個 business event；不跨來源連結、合併身分或去重，不產生合併分數或投資建議。各來源 ID、日期、觀察時間及 provenance 保持分開。</p><p>顯示的是各來源已載入／本頁筆數，不是完整群體；不自動讀取全部頁面，跨頁不是 PIT snapshot。</p><h3>Performance · DESIGNED</h3><p>尚未接入唯讀來源。沒有 return／win rate 等推算或假資料。</p></aside>
       </section>
     </section>
-    <section class="panel planned-page" id="twView" data-page-view="tw" hidden><p class="eyebrow">DESIGNED</p><h2>TW Stocks</h2><p>尚未接入資料。此入口目前只提供導覽，相關資料來源與閱讀功能仍待實作。</p></section>
+    <section class="panel tw-stocks" id="twView" data-page-view="tw" hidden>
+      <p class="eyebrow">TAIWAN VOLUME WATCH · READ ONLY</p><h2>TW Stocks</h2>
+      <p>已保存每日觀察；候選與異常分數是來源事實，不是投資建議。</p>
+      <form id="twFilter" class="signals-controls"><label for="twDate">Exact target date</label><input id="twDate" type="text" placeholder="YYYY-MM-DD" maxlength="10" autocomplete="off"><button type="submit">Apply</button><button id="twLatest" type="button">Latest</button><button id="twReload" type="button">重新讀取</button></form>
+      <p id="twValidation" role="alert"></p><p id="twStatus" role="status"></p><p id="twProvenance" class="signal-source"></p><ul id="twWarnings" class="signal-warnings"></ul>
+      <h2>Daily Observation</h2><div id="twDaily" class="tw-grid"></div>
+      <h2>Accumulation / readiness</h2><div id="twAccumulation"></div>
+      <h2>Source completeness</h2><div id="twSources" class="tw-grid"></div>
+      <h2>Candidates / watchlist</h2><div id="twCandidates" class="tw-grid"></div>
+      <h2>Responsibility / pending work</h2><div id="twResponsibility"></div>
+      <h2>Weekly Check · independent identity</h2><div id="twWeekly"></div>
+      <dialog id="twCandidateDetail" aria-labelledby="twCandidateTitle"><div class="signals-detail-head"><h2 id="twCandidateTitle"></h2><button id="twCandidateClose" type="button">關閉</button></div><div id="twCandidateBody"></div></dialog>
+    </section>
     <section class="panel planned-page" id="performanceView" data-page-view="performance" hidden><p class="eyebrow">DESIGNED</p><h2>Performance</h2><p>尚未接入資料。此入口目前只提供導覽，相關資料來源與閱讀功能仍待實作。</p></section>
     <section class="panel reports" id="reportsView" data-page-view="reports" hidden>
       <p class="eyebrow">Reports · PARTIAL</p>

@@ -1,5 +1,14 @@
 dashboard:
   sources:
+    taiwan:
+      enabled: false
+      # Trusted absolute Python executable and fixed export_tw_readonly.py; source owns all reads.
+      # py.exe uses the fixed -3.11 selector. No runtime dependency installation or shell.
+      python-path: ""
+      cli-path: ""
+      database-path: ""
+      output-dir: ""
+      timeout-seconds: 10 # 1..30
     insider:
       enabled: false
       # Set local absolute paths to the trusted Insider CLI executable and existing schema-2 DB.
