@@ -6,6 +6,8 @@
 
 This existing Google Doc is the project owner's Traditional Chinese reading edition. It contains a fixed plan, completion marks, intended design, current mechanisms and remaining work. The link does not grant Google Drive access or change the document's sharing permissions.
 
+Cross-project workflow, Git and deployment defaults: [PERSONAL-PROJECT-GOVERNANCE.md](PERSONAL-PROJECT-GOVERNANCE.md). This document remains the detailed Local Dashboard authority for Google Doc / Living Design policy.
+
 ## Engineering sources
 
 - [PROJECT-DESIGN.md](PROJECT-DESIGN.md): maintained project design and stable feature IDs.

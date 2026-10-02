@@ -704,9 +704,11 @@ Integration tests may use fixture JSON representing PowerShell output so most te
 
 # Codex Working Rules
 
+This is the current Work policy. The Stage 5A/5B assignments below are retained historical planning; their new-Chat wording does not override this policy or authorize work.
+
 1. A long-lived **Manager Chat** owns requirements, PLAN updates, review, Gate decisions, and the decision to start the next stage.
-2. Each implementation stage should normally use a **new Codex Implementation Chat**. Do not continue the previous implementation chat into the next stage.
-3. Use a separate Research / Debug Chat when a bounded investigation would otherwise distract or destabilize the implementation chat.
+2. Follow [Personal Project Governance](docs/PERSONAL-PROJECT-GOVERNANCE.md): reuse the persistent visible `[Dashboard] 管理與初審` and `[Dashboard] Sol 實作` Works across Stages. Do not create a new Work per Stage or use hidden subagents.
+3. Perform research/debugging within the existing Works by default. Create a new Work only when the owner explicitly requests it, for a new project, when a required role is absent, or for a genuine isolation need. Large tasks still require Stage/Gate decomposition; adding Works does not replace it.
 4. Repository files are the source of truth; do not depend on previous chat context being available.
 5. Start every implementation stage with `/plan`.
 6. Work one stage at a time.
