@@ -281,17 +281,18 @@ Preserve the original Stage / Phase / Release / Feature structure.
 
 When work progresses, update the existing item in place instead of moving completed work into a separate "Done" section.
 
-Use status markers:
+Common status markers:
 
 - `☐` not started
 - `◐` partial
 - `☑` complete
 - `⏸` paused
-- `⛔` intentionally stopped
 
 Typical progression:
 
 `☐ -> ◐ -> ☑`
+
+`⛔` is **not globally standardized** because existing project history uses it with conflicting meanings (for example, blocked/unavailable versus intentionally stopped). A repository that uses `⛔` must define its meaning in its own canonical design before applying it. Do not silently reinterpret historical symbols.
 
 ### 7.2 Stable identities
 
@@ -642,7 +643,27 @@ This checklist is guidance, not a reason to create unnecessary gates.
 
 ---
 
-## 22. Adoption rule
+## 22. Existing rule sources and precedence notes
+
+This file centralizes the rules that were previously missing or scattered. It intentionally does not replace stronger existing local sources.
+
+For Local Dashboard specifically:
+
+- `docs/GOOGLE-DOCS.md` remains the detailed repository-local authority for its Living Design / Google Doc policy.
+- `docs/PROJECT-DESIGN.md` remains the canonical feature/status source for the Dashboard product.
+- historical Stage evidence remains evidence, not governance.
+
+Repository/workspace `AGENTS.md` files may define engineering execution details such as Plan -> Stage -> Gate -> Self-QA. Those local rules remain valid unless they conflict with a newer explicit owner/Manager decision or this document's cross-project defaults.
+
+Known legacy conflict to remove during normal local-rule maintenance:
+
+- older Local Dashboard planning text that says to create a new implementation/research/debug Chat per Stage conflicts with the current persistent two-visible-Work policy. The two persistent Works are the current default.
+
+Do not rewrite historical evidence merely to erase an old policy. Update only active/current instruction surfaces.
+
+---
+
+## 23. Adoption rule
 
 This document is the central cross-project default.
 
