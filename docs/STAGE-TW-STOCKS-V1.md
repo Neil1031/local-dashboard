@@ -4,7 +4,8 @@ Cross-project Taiwan workflow Stage 3; stable Dashboard feature `product-tw`.
 Historical Dashboard Stage 3A/3B identities are unchanged. Accepted implementation
 `e2bbbd85e6f3f5ac9464e8f0af688c64cc7113a0` is Manager approved; NOT MERGED,
 NOT DEPLOYED. The original implementation deferred Design Sync; the separately
-authorized ONE consolidated docs-only sync is recorded at the end.
+authorized consolidated sync and its bounded Manager-requested derived-artifact
+correction are recorded at the end.
 
 ## Original implementation Plan / Stage / Gate / Self-QA
 
@@ -249,14 +250,16 @@ config, tests, synthetic PNGs, captured formal response/protection and known lim
 The existing management Work independently reviews and owns
 `READY_FOR_MANAGER_REVIEW`; Sol does not self-approve.
 
-## ONE consolidated Design Sync (2026-10-03)
+## Consolidated Design Sync c8856a6 (2026-10-03)
 
 Separately authorized scope: existing PROJECT-DESIGN, Data Contracts, As-Built,
 README's materially false active TW status, this bounded evidence appendix, and
 the same owner Google Doc. Accepted implementation remains
 `e2bbbd85e6f3f5ac9464e8f0af688c64cc7113a0`, Manager approved / NOT MERGED /
-NOT DEPLOYED. This ONE docs commit must directly parent that accepted SHA; no
-intermediate commit, merge, deployment or next Stage.
+NOT DEPLOYED. Historical docs-only commit
+`c8856a6b1154ebbfd143417bb2ebec708486c562` directly parents accepted implementation
+e2bbbd85. The bounded correction below directly parents c8856a6; it is part of this
+same Design Sync, not a new Stage. No merge or deployment.
 
 Canonical parser check: 33 stable IDs; only `product-tw` DESIGNED → PARTIAL.
 All other 32 complete feature rows remain byte-identical. Counts: DONE19,
@@ -290,26 +293,73 @@ unchecked, with Performance/TW Reports/Data & Evidence/future range work retaine
 - Drive sharing/owner/parent metadata is exactly identical. No Taiwan owner Doc
   update. Visual/PDF QA was neither performed nor claimed for this targeted edit.
 
-Mechanical proof captures all 216 non-doc tracked file blobs against accepted
-implementation, including source/UI/config/tests/fixtures/generated JS sample.
-Every canonical blob's full bytes match; working content matches those blobs
-under existing Git attributes. Raw working SHA-256/size is also retained privately
-(Windows checkout LF/CRLF is distinguished from canonical Git blob bytes).
-`git diff --check` and the existing v1 design parser pass for this documentation
-change. Private native/metadata/manifest comparison files are supplied to management.
+Historical c8856a6 proof captured all 216 non-doc tracked file blobs against
+accepted implementation, including then-unchanged tests/generated sample, and
+verified all other 506 tracked blobs/modes. That equality belongs to c8856a6 only.
+The current correction explicitly changes the generated sample and one canonical
+status test; it does not claim ALL non-doc bytes remain unchanged. Java/UI/runtime,
+config/parser/fixtures/other tests and canonical design remain accepted content.
+Git canonical blob bytes and raw Windows LF/CRLF working hashes are distinguished
+in private evidence. The 241 Maven / 132 Node results and generator PASS in the
+implementation section remain historical e2 evidence, not fresh correction tests.
 
-**Explicit timing override:** current Manager docs-only protection takes precedence
-over normal governance's generated-sample refresh/check workflow. Generated
-prototype and existing tests remain accepted implementation bytes, including the
-historical TW DESIGNED/count assertions. The generated sample and existing built
-Projects resource therefore do not yet reflect the new canonical PARTIAL state;
-generator parity is not claimed for this Design Sync. No generator run/regen,
-Maven, browser campaign, package rebuild or new formal source read was performed.
-The 241 Maven / 132 Node results and generator PASS above belong to accepted
-implementation content only; they are not fresh tests on this docs commit.
-Updating those test/sample baselines requires a later authorized engineering gate.
+Manager requested a bounded canonical-derived consistency correction, superseding
+the earlier stale-sample/test timing rationale. Canonical PROJECT-DESIGN is the
+authority: the existing generator now updates its sample, and the first Projects
+test now includes the approved product-tw DESIGNED → PARTIAL promotion. Current
+generator/test parity is recorded below. Earlier docs-only artifact timing wording
+describes c8856a6, not the corrected final branch. No Google Doc write, new formal
+source read, package generation, full Maven or browser campaign is part of this fix.
 
 Remaining: independent exact-SHA Design Sync review, separately authorized Git
 closeout/deployment, and later bounded Taiwan features. Sole formal captures are
 reused without a second source read. No Taiwan repository/runtime/config/data,
 Dashboard installation, shortcut, Scheduler/Runner/receipt or provider mutation.
+
+## Bounded Manager consistency correction (2026-10-03)
+
+Direct parent: `c8856a6b1154ebbfd143417bb2ebec708486c562`. One correction commit,
+same branch/worktree/PR14. Allowed changes only this Stage evidence,
+`design/prototype/project-design-sample.js` (existing generator, no hand edit),
+and the first canonical-status test in `tests/projects.test.mjs`. Existing exact
+33-ID order, baseline status checks for every other feature, nonempty fields,
+parser validation and all other assertions remain intact. The approved promotions
+are shell/overview/us/reports/tw; product-tw is PARTIAL. Exact counts are DONE19,
+PARTIAL6, BACKEND_READY3, DATA_READY0, DESIGNED2, IN_PROGRESS0, NOT_STARTED2,
+DEFERRED0, BLOCKED1, DROPPED0.
+
+Fresh targeted verification on correction content:
+
+| Check | Actual result |
+| --- | --- |
+| Existing generator `--check` | PASS; generated sample equals unchanged canonical, 33 IDs |
+| `node --test tests/projects.test.mjs` | 4 PASS, 0 FAIL, 0 SKIP |
+| `mvnw.cmd -B -Dtest=ProjectsResourceHttpTest test` | BUILD SUCCESS; 3 total, 2 PASS, 0 failures/errors, 1 existing conditional SKIP |
+| `git diff --check` | PASS |
+
+Maven used the environment-equivalent existing wrapper with JDK25; PROJECTS_NODE
+was unset only in that invocation. The third existing opt-in browser smoke remained
+skipped normally; no Maven-test edit or browser campaign. The two executed tests
+verified current canonical/resource bytes through isolated loopback Spring HTTP
+and restricted named-resource access, with collector/metadata mocked and TEMP DB.
+This test phase copied current canonical into test resources; it did not package
+or deploy a JAR. Existing candidate JAR SHA-256 remains
+`5926eef44ea5f11cabb3326077568a7d6ca627734e20213ec48cd41aa6eb2b1a`.
+
+All 214 protected non-doc files (the prior 216 minus the authorized sample/test)
+retain exact raw working SHA-256 and Git canonical bytes from accepted e2/c885
+evidence. Java/UI/runtime/config/parser/fixtures/other tests are unchanged.
+Canonical and all other engineering docs outside this Stage remain c885 content.
+The only Projects test edits are its first test name and three expected-value
+lines; other test bytes/assertions remain unchanged. Generator uses unchanged
+canonical/parser; no hand editing of sample.
+
+Private fresh logs: `.tools/tw-correction-generator.log`,
+`.tools/tw-correction-projects-node.log`, `.tools/tw-correction-projects-maven.log`;
+Maven XML: `target/surefire-reports/TEST-io.github.neil1031.dashboard.ProjectsResourceHttpTest.xml`.
+Private runtime and model proofs are `.tools/tw-correction-runtime-proof.json` and
+`.tools/tw-correction-model-proof.json`. These fresh targeted results are distinct
+from historical e2 full-suite evidence. Google Doc is not written; its accepted
+revision remains the one recorded above (management's fresh metadata confirms).
+No additional Taiwan source/DB read, Task/Runner operation, merge, deployment or
+new Stage. Final correction still requires independent exact-SHA review.

@@ -1,4 +1,4 @@
-// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: 2d4a03ca5484b927bec4a3df137ad4329a10d1f645e1de216474451e7d29fd25
+// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: eec1dce3c10470d1a1d5e0f971d30b836345970b606dbc6ac3eb35c10ccbd1af
 window.PROJECT_DESIGN_SAMPLE = Object.freeze({
   "metadata": {
     "project_id": "local-dashboard",
@@ -337,11 +337,11 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "area": "Product expansion",
       "name": "TW Stocks",
       "originalIntent": "原設計只看 AIStockHunter 排程",
-      "implementation": "Daily Scan／Accumulation／Candidates 已設計",
-      "status": "DESIGNED",
-      "limitation": "AIStockHunter 尚無穩定 Dashboard-facing export",
-      "remaining": "來源 repo 另審 ai-stock-hunter-export-v1",
-      "evidence": "docs/DASHBOARD-DATA-CONTRACTS.md"
+      "implementation": "TW Stocks v1 以 Taiwan Volume Watch 的 tw-daily-accumulation-v1、固定 ProcessBuilder、/api/tw/stocks 與 ui/tw-stocks.mjs 呈現七個唯讀區域；實作 e2bbbd85 已通過 Manager 核准",
+      "status": "PARTIAL",
+      "limitation": "NOT MERGED／NOT DEPLOYED；每日與週檢身分獨立，PARTIAL／UNKNOWN／null 保留，WARMING_UP 的零候選不代表無異常；無 range／paging／投資建議",
+      "remaining": "Git closeout／部署須另行授權；Performance、TW Reports、Data & Evidence、歷史範圍及 broader Taiwan roadmap 另行 gate",
+      "evidence": "docs/STAGE-TW-STOCKS-V1.md"
     },
     {
       "id": "product-performance",
@@ -508,8 +508,14 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "evidence": "docs/STAGE-RELEASE-2D.md"
     },
     {
+      "horizon": "PARTIAL",
+      "work": "TW Stocks v1",
+      "gate": "已核准 exact latest/date 唯讀 consumer，未合併／部署；Performance、TW Reports、Data & Evidence、history/range 與更廣 roadmap 分別另審",
+      "evidence": "docs/STAGE-TW-STOCKS-V1.md"
+    },
+    {
       "horizon": "DESIGNED",
-      "work": "TW Stocks／Performance",
+      "work": "Performance",
       "gate": "來源版控唯讀 contract、adapter、partial/null/provenance gate",
       "evidence": "docs/DASHBOARD-DATA-CONTRACTS.md"
     },
