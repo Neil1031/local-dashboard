@@ -1,10 +1,12 @@
 # TW Stocks v1 Consumer Integration
 
 Cross-project Taiwan workflow Stage 3; stable Dashboard feature `product-tw`.
-Historical Dashboard Stage 3A/3B identities are unchanged. Implementation ready
-for independent management review; unmerged, not deployed, Design Sync deferred.
+Historical Dashboard Stage 3A/3B identities are unchanged. Accepted implementation
+`e2bbbd85e6f3f5ac9464e8f0af688c64cc7113a0` is Manager approved; NOT MERGED,
+NOT DEPLOYED. The original implementation deferred Design Sync; the separately
+authorized ONE consolidated docs-only sync is recorded at the end.
 
-## Plan / Stage / Gate / Self-QA
+## Original implementation Plan / Stage / Gate / Self-QA
 
 - Goal: consume saved Taiwan daily observations through source-owned
   `tw-daily-accumulation-v1`, preserving incomplete data and independent identities.
@@ -27,11 +29,13 @@ for independent management review; unmerged, not deployed, Design Sync deferred.
   failure clearing, date/refresh/navigation, mobile/focus and existing regressions.
 - Stop: management review; no merge, Design Sync, installed-config edit or deployment.
 
-Current Manager instruction intentionally overrides normal consolidated design
-sync timing: only this Stage evidence and necessary fixtures are updated now.
+The original implementation Manager instruction intentionally overrode normal
+consolidated design sync timing: only this Stage evidence and necessary fixtures
+were updated at that time.
 `PROJECT-DESIGN.md`, `DASHBOARD-DATA-CONTRACTS.md`, As-Built, README, owner Google
-Doc and generated sample remain untouched. `product-tw` therefore remains
-DESIGNED in that existing canonical snapshot until a later authorized Design Sync.
+Doc and generated sample remained untouched in that accepted implementation.
+`product-tw` was DESIGNED in that historical snapshot. The current separately
+authorized Design Sync below promotes the engineering canonical to PARTIAL.
 
 ## Fixed process and configuration
 
@@ -149,7 +153,7 @@ it. No automatic polling. Loading and failures clear stale facts/cards/detail.
 DOM text only, no HTML injection or executable links. Native candidate dialog
 supports Tab/Space/Enter, visible focus, Escape and trigger-focus return.
 
-## Verification on final implementation content
+## Verification on accepted implementation content e2bbbd85
 
 | Check | Actual result |
 | --- | --- |
@@ -224,7 +228,8 @@ and sidecar absence, four Task definition XMLs, canonical HEAD/clean status all
 matched. No source creation/write, Task trigger, provider/scanner, notification,
 journal repair, source deployment/config edit or installed Dashboard mutation.
 Owned formal backend PID was identity-checked and stopped; ephemeral listener
-released. Preview is a separate owned synthetic helper retained for management QA.
+released. The separate owned synthetic preview helper was retained for management
+QA, then identity-checked and stopped after review; its listener was released.
 
 This is contract consumer compatibility, not Stage 1 natural-writer acceptance,
 market completeness, recommendation, future stability or installed Dashboard QA.
@@ -243,3 +248,68 @@ Full handoff includes exact candidate SHA/base/remote/clean state, PR, API/comma
 config, tests, synthetic PNGs, captured formal response/protection and known limits.
 The existing management Work independently reviews and owns
 `READY_FOR_MANAGER_REVIEW`; Sol does not self-approve.
+
+## ONE consolidated Design Sync (2026-10-03)
+
+Separately authorized scope: existing PROJECT-DESIGN, Data Contracts, As-Built,
+README's materially false active TW status, this bounded evidence appendix, and
+the same owner Google Doc. Accepted implementation remains
+`e2bbbd85e6f3f5ac9464e8f0af688c64cc7113a0`, Manager approved / NOT MERGED /
+NOT DEPLOYED. This ONE docs commit must directly parent that accepted SHA; no
+intermediate commit, merge, deployment or next Stage.
+
+Canonical parser check: 33 stable IDs; only `product-tw` DESIGNED → PARTIAL.
+All other 32 complete feature rows remain byte-identical. Counts: DONE19,
+PARTIAL6, BACKEND_READY3, DESIGNED2, NOT_STARTED2, BLOCKED1; other states zero.
+Broader Taiwan roadmap remains incomplete. Historical Local Dashboard Stage
+3A/3B and original AIStockHunter inventory/plans are retained, with their
+historical role distinguished from current Taiwan Volume Watch integration.
+
+Current architecture/API/exit-2 meaning/independent identities/null/privacy,
+seven UI areas and sole formal captured result are now in the existing
+engineering sources. Source canonical main and deployed image provenance remain
+separate; intentionally dirty installed Git checkout is not called clean main.
+Source contract owns selection and saved semantics; no direct private data reader.
+
+Owner Doc remains `1GgEEjKTNPTJ5ACMXQ6TIaXSUFYH9OugdP9LAOIQcgNs`, tab `t.0`.
+Fourteen unique existing paragraphs were changed under requiredRevisionId;
+no new document/tab/paragraph or chapter was created. Existing TW locations show
+implementation Manager-approved, main integration unchecked and deployment
+unchecked, with Performance/TW Reports/Data & Evidence/future range work retained.
+
+- Native revision before:
+  `ANLCKQm_RvFECoGaDpCWceH3ktoCMtQn7bUnbRK3yP71Z1dHqhTBgxdSVedv731cm6290Kov3xfaDF6We63h7qNSwuSRSSfk0ZePNeNKWj0`
+- Native revision after:
+  `ANLCKQmBiEGvvdnEqvblxPQ5FAVmbU0ZEl1sTCyWx44yI0d6SqKaY3HuV8NII4sGUiLWpc9R_Z9QpEv8l-Qym0HRbM93BBE4WoktsC_k0fs`
+- Full trusted/native before and after: 770 paragraphs each, 14 intended text
+  replacements, 756 other paragraphs unchanged after compensating shifted indexes.
+- All 24 H1 and 52 H2 texts/order/styles retained; tab topology, paragraph/text
+  styles, hanging indentation, native lists/link/object fields and out-of-scope
+  content identical. Readback has no protected controls, native link runs or
+  native bullet paragraphs; existing literal lists/URLs remain preserved.
+- Drive sharing/owner/parent metadata is exactly identical. No Taiwan owner Doc
+  update. Visual/PDF QA was neither performed nor claimed for this targeted edit.
+
+Mechanical proof captures all 216 non-doc tracked file blobs against accepted
+implementation, including source/UI/config/tests/fixtures/generated JS sample.
+Every canonical blob's full bytes match; working content matches those blobs
+under existing Git attributes. Raw working SHA-256/size is also retained privately
+(Windows checkout LF/CRLF is distinguished from canonical Git blob bytes).
+`git diff --check` and the existing v1 design parser pass for this documentation
+change. Private native/metadata/manifest comparison files are supplied to management.
+
+**Explicit timing override:** current Manager docs-only protection takes precedence
+over normal governance's generated-sample refresh/check workflow. Generated
+prototype and existing tests remain accepted implementation bytes, including the
+historical TW DESIGNED/count assertions. The generated sample and existing built
+Projects resource therefore do not yet reflect the new canonical PARTIAL state;
+generator parity is not claimed for this Design Sync. No generator run/regen,
+Maven, browser campaign, package rebuild or new formal source read was performed.
+The 241 Maven / 132 Node results and generator PASS above belong to accepted
+implementation content only; they are not fresh tests on this docs commit.
+Updating those test/sample baselines requires a later authorized engineering gate.
+
+Remaining: independent exact-SHA Design Sync review, separately authorized Git
+closeout/deployment, and later bounded Taiwan features. Sole formal captures are
+reused without a second source read. No Taiwan repository/runtime/config/data,
+Dashboard installation, shortcut, Scheduler/Runner/receipt or provider mutation.

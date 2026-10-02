@@ -41,7 +41,15 @@ current_design: Local investment research and automation console
 
 **目前設計：本機投資研究資料與自動化流程總控制台。** 產品設計把 Overview、Projects、Automations、US Stocks、TW Stocks、Performance、Reports、Data & Evidence、Settings 視為九個主要入口。Scheduler 只屬於 Automations 的一個資料來源；Runner 是另一種執行證據。股票來源須透過來源專案的唯讀版本化契約與 Dashboard adapter，不能讓畫面直接解讀外部 SQLite schema。
 
-Release 1B 九頁 primary navigation 與 operations Overview 已合併 main `654fc84`；Release 2A reports Signals 已核准並合併 main `479a767`，分數明示 Imported AI report。Release 2B 在 US Stocks 新增 SEC Transactions partial 切片：同一 bounded ProcessBuilder 的固定 `--source sec` operation、獨立 API 與 UI，保留 owners、non-P、derivative、candidate／review／quality flags、footnotes、null 與 sanitized provenance。P code／candidate 只是尚未認證候選，Form 4/A amendments/corrections 不自動合併或去重；sec:<accession>:<transaction_index> 是來源位置 ID，非 immutable business-event ID。交易日、申報日、accepted time、local discovered time 分開，insider execution price 非策略進場價。Release 2C 已實作 exact ticker 的 source-separated Ticker Detail aggregate，Reports／SEC 保持獨立 envelopes、分頁、ID、日期與 provenance，無 join／dedupe／combined score／PIT；已合併 main `44823ab`，尚未部署。US Stocks 維持 PARTIAL；Ticker Detail 的 Performance 尚未接入核准唯讀來源，Release 2D Reports · All／US Insider 已接入 source-owned Reports v1，正文安全 DOM 呈現與獨立 revision 分頁，product-reports 為 PARTIAL；All 目前只有 US Insider，TW Daily／Weekly 未接；revision 為正文/hash history，無 PIT／semantic diff。TW Stocks／Performance／Data & Evidence 維持 DESIGNED，Overview 不加股票 metrics。Release 2B 已通過 Manager Review 並合併 main `4acd568`；實際安裝狀態由獨立 deployment evidence 確認。Projects 保留 Release 1A-1 最小入口；`ui/projects.mjs` 讀取建置時原樣複製的 Local Dashboard 主檔，不即時讀 Git 工作目錄。`design/prototype/` 仍是獨立靜態樣本。每個未來受管理專案應在**自己的 repository** 保存 `docs/PROJECT-DESIGN.md` 與 stable `project_id`；Dashboard 只做 viewer／aggregator，不在自己的 repo 再維護另一套該專案 status。最小 Viewer 與 prototype generator 共用 `ui/project-design.mjs` v1 parser，保留來源 repo、歷史 baseline、設計版本、SHA-256 及讀取時間；固定同站單檔來源，拒絕轉址、格式錯誤、不支援版本及超過 256 KiB 的資料。未來跨專案來源仍須另審版本化匯出。
+Release 1B 九頁 primary navigation 與 operations Overview 已合併 main `654fc84`；Release 2A reports Signals 已核准並合併 main `479a767`，分數明示 Imported AI report。Release 2B 在 US Stocks 新增 SEC Transactions partial 切片：同一 bounded ProcessBuilder 的固定 `--source sec` operation、獨立 API 與 UI，保留 owners、non-P、derivative、candidate／review／quality flags、footnotes、null 與 sanitized provenance。P code／candidate 只是尚未認證候選，Form 4/A amendments/corrections 不自動合併或去重；sec:<accession>:<transaction_index> 是來源位置 ID，非 immutable business-event ID。交易日、申報日、accepted time、local discovered time 分開，insider execution price 非策略進場價。Release 2C 已實作 exact ticker 的 source-separated Ticker Detail aggregate，Reports／SEC 保持獨立 envelopes、分頁、ID、日期與 provenance，無 join／dedupe／combined score／PIT；已合併 main `44823ab`，尚未部署。US Stocks 維持 PARTIAL；Ticker Detail 的 Performance 尚未接入核准唯讀來源，Release 2D Reports · All／US Insider 已接入 source-owned Reports v1，正文安全 DOM 呈現與獨立 revision 分頁，product-reports 為 PARTIAL；All 目前只有 US Insider，TW Daily／Weekly 未接；revision 為正文/hash history，無 PIT／semantic diff。TW Stocks v1 已通過 Manager 實作核准，`product-tw` 為 PARTIAL，尚未合併／部署；Performance／Data & Evidence 維持 DESIGNED，Overview 不加股票 metrics。Release 2B 已通過 Manager Review 並合併 main `4acd568`；實際安裝狀態由獨立 deployment evidence 確認。Projects 保留 Release 1A-1 最小入口；`ui/projects.mjs` 讀取建置時原樣複製的 Local Dashboard 主檔，不即時讀 Git 工作目錄。`design/prototype/` 仍是獨立靜態樣本。每個未來受管理專案應在**自己的 repository** 保存 `docs/PROJECT-DESIGN.md` 與 stable `project_id`；Dashboard 只做 viewer／aggregator，不在自己的 repo 再維護另一套該專案 status。最小 Viewer 與 prototype generator 共用 `ui/project-design.mjs` v1 parser，保留來源 repo、歷史 baseline、設計版本、SHA-256 及讀取時間；固定同站單檔來源，拒絕轉址、格式錯誤、不支援版本及超過 256 KiB 的資料。未來跨專案來源仍須另審版本化匯出。
+
+### TW Stocks v1 current consumer slice
+
+核准實作為 `e2bbbd85e6f3f5ac9464e8f0af688c64cc7113a0`，parent／本輪 main 基準為 `9392949d90c0cc0f1f6defb4e9375e4b64f643e2`；**implementation approved / NOT MERGED / NOT DEPLOYED**。資料流是 Taiwan Volume Watch → source-owned `tw-daily-accumulation-v1` → 固定 `TaiwanStocksAdapter` ProcessBuilder → bounded `/api/tw/stocks` → `ui/tw-stocks.mjs`。來源擁有契約、run/date binding 與業務語意；Dashboard 不直接讀它的 private SQLite schema、journal、latest*.json 或 internal tables。
+
+七區為 source/snapshot state、Daily Observation、accumulation/readiness、source completeness、candidates/watchlist、responsibility、Weekly Check。首次進頁只載入一次 latest，explicit Refresh／exact date／Latest；無 polling，loading／失敗清除舊畫面，PARTIAL 保留有效 facts，candidate dialog 支援窄螢幕與鍵盤。COHERENT 不等於 business SUCCESS；PARTIAL 不等於 SUCCESS、UNKNOWN 不等於 NO、null 不等於 0。WARMING_UP 的 0 candidates 不代表沒有異常；latest attempt 與 latest finalized 分開，weekly FAILED 可與可用 daily observation 共存。
+
+Taiwan canonical main `1406ff78d40a748ed9edaada8802354514df593c` 與已部署 Stage 2 image `dad7b4978a4a15823abef641f9440d07bfc0fe11` 是不同 provenance；已安裝 Git checkout 有預期 dirty state，不能稱為 clean main 或等同整份 deployment image。僅一次正式 candidate-runtime GET 的 captured evidence 為 200/no-store/PARTIAL、target 2026-10-02、daily PARTIAL/WARMING_UP、0 candidates、獨立 latest attempt、weekly FAILED/來源明示 SELECTED_RESULT；這是 consumer compatibility PASS，非自然 writer／市場完整性／無異常／建議／未來穩定性／installed Dashboard 驗收。API、exit 2、privacy 與剩餘限制見 [Data Contracts](DASHBOARD-DATA-CONTRACTS.md#tw-stocks-v1-implemented-consumer) 與 [Stage evidence](STAGE-TW-STOCKS-V1.md)。本次 docs-only 不重建 package，Projects 已建置資源及 generated prototype 仍是 accepted implementation 的歷史快照。
 
 ## Goals
 
@@ -84,7 +92,7 @@ flowchart TD
 上圖的 Runner 線表示 Dashboard 讀它的 receipts，**不是** Dashboard 啟動 Runner。`JobNormalizer` 使用完整 Scheduler task path 產生 canonical Dashboard job ID；Runner 自己的 job/profile/execution IDs 分開保存，只能經可信的 full task mapping 關聯。更完整的啟停、API、DB 和 14:30／17:00 雙 trigger 例子見 [As-Built](DASHBOARD-AS-BUILT-ARCHITECTURE.md)。
 
 
-目前 Reports · All／US Insider 已是 `PARTIAL`，其他三個資料入口仍 `DESIGNED`。`product-shell` 列的「四頁」保留為 Release 1B 原切片當時限制；本輪依核准範圍不改其他 31 個 feature rows，後續 Reports 能力以 `product-reports` 及本段現況為準。
+目前 Reports · All／US Insider 與 TW Stocks v1 均為 `PARTIAL`，Performance／Data & Evidence 仍 `DESIGNED`。`product-shell` 列的「四頁」保留為 Release 1B 原切片當時限制。本次 consolidated Design Sync 僅更新 `product-tw`，其他 32 個 feature rows 原樣保留；33 IDs 不變，狀態為 DONE 19、PARTIAL 6、BACKEND_READY 3、DESIGNED 2、NOT_STARTED 2、BLOCKED 1，其餘為 0。
 
 ## Feature Matrix
 
@@ -121,7 +129,7 @@ flowchart TD
 | product-overview | Product expansion | Overview | 原本由 Today 看排程摘要 | 現有 jobs 全快照計數／未來 next run、七天已觀察 History、Runner coverage／diagnostics；Release 1B 已合併 | PARTIAL | 僅 operations；無股票 findings／freshness／reports。PARTIAL／unavailable 明示；缺 History 不推 MISSED | 跨來源 normalized feeds 後續另審 | docs/STAGE-RELEASE-1B.md |
 | product-projects | Product expansion | Projects | 原設計無跨專案設計檢視 | Release 1A-1 正式入口讀本專案建置設計快照，共用 v1 parser 並呈現功能／狀態數量 | PARTIAL | 最小切片已通過獨立初審及 Manager Review，合併 main `9e3c8cb`；安裝版本須另有 deployment evidence；完整閱讀面板／跨專案 aggregation 未完成 | 後續完成完整 Projects 閱讀面板／跨專案 aggregation，後續另審與驗證 | docs/STAGE-PROJECTS-VIEWER-R1A1.md |
 | product-us | Product expansion | US Stocks | 原設計只看 Insider 相關排程 | Release 2A reports Signals、2B SEC Transactions partial 已合併；2C exact ticker source-separated aggregate／獨立分頁／既有明細已實作 | PARTIAL | SEC P／candidate 尚未認證、4/A 未對帳，來源位置 ID 非 immutable event ID；相同 ticker 不推定來源關聯，不 join／dedupe／combined score；Performance 未接、跨頁非 PIT、無 freshness policy；2C 已合併 main `44823ab`、尚未部署；實際安裝狀態由獨立 deployment evidence 確認 | Performance 唯讀 contract／amendment reconciliation／PIT／broader analytics 另行 gate | docs/STAGE-RELEASE-2C.md |
-| product-tw | Product expansion | TW Stocks | 原設計只看 AIStockHunter 排程 | Daily Scan／Accumulation／Candidates 已設計 | DESIGNED | AIStockHunter 尚無穩定 Dashboard-facing export | 來源 repo 另審 ai-stock-hunter-export-v1 | docs/DASHBOARD-DATA-CONTRACTS.md |
+| product-tw | Product expansion | TW Stocks | 原設計只看 AIStockHunter 排程 | TW Stocks v1 以 Taiwan Volume Watch 的 tw-daily-accumulation-v1、固定 ProcessBuilder、/api/tw/stocks 與 ui/tw-stocks.mjs 呈現七個唯讀區域；實作 e2bbbd85 已通過 Manager 核准 | PARTIAL | NOT MERGED／NOT DEPLOYED；每日與週檢身分獨立，PARTIAL／UNKNOWN／null 保留，WARMING_UP 的零候選不代表無異常；無 range／paging／投資建議 | Git closeout／部署須另行授權；Performance、TW Reports、Data & Evidence、歷史範圍及 broader Taiwan roadmap 另行 gate | docs/STAGE-TW-STOCKS-V1.md |
 | product-performance | Product expansion | Performance | 原設計不分析選股效果 | 時距與觀測成熟度畫面已設計 | DESIGNED | 現有 performance-summary 非核准唯讀介面 | 取得來源唯讀 contract 後接入 | docs/DASHBOARD-DATA-CONTRACTS.md |
 | product-reports | Product expansion | Reports | 原設計不集中報告 | Release 2D All／US Insider 使用固定 list-reports／get-report v1；日期篩選、摘要、完整安全正文與獨立 revision metadata 分頁已實作 | PARTIAL | All 僅已接入 US Insider；TW Daily／Weekly 未接；counts 為目前保留列，revision 為正文/hash history、current 可在頁外或 MISSING，無 PIT／semantic diff／歷史 ticker score；2D 待管理初審、未合併／部署 | TW 唯讀 contract、broader report sources 另行 gate | docs/STAGE-RELEASE-2D.md |
 | product-evidence | Product expansion | Data & Evidence | 原設計只在工作詳情看狀態 | 原型規劃跨來源診斷、版本與 correlation | DESIGNED | Runner 診斷已存在，其他畫面未正式發佈 | 以現有證據建唯讀檢視 | docs/DASHBOARD-DESIGN-SPACE.md |
@@ -159,8 +167,8 @@ flowchart TD
 - Stage B correlation 是 shadow model，無正式 API／UI／table；`-2/+5 分鐘`、可能晚到 `3 小時`、Scheduler／Runner 合併 `30 秒` 都是研究 heuristics，不是 Windows provenance guarantee。
 - Scheduler `LastRunTime` 是最近一次值，Dashboard History 是**已觀察**結果；缺一筆不等於沒執行。Schedule version 的觀察時間也不是 Windows 實際修改時間。
 - Runner coverage 僅限有可信映射和可讀 receipts 的工作；缺 receipt 不代表 child 未執行。
-- Insider reports Signals 已合併 main `479a767`；SEC Transactions partial 已通過 Manager Review，合併 main `4acd568`；實際安裝狀態另由 deployment evidence 確認。兩種來源與 identity 分開，不依 ticker／日期 join；來源完整性、Form 4/A 對帳及 broader analytics 尚未完成。AIStockHunter 尚無穩定 `ai-stock-hunter-export-v1`，尚未接入。`DEFAULT 0` 不等於 observed 0；`latest` artifact 不是完整性保證。
-- Release 1B 九頁 Shell／operations Overview 已合併 main `654fc84`。Release 2A reports Signals 已合併 main `479a767`；Release 2B SEC Transactions partial 已合併 main `4acd568`；實際安裝狀態由獨立 deployment evidence 確認；2C 已合併 main `44823ab`、尚未部署，2D Reports · US Insider 已實作待管理初審、未合併／部署；TW Stocks／Performance／Data & Evidence 三個入口仍 DESIGNED。Projects 只有 Local Dashboard 建置快照最小入口，Release 1A-1 已通過獨立初審及 Manager Review，合併 main `9e3c8cb`；安裝版本須另有 deployment evidence；完整閱讀面板／aggregation 尚未完成，不連接其他 repo。
+- Insider reports Signals 已合併 main `479a767`；SEC Transactions partial 已通過 Manager Review，合併 main `4acd568`；實際安裝狀態另由 deployment evidence 確認。兩種來源與 identity 分開，不依 ticker／日期 join；來源完整性、Form 4/A 對帳及 broader analytics 尚未完成。歷史 AIStockHunter `ai-stock-hunter-export-v1` 規劃尚未接入；現行 TW Stocks v1 使用 Taiwan Volume Watch 已部署的 `tw-daily-accumulation-v1`，不讀 AIStockHunter 私有 tables。`DEFAULT 0` 不等於 observed 0；`latest` artifact 不是完整性保證。
+- Release 1B 九頁 Shell／operations Overview 已合併 main `654fc84`。Release 2A reports Signals 已合併 main `479a767`；Release 2B SEC Transactions partial 已合併 main `4acd568`；實際安裝狀態由獨立 deployment evidence 確認；2C 已合併 main `44823ab`、尚未部署，2D Reports · US Insider 已實作待管理初審、未合併／部署；TW Stocks v1 實作已核准、未合併／部署，`product-tw` 為 PARTIAL；Performance／Data & Evidence 兩個入口仍 DESIGNED。Projects 只有 Local Dashboard 建置快照最小入口，Release 1A-1 已通過獨立初審及 Manager Review，合併 main `9e3c8cb`；安裝版本須另有 deployment evidence；完整閱讀面板／aggregation 尚未完成，不連接其他 repo。
 
 ## Remaining Work
 
@@ -172,7 +180,8 @@ flowchart TD
 | PARTIAL | Overview operations slice | 現有真實 API 已接入且 Release 1B 已合併；不含股票 metrics | docs/STAGE-RELEASE-1B.md |
 | PARTIAL | US Stocks Signals／SEC Transactions／Ticker Detail | 2A／2B 已合併；2C source-separated aggregate 已合併 main `44823ab`、尚未部署，不建立跨來源 identity；Performance／4/A reconciliation／PIT／broader analytics 另審 | docs/STAGE-RELEASE-2C.md |
 | PARTIAL | Reports · All／US Insider | source-owned Reports v1 固定 list/get、safe DOM Markdown／revision paging；TW 未接，無 PIT／semantic diff；2D 待審、未合併／部署 | docs/STAGE-RELEASE-2D.md |
-| DESIGNED | TW Stocks／Performance | 來源版控唯讀 contract、adapter、partial/null/provenance gate | docs/DASHBOARD-DATA-CONTRACTS.md |
+| PARTIAL | TW Stocks v1 | 已核准 exact latest/date 唯讀 consumer，未合併／部署；Performance、TW Reports、Data & Evidence、history/range 與更廣 roadmap 分別另審 | docs/STAGE-TW-STOCKS-V1.md |
+| DESIGNED | Performance | 來源版控唯讀 contract、adapter、partial/null/provenance gate | docs/DASHBOARD-DATA-CONTRACTS.md |
 | DESIGNED | Data & Evidence／Schedule view | 對已保存版本與 Runner coverage 建唯讀檢視，保留 UNKNOWN | docs/STAGE-SCHEDULE-SNAPSHOT-HISTORY.md |
 | BLOCKED | Production MISSED | availability、trigger provenance、shadow 誤判與獨立 Manager gate | docs/STAGE-SCHEDULE-SEMANTICS-MISSED-READINESS.md |
 | LATER | Tray／auto-start／updater | 包裝與 rollback/security review，並非此 pilot 範圍 | docs/DASHBOARD-DESIGN-SPACE.md |
@@ -191,6 +200,7 @@ flowchart TD
 | API | `/api/us/signals` | 固定 Insider reports contract v1 的唯讀 adapter，不直接解讀外部 SQLite |
 | API | `/api/us/sec-transactions` | 固定 Insider sec contract v1，保留 source-position identity 與 transaction uncertainty |
 | API | `/api/reports/us-insider`、`/api/reports/us-insider/detail` | 固定 Reports v1 list/get、no-store、bounded 日期／獨立分頁；正文只在 detail |
+| API | `/api/tw/stocks` | Taiwan source-owned v1；無 date 為 LATEST_FINALIZED，單一 exact date 為 TARGET_DATE；no-store，無 range／paging／任意 path |
 | API | `/api/us/ticker-detail` | required exact ticker，既有 reports／SEC envelopes 分開聚合、獨立 bounded pagination；不推定來源關聯 |
 | DB | `job`、`job_run` | 已知 Scheduler 工作與已觀察完成執行 |
 | DB | `schedule_version`、`schedule_observation` | 排程定義 episode 與 presence 觀察 |
@@ -205,6 +215,7 @@ flowchart TD
 - **Release 2C：** [Ticker Detail source-separated aggregate](STAGE-RELEASE-2C.md)；已合併 main `44823ab`、尚未部署；Performance 尚未接入唯讀來源。
 - **Release 2D：** [Reports · US Insider](STAGE-RELEASE-2D.md)；固定 source-owned list/get、正文安全呈現、獨立 revision 分頁；待管理初審、未合併／部署。
 
+- **TW Stocks v1：** [核准 consumer 實作與唯一正式 smoke](STAGE-TW-STOCKS-V1.md)；`product-tw` PARTIAL，實作已核准、未合併／部署；歷史 Local Dashboard Stage 3A／3B 不變。
 - **現況如何運作：** [DASHBOARD-AS-BUILT-ARCHITECTURE.md](DASHBOARD-AS-BUILT-ARCHITECTURE.md)。可追查既有系統及已審查合併的 Release 1A-1 最小 Viewer；後續若修改現況說明，需同步檢查本主檔，保留歷史來源與驗證界線。
 - **產品空間與九頁方向：** [DASHBOARD-DESIGN-SPACE.md](DASHBOARD-DESIGN-SPACE.md)；[資料契約](DASHBOARD-DATA-CONTRACTS.md)。
 - **Runner：** [receipt UI](STAGE-RUNNER-RECEIPTS-UI.md)、[coverage diagnostics](STAGE-RUNNER-COVERAGE-DIAGNOSTICS.md)、[Scheduler 路徑可見性研究](STAGE-5B-R.md)。
@@ -222,3 +233,4 @@ flowchart TD
 | 2026-10-01 | 1 | Release 2B：US Stocks 新增 SEC Transactions partial，保留 nullable transaction facts、owners、non-P／derivative、footnotes、candidate／review／amendment uncertainty；不做 Form 4/A reconciliation。33 IDs／status counts 不變，product-us 維持 PARTIAL，installed app 未變更。 | READY_FOR_MANAGER_REVIEW; not merged / deployed |
 | 2026-10-01 | 1 | Release 2C：US Stocks Ticker Detail 以 required exact ticker 分別聚合既有 Reports／SEC，獨立狀態／分頁／明細；不 join／dedupe／combined score，Performance 未接、4/A／PIT 仍未完成。33 IDs／status counts 不變，product-us 維持 PARTIAL；本輪未部署。 | Development complete; awaiting management review; not merged / deployed |
 | 2026-10-01 | 1 | Release 2D：Reports · All／US Insider 接入 source-owned list/get v1、exact date、完整安全正文與 revision metadata 分頁；TW 未接、無 PIT／semantic diff。33 IDs 保留，只有 product-reports DESIGNED→PARTIAL。2C current wording 同步已合併 main 44823ab；本輪未部署。 | Development complete; awaiting management review; not merged / deployed |
+| 2026-10-03 | 1 | TW Stocks v1 consolidated Design Sync：核准實作 e2bbbd85 的 source-owned Taiwan consumer；僅 product-tw DESIGNED→PARTIAL，33 IDs／其他32 rows 不變；保留歷史 Stage 3A／3B，未合併／部署。 | Implementation Manager approved; Design Sync awaiting independent review |
