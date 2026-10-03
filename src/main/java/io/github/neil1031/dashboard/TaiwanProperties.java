@@ -7,4 +7,5 @@ import org.springframework.boot.context.properties.bind.DefaultValue;
 public record TaiwanProperties(@DefaultValue("false") boolean enabled,
         @DefaultValue("") String pythonPath, @DefaultValue("") String cliPath,
         @DefaultValue("") String databasePath, @DefaultValue("") String outputDir,
-        @DefaultValue("10") int timeoutSeconds) {}
+        @DefaultValue("10") int timeoutSeconds,
+        @DefaultValue("") String reportsCliPath) {}

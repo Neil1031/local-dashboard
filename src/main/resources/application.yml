@@ -10,6 +10,7 @@ dashboard:
       enabled: false
       python-path: ""
       cli-path: ""
+      reports-cli-path: ""
       database-path: ""
       output-dir: ""
       timeout-seconds: 10

@@ -772,8 +772,12 @@
     #twCandidateDetail { width:min(720px,calc(100vw - 40px));box-sizing:border-box;max-height:85vh;overflow:auto;overflow-wrap:anywhere;border:1px solid var(--border);border-radius:18px;padding:24px;color:var(--text);background:#fff8fb; }
     #twCandidateDetail::backdrop { background:rgba(65,35,50,.35); }
     @media(max-width:600px) { .tw-stocks { padding:16px; }#twCandidateDetail { padding:14px;width:calc(100vw - 24px); } }
-    #reportDetail { width:min(840px,calc(100vw - 32px));max-height:calc(100dvh - 32px);box-sizing:border-box;padding:24px;border:1px solid var(--border);border-radius:20px;background:var(--surface,#fff);color:var(--text);overflow:auto;overflow-wrap:anywhere; }
-    #reportDetail::backdrop { background:rgba(40,20,35,.42); }
+    #reportDetail,#twReportDetail { width:min(840px,calc(100vw - 32px));max-height:calc(100dvh - 32px);box-sizing:border-box;padding:24px;border:1px solid var(--border);border-radius:20px;background:var(--surface,#fff);color:var(--text);overflow:auto;overflow-wrap:anywhere; }
+    #reportDetail::backdrop,#twReportDetail::backdrop { background:rgba(40,20,35,.42); }
+    .tw-reports-section { margin-top:28px;padding-top:20px;border-top:1px solid var(--border);min-width:0;overflow-wrap:anywhere; }
+    .tw-report-limit { color:var(--text);background:var(--pink-soft,#fff3f8);padding:10px;border-radius:8px; }
+    .tw-fact-section { min-width:0;overflow-wrap:anywhere; }.tw-fact-section h4 { margin:12px 0 4px; }.tw-fact-section p { margin:4px 0; }
+    .tw-fact-record { margin:10px 0;padding:8px 12px;border-left:2px solid var(--border);min-width:0; }
     .report-detail-head { display:flex;align-items:center;justify-content:space-between;gap:12px; }
     .report-detail-head h2 { min-width:0;overflow-wrap:anywhere; }
     .report-markdown { min-width:0;line-height:1.7;overflow-wrap:anywhere; }
@@ -782,7 +786,7 @@
     .report-markdown h1 { font-size:24px; }.report-markdown h2 { font-size:21px; }
     .report-limitations { margin-top:20px;padding-top:16px;border-top:1px solid var(--border);line-height:1.6; }
     #reportRevisions { padding-left:20px; }
-    @media(max-width:600px) { .reports { padding:16px; }#reportDetail { padding:14px;width:calc(100vw - 24px); }.report-detail-head { flex-wrap:wrap; } }
+    @media(max-width:600px) { .reports { padding:16px; }#reportDetail,#twReportDetail { padding:14px;width:calc(100vw - 24px); }.report-detail-head { flex-wrap:wrap; } }
     .shell-content > .projects { padding:24px; }
     .shell-content [hidden] { display:none!important; }
     @media(max-width:900px) {
@@ -1041,16 +1045,42 @@
     <section class="panel reports" id="reportsView" data-page-view="reports" hidden>
       <p class="eyebrow">Reports · PARTIAL</p>
       <nav class="us-subnav" aria-label="Reports sources"><button type="button" data-reports-page="all">All</button><button type="button" data-reports-page="us">US Insider</button><button type="button" data-reports-page="tw-daily">TW Daily</button><button type="button" data-reports-page="tw-weekly">TW Weekly</button></nav>
-      <p>All 只顯示已接入來源，目前只有 US Insider。TW Daily／TW Weekly 尚未接入；沒有未接來源的假報告。</p>
+      <p>All 分開呈現 US Insider、TW Daily、TW Weekly；各來源狀態與分頁獨立，沒有跨來源總數或合成時間軸。</p>
       <div id="reportsConnected">
-        <h2 id="reportsConnectedTitle">All · 所有已接入來源（目前只有 US Insider）</h2>
+        <h2 id="reportsConnectedTitle">US Insider</h2>
         <form id="reportsFilter" class="signals-controls"><label for="reportsDate">Exact report date</label><input id="reportsDate" type="text" placeholder="YYYY-MM-DD" maxlength="10" autocomplete="off"><button type="submit">篩選</button><button id="reportsReload" type="button">重新讀取</button></form>
         <p id="reportsValidation" role="alert"></p><p id="reportsStatus" role="status"></p><p id="reportsSource" class="signal-source"></p><ul id="reportsWarnings" class="signal-warnings"></ul>
         <p>Stored signals 是目前保留的 ai_signal 列；active signals 是目前 active subset，均不是某個歷史正文的 ticker membership。</p>
         <div id="reportsRows" class="signals-grid"></div>
         <div class="signals-controls"><button id="reportsPrevious" type="button" disabled>Previous</button><span id="reportsPageCount"></span><button id="reportsNext" type="button" disabled>Next</button></div>
       </div>
-      <div id="reportsTw" hidden><h2 id="reportsTwTitle">TW Daily · DESIGNED</h2><p>尚未接入唯讀來源；此來源沒有報告資料。</p></div>
+      <section id="twReports-daily" class="tw-reports-section" hidden aria-labelledby="twDailyTitle">
+        <h2 id="twDailyTitle">TW Daily · 保存的每日觀察</h2>
+        <div class="signals-controls"><button id="twdaily-Reload" type="button">重新讀取 TW Daily</button></div>
+        <p id="twdaily-Status" role="status"></p><p id="twdaily-Source" class="signal-source"></p><ul id="twdaily-Warnings" class="signal-warnings"></ul>
+        <div id="twdaily-Rows" class="signals-grid"></div>
+        <div class="signals-controls"><button id="twdaily-Previous" type="button" disabled>Previous daily</button><span id="twdaily-Page"></span><button id="twdaily-Next" type="button" disabled>Next daily</button></div>
+      </section>
+      <section id="twReports-weekly" class="tw-reports-section" hidden aria-labelledby="twWeeklyTitle">
+        <h2 id="twWeeklyTitle">TW Weekly · 保存的週檢責任</h2>
+        <div class="signals-controls"><button id="twweekly-Reload" type="button">重新讀取 TW Weekly</button></div>
+        <p id="twweekly-Status" role="status"></p><p id="twweekly-Source" class="signal-source"></p><ul id="twweekly-Warnings" class="signal-warnings"></ul>
+        <div id="twweekly-Rows" class="signals-grid"></div>
+        <div class="signals-controls"><button id="twweekly-Previous" type="button" disabled>Previous weekly</button><span id="twweekly-Page"></span><button id="twweekly-Next" type="button" disabled>Next weekly</button></div>
+      </section>
+      <aside id="twReportsLimits" class="report-limitations" hidden><h3>Taiwan 保存報告的閱讀限制</h3>
+        <p>觀察不等於推薦，候選不等於買進；source anomaly score 不是投資分數。WARMING_UP 的 0 候選不代表沒有異常。</p>
+        <p>SUCCESS 不代表市場資料完整，PARTIAL 不等於 SUCCESS，UNKNOWN 不等於 NO，null 不等於 0。週檢 FAILED 是保存的業務狀態。</p>
+        <p>Daily／Weekly 各有獨立來源權威；沒有跨來源原子或 PIT snapshot。這是保存的證據，不是即時市場狀態；bounded page 不代表完整歷史。</p>
+      </aside>
+      <dialog id="twReportDetail" aria-labelledby="twReportTitle"><header class="report-detail-head"><h2 id="twReportTitle">Taiwan report</h2><button id="twReportClose" type="button" aria-label="Close Taiwan report detail">關閉</button></header>
+        <p id="twReportStatus" role="status"></p><p id="twReportSource" class="signal-source"></p><div class="signals-controls"><button id="twReportReload" type="button">重新讀取 Taiwan 明細</button></div>
+        <dl id="twReportMetadata" class="signal-facts"></dl><ul id="twReportWarnings" class="signal-warnings"></ul>
+        <h3>來源結構化事實 · machine truth</h3><div id="twReportFacts"></div>
+        <h3>來源 Markdown · 閱讀呈現</h3><div id="twReportBody" class="report-markdown"></div>
+        <p>每日觀察／週檢不構成投資推薦。保存總數與本次匯出筆數分開；未知值保留 null。逐日 binding 只呈現來源已驗證的關係，不補猜 missing joins；latest pointer 未檢查。</p>
+        <p>正文使用安全 Markdown／純文字；HTML、圖片與連結不執行。Taiwan report 沒有 US 的 revision 模型。</p>
+      </dialog>
       <dialog id="reportDetail" aria-labelledby="reportDetailTitle"><header class="report-detail-head signals-detail-head"><h2 id="reportDetailTitle">US Insider report</h2><button id="reportDetailClose" type="button" aria-label="Close report detail">Close</button></header>
         <p id="reportDetailStatus" role="status"></p><p id="reportDetailSource"></p><div class="signals-controls"><button id="reportDetailReload" type="button">重新讀取明細</button></div><dl id="reportMetadata" class="signal-facts"></dl><ul id="reportWarnings"></ul>
         <h3>Current report body · untrusted source text</h3><div id="reportBody" class="report-markdown"></div>

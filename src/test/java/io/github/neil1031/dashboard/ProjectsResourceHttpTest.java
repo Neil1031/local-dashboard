@@ -36,6 +36,7 @@ class ProjectsResourceHttpTest {
             {"/ui/us-stocks.mjs", "ui/us-stocks.mjs"}, {"/ui/us-sec-transactions.mjs", "ui/us-sec-transactions.mjs"},
             {"/ui/us-ticker-detail.mjs", "ui/us-ticker-detail.mjs"},
             {"/ui/reports.mjs", "ui/reports.mjs"}, {"/ui/safe-markdown.mjs", "ui/safe-markdown.mjs"},
+            {"/ui/tw-reports.mjs", "ui/tw-reports.mjs"},
             {"/ui/tw-stocks.mjs", "ui/tw-stocks.mjs"},
             {"/ui/performance.mjs", "ui/performance.mjs"},
             {"/dashboard.mjs", "dashboard.mjs"}, {"/index.html", "index.html"}}) {

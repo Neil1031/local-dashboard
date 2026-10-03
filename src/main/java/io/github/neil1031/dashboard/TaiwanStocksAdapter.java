@@ -78,6 +78,9 @@ public class TaiwanStocksAdapter {
     Process start(List<String> command) throws IOException {
         return BoundedSourceProcess.start(command);
     }
+    // Reports and Stocks share the same existing Taiwan process budget.
+    boolean acquireSlot() { return slots.tryAcquire(); }
+    void releaseSlot() { slots.release(); }
     private ObjectNode failure(String date, String state, String reason) {
         var r = TwStocksProjection.envelope(date, state, json);
         r.withArray("warnings").add(reason);

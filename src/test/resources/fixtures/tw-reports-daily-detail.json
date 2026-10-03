@@ -1,0 +1,125 @@
+{
+  "contractVersion": "tw-reports-v1",
+  "source": "TAIWAN_VOLUME_WATCH",
+  "generatedAt": "2026-10-03T11:52:30.629458+00:00",
+  "dataState": "READY",
+  "query": {
+    "operation": "DETAIL",
+    "reportType": "DAILY",
+    "reportId": "tw-daily:2026-09-25:11111111111111111111111111111111"
+  },
+  "report": {
+    "reportId": "tw-daily:2026-09-25:11111111111111111111111111111111",
+    "reportType": "DAILY",
+    "effectiveDate": "2026-09-25",
+    "targetDate": "2026-09-25",
+    "accumulationRunId": "11111111111111111111111111111111",
+    "savedAt": "2026-09-25T07:30:00+00:00",
+    "status": "PARTIAL",
+    "classificationStatus": "OBSERVATIONS_AVAILABLE",
+    "candidateCount": 1,
+    "facts": {
+      "scope": {
+        "mode": "DAILY_ACCUMULATION",
+        "startDate": "2026-09-21"
+      },
+      "strategyStatus": "OUT_OF_SCOPE",
+      "sources": [
+        {
+          "name": "TWSE:master",
+          "status": "SUCCESS",
+          "started_at": "2026-09-25T06:30:00+00:00",
+          "finished_at": "2026-09-25T07:30:00+00:00",
+          "reason_code": "SOURCE_SUCCESS"
+        }
+      ],
+      "markets": [
+        {
+          "market": "TWSE",
+          "complete": false,
+          "quote_scope_complete": true,
+          "rows": 1,
+          "expected_master_symbols": 2,
+          "fresh_rows": 1,
+          "unpriced_unknown_count": 1,
+          "status_unknown_count": 0,
+          "quote_scope_status": "NOT_REQUESTED"
+        }
+      ],
+      "readiness": {
+        "skippedCounts": {
+          "ZERO_VOLUME_OR_RECENT_HALT": 2
+        },
+        "warmingSymbols": 0,
+        "pendingCandidateNews": [
+          "2330"
+        ],
+        "reasonCode": "SAVED_READINESS"
+      },
+      "mappingDiagnostics": {
+        "state": "AVAILABLE",
+        "unmapped_symbols": [],
+        "recognized_exclusions": []
+      },
+      "baselineDiagnostics": {
+        "state": "AVAILABLE",
+        "records": [
+          {
+            "symbol": "2330",
+            "status": "READY",
+            "reason_code": "READY",
+            "expected_dates": [
+              "2026-09-24"
+            ],
+            "actual_dates": [
+              "2026-09-24"
+            ],
+            "lower_bound": "2026-09-21"
+          }
+        ]
+      },
+      "candidateSummary": {
+        "savedCandidateCount": 1,
+        "savedTotalCandidatesBeforeLimit": 1,
+        "savedTruncated": false,
+        "exportedCount": 1,
+        "exportTruncated": false
+      },
+      "candidates": [
+        {
+          "symbol": "2330",
+          "stockName": "台積電",
+          "market": "TWSE",
+          "signalDate": "2026-09-25",
+          "classification": "UNEXPLAINED_VOLUME",
+          "classificationBasis": "LATEST_FINALIZABLE",
+          "coverageStatus": "PARTIAL",
+          "analysisEligible": null,
+          "analysisEligibleSemantics": "NOT_APPLICABLE_DAILY_OBSERVATION",
+          "publicInfoCheck": {
+            "record_exists": true,
+            "status": "SUCCESS",
+            "succeeded": true,
+            "checked_at": "2026-09-25T07:30:00+00:00",
+            "as_of": null,
+            "coverage_status": "PARTIAL",
+            "reason_code": "SAVED_PUBLIC_INFO_CHECK"
+          },
+          "riskFlags": [
+            "PUBLIC_INFO_COVERAGE_INCOMPLETE"
+          ],
+          "anomalyRank": 1,
+          "sourceAnomalyScore": 72.0,
+          "volumeRatio": 2.2,
+          "volumeZscore": 3.1,
+          "baselineVolume": 1234.0
+        }
+      ],
+      "provenance": "SAVED_ACCUMULATION_RESULT_AND_MATCHING_SOURCE_HEADERS"
+    },
+    "markdown": "# TW Daily Observation\n\n- reportId: tw-daily:2026-09-25:11111111111111111111111111111111\n- reportType: DAILY\n- effectiveDate: 2026-09-25\n- targetDate: 2026-09-25\n- accumulationRunId: 11111111111111111111111111111111\n- savedAt: 2026-09-25T07:30:00+00:00\n- status: PARTIAL\n- classificationStatus: OBSERVATIONS_AVAILABLE\n- candidateCount: 1\n\n## Source completeness\n- scope:\n  - mode: DAILY_ACCUMULATION\n  - start Date: 2026-09-21\n- strategy Status: OUT_OF_SCOPE\n- sources: 1 exported\n  - record 1:\n    - name: TWSE:master\n    - status: SUCCESS\n    - started at: 2026-09-25T06:30:00+00:00\n    - finished at: 2026-09-25T07:30:00+00:00\n    - reason code: SOURCE_SUCCESS\n\n## Market / readiness\n- markets: 1 exported\n  - record 1:\n    - market: TWSE\n    - complete: False\n    - quote scope complete: True\n    - rows: 1\n    - expected master symbols: 2\n    - fresh rows: 1\n    - unpriced unknown count: 1\n    - status unknown count: 0\n    - quote scope status: NOT_REQUESTED\n- readiness:\n  - skipped Counts:\n    - ZERO VOLUME OR RECENT HALT: 2\n  - warming Symbols: 0\n  - pending Candidate News: [\"2330\"]\n  - reason Code: SAVED_READINESS\n- baseline Diagnostics:\n  - state: AVAILABLE\n  - records: 1 exported\n    - record 1:\n      - symbol: 2330\n      - status: READY\n      - reason code: READY\n      - expected dates: [\"2026-09-24\"]\n      - actual dates: [\"2026-09-24\"]\n      - lower bound: 2026-09-21\n\n## Candidates / watchlist\n- candidate Summary:\n  - saved Candidate Count: 1\n  - saved Total Candidates Before Limit: 1\n  - saved Truncated: False\n  - exported Count: 1\n  - export Truncated: False\n- candidates: 1 exported\n  - record 1:\n    - symbol: 2330\n    - stock Name: 台積電\n    - market: TWSE\n    - signal Date: 2026-09-25\n    - classification: UNEXPLAINED_VOLUME\n    - classification Basis: LATEST_FINALIZABLE\n    - coverage Status: PARTIAL\n    - analysis Eligible: null (NOT_APPLICABLE_DAILY_OBSERVATION)\n    - analysis Eligible Semantics: NOT_APPLICABLE_DAILY_OBSERVATION\n    - public Info Check:\n      - record exists: True\n      - status: SUCCESS\n      - succeeded: True\n      - checked at: 2026-09-25T07:30:00+00:00\n      - as of: null (UNKNOWN)\n      - coverage status: PARTIAL\n      - reason code: SAVED_PUBLIC_INFO_CHECK\n    - risk Flags: [\"PUBLIC_INFO_COVERAGE_INCOMPLETE\"]\n    - anomaly Rank: 1\n    - source Anomaly Score: 72.0\n    - volume Ratio: 2.2\n    - volume Zscore: 3.1\n    - baseline Volume: 1234.0\n- mapping Diagnostics:\n  - state: AVAILABLE\n  - unmapped symbols: []\n  - recognized exclusions: []\n\n## Public information\n- Saved publicInfoCheck and coverageStatus are separate facts. Missing records remain UNKNOWN; analysisEligible=null is not applicable to daily observations.\n\n## Known gaps / warnings\n- No projection gaps recorded.\n\n## Interpretation limits\n僅描述已儲存觀察，並非投資建議。候選不代表買進。source anomaly score 不是投資評分。WARMING_UP 的零候選不代表沒有異常。SUCCESS 不代表市場完整；PARTIAL 不等於 SUCCESS；UNKNOWN 不等於 NO；null 不等於 0。每日與每週來源獨立驗證；未宣稱跨來源原子快照、歷史時點完整性或未來可用性。\n",
+    "bodyTruncated": false
+  },
+  "page": null,
+  "warnings": []
+}

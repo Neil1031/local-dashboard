@@ -1,4 +1,5 @@
 import { renderMarkdown } from './safe-markdown.mjs';
+import { mountTwReports } from './tw-reports.mjs';
 
 export const REPORT_LIST_TIMEOUT_MS = 35000, REPORT_DETAIL_TIMEOUT_MS = 75000;
 const states = new Set(['READY', 'EMPTY', 'UNAVAILABLE', 'ERROR']);
@@ -61,6 +62,7 @@ export function readReportDetail(payload, query) {
 }
 
 export function mountReports(document, fetcher = globalThis.fetch.bind(globalThis)) {
+  const taiwan = mountTwReports(document, fetcher);
   const get = id => document.getElementById(id), panel = get('reportsConnected'), dialog = get('reportDetail');
   let active = false, current = 'all', listQuery = { limit: 20, offset: 0 }, detailQuery;
   let listRevision = 0, detailRevision = 0, listController, detailController, returnFocus;
@@ -140,9 +142,9 @@ export function mountReports(document, fetcher = globalThis.fetch.bind(globalThi
   }
   function select(next) {
     if (!['all','us','tw-daily','tw-weekly'].includes(next)) return;
-    cancelList(); closeDetail(); current = next; panel.hidden = !connected(); get('reportsTw').hidden = connected();
-    get('reportsConnectedTitle').textContent = current === 'all' ? 'All · 所有已接入來源（目前只有 US Insider）' : 'US Insider';
-    get('reportsTwTitle').textContent = current === 'tw-daily' ? 'TW Daily · DESIGNED' : 'TW Weekly · DESIGNED';
+    cancelList(); closeDetail(); current = next; panel.hidden = !connected();
+    get('reportsConnectedTitle').textContent = 'US Insider';
+    if (active) taiwan.show(current);
     for (const button of document.querySelectorAll('[data-reports-page]')) { const selected = button.dataset.reportsPage === current; button.classList.toggle('active', selected); if (selected) button.setAttribute('aria-current', 'page'); else button.removeAttribute('aria-current'); }
     if (active && connected()) void loadList();
   }
@@ -155,5 +157,5 @@ export function mountReports(document, fetcher = globalThis.fetch.bind(globalThi
   for (const direction of ['Previous','Next']) get('reports' + direction).addEventListener('click', () => { listQuery = { ...listQuery, offset: Math.max(0, listQuery.offset + (direction === 'Next' ? 1 : -1) * listQuery.limit) }; void loadList(); });
   for (const direction of ['Previous','Next']) get('reportRevision' + direction).addEventListener('click', () => { if (detailQuery) { detailQuery = { ...detailQuery, revisionOffset: Math.max(0, detailQuery.revisionOffset + (direction === 'Next' ? 1 : -1) * detailQuery.revisionLimit) }; void loadDetail(); } });
   get('reportDetailReload').addEventListener('click', () => void loadDetail());
-  return { show() { active = true; select(current); }, hide() { active = false; cancelList(); closeDetail(); } };
+  return { show() { active = true; select(current); }, hide() { active = false; cancelList(); closeDetail(); taiwan.hide(); } };
 }

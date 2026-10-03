@@ -1,0 +1,39 @@
+{
+  "contractVersion": "tw-reports-v1",
+  "source": "TAIWAN_VOLUME_WATCH",
+  "generatedAt": "2026-10-03T11:52:30.635096+00:00",
+  "dataState": "READY",
+  "query": {
+    "operation": "LIST",
+    "reportType": "WEEKLY",
+    "limit": 20,
+    "offset": 0
+  },
+  "report": null,
+  "page": {
+    "items": [
+      {
+        "reportId": "tw-weekly:2026-09-25:33333333333333333333333333333333",
+        "reportType": "WEEKLY",
+        "effectiveDate": "2026-09-25",
+        "weekStart": "2026-09-21",
+        "weekEnd": "2026-09-25",
+        "checkRunId": "33333333333333333333333333333333",
+        "checkedAt": "2026-09-25T14:30:00+00:00",
+        "status": "FAILED",
+        "dayStatusCounts": {
+          "FAILED": 1
+        },
+        "problemCount": 1,
+        "pendingRevalidationCount": 0,
+        "unfinishedRunCount": 0,
+        "warnings": []
+      }
+    ],
+    "offset": 0,
+    "limit": 20,
+    "hasMore": false,
+    "total": null
+  },
+  "warnings": []
+}
