@@ -1,9 +1,10 @@
+import { message, t, setText, setAttributeText, codeText, isMessage } from './i18n.mjs';
 import { renderMarkdown } from './safe-markdown.mjs';
 import { mountTwReports } from './tw-reports.mjs';
 
 export const REPORT_LIST_TIMEOUT_MS = 35000, REPORT_DETAIL_TIMEOUT_MS = 75000;
 const states = new Set(['READY', 'EMPTY', 'UNAVAILABLE', 'ERROR']);
-const value = v => v == null || v === '' ? '—' : String(v);
+const value = v => isMessage(v) ? v : v == null || v === '' ? '—' : String(v);
 export function exactReportDate(date, required = false) {
   if (!required && (date == null || date === '')) return null;
   if (typeof date !== 'string' || !/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(date) || date.startsWith('0000-')) throw new Error('INVALID_REPORT_DATE');
@@ -67,11 +68,11 @@ export function mountReports(document, fetcher = globalThis.fetch.bind(globalThi
   let active = false, current = 'all', listQuery = { limit: 20, offset: 0 }, detailQuery;
   let listRevision = 0, detailRevision = 0, listController, detailController, returnFocus;
   const connected = () => ['all', 'us'].includes(current);
-  const element = (tag, text, className) => { const node = document.createElement(tag); if (text != null) node.textContent = String(text); if (className) node.className = className; return node; };
-  const messages = { READY: 'READY', EMPTY: 'EMPTY · 沒有符合條件的 report。', UNAVAILABLE: 'UNAVAILABLE · 來源未設定或無法唯讀讀取。', ERROR: 'ERROR · 來源回應無法安全解析。' };
-  function status(id, text, alert = false) { get(id).textContent = text; get(id).setAttribute('role', alert ? 'alert' : 'status'); }
+  const element = (tag, text, className) => { const node = document.createElement(tag); if (text != null) setText(node, text); if (className) node.className = className; return node; };
+  const messages = { READY: 'READY', EMPTY: message("reports.empty.report"), UNAVAILABLE: message("reports.unavailable.2"), ERROR: message("reports.error.2") };
+  function status(id, text, alert = false) { setText(get(id), text); get(id).setAttribute('role', alert ? 'alert' : 'status'); }
   function clearDetail() {
-    for (const id of ['reportMetadata', 'reportWarnings', 'reportBody', 'reportRevisions', 'reportRevisionState', 'reportRevisionPage', 'reportDetailSource']) get(id).replaceChildren();
+    for (const id of ['reportMetadata', 'reportWarnings', 'reportBody', 'reportRevisions', 'reportRevisionState', 'reportRevisionPage', 'reportDetailSource']) setText(get(id), '');
     get('reportRevisionPrevious').disabled = get('reportRevisionNext').disabled = true;
   }
   function cancelDetail() { ++detailRevision; detailController?.abort(); dialog.setAttribute('aria-busy', 'false'); }
@@ -80,19 +81,19 @@ export function mountReports(document, fetcher = globalThis.fetch.bind(globalThi
   dialog.addEventListener('close', () => { cancelDetail(); clearDetail(); if (returnFocus?.isConnected) returnFocus.focus(); });
   function cancelList() { ++listRevision; listController?.abort(); panel.setAttribute('aria-busy', 'false'); }
   function clearList() {
-    for (const id of ['reportsRows', 'reportsSource', 'reportsWarnings', 'reportsPageCount']) get(id).replaceChildren();
+    for (const id of ['reportsRows', 'reportsSource', 'reportsWarnings', 'reportsPageCount']) setText(get(id), '');
     get('reportsPrevious').disabled = get('reportsNext').disabled = true;
   }
-  function source(payload) { const s = payload.sources.find(x => x.sourceId === 'insider-report-documents'); return `US Insider / AI report · contract v1 · 本次觀察 ${payload.observedAt} · 成功來源觀察 ${value(s?.lastObservedAt)}`; }
+  function source(payload) { const s = payload.sources.find(x => x.sourceId === 'insider-report-documents'); return message("reports.us.insider.ai.report.contract.v1", { value0: payload.observedAt, value1: value(s?.lastObservedAt) }); }
   function warnings(id, values) { get(id).replaceChildren(...values.map(text => element('li', text))); }
   function facts(node, item) {
-    for (const [label, key] of [['Report date','reportDate'],['Source report ID','reportId'],['Current imported time','importedAt'],['Current stored content hash','contentHash'],
-      ['Stored signals · 目前保留列','storedSignalCount'],['Active signals · 目前 active subset','activeSignalCount'],['Retained body/hash revisions','revisionCount'],['Created time','createdAt'],['Updated time','updatedAt']]) node.append(element('dt', label), element('dd', value(item[key])));
+    for (const [label, key] of [[message("performance.report.date"),'reportDate'],[message("reports.source.report.id"),'reportId'],[message("reports.current.imported.time"),'importedAt'],[message("reports.current.stored.content.hash"),'contentHash'],
+      [message("reports.stored.signals"),'storedSignalCount'],[message("reports.active.signals.active.subset"),'activeSignalCount'],[message("reports.retained.body.hash.revisions"),'revisionCount'],[message("reports.created.time"),'createdAt'],[message("reports.updated.time"),'updatedAt']]) node.append(element('dt', label), element('dd', value(item[key])));
   }
   async function loadDetail() {
     if (!active || !connected() || !dialog.open || !detailQuery) return;
     detailController?.abort(); const request = ++detailRevision, controller = new AbortController(); detailController = controller;
-    const query = { ...detailQuery }; clearDetail(); dialog.setAttribute('aria-busy', 'true'); status('reportDetailStatus', 'Loading report…');
+    const query = { ...detailQuery }; clearDetail(); dialog.setAttribute('aria-busy', 'true'); status('reportDetailStatus', message("reports.loading.report"));
     const timer = setTimeout(() => controller.abort(), REPORT_DETAIL_TIMEOUT_MS);
     try {
       const response = await fetcher(`/api/reports/us-insider/detail?${new URLSearchParams(query)}`, { cache: 'no-store', signal: controller.signal });
@@ -100,62 +101,62 @@ export function mountReports(document, fetcher = globalThis.fetch.bind(globalThi
       if (request !== detailRevision || !active || !connected() || !dialog.open) return;
       if (controller.signal.aborted) throw new Error('REPORT_REQUEST_ABORTED');
       status('reportDetailStatus', messages[payload.dataState], ['UNAVAILABLE', 'ERROR'].includes(payload.dataState));
-      get('reportDetailSource').textContent = source(payload); warnings('reportWarnings', [...payload.warnings, ...(payload.item?.parseWarnings || [])]);
+      setText(get('reportDetailSource'), source(payload)); warnings('reportWarnings', [...payload.warnings, ...(payload.item?.parseWarnings || [])]);
       if (payload.dataState !== 'READY') return;
       const item = payload.item; facts(get('reportMetadata'), item); renderMarkdown(document, get('reportBody'), item.rawMarkdown);
-      get('reportRevisionState').textContent = `Current revision ${item.currentRevisionStatus} · ID ${value(item.currentRevisionId)}；current 可在本頁之外，MATCHED 不代表重算 hash。`;
-      get('reportRevisions').replaceChildren(...item.revisions.map(row => { const li = element('li'); li.append(element('p', `Revision ${row.revisionId} · ${row.isCurrent ? 'isCurrent' : 'retained body/hash'}`), element('p', `Hash ${value(row.contentHash)}`), element('p', `首次觀察 ${value(row.importedAt)}`)); return li; }));
-      get('reportRevisionPage').textContent = `本頁 ${item.revisions.length} 筆 revision metadata · offset ${query.revisionOffset} · 每頁 ${query.revisionLimit}；不是完整切換 timeline。`;
+      setText(get('reportRevisionState'), message("reports.current.revision.id.current.matched.hash", { value0: item.currentRevisionStatus, value1: value(item.currentRevisionId) }));
+      get('reportRevisions').replaceChildren(...item.revisions.map(row => { const li = element('li'); li.append(element('p', message("reports.revision", { value0: row.revisionId, value1: row.isCurrent ? 'isCurrent' : 'retained body/hash' })), element('p', message("reports.hash", { value0: value(row.contentHash) })), element('p', message("reports.wording", { value0: value(row.importedAt) }))); return li; }));
+      setText(get('reportRevisionPage'), message("reports.revision.metadata.offset.timeline", { value0: item.revisions.length, value1: query.revisionOffset, value2: query.revisionLimit }));
       get('reportRevisionPrevious').disabled = query.revisionOffset === 0; get('reportRevisionNext').disabled = !payload.revisionPage.hasMore;
     } catch {
       if (request !== detailRevision || !active || !dialog.open) return;
-      clearDetail(); status('reportDetailStatus', 'ERROR · 無法安全取得 report；請重試。', true);
+      clearDetail(); status('reportDetailStatus', message("reports.error.report"), true);
     } finally { clearTimeout(timer); if (request === detailRevision) dialog.setAttribute('aria-busy', 'false'); }
   }
   function openDetail(item, trigger) {
     closeDetail(); returnFocus = trigger; detailQuery = { reportDate: item.reportDate, revisionLimit: 20, revisionOffset: 0 };
-    get('reportDetailTitle').textContent = `${item.reportDate} · US Insider report`; dialog.showModal(); get('reportDetailClose').focus(); void loadDetail();
+    setText(get('reportDetailTitle'), message("reports.us.insider.report", { value0: item.reportDate })); dialog.showModal(); get('reportDetailClose').focus(); void loadDetail();
   }
   async function loadList() {
     if (!active || !connected()) return;
     listController?.abort(); closeDetail(); const request = ++listRevision, controller = new AbortController(); listController = controller;
-    const query = { ...listQuery }; clearList(); panel.setAttribute('aria-busy', 'true'); status('reportsStatus', 'Loading reports…');
+    const query = { ...listQuery }; clearList(); panel.setAttribute('aria-busy', 'true'); status('reportsStatus', message("reports.loading.reports"));
     const timer = setTimeout(() => controller.abort(), REPORT_LIST_TIMEOUT_MS);
     try {
       const response = await fetcher(`/api/reports/us-insider?${new URLSearchParams(query)}`, { cache: 'no-store', signal: controller.signal });
       if (!response.ok) throw new Error('REPORT_REQUEST_FAILED'); const payload = readReports(await response.json(), query);
       if (request !== listRevision || !active || !connected()) return; if (controller.signal.aborted) throw new Error('REPORT_REQUEST_ABORTED');
-      status('reportsStatus', messages[payload.dataState], ['UNAVAILABLE','ERROR'].includes(payload.dataState)); get('reportsSource').textContent = source(payload); warnings('reportsWarnings', payload.warnings);
+      status('reportsStatus', messages[payload.dataState], ['UNAVAILABLE','ERROR'].includes(payload.dataState)); setText(get('reportsSource'), source(payload)); warnings('reportsWarnings', payload.warnings);
       get('reportsRows').replaceChildren(...payload.items.map(item => {
         const card = element('article', null, 'signal-card report-card'), open = element('button', item.reportDate, 'signal-open report-open'); open.type = 'button';
         open.addEventListener('click', () => openDetail(item, open)); const dl = element('dl', null, 'signal-facts'); facts(dl, item);
-        card.append(element('p', 'US Insider / AI report', 'eyebrow'), open, element('p', `Parse warnings ${item.parseWarnings.length}`), dl);
+        card.append(element('p', 'US Insider / AI report', 'eyebrow'), open, element('p', message("reports.parse.warnings", { value0: item.parseWarnings.length })), dl);
         if (item.parseWarnings.length) { const list = element('ul'); list.append(...item.parseWarnings.map(text => element('li', text))); card.append(list); }
         return card;
       }));
-      get('reportsPageCount').textContent = `本頁已載入 ${payload.items.length} 筆 · offset ${query.offset} · 每頁 ${query.limit}；非總報告數。`;
+      setText(get('reportsPageCount'), message("reports.offset", { value0: payload.items.length, value1: query.offset, value2: query.limit }));
       get('reportsPrevious').disabled = query.offset === 0 || !['READY','EMPTY'].includes(payload.dataState); get('reportsNext').disabled = !payload.page.hasMore;
     } catch {
       if (request !== listRevision || !active || !connected()) return;
-      clearList(); status('reportsStatus', 'ERROR · 無法安全取得 Reports；請重試。', true);
+      clearList(); status('reportsStatus', message("reports.error.reports"), true);
     } finally { clearTimeout(timer); if (request === listRevision) panel.setAttribute('aria-busy', 'false'); }
   }
   function select(next) {
     if (!['all','us','tw-daily','tw-weekly'].includes(next)) return;
     cancelList(); closeDetail(); current = next; panel.hidden = !connected();
-    get('reportsConnectedTitle').textContent = 'US Insider';
+    setText(get('reportsConnectedTitle'), 'US Insider');
     if (active) taiwan.show(current);
     for (const button of document.querySelectorAll('[data-reports-page]')) { const selected = button.dataset.reportsPage === current; button.classList.toggle('active', selected); if (selected) button.setAttribute('aria-current', 'page'); else button.removeAttribute('aria-current'); }
     if (active && connected()) void loadList();
   }
   document.querySelectorAll('[data-reports-page]').forEach(button => button.addEventListener('click', () => select(button.dataset.reportsPage)));
   get('reportsFilter').addEventListener('submit', event => {
-    event.preventDefault(); try { const date = exactReportDate(get('reportsDate').value); listQuery = { limit: 20, offset: 0, ...(date ? { date } : {}) }; get('reportsValidation').textContent = ''; void loadList(); }
-    catch { get('reportsValidation').textContent = '請輸入真實日曆日期 YYYY-MM-DD，或留空查看全部已接入報告。'; get('reportsDate').focus(); }
+    event.preventDefault(); try { const date = exactReportDate(get('reportsDate').value); listQuery = { limit: 20, offset: 0, ...(date ? { date } : {}) }; setText(get('reportsValidation'), ''); void loadList(); }
+    catch { setText(get('reportsValidation'), message("reports.invalidDate")); get('reportsDate').focus(); }
   });
   get('reportsReload').addEventListener('click', () => void loadList());
-  for (const direction of ['Previous','Next']) get('reports' + direction).addEventListener('click', () => { listQuery = { ...listQuery, offset: Math.max(0, listQuery.offset + (direction === 'Next' ? 1 : -1) * listQuery.limit) }; void loadList(); });
-  for (const direction of ['Previous','Next']) get('reportRevision' + direction).addEventListener('click', () => { if (detailQuery) { detailQuery = { ...detailQuery, revisionOffset: Math.max(0, detailQuery.revisionOffset + (direction === 'Next' ? 1 : -1) * detailQuery.revisionLimit) }; void loadDetail(); } });
+  for (const direction of ["Previous",'Next']) get('reports' + direction).addEventListener('click', () => { listQuery = { ...listQuery, offset: Math.max(0, listQuery.offset + (direction === 'Next' ? 1 : -1) * listQuery.limit) }; void loadList(); });
+  for (const direction of ["Previous",'Next']) get('reportRevision' + direction).addEventListener('click', () => { if (detailQuery) { detailQuery = { ...detailQuery, revisionOffset: Math.max(0, detailQuery.revisionOffset + (direction === 'Next' ? 1 : -1) * detailQuery.revisionLimit) }; void loadDetail(); } });
   get('reportDetailReload').addEventListener('click', () => void loadDetail());
   return { show() { active = true; select(current); }, hide() { active = false; cancelList(); closeDetail(); taiwan.hide(); } };
 }

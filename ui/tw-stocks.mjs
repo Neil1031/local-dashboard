@@ -1,5 +1,6 @@
+import { message, t, setText, setAttributeText, codeText, isMessage } from './i18n.mjs';
 const states = new Set(['COHERENT', 'PARTIAL', 'UNAVAILABLE', 'ERROR']);
-const text = v => v == null ? 'UNKNOWN / —' : String(v).replace(/(?:file:\/\/[^\s<>"']+|[a-z]:[\\/][^\s<>"']+|\\\\[^\s<>"']+|(?<![\w:])\/(?:[^\s/]+\/)+[^\s<>"']*)/gi, '[local path omitted]');
+const text = v => isMessage(v) ? String(v) : v == null ? 'UNKNOWN / —' : String(v).replace(/(?:file:\/\/[^\s<>"']+|[a-z]:[\\/][^\s<>"']+|\\\\[^\s<>"']+|(?<![\w:])\/(?:[^\s/]+\/)+[^\s<>"']*)/gi, '[local path omitted]');
 export function validTwDate(s) {
   return typeof s === 'string' && /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(s) && !s.startsWith('0000-')
     && Number.isFinite(Date.parse(`${s}T00:00:00Z`)) && new Date(`${s}T00:00:00Z`).toISOString().slice(0, 10) === s;
@@ -35,87 +36,88 @@ export function readTwStocks(p, date = null) {
 export function mountTwStocks(document, fetchSource = globalThis.fetch.bind(globalThis)) {
   const get = id => document.getElementById(id), panel = get('twView'), dialog = get('twCandidateDetail');
   let active = false, loaded = false, pending = false, date = null, revision = 0, controller, returnFocus;
-  const node = (tag, value, cls) => { const n = document.createElement(tag); if (value != null) n.textContent = text(value); if (cls) n.className = cls; return n; };
+  const node = (tag, value, cls) => { const n = document.createElement(tag); if (value != null) setText(n, value, text); if (cls) n.className = cls; return n; };
   const fact = (list, label, v) => list.append(node('dt', label), node('dd', v == null ? 'UNKNOWN / —' : v));
   const facts = (root, entries) => { const dl = node('dl', null, 'signal-facts'); entries.forEach(([label, v]) => fact(dl, label, v)); root.append(dl); };
-  const counts = v => v == null ? 'UNKNOWN' : Object.entries(v).map(([k,n]) => `${k}: ${n}`).join(' · ') || '來源保存 0 項';
-  const values = v => v == null ? 'UNKNOWN' : v.length ? v.join(' · ') : '來源保存 0 項';
+  const counts = v => v == null ? codeText('UNKNOWN') : Object.keys(v).length
+    ? message('common.heldText', { text: Object.entries(v).map(([k,n]) => message('common.codeCount', { code: codeText(k), count: n })) }) : message("tw-stocks.0");
+  const values = v => v == null ? 'UNKNOWN' : v.length ? v.join(' · ') : message("tw-stocks.0");
   const close = () => { if (dialog.open) dialog.close(); };
   dialog.addEventListener('close', () => { if (returnFocus?.isConnected) returnFocus.focus(); });
   get('twCandidateClose').addEventListener('click', close);
-  function clear() { close(); for (const id of ['twDaily','twAccumulation','twSources','twCandidates','twResponsibility','twWeekly','twWarnings','twCandidateBody']) get(id).replaceChildren(); }
+  function clear() { close(); for (const id of ['twDaily','twAccumulation','twSources','twCandidates','twResponsibility','twWeekly','twWarnings','twCandidateBody']) setText(get(id), ''); }
   function detail(c, trigger) {
-    returnFocus = trigger; get('twCandidateTitle').textContent = `${text(c.symbol)} · ${text(c.stockName)}`;
+    returnFocus = trigger; setText(get('twCandidateTitle'), message("display.wording.4", { value0: text(c.symbol), value1: text(c.stockName) }));
     const body = get('twCandidateBody'); body.replaceChildren();
-    facts(body, [['Market',c.market],['Signal date',c.signalDate],['分類',c.classification],['分類依據',c.classificationBasis],['Coverage',c.coverageStatus],
-      ['Anomaly rank',c.anomalyRank],['Anomaly score · 來源異常分數',c.anomalyScore],['Volume ratio',c.volumeRatio],['Volume z-score',c.volumeZscore],['Baseline volume',c.baselineVolume],['Risk flags',values(c.riskFlags)]]);
-    body.append(node('h3','Public-info source check'));
-    facts(body, [['Status',c.publicInfoCheck.status],['Record exists',c.publicInfoCheck.recordExists],['Source succeeded',c.publicInfoCheck.succeeded],['Checked at',c.publicInfoCheck.checkedAt],['As of',c.publicInfoCheck.asOf],['Coverage',c.publicInfoCheck.coverageStatus],['Reason',c.publicInfoCheck.reasonCode]]);
-    body.append(node('p','SUCCESS 只表示該來源檢查成功，不能解讀為分析完成或適合投資。每日觀察不適用投資 eligibility（null）。'));
+    facts(body, [[message("evidence.market"),c.market],[message("tw-stocks.signal.date"),c.signalDate],[message("tw-stocks.wording"),c.classification],[message("tw-stocks.wording.2"),c.classificationBasis],[message("automations.coverage"),codeText(c.coverageStatus)],
+      [message("tw-stocks.anomaly.rank"),c.anomalyRank],[message("tw-stocks.anomaly.score"),c.anomalyScore],[message("tw-stocks.volume.ratio"),c.volumeRatio],[message("tw-stocks.volume.z.score"),c.volumeZscore],[message("tw-stocks.baseline.volume"),c.baselineVolume],[message("tw-stocks.risk.flags"),values(c.riskFlags)]]);
+    body.append(node('h3',message("tw-stocks.public.info.source.check")));
+    facts(body, [[message("common.status"),codeText(c.publicInfoCheck.status)],[message("tw-stocks.record.exists"),c.publicInfoCheck.recordExists],[message("reason.SOURCE_SUCCESS"),c.publicInfoCheck.succeeded],[message("evidence.checked.at"),c.publicInfoCheck.checkedAt],[message("tw-stocks.as.of"),c.publicInfoCheck.asOf],[message("automations.coverage"),codeText(c.publicInfoCheck.coverageStatus)],[message("common.reason"),codeText(c.publicInfoCheck.reasonCode)]]);
+    body.append(node('p',message("tw-stocks.success.eligibility.null")));
     dialog.showModal(); get('twCandidateClose').focus();
   }
   function render(p) {
-    get('twStatus').textContent = `${p.dataState} · ${p.dataState === 'COHERENT' ? '保存快照一致；不代表商業成功或資料完整。' : p.dataState === 'PARTIAL' ? '保留可用來源事實；請一併閱讀缺口。' : '來源不可用，不能當成零候選。'}`;
-    get('twProvenance').textContent = `${p.query.mode}${date ? ` · ${date}` : ''} · Dashboard read: ${text(p.observedAt)} · Source generated: ${text(p.generatedAt)}`;
+    setText(get('twStatus'), message('common.stateNotice', { state: codeText(p.dataState), notice: p.dataState === 'COHERENT' ? message('tw-stocks.wording.3') : p.dataState === 'PARTIAL' ? message('tw.status.partial') : message('tw.status.unavailable') }));
+    setText(get('twProvenance'), message("tw-stocks.dashboard.read.source.generated", { value0: p.query.mode, value1: date ? ` · ${date}` : '', value2: text(p.observedAt), value3: text(p.generatedAt) }));
     p.warnings.forEach(w => get('twWarnings').append(node('li',w)));
     if (p.snapshot === null) return;
     const o = p.observation, attempt = p.latestAttempt, finalized = p.latestFinalized;
-    for (const [title, entries] of [['最新嘗試 · Latest attempt', [['Run ID',attempt?.runId],['State',attempt?.state],['Status',attempt?.status],['Created at',attempt?.createdAt],['Started at',attempt?.startedAt],['Finished at',attempt?.finishedAt],['Scheduled dates',values(attempt?.scheduledDates)],['Business finalized',attempt?.businessFinalized]]],
-      ['已保存觀察 · Latest finalized', [['Target date',finalized?.targetDate],['Run ID',finalized?.runId],['Saved status',finalized?.status],['Saved finished at',finalized?.finishedAt],['Classification / readiness',o?.classificationStatus]]]]) {
+    for (const [title, entries] of [[message("evidence.latest.attempt"), [[message("common.runId"),attempt?.runId],[message("evidence.state"),codeText(attempt?.state)],[message("common.status"),codeText(attempt?.status)],[message("common.createdAt"),attempt?.createdAt],[message("tw-stocks.started.at"),attempt?.startedAt],[message("tw-stocks.finished.at"),attempt?.finishedAt],[message("tw-stocks.scheduled.dates"),values(attempt?.scheduledDates)],[message("evidence.business.finalized"),attempt?.businessFinalized]]],
+      [message("tw-stocks.latest.finalized"), [[message("evidence.target.date"),finalized?.targetDate],[message("common.runId"),finalized?.runId],[message("evidence.saved.status"),codeText(finalized?.status)],[message("tw-stocks.saved.finished.at"),finalized?.finishedAt],[message("tw-stocks.classification.readiness"),codeText(o?.classificationStatus)]]]]) {
       const card = node('article',null,'tw-card'); card.append(node('h3',title)); facts(card,entries); get('twDaily').append(card);
     }
-    facts(get('twAccumulation'), [['Scope state',p.scope.state],['Scope mode',p.scope.mode],['Accumulation start',p.scope.startDate]]);
-    if (!o) { get('twCandidates').append(node('p','UNAVAILABLE · 沒有可驗證的已保存 daily observation；不表示沒有候選。')); get('twAccumulation').append(node('p','Readiness UNAVAILABLE · 沒有已保存 daily observation；scope 事實獨立保留。')); }
+    facts(get('twAccumulation'), [[message("evidence.scope.state"),codeText(p.scope.state)],[message("evidence.scope.mode"),p.scope.mode],[message("tw-stocks.accumulation.start"),p.scope.startDate]]);
+    if (!o) { get('twCandidates').append(node('p',message("tw-stocks.unavailable.daily.observation"))); get('twAccumulation').append(node('p',message("tw-stocks.readiness.unavailable.daily.observation.scope"))); }
     else {
-      facts(get('twAccumulation'), [['Readiness',o.classificationStatus],['Skipped counts',counts(o.readiness.skippedCounts)],['Warming symbols',o.readiness.warmingSymbols],['Pending source news',values(o.readiness.pendingCandidateNews)],['Readiness reason',o.readiness.reasonCode],['Baseline diagnostics',o.baselineSessionDiagnostics.state],['Mapping diagnostics',o.mappingDiagnostics.state],['Unmapped symbols · 不是候選',values(o.mappingDiagnostics.unmappedSymbols)],['Recognized exclusions · 獨立於未映射',o.mappingDiagnostics.recognizedExclusions == null ? null : o.mappingDiagnostics.recognizedExclusions.length]]);
+      facts(get('twAccumulation'), [[message("tw.readiness"),codeText(o.classificationStatus)],[message("tw.skippedCounts"),counts(o.readiness.skippedCounts)],[message("evidence.warming.symbols"),o.readiness.warmingSymbols],[message("tw.pendingSourceNews"),values(o.readiness.pendingCandidateNews)],[message("evidence.readiness.reason"),codeText(o.readiness.reasonCode)],[message("evidence.baselineState"),codeText(o.baselineSessionDiagnostics.state)],[message("evidence.mappingState"),codeText(o.mappingDiagnostics.state)],[message("tw-stocks.unmapped.symbols"),values(o.mappingDiagnostics.unmappedSymbols)],[message("tw-stocks.recognized.exclusions"),o.mappingDiagnostics.recognizedExclusions == null ? null : o.mappingDiagnostics.recognizedExclusions.length]]);
       if (o.baselineSessionDiagnostics.records.length) {
-        const d = node('details'); d.append(node('summary',`Saved baseline diagnostics (${o.baselineSessionDiagnostics.records.length})`));
-        for (const b of o.baselineSessionDiagnostics.records) facts(d,[['Symbol',b.symbol],['State',b.status],['Reason',b.reasonCode],['Reason date',b.reasonDate],['Lower bound',b.lowerBound],['Expected dates',values(b.expectedDates)],['Actual dates',values(b.actualDates)],['Missing dates',values(b.missingDates)]]);
+        const d = node('details'); d.append(node('summary',message("tw-stocks.saved.baseline.diagnostics", { value0: o.baselineSessionDiagnostics.records.length })));
+        for (const b of o.baselineSessionDiagnostics.records) facts(d,[[message("evidence.symbol"),b.symbol],[message("evidence.state"),codeText(b.status)],[message("common.reason"),codeText(b.reasonCode)],[message("evidence.reason.date"),b.reasonDate],[message("evidence.lower.bound"),b.lowerBound],[message("evidence.expected.dates"),values(b.expectedDates)],[message("evidence.actual.dates"),values(b.actualDates)],[message("evidence.missing.dates"),values(b.missingDates)]]);
         get('twAccumulation').append(d);
       }
       if (o.mappingDiagnostics.recognizedExclusions?.length) {
-        const d = node('details'); d.append(node('summary','Source-backed recognized exclusions'));
-        o.mappingDiagnostics.recognizedExclusions.forEach(e=>facts(d,[['Symbol',e.symbol],['Market',e.market],['Source',e.source],['Source date',e.sourceDate],['Reason',e.reasonCode]])); get('twAccumulation').append(d);
+        const d = node('details'); d.append(node('summary',message("tw-stocks.source.backed.recognized.exclusions")));
+        o.mappingDiagnostics.recognizedExclusions.forEach(e=>facts(d,[[message("evidence.symbol"),e.symbol],[message("evidence.market"),e.market],[message("common.source"),e.source],[message("evidence.source.date"),e.sourceDate],[message("common.reason"),codeText(e.reasonCode)]])); get('twAccumulation').append(d);
       }
-      for (const s of o.sources) { const card = node('article',null,'tw-card'); card.append(node('h3',`${s.name} · ${s.status}`)); facts(card,[['Started',s.startedAt],['Finished',s.finishedAt],['Reason',s.reasonCode]]); get('twSources').append(card); }
-      if (!o.sources.length) get('twSources').append(node('p','沒有已保存 source headers；請查看 reason codes，不能推定來源成功。'));
-      for (const m of o.markets) { const card=node('article',null,'tw-card');card.append(node('h3',`${m.market} · saved completeness`));facts(card,[['Complete',m.complete],['Rows',m.rows],['Expected symbols',m.expectedMasterSymbols],['Fresh rows',m.freshRows],['Unpriced unknown',m.unpricedUnknownCount],['Status unknown',m.statusUnknownCount],['Quote scope',m.quoteScopeStatus],['Quote scope complete',m.quoteScopeComplete]]);get('twSources').append(card); }
+      for (const s of o.sources) { const card = node('article',null,'tw-card'); card.append(node('h3',message("display.wording.4", { value0: s.name, value1: s.status }))); facts(card,[[message("automations.started"),s.startedAt],[message("evidence.finished"),s.finishedAt],[message("common.reason"),codeText(s.reasonCode)]]); get('twSources').append(card); }
+      if (!o.sources.length) get('twSources').append(node('p',message("tw-stocks.source.headers.reason.codes")));
+      for (const m of o.markets) { const card=node('article',null,'tw-card');card.append(node('h3',message("tw-stocks.saved.completeness", { value0: m.market })));facts(card,[[message("evidence.complete"),m.complete],[message("evidence.rows"),m.rows],[message("evidence.expected.symbols"),m.expectedMasterSymbols],[message("evidence.freshRows"),m.freshRows],[message("evidence.unpriced.unknown"),m.unpricedUnknownCount],[message("evidence.status.unknown"),m.statusUnknownCount],[message("tw-stocks.quote.scope"),codeText(m.quoteScopeStatus)],[message("evidence.quote.scope.complete"),m.quoteScopeComplete]]);get('twSources').append(card); }
       const summary = o.candidateSummary;
-      get('twCandidates').append(node('p',`來源候選 metadata: ${summary.state} · Saved count: ${text(summary.savedCandidateCount)} · Saved total: ${text(summary.savedTotalCandidatesBeforeLimit)} · Truncated: ${text(summary.savedTruncated)} · Exported: ${summary.exportedCount}`));
-      if (!o.candidates.length) get('twCandidates').append(node('p',o.classificationStatus === 'WARMING_UP' ? '目前來源回傳 0 個候選；資料仍在 WARMING_UP，不能解讀為沒有異常。' : '來源目前回傳 0 個候選；這只描述選定觀察，不能推定市場沒有異常。','tw-empty'));
+      get('twCandidates').append(node('p',message("tw-stocks.metadata.saved.count.saved.total.truncated.exported", { value0: summary.state, value1: text(summary.savedCandidateCount), value2: text(summary.savedTotalCandidatesBeforeLimit), value3: text(summary.savedTruncated), value4: summary.exportedCount })));
+      if (!o.candidates.length) get('twCandidates').append(node('p',o.classificationStatus === 'WARMING_UP' ? message("tw.noCandidatesWarming") : message("tw.noCandidates"),'tw-empty'));
       for (const c of o.candidates) {
-        const card=node('article',null,'tw-card tw-candidate'); const trigger=node('button',`${c.symbol} · ${text(c.stockName)}`,'tw-candidate-open');trigger.type='button';trigger.addEventListener('click',()=>detail(c,trigger));card.append(trigger);
-        facts(card,[['Market / date',`${c.market} · ${c.signalDate}`],['Classification',c.classification],['Coverage',c.coverageStatus],['Anomaly score · 來源異常分數',c.anomalyScore],['Anomaly rank',c.anomalyRank]]);get('twCandidates').append(card);
+        const card=node('article',null,'tw-card tw-candidate'); const trigger=node('button',message("display.wording.4", { value0: c.symbol, value1: text(c.stockName) }),'tw-candidate-open');trigger.type='button';trigger.addEventListener('click',()=>detail(c,trigger));card.append(trigger);
+        facts(card,[[message("tw-stocks.market.date"),`${c.market} · ${c.signalDate}`],[message("evidence.classification"),c.classification],[message("automations.coverage"),codeText(c.coverageStatus)],[message("tw-stocks.anomaly.score"),c.anomalyScore],[message("tw-stocks.anomaly.rank"),c.anomalyRank]]);get('twCandidates').append(card);
       }
     }
     const responsibility = p.responsibility;
-    facts(get('twResponsibility'),[['State',responsibility.state],['Pending revalidation count',responsibility.pendingCount],['Unfinished run count',responsibility.unfinishedCount],['Truncated · totals may be unknown',responsibility.truncated]]);
-    if (responsibility.state === 'UNKNOWN') get('twResponsibility').append(node('p','Journal 責任證據 UNKNOWN；不能解讀為 0 項待辦。'));
+    facts(get('twResponsibility'),[[message("evidence.state"),codeText(responsibility.state)],[message("tw-stocks.pending.revalidation.count"),responsibility.pendingCount],[message("tw-stocks.unfinished.run.count"),responsibility.unfinishedCount],[message("tw-stocks.truncated.totals.may.be.unknown"),responsibility.truncated]]);
+    if (responsibility.state === 'UNKNOWN') get('twResponsibility').append(node('p',message("tw-stocks.journal.unknown.0")));
     if (responsibility.pendingRevalidation?.length || responsibility.unfinishedRuns?.length) {
-      const d=node('details');d.append(node('summary','來源保存的待辦明細'));
-      responsibility.pendingRevalidation?.forEach(r=>facts(d,[['Target date',r.targetDate],['Origin run',r.originRunId],['Required at',r.requiredAt]]));
-      responsibility.unfinishedRuns?.forEach(r=>facts(d,[['Run ID',r.runId],['State',r.state],['Relevant dates',values(r.relevantTargetDates)]]));get('twResponsibility').append(d);
+      const d=node('details');d.append(node('summary',message("tw-stocks.wording.4")));
+      responsibility.pendingRevalidation?.forEach(r=>facts(d,[[message("evidence.target.date"),r.targetDate],[message("tw-stocks.origin.run"),r.originRunId],[message("evidence.required.at"),r.requiredAt]]));
+      responsibility.unfinishedRuns?.forEach(r=>facts(d,[[message("common.runId"),r.runId],[message("evidence.state"),codeText(r.state)],[message("evidence.relevant.dates"),values(r.relevantTargetDates)]]));get('twResponsibility').append(d);
     }
     const w=p.weeklyCheck;
-    get('twWeekly').append(node('p','Weekly check_run_id 是獨立身分；FAILED 不會抹除 daily observation。'));
-    facts(get('twWeekly'),[['State',w.state],['Check run ID',w.checkRunId],['Checked at',w.checkedAt],['Week start',w.weekStart],['Week end',w.weekEnd],['Status',w.status],['Problems',w.problemCount],['Day counts',counts(w.dayStatusCounts)],['Pending revalidation',w.pendingRevalidationCount],['Unfinished runs',w.unfinishedRunCount],['Binding',w.binding],['Pointer corroboration',w.pointerState]]);
-    get('twWeekly').append(node('p',w.binding==='SELECTED_RESULT' ? '來源明示 SELECTED_RESULT binding；weekly 身分仍與 daily 分開。' : '來源未證明與選定 daily 綁定；此 weekly summary 獨立呈現。'));
+    get('twWeekly').append(node('p',message("tw-stocks.weekly.check.run.id.failed.daily.observation")));
+    facts(get('twWeekly'),[[message("evidence.state"),codeText(w.state)],[message("evidence.check.run.id"),w.checkRunId],[message("evidence.checked.at"),w.checkedAt],[message("evidence.week.start"),w.weekStart],[message("evidence.week.end"),w.weekEnd],[message("common.status"),codeText(w.status)],[message("tw-stocks.problems"),w.problemCount],[message("tw-stocks.day.counts"),counts(w.dayStatusCounts)],[message("evidence.pendingRevalidation"),w.pendingRevalidationCount],[message("evidence.unfinishedRuns"),w.unfinishedRunCount],[message("tw-stocks.binding"),w.binding],[message("tw-stocks.pointer.corroboration"),w.pointerState]]);
+    get('twWeekly').append(node('p',w.binding==='SELECTED_RESULT' ? message("tw-stocks.selected.result.binding.weekly.daily") : message("tw-stocks.daily.weekly.summary")));
   }
   async function load(force=false) {
     if (pending && !force) return;
     ++revision; const current=revision, requested=date; controller?.abort(); controller=new AbortController();const own=controller;
-    pending=true;loaded=true; clear();panel.setAttribute('aria-busy','true');get('twStatus').setAttribute('role','status');get('twStatus').textContent='Loading · 正在讀取唯讀來源…';get('twProvenance').textContent='';
+    pending=true;loaded=true; clear();panel.setAttribute('aria-busy','true');get('twStatus').setAttribute('role','status');setText(get('twStatus'), message("tw-stocks.loading"));setText(get('twProvenance'), '');
     const timeout=setTimeout(()=>own.abort(),35000);
     try {
       const response=await fetchSource(`/api/tw/stocks${requested == null ? '' : `?date=${encodeURIComponent(requested)}`}`,{cache:'no-store',redirect:'error',signal:own.signal});
       if(!response.ok)throw new Error('SOURCE_REQUEST_FAILED');const payload=readTwStocks(await response.json(),requested);
       if(active && revision===current)render(payload);
     } catch {
-      if(active && revision===current){clear();get('twStatus').textContent='ERROR · 無法讀取 TW Stocks；請重新讀取。';get('twStatus').setAttribute('role','alert');}
+      if(active && revision===current){clear();setText(get('twStatus'), message("tw-stocks.error.tw.stocks"));get('twStatus').setAttribute('role','alert');}
     } finally {clearTimeout(timeout);if(revision===current){pending=false;panel.setAttribute('aria-busy','false');}}
   }
-  get('twFilter').addEventListener('submit',e=>{e.preventDefault();const value=get('twDate').value;if(!validTwDate(value)){get('twValidation').textContent='請輸入 YYYY-MM-DD 真實日曆日期（0001–9999）。';get('twDate').focus();return;}get('twValidation').textContent='';date=value;void load(true);});
-  get('twLatest').addEventListener('click',()=>{date=null;get('twDate').value='';get('twValidation').textContent='';void load(true);});
+  get('twFilter').addEventListener('submit',e=>{e.preventDefault();const value=get('twDate').value;if(!validTwDate(value)){setText(get('twValidation'), message("tw-stocks.yyyy.mm.dd.0001.9999"));get('twDate').focus();return;}setText(get('twValidation'), '');date=value;void load(true);});
+  get('twLatest').addEventListener('click',()=>{date=null;get('twDate').value='';setText(get('twValidation'), '');void load(true);});
   get('twReload').addEventListener('click',()=>void load());
   return {show(){if(active)return;active=true;if(!loaded)void load();},hide(){if(!active)return;active=false;close();if(pending){++revision;controller?.abort();pending=false;loaded=false;clear();panel.setAttribute('aria-busy','false');}}};
 }

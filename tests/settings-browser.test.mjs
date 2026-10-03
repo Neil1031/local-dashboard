@@ -1,3 +1,4 @@
+import { englishPage } from './locale-browser.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
@@ -18,7 +19,7 @@ test('settings save applies cached snapshot, remains safe, and rejects stale tab
     let revision = '0', overrides = {}, collectionCount = 0;
     const context = await browser.newContext({ viewport: { width: 375, height: 900 } });
     const route = async handler => {
-      const page = await context.newPage();
+      const page = await englishPage(context);
       await page.route('**/api/**', async request => {
         const path = new URL(request.request().url()).pathname;
         if (path === '/api/jobs') {
@@ -56,12 +57,12 @@ test('settings save applies cached snapshot, remains safe, and rejects stale tab
     await pageA.locator('#addDependency').click();
     await pageA.locator('#settingDependencies input').fill('AIStockHunter-UnexplainedVolume-Daily');
     await pageA.locator('#settingsForm button[type=submit]').click();
-    await assertEventually(async () => assert.match(await pageA.locator('#settingsMessage').innerText(), /已儲存/));
+    await assertEventually(async () => assert.match(await pageA.locator('#settingsMessage').innerText(), /saved/));
     assert.equal(collectionCount, 2);
     assert.equal(await pageA.locator('img').count(), 0);
     assert.equal(await pageA.evaluate(() => window.injected), undefined);
     assert.equal(await pageA.locator('.job-row').first().getAttribute('data-job'), 'id-2');
-    assert.match(await pageA.locator('#workflowView').innerText(), /資料前置/);
+    assert.match(await pageA.locator('#workflowView').innerText(), /Data prerequisite/);
     await pageA.locator('#automationsPage').click();
     await pageA.locator('#historyTab').click();
     await pageA.waitForFunction(() => document.getElementById('historyView').getAttribute('aria-busy') === 'false');
@@ -69,7 +70,7 @@ test('settings save applies cached snapshot, remains safe, and rejects stale tab
     await pageA.locator('#todayTab').click();
     await pageB.locator('#settingDisplayName').fill('舊分頁');
     await pageB.locator('#settingsForm button[type=submit]').click();
-    await assertEventually(async () => assert.match(await pageB.locator('#settingsMessage').innerText(), /其他分頁/));
+    await assertEventually(async () => assert.match(await pageB.locator('#settingsMessage').innerText(), /Another tab/));
     assert.equal(overrides['My-New-Task'].displayName, '<img src=x onerror=window.injected=true>');
     await pageA.locator('#settingsPage').click();
     await pageA.locator('#settingHidden').check();
@@ -90,7 +91,7 @@ test('settings save applies cached snapshot, remains safe, and rejects stale tab
     assert.equal(Object.hasOwn(overrides['AIStockHunter-Accumulation-Weekly-Check'], 'dependsOn'), false);
     pageA.once('dialog', dialog => dialog.accept());
     await pageA.locator('#resetAllSettings').click();
-    await assertEventually(async () => assert.match(await pageA.locator('#settingsMessage').innerText(), /已儲存/));
+    await assertEventually(async () => assert.match(await pageA.locator('#settingsMessage').innerText(), /saved/));
     assert.deepEqual(overrides, {});
     const pattern = 'AIStockHunter-Accumulation-Check-*';
     const exact = 'AIStockHunter-Accumulation-Check-2026-09-22';
@@ -105,7 +106,7 @@ test('settings save applies cached snapshot, remains safe, and rejects stale tab
     const beforeNoop = revision;
     await pageA.locator('#settingsForm button[type=submit]').click();
     await assertEventually(async () => assert.notEqual(revision, beforeNoop));
-    await pageA.waitForFunction(() => document.getElementById('settingsMessage').textContent.includes('已儲存'));
+    await pageA.waitForFunction(() => document.getElementById('settingsMessage').textContent.includes("saved"));
     assert.equal(Object.hasOwn(overrides, exact), false);
     await pageA.locator('#settingDisplayName').fill('特定日期');
     await pageA.locator('#settingsForm button[type=submit]').click();

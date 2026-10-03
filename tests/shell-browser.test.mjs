@@ -1,3 +1,4 @@
+import { englishPage } from './locale-browser.mjs';
 import { test, before, after, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
@@ -20,7 +21,7 @@ before(async () => {
 });
 after(async () => { await browser.close(); await new Promise(r => server.close(r)); });
 beforeEach(async () => {
-  page = await browser.newPage(); errors = []; page.on('pageerror', e => errors.push(e.message));
+  page = await englishPage(browser); errors = []; page.on('pageerror', e => errors.push(e.message));
   await page.route('**/api/**', route => {
     const url = new URL(route.request().url());
     const payload = url.pathname.startsWith('/api/performance/') ? performanceFixture(url) : url.pathname === '/api/reports/tw' ? twReportsFixture(url) : url.pathname === '/api/tw/stocks' ? twFixture(null, 'PARTIAL') : url.pathname === '/api/jobs' ? snapshot() : url.pathname === '/api/history' ? history(url)
@@ -39,22 +40,22 @@ for (const width of [1280, 375, 320]) test(`nine-page shell, truthful overview a
   assert.match(await page.locator('#overviewSnapshot').innerText(), /PARTIAL/);
   assert.equal(await page.locator('#overviewUpcoming li').count(), 1);
   assert.equal(await page.locator('#overviewView img').count(), 0);
-  assert.match(await page.locator('#overviewRunner').innerText(), /尚未設定.*unavailable/);
+  assert.match(await page.locator('#overviewRunner').innerText(), /not configured.*unavailable/);
   await page.locator('#overviewUpcoming button').click(); await page.keyboard.press('Escape');
   assert.equal(await page.locator('#overviewUpcoming button').evaluate(n => n === document.activeElement), true);
   await page.locator('#twPage').focus(); await page.keyboard.press('Enter');
-  await page.waitForFunction(() => document.getElementById('twStatus').textContent.startsWith('PARTIAL'));
+  await page.waitForFunction(() => document.getElementById('twStatus').textContent.includes('PARTIAL'));
   assert.equal(await page.locator('.tw-candidate').count(), 1);
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), true);
   for (const key of ['performance', 'evidence']) {
     await page.locator(`[data-page="${key}"]`).focus(); await page.keyboard.press('Enter');
     if (key === 'performance') {
-      await page.waitForFunction(() => document.getElementById('performanceSummaryStatus').textContent === 'READY');
+      await page.waitForFunction(() => document.getElementById('performanceSummaryStatus').textContent.includes("READY"));
       assert.equal(await page.locator('.performance-bucket').count(), 5);
       assert.equal(await page.locator('.performance-row').count(), 20);
     } else {
       await page.waitForFunction(() => document.getElementById('evidenceView').getAttribute('aria-busy') === 'false');
-      assert.match(await page.locator('#evidenceView').innerText(), /Taiwan Data & Evidence[\s\S]*TW Stocks[\s\S]*TW Daily Reports[\s\S]*TW Weekly Reports/);
+      assert.match(await page.locator('#evidenceView').innerText(), /Taiwan Data & Evidence[\s\S]*TW Stocks[\s\S]*TW Daily[\s\S]*TW Weekly/);
     }
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), true);
   }
@@ -78,7 +79,7 @@ test('jobs failure clears counts and gives unavailable Runner; history error can
   await page.waitForFunction(() => !document.getElementById('overviewHistoryRetry').hidden);
   assert.equal(await page.locator('#overview-monitored').innerText(), '—');
   assert.match(await page.locator('#overviewRunner').innerText(), /unavailable/);
-  assert.doesNotMatch(await page.locator('#overviewRunner').innerText(), /正在讀取/);
+  assert.doesNotMatch(await page.locator('#overviewRunner').innerText(), /Loading/);
   assert.match(await page.locator('#overviewHistoryStatus').innerText(), /unavailable.*MISSED/);
   assert.doesNotMatch(await page.locator('body').innerText(), /private SQL/);
   await page.unroute('**/api/history?*'); await page.locator('#overviewHistoryRetry').click();
@@ -104,7 +105,7 @@ test('refresh discards a late old History response and clears summaries while jo
     const payload = history(new URL(route.request().url())); payload.jobs[0].taskName = first ? 'OLD RESPONSE' : 'FRESH RESPONSE';
     await route.fulfill({ contentType: 'application/json', body: JSON.stringify(payload) });
   });
-  await page.goto(base); await ready(); await page.waitForFunction(() => document.getElementById('overviewHistoryStatus').textContent.includes('正在讀取'));
+  await page.goto(base); await ready(); await page.waitForFunction(() => document.getElementById('overviewHistoryStatus').textContent.includes("Reading locally saved"));
   let releaseJobs; const jobsHeld = new Promise(r => { releaseJobs = r; });
   await page.route('**/api/jobs', async route => { await jobsHeld; await route.fulfill({ contentType: 'application/json', body: JSON.stringify(snapshot()) }); });
   await page.locator('#refreshBtn').click();

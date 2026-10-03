@@ -1,8 +1,6 @@
-<!doctype html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!DOCTYPE html><html lang="zh-TW"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Local Dashboard</title>
   <style>
     :root {
@@ -832,148 +830,148 @@
   <div class="page product-shell">
     <aside class="shell-sidebar">
       <div class="shell-brand">✿ Local Dashboard</div>
-      <nav class="primary-nav" aria-label="Primary navigation">
-      <button type="button" data-page="overview" id="overviewPage" aria-controls="overviewView">Overview</button>
-      <button type="button" data-page="projects" id="projectsTab" aria-controls="projectsView">Projects</button>
-      <button type="button" data-page="automations" id="automationsPage" aria-controls="automationsView">Automations</button>
-      <button type="button" data-page="us" id="usPage" aria-controls="usView">US Stocks</button>
-      <button type="button" data-page="tw" id="twPage" aria-controls="twView">TW Stocks</button>
-      <button type="button" data-page="performance" id="performancePage" aria-controls="performanceView">Performance</button>
-      <button type="button" data-page="reports" id="reportsPage" aria-controls="reportsView">Reports</button>
-      <button type="button" data-page="evidence" id="evidencePage" aria-controls="evidenceView">Data & Evidence</button>
-      <button type="button" data-page="settings" id="settingsPage" aria-controls="settingsPanel">Settings</button>
+      <nav class="primary-nav" aria-label="主要導覽" data-i18n-aria-label="chrome.primary.navigation">
+      <button type="button" data-page="overview" id="overviewPage" aria-controls="overviewView" data-i18n="nav.overview">總覽</button>
+      <button type="button" data-page="projects" id="projectsTab" aria-controls="projectsView" data-i18n="nav.projects">專案</button>
+      <button type="button" data-page="automations" id="automationsPage" aria-controls="automationsView" data-i18n="nav.automations">自動化</button>
+      <button type="button" data-page="us" id="usPage" aria-controls="usView" data-i18n="nav.usStocks">美股</button>
+      <button type="button" data-page="tw" id="twPage" aria-controls="twView" data-i18n="nav.twStocks">台股</button>
+      <button type="button" data-page="performance" id="performancePage" aria-controls="performanceView" data-i18n="nav.performance">績效</button>
+      <button type="button" data-page="reports" id="reportsPage" aria-controls="reportsView" data-i18n="nav.reports">報告</button>
+      <button type="button" data-page="evidence" id="evidencePage" aria-controls="evidenceView" data-i18n="nav.evidence">資料與證據</button>
+      <button type="button" data-page="settings" id="settingsPage" aria-controls="settingsPanel" data-i18n="nav.settings">設定</button>
       </nav>
     </aside>
     <main class="shell-content">
       <header class="topbar">
-        <div class="page-heading"><h1 id="pageTitle">Overview</h1><p id="pageDescription">排程現況、接下來的工作與已觀察執行。</p></div>
-        <div class="toolbar"><span class="pill">Last refresh <strong id="refreshTime">—</strong></span><button class="refresh" id="refreshBtn" type="button" disabled>↻ Refreshing…</button></div>
+        <div class="page-heading"><h1 id="pageTitle" data-i18n="nav.overview">總覽</h1><p id="pageDescription" data-i18n="page.overview.description">排程現況、接下來的工作與已觀察執行。</p></div>
+        <div class="toolbar"><span class="pill"><span data-i18n="chrome.last.refresh">上次重新讀取</span><strong id="refreshTime">—</strong></span><button class="refresh" id="refreshBtn" type="button" disabled="" data-i18n="automations.refreshing">↻ 正在重新讀取…</button></div>
       </header>
     <section class="collection-notice" id="collectionNotice" role="status" aria-live="polite" aria-atomic="true">
-      <strong id="collectionTitle">正在讀取 Windows Task Scheduler…</strong>
+      <strong id="collectionTitle" data-i18n="automations.windows.task.scheduler">正在讀取 Windows Task Scheduler…</strong>
       <ul id="collectionDetails"></ul>
     </section>
     <noscript><p class="collection-notice error">請啟用 JavaScript 以讀取 /api/jobs；目前沒有載入排程資料。</p></noscript>
-    <p class="collection-notice warning" id="settingsWarning" role="alert" hidden>自訂顯示設定無法載入，已使用預設值</p>
-    <section id="overviewView" data-page-view="overview" aria-label="Operations overview" aria-busy="true">
-      <section class="stats" aria-label="完整收集快照摘要">
-      <article class="stat total"><div class="stat-label">Monitored automations</div><div class="stat-value" id="overview-monitored">—</div></article>
-      <article class="stat missed"><div class="stat-label">Attention · current status</div><div class="stat-value" id="overview-attention">—</div></article>
-      <article class="stat failed"><div class="stat-label">Failed last result</div><div class="stat-value" id="overview-failed">—</div></article>
-      <article class="stat success"><div class="stat-label">Successful last result</div><div class="stat-value" id="overview-success">—</div></article>
+    <p class="collection-notice warning" id="settingsWarning" role="alert" hidden="" data-i18n="automations.wording.9">自訂顯示設定無法載入，已使用預設值</p>
+    <section id="overviewView" data-page-view="overview" aria-label="作業總覽" aria-busy="true" data-i18n-aria-label="chrome.operations.overview">
+      <section class="stats" aria-label="完整收集快照摘要" data-i18n-aria-label="chrome.wording.22">
+      <article class="stat total"><div class="stat-label" data-i18n="chrome.monitored.automations">監控工作數</div><div class="stat-value" id="overview-monitored">—</div></article>
+      <article class="stat missed"><div class="stat-label" data-i18n="chrome.attention.current.status">需注意（目前狀態）</div><div class="stat-value" id="overview-attention">—</div></article>
+      <article class="stat failed"><div class="stat-label" data-i18n="chrome.failed.last.result">最近結果失敗</div><div class="stat-value" id="overview-failed">—</div></article>
+      <article class="stat success"><div class="stat-label" data-i18n="chrome.successful.last.result">最近結果成功</div><div class="stat-value" id="overview-success">—</div></article>
       </section>
-      <p class="summary-note" id="overviewSnapshot" role="status">正在讀取排程快照…</p>
-      <p class="summary-note">Attention 涵蓋 Failed / Unknown / Missed current status；READY 不代表今天已執行。Scheduler Success 不保證應用程式業務成功。</p>
+      <p class="summary-note" id="overviewSnapshot" role="status" data-i18n="chrome.wording">正在讀取排程快照…</p>
+      <p class="summary-note" data-i18n="chrome.attention.failed.unknown.missed.current.status.ready.scheduler.succe">需注意涵蓋目前 FAILED／UNKNOWN／MISSED；READY 不代表今天已執行。Scheduler SUCCESS 不保證業務成功。</p>
       <div class="overview-grid">
-        <section class="panel overview-card"><h2>Upcoming runs</h2><p id="overviewUpcomingStatus" role="status"></p><ul class="overview-list" id="overviewUpcoming"></ul></section>
-        <section class="panel overview-card"><h2>Recent observed executions</h2><p id="overviewHistoryStatus" role="status"></p><button class="refresh" id="overviewHistoryRetry" type="button" hidden>Retry history</button><ul class="overview-list" id="overviewRecent"></ul></section>
-        <section class="panel overview-card overview-wide"><h2>Runner coverage</h2><p id="overviewRunner" role="status"></p><ul id="overviewRunnerWarnings"></ul><p class="summary-note">Receipt coverage 是診斷資訊；不證明今天已執行，也不啟用 MISSED 推算。</p></section>
+        <section class="panel overview-card"><h2 data-i18n="overview.upcomingRuns">接下來的排程</h2><p id="overviewUpcomingStatus" role="status"></p><ul class="overview-list" id="overviewUpcoming"></ul></section>
+        <section class="panel overview-card"><h2 data-i18n="overview.recentExecutions">最近已觀察執行</h2><p id="overviewHistoryStatus" role="status"></p><button class="refresh" id="overviewHistoryRetry" type="button" hidden="" data-i18n="chrome.retry.history">重試歷史</button><ul class="overview-list" id="overviewRecent"></ul></section>
+        <section class="panel overview-card overview-wide"><h2 data-i18n="overview.runnerCoverage">Runner 覆蓋</h2><p id="overviewRunner" role="status"></p><ul id="overviewRunnerWarnings"></ul><p class="summary-note" data-i18n="chrome.receipt.coverage.missed">Receipt 覆蓋是診斷資訊；不證明今天已執行，也不啟用 MISSED 推算。</p></section>
       </div>
     </section>
-    <section id="automationsView" data-page-view="automations" hidden>
-    <section class="hero" aria-label="目前排程摘要">
+    <section id="automationsView" data-page-view="automations" hidden="">
+    <section class="hero" aria-label="目前排程摘要" data-i18n-aria-label="chrome.wording.23">
       <div class="hero-card">
-        <div class="eyebrow">Current scheduler overview</div>
-        <h2 class="hero-title">A little care for your scheduler garden.</h2>
-        <p class="hero-copy">目前排程狀態與最近執行結果，分開看得清楚。<br>Current scheduler state · execution-window tracking will be added later.</p>
+        <div class="eyebrow" data-i18n="chrome.current.scheduler.overview">目前排程總覽</div>
+        <h2 class="hero-title" data-i18n="chrome.a.little.care.for.your.scheduler.garden">留意每項工作的排程與結果。</h2>
+        <p class="hero-copy"><span data-i18n="chrome.wording.2">目前排程狀態與最近執行結果，分開看得清楚。</span><br><span data-i18n="chrome.current.scheduler.state.execution.window.tracking.will.be.added.late">目前 Scheduler 狀態；執行時段追蹤將另行實作。</span></p>
       </div>
       <aside class="mood-card">
         <div class="mood-face" aria-hidden="true">🌷</div>
-        <div><strong id="moodTitle">Reading scheduler</strong><span id="moodText">正在取得目前排程狀態。</span></div>
+        <div><strong id="moodTitle" data-i18n="automations.reading.scheduler">正在讀取排程</strong><span id="moodText" data-i18n="automations.wording.36">正在取得目前排程狀態。</span></div>
       </aside>
     </section>
-    <section class="stats" aria-label="目前收集摘要">
-      <article class="stat total"><div class="stat-label">監控總數 · Monitored</div><div class="stat-value" id="count-monitored">—</div></article>
-      <article class="stat success"><div class="stat-label">Last run success</div><div class="stat-value" id="count-success">—</div></article>
-      <article class="stat failed"><div class="stat-label">Last run failed</div><div class="stat-value" id="count-failed">—</div></article>
-      <article class="stat missed"><div class="stat-label">Attention · current status</div><div class="stat-value" id="count-attention">—</div></article>
+    <section class="stats" aria-label="目前收集摘要" data-i18n-aria-label="chrome.wording.24">
+      <article class="stat total"><div class="stat-label" data-i18n="chrome.monitored">監控總數</div><div class="stat-value" id="count-monitored">—</div></article>
+      <article class="stat success"><div class="stat-label" data-i18n="chrome.last.run.success">最近執行成功</div><div class="stat-value" id="count-success">—</div></article>
+      <article class="stat failed"><div class="stat-label" data-i18n="automations.lastRunFailed">最近一次執行失敗</div><div class="stat-value" id="count-failed">—</div></article>
+      <article class="stat missed"><div class="stat-label" data-i18n="chrome.attention.current.status">需注意（目前狀態）</div><div class="stat-value" id="count-attention">—</div></article>
     </section>
-    <p class="summary-note">Attention: Failed / Unknown / Missed jobs. Collection warnings are shown below.</p>
+    <p class="summary-note" data-i18n="chrome.attention.failed.unknown.missed.jobs.collection.warnings.are.shown.b">需注意：目前 FAILED／UNKNOWN／MISSED 工作。收集警告列於下方。</p>
     <section class="runner-coverage" id="runnerCoverage" aria-labelledby="runnerCoverageTitle" role="status">
-      <h2 id="runnerCoverageTitle">Runner coverage</h2><div id="runnerCoverageBody">正在讀取 Runner 診斷…</div>
+      <h2 id="runnerCoverageTitle" data-i18n="overview.runnerCoverage">Runner 覆蓋</h2><div id="runnerCoverageBody" data-i18n="automations.runner">正在讀取 Runner 診斷…</div>
       <div id="runnerDiagnosticsWarnings"></div>
     </section>
     <section class="panel">
       <div class="panel-head">
-        <div class="tabs" role="tablist" aria-label="Automations views">
-          <button class="tab active" id="todayTab" type="button" data-tab="today" role="tab" aria-controls="todayView" aria-selected="true">Today</button>
-          <button class="tab" id="historyTab" type="button" data-tab="history" role="tab" aria-controls="historyView" aria-selected="false" tabindex="-1">7-day history</button>
+        <div class="tabs" role="tablist" aria-label="自動化檢視" data-i18n-aria-label="chrome.automations.views">
+          <button class="tab active" id="todayTab" type="button" data-tab="today" role="tab" aria-controls="todayView" aria-selected="true" data-i18n="automations.today">今天</button>
+          <button class="tab" id="historyTab" type="button" data-tab="history" role="tab" aria-controls="historyView" aria-selected="false" tabindex="-1" data-i18n="automations.history7d">七天歷史</button>
         </div>
-        <div class="filters" role="group" aria-label="Current status filters">
-          <button class="filter active" type="button" data-filter="all" aria-pressed="true">All</button>
-          <button class="filter" type="button" data-filter="FAILED" aria-pressed="false">Failed</button>
-          <button class="filter" type="button" data-filter="READY" aria-pressed="false">Ready</button>
-          <button class="filter" type="button" data-filter="RUNNING" aria-pressed="false">Running</button>
-          <button class="filter" type="button" data-filter="DISABLED" aria-pressed="false">Disabled</button>
-          <button class="filter" type="button" data-filter="UNKNOWN" aria-pressed="false">Unknown</button>
-          <button class="filter" type="button" data-filter="MISSED" aria-pressed="false">Missed</button>
+        <div class="filters" role="group" aria-label="目前狀態篩選" data-i18n-aria-label="chrome.current.status.filters">
+          <button class="filter active" type="button" data-filter="all" aria-pressed="true" data-i18n="reports.all">全部</button>
+          <button class="filter" type="button" data-filter="FAILED" aria-pressed="false" data-i18n="chrome.failed">失敗</button>
+          <button class="filter" type="button" data-filter="READY" aria-pressed="false" data-i18n="automations.ready">可執行</button>
+          <button class="filter" type="button" data-filter="RUNNING" aria-pressed="false" data-i18n="chrome.running">執行中</button>
+          <button class="filter" type="button" data-filter="DISABLED" aria-pressed="false" data-i18n="chrome.disabled">已停用</button>
+          <button class="filter" type="button" data-filter="UNKNOWN" aria-pressed="false" data-i18n="common.unknown">未知</button>
+          <button class="filter" type="button" data-filter="MISSED" aria-pressed="false" data-i18n="chrome.missed">未執行</button>
         </div>
-        <button class="legacy-switch" id="showLegacy" type="button" role="switch" aria-checked="false">顯示舊版排程</button>
+        <button class="legacy-switch" id="showLegacy" type="button" role="switch" aria-checked="false" data-i18n="chrome.wording.3">顯示舊版排程</button>
       </div>
       <div class="content" id="todayView" role="tabpanel" aria-labelledby="todayTab" aria-busy="true">
-        <section class="workflow" id="workflowView" aria-labelledby="workflowHeading" hidden>
-          <h2 class="workflow-heading" id="workflowHeading">工作流程概覽</h2>
-          <p class="workflow-copy">關係來自 Dashboard 顯示資料；狀態為各工作目前的 Scheduler 狀態。箭頭旁文字說明資料、外部前置或顯示順序。</p>
+        <section class="workflow" id="workflowView" aria-labelledby="workflowHeading" hidden="">
+          <h2 class="workflow-heading" id="workflowHeading" data-i18n="chrome.wording.4">工作流程概覽</h2>
+          <p class="workflow-copy" data-i18n="chrome.dashboard.scheduler">關係來自 Dashboard 顯示資料；狀態為各工作目前的 Scheduler 狀態。箭頭旁文字說明資料、外部前置或顯示順序。</p>
           <div class="workflow-markets" id="workflowMarkets"></div>
         </section>
-        <h2 class="today-list-title">詳細工作列表</h2>
-        <div class="view-counts" aria-label="Today 列表數量">
-          <span>目前顯示 <strong id="view-visible">—</strong></span>
-          <span>舊版隱藏 <strong id="view-legacyHidden">—</strong></span>
-          <span>篩選排除 <strong id="view-filteredOut">—</strong></span>
-          <span>日期收納 <strong id="view-folded">—</strong></span>
+        <h2 class="today-list-title" data-i18n="chrome.wording.5">詳細工作列表</h2>
+        <div class="view-counts" aria-label="今天列表筆數" data-i18n-aria-label="chrome.today">
+          <span><span data-i18n="chrome.wording.6">目前顯示</span><strong id="view-visible">—</strong></span>
+          <span><span data-i18n="chrome.wording.7">舊版隱藏</span><strong id="view-legacyHidden">—</strong></span>
+          <span><span data-i18n="chrome.wording.8">篩選排除</span><strong id="view-filteredOut">—</strong></span>
+          <span><span data-i18n="chrome.wording.9">日期收納</span><strong id="view-folded">—</strong></span>
         </div>
         <div id="jobList"></div>
-        <div class="empty" id="emptyState">正在讀取排程…</div>
+        <div class="empty" id="emptyState" data-i18n="automations.wording.32">正在讀取排程…</div>
       </div>
-      <div class="history" id="historyView" role="tabpanel" aria-labelledby="historyTab" hidden>
-        <p class="history-copy">Observed completed executions · 7 local calendar days including today.<br>僅顯示實際觀察並保存的執行，並非完整 Windows audit log；Success 是排程器結果，不保證應用程式業務成功。</p>
+      <div class="history" id="historyView" role="tabpanel" aria-labelledby="historyTab" hidden="">
+        <p class="history-copy"><span data-i18n="chrome.observed.completed.executions.7.local.calendar.days.including.today">已觀察完成執行 · 包含今天的七個本地日曆日。</span><br><span data-i18n="chrome.windows.audit.log.success">僅顯示實際觀察並保存的執行，不是完整 Windows 稽核紀錄；SUCCESS 是 Scheduler 結果，不保證業務成功。</span></p>
         <p id="historyStatus" role="status" aria-live="polite"></p>
-        <button id="historyRetry" class="refresh" type="button" hidden>Retry history</button>
-        <div id="historyTableWrap" class="history-scroll" tabindex="0" role="region" aria-label="7-day observed history; scroll horizontally for all days" hidden>
-          <table class="history-table" aria-label="Observed executions by job and local day">
+        <button id="historyRetry" class="refresh" type="button" hidden="" data-i18n="chrome.retry.history">重試歷史</button>
+        <div id="historyTableWrap" class="history-scroll" tabindex="0" role="region" aria-label="七天已觀察歷史；橫向捲動查看所有日期" hidden="" data-i18n-aria-label="chrome.7.day.observed.history.scroll.horizontally.for.all.days">
+          <table class="history-table" aria-label="依工作與本地日期呈現已觀察執行" data-i18n-aria-label="chrome.observed.executions.by.job.and.local.day">
             <thead id="historyHead"></thead><tbody id="historyBody"></tbody>
           </table>
         </div>
-        <div class="legend"><span>✓ All observed runs succeeded</span><span>! At least one failed</span><span>— No observed runs</span><span>Number = observed runs</span></div>
+        <div class="legend"><span data-i18n="chrome.all.observed.runs.succeeded">✓ 已觀察執行全部成功</span><span data-i18n="chrome.at.least.one.failed">! 至少一次失敗</span><span data-i18n="chrome.no.observed.runs">— 沒有已觀察執行</span><span data-i18n="chrome.number.observed.runs">數字＝已觀察執行筆數</span></div>
       </div>
     </section>
     </section>
-      <div class="projects panel" data-page-view="projects" id="projectsView" role="region" aria-labelledby="projectsTab" aria-busy="false" hidden>
-        <h2>Projects · 專案設計</h2>
-        <p>正式專案設計／本次建置快照 · 僅 Local Dashboard。來源是建置時複製的工程主檔，並非即時讀取 Git 工作目錄，也不是 Scheduler 實測結果。</p>
-        <p>九頁導覽與 operations Overview 已有部分實作；跨專案 aggregation 尚未接入。各狀態數量不是整體完成百分比。</p>
-        <p id="projectsStatus" role="status" aria-live="polite">尚未讀取專案設計。</p>
-        <button class="refresh" id="projectsRetry" type="button">重新讀取專案設計</button>
-        <section id="projectsData" aria-labelledby="projectIdentity" hidden>
+      <div class="projects panel" data-page-view="projects" id="projectsView" role="region" aria-labelledby="projectsTab" aria-busy="false" hidden="">
+        <h2 data-i18n="chrome.projects">專案設計</h2>
+        <p data-i18n="chrome.local.dashboard.git.scheduler">正式專案設計／本次建置快照 · 僅 Local Dashboard。來源是建置時複製的工程主檔，並非即時讀取 Git 工作目錄，也不是 Scheduler 實測結果。</p>
+        <p data-i18n="chrome.operations.overview.aggregation">九頁導覽與作業總覽已有部分實作；跨專案整合尚未接入。狀態數量不是整體完成百分比。</p>
+        <p id="projectsStatus" role="status" aria-live="polite" data-i18n="chrome.wording.10">尚未讀取專案設計。</p>
+        <button class="refresh" id="projectsRetry" type="button" data-i18n="projects.reload">重新讀取專案設計</button>
+        <section id="projectsData" aria-labelledby="projectIdentity" hidden="">
           <h3 id="projectIdentity"></h3>
           <p id="projectPurpose"></p>
           <p class="project-source" id="projectReadInfo"></p>
-          <details><summary class="project-source-summary">來源、版本與讀取資訊</summary><dl class="project-source" id="projectSourceInfo"></dl></details>
-          <div class="project-counts" id="projectCounts" aria-label="各功能狀態數量"></div>
-          <p>展開功能，閱讀原始目的、目前實作、限制及剩餘工作。</p>
+          <details><summary class="project-source-summary" data-i18n="projects.sourceInfo">來源、版本與讀取資訊</summary><dl class="project-source" id="projectSourceInfo"></dl></details>
+          <div class="project-counts" id="projectCounts" aria-label="各功能狀態數量" data-i18n-aria-label="chrome.wording.25"></div>
+          <p data-i18n="chrome.wording.11">展開功能，閱讀原始目的、目前實作、限制及剩餘工作。</p>
           <div id="projectFeatures"></div>
         </section>
       </div>
-    <section class="panel settings-panel" id="settingsPanel" data-page-view="settings" aria-labelledby="settingsHeading" hidden>
-      <h2 id="settingsHeading">顯示設定</h2>
-      <p>只修改 Dashboard 顯示方式；Windows 排程名稱與設定保持原樣。</p>
+    <section class="panel settings-panel" id="settingsPanel" data-page-view="settings" aria-labelledby="settingsHeading" hidden=""><section class="language-preference"><label for="languagePreference" data-i18n="settings.language">介面語言</label><select id="languagePreference"><option value="zh-TW" data-i18n="settings.language.zhTW">繁體中文</option><option value="en" data-i18n="settings.language.en">English</option></select></section>
+      <h2 id="settingsHeading" data-i18n="settings.displayMetadata">顯示設定</h2>
+      <p data-i18n="chrome.dashboard.windows">只修改 Dashboard 顯示方式；Windows 排程名稱與設定保持原樣。</p>
       <p class="settings-message" id="settingsMessage" role="status" aria-live="polite"></p>
       <div class="settings-grid">
-        <div class="settings-list" id="settingsJobs" aria-label="選擇工作"></div>
+        <div class="settings-list" id="settingsJobs" aria-label="選擇工作" data-i18n-aria-label="settings.selectJob"></div>
         <datalist id="knownSettingJobs"></datalist>
-        <form class="settings-form" id="settingsForm" hidden>
-          <label>Windows 排程名稱（唯讀）<input id="settingRawName" readonly></label>
-          <label>中文顯示名稱<input id="settingDisplayName" maxlength="100" required></label>
-          <label>市場<select id="settingMarket"><option>台股</option><option>美股</option><option>其他</option></select></label>
-          <label>中文用途說明<textarea id="settingDescription" maxlength="1000"></textarea></label>
-          <label>排序（0–10000）<input id="settingOrder" type="number" min="0" max="10000" step="1" required></label>
-          <label><span><input id="settingHidden" type="checkbox"> 隱藏於 Dashboard</span></label>
-          <div><strong>前置關係</strong><div id="settingDependencies"></div><button id="addDependency" type="button">＋ 新增前置</button></div>
-          <div class="settings-actions"><button type="submit">儲存</button><button id="cancelSettings" type="button">取消</button><button id="resetSettings" type="button">恢復預設值</button></div>
+        <form class="settings-form" id="settingsForm" hidden="">
+          <label><span data-i18n="chrome.windows">Windows 排程名稱（唯讀）</span><input id="settingRawName" readonly=""></label>
+          <label><span data-i18n="chrome.wording.12">顯示名稱</span><input id="settingDisplayName" maxlength="100" required=""></label>
+          <label><span data-i18n="evidence.market">市場</span><select id="settingMarket"><option value="台股" data-i18n="nav.twStocks">台股</option><option value="美股" data-i18n="nav.usStocks">美股</option><option value="其他" data-i18n="chrome.wording.13">其他</option></select></label>
+          <label><span data-i18n="automations.wording.24">用途說明</span><textarea id="settingDescription" maxlength="1000"></textarea></label>
+          <label><span data-i18n="chrome.0.10000">排序（0–10000）</span><input id="settingOrder" type="number" min="0" max="10000" step="1" required=""></label>
+          <label><span><input id="settingHidden" type="checkbox"><span data-i18n="chrome.dashboard">隱藏於 Dashboard</span></span></label>
+          <div><strong data-i18n="chrome.wording.14">前置關係</strong><div id="settingDependencies"></div><button id="addDependency" type="button" data-i18n="chrome.wording.15">＋ 新增前置</button></div>
+          <div class="settings-actions"><button type="submit" data-i18n="common.save">儲存</button><button id="cancelSettings" type="button" data-i18n="common.cancel">取消</button><button id="resetSettings" type="button" data-i18n="common.reset">恢復預設值</button></div>
         </form>
       </div>
-      <div class="settings-actions"><button id="resetAllSettings" type="button">全部恢復預設值</button></div>
+      <div class="settings-actions"><button id="resetAllSettings" type="button" data-i18n="common.resetAll">全部恢復預設值</button></div>
     </section>
     <style>
       .signals-panel { padding: 22px; overflow-wrap: anywhere; }
@@ -1002,158 +1000,159 @@
       .ticker-link { margin-top:8px; padding:6px 10px; border:1px solid var(--border); border-radius:8px; background:#fff; color:var(--pink-dark); cursor:pointer; }
       @media(max-width:400px) { .signals-panel { padding:14px; } #signalDetail, #secDetail, #tickerSignalDetail, #tickerSecDetail { padding:14px; } }
     </style>
-    <section class="panel signals-panel" id="usView" data-page-view="us" hidden aria-label="US Stocks">
-      <p class="eyebrow">US Stocks · PARTIAL</p>
-      <nav class="us-subnav" aria-label="US Stocks pages"><button type="button" data-us-page="signals" aria-controls="signalsPanel">Signals</button><button type="button" data-us-page="sec" aria-controls="secPanel">SEC Transactions</button><button type="button" data-us-page="ticker" aria-controls="tickerPanel">Ticker Detail</button></nav>
-      <section id="signalsPanel" aria-labelledby="signalsTitle"><h2 id="signalsTitle">Signals</h2>
-      <p>Insider report assessments · 分數由外部 AI report 匯入。此頁保留來源資料與限制，不產生投資建議。</p>
-      <form id="signalsFilter" class="signals-controls"><label for="signalsTicker">Exact ticker</label><input id="signalsTicker" name="ticker" maxlength="16" placeholder="例如 COO" autocomplete="off"><button type="submit">搜尋</button><button type="button" id="signalsReload">重新讀取</button></form>
+    <section class="panel signals-panel" id="usView" data-page-view="us" hidden="" aria-label="美股" data-i18n-aria-label="nav.usStocks">
+      <p class="eyebrow" data-i18n="chrome.us.stocks.partial">美股 · PARTIAL</p>
+      <nav class="us-subnav" aria-label="美股子頁" data-i18n-aria-label="chrome.us.stocks.pages"><button type="button" data-us-page="signals" aria-controls="signalsPanel" data-i18n="us.signals">訊號</button><button type="button" data-us-page="sec" aria-controls="secPanel" data-i18n="us.secTransactions">SEC 交易</button><button type="button" data-us-page="ticker" aria-controls="tickerPanel" data-i18n="us.tickerDetail">股票明細</button></nav>
+      <section id="signalsPanel" aria-labelledby="signalsTitle"><h2 id="signalsTitle" data-i18n="us.signals">訊號</h2>
+      <p data-i18n="chrome.insider.report.assessments.ai.report">Insider 報告評估 · 分數由外部 AI 報告匯入。保留來源資料與限制，不產生投資建議。</p>
+      <form id="signalsFilter" class="signals-controls"><label for="signalsTicker" data-i18n="us.exactTicker">精確股票代號</label><input id="signalsTicker" name="ticker" maxlength="16" placeholder="例如 COO" autocomplete="off" data-i18n-placeholder="chrome.coo"><button type="submit" data-i18n="common.search">搜尋</button><button type="button" id="signalsReload" data-i18n="common.refresh">重新讀取</button></form>
       <p id="signalsStatus" role="status" aria-live="polite"></p><p id="signalsSource" class="signal-source"></p><p id="signalsWarnings"></p>
       <div id="signalsRows" class="signals-grid"></div>
-      <p id="signalsPage" role="status"></p><div class="signals-controls"><button id="signalsPrevious" type="button" disabled>上一頁</button><button id="signalsNext" type="button" disabled>下一頁</button></div>
-      <p class="signal-source">頁面是目前來源狀態，跨頁讀取期間匯入可能改變結果；不是歷史 PIT snapshot。空值顯示 —，不推算 freshness。</p>
+      <p id="signalsPage" role="status"></p><div class="signals-controls"><button id="signalsPrevious" type="button" disabled="" data-i18n="common.previous">上一頁</button><button id="signalsNext" type="button" disabled="" data-i18n="common.next">下一頁</button></div>
+      <p class="signal-source" data-i18n="chrome.pit.snapshot.freshness">頁面呈現目前來源狀態，跨頁匯入可能改變結果；不是歷史 PIT 快照。空值顯示 —，不推算新鮮度。</p>
       </section>
-      <section id="secPanel" hidden aria-labelledby="secTitle"><h2 id="secTitle">SEC Transactions</h2>
-      <p>Partial slice · 保留全部來源交易，包括 non-P 與 derivative。P code 或 Candidate / 尚未認證，不代表已確認乾淨 open-market purchase。</p>
-      <p class="signal-source">Form 4/A amendments/corrections 尚未完成 reconciliation，來源列不自動合併或去重。Insider execution price 是內部人成交價，非策略進場價。</p>
-      <form id="secFilter" class="signals-controls"><label for="secTicker">Exact ticker</label><input id="secTicker" name="ticker" maxlength="16" placeholder="例如 COO" autocomplete="off"><button type="submit">搜尋</button><button type="button" id="secReload">重新讀取</button></form>
+      <section id="secPanel" hidden="" aria-labelledby="secTitle"><h2 id="secTitle" data-i18n="us.secTransactions">SEC 交易</h2>
+      <p data-i18n="chrome.partial.slice.non.p.derivative.p.code.candidate.open.market.purchase">部分切片 · 保留全部來源交易，包含 non-P 與衍生品。P 代碼或候選尚未認證，不代表已確認乾淨的公開市場買進。</p>
+      <p class="signal-source" data-i18n="chrome.form.4.a.amendments.corrections.reconciliation.insider.execution.pri">Form 4/A 修正尚未對帳，來源列不自動合併或去重。內部人成交價不是策略進場價。</p>
+      <form id="secFilter" class="signals-controls"><label for="secTicker" data-i18n="us.exactTicker">精確股票代號</label><input id="secTicker" name="ticker" maxlength="16" placeholder="例如 COO" autocomplete="off" data-i18n-placeholder="chrome.coo"><button type="submit" data-i18n="common.search">搜尋</button><button type="button" id="secReload" data-i18n="common.refresh">重新讀取</button></form>
       <p id="secStatus" role="status" aria-live="polite"></p><p id="secSource" class="signal-source"></p><p id="secWarnings"></p>
       <div id="secRows" class="signals-grid"></div><p id="secPage" role="status"></p>
-      <div class="signals-controls"><button id="secPrevious" type="button" disabled>上一頁</button><button id="secNext" type="button" disabled>下一頁</button></div>
-      <p class="signal-source">sec:&lt;accession&gt;:&lt;transaction_index&gt; 是來源位置 ID，非 immutable business-event ID；來源重排或修正可能改變對應。交易日、申報日、accepted time、local discovered time 分開。空值顯示 —；不推算 freshness，不是 PIT snapshot。</p>
+      <div class="signals-controls"><button id="secPrevious" type="button" disabled="" data-i18n="common.previous">上一頁</button><button id="secNext" type="button" disabled="" data-i18n="common.next">下一頁</button></div>
+      <p class="signal-source" data-i18n="chrome.sec.accession.transaction.index.id.immutable.business.event.id.accep">sec:&lt;accession&gt;:&lt;transaction_index&gt; 是來源位置 ID，非不可變業務事件 ID；來源重排或修正可改變對應。交易日、申報日、受理與本地發現時間分開。空值 —；不推算新鮮度，非 PIT 快照。</p>
       </section>
-      <section id="tickerPanel" hidden aria-labelledby="tickerTitle">
-        <h2 id="tickerTitle">Ticker Detail</h2>
-        <form id="tickerFilter" class="signals-controls"><label for="tickerInput">Exact ticker · 必填</label><input id="tickerInput" name="ticker" maxlength="16" placeholder="例如 COO" autocomplete="off"><button type="submit">查看來源</button><button id="tickerReload" type="button">重新讀取</button></form>
+      <section id="tickerPanel" hidden="" aria-labelledby="tickerTitle">
+        <h2 id="tickerTitle" data-i18n="us.tickerDetail">股票明細</h2>
+        <form id="tickerFilter" class="signals-controls"><label for="tickerInput" data-i18n="chrome.exact.ticker">精確股票代號（必填）</label><input id="tickerInput" name="ticker" maxlength="16" placeholder="例如 COO" autocomplete="off" data-i18n-placeholder="chrome.coo"><button type="submit" data-i18n="us.viewSources">查看來源</button><button id="tickerReload" type="button" data-i18n="common.refresh">重新讀取</button></form>
         <p id="tickerValidation" role="alert"></p><p id="tickerStatus" role="status" aria-live="polite"></p><p id="tickerSummary" class="signal-source"></p>
-        <section id="tickerSignalsPanel" class="ticker-section" aria-labelledby="tickerSignalsTitle"><h3 id="tickerSignalsTitle">Reports Signals</h3><p>Imported AI report · 分數、reasons／risks 只屬於 Reports，不套用至 SEC。</p>
+        <section id="tickerSignalsPanel" class="ticker-section" aria-labelledby="tickerSignalsTitle"><h3 id="tickerSignalsTitle" data-i18n="chrome.reports.signals">報告訊號</h3><p data-i18n="chrome.imported.ai.report.reasons.risks.reports.sec">匯入的 AI 報告 · 分數、理由／風險只屬於報告，不套用至 SEC。</p>
           <p id="tickerSignalsStatus" role="status" aria-live="polite"></p><p id="tickerSignalsSource" class="signal-source"></p><p id="tickerSignalsWarnings"></p><div id="tickerSignalsRows" class="signals-grid"></div><p id="tickerSignalsPage" role="status"></p>
-          <div class="signals-controls"><button id="tickerSignalsPrevious" type="button" disabled>Reports 上一頁</button><button id="tickerSignalsNext" type="button" disabled>Reports 下一頁</button></div>
+          <div class="signals-controls"><button id="tickerSignalsPrevious" type="button" disabled="" data-i18n="chrome.reports">報告上一頁</button><button id="tickerSignalsNext" type="button" disabled="" data-i18n="chrome.reports.2">報告下一頁</button></div>
         </section>
-        <section id="tickerSecPanel" class="ticker-section" aria-labelledby="tickerSecTitle"><h3 id="tickerSecTitle">SEC Transactions · partial</h3><p>P／Candidate 尚未認證；保留 non-P、derivative 與未對帳的 Form 4/A 來源列。SEC 無分數，內部人成交價非策略進場價。</p>
+        <section id="tickerSecPanel" class="ticker-section" aria-labelledby="tickerSecTitle"><h3 id="tickerSecTitle" data-i18n="us.secPartial">SEC Transactions · 部分資料</h3><p data-i18n="chrome.p.candidate.non.p.derivative.form.4.a.sec">P／候選尚未認證；保留 non-P、衍生品與未對帳的 Form 4/A 來源列。SEC 沒有分數；內部人成交價非策略進場價。</p>
           <p id="tickerSecStatus" role="status" aria-live="polite"></p><p id="tickerSecSource" class="signal-source"></p><p id="tickerSecWarnings"></p><div id="tickerSecRows" class="signals-grid"></div><p id="tickerSecPage" role="status"></p>
-          <div class="signals-controls"><button id="tickerSecPrevious" type="button" disabled>SEC 上一頁</button><button id="tickerSecNext" type="button" disabled>SEC 下一頁</button></div>
+          <div class="signals-controls"><button id="tickerSecPrevious" type="button" disabled="" data-i18n="chrome.sec">SEC 上一頁</button><button id="tickerSecNext" type="button" disabled="" data-i18n="chrome.sec.2">SEC 下一頁</button></div>
         </section>
-        <aside class="ticker-limitations" aria-label="Ticker Detail limitations"><h3>閱讀限制</h3><p>相同 ticker 不代表同一個 business event；不跨來源連結、合併身分或去重，不產生合併分數或投資建議。各來源 ID、日期、觀察時間及 provenance 保持分開。</p><p>顯示的是各來源已載入／本頁筆數，不是完整群體；不自動讀取全部頁面，跨頁不是 PIT snapshot。</p><h3>Performance · DESIGNED</h3><p>尚未接入唯讀來源。沒有 return／win rate 等推算或假資料。</p></aside>
+        <aside class="ticker-limitations" aria-label="股票明細閱讀限制" data-i18n-aria-label="chrome.ticker.detail.limitations"><h3 data-i18n="chrome.wording.16">閱讀限制</h3><p data-i18n="chrome.ticker.business.event.id.provenance">相同 ticker 不代表同一業務事件；不跨來源連結、合併身分或去重，不產生合併分數或投資建議。來源 ID、日期、觀察時間與溯源保持分開。</p><p data-i18n="chrome.pit.snapshot">顯示各來源已載入／本頁筆數，不是完整群體；不自動讀取所有頁面，跨頁不是 PIT 快照。</p><h3 data-i18n="chrome.performance.designed">績效 · DESIGNED</h3><p data-i18n="chrome.return.win.rate">尚未接入唯讀來源。不推算報酬／勝率，也沒有假資料。</p></aside>
       </section>
     </section>
-    <section class="panel tw-stocks" id="twView" data-page-view="tw" hidden>
-      <p class="eyebrow">TAIWAN VOLUME WATCH · READ ONLY</p><h2>TW Stocks</h2>
-      <p>已保存每日觀察；候選與異常分數是來源事實，不是投資建議。</p>
-      <form id="twFilter" class="signals-controls"><label for="twDate">Exact target date</label><input id="twDate" type="text" placeholder="YYYY-MM-DD" maxlength="10" autocomplete="off"><button type="submit">Apply</button><button id="twLatest" type="button">Latest</button><button id="twReload" type="button">重新讀取</button></form>
+    <section class="panel tw-stocks" id="twView" data-page-view="tw" hidden="">
+      <p class="eyebrow" data-i18n="chrome.taiwan.volume.watch.read.only">TAIWAN VOLUME WATCH · 唯讀</p><h2 data-i18n="nav.twStocks">台股</h2>
+      <p data-i18n="chrome.wording.17">已保存每日觀察；候選與異常分數是來源事實，不是投資建議。</p>
+      <form id="twFilter" class="signals-controls"><label for="twDate" data-i18n="chrome.exact.target.date">指定日期</label><input id="twDate" type="text" placeholder="YYYY-MM-DD" maxlength="10" autocomplete="off" data-i18n-placeholder="chrome.yyyy.mm.dd"><button type="submit" data-i18n="chrome.apply">套用</button><button id="twLatest" type="button" data-i18n="chrome.latest">最新保存</button><button id="twReload" type="button" data-i18n="common.refresh">重新讀取</button></form>
       <p id="twValidation" role="alert"></p><p id="twStatus" role="status"></p><p id="twProvenance" class="signal-source"></p><ul id="twWarnings" class="signal-warnings"></ul>
-      <h2>Daily Observation</h2><div id="twDaily" class="tw-grid"></div>
-      <h2>Accumulation / readiness</h2><div id="twAccumulation"></div>
-      <h2>Source completeness</h2><div id="twSources" class="tw-grid"></div>
-      <h2>Candidates / watchlist</h2><div id="twCandidates" class="tw-grid"></div>
-      <h2>Responsibility / pending work</h2><div id="twResponsibility"></div>
-      <h2>Weekly Check · independent identity</h2><div id="twWeekly"></div>
-      <dialog id="twCandidateDetail" aria-labelledby="twCandidateTitle"><div class="signals-detail-head"><h2 id="twCandidateTitle"></h2><button id="twCandidateClose" type="button">關閉</button></div><div id="twCandidateBody"></div></dialog>
+      <h2 data-i18n="chrome.daily.observation">每日觀察</h2><div id="twDaily" class="tw-grid"></div>
+      <h2 data-i18n="chrome.accumulation.readiness">累積範圍／資料成熟度</h2><div id="twAccumulation"></div>
+      <h2 data-i18n="evidence.completeness.title">資料來源完整性</h2><div id="twSources" class="tw-grid"></div>
+      <h2 data-i18n="chrome.candidates.watchlist">候選／觀察清單</h2><div id="twCandidates" class="tw-grid"></div>
+      <h2 data-i18n="chrome.responsibility.pending.work">責任／待處理工作</h2><div id="twResponsibility"></div>
+      <h2 data-i18n="chrome.weekly.check.independent.identity">週檢（獨立身分）</h2><div id="twWeekly"></div>
+      <dialog id="twCandidateDetail" aria-labelledby="twCandidateTitle"><div class="signals-detail-head"><h2 id="twCandidateTitle"></h2><button id="twCandidateClose" type="button" data-i18n="common.close">關閉</button></div><div id="twCandidateBody"></div></dialog>
     </section>
-    <section class="panel performance" id="performanceView" data-page-view="performance" hidden>
-      <p class="eyebrow">US / INSIDER AI REPORT · RESEARCH EVIDENCE</p><h2>Performance · Summary / Signal Detail</h2>
-      <p>目前 active AI report signals；只讀取來源已保存的觀察，報酬未觀察時顯示 —。</p>
-      <nav class="us-subnav" aria-label="Performance horizons"><button type="button" data-performance-horizon="1d" aria-pressed="false">1D</button><button type="button" data-performance-horizon="1w" aria-pressed="false">1W</button><button type="button" data-performance-horizon="1m" aria-pressed="false">1M</button><button type="button" data-performance-horizon="3m" aria-pressed="true">3M</button><button type="button" data-performance-horizon="6m" aria-pressed="false">6M</button></nav>
-      <button id="performanceRefresh" type="button">重新讀取</button>
-      <h3>Investment Score buckets · 全部 active source rows，無分數門檻</h3><p id="performanceSummaryStatus" role="status"></p><p id="performanceSource" class="signal-source"></p><div id="performanceGroups" class="performance-grid"></div><p id="performanceCounts"></p>
-      <details><summary>狀態與方法說明</summary>
-        <p>Summary 的 observed 是所選時距已有 non-null tradable return；0% 是已觀察、不是 win（win &gt; 0）。UNSCORED 是分數 null，不是 0。空 bucket 仍保留；沒有 observed 時 average / win rate 為 —。</p>
-        <p>List 的 horizonObserved 只代表 snapshot 已保存，return 仍可能缺少。Stored COMPLETE / PARTIAL / PENDING / NOT_COMPUTED counts 是儲存狀態，不是所選時距成熟度。COMPLETE 表示截至 stored asOf 有可用 entry 且無已知 completed-session gap，未保證未來時距成熟或獲利。PARTIAL 表示已知 completed-session / entry 缺漏；PENDING 是來源保存的等待時間；NOT_COMPUTED 是沒有 performance row，仍可能已有 snapshot。缺漏日期不由 Dashboard 修補。</p>
-        <p>Discovery price 是假設 publication 前一個已完成 normal-session close proxy；next tradable 是 publication 當時或之後第一個 regular-session open。1D 是 entry session close vs open；1W 是 entry +7 calendar days 當日或之後首個 session；1M / 3M / 6M 是 calendar-month target 當日或之後首個 session。</p>
-        <p>Yahoo OHLC：split_adjusted_ex_dividends；不含 dividends / fees / taxes / slippage。Daily bars 無法證明 intraday threshold 順序或實際成交。不是已實現的 portfolio return。</p>
-        <p>分數是 current imported report assessments，沒有重建歷史 score revisions 的 point-in-time 模型。同一 ticker 多次 reports 可能是相關觀察，不是獨立 trades；此頁不推算統計顯著性或投資建議。</p>
+    <section class="panel performance" id="performanceView" data-page-view="performance" hidden="">
+      <p class="eyebrow" data-i18n="chrome.us.insider.ai.report.research.evidence">美股／INSIDER AI 報告 · 研究證據</p><h2 data-i18n="chrome.performance.summary.signal.detail">績效 · 摘要／訊號明細</h2>
+      <p data-i18n="chrome.active.ai.report.signals">目前啟用的 AI 報告訊號；只讀來源已保存觀察，報酬未觀察時顯示 —。</p>
+      <nav class="us-subnav" aria-label="績效時距" data-i18n-aria-label="chrome.performance.horizons"><button type="button" data-performance-horizon="1d" aria-pressed="false">1D</button><button type="button" data-performance-horizon="1w" aria-pressed="false">1W</button><button type="button" data-performance-horizon="1m" aria-pressed="false">1M</button><button type="button" data-performance-horizon="3m" aria-pressed="true">3M</button><button type="button" data-performance-horizon="6m" aria-pressed="false">6M</button></nav>
+      <button id="performanceRefresh" type="button" data-i18n="common.refresh">重新讀取</button>
+      <h3 data-i18n="chrome.investment.score.buckets.active.source.rows">投資分數分組 · 全部啟用來源列，無分數門檻</h3><p id="performanceSummaryStatus" role="status"></p><p id="performanceSource" class="signal-source"></p><div id="performanceGroups" class="performance-grid"></div><p id="performanceCounts"></p>
+      <details><summary data-i18n="chrome.wording.18">狀態與方法說明</summary>
+        <p data-i18n="chrome.summary.observed.non.null.tradable.return.0.win.win.0.unscored.null.">摘要的已觀察筆數是所選時距已有非空可交易報酬；0% 是已觀察、不是勝利（勝利 &gt; 0）。UNSCORED 是分數 null，不是 0。空分組仍保留；沒有已觀察報酬時，平均／勝率顯示 —。</p>
+        <p data-i18n="chrome.list.horizonobserved.snapshot.return.stored.complete.partial.pending">清單的 horizonObserved 只代表快照已保存，報酬仍可能缺少。COMPLETE／PARTIAL／PENDING／NOT_COMPUTED 是保存狀態，非所選時距成熟度。COMPLETE 表示截至保存時間有可用進場值且無已知已完成交易日缺口，不保證未來成熟或獲利。PARTIAL 有已知交易日／進場缺漏；PENDING 是來源保存等待；NOT_COMPUTED 無績效列，仍可能有快照。Dashboard 不修補缺漏日期。</p>
+        <p data-i18n="chrome.discovery.price.publication.normal.session.close.proxy.next.tradable">發現價假設為發布前一個已完成正常交易時段的收盤代理值；可交易進場價是發布當時或之後第一個正常時段開盤。1D 為進場時段收盤對開盤；1W 為進場 +7 日曆日當日或之後首個交易日；1M／3M／6M 為日曆月目標當日或之後首個交易日。</p>
+        <p data-i18n="chrome.yahoo.ohlc.split.adjusted.ex.dividends.dividends.fees.taxes.slippage">Yahoo OHLC：split_adjusted_ex_dividends；不含股息、費用、稅、滑價。日線無法證明盤中門檻先後或實際成交。不是已實現投資組合報酬。</p>
+        <p data-i18n="chrome.current.imported.report.assessments.score.revisions.point.in.time.ti">分數為目前匯入的報告評估，未重建歷史分數版本的 PIT 模型。同一 ticker 多份報告可能為相關觀察，非獨立交易；不推算統計顯著性或投資建議。</p>
       </details>
-      <h3>Signals · bounded current-state page</h3><form id="performanceFilter" class="signals-controls"><label for="performanceTicker">Exact ticker · case-sensitive</label><input id="performanceTicker" type="text" maxlength="256" autocomplete="off"><button type="submit">篩選 list</button></form><p>Summary 不受 list ticker 篩選影響。每頁反映當次來源狀態，跨頁不是 point-in-time population snapshot；不自動讀取全部頁面。</p>
-      <p id="performanceValidation" role="alert"></p><p id="performanceListStatus" role="status"></p><p id="performanceListSource" class="signal-source"></p><div id="performanceRows" class="signals-grid"></div><div class="signals-controls"><button id="performancePrevious" type="button" disabled>Previous</button><span id="performancePageCount"></span><button id="performanceNext" type="button" disabled>Next</button></div>
-      <dialog id="performanceDetail" aria-labelledby="performanceDetailTitle"><div class="report-detail-head"><h2 id="performanceDetailTitle">Signal Detail · stored research evidence</h2><button id="performanceDetailClose" type="button">關閉</button></div><p id="performanceDetailStatus" role="status"></p><p id="performanceDetailSource" class="signal-source"></p><dl id="performanceFacts"></dl><h3>All stored snapshots · tradable / discovery 分開</h3><div id="performanceSnapshots"></div><p>Absent type 保持缺席；報酬不從價格重新計算。Provider / price basis 由每筆 snapshot 提供；方法與限制見 Summary 的說明。</p></dialog>
+      <h3 data-i18n="chrome.signals.bounded.current.state.page">訊號 · 限定目前狀態頁</h3><form id="performanceFilter" class="signals-controls"><label for="performanceTicker" data-i18n="chrome.exact.ticker.case.sensitive">精確股票代號（區分大小寫）</label><input id="performanceTicker" type="text" maxlength="256" autocomplete="off"><button type="submit" data-i18n="chrome.list">篩選清單</button></form><p data-i18n="chrome.summary.list.ticker.point.in.time.population.snapshot">摘要不受清單 ticker 篩選影響。各頁反映當次來源狀態，跨頁不是 PIT 群體快照；不自動讀取所有頁面。</p>
+      <p id="performanceValidation" role="alert"></p><p id="performanceListStatus" role="status"></p><p id="performanceListSource" class="signal-source"></p><div id="performanceRows" class="signals-grid"></div><div class="signals-controls"><button id="performancePrevious" type="button" disabled="" data-i18n="common.previous">上一頁</button><span id="performancePageCount"></span><button id="performanceNext" type="button" disabled="" data-i18n="common.next">下一頁</button></div>
+      <dialog id="performanceDetail" aria-labelledby="performanceDetailTitle"><div class="report-detail-head"><h2 id="performanceDetailTitle" data-i18n="chrome.signal.detail.stored.research.evidence">訊號明細 · 保存研究證據</h2><button id="performanceDetailClose" type="button" data-i18n="common.close">關閉</button></div><p id="performanceDetailStatus" role="status"></p><p id="performanceDetailSource" class="signal-source"></p><dl id="performanceFacts"></dl><h3 data-i18n="chrome.all.stored.snapshots.tradable.discovery">全部保存快照 · 可交易／發現基準分開</h3><div id="performanceSnapshots"></div><p data-i18n="chrome.absent.type.provider.price.basis.snapshot.summary">缺席快照保持缺席；報酬不從價格重新計算。每筆快照提供資料來源／價格基準；方法與限制見摘要。</p></dialog>
     </section>
-    <section class="panel reports" id="reportsView" data-page-view="reports" hidden>
-      <p class="eyebrow">Reports · PARTIAL</p>
-      <nav class="us-subnav" aria-label="Reports sources"><button type="button" data-reports-page="all">All</button><button type="button" data-reports-page="us">US Insider</button><button type="button" data-reports-page="tw-daily">TW Daily</button><button type="button" data-reports-page="tw-weekly">TW Weekly</button></nav>
-      <p>All 分開呈現 US Insider、TW Daily、TW Weekly；各來源狀態與分頁獨立，沒有跨來源總數或合成時間軸。</p>
+    <section class="panel reports" id="reportsView" data-page-view="reports" hidden="">
+      <p class="eyebrow" data-i18n="chrome.reports.partial">報告 · PARTIAL</p>
+      <nav class="us-subnav" aria-label="報告來源" data-i18n-aria-label="chrome.reports.sources"><button type="button" data-reports-page="all" data-i18n="reports.all">全部</button><button type="button" data-reports-page="us">US Insider</button><button type="button" data-reports-page="tw-daily" data-i18n="reports.twDaily">TW Daily</button><button type="button" data-reports-page="tw-weekly" data-i18n="reports.twWeekly">TW Weekly</button></nav>
+      <p data-i18n="chrome.all.us.insider.tw.daily.tw.weekly">全部分開呈現 US Insider、台股日報、台股週報；狀態與分頁獨立，無跨來源總數或合成時間軸。</p>
       <div id="reportsConnected">
         <h2 id="reportsConnectedTitle">US Insider</h2>
-        <form id="reportsFilter" class="signals-controls"><label for="reportsDate">Exact report date</label><input id="reportsDate" type="text" placeholder="YYYY-MM-DD" maxlength="10" autocomplete="off"><button type="submit">篩選</button><button id="reportsReload" type="button">重新讀取</button></form>
+        <form id="reportsFilter" class="signals-controls"><label for="reportsDate" data-i18n="reports.exactDate">指定報告日期</label><input id="reportsDate" type="text" placeholder="YYYY-MM-DD" maxlength="10" autocomplete="off" data-i18n-placeholder="chrome.yyyy.mm.dd"><button type="submit" data-i18n="common.filter">篩選</button><button id="reportsReload" type="button" data-i18n="common.refresh">重新讀取</button></form>
         <p id="reportsValidation" role="alert"></p><p id="reportsStatus" role="status"></p><p id="reportsSource" class="signal-source"></p><ul id="reportsWarnings" class="signal-warnings"></ul>
-        <p>Stored signals 是目前保留的 ai_signal 列；active signals 是目前 active subset，均不是某個歷史正文的 ticker membership。</p>
+        <p data-i18n="chrome.stored.signals.ai.signal.active.signals.active.subset.ticker.members">保存訊號是目前保留的 ai_signal 列；啟用訊號為目前啟用子集，均不是歷史正文的 ticker 成員清單。</p>
         <div id="reportsRows" class="signals-grid"></div>
-        <div class="signals-controls"><button id="reportsPrevious" type="button" disabled>Previous</button><span id="reportsPageCount"></span><button id="reportsNext" type="button" disabled>Next</button></div>
+        <div class="signals-controls"><button id="reportsPrevious" type="button" disabled="" data-i18n="common.previous">上一頁</button><span id="reportsPageCount"></span><button id="reportsNext" type="button" disabled="" data-i18n="common.next">下一頁</button></div>
       </div>
-      <section id="twReports-daily" class="tw-reports-section" hidden aria-labelledby="twDailyTitle">
-        <h2 id="twDailyTitle">TW Daily · 保存的每日觀察</h2>
-        <div class="signals-controls"><button id="twdaily-Reload" type="button">重新讀取 TW Daily</button></div>
+      <section id="twReports-daily" class="tw-reports-section" hidden="" aria-labelledby="twDailyTitle">
+        <h2 id="twDailyTitle" data-i18n="chrome.tw.daily">台股日報 · 保存每日觀察</h2>
+        <div class="signals-controls"><button id="twdaily-Reload" type="button" data-i18n="chrome.tw.daily.2">重新讀取台股日報</button></div>
         <p id="twdaily-Status" role="status"></p><p id="twdaily-Source" class="signal-source"></p><ul id="twdaily-Warnings" class="signal-warnings"></ul>
         <div id="twdaily-Rows" class="signals-grid"></div>
-        <div class="signals-controls"><button id="twdaily-Previous" type="button" disabled>Previous daily</button><span id="twdaily-Page"></span><button id="twdaily-Next" type="button" disabled>Next daily</button></div>
+        <div class="signals-controls"><button id="twdaily-Previous" type="button" disabled="" data-i18n="chrome.previous.daily">日報上一頁</button><span id="twdaily-Page"></span><button id="twdaily-Next" type="button" disabled="" data-i18n="chrome.next.daily">日報下一頁</button></div>
       </section>
-      <section id="twReports-weekly" class="tw-reports-section" hidden aria-labelledby="twWeeklyTitle">
-        <h2 id="twWeeklyTitle">TW Weekly · 保存的週檢責任</h2>
-        <div class="signals-controls"><button id="twweekly-Reload" type="button">重新讀取 TW Weekly</button></div>
+      <section id="twReports-weekly" class="tw-reports-section" hidden="" aria-labelledby="twWeeklyTitle">
+        <h2 id="twWeeklyTitle" data-i18n="chrome.tw.weekly">台股週報 · 保存週檢責任</h2>
+        <div class="signals-controls"><button id="twweekly-Reload" type="button" data-i18n="chrome.tw.weekly.2">重新讀取台股週報</button></div>
         <p id="twweekly-Status" role="status"></p><p id="twweekly-Source" class="signal-source"></p><ul id="twweekly-Warnings" class="signal-warnings"></ul>
         <div id="twweekly-Rows" class="signals-grid"></div>
-        <div class="signals-controls"><button id="twweekly-Previous" type="button" disabled>Previous weekly</button><span id="twweekly-Page"></span><button id="twweekly-Next" type="button" disabled>Next weekly</button></div>
+        <div class="signals-controls"><button id="twweekly-Previous" type="button" disabled="" data-i18n="chrome.previous.weekly">週報上一頁</button><span id="twweekly-Page"></span><button id="twweekly-Next" type="button" disabled="" data-i18n="chrome.next.weekly">週報下一頁</button></div>
       </section>
-      <aside id="twReportsLimits" class="report-limitations" hidden><h3>Taiwan 保存報告的閱讀限制</h3>
-        <p>觀察不等於推薦，候選不等於買進；source anomaly score 不是投資分數。WARMING_UP 的 0 候選不代表沒有異常。</p>
-        <p>SUCCESS 不代表市場資料完整，PARTIAL 不等於 SUCCESS，UNKNOWN 不等於 NO，null 不等於 0。週檢 FAILED 是保存的業務狀態。</p>
-        <p>Daily／Weekly 各有獨立來源權威；沒有跨來源原子或 PIT snapshot。這是保存的證據，不是即時市場狀態；bounded page 不代表完整歷史。</p>
+      <aside id="twReportsLimits" class="report-limitations" hidden=""><h3 data-i18n="reports.twLimits">Taiwan 保存報告的閱讀限制</h3>
+        <p data-i18n="chrome.source.anomaly.score.warming.up.0">觀察不等於推薦，候選不等於買進；來源異常分數不是投資分數。WARMING_UP 的 0 候選不代表沒有異常。</p>
+        <p data-i18n="chrome.success.partial.success.unknown.no.null.0.failed">SUCCESS 不代表市場資料完整，PARTIAL 不等於 SUCCESS，UNKNOWN 不等於 NO，null 不等於 0。週檢 FAILED 是保存的業務狀態。</p>
+        <p data-i18n="chrome.daily.weekly.pit.snapshot.bounded.page">每日／週檢有獨立來源權威，無跨來源原子／PIT 快照。保存證據非即時市場狀態；限定頁不代表完整歷史。</p>
       </aside>
-      <dialog id="twReportDetail" aria-labelledby="twReportTitle"><header class="report-detail-head"><h2 id="twReportTitle">Taiwan report</h2><button id="twReportClose" type="button" aria-label="Close Taiwan report detail">關閉</button></header>
-        <p id="twReportStatus" role="status"></p><p id="twReportSource" class="signal-source"></p><div class="signals-controls"><button id="twReportReload" type="button">重新讀取 Taiwan 明細</button></div>
+      <dialog id="twReportDetail" aria-labelledby="twReportTitle"><header class="report-detail-head"><h2 id="twReportTitle" data-i18n="chrome.taiwan.report">台股報告</h2><button id="twReportClose" type="button" aria-label="關閉台股報告明細" data-i18n="common.close" data-i18n-aria-label="chrome.close.taiwan.report.detail">關閉</button></header>
+        <p id="twReportStatus" role="status"></p><p id="twReportSource" class="signal-source"></p><div class="signals-controls"><button id="twReportReload" type="button" data-i18n="chrome.taiwan">重新讀取台股明細</button></div>
         <dl id="twReportMetadata" class="signal-facts"></dl><ul id="twReportWarnings" class="signal-warnings"></ul>
-        <h3>來源結構化事實 · machine truth</h3><div id="twReportFacts"></div>
-        <h3>來源 Markdown · 閱讀呈現</h3><div id="twReportBody" class="report-markdown"></div>
-        <p>每日觀察／週檢不構成投資推薦。保存總數與本次匯出筆數分開；未知值保留 null。逐日 binding 只呈現來源已驗證的關係，不補猜 missing joins；latest pointer 未檢查。</p>
-        <p>正文使用安全 Markdown／純文字；HTML、圖片與連結不執行。Taiwan report 沒有 US 的 revision 模型。</p>
+        <h3 data-i18n="chrome.machine.truth">來源結構化事實（判讀依據）</h3><div id="twReportFacts"></div>
+        <h3 data-i18n="chrome.markdown">來源 Markdown · 閱讀呈現</h3><div id="twReportBody" class="report-markdown"></div>
+        <p data-i18n="chrome.null.binding.missing.joins.latest.pointer">每日觀察／週檢不是投資推薦。保存總數與匯出筆數分開；未知值保留 null。逐日綁定只呈現來源已驗證關係，不猜缺少的連結；最新指標未檢查。</p>
+        <p data-i18n="chrome.markdown.html.taiwan.report.us.revision">正文以安全 Markdown／純文字呈現，HTML、圖片、連結不執行。台股報告無美股的版本模型。</p>
       </dialog>
-      <dialog id="reportDetail" aria-labelledby="reportDetailTitle"><header class="report-detail-head signals-detail-head"><h2 id="reportDetailTitle">US Insider report</h2><button id="reportDetailClose" type="button" aria-label="Close report detail">Close</button></header>
-        <p id="reportDetailStatus" role="status"></p><p id="reportDetailSource"></p><div class="signals-controls"><button id="reportDetailReload" type="button">重新讀取明細</button></div><dl id="reportMetadata" class="signal-facts"></dl><ul id="reportWarnings"></ul>
-        <h3>Current report body · untrusted source text</h3><div id="reportBody" class="report-markdown"></div>
-        <h3>Retained body/hash revision metadata</h3><p id="reportRevisionState"></p><ul id="reportRevisions"></ul><div class="signals-controls"><button id="reportRevisionPrevious" type="button" disabled>Previous revisions</button><span id="reportRevisionPage"></span><button id="reportRevisionNext" type="button" disabled>Next revisions</button></div>
-        <aside class="report-limitations"><h3>Revision 閱讀限制</h3><p>Revision history 是 body／hash／首次觀察的保留紀錄，不是完整切換 timeline；A → B → A 回到原保留 revision。Current revision 可在目前頁之外；MISSING／null 是合法的未匹配狀態，MATCHED 只表示來源儲存關係，不驗證正文 hash。</p><p>不重建歷史 ticker／score，不從 inactive signal 推論舊版 membership，沒有 per-signal PIT reconstruction 或 semantic diff；各次分頁可能觀察到不同 import，跨頁不是 PIT snapshot。</p><p>本文只以安全 Markdown 子集／純文字顯示；HTML、圖片與連結語法保留為文字，沒有 HTML 執行或檔案／來源連結。</p></aside>
+      <dialog id="reportDetail" aria-labelledby="reportDetailTitle"><header class="report-detail-head signals-detail-head"><h2 id="reportDetailTitle" data-i18n="chrome.us.insider.report">US Insider 報告</h2><button id="reportDetailClose" type="button" aria-label="關閉報告明細" data-i18n="common.close" data-i18n-aria-label="chrome.close.report.detail">關閉</button></header>
+        <p id="reportDetailStatus" role="status"></p><p id="reportDetailSource"></p><div class="signals-controls"><button id="reportDetailReload" type="button" data-i18n="chrome.wording.19">重新讀取明細</button></div><dl id="reportMetadata" class="signal-facts"></dl><ul id="reportWarnings"></ul>
+        <h3 data-i18n="chrome.current.report.body.untrusted.source.text">目前報告正文（不受信任的來源文字）</h3><div id="reportBody" class="report-markdown"></div>
+        <h3 data-i18n="chrome.retained.body.hash.revision.metadata">保留的正文／雜湊版本 metadata</h3><p id="reportRevisionState"></p><ul id="reportRevisions"></ul><div class="signals-controls"><button id="reportRevisionPrevious" type="button" disabled="" data-i18n="chrome.previous.revisions">版本上一頁</button><span id="reportRevisionPage"></span><button id="reportRevisionNext" type="button" disabled="" data-i18n="chrome.next.revisions">版本下一頁</button></div>
+        <aside class="report-limitations"><h3 data-i18n="chrome.revision">版本閱讀限制</h3><p data-i18n="chrome.revision.history.body.hash.timeline.a.b.a.revision.current.revision.">版本歷史保存正文／雜湊／首次觀察，非完整切換時間軸；A → B → A 回到原保留版本。目前版本可在本頁之外；MISSING／null 為合法未匹配，MATCHED 只表示保存關係，不驗證正文雜湊。</p><p data-i18n="chrome.ticker.score.inactive.signal.membership.per.signal.pit.reconstructio">不重建歷史 ticker／分數，不從停用訊號推論舊版成員；無逐訊號 PIT 重建或語意差異。各次分頁可能讀到不同匯入，跨頁不是 PIT 快照。</p><p data-i18n="chrome.markdown.html.html">正文只用安全 Markdown 子集／純文字；HTML、圖片、連結語法保留文字，不執行 HTML 或開啟檔案／來源連結。</p></aside>
       </dialog>
     </section>
-    <section class="panel evidence-view" id="evidenceView" data-page-view="evidence" hidden aria-labelledby="evidenceTitle">
-      <div class="evidence-heading"><div><p class="eyebrow">TAIWAN · SOURCE EVIDENCE</p><h2 id="evidenceTitle">Taiwan Data &amp; Evidence</h2><p>為什麼呈現這個狀態？閱讀來源保存的身分、完整性、就緒程度與責任缺口。</p></div><button id="evidenceReload" type="button">Refresh · 重新讀取</button></div>
+    <section class="panel evidence-view" id="evidenceView" data-page-view="evidence" hidden="" aria-labelledby="evidenceTitle">
+      <div class="evidence-heading"><div><p class="eyebrow" data-i18n="chrome.taiwan.source.evidence">台灣 · 來源證據</p><h2 id="evidenceTitle" data-i18n="evidence.title">台股資料與證據</h2><p data-i18n="chrome.wording.20">為什麼呈現這個狀態？閱讀來源保存的身分、完整性、就緒程度與責任缺口。</p></div><button id="evidenceReload" type="button" data-i18n="chrome.refresh">重新讀取</button></div>
       <p id="evidenceStatus" role="status"></p>
-      <nav class="evidence-links" aria-label="相關 Taiwan 頁面"><a href="#tw">前往 TW Stocks</a><a href="#reports">前往 TW Reports</a></nav>
-      <section aria-labelledby="evidenceSourcesTitle"><h3 id="evidenceSourcesTitle">Evidence Sources · 三個獨立來源</h3><div class="evidence-grid" id="evidenceSources"><article class="evidence-card" id="evidenceSource-stocks"></article><article class="evidence-card" id="evidenceSource-daily"></article><article class="evidence-card" id="evidenceSource-weekly"></article></div></section>
-      <section aria-labelledby="evidenceDailyTitle"><h3 id="evidenceDailyTitle">Current Daily Evidence · 保存身分</h3><div id="evidenceDaily"></div></section>
-      <section aria-labelledby="evidenceDiagnosticsTitle"><h3 id="evidenceDiagnosticsTitle">Completeness / Readiness / Responsibility</h3><div class="evidence-diagnostics">
-        <section class="evidence-card"><h4>Source Completeness · 來源完整性</h4><div id="evidenceCompleteness"></div></section>
-        <section class="evidence-card"><h4>Readiness &amp; Gaps · 就緒程度與缺口</h4><div id="evidenceReadiness"></div></section>
-        <section class="evidence-card"><h4>Responsibility · 待補查與未完成責任</h4><div id="evidenceResponsibility"></div></section>
-        <section class="evidence-card"><h4>Weekly Check · 獨立週檢</h4><div id="evidenceWeekly"></div></section>
+      <nav class="evidence-links" aria-label="相關台股頁面" data-i18n-aria-label="chrome.taiwan.2"><a href="#tw" data-i18n="chrome.tw.stocks">前往台股</a><a href="#reports" data-i18n="chrome.tw.reports">前往台股報告</a></nav>
+      <section aria-labelledby="evidenceSourcesTitle"><h3 id="evidenceSourcesTitle" data-i18n="chrome.evidence.sources">證據來源（三個獨立來源）</h3><div class="evidence-grid" id="evidenceSources"><article class="evidence-card" id="evidenceSource-stocks"></article><article class="evidence-card" id="evidenceSource-daily"></article><article class="evidence-card" id="evidenceSource-weekly"></article></div></section>
+      <section aria-labelledby="evidenceDailyTitle"><h3 id="evidenceDailyTitle" data-i18n="chrome.current.daily.evidence">目前每日證據（保存身分）</h3><div id="evidenceDaily"></div></section>
+      <section aria-labelledby="evidenceDiagnosticsTitle"><h3 id="evidenceDiagnosticsTitle" data-i18n="chrome.completeness.readiness.responsibility">完整性／成熟度／責任</h3><div class="evidence-diagnostics">
+        <section class="evidence-card"><h4 data-i18n="chrome.source.completeness">來源完整性</h4><div id="evidenceCompleteness"></div></section>
+        <section class="evidence-card"><h4 data-i18n="chrome.readiness.gaps">成熟度與缺口</h4><div id="evidenceReadiness"></div></section>
+        <section class="evidence-card"><h4 data-i18n="chrome.responsibility">責任（待補查與未完成）</h4><div id="evidenceResponsibility"></div></section>
+        <section class="evidence-card"><h4 data-i18n="chrome.weekly.check">週檢（獨立來源）</h4><div id="evidenceWeekly"></div></section>
       </div></section>
-      <section aria-labelledby="evidenceReportsTitle"><h3 id="evidenceReportsTitle">Report Evidence · 本次 bounded LIST 首筆</h3><div class="evidence-diagnostics"><article class="evidence-card" id="evidenceReport-daily"></article><article class="evidence-card" id="evidenceReport-weekly"></article></div></section>
-      <section class="evidence-limits" aria-labelledby="evidenceLimitsTitle"><h3 id="evidenceLimitsTitle">Interpretation Limits · 解讀邊界</h3><p>COHERENT 不等於 SUCCESS；PARTIAL 不等於 SUCCESS；UNKNOWN 不是 NO，null 不是 0。來源 SUCCESS 不保證市場完整。候選不是買進建議，來源異常分數不是投資分數。</p><p>Latest attempt 與 latest finalized 分開；Daily authority 與 Weekly authority 分開。日期重疊不代表同一原子觀察或 PIT snapshot；報告清單不是完整歷史。</p><p>目前第一切片為 Taiwan data/source evidence；Schedule Versions / Correlation / Runner aggregation 尚未完成。歷史範圍、Taiwan Performance 與 US Evidence aggregation 尚未接入。</p><p>離頁或重新讀取後，只顯示本次結果；來源處理可能仍在進行。</p></section>
+      <section aria-labelledby="evidenceReportsTitle"><h3 id="evidenceReportsTitle" data-i18n="chrome.report.evidence.bounded.list">報告證據（本次限定清單首筆）</h3><div class="evidence-diagnostics"><article class="evidence-card" id="evidenceReport-daily"></article><article class="evidence-card" id="evidenceReport-weekly"></article></div></section>
+      <section class="evidence-limits" aria-labelledby="evidenceLimitsTitle"><h3 id="evidenceLimitsTitle" data-i18n="chrome.interpretation.limits">解讀邊界</h3><p data-i18n="chrome.coherent.success.partial.success.unknown.no.null.0.success">COHERENT 不等於 SUCCESS；PARTIAL 不等於 SUCCESS；UNKNOWN 不是 NO，null 不是 0。來源 SUCCESS 不保證市場完整。候選不是買進建議，來源異常分數不是投資分數。</p><p data-i18n="chrome.latest.attempt.latest.finalized.daily.authority.weekly.authority.pit">最新嘗試與保存觀察分開，每日與週檢權威分開。日期重疊不代表原子／PIT 觀察；報告清單不是完整歷史。</p><p data-i18n="chrome.taiwan.data.source.evidence.schedule.versions.correlation.runner.agg">目前只有台灣資料來源證據切片；排程版本／關聯／Runner 整合尚未完成。歷史範圍、台股績效與美股證據整合尚未接入。</p><p data-i18n="chrome.wording.21">離頁或重新讀取後，只顯示本次結果；來源處理可能仍在進行。</p></section>
     </section>
-    <div class="footer-note">Local · dates shown in your local time zone · Settings changes display metadata only</div>
+    <div class="footer-note" data-i18n="chrome.local.dates.shown.in.your.local.time.zone.settings.changes.display.m">本機 · 日期依本地時區顯示 · 設定只改顯示 metadata</div>
     </main>
   </div>
-  <dialog id="signalDetail" aria-labelledby="signalDetailTitle"><div class="signals-detail-head"><h2 id="signalDetailTitle"></h2><button id="signalDetailClose" type="button">關閉</button></div><div id="signalDetailBody"></div></dialog>
-  <dialog id="secDetail" aria-labelledby="secDetailTitle"><div class="signals-detail-head"><h2 id="secDetailTitle"></h2><button id="secDetailClose" type="button">關閉</button></div><div id="secDetailBody"></div></dialog>
-  <dialog id="tickerSignalDetail" aria-labelledby="tickerSignalDetailTitle"><div class="signals-detail-head"><h2 id="tickerSignalDetailTitle"></h2><button id="tickerSignalDetailClose" type="button">關閉</button></div><div id="tickerSignalDetailBody"></div></dialog>
-  <dialog id="tickerSecDetail" aria-labelledby="tickerSecDetailTitle"><div class="signals-detail-head"><h2 id="tickerSecDetailTitle"></h2><button id="tickerSecDetailClose" type="button">關閉</button></div><div id="tickerSecDetailBody"></div></dialog>
+  <dialog id="signalDetail" aria-labelledby="signalDetailTitle"><div class="signals-detail-head"><h2 id="signalDetailTitle"></h2><button id="signalDetailClose" type="button" data-i18n="common.close">關閉</button></div><div id="signalDetailBody"></div></dialog>
+  <dialog id="secDetail" aria-labelledby="secDetailTitle"><div class="signals-detail-head"><h2 id="secDetailTitle"></h2><button id="secDetailClose" type="button" data-i18n="common.close">關閉</button></div><div id="secDetailBody"></div></dialog>
+  <dialog id="tickerSignalDetail" aria-labelledby="tickerSignalDetailTitle"><div class="signals-detail-head"><h2 id="tickerSignalDetailTitle"></h2><button id="tickerSignalDetailClose" type="button" data-i18n="common.close">關閉</button></div><div id="tickerSignalDetailBody"></div></dialog>
+  <dialog id="tickerSecDetail" aria-labelledby="tickerSecDetailTitle"><div class="signals-detail-head"><h2 id="tickerSecDetailTitle"></h2><button id="tickerSecDetailClose" type="button" data-i18n="common.close">關閉</button></div><div id="tickerSecDetailBody"></div></dialog>
   <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
     <section class="drawer-card">
       <div class="drawer-head">
-        <div><h2 class="drawer-title" id="drawerTitle">Job detail</h2><div class="drawer-sub" id="drawerSubtitle"></div></div>
-        <button class="close" id="closeDrawer" type="button" aria-label="Close">×</button>
+        <div><h2 class="drawer-title" id="drawerTitle" data-i18n="chrome.job.detail">工作明細</h2><div class="drawer-sub" id="drawerSubtitle"></div></div>
+        <button class="close" id="closeDrawer" type="button" aria-label="關閉" data-i18n-aria-label="common.close">×</button>
       </div>
       <div class="detail-grid" id="detailGrid"></div>
       <div class="detail-grid" id="metadataGrid"></div>
-      <section class="runner-execution" id="runnerExecution" aria-labelledby="runnerTitle" hidden>
-        <h3 class="log-title" id="runnerTitle">Runner execution</h3>
+      <section class="runner-execution" id="runnerExecution" aria-labelledby="runnerTitle" hidden="">
+        <h3 class="log-title" id="runnerTitle" data-i18n="chrome.runner.execution">Runner 執行</h3>
         <div id="runnerSummary" role="status"></div>
         <div class="detail-grid" id="runnerDiagnostics"></div>
         <ol class="runner-recent" id="runnerRecent"></ol>
       </section>
-      <div id="currentWarnings"><div class="log-title">Warnings</div>
+      <div id="currentWarnings"><div class="log-title" data-i18n="common.warnings">警告</div>
       <div class="warnings" id="jobWarnings"></div></div>
-      <ol class="history-executions" id="historyExecutions" hidden></ol>
+      <ol class="history-executions" id="historyExecutions" hidden=""></ol>
     </section>
   </div>
-  <script type="module" src="/dashboard.mjs"></script>
-</body>
-</html>
+
+
+
+<script type="module" src="/dashboard.mjs"></script></body></html>

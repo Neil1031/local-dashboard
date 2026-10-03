@@ -1,3 +1,4 @@
+import { englishPage } from './locale-browser.mjs';
 import { test, before, after, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
@@ -50,7 +51,7 @@ before(async () => {
 after(async () => { await browser?.close(); await new Promise(resolve => server?.close(resolve)); });
 beforeEach(async () => {
   context = await browser.newContext({ viewport: { width: 1280, height: 1000 }, timezoneId: 'Asia/Taipei', locale: 'en-US' });
-  page = await context.newPage();
+  page = await englishPage(context);
   await page.clock.install({ time: new Date('2026-09-21T11:00:00Z') });
   errors = [];
   page.on('pageerror', error => errors.push(error.message));

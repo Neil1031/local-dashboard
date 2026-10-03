@@ -4,6 +4,7 @@ const routes = new Map([
   ['/', ['index.html', 'text/html; charset=utf-8']],
   ['/index.html', ['index.html', 'text/html; charset=utf-8']],
   ['/dashboard.mjs', ['dashboard.mjs', 'text/javascript']],
+  ...['i18n', 'locale-zh-TW', 'locale-en'].map(name => ['/ui/' + name + '.mjs', ['ui/' + name + '.mjs', 'text/javascript']]),
   ['/ui/shell.mjs', ['ui/shell.mjs', 'text/javascript']],
   ['/ui/overview.mjs', ['ui/overview.mjs', 'text/javascript']],
   ['/ui/us-signals.mjs', ['ui/us-signals.mjs', 'text/javascript']],

@@ -1,3 +1,4 @@
+import { englishPage } from './locale-browser.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
@@ -12,7 +13,7 @@ test('packaged history UI matches every persisted API execution without another 
   const artifactDir = fileURLToPath(new URL('../target/stage-3b/', import.meta.url));
   await mkdir(artifactDir, { recursive: true });
   try {
-    const page = await browser.newPage({ viewport: { width: 1280, height: 1100 }, timezoneId: 'Asia/Taipei', locale: 'en-US' });
+    const page = await englishPage(browser, { viewport: { width: 1280, height: 1100 }, timezoneId: 'Asia/Taipei', locale: 'en-US' });
     const requests = [], errors = [];
     page.on('request', request => { if (new URL(request.url()).pathname.startsWith('/api/')) requests.push(request.url()); });
     page.on('pageerror', error => errors.push(error.message));
