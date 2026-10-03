@@ -84,25 +84,15 @@ public class InsiderSignalsAdapter {
         if (!config.enabled()) return unavailable(operation, limit, offset, "SOURCE_DISABLED");
         if (!configured()) return unavailable(operation, limit, offset, "SOURCE_NOT_CONFIGURED");
         if (!slots.tryAcquire()) return unavailable(operation, limit, offset, "SOURCE_BUSY");
-        Process process = null;
-        Thread outThread = null, errThread = null;
         try {
-            process = start(command(operation, ticker, limit, offset));
-            process.getOutputStream().close();
-            var out = new Capture(process.getInputStream(), MAX_STDOUT);
-            var err = new Capture(process.getErrorStream(), MAX_STDERR);
-            outThread = Thread.startVirtualThread(out); errThread = Thread.startVirtualThread(err);
-            if (!process.waitFor(config.timeoutSeconds(), TimeUnit.SECONDS)) {
-                stop(process); return unavailable(operation, limit, offset, "SOURCE_TIMEOUT");
-            }
-            outThread.join(1000); errThread.join(1000);
-            if (outThread.isAlive() || errThread.isAlive() || out.failed || err.failed)
-                return failure(operation, limit, offset, "SOURCE_OUTPUT_ERROR");
-            if (out.overflow || err.overflow) return failure(operation, limit, offset, "SOURCE_OUTPUT_LIMIT");
-            if (process.exitValue() != 0) return unavailable(operation, limit, offset, "SOURCE_READ_FAILED");
-            String text = StandardCharsets.UTF_8.newDecoder().onMalformedInput(CodingErrorAction.REPORT)
-                    .decode(java.nio.ByteBuffer.wrap(out.bytes.toByteArray())).toString();
+            var output = BoundedSourceProcess.run(command(operation, ticker, limit, offset),
+                    config.timeoutSeconds(), MAX_STDOUT, MAX_STDERR, this::start);
+            if (output.exit() != 0) return unavailable(operation, limit, offset, "SOURCE_READ_FAILED");
+            String text = output.utf8();
             return normalize(operation, json.readTree(text), ticker, limit, offset);
+        } catch (BoundedSourceProcess.Failure e) {
+            return e.code.equals("SOURCE_TIMEOUT") ? unavailable(operation, limit, offset, e.code)
+                    : failure(operation, limit, offset, e.code);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt(); return unavailable(operation, limit, offset, "SOURCE_INTERRUPTED");
         } catch (com.fasterxml.jackson.core.JsonProcessingException | java.nio.charset.CharacterCodingException e) {
@@ -114,20 +104,15 @@ public class InsiderSignalsAdapter {
         } catch (RuntimeException e) {
             return failure(operation, limit, offset, "SOURCE_INVALID_OUTPUT");
         } finally {
-            if (process != null) { if (process.isAlive()) stop(process); close(process.getInputStream()); close(process.getErrorStream()); }
-            if (outThread != null) outThread.interrupt();
-            if (errThread != null) errThread.interrupt();
             slots.release();
         }
     }
     Process start(List<String> command) throws IOException {
-        var builder = new ProcessBuilder(command);
-        builder.environment().put("PYTHONDONTWRITEBYTECODE", "1");
-        builder.environment().put("PYTHONIOENCODING", "utf-8");
-        builder.environment().put("PYTHONUTF8", "1");
-        return builder.start();
+        return BoundedSourceProcess.start(command);
     }
-    private boolean configured() {
+    boolean acquireSlot() { return slots.tryAcquire(); }
+    void releaseSlot() { slots.release(); }
+    boolean configured() {
         try {
             Path cli = Path.of(config.cliPath()), db = Path.of(config.databasePath());
             String name = cli.getFileName().toString().toLowerCase(Locale.ROOT);
@@ -136,25 +121,6 @@ public class InsiderSignalsAdapter {
                     && !name.matches(".*\\.(bat|cmd|ps1|sh)")
                     && !Set.of("cmd.exe", "powershell.exe", "pwsh.exe", "bash", "sh").contains(name);
         } catch (RuntimeException e) { return false; }
-    }
-    private static void stop(Process p) {
-        p.descendants().forEach(ProcessHandle::destroyForcibly); p.destroyForcibly();
-    }
-    private static void close(InputStream stream) { try { stream.close(); } catch (IOException ignored) {} }
-    static final class Capture implements Runnable {
-        final InputStream stream; final int max; final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        volatile boolean overflow, failed;
-        Capture(InputStream stream, int max) { this.stream = stream; this.max = max; }
-        public void run() {
-            try (stream) {
-                byte[] buffer = new byte[8192]; int count;
-                while ((count = stream.read(buffer)) != -1) {
-                    int keep = Math.min(count, max - bytes.size());
-                    if (keep > 0) bytes.write(buffer, 0, keep);
-                    if (keep < count) overflow = true;
-                }
-            } catch (IOException e) { failed = true; }
-        }
     }
     static class InvalidContract extends RuntimeException {}
     ObjectNode normalize(JsonNode source, String filter, int limit, int offset) {

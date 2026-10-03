@@ -1,0 +1,530 @@
+{
+  "contract_version": 1,
+  "source": "performance",
+  "horizon": "3m",
+  "ticker": null,
+  "signals": [
+    {
+      "signalId": "report:2026-09-30:COO",
+      "ticker": "COO",
+      "company": "公司 🚀 <script>globalThis.performancePwned=true</script>",
+      "reportDate": "2026-09-30",
+      "discoveredAt": "2026-09-30T10:00:00+08:00",
+      "discoveryBasis": "assumed_publication_time",
+      "scores": {
+        "signal": {
+          "value": 0.0,
+          "origin": "imported_ai_report"
+        },
+        "investment": {
+          "value": 84.999,
+          "origin": "imported_ai_report"
+        }
+      },
+      "performanceStatus": "COMPLETE",
+      "performanceAsOf": "2026-09-30T10:00:00+08:00",
+      "missingSessions": [],
+      "snapshot": {
+        "snapshotAt": "2026-09-30T10:00:00+08:00",
+        "price": 100.0,
+        "returnFromDiscoveryPct": null,
+        "returnFromTradablePct": null,
+        "provider": "yahoo",
+        "priceBasis": "split_adjusted_ex_dividends",
+        "createdAt": "2026-09-30T10:00:00+08:00"
+      },
+      "horizonObserved": true
+    },
+    {
+      "signalId": "report:2026-09-29:COO",
+      "ticker": "COO",
+      "company": "公司 🚀 <script>globalThis.performancePwned=true</script>",
+      "reportDate": "2026-09-29",
+      "discoveredAt": "2026-09-30T10:00:00+08:00",
+      "discoveryBasis": "assumed_publication_time",
+      "scores": {
+        "signal": {
+          "value": 90.0,
+          "origin": "imported_ai_report"
+        },
+        "investment": {
+          "value": 85.0,
+          "origin": "imported_ai_report"
+        }
+      },
+      "performanceStatus": "PARTIAL",
+      "performanceAsOf": "2026-09-30T10:00:00+08:00",
+      "missingSessions": [
+        "2026-09-28"
+      ],
+      "snapshot": {
+        "snapshotAt": "2026-09-30T10:00:00+08:00",
+        "price": 100.0,
+        "returnFromDiscoveryPct": null,
+        "returnFromTradablePct": 0.0,
+        "provider": "yahoo",
+        "priceBasis": "split_adjusted_ex_dividends",
+        "createdAt": "2026-09-30T10:00:00+08:00"
+      },
+      "horizonObserved": true
+    },
+    {
+      "signalId": "report:2026-09-28:T03",
+      "ticker": "T03",
+      "company": "公司 🚀 <script>globalThis.performancePwned=true</script>",
+      "reportDate": "2026-09-28",
+      "discoveredAt": "2026-09-30T10:00:00+08:00",
+      "discoveryBasis": "assumed_publication_time",
+      "scores": {
+        "signal": {
+          "value": 90.0,
+          "origin": "imported_ai_report"
+        },
+        "investment": {
+          "value": 89.999,
+          "origin": "imported_ai_report"
+        }
+      },
+      "performanceStatus": "PENDING",
+      "performanceAsOf": "2026-09-30T10:00:00+08:00",
+      "missingSessions": [],
+      "snapshot": {
+        "snapshotAt": "2026-09-30T10:00:00+08:00",
+        "price": 100.0,
+        "returnFromDiscoveryPct": null,
+        "returnFromTradablePct": null,
+        "provider": "yahoo",
+        "priceBasis": "split_adjusted_ex_dividends",
+        "createdAt": "2026-09-30T10:00:00+08:00"
+      },
+      "horizonObserved": true
+    },
+    {
+      "signalId": "report:2026-09-27:T04",
+      "ticker": "T04",
+      "company": "公司 🚀 <script>globalThis.performancePwned=true</script>",
+      "reportDate": "2026-09-27",
+      "discoveredAt": "2026-09-30T10:00:00+08:00",
+      "discoveryBasis": "assumed_publication_time",
+      "scores": {
+        "signal": {
+          "value": 90.0,
+          "origin": "imported_ai_report"
+        },
+        "investment": {
+          "value": 90.0,
+          "origin": "imported_ai_report"
+        }
+      },
+      "performanceStatus": "NOT_COMPUTED",
+      "performanceAsOf": null,
+      "missingSessions": [],
+      "snapshot": {
+        "snapshotAt": "2026-09-30T10:00:00+08:00",
+        "price": 100.0,
+        "returnFromDiscoveryPct": null,
+        "returnFromTradablePct": 0.0,
+        "provider": "yahoo",
+        "priceBasis": "split_adjusted_ex_dividends",
+        "createdAt": "2026-09-30T10:00:00+08:00"
+      },
+      "horizonObserved": true
+    },
+    {
+      "signalId": "report:2026-09-26:T05",
+      "ticker": "T05",
+      "company": "公司 🚀 <script>globalThis.performancePwned=true</script>",
+      "reportDate": "2026-09-26",
+      "discoveredAt": "2026-09-30T10:00:00+08:00",
+      "discoveryBasis": "assumed_publication_time",
+      "scores": {
+        "signal": {
+          "value": 90.0,
+          "origin": "imported_ai_report"
+        },
+        "investment": {
+          "value": 94.999,
+          "origin": "imported_ai_report"
+        }
+      },
+      "performanceStatus": "COMPLETE",
+      "performanceAsOf": "2026-09-30T10:00:00+08:00",
+      "missingSessions": [],
+      "snapshot": null,
+      "horizonObserved": false
+    },
+    {
+      "signalId": "report:2026-09-25:T06",
+      "ticker": "T06",
+      "company": "公司 🚀 <script>globalThis.performancePwned=true</script>",
+      "reportDate": "2026-09-25",
+      "discoveredAt": "2026-09-30T10:00:00+08:00",
+      "discoveryBasis": "assumed_publication_time",
+      "scores": {
+        "signal": {
+          "value": 90.0,
+          "origin": "imported_ai_report"
+        },
+        "investment": {
+          "value": 95.0,
+          "origin": "imported_ai_report"
+        }
+      },
+      "performanceStatus": "PARTIAL",
+      "performanceAsOf": "2026-09-30T10:00:00+08:00",
+      "missingSessions": [
+        "2026-09-28"
+      ],
+      "snapshot": {
+        "snapshotAt": "2026-09-30T10:00:00+08:00",
+        "price": 100.0,
+        "returnFromDiscoveryPct": null,
+        "returnFromTradablePct": 10.0,
+        "provider": "yahoo",
+        "priceBasis": "split_adjusted_ex_dividends",
+        "createdAt": "2026-09-30T10:00:00+08:00"
+      },
+      "horizonObserved": true
+    },
+    {
+      "signalId": "report:2026-09-24:T07",
+      "ticker": "T07",
+      "company": "公司 🚀 <script>globalThis.performancePwned=true</script>",
+      "reportDate": "2026-09-24",
+      "discoveredAt": "2026-09-30T10:00:00+08:00",
+      "discoveryBasis": "assumed_publication_time",
+      "scores": {
+        "signal": {
+          "value": 90.0,
+          "origin": "imported_ai_report"
+        },
+        "investment": {
+          "value": null,
+          "origin": "imported_ai_report"
+        }
+      },
+      "performanceStatus": "PENDING",
+      "performanceAsOf": "2026-09-30T10:00:00+08:00",
+      "missingSessions": [],
+      "snapshot": {
+        "snapshotAt": "2026-09-30T10:00:00+08:00",
+        "price": 100.0,
+        "returnFromDiscoveryPct": null,
+        "returnFromTradablePct": 10.0,
+        "provider": "yahoo",
+        "priceBasis": "split_adjusted_ex_dividends",
+        "createdAt": "2026-09-30T10:00:00+08:00"
+      },
+      "horizonObserved": true
+    },
+    {
+      "signalId": "report:2026-09-23:T08",
+      "ticker": "T08",
+      "company": "公司 🚀 <script>globalThis.performancePwned=true</script>",
+      "reportDate": "2026-09-23",
+      "discoveredAt": "2026-09-30T10:00:00+08:00",
+      "discoveryBasis": "assumed_publication_time",
+      "scores": {
+        "signal": {
+          "value": 90.0,
+          "origin": "imported_ai_report"
+        },
+        "investment": {
+          "value": 84.999,
+          "origin": "imported_ai_report"
+        }
+      },
+      "performanceStatus": "NOT_COMPUTED",
+      "performanceAsOf": null,
+      "missingSessions": [],
+      "snapshot": null,
+      "horizonObserved": false
+    },
+    {
+      "signalId": "report:2026-09-22:T09",
+      "ticker": "T09",
+      "company": "公司 🚀 <script>globalThis.performancePwned=true</script>",
+      "reportDate": "2026-09-22",
+      "discoveredAt": "2026-09-30T10:00:00+08:00",
+      "discoveryBasis": "assumed_publication_time",
+      "scores": {
+        "signal": {
+          "value": 90.0,
+          "origin": "imported_ai_report"
+        },
+        "investment": {
+          "value": 85.0,
+          "origin": "imported_ai_report"
+        }
+      },
+      "performanceStatus": "COMPLETE",
+      "performanceAsOf": "2026-09-30T10:00:00+08:00",
+      "missingSessions": [],
+      "snapshot": null,
+      "horizonObserved": false
+    },
+    {
+      "signalId": "report:2026-09-21:T10",
+      "ticker": "T10",
+      "company": "公司 🚀 <script>globalThis.performancePwned=true</script>",
+      "reportDate": "2026-09-21",
+      "discoveredAt": "2026-09-30T10:00:00+08:00",
+      "discoveryBasis": "assumed_publication_time",
+      "scores": {
+        "signal": {
+          "value": 90.0,
+          "origin": "imported_ai_report"
+        },
+        "investment": {
+          "value": 89.999,
+          "origin": "imported_ai_report"
+        }
+      },
+      "performanceStatus": "PARTIAL",
+      "performanceAsOf": "2026-09-30T10:00:00+08:00",
+      "missingSessions": [
+        "2026-09-28"
+      ],
+      "snapshot": null,
+      "horizonObserved": false
+    },
+    {
+      "signalId": "report:2026-09-20:T11",
+      "ticker": "T11",
+      "company": "公司 🚀 <script>globalThis.performancePwned=true</script>",
+      "reportDate": "2026-09-20",
+      "discoveredAt": "2026-09-30T10:00:00+08:00",
+      "discoveryBasis": "assumed_publication_time",
+      "scores": {
+        "signal": {
+          "value": 90.0,
+          "origin": "imported_ai_report"
+        },
+        "investment": {
+          "value": 90.0,
+          "origin": "imported_ai_report"
+        }
+      },
+      "performanceStatus": "PENDING",
+      "performanceAsOf": "2026-09-30T10:00:00+08:00",
+      "missingSessions": [],
+      "snapshot": null,
+      "horizonObserved": false
+    },
+    {
+      "signalId": "report:2026-09-19:T12",
+      "ticker": "T12",
+      "company": "公司 🚀 <script>globalThis.performancePwned=true</script>",
+      "reportDate": "2026-09-19",
+      "discoveredAt": "2026-09-30T10:00:00+08:00",
+      "discoveryBasis": "assumed_publication_time",
+      "scores": {
+        "signal": {
+          "value": 90.0,
+          "origin": "imported_ai_report"
+        },
+        "investment": {
+          "value": 94.999,
+          "origin": "imported_ai_report"
+        }
+      },
+      "performanceStatus": "NOT_COMPUTED",
+      "performanceAsOf": null,
+      "missingSessions": [],
+      "snapshot": null,
+      "horizonObserved": false
+    },
+    {
+      "signalId": "report:2026-09-18:T13",
+      "ticker": "T13",
+      "company": "公司 🚀 <script>globalThis.performancePwned=true</script>",
+      "reportDate": "2026-09-18",
+      "discoveredAt": "2026-09-30T10:00:00+08:00",
+      "discoveryBasis": "assumed_publication_time",
+      "scores": {
+        "signal": {
+          "value": 90.0,
+          "origin": "imported_ai_report"
+        },
+        "investment": {
+          "value": 95.0,
+          "origin": "imported_ai_report"
+        }
+      },
+      "performanceStatus": "COMPLETE",
+      "performanceAsOf": "2026-09-30T10:00:00+08:00",
+      "missingSessions": [],
+      "snapshot": null,
+      "horizonObserved": false
+    },
+    {
+      "signalId": "report:2026-09-17:T14",
+      "ticker": "T14",
+      "company": "公司 🚀 <script>globalThis.performancePwned=true</script>",
+      "reportDate": "2026-09-17",
+      "discoveredAt": "2026-09-30T10:00:00+08:00",
+      "discoveryBasis": "assumed_publication_time",
+      "scores": {
+        "signal": {
+          "value": 90.0,
+          "origin": "imported_ai_report"
+        },
+        "investment": {
+          "value": null,
+          "origin": "imported_ai_report"
+        }
+      },
+      "performanceStatus": "PARTIAL",
+      "performanceAsOf": "2026-09-30T10:00:00+08:00",
+      "missingSessions": [
+        "2026-09-28"
+      ],
+      "snapshot": null,
+      "horizonObserved": false
+    },
+    {
+      "signalId": "report:2026-09-16:T15",
+      "ticker": "T15",
+      "company": "公司 🚀 <script>globalThis.performancePwned=true</script>",
+      "reportDate": "2026-09-16",
+      "discoveredAt": "2026-09-30T10:00:00+08:00",
+      "discoveryBasis": "assumed_publication_time",
+      "scores": {
+        "signal": {
+          "value": 90.0,
+          "origin": "imported_ai_report"
+        },
+        "investment": {
+          "value": 84.999,
+          "origin": "imported_ai_report"
+        }
+      },
+      "performanceStatus": "PENDING",
+      "performanceAsOf": "2026-09-30T10:00:00+08:00",
+      "missingSessions": [],
+      "snapshot": null,
+      "horizonObserved": false
+    },
+    {
+      "signalId": "report:2026-09-15:T16",
+      "ticker": "T16",
+      "company": "公司 🚀 <script>globalThis.performancePwned=true</script>",
+      "reportDate": "2026-09-15",
+      "discoveredAt": "2026-09-30T10:00:00+08:00",
+      "discoveryBasis": "assumed_publication_time",
+      "scores": {
+        "signal": {
+          "value": 90.0,
+          "origin": "imported_ai_report"
+        },
+        "investment": {
+          "value": 85.0,
+          "origin": "imported_ai_report"
+        }
+      },
+      "performanceStatus": "NOT_COMPUTED",
+      "performanceAsOf": null,
+      "missingSessions": [],
+      "snapshot": null,
+      "horizonObserved": false
+    },
+    {
+      "signalId": "report:2026-09-14:T17",
+      "ticker": "T17",
+      "company": "公司 🚀 <script>globalThis.performancePwned=true</script>",
+      "reportDate": "2026-09-14",
+      "discoveredAt": "2026-09-30T10:00:00+08:00",
+      "discoveryBasis": "assumed_publication_time",
+      "scores": {
+        "signal": {
+          "value": 90.0,
+          "origin": "imported_ai_report"
+        },
+        "investment": {
+          "value": 89.999,
+          "origin": "imported_ai_report"
+        }
+      },
+      "performanceStatus": "COMPLETE",
+      "performanceAsOf": "2026-09-30T10:00:00+08:00",
+      "missingSessions": [],
+      "snapshot": null,
+      "horizonObserved": false
+    },
+    {
+      "signalId": "report:2026-09-13:T18",
+      "ticker": "T18",
+      "company": "公司 🚀 <script>globalThis.performancePwned=true</script>",
+      "reportDate": "2026-09-13",
+      "discoveredAt": "2026-09-30T10:00:00+08:00",
+      "discoveryBasis": "assumed_publication_time",
+      "scores": {
+        "signal": {
+          "value": 90.0,
+          "origin": "imported_ai_report"
+        },
+        "investment": {
+          "value": 90.0,
+          "origin": "imported_ai_report"
+        }
+      },
+      "performanceStatus": "PARTIAL",
+      "performanceAsOf": "2026-09-30T10:00:00+08:00",
+      "missingSessions": [
+        "2026-09-28"
+      ],
+      "snapshot": null,
+      "horizonObserved": false
+    },
+    {
+      "signalId": "report:2026-09-12:T19",
+      "ticker": "T19",
+      "company": "公司 🚀 <script>globalThis.performancePwned=true</script>",
+      "reportDate": "2026-09-12",
+      "discoveredAt": "2026-09-30T10:00:00+08:00",
+      "discoveryBasis": "assumed_publication_time",
+      "scores": {
+        "signal": {
+          "value": 90.0,
+          "origin": "imported_ai_report"
+        },
+        "investment": {
+          "value": 94.999,
+          "origin": "imported_ai_report"
+        }
+      },
+      "performanceStatus": "PENDING",
+      "performanceAsOf": "2026-09-30T10:00:00+08:00",
+      "missingSessions": [],
+      "snapshot": null,
+      "horizonObserved": false
+    },
+    {
+      "signalId": "report:2026-09-11:T20",
+      "ticker": "T20",
+      "company": "公司 🚀 <script>globalThis.performancePwned=true</script>",
+      "reportDate": "2026-09-11",
+      "discoveredAt": "2026-09-30T10:00:00+08:00",
+      "discoveryBasis": "assumed_publication_time",
+      "scores": {
+        "signal": {
+          "value": 90.0,
+          "origin": "imported_ai_report"
+        },
+        "investment": {
+          "value": 95.0,
+          "origin": "imported_ai_report"
+        }
+      },
+      "performanceStatus": "NOT_COMPUTED",
+      "performanceAsOf": null,
+      "missingSessions": [],
+      "snapshot": null,
+      "horizonObserved": false
+    }
+  ],
+  "limit": 20,
+  "offset": 0,
+  "has_more": true,
+  "next_offset": 20
+}

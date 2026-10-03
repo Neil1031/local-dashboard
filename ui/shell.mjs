@@ -4,7 +4,7 @@ export const primaryPages = Object.freeze({
   automations: ['Automations', '目前 Scheduler 快照與七天已觀察歷史。'],
   us: ['US Stocks', 'Signals 與 SEC Transactions · 唯讀 partial slices。'],
   tw: ['TW Stocks', 'Taiwan Volume Watch · 已保存 daily observation 唯讀契約。'],
-  performance: ['Performance', 'DESIGNED · 尚未接入資料來源。'],
+  performance: ['Performance', 'Insider AI report · 已保存的研究觀察與報酬。'],
   reports: ['Reports', 'US Insider 唯讀報告 · All 只包含已接入來源。'],
   evidence: ['Data & Evidence', 'DESIGNED · 尚未接入閱讀介面。'],
   settings: ['Settings', '只修改 Dashboard 顯示 metadata。']

@@ -1,0 +1,99 @@
+{
+  "contract_version": 1,
+  "source": "performance",
+  "signal": {
+    "signalId": "report:2026-09-30:COO",
+    "ticker": "COO",
+    "company": "公司 🚀 <script>globalThis.performancePwned=true</script>",
+    "reportDate": "2026-09-30",
+    "discoveredAt": "2026-09-30T10:00:00+08:00",
+    "discoveryBasis": "assumed_publication_time",
+    "scores": {
+      "signal": {
+        "value": 0.0,
+        "origin": "imported_ai_report"
+      },
+      "investment": {
+        "value": 84.999,
+        "origin": "imported_ai_report"
+      }
+    }
+  },
+  "performance": {
+    "status": "COMPLETE",
+    "asOf": "2026-09-30T10:00:00+08:00",
+    "missingSessions": [],
+    "maxUpsidePct": 0.0,
+    "maxAdversePct": null,
+    "maxDrawdownPct": -2.0,
+    "daysToPeak": 0,
+    "daysToFirst10PctGain": null,
+    "daysToFirst10PctLoss": null,
+    "updatedAt": "2026-09-30T10:00:00+08:00"
+  },
+  "snapshots": {
+    "discovery": {
+      "snapshotAt": "2026-09-30T10:00:00+08:00",
+      "price": 100.0,
+      "returnFromDiscoveryPct": null,
+      "returnFromTradablePct": 10.0,
+      "provider": "yahoo",
+      "priceBasis": "split_adjusted_ex_dividends",
+      "createdAt": "2026-09-30T10:00:00+08:00"
+    },
+    "next_tradable": {
+      "snapshotAt": "2026-09-30T10:00:00+08:00",
+      "price": 100.0,
+      "returnFromDiscoveryPct": null,
+      "returnFromTradablePct": 10.0,
+      "provider": "yahoo",
+      "priceBasis": "split_adjusted_ex_dividends",
+      "createdAt": "2026-09-30T10:00:00+08:00"
+    },
+    "1d": {
+      "snapshotAt": "2026-09-30T10:00:00+08:00",
+      "price": 100.0,
+      "returnFromDiscoveryPct": null,
+      "returnFromTradablePct": 10.0,
+      "provider": "yahoo",
+      "priceBasis": "split_adjusted_ex_dividends",
+      "createdAt": "2026-09-30T10:00:00+08:00"
+    },
+    "1w": {
+      "snapshotAt": "2026-09-30T10:00:00+08:00",
+      "price": 100.0,
+      "returnFromDiscoveryPct": null,
+      "returnFromTradablePct": 10.0,
+      "provider": "yahoo",
+      "priceBasis": "split_adjusted_ex_dividends",
+      "createdAt": "2026-09-30T10:00:00+08:00"
+    },
+    "1m": {
+      "snapshotAt": "2026-09-30T10:00:00+08:00",
+      "price": 100.0,
+      "returnFromDiscoveryPct": null,
+      "returnFromTradablePct": 10.0,
+      "provider": "yahoo",
+      "priceBasis": "split_adjusted_ex_dividends",
+      "createdAt": "2026-09-30T10:00:00+08:00"
+    },
+    "3m": {
+      "snapshotAt": "2026-09-30T10:00:00+08:00",
+      "price": 100.0,
+      "returnFromDiscoveryPct": null,
+      "returnFromTradablePct": null,
+      "provider": "yahoo",
+      "priceBasis": "split_adjusted_ex_dividends",
+      "createdAt": "2026-09-30T10:00:00+08:00"
+    },
+    "6m": {
+      "snapshotAt": "2026-09-30T10:00:00+08:00",
+      "price": 100.0,
+      "returnFromDiscoveryPct": null,
+      "returnFromTradablePct": 10.0,
+      "provider": "yahoo",
+      "priceBasis": "split_adjusted_ex_dividends",
+      "createdAt": "2026-09-30T10:00:00+08:00"
+    }
+  }
+}
