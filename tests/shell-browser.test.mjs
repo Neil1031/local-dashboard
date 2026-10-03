@@ -4,6 +4,7 @@ import { createRequire } from 'node:module';
 import { createServer } from 'node:http';
 import { serveStaticAsset } from './static-assets.mjs';
 import { twFixture } from './tw-stocks-fixture.mjs';
+import { twReportsFixture } from './tw-reports-fixture.mjs';
 import { performanceFixture } from './performance-fixture.mjs';
 const { chromium } = createRequire(import.meta.url)('playwright');
 let browser, server, base, page, errors;
@@ -22,7 +23,7 @@ beforeEach(async () => {
   page = await browser.newPage(); errors = []; page.on('pageerror', e => errors.push(e.message));
   await page.route('**/api/**', route => {
     const url = new URL(route.request().url());
-    const payload = url.pathname.startsWith('/api/performance/') ? performanceFixture(url) : url.pathname === '/api/tw/stocks' ? twFixture(null, 'PARTIAL') : url.pathname === '/api/jobs' ? snapshot() : url.pathname === '/api/history' ? history(url)
+    const payload = url.pathname.startsWith('/api/performance/') ? performanceFixture(url) : url.pathname === '/api/reports/tw' ? twReportsFixture(url) : url.pathname === '/api/tw/stocks' ? twFixture(null, 'PARTIAL') : url.pathname === '/api/jobs' ? snapshot() : url.pathname === '/api/history' ? history(url)
       : url.pathname === '/api/runner/executions' ? { status: 'NOT_CONFIGURED', jobs: [], warnings: [] }
         : { version: 1, revision: '0', overrides: {}, warning: null };
     return route.fulfill({ contentType: 'application/json', body: JSON.stringify(payload) });
@@ -51,7 +52,10 @@ for (const width of [1280, 375, 320]) test(`nine-page shell, truthful overview a
       await page.waitForFunction(() => document.getElementById('performanceSummaryStatus').textContent === 'READY');
       assert.equal(await page.locator('.performance-bucket').count(), 5);
       assert.equal(await page.locator('.performance-row').count(), 20);
-    } else assert.match(await page.locator(`[data-page-view="${key}"]`).innerText(), /DESIGNED[\s\S]*尚未接入資料/);
+    } else {
+      await page.waitForFunction(() => document.getElementById('evidenceView').getAttribute('aria-busy') === 'false');
+      assert.match(await page.locator('#evidenceView').innerText(), /Taiwan Data & Evidence[\s\S]*TW Stocks[\s\S]*TW Daily Reports[\s\S]*TW Weekly Reports/);
+    }
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), true);
   }
   await page.locator('#automationsPage').focus(); await page.keyboard.press('Space');
