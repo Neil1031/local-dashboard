@@ -1,4 +1,4 @@
-// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: eec1dce3c10470d1a1d5e0f971d30b836345970b606dbc6ac3eb35c10ccbd1af
+// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: f50bcb6b4cfbede49a3545e84fd10d4cad0ee6dcd63a8d5e927dd7b2b5ee6c8d
 window.PROJECT_DESIGN_SAMPLE = Object.freeze({
   "metadata": {
     "project_id": "local-dashboard",
@@ -328,8 +328,8 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "originalIntent": "原設計只看 Insider 相關排程",
       "implementation": "Release 2A reports Signals、2B SEC Transactions partial 已合併；2C exact ticker source-separated aggregate／獨立分頁／既有明細已實作",
       "status": "PARTIAL",
-      "limitation": "SEC P／candidate 尚未認證、4/A 未對帳，來源位置 ID 非 immutable event ID；相同 ticker 不推定來源關聯，不 join／dedupe／combined score；Performance 未接、跨頁非 PIT、無 freshness policy；2C 已合併 main `44823ab`、尚未部署；實際安裝狀態由獨立 deployment evidence 確認",
-      "remaining": "Performance 唯讀 contract／amendment reconciliation／PIT／broader analytics 另行 gate",
+      "limitation": "SEC P／candidate 尚未認證、4/A 未對帳，來源位置 ID 非 immutable event ID；相同 ticker 不推定來源關聯，不 join／dedupe／combined score；Ticker Detail 尚未整合 Performance、跨頁非 PIT、無 freshness policy；2C 已合併 main `44823ab`、已完成核准累積部署；實際安裝狀態由獨立 deployment evidence 確認",
+      "remaining": "Ticker Detail Performance integration／amendment reconciliation／PIT／broader analytics 另行 gate",
       "evidence": "docs/STAGE-RELEASE-2C.md"
     },
     {
@@ -339,8 +339,8 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "originalIntent": "原設計只看 AIStockHunter 排程",
       "implementation": "TW Stocks v1 以 Taiwan Volume Watch 的 tw-daily-accumulation-v1、固定 ProcessBuilder、/api/tw/stocks 與 ui/tw-stocks.mjs 呈現七個唯讀區域；實作 e2bbbd85 已通過 Manager 核准",
       "status": "PARTIAL",
-      "limitation": "NOT MERGED／NOT DEPLOYED；每日與週檢身分獨立，PARTIAL／UNKNOWN／null 保留，WARMING_UP 的零候選不代表無異常；無 range／paging／投資建議",
-      "remaining": "Git closeout／部署須另行授權；Performance、TW Reports、Data & Evidence、歷史範圍及 broader Taiwan roadmap 另行 gate",
+      "limitation": "已整合 main `bce84c4` 並完成核准累積部署；每日與週檢身分獨立，PARTIAL／UNKNOWN／null 保留，WARMING_UP 的零候選不代表無異常；無 range／paging／投資建議",
+      "remaining": "Taiwan Performance、TW Reports、Data & Evidence、歷史範圍及 broader Taiwan roadmap 另行 gate",
       "evidence": "docs/STAGE-TW-STOCKS-V1.md"
     },
     {
@@ -348,11 +348,11 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "area": "Product expansion",
       "name": "Performance",
       "originalIntent": "原設計不分析選股效果",
-      "implementation": "時距與觀測成熟度畫面已設計",
-      "status": "DESIGNED",
-      "limitation": "現有 performance-summary 非核准唯讀介面",
-      "remaining": "取得來源唯讀 contract 後接入",
-      "evidence": "docs/DASHBOARD-DATA-CONTRACTS.md"
+      "implementation": "Release 3A 已核准第一個 Insider current active AI-report Performance v1 consumer；固定三個唯讀 CLI、Summary／有限 list／Signal Detail 與五時距",
+      "status": "PARTIAL",
+      "limitation": "實作 96b15c8 已獲 Manager 核准；未 Git closeout／main 整合／部署。stored state 與時距觀察分開，null 非 0，current scores 非歷史 PIT；Ticker Detail 未整合",
+      "remaining": "Taiwan／SEC Performance、broader analytics／PIT、portfolio／backtest／recommendations／trading 另行 gate",
+      "evidence": "docs/STAGE-RELEASE-3A-PERFORMANCE.md"
     },
     {
       "id": "product-reports",
@@ -361,7 +361,7 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "originalIntent": "原設計不集中報告",
       "implementation": "Release 2D All／US Insider 使用固定 list-reports／get-report v1；日期篩選、摘要、完整安全正文與獨立 revision metadata 分頁已實作",
       "status": "PARTIAL",
-      "limitation": "All 僅已接入 US Insider；TW Daily／Weekly 未接；counts 為目前保留列，revision 為正文/hash history、current 可在頁外或 MISSING，無 PIT／semantic diff／歷史 ticker score；2D 待管理初審、未合併／部署",
+      "limitation": "All 僅已接入 US Insider；TW Daily／Weekly 未接；counts 為目前保留列，revision 為正文/hash history、current 可在頁外或 MISSING，無 PIT／semantic diff／歷史 ticker score；2D 已核准合併並完成累積部署",
       "remaining": "TW 唯讀 contract、broader report sources 另行 gate",
       "evidence": "docs/STAGE-RELEASE-2D.md"
     },
@@ -498,26 +498,26 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
     {
       "horizon": "PARTIAL",
       "work": "US Stocks Signals／SEC Transactions／Ticker Detail",
-      "gate": "2A／2B 已合併；2C source-separated aggregate 已合併 main `44823ab`、尚未部署，不建立跨來源 identity；Performance／4/A reconciliation／PIT／broader analytics 另審",
+      "gate": "2A／2B 已合併；2C source-separated aggregate 已合併 main `44823ab`、已完成核准累積部署，不建立跨來源 identity；Ticker Detail Performance integration／4/A reconciliation／PIT／broader analytics 另審",
       "evidence": "docs/STAGE-RELEASE-2C.md"
     },
     {
       "horizon": "PARTIAL",
       "work": "Reports · All／US Insider",
-      "gate": "source-owned Reports v1 固定 list/get、safe DOM Markdown／revision paging；TW 未接，無 PIT／semantic diff；2D 待審、未合併／部署",
+      "gate": "source-owned Reports v1 固定 list/get、safe DOM Markdown／revision paging；TW 未接，無 PIT／semantic diff；2D 已合併 main `40f5aec` 並完成核准累積部署",
       "evidence": "docs/STAGE-RELEASE-2D.md"
     },
     {
       "horizon": "PARTIAL",
       "work": "TW Stocks v1",
-      "gate": "已核准 exact latest/date 唯讀 consumer，未合併／部署；Performance、TW Reports、Data & Evidence、history/range 與更廣 roadmap 分別另審",
+      "gate": "已核准 exact latest/date 唯讀 consumer，已整合 main `bce84c4` 並完成核准累積部署；Performance、TW Reports、Data & Evidence、history/range 與更廣 roadmap 分別另審",
       "evidence": "docs/STAGE-TW-STOCKS-V1.md"
     },
     {
-      "horizon": "DESIGNED",
-      "work": "Performance",
-      "gate": "來源版控唯讀 contract、adapter、partial/null/provenance gate",
-      "evidence": "docs/DASHBOARD-DATA-CONTRACTS.md"
+      "horizon": "PARTIAL",
+      "work": "Performance v1",
+      "gate": "Insider current active AI-report 第一切片已核准，Git closeout／main 整合／部署待辦；Taiwan／SEC／PIT／portfolio／backtest／recommendations／trading 未完成",
+      "evidence": "docs/STAGE-RELEASE-3A-PERFORMANCE.md"
     },
     {
       "horizon": "DESIGNED",

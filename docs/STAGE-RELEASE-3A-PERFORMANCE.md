@@ -1,5 +1,7 @@
 # Release 3A — Insider Performance v1 consumer
 
+Current follow-up: implementation `96b15c8caf0ed0fc64e307a77c95de3e460e20ce` has passed Manager approval. The subsequently authorized consolidated Design Sync promotes only `product-performance` to PARTIAL; Git closeout/main integration and deployment remain pending. The implementation-phase record below retains its original gate/status/evidence; the later sync is recorded at the end.
+
 Implementation handoff evidence, 2026-10-03 Asia/Taipei. Awaiting independent management and Manager review. NOT MERGED / NOT DEPLOYED. Canonical `product-performance` remains DESIGNED; no Design Sync in this implementation phase.
 
 ## Plan / Stage / Gate
@@ -104,3 +106,51 @@ Private reproducible evidence lives in this worktree's ignored `.tools/`; Stage 
 | `formal-after-private.json` | `f58a61b88c3bc9099e21436953286c9144391c31276e9ae1f7c3d22d8c5acf2b` |
 
 Existing primary main and source main remain clean/unmodified. Exact candidate SHA/PR/changed paths and log hashes are frozen in `.tools/handoff-packet.json` after commit/push. Sole normal implementation role remains the existing Sol Work; management independently reviews exact SHA. HANDOFF_DELIVERED is the submission state, not self-approval. Stop after handoff: no Design Sync, merge, deployment or next Stage.
+
+## Consolidated Design Sync evidence — 2026-10-03
+
+Manager authorization is one bounded docs/generated/coupled-test commit, direct parent accepted implementation `96b15c8caf0ed0fc64e307a77c95de3e460e20ce`; current main/base remains `bce84c4506e3e94d7b69eac6bf92679d1f1fd49d`. Same branch/PR #15, no new Work/subagent. This sync is READY_FOR_MANAGER_REVIEW, not self-approval, Git closeout or deployment. The original implementation evidence above is historical and unchanged; its formal capture is not rerun or reassigned to this documentation commit.
+
+### Scope and parity
+
+- Existing PROJECT-DESIGN, Data Contracts, As-Built, Design Space and README explain the approved first current-active Insider AI-report consumer, its three fixed read-only operations, small BoundedSourceProcess mechanics/source-specific exits, APIs, stored status versus horizon observation, exact identity/null/zero/snapshot semantics, source methodology and statistical limits. Broader original design remains in its fixed place; Ticker Detail itself still has no Performance integration.
+- Only product-performance DESIGNED→PARTIAL; all33 IDs and32other feature statuses retained. Existing parser derives DONE19/PARTIAL7/BACKEND_READY3/DATA_READY0/DESIGNED1/IN_PROGRESS0/NOT_STARTED2/DEFERRED0/BLOCKED1/DROPPED0. product-us/reports/tw remain PARTIAL. No status was changed to manufacture these counts.
+- Materially stale active2C/2D/TW wording reconciled to the already accepted cumulative bce84c4 deployment; historical Stage/Change Log evidence retained. Design Space's active Taiwan source statement now names the existing Taiwan Volume Watch contract, preserving the old AIStockHunter export proposal as unfinished design. This reconciliation adds no runtime capability or new deployment claim.
+- Existing prototype generator regenerated project-design-sample.js from canonical, then --check passed. Coupled Projects test retains baseline33-ID/status guards and exact final counts, adding the approved Performance promotion. Installed Projects remains the frozen bce84c4 package build snapshot; browser reload cannot read this unbuilt canonical. No package or JAR rebuild.
+
+### Bounded validation and implementation protection
+
+| Check | Result |
+| --- | --- |
+| Projects Node status/parser/loader/error cases |4PASS/0failure/0skip |
+| ProjectsResourceHttpTest |3PASS/0failure/0error/0skip; actual isolated random-port Spring resources + browser, temp Dashboard DB and fixture-routed APIs, no source read |
+| Generator --check and diff --check |PASS33features / PASS |
+| Exact implementation preservation |All518 out-of-scope tracked files equal accepted Git content; Java source equals accepted blobs with existing checkout CRLF where applicable.14 product UI raw resources byte-exact to accepted frozen JAR, including existing mixed EOL files; no runtime/test-source modifications |
+| Candidate JAR |Unchanged SHA2560f25f45742e9850ea9f3e1d7f7766a36676f1028c466c1054e333ef0eee9a310 |
+| Installed image/config/source |225files hash/size/mtime unchanged, installed config unchanged, two shortcut hashes equal existing deployment identity; Insider98trackedfiles equal main231638f2, clean |
+| Formal source operations |0new reads; existing32active/3m observed0/null/NOT_COMPUTED32 captures reused |
+
+Windows launcher environment prevented normal Maven wrapper start; the downloaded matching Maven3.9.11 batch stalled before Java and Surefire's cmd.exe fork returned OS CreateProcess740. The verified test helper alone was stopped. Same installed Maven/JDK25 with forkCount=0 ran the exact bounded test class successfully, including its actual browser child. No system settings/elevation, auto-approval rejection bypass, product change, full Maven/browser campaign, package build or installed operation. Failed launcher logs are retained separately; zero-test launcher failures are not test failures or successful verification. After the final on/after methodology refinement, the same bounded test class ran again on stable canonical; final-stable log is authoritative. Served target/classes canonical is byte-exact SHA256 f50bcb6b4cfbede49a3545e84fd10d4cad0ee6dcd63a8d5e927dd7b2b5ee6c8d. The accepted packaged JAR is unchanged; test resource copying does not repackage it.
+
+### Existing owner Google Doc synchronization
+
+Same Doc `1GgEEjKTNPTJ5ACMXQ6TIaXSUFYH9OugdP9LAOIQcgNs`, tab t.0, in place. Checked-in trusted-read bridge3.6 with supported Windows fileIO persisted complete before/intermediate/final native responses/control inventory/outline/text; no protected controls/warnings. Two direct structured batches used fresh requiredRevisionId:17targets initially, then bounded current-wording corrections to2additional paragraphs plus one methodology correction.19unique target paragraphs changed,751other native paragraphs unchanged,770total. All24H1/52H2 text/order/styles, tab/named styles/list/hanging indentation/text styles/links/headerfooterobjects preserved. Parent/sharing metadata readback equal; no permissions/move/copy/new Doc/Taiwan Doc write. Native checks are not PDF/browser visual QA.
+
+Existing Release3 items remain in place: ☑ Performance v1 implementation complete/Manager approved, ☐ Git closeout/main integration, ☐ production deployment. First Insider slice is PARTIAL,32currentactive/3m observed0 is not0% performance; NOT_COMPUTED does not become PENDING. Current canonical7PARTIAL/1DESIGNED is distinguished from installed bce84c4 historical6PARTIAL/2DESIGNED. Taiwan/SEC/broader analytics/PIT/portfolio/backtesting/recommendations/trading remain unfinished.
+
+- Before revision: `ANLCKQlZe86HGEls6gBTWfAzb-FF9e739_TFD1qfLR4HKlc-XQHh814soMYwVo6U5xww6d90t8ytUehLXnXU66fs4rO3LRc1A51-EdshHbQ`.
+- Intermediate revision: `ANLCKQmGwLx6JoYqTWW0XjJHIyv6iRsVD-NQi8k9dALDYLRTPfVvuzmjGTvIFDj1cogQBDC6BrcEnyanVM7nVYPekdEO5oP2ZK2XyTSL1V0`.
+- Final revision: `ANLCKQneZpzMsCPIfLkaaLcUk0EbsQ_qAX3svUokUGn_dUibwb1RUMWXaHTCYLKCoU73u2cvq_M8bOKZ_5bYcoMDPK0Uq7RbX9lKp7lEXcM`.
+
+Ignored private evidence under `.tools/performance-design-sync/` is available to management; raw native/private metadata is not committed. Hash-bound evidence:
+
+| Artifact | SHA256 |
+| --- | --- |
+| `projects-node-final.log` | `8a70c35a13a39eeb9ce4630afd707eb6b48b1af19658411ec6edc0a0be66a5c3` |
+| `projects-http-final-stable.log` | `8d281da94b2b4e289b26ff8d609af82fd078f9d117d47564320205fcc36d9e3d` |
+| `doc/before/manifest.json` | `b355b56a56a777de50ba46ef17ce03a681ef82bb817e8aae4a3f6d982bcd6e7c` |
+| `doc/final/manifest.json` | `07f41a5b541aaacb0e6e03bd7324854f45804a483935ef29dc676bd90669f1f3` |
+| `doc/native-proof.json` | `e96c6e9e01ea87b06cfdcb897f032abce6a04a09f95289fb6affcd6c247bba27` |
+| `byte-proof.json` | `03b231f7cbae91db17c8ee8f6284dec3ff551eb1c795aec80022c05225dba0c5` |
+
+Exact Design Sync SHA/parent/changed paths/live PR state are recorded in the post-commit handoff packet and direct management delivery, avoiding a self-referential SHA in this commit. No new formal DB/CLI read, source writer, installed Start/Stop, Scheduler/Task/Runner/receipt operation, rebuild/repackage/deploy/merge or next Stage. Stop after HANDOFF_DELIVERED to existing management for independent exact-SHA review.
