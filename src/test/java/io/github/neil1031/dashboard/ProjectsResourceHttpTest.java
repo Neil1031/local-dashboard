@@ -39,6 +39,7 @@ class ProjectsResourceHttpTest {
             {"/ui/tw-reports.mjs", "ui/tw-reports.mjs"},
             {"/ui/tw-stocks.mjs", "ui/tw-stocks.mjs"},
             {"/ui/performance.mjs", "ui/performance.mjs"},
+            {"/ui/evidence.mjs", "ui/evidence.mjs"},
             {"/dashboard.mjs", "dashboard.mjs"}, {"/index.html", "index.html"}}) {
             var response = http.getForEntity(asset[0], byte[].class);
             assertEquals(200, response.getStatusCode().value(), asset[0]);

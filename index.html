@@ -663,6 +663,31 @@
     .project-status { display: inline-block; margin: 8px 0 0 12px; border-radius: 6px; padding: 4px 8px; background: var(--panel-strong); font-size: 12px; font-weight: 700; }
     .project-feature-content { padding: 0 16px 16px; margin: 0; }
     @media (max-width: 400px) { .projects { padding: 16px; } .project-counts { grid-template-columns: 1fr 1fr; } .project-status { margin-left: 0; } }
+    .evidence-view { padding: 24px; min-width: 0; overflow-wrap: anywhere; }
+    .evidence-view h2 { margin: 0; }
+    .evidence-view p, .evidence-view li { line-height: 1.65; }
+    .evidence-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+    .evidence-heading button, .evidence-links a { border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; background: #fff; color: var(--text); font: inherit; cursor: pointer; }
+    .evidence-heading button { flex: 0 0 auto; }
+    .evidence-links { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 24px; }
+    .evidence-links a { text-decoration: none; }
+    .evidence-view button:focus-visible, .evidence-links a:focus-visible, .evidence-view summary:focus-visible { outline: 3px solid var(--pink-dark); outline-offset: 2px; }
+    .evidence-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .evidence-diagnostics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .evidence-card, .evidence-limits { min-width: 0; border: 1px solid var(--border); border-radius: 14px; background: #fffafd; padding: 16px; margin-bottom: 14px; }
+    .evidence-card h3, .evidence-card h4 { margin: 0 0 12px; }
+    .evidence-state { font-weight: 700; color: var(--pink-deep); }
+    .evidence-facts { display: grid; grid-template-columns: minmax(100px, 1fr) minmax(0, 2fr); gap: 8px 12px; font-size: 13px; }
+    .evidence-facts dt { color: var(--muted); }
+    .evidence-facts dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+    .evidence-view details { border-top: 1px solid var(--border); padding: 12px 0; }
+    .evidence-view summary { cursor: pointer; font-size: 13px; font-weight: 700; }
+    .evidence-record { padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .evidence-warnings { font-size: 12px; }
+    .evidence-warnings h4 { margin-top: 16px; }
+    .evidence-interpretation { border-left: 3px solid var(--pink-dark); padding-left: 12px; }
+    @media (max-width: 820px) { .evidence-grid, .evidence-diagnostics { grid-template-columns: 1fr; } }
+    @media (max-width: 520px) { .evidence-view { padding: 16px; } .evidence-heading { flex-direction: column; } .evidence-facts { grid-template-columns: minmax(0, 1fr); gap: 4px; } .evidence-facts dd { margin-bottom: 8px; } }
   </style>
   <style>
     /* History keeps horizontal scrolling inside the panel, with a readable row heading. */
@@ -1088,7 +1113,21 @@
         <aside class="report-limitations"><h3>Revision 閱讀限制</h3><p>Revision history 是 body／hash／首次觀察的保留紀錄，不是完整切換 timeline；A → B → A 回到原保留 revision。Current revision 可在目前頁之外；MISSING／null 是合法的未匹配狀態，MATCHED 只表示來源儲存關係，不驗證正文 hash。</p><p>不重建歷史 ticker／score，不從 inactive signal 推論舊版 membership，沒有 per-signal PIT reconstruction 或 semantic diff；各次分頁可能觀察到不同 import，跨頁不是 PIT snapshot。</p><p>本文只以安全 Markdown 子集／純文字顯示；HTML、圖片與連結語法保留為文字，沒有 HTML 執行或檔案／來源連結。</p></aside>
       </dialog>
     </section>
-    <section class="panel planned-page" id="evidenceView" data-page-view="evidence" hidden><p class="eyebrow">DESIGNED</p><h2>Data & Evidence</h2><p>尚未接入資料。此入口目前只提供導覽，相關資料來源與閱讀功能仍待實作。</p></section>
+    <section class="panel evidence-view" id="evidenceView" data-page-view="evidence" hidden aria-labelledby="evidenceTitle">
+      <div class="evidence-heading"><div><p class="eyebrow">TAIWAN · SOURCE EVIDENCE</p><h2 id="evidenceTitle">Taiwan Data &amp; Evidence</h2><p>為什麼呈現這個狀態？閱讀來源保存的身分、完整性、就緒程度與責任缺口。</p></div><button id="evidenceReload" type="button">Refresh · 重新讀取</button></div>
+      <p id="evidenceStatus" role="status"></p>
+      <nav class="evidence-links" aria-label="相關 Taiwan 頁面"><a href="#tw">前往 TW Stocks</a><a href="#reports">前往 TW Reports</a></nav>
+      <section aria-labelledby="evidenceSourcesTitle"><h3 id="evidenceSourcesTitle">Evidence Sources · 三個獨立來源</h3><div class="evidence-grid" id="evidenceSources"><article class="evidence-card" id="evidenceSource-stocks"></article><article class="evidence-card" id="evidenceSource-daily"></article><article class="evidence-card" id="evidenceSource-weekly"></article></div></section>
+      <section aria-labelledby="evidenceDailyTitle"><h3 id="evidenceDailyTitle">Current Daily Evidence · 保存身分</h3><div id="evidenceDaily"></div></section>
+      <section aria-labelledby="evidenceDiagnosticsTitle"><h3 id="evidenceDiagnosticsTitle">Completeness / Readiness / Responsibility</h3><div class="evidence-diagnostics">
+        <section class="evidence-card"><h4>Source Completeness · 來源完整性</h4><div id="evidenceCompleteness"></div></section>
+        <section class="evidence-card"><h4>Readiness &amp; Gaps · 就緒程度與缺口</h4><div id="evidenceReadiness"></div></section>
+        <section class="evidence-card"><h4>Responsibility · 待補查與未完成責任</h4><div id="evidenceResponsibility"></div></section>
+        <section class="evidence-card"><h4>Weekly Check · 獨立週檢</h4><div id="evidenceWeekly"></div></section>
+      </div></section>
+      <section aria-labelledby="evidenceReportsTitle"><h3 id="evidenceReportsTitle">Report Evidence · 本次 bounded LIST 首筆</h3><div class="evidence-diagnostics"><article class="evidence-card" id="evidenceReport-daily"></article><article class="evidence-card" id="evidenceReport-weekly"></article></div></section>
+      <section class="evidence-limits" aria-labelledby="evidenceLimitsTitle"><h3 id="evidenceLimitsTitle">Interpretation Limits · 解讀邊界</h3><p>COHERENT 不等於 SUCCESS；PARTIAL 不等於 SUCCESS；UNKNOWN 不是 NO，null 不是 0。來源 SUCCESS 不保證市場完整。候選不是買進建議，來源異常分數不是投資分數。</p><p>Latest attempt 與 latest finalized 分開；Daily authority 與 Weekly authority 分開。日期重疊不代表同一原子觀察或 PIT snapshot；報告清單不是完整歷史。</p><p>目前第一切片為 Taiwan data/source evidence；Schedule Versions / Correlation / Runner aggregation 尚未完成。歷史範圍、Taiwan Performance 與 US Evidence aggregation 尚未接入。</p><p>離頁或重新讀取後，只顯示本次結果；來源處理可能仍在進行。</p></section>
+    </section>
     <div class="footer-note">Local · dates shown in your local time zone · Settings changes display metadata only</div>
     </main>
   </div>

@@ -6,6 +6,7 @@ import { mountUsStocks } from './ui/us-stocks.mjs';
 import { mountReports } from './ui/reports.mjs';
 import { mountTwStocks } from './ui/tw-stocks.mjs';
 import { mountPerformance } from './ui/performance.mjs';
+import { mountEvidence } from './ui/evidence.mjs';
 const currentStatuses = new Set(['READY', 'RUNNING', 'FAILED', 'DISABLED', 'UNKNOWN', 'MISSED']);
 const lastStatuses = new Set(['SUCCESS', 'FAILED', 'UNKNOWN']);
 export const currentStatus = job => currentStatuses.has(job.status) ? job.status : 'UNKNOWN';
@@ -187,6 +188,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
   const reports = mountReports(document, fetchJobs);
   const twStocks = mountTwStocks(document, fetchJobs);
   const performance = mountPerformance(document, fetchJobs);
+  const evidence = mountEvidence(document, fetchJobs);
   const filters = [...document.querySelectorAll('.filter')];
   let snapshot = null;
   let runnerSnapshot = null;
@@ -253,6 +255,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
     if (page === 'reports') reports.show(); else reports.hide();
     if (page === 'tw') twStocks.show(); else twStocks.hide();
     performance.show(page);
+    if (page === 'evidence') evidence.show(); else evidence.hide();
     if (page === 'projects') projects.show();
     if (page === 'settings') renderSettingList();
     if (phase !== 'loading' && !busy && needsHistory()) void loadHistory();

@@ -6,7 +6,7 @@ export const primaryPages = Object.freeze({
   tw: ['TW Stocks', 'Taiwan Volume Watch · 已保存 daily observation 唯讀契約。'],
   performance: ['Performance', 'Insider AI report · 已保存的研究觀察與報酬。'],
   reports: ['Reports', 'US Insider 唯讀報告 · All 只包含已接入來源。'],
-  evidence: ['Data & Evidence', 'DESIGNED · 尚未接入閱讀介面。'],
+  evidence: ['Data & Evidence', 'Taiwan · 來源狀態、保存身分與資料缺口的唯讀證據。'],
   settings: ['Settings', '只修改 Dashboard 顯示 metadata。']
 });
 
