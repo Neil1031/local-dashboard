@@ -8,7 +8,7 @@
 
 **這功能解決什麼問題：** 在同一個本機畫面查看受監控 Windows 排程的現況、最近一次結果、已觀察到的執行歷史，以及有設定的 Runner 執行證據。
 
-**它怎麼運作：** Release 1B 已合併並提供 **九頁主要導覽**。Overview 讀現有 jobs／History／Runner；Automations 提供 Today／7-day History、Workflow 與 Runner coverage；Settings 提供原有顯示 metadata 編輯；Projects 保留最小建置快照 Viewer。已合併 Release 2A 的 US Signals 切片由獨立 `ui/us-signals.mjs` → `/api/us/signals` → 固定 ProcessBuilder → Insider reports contract v1 唯讀 CLI；不直接開外部 SQLite，不執行 pipeline。分數來源是 Imported AI report，交易／報告日期、null／quality flags 與 sanitized provenance 保留。Release 2B 另加獨立 `ui/us-sec-transactions.mjs` → `/api/us/sec-transactions` → 固定 sec operation，共用相同 process bounds；無 SEC scoring、不 join reports，保留 non-P／derivative／owners／footnotes／review／null。P／candidate 尚未認證，4/A 未對帳；來源位置 ID 非 immutable event ID，execution price 非策略進場價。Release 2B 已通過 Manager Review，合併 main `4acd568`；實際安裝狀態由獨立 deployment evidence 確認。Release 2C 專用 `ui/us-ticker-detail.mjs` → `/api/us/ticker-detail` → `UsTickerDetailService` 順序重用既有兩個 adapter operations，保留 process bounds，各來源 failure 不抹除另一成功 section；前端 deadline 75 秒涵蓋兩次 max-30s 與 bounded drains。2C 已隨 main bce84c4 核准累積 image 部署。Release 2D `ui/reports.mjs` → `/api/reports/us-insider` 與 `/detail` → 同一 adapter 的固定 list-reports／get-report，沿用兩個共用 process slots／輸出與逾時界線。All 已實作 US Insider／TW Daily／TW Weekly 三個獨立區域，TW consumer 已核准、Git／部署待後續 gate；`safe-markdown.mjs` 以 DOM 文字呈現完整 untrusted 正文，無 innerHTML／可執行連結。Counts 為目前保留／active 列；revision 是正文/hash history、current 可在頁外或 MISSING，無 PIT／semantic diff。2D 已合併 main 40f5aec 並完成核准累積部署。Windows Task Scheduler 是排程現況的來源；Dashboard 自己的 SQLite 保存「看見過什麼」；Runner receipts 是另一套執行證據。三者的身分與語意分開保存。排程版本與 occurrence correlation 已在程式中，但 correlation 仍是 shadow research，沒有正式 UI／HTTP API。
+**它怎麼運作：** Release 1B 已合併並提供 **九頁主要導覽**。Overview 讀現有 jobs／History／Runner；Automations 提供 Today／7-day History、Workflow 與 Runner coverage；Settings 提供原有顯示 metadata 編輯；Projects 保留最小建置快照 Viewer。已合併 Release 2A 的 US Signals 切片由獨立 `ui/us-signals.mjs` → `/api/us/signals` → 固定 ProcessBuilder → Insider reports contract v1 唯讀 CLI；不直接開外部 SQLite，不執行 pipeline。分數來源是 Imported AI report，交易／報告日期、null／quality flags 與 sanitized provenance 保留。Release 2B 另加獨立 `ui/us-sec-transactions.mjs` → `/api/us/sec-transactions` → 固定 sec operation，共用相同 process bounds；無 SEC scoring、不 join reports，保留 non-P／derivative／owners／footnotes／review／null。P／candidate 尚未認證，4/A 未對帳；來源位置 ID 非 immutable event ID，execution price 非策略進場價。Release 2B 已通過 Manager Review，合併 main `4acd568`；實際安裝狀態由獨立 deployment evidence 確認。Release 2C 專用 `ui/us-ticker-detail.mjs` → `/api/us/ticker-detail` → `UsTickerDetailService` 順序重用既有兩個 adapter operations，保留 process bounds，各來源 failure 不抹除另一成功 section；前端 deadline 75 秒涵蓋兩次 max-30s 與 bounded drains。2C 已隨 main bce84c4 核准累積 image 部署。Release 2D `ui/reports.mjs` → `/api/reports/us-insider` 與 `/detail` → 同一 adapter 的固定 list-reports／get-report，沿用兩個共用 process slots／輸出與逾時界線。All 已實作 US Insider／TW Daily／TW Weekly 三個獨立區域，TW consumer 已整合／部署於 main 7a2f9c45；`safe-markdown.mjs` 以 DOM 文字呈現完整 untrusted 正文，無 innerHTML／可執行連結。Counts 為目前保留／active 列；revision 是正文/hash history、current 可在頁外或 MISSING，無 PIT／semantic diff。2D 已合併 main 40f5aec 並完成核准累積部署。Windows Task Scheduler 是排程現況的來源；Dashboard 自己的 SQLite 保存「看見過什麼」；Runner receipts 是另一套執行證據。三者的身分與語意分開保存。排程版本與 occurrence correlation 已在程式中，但 correlation 仍是 shadow research，沒有正式 UI／HTTP API。
 
 ```mermaid
 flowchart LR
@@ -41,7 +41,7 @@ flowchart LR
   RA -.已驗證的 Runner view.-> O
 ```
 
-**目前限制：** 九頁導覽已實作部分功能；US Stocks 已有 reports Signals／SEC Transactions partial 切片（PARTIAL），Release 2C Ticker Detail source-separated aggregate 已合併 main `44823ab`、已完成核准累積部署；Reports／SEC 分頁／日期／ID 獨立，無 cross-source join；Ticker Detail 尚未整合 Performance。SEC amendments/corrections 不 collapse；來源完整性與完整 4/A reconciliation 尚未驗證。Reports · All／US Insider 在 Release 2D 為 PARTIAL；TW Daily／Weekly 已核准實作，三來源獨立、無 PIT／semantic diff。TW Stocks v1 已通過 Manager 實作核准，`product-tw` 為 PARTIAL、已整合 main bce84c4 並完成核准累積部署；獨立 Performance v1 已核准為 PARTIAL、已整合 main d69ff5ab 並完成核准正式部署；Data & Evidence 仍是 DESIGNED 入口。Overview 僅涵蓋 operations，不顯示投資 metrics 或完成百分比。`design/prototype/index.html` 仍是獨立靜態設計原型。沒有自動 `MISSED`；Dashboard 不修改 Scheduler task 或正式 Runner config，也不把 correlation 結果寫入資料庫。參照 [`DASHBOARD-DESIGN-SPACE.md`](DASHBOARD-DESIGN-SPACE.md) 時，應將其視為產品設計，勿誤當完整現況畫面。Signals 跨頁非 PIT、無 freshness policy，來源讀失敗保持 unavailable，詳見 [Release 2A](STAGE-RELEASE-2A.md)。
+**目前限制：** 九頁導覽已實作部分功能；US Stocks 已有 reports Signals／SEC Transactions partial 切片（PARTIAL），Release 2C Ticker Detail source-separated aggregate 已合併 main `44823ab`、已完成核准累積部署；Reports／SEC 分頁／日期／ID 獨立，無 cross-source join；Ticker Detail 尚未整合 Performance。SEC amendments/corrections 不 collapse；來源完整性與完整 4/A reconciliation 尚未驗證。Reports · All／US Insider 在 Release 2D 為 PARTIAL；TW Daily／Weekly 已核准實作，三來源獨立、無 PIT／semantic diff。TW Stocks v1 已通過 Manager 實作核准，`product-tw` 為 PARTIAL、已整合 main bce84c4 並完成核准累積部署；獨立 Performance v1 已核准為 PARTIAL、已整合 main d69ff5ab 並完成核准正式部署；Data & Evidence Taiwan v1 已核准為 PARTIAL，main／部署待後續 gates。Overview 僅涵蓋 operations，不顯示投資 metrics 或完成百分比。`design/prototype/index.html` 仍是獨立靜態設計原型。沒有自動 `MISSED`；Dashboard 不修改 Scheduler task 或正式 Runner config，也不把 correlation 結果寫入資料庫。參照 [`DASHBOARD-DESIGN-SPACE.md`](DASHBOARD-DESIGN-SPACE.md) 時，應將其視為產品設計，勿誤當完整現況畫面。Signals 跨頁非 PIT、無 freshness policy，來源讀失敗保持 unavailable，詳見 [Release 2A](STAGE-RELEASE-2A.md)。
 
 ## 2. 啟動、設定與安全停止
 
@@ -69,7 +69,7 @@ Release 1B 的 `ui/shell.mjs` 管主要導覽；`ui/overview.mjs` 只從已驗�
 
 **它怎麼運作：** `dashboard.mjs` 把 `/api/jobs` 快照顯示於 Today，按市場、狀態與 metadata 排列；摘要的「需留意」來自當前 status，不是漏跑判斷。Workflow 在 Today 內按台股／美股呈現預設順序與依賴文字，點卡片進同一工作詳情；這是工作關係的**展示**，不會啟動或阻擋下游工作。History tab 以瀏覽器本地七個日曆日算出 UTC 查詢界線，讀 `GET /api/history?from=...&to=...`，將當前工作與只在歷史存在的工作按 canonical ID 合併。日期格可展開該日全部已觀察執行；有日期的舊檢查工作可摺疊。現在的 UI 另讀一次 `/api/runner/executions` 以顯示 coverage 與詳情。
 
-**目前限制：** History 不是 Windows Event Log 全量紀錄；空格只表示資料庫沒有該日可顯示的已觀察執行，絕不代表漏跑。Workflow 依賴圖不是執行引擎；預設只呈現設定順序中前段工作。Release 1B 把 Today／History 搬至 Automations，保留原有功能；Release 2A 已合併 reports Signals；Release 2B 新增 SEC partial；2C Ticker Detail 已合併但已完成核准累積部署，2D Reports · US Insider 已核准合併並完成累積部署，TW Stocks v1 consumer 已核准實作、已整合 main bce84c4 並完成核准累積部署；獨立 Performance v1 已核准為 PARTIAL、已整合 main d69ff5ab 並完成核准正式部署；Data & Evidence 仍未接入。
+**目前限制：** History 不是 Windows Event Log 全量紀錄；空格只表示資料庫沒有該日可顯示的已觀察執行，絕不代表漏跑。Workflow 依賴圖不是執行引擎；預設只呈現設定順序中前段工作。Release 1B 把 Today／History 搬至 Automations，保留原有功能；Release 2A 已合併 reports Signals；Release 2B 新增 SEC partial；2C Ticker Detail 已合併但已完成核准累積部署，2D Reports · US Insider 已核准合併並完成累積部署，TW Stocks v1 consumer 已核准實作、已整合 main bce84c4 並完成核准累積部署；獨立 Performance v1 已核准為 PARTIAL、已整合 main d69ff5ab 並完成核准正式部署；Data & Evidence Taiwan 第一切片已核准，broader aggregation 未完成。
 
 ## 5. SQLite：工作身分與已觀察執行
 
@@ -210,11 +210,11 @@ sequenceDiagram
 | Projects 本專案建置快照入口 | Release 1A-1 最小切片已核准並合併 | 安裝版本須另有 deployment evidence；完整面板與跨專案 aggregation 未完成；九頁 shell 已由 Release 1B 開發實作。 |
 | Product Shell／Overview operations | Release 1B PARTIAL 已合併 | 九頁導覽／既有 API 已隨 1B／2A／2B 累積 image 安裝；2C 已隨 main bce84c4 核准累積 image 部署，installed 狀態由 deployment evidence 確認。 |
 | US Stocks Signals／SEC Transactions | PARTIAL | reports Signals 已合併；SEC partial 已合併 main `4acd568`，2C Ticker Detail source-separated aggregate 已合併 main `44823ab`、已完成核准累積部署；Ticker Detail Performance integration／4A 對帳／PIT 尚未完成。 |
-| Reports · All／US Insider | PARTIAL | Release 2D 固定 list/get v1、exact date、完整安全正文與獨立 revision metadata 分頁；All 已實作三來源獨立區域，TW consumer已核准、Git／部署待後續 gate、current 可在頁外或 MISSING、無 PIT／semantic diff；2D 已核准並整合 main 40f5aec 並完成核准累積部署。 |
+| Reports · All／US Insider | PARTIAL | Release 2D 固定 list/get v1、exact date、完整安全正文與獨立 revision metadata 分頁；All 已實作三來源獨立區域，TW consumer已於 main 7a2f9c45 整合／部署、current 可在頁外或 MISSING、無 PIT／semantic diff；2D 已核准並整合 main 40f5aec 並完成核准累積部署，broader sources 尚未完成。 |
 | TW Stocks v1 | PARTIAL | 實作 e2bbbd85 已獲 Manager 核准，已整合 main bce84c4 並完成核准累積部署；source-owned Taiwan contract 七區唯讀 consumer，非完整 Taiwan roadmap。 |
-| TW Reports v1 | PARTIAL | Daily／Weekly consumer93ae8859已核准；三來源獨立、main／部署待後續gate；broader roadmap未完成。 |
+| TW Reports v1 | PARTIAL | Daily／Weekly consumer93ae8859已核准；三來源獨立、main 7a2f9c45整合／部署完成；broader roadmap未完成。 |
 | Performance v1 | PARTIAL | Release 3A current active Insider AI-report 唯讀 consumer 已核准實作 96b15c8，已整合 main d69ff5ab 並完成核准正式部署；Taiwan／SEC／PIT／portfolio／broader analytics 未完成。 |
-| Data & Evidence | DESIGNED | 尚未接入閱讀 adapter，只有導覽 destination。 |
+| Data & Evidence | PARTIAL | Taiwan v1 重用既有 normalized APIs／strict parsers；Schedule Versions／Correlation／Runner aggregation 未完成；main／部署待本次後續 gates。 |
 
 **目前限制：** 上表的「已完成」指 repo 中有正式程式與既有 Stage gate；不代表目前這台機器所有 Scheduler task、Runner mapping、資料庫或外部來源均已在本文件撰寫時實機驗收。外部來源已實作 reports Signals、SEC Transactions partial、2C source-separated Ticker Detail，以及2D Reports · US Insider 第一切片和已核准的 TW Stocks v1 consumer；Release 1B／2A／2B 已通過 Manager Review 並合併，均與已安裝版本分開標明。`MISSED` 不可由現有 shadow 時間 heuristics 直接啟用。
 
@@ -269,7 +269,7 @@ flowchart LR
 
 ## 16. Release 3A：Insider Performance v1 核准實作
 
-**目的與狀態：** 在既有 Performance 固定入口閱讀 current active Insider AI-report 的 stored research evidence。Manager 已核准實作96b15c8；product-performance PARTIAL，Git closeout／main d69ff5ab 整合／正式部署已完成。Gate A current installed image 為 d69ff5ab 的 Performance 累積 image，不含本次未建置 TW Reports Design Sync；部署完成不等於安裝後 QA。
+**目的與狀態：** 在既有 Performance 固定入口閱讀 current active Insider AI-report 的 stored research evidence。Manager 已核准實作96b15c8；product-performance PARTIAL，Git closeout／main d69ff5ab 整合／正式部署已完成。本輪 pre-merge installed image 為 main 7a2f9c45 的累積 TW Reports image，尚未包含新 Evidence；正式替換由本輪 Gate C 記錄；部署完成不等於安裝後 QA。
 
 ```mermaid
 flowchart LR
@@ -291,8 +291,35 @@ flowchart LR
 
 ## 17. TW Reports v1：核准日／週報 consumer
 
-核准實作93ae8859、direct parent／reviewed main d69ff5ab；consolidated Design Sync，Git／部署待後續 gate。Taiwan canonical95071c2b 的 source-owned tw-reports-v1 → 固定 TaiwanReportsAdapter → 獨立 TwReportsProjection → no-store /api/reports/tw + /api/reports/tw/detail → Reports TW Daily／TW Weekly。reports-cli-path 明確分離 Stage2 cli-path；TW Stocks／Reports 共用 Taiwan Semaphore2，沿用既有 source 六欄，不直接讀 private SQLite／weekly／latest／journal，不重算報告。
+核准實作93ae8859、direct parent／reviewed main d69ff5ab；consolidated Design Sync／main 7a2f9c45整合／部署完成。Taiwan canonical95071c2b 的 source-owned tw-reports-v1 → 固定 TaiwanReportsAdapter → 獨立 TwReportsProjection → no-store /api/reports/tw + /api/reports/tw/detail → Reports TW Daily／TW Weekly。reports-cli-path 明確分離 Stage2 cli-path；TW Stocks／Reports 共用 Taiwan Semaphore2，沿用既有 source 六欄，不直接讀 private SQLite／weekly／latest／journal，不重算報告。
 
 All 的 US Insider／TW Daily／TW Weekly 分別呈現狀態、分頁、來源與明細，不合成跨來源 timeline／total／PIT。READY／EMPTY=exit0；合法 PARTIAL／UNAVAILABLE／ERROR=exit2；Weekly saved FAILED 是業務狀態而非 transport failure。Daily／Weekly authority、run/date／report IDs 獨立；null 非0、UNKNOWN 非NO、WARMING_UP 零候選非無異常、source anomaly score 非investment score。Safe DOM Markdown、native keyboard dialog 與 latest matching response 規則保留。
 
-既有唯一四次 consumer captures 為 Daily READY→PARTIAL／WARMING_UP／0，Weekly READY→PARTIAL／saved FAILED／pending164匯出100；相容性不表示自然排程成功或完整歷史／市場／投資有效性。本次無正式來源重讀，Stage4 112-asset來源部署證據保留。product-tw／product-reports仍PARTIAL，Data & Evidence、Taiwan Performance／history/range／broader analytics未完成。詳見[Data Contracts](DASHBOARD-DATA-CONTRACTS.md#tw-reports-v1-implemented-consumer)及[Stage evidence](STAGE-TW-REPORTS-V1.md)。
+既有唯一四次 consumer captures 為 Daily READY→PARTIAL／WARMING_UP／0，Weekly READY→PARTIAL／saved FAILED／pending164匯出100；相容性不表示自然排程成功或完整歷史／市場／投資有效性。本次無正式來源重讀，Stage4 112-asset來源部署證據保留。product-tw／product-reports仍PARTIAL，Data & Evidence broader aggregation、Taiwan Performance／history/range／broader analytics未完成。詳見[Data Contracts](DASHBOARD-DATA-CONTRACTS.md#tw-reports-v1-implemented-consumer)及[Stage evidence](STAGE-TW-REPORTS-V1.md)。
+
+
+## 18. Taiwan Data & Evidence v1：來源證據第一切片
+
+Taiwan Data & Evidence v1 實作 `04f67e9c41085b7ff196b50eac1ca331251cb2d7` 已獲 Manager 核准；本次 consolidated Design Sync 完成，main integration／production deployment 待後續已授權 gates。只將 `product-evidence` DESIGNED→PARTIAL，33 stable IDs 與其他32 statuses 保留；product-tw／product-reports／product-performance 仍 PARTIAL。Taiwan-only 第一切片不是整個跨來源 Evidence 完成，Schedule Versions／Correlation／Runner aggregation 仍未接入。
+
+Taiwan Volume Watch source-owned `tw-daily-accumulation-v1`／`tw-reports-v1` → 既有 `TaiwanStocksAdapter`／`TwStocksProjection` 與 `TaiwanReportsAdapter`／`TwReportsProjection` → 既有 normalized Dashboard APIs → `ui/evidence.mjs`（重用 `readTwStocks`／`readTwReports`）→ Data & Evidence Taiwan v1。沒有新 source contract／backend adapter／projection，不直讀 Taiwan SQLite／file／private schema；沒有新的 Dashboard persistence／backend cache，沒有 report DETAIL fetch、aggregate health／trust／investment score 或 cross-source atomic／PIT interpretation。
+
+```mermaid
+flowchart LR
+  TVW[Taiwan Volume Watch contracts] --> STOCKS[TaiwanStocksAdapter / TwStocksProjection]
+  TVW --> REPORTS[TaiwanReportsAdapter / TwReportsProjection]
+  STOCKS --> API[Existing normalized APIs]
+  REPORTS --> API
+  API --> EVIDENCE[ui/evidence.mjs]
+  EVIDENCE --> UI[Data & Evidence Taiwan v1]
+```
+
+Wave 1：`GET /api/tw/stocks`；只有 fetch＋JSON body 實際 settled 後，Wave 2 才並行讀 `GET /api/reports/tw?type=daily&limit=1&offset=0` 與 `GET /api/reports/tw?type=weekly&limit=1&offset=0`。Evidence-owned unresolved Taiwan browser request 最大2；single drain loop、generation matching 與 newest refresh coalescing，Refresh 立即作廢舊 presentation，等舊 reads 實際 drain 再處理 newest generation（即使忽略 abort）。離頁阻止 stale render／pending cache，已完成 view 返回可重用 browser completed cache；無 polling。此 browser-local presentation cache 不是新增 backend persistence/cache；AbortController 不保證 server／source child process universal cancellation，也不宣稱跨其他頁面／clients 的全域 budget。
+
+COHERENT != SUCCESS；PARTIAL != SUCCESS；UNKNOWN != NO；null != 0；WARMING_UP＋0 candidates != no anomaly；candidate != buy；source anomaly score != investment score。Weekly FAILED 是保存的週檢業務狀態，不抹除 Daily availability。latest attempt != latest finalized；Daily observation identity != Daily report identity != Weekly report identity。bounded LIST first item 不代表 complete historical latest，除非 source contract 明確建立該語意。三張來源卡片保留獨立 dataState／contract／observedAt／generatedAt／selected ID／warnings；envelope 與 item warnings／times 分開。Daily query／snapshot／scope、attempt／finalized、completeness／readiness／responsibility 與 Weekly Check 分開，missing facts 不補成零；LIST problemCount 不代替完整 DETAIL，細節由 Reports 頁負責。
+
+本輪沒有新的 formal Taiwan compatibility read。只可重用 frozen normalized captures：Stocks observed `2026-10-02T17:04:23.118012500Z`、selected `2026-10-02`、run `e801318d154a46c88f03858a9b60044c`、PARTIAL；Daily LIST observed `2026-10-03T12:17:45.674272100Z`、READY、`tw-daily:2026-10-02:f93460ffdd3d4ec6a60ce1244ce30d0f`；Weekly LIST observed `2026-10-03T12:17:46.080439900Z`、READY／saved FAILED、`tw-weekly:2026-10-02:510f722b6bcd40c09cee9393594be39e`。Replay 仍標為 SAVED_TEST_EVIDENCE，原始 bytes／時間／狀態／ID 不改，不稱新 observations 或 installed acceptance。
+
+Localization / i18n（zh-TW default、en）→ Taiwan History / Range → Taiwan Performance；localization 尚未實作。完成 i18n Stage 後，所有新增 owner-facing UI 必須使用 common i18n resource layer，不再加入 hard-coded user-visible strings。獨立 `chore/i18n-seed` 分支留給下一 Stage，本次不 merge／consume／touch，也不新增 localization stable feature ID。
+
+[Stage evidence](STAGE-TW-DATA-EVIDENCE-V1.md) 保留實作與 Self-QA；本 Gate A 不建置／部署／觸碰 installed runtime。

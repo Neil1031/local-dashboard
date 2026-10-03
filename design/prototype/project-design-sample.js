@@ -1,4 +1,4 @@
-// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: af3eb2398d39c54c4e2bdb8547699e515b268b976fcddebe8bcbc1bcb62371fd
+// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: 3d573818cc84b69138f6b4b9db4393261e3ea6a524d389d73325de076494e297
 window.PROJECT_DESIGN_SAMPLE = Object.freeze({
   "metadata": {
     "project_id": "local-dashboard",
@@ -340,7 +340,7 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "implementation": "TW Stocks v1 以 Taiwan Volume Watch 的 tw-daily-accumulation-v1、固定 ProcessBuilder、/api/tw/stocks 與 ui/tw-stocks.mjs 呈現七個唯讀區域；實作 e2bbbd85 已通過 Manager 核准",
       "status": "PARTIAL",
       "limitation": "已整合 main `bce84c4` 並完成核准累積部署；每日與週檢身分獨立，PARTIAL／UNKNOWN／null 保留，WARMING_UP 的零候選不代表無異常；無 range／paging／投資建議",
-      "remaining": "Taiwan Performance、Data & Evidence、歷史範圍及 broader Taiwan roadmap 另行 gate",
+      "remaining": "Taiwan Performance、broader Data & Evidence aggregation、歷史範圍及 broader Taiwan roadmap 另行 gate",
       "evidence": "docs/STAGE-TW-STOCKS-V1.md"
     },
     {
@@ -361,8 +361,8 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "originalIntent": "原設計不集中報告",
       "implementation": "Release 2D US Insider 固定 list-reports／get-report v1 保留；TW Reports v1 固定 source-owned 日／週報 LIST／DETAIL 與 All 三來源獨立區域已核准實作",
       "status": "PARTIAL",
-      "limitation": "All 實作三個獨立來源區域；TW Daily／Weekly 已核准，main 整合與部署待後續 gate；counts 為目前保留列，revision 為正文/hash history、current 可在頁外或 MISSING，無 PIT／semantic diff／歷史 ticker score；2D 已核准合併並完成累積部署",
-      "remaining": "TW Reports main 整合／部署依本次授權 gate；broader report sources／PIT 另行 gate",
+      "limitation": "All 實作三個獨立來源區域；TW Daily／Weekly 已核准，main 7a2f9c45 整合與部署已完成；counts 為目前保留列，revision 為正文/hash history、current 可在頁外或 MISSING，無 PIT／semantic diff／歷史 ticker score；2D 已核准合併並完成累積部署",
+      "remaining": "TW Reports 已部署於 main 7a2f9c45；broader report sources／PIT 另行 gate",
       "evidence": "docs/STAGE-RELEASE-2D.md; docs/STAGE-TW-REPORTS-V1.md"
     },
     {
@@ -370,11 +370,11 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "area": "Product expansion",
       "name": "Data & Evidence",
       "originalIntent": "原設計只在工作詳情看狀態",
-      "implementation": "原型規劃跨來源診斷、版本與 correlation",
-      "status": "DESIGNED",
-      "limitation": "Runner 診斷已存在，其他畫面未正式發佈",
-      "remaining": "以現有證據建唯讀檢視",
-      "evidence": "docs/DASHBOARD-DESIGN-SPACE.md"
+      "implementation": "Taiwan v1 重用既有 Stocks／Daily／Weekly Reports LIST APIs 與 strict parsers，呈現來源 cards／readiness／completeness／責任／Weekly Check",
+      "status": "PARTIAL",
+      "limitation": "核准實作04f67e9c；consolidated Design Sync，main／部署待後續 gates；只 Taiwan 第一切片，Schedule Versions／Correlation／Runner aggregation 未完成，非健康／信任／投資 score 或 atomic/PIT",
+      "remaining": "下一 Stage 先 Localization/i18n，再 Taiwan History/Range、Taiwan Performance；broader Evidence aggregation 另審",
+      "evidence": "docs/STAGE-TW-DATA-EVIDENCE-V1.md; docs/DASHBOARD-DATA-CONTRACTS.md"
     }
   ],
   "issues": [
@@ -510,7 +510,7 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
     {
       "horizon": "PARTIAL",
       "work": "TW Stocks v1",
-      "gate": "已核准 exact latest/date 唯讀 consumer，已整合 main `bce84c4` 並完成核准累積部署；Performance、Data & Evidence、history/range 與更廣 roadmap 分別另審",
+      "gate": "已核准 exact latest/date 唯讀 consumer，已整合 main `bce84c4` 並完成核准累積部署；Performance、broader Data & Evidence aggregation、history/range 與更廣 roadmap 分別另審",
       "evidence": "docs/STAGE-TW-STOCKS-V1.md"
     },
     {
@@ -520,10 +520,16 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "evidence": "docs/STAGE-RELEASE-3A-PERFORMANCE.md"
     },
     {
-      "horizon": "DESIGNED",
-      "work": "Data & Evidence／Schedule view",
-      "gate": "對已保存版本與 Runner coverage 建唯讀檢視，保留 UNKNOWN",
-      "evidence": "docs/STAGE-SCHEDULE-SNAPSHOT-HISTORY.md"
+      "horizon": "PARTIAL",
+      "work": "Data & Evidence Taiwan v1",
+      "gate": "只 Taiwan 保存來源證據；Schedule Versions／Correlation／Runner aggregation 未完成",
+      "evidence": "docs/STAGE-TW-DATA-EVIDENCE-V1.md"
+    },
+    {
+      "horizon": "NEXT",
+      "work": "Localization / i18n → Taiwan History / Range → Taiwan Performance",
+      "gate": "zh-TW default／en；i18n 尚未實作，完成後新 UI 必須使用 common resource layer；不 touch chore/i18n-seed",
+      "evidence": "docs/DASHBOARD-DESIGN-SPACE.md"
     },
     {
       "horizon": "BLOCKED",

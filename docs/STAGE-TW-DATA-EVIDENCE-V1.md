@@ -178,3 +178,12 @@ fetcher, so its instrumentation recorded no requests. Moving trace setup before 
 corrected the harness; no product workaround was needed. That initial log is retained.
 Windows Maven uses the existing unmodified SysWOW64 wrapper/JDK25/nonfork explicit
 test/classes classpath strategy; no system, registry, wrapper or POM changes.
+
+
+## Authorized consolidated Design Sync — Gate A
+
+Taiwan Data & Evidence v1 實作 `04f67e9c41085b7ff196b50eac1ca331251cb2d7` 已獲 Manager 核准；本次 consolidated Design Sync 完成，main integration／production deployment 待後續已授權 gates。只將 `product-evidence` DESIGNED→PARTIAL，33 stable IDs 與其他32 statuses 保留；product-tw／product-reports／product-performance 仍 PARTIAL。Taiwan-only 第一切片不是整個跨來源 Evidence 完成，Schedule Versions／Correlation／Runner aggregation 仍未接入。
+
+Localization / i18n（zh-TW default、en）→ Taiwan History / Range → Taiwan Performance；localization 尚未實作。完成 i18n Stage 後，所有新增 owner-facing UI 必須使用 common i18n resource layer，不再加入 hard-coded user-visible strings。獨立 `chore/i18n-seed` 分支留給下一 Stage，本次不 merge／consume／touch，也不新增 localization stable feature ID。
+
+Canonical architecture/contracts/Design Space/current wording and generator sample are synchronized; only product-evidence is promoted. Accepted implementation/runtime source bytes stay exact to04f67e9c. Coupled canonical assertions alone may change. Gate A owner Docs mark implementation/Design Sync checked and main/deployment unchecked, with fresh native revision guard/readback. Actual Gate A validation and Docs evidence live in the combined private operations packet. Gate B/C remain unexecuted at this documentation commit; no postdeployment status-only Git commit is needed. Installed image/config/home/source/Tasks untouched during Gate A; no new formal read.
