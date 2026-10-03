@@ -83,3 +83,10 @@ Before/after exact equality PASS: 112 installed Taiwan runtime assets (all manif
 Canonical engineering docs/README/generated sample stayed byte/content unchanged; Google Docs received no operations. Installed external config remains exact original f5786331c8b62994f8ca0d2231057d2bbbeab694a379ff8aa410726f44885b7f, with no reports-cli-path delta. No deployment/Design Sync/merge/next Stage.
 
 Final exact commit/PR and private evidence hashes are in the frozen management handoff packet rather than a self-referential commit field here. Sol stops after HANDOFF_DELIVERED for management independent review.
+
+
+## Subsequent owner-authorized consolidated Design Sync (Gate A)
+
+The historical implementation-only stop/evidence above remains unchanged. A subsequent direct owner authorization replaces separate Design Sync/review/Git/deployment approvals with gated A→B→C execution. Accepted implementation93ae8859d04dbc399742714d61ba002363095b6b, reviewed parent/main d69ff5ab10d637335b9bf9e0c558bd07aa267883 and Taiwan canonical95071c2b9383a8d143dcfd107edd2d1050130462 are frozen identities. Gate A updates canonical current architecture/contracts/remaining-work wording, bounded stale Performance deployment wording and generated sample via the existing generator. All33 IDs/statuses and product-tw/product-reports PARTIAL are preserved. Runtime/source/config bytes remain unchanged; installed Dashboard untouched; existing captures reused with zero formal rereads.
+
+Both existing native Google Docs are synchronized in place with fresh required revision IDs and native readback. Gate A records TW Daily/Weekly implementation approved + consolidated Design Sync complete, main integration/deployment pending. This historical Gate A snapshot is not a claim that the later gates have passed. Exact Design Sync SHA, validations, revision proofs, Git closeout and deployment identities are recorded separately in the combined operations handoff packet; no post-deployment Git status-only commit.
