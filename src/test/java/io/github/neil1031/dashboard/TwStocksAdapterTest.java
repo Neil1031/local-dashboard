@@ -30,7 +30,7 @@ class TwStocksAdapterTest {
         Path python=Path.of(System.getProperty("java.home"),"bin","java.exe"); // A regular executable copy named Python identifies the test-only fixed path.
         Path executable=temp.resolve("python.exe"), cli=temp.resolve("export_tw_readonly.py");
         if(!Files.exists(executable))Files.copy(python,executable);Files.writeString(cli,"synthetic fixed CLI");
-        return new TaiwanProperties(true,executable.toString(),cli.toString(),temp.resolve("absent db.sqlite3").toString(),temp.resolve("absent output").toString(),timeout);
+        return new TaiwanProperties(true,executable.toString(),cli.toString(),temp.resolve("absent db.sqlite3").toString(),temp.resolve("absent output").toString(),timeout,"");
     }
     TaiwanStocksAdapter realChild(TaiwanProperties p,String mode,Path fixture,List<Process> children,List<List<String>> commands) {
         return new TaiwanStocksAdapter(p,json){@Override Process start(List<String> command)throws java.io.IOException {
@@ -87,10 +87,10 @@ class TwStocksAdapterTest {
     }
     @Test void fixedCommandPythonAndPyLauncherDateDisabledAndBadConfigurations() throws Exception {
         var p=properties(10);var a=new TaiwanStocksAdapter(p,json);assertThat(a.command("2026-09-25")).containsExactly(p.pythonPath(),"-B",p.cliPath(),"--db",p.databasePath(),"--output-dir",p.outputDir(),"--target-date","2026-09-25");
-        var py=new TaiwanStocksAdapter(new TaiwanProperties(false,temp.resolve("py.exe").toString(),"cli","db","output",10),json);assertThat(py.command(null)).containsExactly(temp.resolve("py.exe").toString(),"-3.11","-B","cli","--db","db","--output-dir","output");
+        var py=new TaiwanStocksAdapter(new TaiwanProperties(false,temp.resolve("py.exe").toString(),"cli","db","output",10,""),json);assertThat(py.command(null)).containsExactly(temp.resolve("py.exe").toString(),"-3.11","-B","cli","--db","db","--output-dir","output");
         assertThat(py.read(null).path("warnings").toString()).contains("SOURCE_DISABLED");
-        for(int timeout:List.of(0,31))assertThat(new TaiwanStocksAdapter(new TaiwanProperties(true,p.pythonPath(),p.cliPath(),p.databasePath(),p.outputDir(),timeout),json).read(null).path("warnings").toString()).contains("SOURCE_NOT_CONFIGURED");
-        for(String python:List.of("cmd.exe","pwsh.exe","powershell.exe","sh","bash","python.cmd"))assertThat(new TaiwanStocksAdapter(new TaiwanProperties(true,temp.resolve(python).toString(),p.cliPath(),p.databasePath(),p.outputDir(),10),json).read(null).path("warnings").toString()).contains("SOURCE_NOT_CONFIGURED");
+        for(int timeout:List.of(0,31))assertThat(new TaiwanStocksAdapter(new TaiwanProperties(true,p.pythonPath(),p.cliPath(),p.databasePath(),p.outputDir(),timeout,""),json).read(null).path("warnings").toString()).contains("SOURCE_NOT_CONFIGURED");
+        for(String python:List.of("cmd.exe","pwsh.exe","powershell.exe","sh","bash","python.cmd"))assertThat(new TaiwanStocksAdapter(new TaiwanProperties(true,temp.resolve(python).toString(),p.cliPath(),p.databasePath(),p.outputDir(),10,""),json).read(null).path("warnings").toString()).contains("SOURCE_NOT_CONFIGURED");
         for(String bad:List.of("", "0000-01-01","2026-02-29","2026-9-25"," 2026-09-25","--help","10000-01-01"))assertThatThrownBy(()->py.read(bad)).isInstanceOf(IllegalArgumentException.class);
     }
     @Test void realProcessesExit0Exit2ValidPartialUnavailableInputErrorArgparseUnexpectedAnd16MiBCeiling() throws Exception {
@@ -129,7 +129,7 @@ class TwStocksAdapterTest {
                 print(json.dumps(json.loads(Path(__file__).with_name('synthetic.json').read_text(encoding='utf-8')), ensure_ascii=False))
                 """);
         var before = new HashMap<Path, byte[]>(); for (Path f : List.of(cli,payload,module)) before.put(f, Files.readAllBytes(f));
-        var a = new TaiwanStocksAdapter(new TaiwanProperties(true,python.toString(),cli.toString(),db.toString(),output.toString(),10),json);
+        var a = new TaiwanStocksAdapter(new TaiwanProperties(true,python.toString(),cli.toString(),db.toString(),output.toString(),10,""),json);
         var r = a.read(null); assertThat(r.path("dataState").asText()).isEqualTo("COHERENT");
         assertThat(r.path("observation").path("candidates").get(0).path("stockName").asText()).isEqualTo("台積電");
         for(var entry:before.entrySet())assertThat(Files.readAllBytes(entry.getKey())).isEqualTo(entry.getValue());

@@ -11,6 +11,7 @@ const routes = new Map([
   ['/ui/us-sec-transactions.mjs', ['ui/us-sec-transactions.mjs', 'text/javascript']],
   ['/ui/us-ticker-detail.mjs', ['ui/us-ticker-detail.mjs', 'text/javascript']],
   ['/ui/reports.mjs', ['ui/reports.mjs', 'text/javascript']],
+  ['/ui/tw-reports.mjs', ['ui/tw-reports.mjs', 'text/javascript']],
   ['/ui/tw-stocks.mjs', ['ui/tw-stocks.mjs', 'text/javascript']],
   ['/ui/performance.mjs', ['ui/performance.mjs', 'text/javascript']],
   ['/ui/safe-markdown.mjs', ['ui/safe-markdown.mjs', 'text/javascript']],

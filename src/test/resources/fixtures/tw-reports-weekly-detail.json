@@ -1,0 +1,59 @@
+{
+  "contractVersion": "tw-reports-v1",
+  "source": "TAIWAN_VOLUME_WATCH",
+  "generatedAt": "2026-10-03T11:52:30.635096+00:00",
+  "dataState": "PARTIAL",
+  "query": {
+    "operation": "DETAIL",
+    "reportType": "WEEKLY",
+    "reportId": "tw-weekly:2026-09-25:33333333333333333333333333333333"
+  },
+  "report": {
+    "reportId": "tw-weekly:2026-09-25:33333333333333333333333333333333",
+    "reportType": "WEEKLY",
+    "effectiveDate": "2026-09-25",
+    "weekStart": "2026-09-21",
+    "weekEnd": "2026-09-25",
+    "checkRunId": "33333333333333333333333333333333",
+    "checkedAt": "2026-09-25T14:30:00+00:00",
+    "status": "FAILED",
+    "dayStatusCounts": {
+      "FAILED": 1
+    },
+    "problemCount": 1,
+    "pendingRevalidationCount": 0,
+    "unfinishedRunCount": 0,
+    "facts": {
+      "days": [
+        {
+          "targetDate": "2026-09-25",
+          "status": "FAILED",
+          "accumulationRunId": "11111111111111111111111111111111",
+          "savedAt": "2026-09-25T07:30:00+00:00",
+          "bindingState": "SAVED_COLLECTION_IDENTITY",
+          "savedCollectionStatus": "PARTIAL",
+          "problems": null
+        }
+      ],
+      "problems": [
+        {
+          "code": "REPORTED_PROBLEM_REDACTED",
+          "targetDate": null,
+          "runId": null
+        }
+      ],
+      "pendingRevalidation": [],
+      "unfinishedRuns": [],
+      "pointerState": "NOT_INSPECTED",
+      "dailyBinding": "INDEPENDENT",
+      "provenance": "SAVED_IMMUTABLE_WEEKLY_CHECK"
+    },
+    "markdown": "# TW Weekly Check\n\n- reportId: tw-weekly:2026-09-25:33333333333333333333333333333333\n- reportType: WEEKLY\n- effectiveDate: 2026-09-25\n- weekStart: 2026-09-21\n- weekEnd: 2026-09-25\n- checkRunId: 33333333333333333333333333333333\n- checkedAt: 2026-09-25T14:30:00+00:00\n- status: FAILED\n- dayStatusCounts: {\"FAILED\":1}\n- problemCount: 1\n- pendingRevalidationCount: 0\n- unfinishedRunCount: 0\n\n## Days\n- days: 1 exported\n  - record 1:\n    - target Date: 2026-09-25\n    - status: FAILED\n    - accumulation Run Id: 11111111111111111111111111111111\n    - saved At: 2026-09-25T07:30:00+00:00\n    - binding State: SAVED_COLLECTION_IDENTITY\n    - saved Collection Status: PARTIAL\n    - problems: null (UNKNOWN)\n\n## Problems\n- problems: 1 exported\n  - record 1:\n    - code: REPORTED_PROBLEM_REDACTED\n    - target Date: null (UNKNOWN)\n    - run Id: null (UNKNOWN)\n\n## Pending / unfinished responsibility\n- pending Revalidation: []\n- unfinished Runs: []\n\n## Source identity\n- pointer State: NOT_INSPECTED\n- daily Binding: INDEPENDENT\n- provenance: SAVED_IMMUTABLE_WEEKLY_CHECK\n\n## Known gaps / warnings\n- SAVED_FACT_UNKNOWN, SOURCE_TEXT_REDACTED\n\n## Interpretation limits\n僅描述已儲存觀察，並非投資建議。候選不代表買進。source anomaly score 不是投資評分。WARMING_UP 的零候選不代表沒有異常。SUCCESS 不代表市場完整；PARTIAL 不等於 SUCCESS；UNKNOWN 不等於 NO；null 不等於 0。每日與每週來源獨立驗證；未宣稱跨來源原子快照、歷史時點完整性或未來可用性。\n",
+    "bodyTruncated": false
+  },
+  "page": null,
+  "warnings": [
+    "SAVED_FACT_UNKNOWN",
+    "SOURCE_TEXT_REDACTED"
+  ]
+}

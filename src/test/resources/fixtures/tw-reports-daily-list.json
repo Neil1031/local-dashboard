@@ -1,0 +1,34 @@
+{
+  "contractVersion": "tw-reports-v1",
+  "source": "TAIWAN_VOLUME_WATCH",
+  "generatedAt": "2026-10-03T11:52:30.629458+00:00",
+  "dataState": "READY",
+  "query": {
+    "operation": "LIST",
+    "reportType": "DAILY",
+    "limit": 20,
+    "offset": 0
+  },
+  "report": null,
+  "page": {
+    "items": [
+      {
+        "reportId": "tw-daily:2026-09-25:11111111111111111111111111111111",
+        "reportType": "DAILY",
+        "effectiveDate": "2026-09-25",
+        "targetDate": "2026-09-25",
+        "accumulationRunId": "11111111111111111111111111111111",
+        "savedAt": "2026-09-25T07:30:00+00:00",
+        "status": "PARTIAL",
+        "classificationStatus": "OBSERVATIONS_AVAILABLE",
+        "candidateCount": 1,
+        "warnings": []
+      }
+    ],
+    "offset": 0,
+    "limit": 20,
+    "hasMore": false,
+    "total": null
+  },
+  "warnings": []
+}

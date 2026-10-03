@@ -1,0 +1,561 @@
+{
+  "contractVersion": "tw-reports-v1",
+  "source": "TAIWAN_VOLUME_WATCH",
+  "generatedAt": "2026-10-03T11:52:30.685009+00:00",
+  "dataState": "PARTIAL",
+  "query": {
+    "operation": "DETAIL",
+    "reportType": "WEEKLY",
+    "reportId": "tw-weekly:2026-09-25:33333333333333333333333333333333"
+  },
+  "report": {
+    "reportId": "tw-weekly:2026-09-25:33333333333333333333333333333333",
+    "reportType": "WEEKLY",
+    "effectiveDate": "2026-09-25",
+    "weekStart": "2026-09-21",
+    "weekEnd": "2026-09-25",
+    "checkRunId": "33333333333333333333333333333333",
+    "checkedAt": "2026-09-25T14:30:00+00:00",
+    "status": "FAILED",
+    "dayStatusCounts": {
+      "FAILED": 1
+    },
+    "problemCount": 1,
+    "pendingRevalidationCount": 164,
+    "unfinishedRunCount": 0,
+    "facts": {
+      "days": [
+        {
+          "targetDate": "2026-09-25",
+          "status": "FAILED",
+          "accumulationRunId": "11111111111111111111111111111111",
+          "savedAt": "2026-09-25T07:30:00+00:00",
+          "bindingState": "SAVED_COLLECTION_IDENTITY",
+          "savedCollectionStatus": "PARTIAL",
+          "problems": null
+        }
+      ],
+      "problems": [
+        {
+          "code": "REPORTED_PROBLEM_REDACTED",
+          "targetDate": null,
+          "runId": null
+        }
+      ],
+      "pendingRevalidation": [
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        },
+        {
+          "targetDate": "2026-09-25",
+          "originRunId": "11111111111111111111111111111111",
+          "requiredAt": "2026-09-25T07:30:00+00:00"
+        }
+      ],
+      "unfinishedRuns": [],
+      "pointerState": "NOT_INSPECTED",
+      "dailyBinding": "INDEPENDENT",
+      "provenance": "SAVED_IMMUTABLE_WEEKLY_CHECK"
+    },
+    "markdown": "# TW Weekly Check\n\n- reportId: tw-weekly:2026-09-25:33333333333333333333333333333333\n- reportType: WEEKLY\n- effectiveDate: 2026-09-25\n- weekStart: 2026-09-21\n- weekEnd: 2026-09-25\n- checkRunId: 33333333333333333333333333333333\n- checkedAt: 2026-09-25T14:30:00+00:00\n- status: FAILED\n- dayStatusCounts: {\"FAILED\":1}\n- problemCount: 1\n- pendingRevalidationCount: 164\n- unfinishedRunCount: 0\n\n## Days\n- days: 1 exported\n  - record 1:\n    - target Date: 2026-09-25\n    - status: FAILED\n    - accumulation Run Id: 11111111111111111111111111111111\n    - saved At: 2026-09-25T07:30:00+00:00\n    - binding State: SAVED_COLLECTION_IDENTITY\n    - saved Collection Status: PARTIAL\n    - problems: null (UNKNOWN)\n\n## Problems\n- problems: 1 exported\n  - record 1:\n    - code: REPORTED_PROBLEM_REDACTED\n    - target Date: null (UNKNOWN)\n    - run Id: null (UNKNOWN)\n\n## Pending / unfinished responsibility\n- pending Revalidation: 100 exported\n  - record 1:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 2:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 3:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 4:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 5:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 6:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 7:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 8:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 9:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 10:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 11:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 12:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 13:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 14:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 15:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 16:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 17:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 18:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 19:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 20:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 21:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 22:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 23:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 24:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 25:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 26:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 27:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 28:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 29:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 30:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 31:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 32:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 33:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 34:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 35:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 36:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 37:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 38:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 39:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 40:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 41:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 42:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 43:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 44:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 45:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 46:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 47:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 48:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 49:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 50:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 51:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 52:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 53:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 54:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 55:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 56:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 57:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 58:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 59:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 60:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 61:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 62:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 63:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 64:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 65:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 66:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 67:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 68:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 69:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 70:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 71:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 72:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 73:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 74:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 75:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 76:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 77:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 78:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 79:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 80:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 81:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 82:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 83:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 84:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 85:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 86:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 87:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 88:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 89:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 90:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 91:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 92:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 93:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 94:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 95:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 96:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 97:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 98:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 99:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n  - record 100:\n    - target Date: 2026-09-25\n    - origin Run Id: 11111111111111111111111111111111\n    - required At: 2026-09-25T07:30:00+00:00\n- unfinished Runs: []\n\n## Source identity\n- pointer State: NOT_INSPECTED\n- daily Binding: INDEPENDENT\n- provenance: SAVED_IMMUTABLE_WEEKLY_CHECK\n\n## Known gaps / warnings\n- ITEMS_TRUNCATED, SAVED_FACT_UNKNOWN, SOURCE_TEXT_REDACTED\n\n## Interpretation limits\n僅描述已儲存觀察，並非投資建議。候選不代表買進。source anomaly score 不是投資評分。WARMING_UP 的零候選不代表沒有異常。SUCCESS 不代表市場完整；PARTIAL 不等於 SUCCESS；UNKNOWN 不等於 NO；null 不等於 0。每日與每週來源獨立驗證；未宣稱跨來源原子快照、歷史時點完整性或未來可用性。\n",
+    "bodyTruncated": false
+  },
+  "page": null,
+  "warnings": [
+    "ITEMS_TRUNCATED",
+    "SAVED_FACT_UNKNOWN",
+    "SOURCE_TEXT_REDACTED"
+  ]
+}
