@@ -1,0 +1,57 @@
+{
+  "contract_version": 1,
+  "source": "performance",
+  "horizon": "3m",
+  "filters": {
+    "minInvestment": null,
+    "minSignal": null
+  },
+  "groups": [
+    {
+      "bucket": "<85",
+      "signals": 3,
+      "observed": 0,
+      "unobserved": 3,
+      "averageReturnPct": null,
+      "winRatePct": null
+    },
+    {
+      "bucket": "85-89",
+      "signals": 6,
+      "observed": 1,
+      "unobserved": 5,
+      "averageReturnPct": 0.0,
+      "winRatePct": 0.0
+    },
+    {
+      "bucket": "90-94",
+      "signals": 6,
+      "observed": 1,
+      "unobserved": 5,
+      "averageReturnPct": 0.0,
+      "winRatePct": 0.0
+    },
+    {
+      "bucket": "95+",
+      "signals": 3,
+      "observed": 1,
+      "unobserved": 2,
+      "averageReturnPct": 10.0,
+      "winRatePct": 100.0
+    },
+    {
+      "bucket": "UNSCORED",
+      "signals": 3,
+      "observed": 1,
+      "unobserved": 2,
+      "averageReturnPct": 10.0,
+      "winRatePct": 100.0
+    }
+  ],
+  "performanceStatusCounts": {
+    "complete": 6,
+    "partial": 5,
+    "pending": 5,
+    "not_computed": 5
+  }
+}

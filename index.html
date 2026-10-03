@@ -747,6 +747,18 @@
     .overview-list button { border:0;background:transparent;color:var(--pink-deep);padding:2px 0;text-align:left;cursor:pointer;font-weight:700;overflow-wrap:anywhere; }
     .overview-list time { display:block;font-size:13px;color:var(--muted);margin-top:5px; }
     .planned-page { padding:24px; }
+    .performance { padding:24px;min-width:0;overflow-wrap:anywhere; }
+    .performance-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,185px),1fr));gap:12px;margin:16px 0; }
+    .performance-bucket,.performance-row,.performance-snapshot { padding:14px;border:1px solid var(--border);border-radius:12px;min-width:0;overflow-wrap:anywhere; }
+    .performance dl { display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px; }
+    .performance dd { margin:0;overflow-wrap:anywhere; }
+    .performance button,.performance input { max-width:100%;white-space:normal; }
+    .performance details { padding:12px;border:1px solid var(--border);border-radius:12px;margin:16px 0; }
+    .performance button:focus-visible,.performance input:focus-visible,.performance summary:focus-visible { outline:3px solid var(--pink);outline-offset:3px; }
+    .performance [aria-pressed=true] { border-color:var(--pink);background:var(--pink-soft); }
+    #performanceDetail { max-height:85vh;overflow:auto;width:min(780px,calc(100vw - 32px));box-sizing:border-box;border:1px solid var(--border);border-radius:16px;padding:24px;overflow-wrap:anywhere; }
+    #performanceDetail::backdrop { background:rgba(0,0,0,.35); }
+    @media(max-width:600px) { .performance { padding:16px; }#performanceDetail { padding:14px;width:calc(100vw - 24px); } }
     .reports { padding:24px;min-width:0;overflow-wrap:anywhere; }
     .tw-stocks { padding:24px;min-width:0;overflow-wrap:anywhere; }
     .tw-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px;margin-bottom:24px; }
@@ -1009,7 +1021,23 @@
       <h2>Weekly Check · independent identity</h2><div id="twWeekly"></div>
       <dialog id="twCandidateDetail" aria-labelledby="twCandidateTitle"><div class="signals-detail-head"><h2 id="twCandidateTitle"></h2><button id="twCandidateClose" type="button">關閉</button></div><div id="twCandidateBody"></div></dialog>
     </section>
-    <section class="panel planned-page" id="performanceView" data-page-view="performance" hidden><p class="eyebrow">DESIGNED</p><h2>Performance</h2><p>尚未接入資料。此入口目前只提供導覽，相關資料來源與閱讀功能仍待實作。</p></section>
+    <section class="panel performance" id="performanceView" data-page-view="performance" hidden>
+      <p class="eyebrow">US / INSIDER AI REPORT · RESEARCH EVIDENCE</p><h2>Performance · Summary / Signal Detail</h2>
+      <p>目前 active AI report signals；只讀取來源已保存的觀察，報酬未觀察時顯示 —。</p>
+      <nav class="us-subnav" aria-label="Performance horizons"><button type="button" data-performance-horizon="1d" aria-pressed="false">1D</button><button type="button" data-performance-horizon="1w" aria-pressed="false">1W</button><button type="button" data-performance-horizon="1m" aria-pressed="false">1M</button><button type="button" data-performance-horizon="3m" aria-pressed="true">3M</button><button type="button" data-performance-horizon="6m" aria-pressed="false">6M</button></nav>
+      <button id="performanceRefresh" type="button">重新讀取</button>
+      <h3>Investment Score buckets · 全部 active source rows，無分數門檻</h3><p id="performanceSummaryStatus" role="status"></p><p id="performanceSource" class="signal-source"></p><div id="performanceGroups" class="performance-grid"></div><p id="performanceCounts"></p>
+      <details><summary>狀態與方法說明</summary>
+        <p>Summary 的 observed 是所選時距已有 non-null tradable return；0% 是已觀察、不是 win（win &gt; 0）。UNSCORED 是分數 null，不是 0。空 bucket 仍保留；沒有 observed 時 average / win rate 為 —。</p>
+        <p>List 的 horizonObserved 只代表 snapshot 已保存，return 仍可能缺少。Stored COMPLETE / PARTIAL / PENDING / NOT_COMPUTED counts 是儲存狀態，不是所選時距成熟度。COMPLETE 表示截至 stored asOf 有可用 entry 且無已知 completed-session gap，未保證未來時距成熟或獲利。PARTIAL 表示已知 completed-session / entry 缺漏；PENDING 是來源保存的等待時間；NOT_COMPUTED 是沒有 performance row，仍可能已有 snapshot。缺漏日期不由 Dashboard 修補。</p>
+        <p>Discovery price 是假設 publication 前一個已完成 normal-session close proxy；next tradable 是 publication 當時或之後第一個 regular-session open。1D 是 entry session close vs open；1W 是 entry +7 calendar days 當日或之後首個 session；1M / 3M / 6M 是 calendar-month target 當日或之後首個 session。</p>
+        <p>Yahoo OHLC：split_adjusted_ex_dividends；不含 dividends / fees / taxes / slippage。Daily bars 無法證明 intraday threshold 順序或實際成交。不是已實現的 portfolio return。</p>
+        <p>分數是 current imported report assessments，沒有重建歷史 score revisions 的 point-in-time 模型。同一 ticker 多次 reports 可能是相關觀察，不是獨立 trades；此頁不推算統計顯著性或投資建議。</p>
+      </details>
+      <h3>Signals · bounded current-state page</h3><form id="performanceFilter" class="signals-controls"><label for="performanceTicker">Exact ticker · case-sensitive</label><input id="performanceTicker" type="text" maxlength="256" autocomplete="off"><button type="submit">篩選 list</button></form><p>Summary 不受 list ticker 篩選影響。每頁反映當次來源狀態，跨頁不是 point-in-time population snapshot；不自動讀取全部頁面。</p>
+      <p id="performanceValidation" role="alert"></p><p id="performanceListStatus" role="status"></p><p id="performanceListSource" class="signal-source"></p><div id="performanceRows" class="signals-grid"></div><div class="signals-controls"><button id="performancePrevious" type="button" disabled>Previous</button><span id="performancePageCount"></span><button id="performanceNext" type="button" disabled>Next</button></div>
+      <dialog id="performanceDetail" aria-labelledby="performanceDetailTitle"><div class="report-detail-head"><h2 id="performanceDetailTitle">Signal Detail · stored research evidence</h2><button id="performanceDetailClose" type="button">關閉</button></div><p id="performanceDetailStatus" role="status"></p><p id="performanceDetailSource" class="signal-source"></p><dl id="performanceFacts"></dl><h3>All stored snapshots · tradable / discovery 分開</h3><div id="performanceSnapshots"></div><p>Absent type 保持缺席；報酬不從價格重新計算。Provider / price basis 由每筆 snapshot 提供；方法與限制見 Summary 的說明。</p></dialog>
+    </section>
     <section class="panel reports" id="reportsView" data-page-view="reports" hidden>
       <p class="eyebrow">Reports · PARTIAL</p>
       <nav class="us-subnav" aria-label="Reports sources"><button type="button" data-reports-page="all">All</button><button type="button" data-reports-page="us">US Insider</button><button type="button" data-reports-page="tw-daily">TW Daily</button><button type="button" data-reports-page="tw-weekly">TW Weekly</button></nav>

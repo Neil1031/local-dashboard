@@ -49,30 +49,18 @@ public class TaiwanStocksAdapter {
         if (!config.enabled()) return failure(date, "UNAVAILABLE", "SOURCE_DISABLED");
         if (!configured()) return failure(date, "UNAVAILABLE", "SOURCE_NOT_CONFIGURED");
         if (!slots.tryAcquire()) return failure(date, "UNAVAILABLE", "SOURCE_BUSY");
-        Process process = null;
-        Thread stdout = null, stderr = null;
         try {
-            process = start(command(date));
-            process.getOutputStream().close();
-            var out = new InsiderSignalsAdapter.Capture(process.getInputStream(), MAX_STDOUT);
-            var err = new InsiderSignalsAdapter.Capture(process.getErrorStream(), MAX_STDERR);
-            stdout = Thread.startVirtualThread(out); stderr = Thread.startVirtualThread(err);
-            if (!process.waitFor(config.timeoutSeconds(), TimeUnit.SECONDS)) {
-                stop(process); return failure(date, "UNAVAILABLE", "SOURCE_TIMEOUT");
-            }
-            stdout.join(1000); stderr.join(1000);
-            if (stdout.isAlive() || stderr.isAlive() || out.failed || err.failed)
-                return failure(date, "ERROR", "SOURCE_OUTPUT_ERROR");
-            if (out.overflow || err.overflow) return failure(date, "ERROR", "SOURCE_OUTPUT_LIMIT");
-            int exit = process.exitValue();
+            var output = BoundedSourceProcess.run(command(date), config.timeoutSeconds(), MAX_STDOUT, MAX_STDERR, this::start);
+            int exit = output.exit();
             if (exit != 0 && exit != 2) return failure(date, "UNAVAILABLE", "SOURCE_READ_FAILED");
-            String text = StandardCharsets.UTF_8.newDecoder().onMalformedInput(CodingErrorAction.REPORT)
-                    .onUnmappableCharacter(CodingErrorAction.REPORT).decode(ByteBuffer.wrap(out.bytes.toByteArray())).toString();
+            String text = output.utf8();
             JsonNode source = json.readTree(text);
             if (exit == 2 && source != null && source.isObject() && source.size() == 1
                     && "TARGET_DATE_INVALID".equals(source.path("error").asText()))
                 return failure(date, "ERROR", "SOURCE_TARGET_DATE_INVALID");
             return TwStocksProjection.normalize(source, date, exit, json);
+        } catch (BoundedSourceProcess.Failure e) {
+            return failure(date, e.code.equals("SOURCE_TIMEOUT") ? "UNAVAILABLE" : "ERROR", e.code);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt(); return failure(date, "UNAVAILABLE", "SOURCE_INTERRUPTED");
         } catch (TwStocksProjection.Unsupported e) {
@@ -84,24 +72,12 @@ public class TaiwanStocksAdapter {
         } catch (RuntimeException e) {
             return failure(date, "ERROR", "SOURCE_INVALID_OUTPUT");
         } finally {
-            if (process != null) { stop(process); close(process.getInputStream()); close(process.getErrorStream()); }
-            if (stdout != null) stdout.interrupt();
-            if (stderr != null) stderr.interrupt();
             slots.release();
         }
     }
     Process start(List<String> command) throws IOException {
-        var builder = new ProcessBuilder(command);
-        builder.environment().put("PYTHONDONTWRITEBYTECODE", "1");
-        builder.environment().put("PYTHONIOENCODING", "utf-8");
-        builder.environment().put("PYTHONUTF8", "1");
-        return builder.start();
+        return BoundedSourceProcess.start(command);
     }
-    private static void stop(Process p) {
-        p.descendants().forEach(ProcessHandle::destroyForcibly);
-        if (p.isAlive()) p.destroyForcibly();
-    }
-    private static void close(InputStream s) { try { s.close(); } catch (IOException ignored) {} }
     private ObjectNode failure(String date, String state, String reason) {
         var r = TwStocksProjection.envelope(date, state, json);
         r.withArray("warnings").add(reason);
