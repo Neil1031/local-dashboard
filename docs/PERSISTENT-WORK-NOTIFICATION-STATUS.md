@@ -18,14 +18,14 @@ Authoritative policy: [Personal Project Governance, section 7.4](PERSONAL-PROJEC
 
 ## Current status
 
-The owner authorized the new policy and notification of existing Works on 2026-10-05. All known pairs start `NOT_NOTIFIED`; mark a pair `NOTIFIED` only after successful notice submission to both Works. Reading/acceptance requires an actual reply and is not inferred from submission.
+The owner authorized the new policy and notification of existing Works on 2026-10-05. All known pairs were initialized `NOT_NOTIFIED` in policy candidate `642e3ac00e7efac718502be5dd1fa8fa4b526e84`, merged at `953291d9dc62dae92a6d83ec744b27248c81194a`. On 2026-10-05, role-specific short notices were successfully submitted to both Works of all four pairs below. `NOTIFIED` records successful submission to both identified Works; reading/acceptance requires an actual reply and is not inferred from submission. Comment capability was tested centrally once; Works were told not to repeat capability probes.
 
 | Topic / persistent Work pair | Management Work | Sol Work | Notice version | Status | Last notification |
 |---|---|---|---|---|---|
-| TW | `01a0f900-c724-7502-a0ab-eb799e1f11d3` | `01a0f902-e4c9-7753-a3c4-27cb0894e7bf` | `owner-doc-lightweight-sync-v1` | **NOT_NOTIFIED** | — |
-| Dashboard | `01a0de9a-1854-7280-a92d-ebebf41f7663` | `01a0f108-865e-7091-b88d-333228144bfe` | `owner-doc-lightweight-sync-v1` | **NOT_NOTIFIED** | — |
-| SocialMomentum | `01a0f930-6521-74c2-9df8-026d99e852eb` | `01a0fa57-e3bb-7b13-82d7-ffad799e3de1` | `owner-doc-lightweight-sync-v1` | **NOT_NOTIFIED** | — |
-| Insider | `01a0b278-2303-74d2-9075-842008ca4740` | `01a0eb1a-f3be-7a43-8a24-e178cbf7386f` | `owner-doc-lightweight-sync-v1` | **NOT_NOTIFIED** | — |
+| TW | `01a0f900-c724-7502-a0ab-eb799e1f11d3` | `01a0f902-e4c9-7753-a3c4-27cb0894e7bf` | `owner-doc-lightweight-sync-v1` | **NOTIFIED** | 2026-10-05 |
+| Dashboard | `01a0de9a-1854-7280-a92d-ebebf41f7663` | `01a0f108-865e-7091-b88d-333228144bfe` | `owner-doc-lightweight-sync-v1` | **NOTIFIED** | 2026-10-05 |
+| SocialMomentum | `01a0f930-6521-74c2-9df8-026d99e852eb` | `01a0fa57-e3bb-7b13-82d7-ffad799e3de1` | `owner-doc-lightweight-sync-v1` | **NOTIFIED** | 2026-10-05 |
+| Insider | `01a0b278-2303-74d2-9075-842008ca4740` | `01a0eb1a-f3be-7a43-8a24-e178cbf7386f` | `owner-doc-lightweight-sync-v1` | **NOTIFIED** | 2026-10-05 |
 
 ## Previous notice history — sol-luna-bounded-delegation-v1
 
