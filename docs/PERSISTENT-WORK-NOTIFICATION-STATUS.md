@@ -4,9 +4,9 @@ This file tracks whether each persistent Work pair has already received the curr
 
 Current shared notice version:
 
-`sol-luna-bounded-delegation-v1`
+`owner-doc-lightweight-sync-v1`
 
-Authoritative workflow: [Personal Project Governance, sections 1–2](PERSONAL-PROJECT-GOVERNANCE.md#1-project-execution-model). This file records delivery only; it does not define another workflow or approval Gate. The new notice adds bounded Luna delegation and concise Management Preflight; existing combined-closeout rules remain applicable.
+Authoritative policy: [Personal Project Governance, section 7.4](PERSONAL-PROJECT-GOVERNANCE.md#74-owner-doc-lightweight-sync-policy), with native editing safeguards in section 10. This file records delivery only; it does not define another workflow or approval Gate. Existing Sol/Luna and combined-closeout rules remain applicable.
 
 ## Rule
 
@@ -17,6 +17,17 @@ Authoritative workflow: [Personal Project Governance, sections 1–2](PERSONAL-P
 - Stage-specific differences and STOP conditions are still stated in each Stage instruction.
 
 ## Current status
+
+The owner authorized the new policy and notification of existing Works on 2026-10-05. All known pairs start `NOT_NOTIFIED`; mark a pair `NOTIFIED` only after successful notice submission to both Works. Reading/acceptance requires an actual reply and is not inferred from submission.
+
+| Topic / persistent Work pair | Management Work | Sol Work | Notice version | Status | Last notification |
+|---|---|---|---|---|---|
+| TW | `01a0f900-c724-7502-a0ab-eb799e1f11d3` | `01a0f902-e4c9-7753-a3c4-27cb0894e7bf` | `owner-doc-lightweight-sync-v1` | **NOT_NOTIFIED** | — |
+| Dashboard | `01a0de9a-1854-7280-a92d-ebebf41f7663` | `01a0f108-865e-7091-b88d-333228144bfe` | `owner-doc-lightweight-sync-v1` | **NOT_NOTIFIED** | — |
+| SocialMomentum | `01a0f930-6521-74c2-9df8-026d99e852eb` | `01a0fa57-e3bb-7b13-82d7-ffad799e3de1` | `owner-doc-lightweight-sync-v1` | **NOT_NOTIFIED** | — |
+| Insider | `01a0b278-2303-74d2-9075-842008ca4740` | `01a0eb1a-f3be-7a43-8a24-e178cbf7386f` | `owner-doc-lightweight-sync-v1` | **NOT_NOTIFIED** | — |
+
+## Previous notice history — sol-luna-bounded-delegation-v1
 
 On 2026-10-04, the owner authorized adoption and notification of the existing project Works. The notice for this version was successfully submitted to both Works in each pair below, referencing accepted candidate `b555f6280a53e79b2177a6386fbd6c81f23c959d` and canonical main merge `4327ebb3aadf2018296efc72eb73be32892fa8e8`. No new Work was created.
 
