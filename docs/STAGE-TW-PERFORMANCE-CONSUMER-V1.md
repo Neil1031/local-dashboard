@@ -3,7 +3,7 @@
 ## Authority and frozen identities
 
 - Sol implementation: isolated `implement/dashboard-tw-performance-v1` in `F:/AI workspace/local-dashboard-tw-performance-v1`.
-- Dashboard baseline and commit parent: `1322040f0e6859ae3efc36f1dd971c0ee3b3cc4c`.
+- Dashboard baseline and initial implementation parent: `1322040f0e6859ae3efc36f1dd971c0ee3b3cc4c`.
 - Taiwan source contract: `bc9026b70dd3039813e76b69979d8170a3743d78` in `F:/AI workspace/taiwan-volume-watch-main`.
 - Contract inspected directly: `schema/tw-observed-performance-v1.schema.json`, `stock_hunter/tw_observed_performance_export.py` and the fixed exporter entry point.
 - Installed Dashboard identity remains `d1e6a5a55edee12c455cc52be26196640ecedb2c`; this checkout is not the installation.
@@ -22,7 +22,7 @@
 - New `TaiwanPerformanceAdapter`, `TwPerformanceProjection`, `TwPerformanceController`; GET `/api/tw/performance`.
 - Only startDate/endDate/limit/offset accepted. Unknown, duplicate or empty parameters and invalid values produce HTTP400 before a child is started. Responses use no-store.
 - Mandatory real inclusive dates, start<=end, maximum366days; limit1..50(default20), offset0..10000(default0).
-- New development key `dashboard.sources.taiwan.performance-cli-path`. Empty by default; explicit example uses `export_tw_observed_performance.py`. Existing seven/eight-argument Taiwan configuration callers retain defaults.
+- New development key `dashboard.sources.taiwan.performance-cli-path`. Empty in both development defaults and example; comment identifies source-relative `tools/export_tw_observed_performance.py` and requires a trusted absolute deployed path. Existing seven/eight-argument Taiwan configuration callers retain defaults.
 - Fixed argv: configured Python (py.exe adds -3.11), -B, configured exact CLI, --db configured database, list, --start-date, --end-date, --limit, --offset. No shell, output-dir, fallback, discovery or help call.
 - Same Stocks-owned two-slot semaphore is shared with Stocks/Reports/History. Existing BoundedSourceProcess supplies timeout1..30s, stdout1MiB, stderr64KiB, cleanup and interrupt handling.
 - READY/EMPTY require exit0; PARTIAL/UNAVAILABLE/ERROR require exit2. Other exits, malformed/duplicate/trailing JSON, unsupported contracts and limit failures return bounded public failure codes without private paths/stderr.
@@ -65,6 +65,7 @@
 - Dashboard primary main and Taiwan canonical worktrees remain clean. Formal DB/business payloads were neither read nor hashed; business-data byte parity is not claimed. No stage-owned formal source/data/Task/Runner/receipt/installation/process writes.
 - Canonical design, generated sample, README, historical Stage evidence, Owner Docs and notification table were not changed.
 - Local evidence directory: `C:/Users/qwe74/AppData/Local/Temp/dashboard-tw-performance-consumer-v1-1791120198236` (plan, synthetic test logs, screenshot set, protection/task captures and handoff packet). Evidence contains synthetic observations only.
+- F1 focused follow-up: corrected the owner-specific nonexistent CLI example to an empty value with source-relative entry-point guidance. Only the example and this Stage wording change; executable code, tests and default application.yml remain byte-identical to candidate ce330a2614e660d132fb216ca17c300432e83a7b. Generator/diff checks and protection parity rechecked; no full campaign rerun.
 - Limits: formal compatibility remains **NOT_CONSUMED**; this is source-schema/synthetic consumer QA, not installed acceptance or independent management review.
 
 ## Delivery / stop boundary
