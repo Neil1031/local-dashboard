@@ -4,7 +4,9 @@ This file tracks whether each persistent Work pair has already received the curr
 
 Current shared notice version:
 
-`streamlined-combined-closeout-v1`
+`sol-luna-bounded-delegation-v1`
+
+Authoritative workflow: [Personal Project Governance, sections 1–2](PERSONAL-PROJECT-GOVERNANCE.md#1-project-execution-model). This file records delivery only; it does not define another workflow or approval Gate. The new notice adds bounded Luna delegation and concise Management Preflight; existing combined-closeout rules remain applicable.
 
 ## Rule
 
@@ -15,6 +17,19 @@ Current shared notice version:
 - Stage-specific differences and STOP conditions are still stated in each Stage instruction.
 
 ## Current status
+
+No notification for this version has been sent by the documentation update. Notify each affected existing pair once when it first uses the rule, under explicit messaging authorization; do not create new Works or mark a written document as a delivered message.
+
+| Topic / persistent Work pair | Management Work | Sol Work | Notice version | Status | Last notification |
+|---|---|---|---|---|---|
+| TW | `01a0f900-c724-7502-a0ab-eb799e1f11d3` | `01a0f902-e4c9-7753-a3c4-27cb0894e7bf` | `sol-luna-bounded-delegation-v1` | **NOT_NOTIFIED** | — |
+| Dashboard | `01a0de9a-1854-7280-a92d-ebebf41f7663` | `01a0f108-865e-7091-b88d-333228144bfe` | `sol-luna-bounded-delegation-v1` | **NOT_NOTIFIED** | — |
+
+Other project pairs are not inventoried in this register; absence is not evidence of notification. Add their existing identities when first adopting the notice.
+
+## Prior notice history
+
+These records prove delivery of the prior notice only, not the current version.
 
 | Topic / persistent Work pair | Management Work | Sol Work | Notice version | Status | Last notification |
 |---|---|---|---|---|---|
