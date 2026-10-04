@@ -15,6 +15,31 @@ A repository-specific override should be deliberate and documented. Do not silen
 
 ---
 
+## 0. Mandatory project-entry read for GPT / Manager
+
+Before planning, implementing, reviewing, or continuing **any managed project-development task**, the GPT / Manager should first read this central governance document:
+
+`Neil1031/local-dashboard/docs/PERSONAL-PROJECT-GOVERNANCE.md`
+
+Local workspace path when available:
+
+`F:\\AI workspace\\local-dashboard\\docs\\PERSONAL-PROJECT-GOVERNANCE.md`
+
+Then read the target project's active local sources in this order when they exist:
+
+1. repository / workspace `AGENTS.md`;
+2. the repository's canonical engineering design, normally `docs/PROJECT-DESIGN.md`;
+3. relevant approved source-contract / architecture documents;
+4. the current Stage / PR evidence needed for the task.
+
+Do not rely only on chat memory for project-development rules.
+
+If this governance file cannot be read in the current environment, state that limitation instead of assuming an old remembered version is current.
+
+Repository-local instructions may intentionally override this cross-project default, but the override must be explicit and current rather than inferred from historical evidence.
+
+---
+
 ## 1. Project execution model
 
 ### 1.1 Default visible Work topology
@@ -922,9 +947,11 @@ For Local Dashboard specifically:
 
 Repository/workspace `AGENTS.md` files may define engineering execution details such as Plan -> Stage -> Gate -> Self-QA. Those local rules remain valid unless they conflict with a newer explicit owner/Manager decision or this document's cross-project defaults.
 
-Known legacy conflict to remove during normal local-rule maintenance:
+Known active/legacy conflicts to reconcile during normal local-rule maintenance:
 
-- older Local Dashboard planning text that says to create a new implementation/research/debug Chat per Stage conflicts with the current persistent two-visible-Work policy. The two persistent Works are the current default.
+- older Local Dashboard `PLAN.md` text that says to create a new implementation/research/debug Chat per Stage conflicts with the current persistent two-visible-Work policy. The two persistent Works are the current default;
+- the Insider repository's older `AGENTS.md` backward-compatibility default may be stricter than the current cross-project fix-forward policy. Treat a deliberate repository-specific compatibility rule as an override only when it is still intended; otherwise update the active local instruction rather than letting stale text silently win;
+- historical Google Doc snapshots used `⛔` with a blocked/unavailable meaning, while later chat summaries sometimes used it for intentionally stopped. This document therefore does not assign a global `⛔` meaning; each active project must define it before use.
 
 Do not rewrite historical evidence merely to erase an old policy. Update only active/current instruction surfaces.
 
