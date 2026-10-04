@@ -8,6 +8,8 @@ dashboard:
       cli-path: ""
       # Explicit Stage 4 source-owned Reports CLI; never inferred from the Stocks CLI.
       reports-cli-path: ""
+      # History LIST only; separate fixed export_tw_history.py path.
+      history-cli-path: ""
       database-path: ""
       output-dir: ""
       timeout-seconds: 10 # 1..30

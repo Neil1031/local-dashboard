@@ -32,8 +32,14 @@ class BoundedSourceProcessTest {
         var result=new java.util.concurrent.atomic.AtomicReference<Exception>();
         var worker=new Thread(()->{try {BoundedSourceProcess.run(argv(TwProcessFixture.class.getName(),"tree",file.toString()),10,1000,1000,c->{var p=BoundedSourceProcess.start(c);parents.add(p);return p;});}catch(Exception e){result.set(e);}});
         worker.start();long deadline=System.nanoTime()+java.util.concurrent.TimeUnit.SECONDS.toNanos(3);
-        while(!Files.exists(Path.of(file+".pid"))&&System.nanoTime()<deadline)Thread.sleep(10);
-        assertThat(Files.exists(Path.of(file+".pid"))).isTrue();long pid=Long.parseLong(Files.readString(Path.of(file+".pid")));
+        // Creation precedes Files.writeString's content publication. Wait for the complete PID handshake.
+        String pidText="";
+        while(System.nanoTime()<deadline){
+            if(Files.exists(Path.of(file+".pid")))pidText=Files.readString(Path.of(file+".pid")).trim();
+            if(pidText.matches("[0-9]+"))break;
+            Thread.sleep(10);
+        }
+        assertThat(pidText).matches("[0-9]+");long pid=Long.parseLong(pidText);
         assertThat(ProcessHandle.of(pid).map(ProcessHandle::isAlive).orElse(false)).isTrue();worker.interrupt();worker.join(2000);
         assertThat(worker.isAlive()).isFalse();assertThat(result.get()).isInstanceOf(InterruptedException.class);
         assertThat(parents.get(0).isAlive()).isFalse();assertThat(ProcessHandle.of(pid).map(ProcessHandle::isAlive).orElse(false)).isFalse();

@@ -6,6 +6,7 @@ import { mountOverview } from './ui/overview.mjs';
 import { mountUsStocks } from './ui/us-stocks.mjs';
 import { mountReports } from './ui/reports.mjs';
 import { mountTwStocks } from './ui/tw-stocks.mjs';
+import { mountTwHistory } from './ui/tw-history.mjs';
 import { mountPerformance } from './ui/performance.mjs';
 import { mountEvidence } from './ui/evidence.mjs';
 const currentStatuses = new Set(['READY', 'RUNNING', 'FAILED', 'DISABLED', 'UNKNOWN', 'MISSED']);
@@ -188,7 +189,7 @@ export function mountDashboard(document, fetchJobs = globalThis.fetch.bind(globa
   const projects = mountProjects(document, fetchJobs);
   const signals = mountUsStocks(document, fetchJobs);
   const reports = mountReports(document, fetchJobs);
-  const twStocks = mountTwStocks(document, fetchJobs);
+  const twStocks = mountTwHistory(document, fetchJobs, mountTwStocks(document, fetchJobs));
   const performance = mountPerformance(document, fetchJobs);
   const evidence = mountEvidence(document, fetchJobs);
   const filters = [...document.querySelectorAll('.filter')];

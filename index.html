@@ -1037,6 +1037,8 @@
     </section>
     <section class="panel tw-stocks" id="twView" data-page-view="tw" hidden="">
       <p class="eyebrow" data-i18n="chrome.taiwan.volume.watch.read.only">TAIWAN VOLUME WATCH · 唯讀</p><h2 data-i18n="nav.twStocks">台股</h2>
+      <nav class="us-subnav" aria-label="台股子頁" data-i18n-aria-label="twHistory.navigation"><button id="twCurrentTab" type="button" aria-pressed="true" aria-controls="twCurrentPanel" data-i18n="twHistory.current">目前觀察</button><button id="twHistoryTab" type="button" aria-pressed="false" aria-controls="twHistoryPanel" data-i18n="twHistory.tab">歷史 / 範圍</button></nav>
+      <div id="twCurrentPanel">
       <p data-i18n="chrome.wording.17">已保存每日觀察；候選與異常分數是來源事實，不是投資建議。</p>
       <form id="twFilter" class="signals-controls"><label for="twDate" data-i18n="chrome.exact.target.date">指定日期</label><input id="twDate" type="text" placeholder="YYYY-MM-DD" maxlength="10" autocomplete="off" data-i18n-placeholder="chrome.yyyy.mm.dd"><button type="submit" data-i18n="chrome.apply">套用</button><button id="twLatest" type="button" data-i18n="chrome.latest">最新保存</button><button id="twReload" type="button" data-i18n="common.refresh">重新讀取</button></form>
       <p id="twValidation" role="alert"></p><p id="twStatus" role="status"></p><p id="twProvenance" class="signal-source"></p><ul id="twWarnings" class="signal-warnings"></ul>
@@ -1047,6 +1049,14 @@
       <h2 data-i18n="chrome.responsibility.pending.work">責任／待處理工作</h2><div id="twResponsibility"></div>
       <h2 data-i18n="chrome.weekly.check.independent.identity">週檢（獨立身分）</h2><div id="twWeekly"></div>
       <dialog id="twCandidateDetail" aria-labelledby="twCandidateTitle"><div class="signals-detail-head"><h2 id="twCandidateTitle"></h2><button id="twCandidateClose" type="button" data-i18n="common.close">關閉</button></div><div id="twCandidateBody"></div></dialog>
+      </div>
+      <section id="twHistoryPanel" hidden="" aria-labelledby="twHistoryTitle">
+        <h3 id="twHistoryTitle" data-i18n="twHistory.title">已保存每日觀察歷史</h3>
+        <p data-i18n="twHistory.notice">每筆是獨立保存觀察；沒有觀察的日期不推論其他狀態。跨頁不是固定快照。</p>
+        <form id="twHistoryFilter" class="signals-controls"><label for="twHistoryStart" data-i18n="twHistory.start">開始日期</label><input id="twHistoryStart" type="text" maxlength="10" autocomplete="off" placeholder="YYYY-MM-DD" data-i18n-placeholder="chrome.yyyy.mm.dd"><label for="twHistoryEnd" data-i18n="twHistory.end">結束日期</label><input id="twHistoryEnd" type="text" maxlength="10" autocomplete="off" placeholder="YYYY-MM-DD" data-i18n-placeholder="chrome.yyyy.mm.dd"><button type="submit" data-i18n="twHistory.query">查詢</button><button id="twHistoryRefresh" type="button" data-i18n="common.refresh">重新讀取</button></form>
+        <p id="twHistoryValidation" role="alert"></p><p id="twHistoryStatus" role="status"></p><p id="twHistoryProvenance" class="signal-source"></p><p id="twHistoryScope"></p><ul id="twHistoryWarnings" class="signal-warnings"></ul><div id="twHistoryRows" class="tw-grid"></div>
+        <div class="signals-controls"><button id="twHistoryPrevious" type="button" disabled="" data-i18n="common.previous">上一頁</button><span id="twHistoryPage"></span><button id="twHistoryNext" type="button" disabled="" data-i18n="common.next">下一頁</button></div>
+      </section>
     </section>
     <section class="panel performance" id="performanceView" data-page-view="performance" hidden="">
       <p class="eyebrow" data-i18n="chrome.us.insider.ai.report.research.evidence">美股／INSIDER AI 報告 · 研究證據</p><h2 data-i18n="chrome.performance.summary.signal.detail">績效 · 摘要／訊號明細</h2>
