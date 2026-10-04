@@ -45,9 +45,9 @@ Release 1B 九頁 primary navigation 與 operations Overview 已合併 main `654
 
 ### Localization / i18n v1 cross-cutting capability
 
-Localization / i18n v1 實作 `f960723ddcdeec925ef2e8b40035cd28ac74bae1` 已獲 Manager 核准，本次 consolidated Design Sync 完成；main integration／production deployment 由接續的已授權 Gate B／C 執行，完成後成為 deployed cross-cutting capability，最終 exact installed main 與 STOPPED 身分由 operational packet／既有 Owner Docs 確認。Localization 不新增 feature ID；33 stable IDs 與 status counts 保持 DONE 19、PARTIAL 8、BACKEND_READY 3、NOT_STARTED 2、BLOCKED 1，其餘 0。下一 Stage 為 Taiwan History / Range → Taiwan Performance，本次不開始。
+Localization / i18n v1 實作 `f960723ddcdeec925ef2e8b40035cd28ac74bae1` 已獲 Manager 核准，Design Sync、main `95f025dc1c0675e056cc78db1061c25078b66f6e` 整合與完整套件部署均已完成，部署後 STOPPED。既有 operational packet／Owner Doc 保存安裝身分。Localization 不新增 feature ID；33 stable IDs／status counts 保持 DONE 19、PARTIAL 8、BACKEND_READY 3、NOT_STARTED 2、BLOCKED 1，其餘 0。本次 Taiwan History / Range consumer e52a4be 已核准；下一 Stage Taiwan Performance NOT STARTED。
 
-共享 flat resource flow 為 `ui/i18n.mjs` → `ui/locale-zh-TW.mjs`／`ui/locale-en.mjs` → 九個既有 owner-facing UI 區域。每語系 1,066 keys，exact key／named placeholder parity；預設 zh-TW，替代 en。偏好僅存 browser localStorage `local-dashboard.locale.v1`；缺值／無效值／read failure 使用 in-memory zh-TW，write failure 安全退回 zh-TW。沒有 backend locale state、application.yml locale setting、DB locale state或外部翻譯服務。
+共享 flat resource flow 為 `ui/i18n.mjs` → `ui/locale-zh-TW.mjs`／`ui/locale-en.mjs` → 九個既有 owner-facing UI 區域。i18n原切片每語系1,066keys；本次History新增26keys後現行1,092keys，exact key／named placeholder parity；預設 zh-TW，替代 en。偏好僅存 browser localStorage `local-dashboard.locale.v1`；缺值／無效值／read failure 使用 in-memory zh-TW，write failure 安全退回 zh-TW。沒有 backend locale state、application.yml locale setting、DB locale state或外部翻譯服務。
 
 Dashboard-owned chrome、固定表單／提示／狀態／aria-label／placeholder 使用共享文字層；source-owned report Markdown、company/security names、AI free-text、configured job/display metadata、canonical Project Design body、IDs、hashes、timestamps與provenance保留原值。Known machine codes 可顯示在地化解釋並保留 exact raw code；unknown future codes 仍 raw。翻譯只用 textContent／allowlisted text attributes，不插入 translation HTML。
 
@@ -81,7 +81,7 @@ Taiwan Volume Watch → source-owned `tw-reports-v1` → 固定 `TaiwanReportsAd
 
 Daily／Weekly 保留獨立 authority、run/date／report IDs、warnings／provenance、null／UNKNOWN／保存總數與匯出截斷。All 分別呈現 US Insider／TW Daily／TW Weekly，狀態、分頁、明細與責任各自獨立，不合成跨來源 timeline／total／PIT snapshot。安全 DOM Markdown／native dialog 保留，最新 matching response 才能呈現；browser abort 不證明 source cancellation。null 不等於 0、UNKNOWN 不等於 NO、WARMING_UP＋0 candidates 不代表無異常，來源 anomaly score 不是 investment score。
 
-既有唯一 consumer compatibility set 為四次 LIST returned exact ID → DETAIL：Daily READY→PARTIAL／WARMING_UP／0；Weekly READY→PARTIAL／saved FAILED／pending164匯出100。只證明 consumer compatibility，非自然排程成功、完整歷史／市場或投資有效性。本次只重用 captures，不重讀正式來源。Taiwan Performance／history/range／Data & Evidence broader aggregation／broader research analytics 仍未完成；完整語意見 [Data Contracts](DASHBOARD-DATA-CONTRACTS.md#tw-reports-v1-implemented-consumer)，核准驗證與歷史 evidence 見 [Stage](STAGE-TW-REPORTS-V1.md)。
+既有唯一 consumer compatibility set 為四次 LIST returned exact ID → DETAIL：Daily READY→PARTIAL／WARMING_UP／0；Weekly READY→PARTIAL／saved FAILED／pending164匯出100。只證明 consumer compatibility，非自然排程成功、完整歷史／市場或投資有效性。本次只重用 captures，不重讀正式來源。History/Range consumer已核准；Taiwan Performance／Data & Evidence broader aggregation／broader research analytics仍未完成；完整語意見 [Data Contracts](DASHBOARD-DATA-CONTRACTS.md#tw-reports-v1-implemented-consumer)，核准驗證與歷史 evidence 見 [Stage](STAGE-TW-REPORTS-V1.md)。
 
 
 
@@ -97,7 +97,7 @@ COHERENT != SUCCESS；PARTIAL != SUCCESS；UNKNOWN != NO；null != 0；WARMING_U
 
 本輪沒有新的 formal Taiwan compatibility read。只可重用 frozen normalized captures：Stocks observed `2026-10-02T17:04:23.118012500Z`、selected `2026-10-02`、run `e801318d154a46c88f03858a9b60044c`、PARTIAL；Daily LIST observed `2026-10-03T12:17:45.674272100Z`、READY、`tw-daily:2026-10-02:f93460ffdd3d4ec6a60ce1244ce30d0f`；Weekly LIST observed `2026-10-03T12:17:46.080439900Z`、READY／saved FAILED、`tw-weekly:2026-10-02:510f722b6bcd40c09cee9393594be39e`。Replay 仍標為 SAVED_TEST_EVIDENCE，原始 bytes／時間／狀態／ID 不改，不稱新 observations 或 installed acceptance。
 
-Localization / i18n v1 實作已核准，本次 Design Sync完成；main integration／deployment待接續Gate，完成後為cross-cutting deployed能力。後續順序為Taiwan History / Range → Taiwan Performance，本次不開始。33 IDs／status counts不改，locale／持久工程規則及seed界線見下方Localization章節。
+Localization / i18n v1 已完成實作核准、Design Sync、main95f025dc1c0675e056cc78db1061c25078b66f6e整合及部署，最後STOPPED；不將安裝身分當自然使用驗收。本次Taiwan History / Range consumer已核准，下一Taiwan Performance NOT STARTED；33 IDs／status counts不改。
 
 完整實作／Self-QA／限制見 [Stage evidence](STAGE-TW-DATA-EVIDENCE-V1.md)。
 
@@ -148,7 +148,7 @@ flowchart TD
 上圖的 Runner 線表示 Dashboard 讀它的 receipts，**不是** Dashboard 啟動 Runner。`JobNormalizer` 使用完整 Scheduler task path 產生 canonical Dashboard job ID；Runner 自己的 job/profile/execution IDs 分開保存，只能經可信的 full task mapping 關聯。更完整的啟停、API、DB 和 14:30／17:00 雙 trigger 例子見 [As-Built](DASHBOARD-AS-BUILT-ARCHITECTURE.md)。
 
 
-目前 Reports · All／US Insider／TW Daily／TW Weekly 與 TW Stocks v1 均為 `PARTIAL`，Performance v1 為 `PARTIAL`；Data & Evidence Taiwan v1 為 `PARTIAL`。`product-shell` 列的「四頁」保留為 Release 1B 原切片當時限制。前次 Performance Design Sync 僅將 `product-performance` DESIGNED→PARTIAL；前次 TW Reports Design Sync 保留所有 33 IDs／statuses；前次僅 product-evidence DESIGNED→PARTIAL；本次Localization Design Sync不新增ID或變更任何status。2C／2D／TW 的 active wording 同步已完成的核准累積部署，三者仍 PARTIAL。parser-derived counts 為 DONE 19、PARTIAL 8、BACKEND_READY 3、DATA_READY 0、DESIGNED 0、IN_PROGRESS 0、NOT_STARTED 2、DEFERRED 0、BLOCKED 1、DROPPED 0。
+目前 Reports · All／US Insider／TW Daily／TW Weekly 與 TW Stocks v1 均為 `PARTIAL`，Performance v1 為 `PARTIAL`；Data & Evidence Taiwan v1 為 `PARTIAL`。`product-shell` 列的「四頁」保留為 Release 1B 原切片當時限制。前次 Performance Design Sync 僅將 `product-performance` DESIGNED→PARTIAL；前次 TW Reports Design Sync 保留所有 33 IDs／statuses；前次僅 product-evidence DESIGNED→PARTIAL；本次 History / Range Design Sync 不新增 ID 或變更任何 status。2C／2D／TW 的 active wording 同步已完成的核准累積部署，三者仍 PARTIAL。parser-derived counts 為 DONE 19、PARTIAL 8、BACKEND_READY 3、DATA_READY 0、DESIGNED 0、IN_PROGRESS 0、NOT_STARTED 2、DEFERRED 0、BLOCKED 1、DROPPED 0。
 
 ## Feature Matrix
 
@@ -185,10 +185,10 @@ flowchart TD
 | product-overview | Product expansion | Overview | 原本由 Today 看排程摘要 | 現有 jobs 全快照計數／未來 next run、七天已觀察 History、Runner coverage／diagnostics；Release 1B 已合併 | PARTIAL | 僅 operations；無股票 findings／freshness／reports。PARTIAL／unavailable 明示；缺 History 不推 MISSED | 跨來源 normalized feeds 後續另審 | docs/STAGE-RELEASE-1B.md |
 | product-projects | Product expansion | Projects | 原設計無跨專案設計檢視 | Release 1A-1 正式入口讀本專案建置設計快照，共用 v1 parser 並呈現功能／狀態數量 | PARTIAL | 最小切片已通過獨立初審及 Manager Review，合併 main `9e3c8cb`；安裝版本須另有 deployment evidence；完整閱讀面板／跨專案 aggregation 未完成 | 後續完成完整 Projects 閱讀面板／跨專案 aggregation，後續另審與驗證 | docs/STAGE-PROJECTS-VIEWER-R1A1.md |
 | product-us | Product expansion | US Stocks | 原設計只看 Insider 相關排程 | Release 2A reports Signals、2B SEC Transactions partial 已合併；2C exact ticker source-separated aggregate／獨立分頁／既有明細已實作 | PARTIAL | SEC P／candidate 尚未認證、4/A 未對帳，來源位置 ID 非 immutable event ID；相同 ticker 不推定來源關聯，不 join／dedupe／combined score；Ticker Detail 尚未整合 Performance、跨頁非 PIT、無 freshness policy；2C 已合併 main `44823ab`、已完成核准累積部署；實際安裝狀態由獨立 deployment evidence 確認 | Ticker Detail Performance integration／amendment reconciliation／PIT／broader analytics 另行 gate | docs/STAGE-RELEASE-2C.md |
-| product-tw | Product expansion | TW Stocks | 原設計只看 AIStockHunter 排程 | TW Stocks v1 以 Taiwan Volume Watch 的 tw-daily-accumulation-v1、固定 ProcessBuilder、/api/tw/stocks 與 ui/tw-stocks.mjs 呈現七個唯讀區域；實作 e2bbbd85 已通過 Manager 核准 | PARTIAL | 已整合 main `bce84c4` 並完成核准累積部署；每日與週檢身分獨立，PARTIAL／UNKNOWN／null 保留，WARMING_UP 的零候選不代表無異常；無 range／paging／投資建議 | Taiwan Performance、broader Data & Evidence aggregation、歷史範圍及 broader Taiwan roadmap 另行 gate | docs/STAGE-TW-STOCKS-V1.md |
+| product-tw | Product expansion | TW Stocks | 原設計只看 AIStockHunter 排程 | TW Stocks Current exact latest/date與核准History/Range consumer e52a4be；source-owned CLI/API、目前／歷史子頁、366日bounded range、paging及same-day runs，shared i18n | PARTIAL | product-tw仍PARTIAL；History保存資料不是完整歷史或PIT，無missing-day/MISSED推論，Taiwan Performance NOT STARTED，installed exactidentity另列operationalpacket | Taiwan Performance、broader Evidence／Taiwan roadmap另行gate | docs/STAGE-TW-STOCKS-V1.md; docs/STAGE-TW-HISTORY-RANGE-CONSUMER-V1.md |
 | product-performance | Product expansion | Performance | 原設計不分析選股效果 | Release 3A 已核准第一個 Insider current active AI-report Performance v1 consumer；固定三個唯讀 CLI、Summary／有限 list／Signal Detail 與五時距 | PARTIAL | 實作 96b15c8 已獲 Manager 核准；已整合 main `d69ff5ab` 並完成核准正式部署。stored state 與時距觀察分開，null 非 0，current scores 非歷史 PIT；Ticker Detail 未整合 | Taiwan／SEC Performance、broader analytics／PIT、portfolio／backtest／recommendations／trading 另行 gate | docs/STAGE-RELEASE-3A-PERFORMANCE.md |
 | product-reports | Product expansion | Reports | 原設計不集中報告 | Release 2D US Insider 固定 list-reports／get-report v1 保留；TW Reports v1 固定 source-owned 日／週報 LIST／DETAIL 與 All 三來源獨立區域已核准實作 | PARTIAL | All 實作三個獨立來源區域；TW Daily／Weekly 已核准，main 7a2f9c45 整合與部署已完成；counts 為目前保留列，revision 為正文/hash history、current 可在頁外或 MISSING，無 PIT／semantic diff／歷史 ticker score；2D 已核准合併並完成累積部署 | TW Reports 已部署於 main 7a2f9c45；broader report sources／PIT 另行 gate | docs/STAGE-RELEASE-2D.md; docs/STAGE-TW-REPORTS-V1.md |
-| product-evidence | Product expansion | Data & Evidence | 原設計只在工作詳情看狀態 | Taiwan v1 重用既有 Stocks／Daily／Weekly Reports LIST APIs 與 strict parsers，呈現來源 cards／readiness／completeness／責任／Weekly Check | PARTIAL | 核准實作04f67e9c；consolidated Design Sync，main／部署待後續 gates；只 Taiwan 第一切片，Schedule Versions／Correlation／Runner aggregation 未完成，非健康／信任／投資 score 或 atomic/PIT | 下一 Stage 先 Localization/i18n，再 Taiwan History/Range、Taiwan Performance；broader Evidence aggregation 另審 | docs/STAGE-TW-DATA-EVIDENCE-V1.md; docs/DASHBOARD-DATA-CONTRACTS.md |
+| product-evidence | Product expansion | Data & Evidence | 原設計只在工作詳情看狀態 | Taiwan v1 重用既有 Stocks／Daily／Weekly Reports LIST APIs 與 strict parsers，呈現來源 cards／readiness／completeness／責任／Weekly Check | PARTIAL | 核准實作04f67e9c；已完成 consolidated Design Sync、main 整合與部署；只 Taiwan 第一切片，Schedule Versions／Correlation／Runner aggregation 未完成，非健康／信任／投資 score 或 atomic/PIT | Localization 已部署，History / Range consumer 已核准；下一 Taiwan Performance NOT STARTED；broader Evidence aggregation 另審 | docs/STAGE-TW-DATA-EVIDENCE-V1.md; docs/DASHBOARD-DATA-CONTRACTS.md |
 
 
 ## Design Changes
@@ -236,10 +236,10 @@ flowchart TD
 | PARTIAL | Overview operations slice | 現有真實 API 已接入且 Release 1B 已合併；不含股票 metrics | docs/STAGE-RELEASE-1B.md |
 | PARTIAL | US Stocks Signals／SEC Transactions／Ticker Detail | 2A／2B 已合併；2C source-separated aggregate 已合併 main `44823ab`、已完成核准累積部署，不建立跨來源 identity；Ticker Detail Performance integration／4/A reconciliation／PIT／broader analytics 另審 | docs/STAGE-RELEASE-2C.md |
 | PARTIAL | Reports · All／US Insider | source-owned Reports v1 固定 list/get、safe DOM Markdown／revision paging；TW Daily／Weekly 已核准實作；三來源獨立，無 PIT／semantic diff；2D 已合併 main `40f5aec` 並完成核准累積部署 | docs/STAGE-RELEASE-2D.md |
-| PARTIAL | TW Stocks v1 | 已核准 exact latest/date 唯讀 consumer，已整合 main `bce84c4` 並完成核准累積部署；Performance、broader Data & Evidence aggregation、history/range 與更廣 roadmap 分別另審 | docs/STAGE-TW-STOCKS-V1.md |
+| PARTIAL | TW Stocks v1 | 已核准 exact latest/date 唯讀 consumer，已整合 main `bce84c4` 並完成核准累積部署；History / Range consumer 已核准；Taiwan Performance NOT STARTED，broader Data & Evidence aggregation 與更廣 roadmap 分別另審 | docs/STAGE-TW-STOCKS-V1.md |
 | PARTIAL | Performance v1 | Insider current active AI-report 第一切片已核准，已完成 Git closeout／main 整合 d69ff5ab／正式部署；Taiwan／SEC／PIT／portfolio／backtest／recommendations／trading 未完成 | docs/STAGE-RELEASE-3A-PERFORMANCE.md |
 | PARTIAL | Data & Evidence Taiwan v1 | 只 Taiwan 保存來源證據；Schedule Versions／Correlation／Runner aggregation 未完成 | docs/STAGE-TW-DATA-EVIDENCE-V1.md |
-| NEXT | Localization / i18n → Taiwan History / Range → Taiwan Performance | zh-TW default／en；i18n 尚未實作，完成後新 UI 必須使用 common resource layer；不 touch chore/i18n-seed | docs/DASHBOARD-DESIGN-SPACE.md |
+| NEXT | Taiwan Performance | History / Range consumer e52a4be已核准；Localization已部署，新UI使用shared zh-TW/en；Performance NOT STARTED | docs/STAGE-TW-HISTORY-RANGE-CONSUMER-V1.md |
 | BLOCKED | Production MISSED | availability、trigger provenance、shadow 誤判與獨立 Manager gate | docs/STAGE-SCHEDULE-SEMANTICS-MISSED-READINESS.md |
 | LATER | Tray／auto-start／updater | 包裝與 rollback/security review，並非此 pilot 範圍 | docs/DASHBOARD-DESIGN-SPACE.md |
 
@@ -301,3 +301,15 @@ flowchart TD
 | 2026-10-03 | 1 | TW Reports v1 consolidated Design Sync：核准實作93ae8859的 source-owned Daily／Weekly consumer、All 三個獨立區域；33 IDs／全 statuses 保留；同步前次 Performance main d69ff5ab／部署現況。Gate A 不改 runtime／installed，不重讀正式來源。 | Design Sync complete; Git integration and deployment pending subsequent authorized gates |
 | 2026-10-03 | 1 | Taiwan Data & Evidence v1 consolidated Design Sync：核准實作04f67e9c；僅 product-evidence DESIGNED→PARTIAL；33IDs／其他32 statuses 保留，runtime bytes 不改，無正式來源重讀。記錄下一順序 i18n→History/Range→Taiwan Performance，localization 未開始。 | Design Sync complete; main integration/deployment pending authorized gates |
 | 2026-10-04 | 1 | Localization / i18n v1 consolidated Design Sync：accepted f960723，shared1066-key zh-TW／en、browser preference、held-state／source boundaries與持久UI規則；33 IDs／statuses及runtime／AGENTS bytes不改，sample重生。 | Implementation approved; Design Sync complete; Gate B/C authorized next, final installed identity in operational packet / Owner Docs |
+| 2026-10-04 | 1 | Taiwan History / Range consumer consolidated Design Sync：accepted e52a4be，bounded API/subpages／same-day/source ordering／no missing inference／shared i18n；33 IDs／statuses及runtime bytes不改，notice NOTIFIED、sample重生。 | Design Sync complete; approved main/deployment gates next; final installed identity in operational packet / Owner Docs |
+
+
+### Taiwan History / Range v1 current consumer slice
+
+Taiwan History / Range consumer v1 已獲 Manager 核准 exact e52a4beae0ef20662e7b115a8e65d0c6aa6c25dd。來源 tw-history-range-v1 已於 Taiwan canonical main13e9f313a1754576e8b5d509e54e530b8764ac6b 完成115-asset overlay部署；本次只消費版本化契約，不解讀 private SQLite／source files。現有 TW Stocks 新增目前觀察／歷史・範圍子頁，不增主要入口。no-store GET /api/tw/history 只收 startDate／endDate／limit／offset；strict real dates、inclusive<=366days、limit1..50(default20)、offset0..10000(default0)，unknown／duplicate／empty params HTTP400 before invocation。
+
+TaiwanHistoryAdapter → TwHistoryProjection → TwHistoryController → ui/tw-history.mjs，explicit dashboard.sources.taiwan.history-cli-path 指向固定 export_tw_history.py LIST；與 Stocks／Reports 共用 Taiwan Semaphore2。source ordering及同日每個RunID保留，savedStatus與dataState分開，null!=0、UNKNOWN!=NO、WARMING_UP+0不是無異常。保留TWSE／TPEX readiness/completeness/warnings與exactDaily reportId，不自動DETAIL。page.total=null、hasMore／nextOffset原樣、offset ceiling禁用不可呼叫Next；不補gap-date，不推missing／holiday／MISSED／no anomaly，不聲稱跨頁atomic／PIT。
+
+History首次入頁才讀，Refresh／Previous／Next只指定一頁、無polling；latestmatching response wins，離開阻擋stale。新增26shared zh-TW／en keys，現行每locale1,092keys與placeholder parity；locale只held-text更新，range／offset／data／focus不變、不refetch。正式來源讀取0，僅原Stage5frozen2654bytes/hash38c0ad31…精確limit2/offset0重播，原時間與兩筆同日身分保持；不是新formal／installed acceptance。33IDs／status counts19DONE／8PARTIAL／3BACKEND_READY／2NOT_STARTED／1BLOCKED保持，product-tw仍PARTIAL。Taiwan Performance NOT STARTED，broader analytics／portfolio／trading／backtest不在本次。
+
+本次 consolidated Design Sync完成；接續已授權 explicit no-ff Git integration與完整Dashboard package部署。Git文件於DS snapshot不預填未知merge／installedSHA；完成後exactimage／backup／configdelta history-cli-path／STOPPED身分由operationalpacket與既有Owner Doc確認。安裝後不啟動或QA。詳見[History Stage](STAGE-TW-HISTORY-RANGE-CONSUMER-V1.md)。

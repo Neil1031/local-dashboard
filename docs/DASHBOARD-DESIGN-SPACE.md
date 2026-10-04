@@ -132,7 +132,7 @@ No brokerage/trading or automatic orders, cloud deployment, source DB writes, AI
 
 Manager Review can verify: revised nine-page sitemap and Projects pilot with six detail views, source-owned Project Design model, actual source-contract inventory, normalized models in `DASHBOARD-DATA-CONTRACTS.md`, architecture, shared states/components, completion matrix, roadmap, refactor thresholds, static desktop/mobile/keyboard prototype, unchanged production entrypoints and clean Git state. The original design stage stopped at design review. Release 1B has completed Git closeout. Release 2A is merged at 479a767. Release 2B is merged at 4acd568; cumulative deployment closed at e0aa592 under owner final no-post-install-QA policy. Release 2C is merged main44823ab, Release 2D main40f5aec and TW Stocks v1 mainbce84c4; all are included in the authorized bce84c4 cumulative deployment. Performance v1 implementation96b15c8 is Manager approved, PARTIAL, merged main d69ff5ab and production deployed; see STAGE-RELEASE-3A-PERFORMANCE.md. Historical development/deployment evidence remains separate.
 
-TW Reports consolidated Design Sync preserves all33 IDs/statuses, product-tw/product-reports PARTIAL. Daily/Weekly independent authorities, READY/EMPTY exit0 and PARTIAL/UNAVAILABLE/ERROR exit2, saved Weekly FAILED business status, null/UNKNOWN/WARMING_UP/anomaly-score semantics and no combined timeline/total/PIT remain explicit. Existing captures only; formal reads0. Taiwan Performance/history/range, Data & Evidence and broader research analytics remain separately gated. [Current TW Reports architecture/contract](DASHBOARD-DATA-CONTRACTS.md#tw-reports-v1-implemented-consumer); [approved Stage evidence](STAGE-TW-REPORTS-V1.md).
+TW Reports consolidated Design Sync preserves all33 IDs/statuses, product-tw/product-reports PARTIAL. Daily/Weekly independent authorities, READY/EMPTY exit0 and PARTIAL/UNAVAILABLE/ERROR exit2, saved Weekly FAILED business status, null/UNKNOWN/WARMING_UP/anomaly-score semantics and no combined timeline/total/PIT remain explicit. Existing captures only; formal reads0. History/Range consumer is approved; Taiwan Performance, Data & Evidence and broader research analytics remain separately gated. [Current TW Reports architecture/contract](DASHBOARD-DATA-CONTRACTS.md#tw-reports-v1-implemented-consumer); [approved Stage evidence](STAGE-TW-REPORTS-V1.md).
 
 
 ## Taiwan Data & Evidence v1 and next Stage order
@@ -147,18 +147,29 @@ COHERENT != SUCCESS；PARTIAL != SUCCESS；UNKNOWN != NO；null != 0；WARMING_U
 
 本輪沒有新的 formal Taiwan compatibility read。只可重用 frozen normalized captures：Stocks observed `2026-10-02T17:04:23.118012500Z`、selected `2026-10-02`、run `e801318d154a46c88f03858a9b60044c`、PARTIAL；Daily LIST observed `2026-10-03T12:17:45.674272100Z`、READY、`tw-daily:2026-10-02:f93460ffdd3d4ec6a60ce1244ce30d0f`；Weekly LIST observed `2026-10-03T12:17:46.080439900Z`、READY／saved FAILED、`tw-weekly:2026-10-02:510f722b6bcd40c09cee9393594be39e`。Replay 仍標為 SAVED_TEST_EVIDENCE，原始 bytes／時間／狀態／ID 不改，不稱新 observations 或 installed acceptance。
 
-Localization / i18n v1 實作已核准，本次 Design Sync完成；main integration／deployment待接續Gate，完成後為cross-cutting deployed能力。後續順序為Taiwan History / Range → Taiwan Performance，本次不開始。33 IDs／status counts不改，locale／持久工程規則及seed界線見下方Localization章節。
+Localization / i18n v1 已完成實作核准、Design Sync、main95f025dc1c0675e056cc78db1061c25078b66f6e整合及部署，最後STOPPED；不將安裝身分當自然使用驗收。本次Taiwan History / Range consumer已核准，下一Taiwan Performance NOT STARTED；33 IDs／status counts不改。
 
 This is a roadmap decision, not authorization to start a new Stage or a fake completed localization feature. [Evidence Stage](STAGE-TW-DATA-EVIDENCE-V1.md).
 
 ## Localization / i18n v1 as-built presentation contract
 
-Localization / i18n v1 實作 `f960723ddcdeec925ef2e8b40035cd28ac74bae1` 已獲 Manager 核准，本次 consolidated Design Sync 完成；main integration／production deployment 由接續的已授權 Gate B／C 執行，完成後成為 deployed cross-cutting capability，最終 exact installed main 與 STOPPED 身分由 operational packet／既有 Owner Docs 確認。Localization 不新增 feature ID；33 stable IDs 與 status counts 保持 DONE 19、PARTIAL 8、BACKEND_READY 3、NOT_STARTED 2、BLOCKED 1，其餘 0。下一 Stage 為 Taiwan History / Range → Taiwan Performance，本次不開始。
+Localization / i18n v1 實作 `f960723ddcdeec925ef2e8b40035cd28ac74bae1` 已獲 Manager 核准，Design Sync、main `95f025dc1c0675e056cc78db1061c25078b66f6e` 整合與完整套件部署均已完成，部署後 STOPPED。既有 operational packet／Owner Doc 保存安裝身分。Localization 不新增 feature ID；33 stable IDs／status counts 保持 DONE 19、PARTIAL 8、BACKEND_READY 3、NOT_STARTED 2、BLOCKED 1，其餘 0。本次 Taiwan History / Range consumer e52a4be 已核准；下一 Stage Taiwan Performance NOT STARTED。
 
-共享 flat resource flow 為 `ui/i18n.mjs` → `ui/locale-zh-TW.mjs`／`ui/locale-en.mjs` → 九個既有 owner-facing UI 區域。每語系 1,066 keys，exact key／named placeholder parity；預設 zh-TW，替代 en。偏好僅存 browser localStorage `local-dashboard.locale.v1`；缺值／無效值／read failure 使用 in-memory zh-TW，write failure 安全退回 zh-TW。沒有 backend locale state、application.yml locale setting、DB locale state或外部翻譯服務。
+共享 flat resource flow 為 `ui/i18n.mjs` → `ui/locale-zh-TW.mjs`／`ui/locale-en.mjs` → 九個既有 owner-facing UI 區域。i18n原切片每語系1,066keys；本次History新增26keys後現行1,092keys，exact key／named placeholder parity；預設 zh-TW，替代 en。偏好僅存 browser localStorage `local-dashboard.locale.v1`；缺值／無效值／read failure 使用 in-memory zh-TW，write failure 安全退回 zh-TW。沒有 backend locale state、application.yml locale setting、DB locale state或外部翻譯服務。
 
 Dashboard-owned chrome、固定表單／提示／狀態／aria-label／placeholder 使用共享文字層；source-owned report Markdown、company/security names、AI free-text、configured job/display metadata、canonical Project Design body、IDs、hashes、timestamps與provenance保留原值。Known machine codes 可顯示在地化解釋並保留 exact raw code；unknown future codes 仍 raw。翻譯只用 textContent／allowlisted text attributes，不插入 translation HTML。
 
 語系切換只更新 held presentation，保留當前 page／subpage、filters、pagination、open dialogs／details、focus及已載入資料；不 navigate、reload、show/load/refresh、refetch、restart server或改 query／business semantics。Project Design parser／來源內容與 source identity、null／UNKNOWN／PARTIAL等語意保持不變。
 
 部署後每個新增 Dashboard-owned owner-facing UI string 必須使用 common i18n layer；新 key 在同一修改加入 zh-TW／en及相同 named placeholders，UI 修改執行 parity／coverage及相關 browser regression。持久規則見 root `AGENTS.md`。歷史參考 `chore/i18n-seed` 保持 `15e9c5c807ffc11e9039c6c60a68c4373f350a58`；不 merge／rebase／cherry-pick，production canonical是兩份 reviewed `ui/locale-*.mjs`，不是 seed。
+
+
+## Taiwan History / Range v1 implemented consumer
+
+Taiwan History / Range consumer v1 已獲 Manager 核准 exact e52a4beae0ef20662e7b115a8e65d0c6aa6c25dd。來源 tw-history-range-v1 已於 Taiwan canonical main13e9f313a1754576e8b5d509e54e530b8764ac6b 完成115-asset overlay部署；本次只消費版本化契約，不解讀 private SQLite／source files。現有 TW Stocks 新增目前觀察／歷史・範圍子頁，不增主要入口。no-store GET /api/tw/history 只收 startDate／endDate／limit／offset；strict real dates、inclusive<=366days、limit1..50(default20)、offset0..10000(default0)，unknown／duplicate／empty params HTTP400 before invocation。
+
+TaiwanHistoryAdapter → TwHistoryProjection → TwHistoryController → ui/tw-history.mjs，explicit dashboard.sources.taiwan.history-cli-path 指向固定 export_tw_history.py LIST；與 Stocks／Reports 共用 Taiwan Semaphore2。source ordering及同日每個RunID保留，savedStatus與dataState分開，null!=0、UNKNOWN!=NO、WARMING_UP+0不是無異常。保留TWSE／TPEX readiness/completeness/warnings與exactDaily reportId，不自動DETAIL。page.total=null、hasMore／nextOffset原樣、offset ceiling禁用不可呼叫Next；不補gap-date，不推missing／holiday／MISSED／no anomaly，不聲稱跨頁atomic／PIT。
+
+History首次入頁才讀，Refresh／Previous／Next只指定一頁、無polling；latestmatching response wins，離開阻擋stale。新增26shared zh-TW／en keys，現行每locale1,092keys與placeholder parity；locale只held-text更新，range／offset／data／focus不變、不refetch。正式來源讀取0，僅原Stage5frozen2654bytes/hash38c0ad31…精確limit2/offset0重播，原時間與兩筆同日身分保持；不是新formal／installed acceptance。33IDs／status counts19DONE／8PARTIAL／3BACKEND_READY／2NOT_STARTED／1BLOCKED保持，product-tw仍PARTIAL。Taiwan Performance NOT STARTED，broader analytics／portfolio／trading／backtest不在本次。
+
+本次 consolidated Design Sync完成；接續已授權 explicit no-ff Git integration與完整Dashboard package部署。Git文件於DS snapshot不預填未知merge／installedSHA；完成後exactimage／backup／configdelta history-cli-path／STOPPED身分由operationalpacket與既有Owner Doc確認。安裝後不啟動或QA。詳見[History Stage](STAGE-TW-HISTORY-RANGE-CONSUMER-V1.md)。

@@ -11,7 +11,7 @@ UI job metadata、台股／美股分組、排序與舊版顯示切換見 [Stage 
 
 ## 介面語系
 
-預設繁體中文（zh-TW），Settings 可選 English（en），偏好僅存瀏覽器。共用 `ui/i18n.mjs` 與雙語 flat resources 各 1,066 keys；切換語系保留頁面、篩選、分頁、明細與已載入資料，不重讀來源。來源報告、配置顯示名稱、IDs與provenance保留原文。新增介面文字須遵守 root `AGENTS.md` 的雙語 key／placeholder／coverage規則。核准實作與本次文件同步見 [Localization Stage](docs/STAGE-LOCALIZATION-I18N-V1.md)；main integration與部署身分由後續已授權Gate及operational packet／Owner Docs確認。
+預設繁體中文（zh-TW），Settings 可選 English（en），偏好僅存瀏覽器。共用 `ui/i18n.mjs` 與雙語 flat resources 現行各1,092keys（i18n原切片1,066＋History26）；切換語系保留頁面、篩選、分頁、明細與已載入資料，不重讀來源。來源報告、配置顯示名稱、IDs與provenance保留原文。新增介面文字須遵守 root `AGENTS.md` 的雙語 key／placeholder／coverage規則。核准實作與本次文件同步見 [Localization Stage](docs/STAGE-LOCALIZATION-I18N-V1.md)；i18n已合併／部署 main95f025dc；History consumer本次由已授權Gate合併／部署，exactidentity由operationalpacket／Owner Docs確認。
 
 ## 環境與啟動
 
@@ -433,4 +433,9 @@ Manager 已核准實作 `96b15c8caf0ed0fc64e307a77c95de3e460e20ce`，PR #15 已�
 
 Manager 核准實作 `04f67e9c41085b7ff196b50eac1ca331251cb2d7`，consolidated Design Sync 完成；main整合／正式部署待本輪 Gate B/C。第一切片重用既有 Taiwan Stocks／Daily／Weekly Reports LIST APIs與strict parsers，分開呈現來源時間／ID／warnings、Daily readiness／completeness／責任及Weekly Check；null不補0、暖機零候選不表示無異常，沒有aggregate score或atomic/PIT推論。Stocks的fetch＋JSON body完成後才並行Daily／Weekly LIST，Evidence自有未完成browser讀取最多2；Refresh等待舊reads drain後處理最新generation，無polling；browser abort不保證source child已停止。沒有新backend adapter／source contract／persistence、DETAIL fetch或正式来源重讀。Schedule Versions／Correlation／Runner aggregation未完成，`product-evidence`是PARTIAL。
 
-[Stage與既有實作證據](docs/STAGE-TW-DATA-EVIDENCE-V1.md)。下一Stage規劃：Localization/i18n（zh-TW default、en）→Taiwan History/Range→Taiwan Performance；localization尚未實作，完成該Stage後新增owner-facing UI使用common i18n resource layer。本次不touch／merge／consume獨立`chore/i18n-seed`，不開始下一Stage。
+[Stage與既有實作證據](docs/STAGE-TW-DATA-EVIDENCE-V1.md)。Localization/i18n已部署，Taiwan History/Range consumer已核准；下一StageTaiwan Performance NOT STARTED，新增owner-facing UI使用common i18n resource layer。本次不touch／merge／consume獨立`chore/i18n-seed`，不開始下一Stage。
+
+
+## Taiwan History / Range consumer v1
+
+Existing TW Stocks Current / History subpages consume source-owned tw-history-range-v1 through GET /api/tw/history with explicit history-cli-path, strict inclusive366day range and bounded limit/offset. Same-day RunIDs, source order, null/UNKNOWN/readiness, independent saved business states and total=null paging remain truthful. No date-gap/MISSED/PIT inference, automatic DETAIL, polling, direct source schema reads or new formal capture. Shared zh-TW/en locale changes preserve range/offset/data/focus without requests. Accepted e52a4be; Design Sync complete, authorized main/package deployment follows with final exactidentity in operationalpacket/Owner Doc. product-tw remainsPARTIAL; Taiwan Performance NOT STARTED. [Contract](docs/DASHBOARD-DATA-CONTRACTS.md#taiwan-history--range-v1-implemented-consumer), [Stage](docs/STAGE-TW-HISTORY-RANGE-CONSUMER-V1.md).

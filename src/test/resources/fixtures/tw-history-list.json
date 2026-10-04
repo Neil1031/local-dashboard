@@ -1,0 +1,127 @@
+{
+  "contractVersion": "tw-history-range-v1",
+  "source": "TAIWAN_VOLUME_WATCH",
+  "generatedAt": "2026-09-25T15:00:00Z",
+  "dataState": "READY",
+  "query": {
+    "operation": "LIST",
+    "requestedStartDate": "2026-09-21",
+    "requestedEndDate": "2026-09-25",
+    "limit": 20,
+    "offset": 0
+  },
+  "scope": {
+    "state": "AVAILABLE",
+    "mode": "DAILY_ACCUMULATION",
+    "startDate": "2026-09-01"
+  },
+  "items": [
+    {
+      "observationId": "tw-observation:2026-09-25:22222222222222222222222222222222",
+      "targetDate": "2026-09-25",
+      "runId": "22222222222222222222222222222222",
+      "finishedAt": "2026-09-25T14:00:00Z",
+      "savedStatus": "PARTIAL",
+      "classificationStatus": "WARMING_UP",
+      "strategyStatus": "OUT_OF_SCOPE",
+      "candidateCount": 0,
+      "savedTotalCandidatesBeforeLimit": 0,
+      "savedCandidateTruncated": false,
+      "sourceStatusCounts": {
+        "SUCCESS": 2,
+        "PARTIAL": 0,
+        "FAILED": 0
+      },
+      "readiness": {
+        "warmingSymbols": 7,
+        "skippedCounts": {
+          "INSUFFICIENT_HISTORY": 7
+        },
+        "reasonCode": "WARMING_UP"
+      },
+      "markets": [
+        {
+          "market": "TWSE",
+          "complete": true,
+          "expectedMasterSymbols": 7,
+          "freshRows": 7,
+          "unpricedUnknownCount": 0,
+          "statusUnknownCount": 0,
+          "quoteScopeStatus": "UNKNOWN"
+        },
+        {
+          "market": "TPEX",
+          "complete": true,
+          "expectedMasterSymbols": 7,
+          "freshRows": 7,
+          "unpricedUnknownCount": 0,
+          "statusUnknownCount": 0,
+          "quoteScopeStatus": "UNKNOWN"
+        }
+      ],
+      "projectionWarnings": [],
+      "detailRef": {
+        "contractVersion": "tw-reports-v1",
+        "reportId": "tw-daily:2026-09-25:22222222222222222222222222222222"
+      }
+    },
+    {
+      "observationId": "tw-observation:2026-09-25:11111111111111111111111111111111",
+      "targetDate": "2026-09-25",
+      "runId": "11111111111111111111111111111111",
+      "finishedAt": "2026-09-25T13:00:00Z",
+      "savedStatus": "PARTIAL",
+      "classificationStatus": "WARMING_UP",
+      "strategyStatus": "OUT_OF_SCOPE",
+      "candidateCount": 0,
+      "savedTotalCandidatesBeforeLimit": 0,
+      "savedCandidateTruncated": false,
+      "sourceStatusCounts": {
+        "SUCCESS": 2,
+        "PARTIAL": 0,
+        "FAILED": 0
+      },
+      "readiness": {
+        "warmingSymbols": 7,
+        "skippedCounts": {
+          "INSUFFICIENT_HISTORY": 7
+        },
+        "reasonCode": "WARMING_UP"
+      },
+      "markets": [
+        {
+          "market": "TWSE",
+          "complete": true,
+          "expectedMasterSymbols": 7,
+          "freshRows": 7,
+          "unpricedUnknownCount": 0,
+          "statusUnknownCount": 0,
+          "quoteScopeStatus": "UNKNOWN"
+        },
+        {
+          "market": "TPEX",
+          "complete": true,
+          "expectedMasterSymbols": 7,
+          "freshRows": 7,
+          "unpricedUnknownCount": 0,
+          "statusUnknownCount": 0,
+          "quoteScopeStatus": "UNKNOWN"
+        }
+      ],
+      "projectionWarnings": [],
+      "detailRef": {
+        "contractVersion": "tw-reports-v1",
+        "reportId": "tw-daily:2026-09-25:11111111111111111111111111111111"
+      }
+    }
+  ],
+  "page": {
+    "limit": 20,
+    "offset": 0,
+    "returned": 2,
+    "hasMore": false,
+    "nextOffset": null,
+    "total": null
+  },
+  "warnings": []
+}

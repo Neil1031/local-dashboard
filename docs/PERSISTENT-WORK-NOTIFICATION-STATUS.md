@@ -19,7 +19,7 @@ Current shared notice version:
 | Topic / persistent Work pair | Management Work | Sol Work | Notice version | Status | Last notification |
 |---|---|---|---|---|---|
 | TW | `01a0f900-c724-7502-a0ab-eb799e1f11d3` | `01a0f902-e4c9-7753-a3c4-27cb0894e7bf` | `streamlined-combined-closeout-v1` | **NOTIFIED** | 2026-10-04 |
-| Dashboard | `01a0de9a-1854-7280-a92d-ebebf41f7663` | `01a0f108-865e-7091-b88d-333228144bfe` | `streamlined-combined-closeout-v1` | **NOT_NOTIFIED** | — |
+| Dashboard | `01a0de9a-1854-7280-a92d-ebebf41f7663` | `01a0f108-865e-7091-b88d-333228144bfe` | `streamlined-combined-closeout-v1` | **NOTIFIED** | 2026-10-04 |
 
 ## Streamlined combined-closeout summary
 
