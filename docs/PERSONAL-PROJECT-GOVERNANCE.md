@@ -85,6 +85,8 @@ Owns:
 
 Luna self-check and Sol Self-QA do not constitute independent PASS. Management review remains separate from GPT Manager Final Review.
 
+Management owns routine Owner Doc lightweight status/comment handling under section 7.4; this does not authorize design-body rewriting.
+
 **Sol Implementation Work**
 
 Sol is the implementation owner.
@@ -104,6 +106,8 @@ Owns:
 - producing a complete handoff packet with `HANDOFF_DELIVERED`.
 
 Sol should actively attempt to solve implementation problems rather than merely report them.
+
+For Owner Doc changes, Sol submits `DOC_CHANGE_REQUEST` under section 7.4 and does not edit the Google Doc.
 
 ### 1.3 Handoff marker
 
@@ -330,7 +334,7 @@ Manager authorization is process-authoritative for normal repository work, inclu
 - approved config delta;
 - known own-process start/stop;
 - normal schema migration when the Stage explicitly authorizes it;
-- Google Doc updates;
+- Google Doc updates within section 7.4's role/scope limits; general Stage authorization does not grant Sol Owner Doc write access or automatic full-body synchronization;
 - Git merge/push after Manager approval.
 
 Do not repeatedly ask the owner for the same authorization.
@@ -508,7 +512,7 @@ If identity truly changes, record it as an intentional design change.
 
 ### 7.3 What the owner document must explain
 
-Do not write status only.
+The owner document must retain useful design explanations, not just status. This is a body-quality requirement for separately authorized content/batch work, not a requirement to rewrite its body at each Stage. Routine synchronization follows section 7.4.
 
 When materially relevant, explain:
 
@@ -529,6 +533,77 @@ For externally imported AI scores, explicitly state the score origin, e.g.:
 `Imported AI report`
 
 Do not make an imported score look like it was computed by the consumer Python/Dashboard code.
+
+### 7.4 Owner Doc Lightweight Sync Policy
+
+Notice version: `owner-doc-lightweight-sync-v1`. This owner decision replaces per-Stage full-body synchronization and implementation-owned Owner Doc writes. Git canonical design / contracts / Stage evidence remain engineering truth. Preserve the single existing Owner Doc and its stable structure, identities, sharing and truthful status.
+
+**A. Sol Implementation Work — request only**
+
+Sol must not directly edit Owner Google Doc body or status, synchronize it merely because implementation / Design Sync / deployment finished, or create a new/duplicate Owner Doc. Sol maintains Git canonical docs, Stage evidence and implementation truth.
+
+If an Owner Doc change is needed, include `DOC_CHANGE_REQUEST` in the handoff with at least:
+
+- target document;
+- target section / paragraph;
+- current wording summary;
+- requested change;
+- reason;
+- supporting Stage / SHA / evidence;
+- classification: `STATUS_ONLY` or `CONTENT_CHANGE`.
+
+Sol may propose wording but must not write it into the Owner Doc.
+
+**B. Management Work — lightweight sync owner**
+
+Management first decides whether the request is supported. Its routine direct body-edit authority is limited to:
+
+1. Evidence-backed completion markers: `☐ → ◐`, `◐ → ☑`, `☐ → ☑`, and `⏸` when warranted.
+2. Extremely short, objective operational identities directly related to that status: accepted / merged SHA, deployed / not deployed, `STOPPED`, exact runtime identity, formal compatibility status, or existing `NOT STARTED` / `PARTIAL` / `COMPLETE` states.
+
+Do not use a status update to rewrite design body, architecture, methodology or long paragraphs. Preserve the evidence's meaning; a short identity does not imply broader acceptance.
+
+**C. Content changes — comments only**
+
+For architecture, source-of-truth, data semantics, methodology, limitations, formulas, product behavior, roadmap wording or long design explanations, Management may add a comment at the corresponding location after approving `DOC_CHANGE_REQUEST`; do not directly rewrite body.
+
+Keep the comment brief: requested change, reason, Stage / SHA reference. Read the target first and include exact quoted text plus section/paragraph context in both the comment and `quoted_text`, so the target is identifiable even if the editor shows an unanchored Drive API comment. Do not claim native UI anchoring from API success.
+
+A comment is a pending synchronization item, not a new canonical engineering truth.
+
+**D. Fixed comment route / failure fallback**
+
+Comment capability was tested once on 2026-10-05 using the connected Google Drive `bulk_update_file_comments` / `get_document_comments` tools on the existing Local Dashboard Owner Doc `1GgEEjKTNPTJ5ACMXQ6TIaXSUFYH9OugdP9LAOIQcgNs`. Test comment `AAACA1TYAsM` was created with live quoted text, read back, then resolved and read back as resolved; the native body/tab text snapshot was unchanged. Native UI anchoring was not verified and is not required for this explicit quote/location route.
+
+Management uses this verified comment route directly for approved content requests. Sol / Management Works must not repeat capability probes at every Stage or on notification receipt. This verifies the connector route, not every document's permissions. If the tool is absent or the actual authorized comment write/readback fails, do not run a new capability-test campaign or substitute a body write.
+
+Return `OWNER_DOC_CONTENT_SYNC_PENDING` and `OWNER_DOC_MANAGER_EDIT_REQUIRED`, with:
+
+- target Owner Doc / document ID;
+- target section / paragraph;
+- approved `DOC_CHANGE_REQUEST`;
+- approved replacement / addition wording;
+- reason;
+- supporting Stage / accepted SHA / merge SHA / deployment evidence;
+- current completion status.
+
+GPT Manager performs the required body update in the main conversation. Management may still perform its independently authorized completion/status marker and very short operational identity updates.
+
+Pending Owner Doc content does not block normal Stage / merge / deployment unless that Stage explicitly makes body sync a completion Gate. After Manager edits, Management may verify revision / target paragraph during later closeout; do not repeat a full Doc review. An actual operation failure is not successful comment delivery.
+
+**E. Full body synchronization — separately authorized batch**
+
+Full body updates are `OWNER_DOC_BATCH_SYNC` and require separate authorization. Appropriate triggers are an explicit GPT Manager request, completion of a major Phase / Release, accumulated approved `DOC_CHANGE_REQUEST` items needing batch cleanup, an explicit Owner cleanup request, or a major canonical design change leaving the Owner Doc materially inaccurate. A trigger alone is not authorization.
+
+Do not automatically attach batch body sync to implementation completion, Design Sync, Git merge or deployment. Batch authorization identifies the editing owner and content scope; routine Management authority remains limited to B/C, and Sol's direct-write prohibition remains in force.
+
+**F. Completion marker authority**
+
+Management must not mark `☑` merely because work looks complete. Require approved evidence supporting the exact marker, such as Management Independent Review PASS, GPT Manager acceptance, authorized merge/deployment evidence, or canonical Stage completion evidence. If the applicable acceptance has not been established, retain the existing marker. Do not promote `UNKNOWN`, null or `PARTIAL` to success.
+
+**G. GPT Manager role**
+
+GPT Manager owns Stage acceptance / design direction and may authorize batch sync. It does not personally edit every routine Google Doc update or require Sol to synchronize the body. Management owns daily lightweight status/comment handling; the failure packet in D routes required body editing to GPT Manager.
 
 ---
 
@@ -585,7 +660,7 @@ A success of an operational scheduler/process does not automatically prove busin
 
 ## 10. Google Doc editing rules
 
-Edit the existing document in place.
+Any authorized body edit updates the existing document in place, within section 7.4's role and scope limits. Implementation / Design Sync / deployment does not automatically require full body synchronization.
 
 Do not:
 
@@ -606,7 +681,7 @@ Preserve as applicable:
 - native elements;
 - sharing metadata.
 
-Preferred workflow:
+For an authorized native body write (including Management's bounded status/identity updates), use:
 
 1. Read current document and revision.
 2. Use trusted/native read for existing-doc writes.
@@ -616,11 +691,9 @@ Preferred workflow:
 6. Native readback.
 7. Verify unrelated structure did not drift.
 
-If the Google Doc cannot be synchronized during an otherwise valid product Stage, record:
+For pending content / comment-operation failure, use section 7.4 D's `OWNER_DOC_CONTENT_SYNC_PENDING` / `OWNER_DOC_MANAGER_EDIT_REQUIRED` packet. The legacy `GOOGLE_DOC_SYNC_PENDING` marker remains valid historical evidence of an unsynchronized document; it does not authorize a body-write fallback.
 
-`GOOGLE_DOC_SYNC_PENDING`
-
-Do not block working product code solely because a document connector is temporarily unavailable.
+Do not block working product code, normal Git closeout or deployment solely because Owner Doc content is pending, unless the Stage explicitly makes body synchronization a completion Gate. Keep native in-place editing, revision guards, structure preservation, no duplicate Docs and truthful status.
 
 ### 10.1 Visual Doc QA
 
@@ -829,7 +902,7 @@ Manager/management review should normally answer:
 - Are tests proportional and meaningful?
 - Are source/formal/synthetic/installed evidence boundaries stated honestly?
 - Did only intended canonical feature/status rows change?
-- Did engineering docs and owner Living Design remain coherent?
+- Did engineering docs remain canonical, with Owner Doc lightweight updates / pending content requests truthfully handled under section 7.4?
 - Is the exact reviewed SHA clear?
 - Is the next Stage still stopped until authorized?
 

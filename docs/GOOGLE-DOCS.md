@@ -8,6 +8,8 @@ This existing Google Doc is the project owner's Traditional Chinese reading edit
 
 Cross-project workflow, Git and deployment defaults: [PERSONAL-PROJECT-GOVERNANCE.md](PERSONAL-PROJECT-GOVERNANCE.md). This document remains the detailed Local Dashboard authority for Google Doc / Living Design policy.
 
+Owner update, 2026-10-05: [Owner Doc Lightweight Sync Policy](PERSONAL-PROJECT-GOVERNANCE.md#74-owner-doc-lightweight-sync-policy) governs editing roles and synchronization cadence. Sol submits `DOC_CHANGE_REQUEST` and never edits Owner Docs; Management handles evidence-backed status/short identity updates and approved content comments. Comment creation/readback is verified; Works use that route without repeated capability tests. Actual failure returns `OWNER_DOC_CONTENT_SYNC_PENDING` / `OWNER_DOC_MANAGER_EDIT_REQUIRED`; full body sync is separately authorized `OWNER_DOC_BATCH_SYNC`. Historical reconciliation evidence below is unchanged.
+
 ## Engineering sources
 
 - [PROJECT-DESIGN.md](PROJECT-DESIGN.md): maintained project design and stable feature IDs.
@@ -61,8 +63,8 @@ Google Doc sync source: `4c6fddf5890551f35865b907f1ac15f977d0c722` plus the scop
 4. For each feature, distinguish intended behavior, implemented behavior, validation evidence, limitations and remaining work. Explain data acquisition, storage, decisions and error handling; a progress list alone is not a design document.
 5. Change scope only for an explicit new need, a demonstrated infeasibility or a reviewed design decision. Record the reason, affected IDs and before/after behavior. Do not silently renumber historical Stages to match reading-section numbers.
 6. Engineering files and evidence remain the implementation reference. The Google Doc is a reading projection, not an independent completion ledger. A reader label is not automatically a repository Stage or feature ID.
-7. A feature stage must report whether the engineering design and Google Doc require updates. Preserve unfinished checkboxes until the stated implementation and acceptance criteria are met. A prototype, a passed unit test and verified deployment are different states.
-8. When the Google Doc is updated, record the source commit or clearly state that synchronization is pending. This index does not implement automatic Git-to-Docs or Docs-to-Git synchronization. If the editing capability is unavailable, report `GOOGLE_DOC_SYNC_PENDING` rather than claim synchronization.
+7. A feature stage reports whether the Git engineering design requires updates; Sol requests Owner Doc changes through `DOC_CHANGE_REQUEST`, without writing the Doc. Management follows the shared lightweight policy rather than doing per-Stage full body sync. Preserve unfinished checkboxes until the applicable acceptance evidence exists. A prototype, a passed unit test and verified deployment are different states.
+8. For authorized Owner Doc updates, record the source commit or state that content synchronization is pending. Actual comment failure requires `OWNER_DOC_CONTENT_SYNC_PENDING` / `OWNER_DOC_MANAGER_EDIT_REQUIRED`; legacy `GOOGLE_DOC_SYNC_PENDING` remains historical evidence, not permission for body-writing fallback. This index does not implement automatic Git-to-Docs or Docs-to-Git synchronization.
 9. Do not change Google Doc permissions just to make a link work. Do not publish private source data, local credentials, raw receipts or production databases in documentation.
 
 ## Current follow-up
