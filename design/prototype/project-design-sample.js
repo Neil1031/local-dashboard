@@ -1,4 +1,4 @@
-// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: 48c9db13f6757064084fe53e1c67dc59d684616b772e3ebdcc391b6ce9ca8fdc
+// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: 0cef05ecbd6d2bb121226c3193ce15cbc37acf5763c5ff2f98019b175aa3b679
 window.PROJECT_DESIGN_SAMPLE = Object.freeze({
   "metadata": {
     "project_id": "local-dashboard",
@@ -337,10 +337,10 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "area": "Product expansion",
       "name": "TW Stocks",
       "originalIntent": "原設計只看 AIStockHunter 排程",
-      "implementation": "TW Stocks Current exact latest/date與核准History/Range consumer e52a4be；source-owned CLI/API、目前／歷史子頁、366日bounded range、paging及same-day runs，shared i18n",
+      "implementation": "TW Stocks Current exact latest/date 與核准 History/Range consumer e52a4be；source-owned CLI/API、目前／歷史子頁、366日 bounded range、paging 及 same-day runs，shared i18n",
       "status": "PARTIAL",
-      "limitation": "product-tw仍PARTIAL；History保存資料不是完整歷史或PIT，無missing-day/MISSED推論，Taiwan Performance NOT STARTED，installed exactidentity另列operationalpacket",
-      "remaining": "Taiwan Performance、broader Evidence／Taiwan roadmap另行gate",
+      "limitation": "History 保存資料不是完整歷史或 PIT，無 missing-day／MISSED 推論；Taiwan Performance 是獨立 Performance 子頁，並未將 TW Stocks 提升為完整研究或投資功能；installed exact identity 另列 operational packet",
+      "remaining": "Broader Evidence／Taiwan roadmap 另行 gate",
       "evidence": "docs/STAGE-TW-STOCKS-V1.md; docs/STAGE-TW-HISTORY-RANGE-CONSUMER-V1.md"
     },
     {
@@ -348,11 +348,11 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "area": "Product expansion",
       "name": "Performance",
       "originalIntent": "原設計不分析選股效果",
-      "implementation": "Release 3A 已核准第一個 Insider current active AI-report Performance v1 consumer；固定三個唯讀 CLI、Summary／有限 list／Signal Detail 與五時距",
+      "implementation": "Release 3A Insider current active AI-report Summary／list／Detail 與 Taiwan source-separated observed-performance bounded LIST 子頁；各自使用 source-owned read-only CLI 與時距",
       "status": "PARTIAL",
-      "limitation": "實作 96b15c8 已獲 Manager 核准；已整合 main `d69ff5ab` 並完成核准正式部署。stored state 與時距觀察分開，null 非 0，current scores 非歷史 PIT；Ticker Detail 未整合",
-      "remaining": "Taiwan／SEC Performance、broader analytics／PIT、portfolio／backtest／recommendations／trading 另行 gate",
-      "evidence": "docs/STAGE-RELEASE-3A-PERFORMANCE.md"
+      "limitation": "Taiwan consumer accepted implementation `920fdfd8`、source contract `tw-observed-performance-v1`；US behavior unchanged。兩來源不合併，observed return 不代表 realized P&L；Taiwan 不提供 aggregate win rate、advice、portfolio、backtest 或 trading；本 Design Sync 不記錄未知 merge/install identity",
+      "remaining": "Taiwan／SEC broader analytics、PIT、portfolio／backtest／recommendations／trading 另行 gate",
+      "evidence": "docs/STAGE-RELEASE-3A-PERFORMANCE.md; docs/STAGE-TW-PERFORMANCE-CONSUMER-V1.md"
     },
     {
       "id": "product-reports",
@@ -373,7 +373,7 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
       "implementation": "Taiwan v1 重用既有 Stocks／Daily／Weekly Reports LIST APIs 與 strict parsers，呈現來源 cards／readiness／completeness／責任／Weekly Check",
       "status": "PARTIAL",
       "limitation": "核准實作04f67e9c；已完成 consolidated Design Sync、main 整合與部署；只 Taiwan 第一切片，Schedule Versions／Correlation／Runner aggregation 未完成，非健康／信任／投資 score 或 atomic/PIT",
-      "remaining": "Localization 已部署，History / Range consumer 已核准；下一 Taiwan Performance NOT STARTED；broader Evidence aggregation 另審",
+      "remaining": "History / Range 與 Taiwan Performance 為獨立 consumer；broader Evidence aggregation 另審",
       "evidence": "docs/STAGE-TW-DATA-EVIDENCE-V1.md; docs/DASHBOARD-DATA-CONTRACTS.md"
     }
   ],
@@ -510,14 +510,14 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
     {
       "horizon": "PARTIAL",
       "work": "TW Stocks v1",
-      "gate": "已核准 exact latest/date 唯讀 consumer，已整合 main `bce84c4` 並完成核准累積部署；History / Range consumer 已核准；Taiwan Performance NOT STARTED，broader Data & Evidence aggregation 與更廣 roadmap 分別另審",
+      "gate": "已核准 exact latest/date 唯讀 consumer，已整合 main `bce84c4` 並完成核准累積部署；History / Range consumer 已核准；Taiwan Performance 保持獨立 source-separated 子頁，broader Data & Evidence aggregation 與更廣 roadmap 分別另審",
       "evidence": "docs/STAGE-TW-STOCKS-V1.md"
     },
     {
       "horizon": "PARTIAL",
       "work": "Performance v1",
-      "gate": "Insider current active AI-report 第一切片已核准，已完成 Git closeout／main 整合 d69ff5ab／正式部署；Taiwan／SEC／PIT／portfolio／backtest／recommendations／trading 未完成",
-      "evidence": "docs/STAGE-RELEASE-3A-PERFORMANCE.md"
+      "gate": "Insider v1 已完成核准 Git／部署 closeout；Taiwan observed-performance consumer implementation 與 Design Sync complete，當前授權的 frozen Git/package closeout 仍在進行；Taiwan／SEC broader analytics、PIT、portfolio／backtest／recommendations／trading 未完成",
+      "evidence": "docs/STAGE-RELEASE-3A-PERFORMANCE.md; docs/STAGE-TW-PERFORMANCE-CONSUMER-V1.md"
     },
     {
       "horizon": "PARTIAL",
@@ -527,9 +527,9 @@ window.PROJECT_DESIGN_SAMPLE = Object.freeze({
     },
     {
       "horizon": "NEXT",
-      "work": "Taiwan Performance",
-      "gate": "History / Range consumer e52a4be已核准；Localization已部署，新UI使用shared zh-TW/en；Performance NOT STARTED",
-      "evidence": "docs/STAGE-TW-HISTORY-RANGE-CONSUMER-V1.md"
+      "work": "Taiwan Performance frozen closeout",
+      "gate": "Accepted Dashboard consumer `920fdfd8` 與 source contract main `bc9026b7` 已完成 Design Sync；依核准範圍進行 no-ff Git integration／完整 Dashboard package deployment。Merge、image 與 installed identity 待實際 closeout 後記入 operational packet／Owner Docs",
+      "evidence": "docs/STAGE-TW-PERFORMANCE-CONSUMER-V1.md"
     },
     {
       "horizon": "BLOCKED",

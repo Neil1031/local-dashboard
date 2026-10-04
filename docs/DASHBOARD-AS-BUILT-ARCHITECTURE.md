@@ -213,10 +213,10 @@ sequenceDiagram
 | Reports · All／US Insider | PARTIAL | Release 2D 固定 list/get v1、exact date、完整安全正文與獨立 revision metadata 分頁；All 已實作三來源獨立區域，TW consumer已於 main 7a2f9c45 整合／部署、current 可在頁外或 MISSING、無 PIT／semantic diff；2D 已核准並整合 main 40f5aec 並完成核准累積部署，broader sources 尚未完成。 |
 | TW Stocks v1 | PARTIAL | 實作 e2bbbd85 已獲 Manager 核准，已整合 main bce84c4 並完成核准累積部署；source-owned Taiwan contract 七區唯讀 consumer，非完整 Taiwan roadmap。 |
 | TW Reports v1 | PARTIAL | Daily／Weekly consumer93ae8859已核准；三來源獨立、main 7a2f9c45整合／部署完成；broader roadmap未完成。 |
-| Performance v1 | PARTIAL | Release 3A current active Insider AI-report 唯讀 consumer 已核准實作 96b15c8，已整合 main d69ff5ab 並完成核准正式部署；Taiwan／SEC／PIT／portfolio／broader analytics 未完成。 |
+| Performance v1 | PARTIAL | Release 3A Insider AI-report consumer 已核准並部署；後續 Taiwan source-separated observed-performance consumer accepted implementation 與 Design Sync complete，已核准的 Git/package closeout 尚待執行；SEC／PIT／portfolio／broader analytics 未完成。 |
 | Data & Evidence | PARTIAL | Taiwan v1 重用既有 normalized APIs／strict parsers；Schedule Versions／Correlation／Runner aggregation 未完成；main／部署待本次後續 gates。 |
 
-**目前限制：** 上表的「已完成」指 repo 中有正式程式與既有 Stage gate；不代表目前這台機器所有 Scheduler task、Runner mapping、資料庫或外部來源均已在本文件撰寫時實機驗收。外部來源已實作 reports Signals、SEC Transactions partial、2C source-separated Ticker Detail，以及2D Reports · US Insider 第一切片和已核准的 TW Stocks v1 consumer；Release 1B／2A／2B 已通過 Manager Review 並合併，均與已安裝版本分開標明。`MISSED` 不可由現有 shadow 時間 heuristics 直接啟用。
+**目前限制：** 上表的「已完成」指 repo 中有正式程式與既有 Stage gate；不代表目前這台機器所有 Scheduler task、Runner mapping、資料庫或外部來源均已在本文件撰寫時實機驗收。外部來源已實作 reports Signals、SEC Transactions partial、2C source-separated Ticker Detail，以及2D Reports · US Insider、TW Stocks v1 和 Taiwan Performance v1 的獨立 consumers；Taiwan Performance 的已核准 Git/package closeout 尚待執行，closeout 後的 installed identity 另行標明。Release 1B／2A／2B 已通過 Manager Review 並合併。`MISSED` 不可由現有 shadow 時間 heuristics 直接啟用。
 
 ## Release 1A-1：Projects 最小正式入口（已核准並合併）
 
@@ -295,7 +295,7 @@ flowchart LR
 
 All 的 US Insider／TW Daily／TW Weekly 分別呈現狀態、分頁、來源與明細，不合成跨來源 timeline／total／PIT。READY／EMPTY=exit0；合法 PARTIAL／UNAVAILABLE／ERROR=exit2；Weekly saved FAILED 是業務狀態而非 transport failure。Daily／Weekly authority、run/date／report IDs 獨立；null 非0、UNKNOWN 非NO、WARMING_UP 零候選非無異常、source anomaly score 非investment score。Safe DOM Markdown、native keyboard dialog 與 latest matching response 規則保留。
 
-既有唯一四次 consumer captures 為 Daily READY→PARTIAL／WARMING_UP／0，Weekly READY→PARTIAL／saved FAILED／pending164匯出100；相容性不表示自然排程成功或完整歷史／市場／投資有效性。本次無正式來源重讀，Stage4 112-asset來源部署證據保留。product-tw／product-reports仍PARTIAL，Data & Evidence broader aggregation、Taiwan Performance／history/range／broader analytics未完成。詳見[Data Contracts](DASHBOARD-DATA-CONTRACTS.md#tw-reports-v1-implemented-consumer)及[Stage evidence](STAGE-TW-REPORTS-V1.md)。
+既有唯一四次 consumer captures 為 Daily READY→PARTIAL／WARMING_UP／0，Weekly READY→PARTIAL／saved FAILED／pending164匯出100；相容性不表示自然排程成功或完整歷史／市場／投資有效性。本次無正式來源重讀，Stage4 112-asset來源部署證據保留。該次 Reports implementation checkpoint 未包含 Taiwan Performance／history/range；這兩個 consumer 後續分開實作。product-tw／product-reports仍PARTIAL，Data & Evidence broader aggregation與broader analytics未完成。詳見[Data Contracts](DASHBOARD-DATA-CONTRACTS.md#tw-reports-v1-implemented-consumer)及[Stage evidence](STAGE-TW-REPORTS-V1.md)。
 
 
 ## 18. Taiwan Data & Evidence v1：來源證據第一切片
@@ -320,13 +320,13 @@ COHERENT != SUCCESS；PARTIAL != SUCCESS；UNKNOWN != NO；null != 0；WARMING_U
 
 本輪沒有新的 formal Taiwan compatibility read。只可重用 frozen normalized captures：Stocks observed `2026-10-02T17:04:23.118012500Z`、selected `2026-10-02`、run `e801318d154a46c88f03858a9b60044c`、PARTIAL；Daily LIST observed `2026-10-03T12:17:45.674272100Z`、READY、`tw-daily:2026-10-02:f93460ffdd3d4ec6a60ce1244ce30d0f`；Weekly LIST observed `2026-10-03T12:17:46.080439900Z`、READY／saved FAILED、`tw-weekly:2026-10-02:510f722b6bcd40c09cee9393594be39e`。Replay 仍標為 SAVED_TEST_EVIDENCE，原始 bytes／時間／狀態／ID 不改，不稱新 observations 或 installed acceptance。
 
-Localization / i18n v1 已完成實作核准、Design Sync、main95f025dc1c0675e056cc78db1061c25078b66f6e整合及部署，最後STOPPED；不將安裝身分當自然使用驗收。本次Taiwan History / Range consumer已核准，下一Taiwan Performance NOT STARTED；33 IDs／status counts不改。
+Localization / i18n v1 已完成實作核准、Design Sync、main95f025dc1c0675e056cc78db1061c25078b66f6e整合及部署，最後STOPPED；不將安裝身分當自然使用驗收。該次交付時 Taiwan History / Range 已核准，Taiwan Performance 是預定後續順序；後續 consumer 狀態見本文件最新切片。33 IDs／status counts不改。
 
 [Stage evidence](STAGE-TW-DATA-EVIDENCE-V1.md) 保留實作與 Self-QA；本 Gate A 不建置／部署／觸碰 installed runtime。
 
 ## 19. Localization / i18n v1 as-built presentation contract
 
-Localization / i18n v1 實作 `f960723ddcdeec925ef2e8b40035cd28ac74bae1` 已獲 Manager 核准，Design Sync、main `95f025dc1c0675e056cc78db1061c25078b66f6e` 整合與完整套件部署均已完成，部署後 STOPPED。既有 operational packet／Owner Doc 保存安裝身分。Localization 不新增 feature ID；33 stable IDs／status counts 保持 DONE 19、PARTIAL 8、BACKEND_READY 3、NOT_STARTED 2、BLOCKED 1，其餘 0。本次 Taiwan History / Range consumer e52a4be 已核准；下一 Stage Taiwan Performance NOT STARTED。
+Localization / i18n v1 實作 `f960723ddcdeec925ef2e8b40035cd28ac74bae1` 已獲 Manager 核准，Design Sync、main `95f025dc1c0675e056cc78db1061c25078b66f6e` 整合與完整套件部署均已完成，部署後 STOPPED。既有 operational packet／Owner Doc 保存安裝身分。Localization 不新增 feature ID；33 stable IDs／status counts 保持 DONE 19、PARTIAL 8、BACKEND_READY 3、NOT_STARTED 2、BLOCKED 1，其餘 0。該次 Taiwan History / Range consumer e52a4be 已核准，Taiwan Performance 為預定後續切片；後續 consumer 狀態見下節。
 
 共享 flat resource flow 為 `ui/i18n.mjs` → `ui/locale-zh-TW.mjs`／`ui/locale-en.mjs` → 九個既有 owner-facing UI 區域。i18n原切片每語系1,066keys；本次History新增26keys後現行1,092keys，exact key／named placeholder parity；預設 zh-TW，替代 en。偏好僅存 browser localStorage `local-dashboard.locale.v1`；缺值／無效值／read failure 使用 in-memory zh-TW，write failure 安全退回 zh-TW。沒有 backend locale state、application.yml locale setting、DB locale state或外部翻譯服務。
 
@@ -343,6 +343,18 @@ Taiwan History / Range consumer v1 已獲 Manager 核准 exact e52a4beae0ef20662
 
 TaiwanHistoryAdapter → TwHistoryProjection → TwHistoryController → ui/tw-history.mjs，explicit dashboard.sources.taiwan.history-cli-path 指向固定 export_tw_history.py LIST；與 Stocks／Reports 共用 Taiwan Semaphore2。source ordering及同日每個RunID保留，savedStatus與dataState分開，null!=0、UNKNOWN!=NO、WARMING_UP+0不是無異常。保留TWSE／TPEX readiness/completeness/warnings與exactDaily reportId，不自動DETAIL。page.total=null、hasMore／nextOffset原樣、offset ceiling禁用不可呼叫Next；不補gap-date，不推missing／holiday／MISSED／no anomaly，不聲稱跨頁atomic／PIT。
 
-History首次入頁才讀，Refresh／Previous／Next只指定一頁、無polling；latestmatching response wins，離開阻擋stale。新增26shared zh-TW／en keys，現行每locale1,092keys與placeholder parity；locale只held-text更新，range／offset／data／focus不變、不refetch。正式來源讀取0，僅原Stage5frozen2654bytes/hash38c0ad31…精確limit2/offset0重播，原時間與兩筆同日身分保持；不是新formal／installed acceptance。33IDs／status counts19DONE／8PARTIAL／3BACKEND_READY／2NOT_STARTED／1BLOCKED保持，product-tw仍PARTIAL。Taiwan Performance NOT STARTED，broader analytics／portfolio／trading／backtest不在本次。
+History首次入頁才讀，Refresh／Previous／Next只指定一頁、無polling；latestmatching response wins，離開阻擋stale。新增26shared zh-TW／en keys，現行每locale1,092keys與placeholder parity；locale只held-text更新，range／offset／data／focus不變、不refetch。正式來源讀取0，僅原Stage5frozen2654bytes/hash38c0ad31…精確limit2/offset0重播，原時間與兩筆同日身分保持；不是新formal／installed acceptance。33IDs／status counts19DONE／8PARTIAL／3BACKEND_READY／2NOT_STARTED／1BLOCKED保持，product-tw仍PARTIAL。於這次 History / Range consumer Design Sync 時 Taiwan Performance 尚未開始；後續 consumer scope 與 current status 見下節。broader analytics／portfolio／trading／backtest不在本次。
 
 本次 consolidated Design Sync完成；接續已授權 explicit no-ff Git integration與完整Dashboard package部署。Git文件於DS snapshot不預填未知merge／installedSHA；完成後exactimage／backup／configdelta history-cli-path／STOPPED身分由operationalpacket與既有Owner Doc確認。安裝後不啟動或QA。詳見[History Stage](STAGE-TW-HISTORY-RANGE-CONSUMER-V1.md)。
+
+## 21. Taiwan Performance v1：source-separated consumer
+
+Accepted Dashboard consumer `920fdfd8ebc7ca2198eb45cda5b7380a038338a1` reads Taiwan Volume Watch source main `bc9026b70dd3039813e76b69979d8170a3743d78`, whose `tw-observed-performance-v1` contract is deployed. It is a separate subview under the existing Performance page. It adds no primary page, Overview Taiwan metrics or cross-source aggregation; the existing US Performance behavior remains unchanged. Both `product-performance` and `product-tw` remain PARTIAL, with all 33 feature IDs and the existing 19/8/3/2/1 status counts preserved.
+
+The data path is Taiwan Volume Watch fixed `tools/export_tw_observed_performance.py` → `TaiwanPerformanceAdapter` / `TwPerformanceProjection` → no-store `GET /api/tw/performance` → Taiwan subview in `ui/tw-performance.mjs`. The adapter uses `dashboard.sources.taiwan.performance-cli-path`, fixed argv and the existing Stocks-owned two-slot semaphore; `py.exe` selects Python 3.11. The shared bounded process layer caps stdout at 1 MiB and stderr at 64 KiB. Exit 0 is valid for READY/EMPTY; exit 2 is valid for PARTIAL/UNAVAILABLE/ERROR. It does not read Taiwan private SQLite schemas or artifacts.
+
+The API accepts only `startDate`, `endDate`, `limit`, `offset`; real inclusive dates are limited to 366 days, `limit` to 1–50 (default 20) and `offset` to 0–10000 (default 0). Unknown, duplicate, empty or invalid parameters return HTTP 400 before a child starts. Same-day observations from different runs remain distinct and in source order; page total is null and source `hasMore` / `nextOffset` are retained.
+
+Five source-owned horizons (1/3/5/10/20 sessions) retain source dates, closes, returns, due clocks, states, reasons and provenance. Evidence uses current saved official unadjusted closes with a conservative 13:33 Taipei availability clock. Dashboard does not calculate returns or session dates. An invalid reference may retain a visible horizon close with a null return. Reference close is not execution/entry; observed return is not realized P&L. Null is not zero, NOT_YET_DUE is not failure, and PRICE_UNAVAILABLE is not flat return. No aggregate Taiwan win rate, advice, paper trading, backtest, portfolio or trading behavior is added.
+
+Formal compatibility is NOT_CONSUMED and formal reads remain 0. Design Sync is complete; authorized frozen Git/package closeout follows. This design snapshot does not prefill a merge, image or installed SHA. Record the actual closeout identities and exact config delta in the existing operational packet and Owner Docs. See [Taiwan Performance consumer Stage evidence](STAGE-TW-PERFORMANCE-CONSUMER-V1.md).

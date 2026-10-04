@@ -5,7 +5,7 @@ export const primaryPages = Object.freeze({
   automations: [message("nav.automations"), message("page.automations.description")],
   us: [message("nav.usStocks"), message("shell.signals.sec.transactions.partial.slices")],
   tw: [message("nav.twStocks"), message("shell.taiwan.volume.watch.daily.observation")],
-  performance: [message("nav.performance"), message("shell.insider.ai.report")],
+  performance: [message("nav.performance"), message("twPerformance.sourcesNotice")],
   reports: [message("nav.reports"), message("shell.us.insider.all")],
   evidence: [message("nav.evidence"), message("shell.taiwan")],
   settings: [message("nav.settings"), message("shell.dashboard.metadata")]

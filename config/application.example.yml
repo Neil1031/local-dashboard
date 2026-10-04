@@ -10,6 +10,9 @@ dashboard:
       reports-cli-path: ""
       # History LIST only; separate fixed export_tw_history.py path.
       history-cli-path: ""
+      # Source-relative entry: tools/export_tw_observed_performance.py.
+      # Configure its trusted absolute deployed path; never infer it from another CLI.
+      performance-cli-path: ""
       database-path: ""
       output-dir: ""
       timeout-seconds: 10 # 1..30
