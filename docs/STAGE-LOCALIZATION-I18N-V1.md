@@ -1,10 +1,10 @@
-# Dashboard Localization / I18N V1 — implementation evidence
+# Dashboard Localization / I18N V1 — implementation / consolidated Design Sync
 
 ## Goal / scope
 
 將目前九個 Dashboard 產品區域的固定介面文字接上共享 zh-TW / en 語系層，預設繁體中文。範圍為 Overview、Projects viewer chrome、Automations、US Stocks、TW Stocks、Performance、Reports、Data & Evidence、Settings，以及表單、狀態、明細、aria-label、placeholder 與大型 Markdown 提示。
 
-本 Stage 為 implementation only。基準與直接 parent 為 `c269fe720678a045bef9bf328df84bd4dd32b211`；branch 為 `implement/dashboard-i18n-v1`。candidate SHA / draft PR 與完整可重播紀錄由正式 handoff packet 記錄，避免文件自我指涉。
+核准 implementation 的基準與直接 parent 為 `c269fe720678a045bef9bf328df84bd4dd32b211`；branch 為 `implement/dashboard-i18n-v1`。實作 accepted SHA 為 `f960723ddcdeec925ef2e8b40035cd28ac74bae1`，PR #18；本次 Design Sync direct parent 恰為 accepted SHA，runtime／AGENTS bytes凍結。Exact Design Sync／merge／installed identities 由本次 operational packet記錄，避免部署後status-only Git commit。
 
 ## Dependencies / seed verification
 
@@ -26,7 +26,7 @@
 - Known status / reason 顯示人類說明與 exact raw code；unknown future codes 保持原值。Evidence privacy formatter 以 explicit identity/code kind 決定，與翻譯後 label 無關。null / 0、UNKNOWN / NO、PARTIAL / SUCCESS、business FAILED / transport ERROR 的界線不變。
 - report Markdown、公司名、AI reasons/risks、Projects canonical source、配置的 job display names / descriptions / dependency notes、IDs、hashes、timestamps 與 provenance 不翻譯。版本化 job metadata 預設資料保留原樣；en 下仍可見其中原有中文。既有本地日期格式與 timezone 規則保留。
 - `ui/us-stocks.mjs` 是只負責裝配與 subpage state 的 orchestration；source parser `ui/project-design.mjs` 不含本次 chrome 變更。16 個 audited parser/identity/loader functions 與基準內容一致。
-- root `AGENTS.md` 記錄持久 i18n 工程規則；僅本 Stage evidence doc 新增，沒有 Design Sync。
+- root `AGENTS.md` 的持久 i18n 工程規則是已核准 implementation內容；本 Design Sync不改該檔或runtime，只同步 materially applicable canonical docs並重生prototype sample。
 
 ## Gate / done when / Self-QA
 
@@ -46,12 +46,24 @@ Browser tests 包括：zh-TW → en → zh-TW、Settings 真實 selector / reloa
 
 首次 Maven 保留 `maven-first.log` 與 `maven-first-bounded-failure.txt`：既有 `BoundedSourceProcessTest.interruptedReadAlsoKillsConfirmedDescendantAndParent` 在 PID 檔已存在但尚未寫入內容時讀到空字串，NumberFormatException。fixture 使用 Files.writeString，測試只等待 Files.exists，可產生該競態；相同 code/environment 完整 clean verify 重跑全部通過。沒有修改、跳過或弱化該測試。
 
-視覺與 accessibility：兩語系 × 1280/375/320 × 九區，另四種 open dialog；78 PNG，檢查無整頁 overflow、dialog fits viewport、wrap、navigation/buttons、focus。Sol 檢視 representative 桌面與手機畫面；管理的 independent exact-SHA visual review 仍待正式 handoff。
+視覺與 accessibility：兩語系 × 1280/375/320 × 九區，另四種 open dialog；78 PNG，檢查無整頁 overflow、dialog fits viewport、wrap、navigation/buttons、focus。Sol 檢視 representative 桌面與手機畫面；上述 implementation 的 Manager independent exact-SHA review已通過；本次Design Sync仍以exact SHA交管理複查。
 
 Private evidence 根目錄：`F:\AI workspace\local-dashboard-i18n-operations`；最終 screenshots 在 `F:\AI workspace\local-dashboard-i18n-v1\.tools\i18n\visual`。保留 ordinary-final.log、maven-final.log、targeted-final.log、coverage-shell-final.log、parser-and-loader-parity.json、visual-manifest.json、translation-resources.json、protection-before/after/comparison.json 與 final-handoff-packet.json。所有 UI APIs 為 synthetic fixtures / ephemeral loopback；沒有正式 Taiwan/Insider business read 或 production HTTP。
 
-## Boundaries / remaining review
+## Consolidated Design Sync / closeout boundaries
 
-Backend product / source/query/business logic / config 無變更。主要 main 仍在基準且 clean；33 IDs/status counts 仍為 DONE 19、PARTIAL 8、BACKEND_READY 3、NOT_STARTED 2、BLOCKED 1，其餘 0。installed runtime / external home / application.yml / DB / Runner / shortcuts / Scheduler / Google Docs 未被本 Stage 修改。沒有 production start/stop、Design Sync、merge、deployment、Taiwan History / Range 或 Taiwan Performance。
+Localization / i18n v1 實作 `f960723ddcdeec925ef2e8b40035cd28ac74bae1` 已獲 Manager 核准，本次 consolidated Design Sync 完成；main integration／production deployment 由接續的已授權 Gate B／C 執行，完成後成為 deployed cross-cutting capability，最終 exact installed main 與 STOPPED 身分由 operational packet／既有 Owner Docs 確認。Localization 不新增 feature ID；33 stable IDs 與 status counts 保持 DONE 19、PARTIAL 8、BACKEND_READY 3、NOT_STARTED 2、BLOCKED 1，其餘 0。下一 Stage 為 Taiwan History / Range → Taiwan Performance，本次不開始。
 
-此交付狀態為 **READY_FOR_MANAGER_REVIEW — DASHBOARD LOCALIZATION / I18N V1 IMPLEMENTATION**，不是最終產品核准。
+共享 flat resource flow 為 `ui/i18n.mjs` → `ui/locale-zh-TW.mjs`／`ui/locale-en.mjs` → 九個既有 owner-facing UI 區域。每語系 1,066 keys，exact key／named placeholder parity；預設 zh-TW，替代 en。偏好僅存 browser localStorage `local-dashboard.locale.v1`；缺值／無效值／read failure 使用 in-memory zh-TW，write failure 安全退回 zh-TW。沒有 backend locale state、application.yml locale setting、DB locale state或外部翻譯服務。
+
+Dashboard-owned chrome、固定表單／提示／狀態／aria-label／placeholder 使用共享文字層；source-owned report Markdown、company/security names、AI free-text、configured job/display metadata、canonical Project Design body、IDs、hashes、timestamps與provenance保留原值。Known machine codes 可顯示在地化解釋並保留 exact raw code；unknown future codes 仍 raw。翻譯只用 textContent／allowlisted text attributes，不插入 translation HTML。
+
+語系切換只更新 held presentation，保留當前 page／subpage、filters、pagination、open dialogs／details、focus及已載入資料；不 navigate、reload、show/load/refresh、refetch、restart server或改 query／business semantics。Project Design parser／來源內容與 source identity、null／UNKNOWN／PARTIAL等語意保持不變。
+
+部署後每個新增 Dashboard-owned owner-facing UI string 必須使用 common i18n layer；新 key 在同一修改加入 zh-TW／en及相同 named placeholders，UI 修改執行 parity／coverage及相關 browser regression。持久規則見 root `AGENTS.md`。歷史參考 `chore/i18n-seed` 保持 `15e9c5c807ffc11e9039c6c60a68c4373f350a58`；不 merge／rebase／cherry-pick，production canonical是兩份 reviewed `ui/locale-*.mjs`，不是 seed。
+
+Gate A：docs／sample與既有兩份Owner Docs targeted guarded updates；runtime／AGENTS、installed image／external home／config／DB／Runner／shortcuts／Scheduler不動，formal source reads=0。Owner Docs在Gate A分別記錄 ☑ implementation approved、☑ Design Sync、☐ main integration、☐ production deployment；Gate B／C完成後同Doc原地更新四項完成。
+
+Gate B只接受live pre-merge main `c269fe720678a045bef9bf328df84bd4dd32b211`，clean dedicated main worktree明確no-ff，兩parent／tree／refs／PR狀態完整核對。Gate C只從exact merged main clean isolated checkout測試／封裝，完整backup後完整image替換；config delta NONE；isolated synthetic/TEMP QA與正式installed identity分開，post-install僅identity／protection，final STOPPED，不為QA啟動新版，不formal CLI／DB／HTTP／UI驗收。
+
+本文件的221 Node PASS／4 existing opt-in skips、273 Maven PASS、78PNG及其他Self-QA數字是已核准implementation evidence。新的Gate A／C結果由各自operational packet記錄；不將舊capture改稱新observation，不開始History / Range或Taiwan Performance。
