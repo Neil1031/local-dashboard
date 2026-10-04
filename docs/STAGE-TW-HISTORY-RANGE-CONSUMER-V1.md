@@ -66,3 +66,7 @@ Only this new Stage file changes documentation. Canonical PROJECT-DESIGN, README
 Explicit acknowledgement: streamlined-combined-closeout-v1 one-time workflow notice received and understood. This Stage still stops after implementation handoff; existing governance is reused, no new Work/subagent is created, and notice tracking/canonical docs are not changed under this implementation-only scope.
 
 Sol delivers exact SHA / direct parent / branch / draft PR / tests / replay / protection evidence to existing [Dashboard] 管理與初審 with HANDOFF_DELIVERED. Independent final approval, merge, Design Sync, deployment, Taiwan Performance and next Stage remain outside this packet's completion claim.
+
+## Authorized combined closeout
+
+Implementation exacte52a4be passed independent management review and Manager approval. Owner now authorizes material Design Sync directly on e52a4be, no-ff integration with exactmainb384abfe, then isolated exact-merged-main package validation, complete rollback backup, sole history-cli-path config addition, fullimage install and finalSTOPPED. No new formal reads or post-install QA, no status-onlyGitcommit/repackage loop. The original implementation-only boundary above is historical; current closeout adds only these authorized actions. Final merge/package/install/Owner Doc revisions and manifests are recorded outsideGit after actualinstallation. Taiwan Performance NOT STARTED.
