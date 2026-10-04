@@ -1,3 +1,4 @@
+import { englishPage } from './locale-browser.mjs';
 import { test, before, after, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
@@ -21,7 +22,7 @@ before(async()=>{
 });
 after(async()=>{await browser.close();await new Promise(r=>server.close(r));});
 beforeEach(async()=>{
-  page=await browser.newPage();errors=[];requests=[];page.on('pageerror',e=>errors.push(e.message));
+  page=await englishPage(browser);errors=[];requests=[];page.on('pageerror',e=>errors.push(e.message));
   await page.route('**/api/**',r=>{
     const u=new URL(r.request().url());requests.push(u);
     const p=u.pathname==='/api/tw/stocks'?warmingFixture():u.pathname==='/api/reports/tw'?twReportsFixture(u)
@@ -45,10 +46,10 @@ for(const width of [1280,375,320])test(`Taiwan evidence cards/IDs/native details
   });
   await open(width);
   assert.equal(await page.locator('#evidenceSources > article').count(),3);
-  assert.match(await page.locator('#evidenceReadiness').innerText(),/1082[\s\S]*Saved candidates[\s\S]*0[\s\S]*INSUFFICIENT_HISTORY: 1082[\s\S]*WARMING_UP[\s\S]*0 候選不代表沒有異常/);
-  assert.match(await page.locator('#evidenceResponsibility').innerText(),/Pending revalidation total[\s\S]*UNKNOWN[\s\S]*null／UNKNOWN 不是 0/);
-  assert.match(await page.locator('#evidenceWeekly').innerText(),/FAILED[\s\S]*不會抹除可用 Daily/);
-  assert.match(await page.locator('#evidenceDaily').innerText(),/Latest attempt[\s\S]*來源身分未公開[\s\S]*Latest finalized/);
+  assert.match(await page.locator('#evidenceReadiness').innerText(),/1082[\s\S]*Saved candidates[\s\S]*0[\s\S]*INSUFFICIENT_HISTORY.*1082[\s\S]*WARMING_UP[\s\S]*0 candidates does not mean no anomaly/);
+  assert.match(await page.locator('#evidenceResponsibility').innerText(),/Pending revalidation total[\s\S]*UNKNOWN[\s\S]*null\/UNKNOWN does not mean 0/);
+  assert.match(await page.locator('#evidenceWeekly').innerText(),/FAILED[\s\S]*does not erase available Daily/);
+  assert.match(await page.locator('#evidenceDaily').innerText(),/Latest attempt[\s\S]*source identity not disclosed[\s\S]*Latest finalized/);
   assert.match(await page.locator('#evidenceReport-weekly').innerText(),/READY[\s\S]*FAILED/);
   assert.equal(await page.locator('#evidenceView img,#evidenceView script,#evidenceView dialog').count(),0);
   assert.doesNotMatch(await page.locator('#evidenceView').innerText(),/SECRET|private-host|databasePath|999999|stderr/);
@@ -77,16 +78,16 @@ test('valid scope/Weekly/responsibility survive observation=null; latest attempt
 for(const [stocks,daily,weekly]of [['PARTIAL','READY','ERROR'],['UNAVAILABLE','READY','READY'],['COHERENT','PARTIAL','PARTIAL']])test(`browser independent states ${stocks}/${daily}/${weekly}`,async()=>{
   await page.route('**/api/tw/stocks',r=>r.fulfill({contentType:'application/json',body:JSON.stringify(twFixture(null,stocks))}));
   await page.route('**/api/reports/tw?*',r=>{const u=new URL(r.request().url());return r.fulfill({contentType:'application/json',body:JSON.stringify(report(u.searchParams.get('type'),u.searchParams.get('type')==='daily'?daily:weekly))});});
-  await open();for(const [id,state]of [['stocks',stocks],['daily',daily],['weekly',weekly]])assert.match(await page.locator('#evidenceSource-'+id+' .evidence-state').innerText(),new RegExp('^'+state));
+  await open();for(const [id,state]of [['stocks',stocks],['daily',daily],['weekly',weekly]])assert.match(await page.locator('#evidenceSource-'+id+' .evidence-state').innerText(),new RegExp('\\b'+state+'\\b'));
   assert.doesNotMatch(await page.locator('#evidenceView').innerText(),/OVERALL HEALTH|SYSTEM GOOD|TRUST SCORE|READY FOR INVESTMENT/);
 });
-test('LIST empty/unavailable/HTTP failure/null candidate/item warnings/times and privacy remain independent',async()=>{
+test('LIST empty/unavailable/HTTP failure/null candidate/Warnings on the first item of this LIST/times and privacy remain independent',async()=>{
   await page.route('**/api/reports/tw?*',r=>{
     const u=new URL(r.request().url()),p=report(u.searchParams.get('type'),'PARTIAL');
     p.warnings=['SOURCE_PARTIAL'];p.items[0].warnings=['ITEM_WARNING'];if(p.reportType==='DAILY')p.items[0].candidateCount=null;
     p.databasePath='C:\\SECRET';return r.fulfill({contentType:'application/json',body:JSON.stringify(p)});
   });await open();assert.match(await page.locator('#evidenceReport-daily').innerText(),/Candidate count[\s\S]*UNKNOWN/);
-  for(const type of ['daily','weekly']){const text=await page.locator('#evidenceReport-'+type).innerText();assert.match(text,/2026-10-03T10:00:00Z[\s\S]*2026-10-03T09:59:59Z/);assert.match(text,/SOURCE_PARTIAL[\s\S]*item warnings[\s\S]*ITEM_WARNING/);assert.doesNotMatch(text,/SECRET/);}
+  for(const type of ['daily','weekly']){const text=await page.locator('#evidenceReport-'+type).innerText();assert.match(text,/2026-10-03T10:00:00Z[\s\S]*2026-10-03T09:59:59Z/);assert.match(text,/SOURCE_PARTIAL[\s\S]*Warnings on the first item of this LIST[\s\S]*ITEM_WARNING/);assert.doesNotMatch(text,/SECRET/);}
   for(const state of ['EMPTY','UNAVAILABLE','ERROR']){
     await page.route('**/api/reports/tw?*',r=>{const u=new URL(r.request().url());return r.fulfill({contentType:'application/json',body:JSON.stringify(report(u.searchParams.get('type'),state))});});
     await page.locator('#evidenceReload').click();await ready();assert.match(await page.locator('#evidenceReport-daily').innerText(),new RegExp(state));assert.doesNotMatch(await page.locator('#evidenceReport-daily').innerText(),/tw-daily:/);
@@ -124,7 +125,7 @@ test('Wave2 held through refresh waits both old requests; never overlaps three',
 test('leaving pending view prevents late cache/render; Evidence→Stocks/Reports→back uses completed cache only',async()=>{
   await ignoredAbort();let release;const held=new Promise(r=>release=r);let stock=0;
   await page.route('**/api/tw/stocks',async r=>{if(++stock===1)await held;await r.fulfill({contentType:'application/json',body:JSON.stringify(warmingFixture())});});
-  await page.goto(base+'/#evidence');await page.locator('#overviewPage').click();release();await sleepTurn();assert.equal(await page.locator('#evidenceDaily').innerText(),'等待 Stocks 證據。');
+  await page.goto(base+'/#evidence');await page.locator('#overviewPage').click();release();await sleepTurn();assert.equal(await page.locator('#evidenceDaily').innerText(),"Waiting for Stocks evidence.");
   await page.locator('#evidencePage').click();await ready();
   await page.locator('.evidence-links a[href="#tw"]').click();await page.locator('#evidencePage').click();await ready();
   await page.locator('.evidence-links a[href="#reports"]').click();await page.locator('#evidencePage').click();await ready();

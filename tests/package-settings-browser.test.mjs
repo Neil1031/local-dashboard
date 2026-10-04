@@ -1,3 +1,4 @@
+import { englishPage } from './locale-browser.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
@@ -7,7 +8,7 @@ test('packaged settings API and UI apply without collecting tasks', { skip: !pro
   const { chromium } = require('playwright');
   const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL || 'msedge', headless: true });
   try {
-    const page = await browser.newPage({ viewport: { width: 320, height: 900 } });
+    const page = await englishPage(browser, { viewport: { width: 320, height: 900 } });
     let collections = 0;
     await page.route('**/api/jobs', route => {
       collections++;
@@ -20,7 +21,7 @@ test('packaged settings API and UI apply without collecting tasks', { skip: !pro
     await page.locator('#settingsJobs button').filter({ hasText: 'My-New-Task' }).click();
     await page.locator('#settingDisplayName').fill('封裝驗收工作');
     await page.locator('#settingsForm button[type=submit]').click();
-    await page.waitForFunction(() => document.getElementById('settingsMessage').textContent.includes('已儲存'));
+    await page.waitForFunction(() => document.getElementById('settingsMessage').textContent.includes("saved"));
     assert.equal(await page.locator('.job-row .job-name').innerText(), '封裝驗收工作');
     assert.equal(collections, 1);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), true);

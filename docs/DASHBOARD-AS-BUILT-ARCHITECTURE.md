@@ -41,7 +41,7 @@ flowchart LR
   RA -.已驗證的 Runner view.-> O
 ```
 
-**目前限制：** 九頁導覽已實作部分功能；US Stocks 已有 reports Signals／SEC Transactions partial 切片（PARTIAL），Release 2C Ticker Detail source-separated aggregate 已合併 main `44823ab`、已完成核准累積部署；Reports／SEC 分頁／日期／ID 獨立，無 cross-source join；Ticker Detail 尚未整合 Performance。SEC amendments/corrections 不 collapse；來源完整性與完整 4/A reconciliation 尚未驗證。Reports · All／US Insider 在 Release 2D 為 PARTIAL；TW Daily／Weekly 已核准實作，三來源獨立、無 PIT／semantic diff。TW Stocks v1 已通過 Manager 實作核准，`product-tw` 為 PARTIAL、已整合 main bce84c4 並完成核准累積部署；獨立 Performance v1 已核准為 PARTIAL、已整合 main d69ff5ab 並完成核准正式部署；Data & Evidence Taiwan v1 已核准為 PARTIAL，main／部署待後續 gates。Overview 僅涵蓋 operations，不顯示投資 metrics 或完成百分比。`design/prototype/index.html` 仍是獨立靜態設計原型。沒有自動 `MISSED`；Dashboard 不修改 Scheduler task 或正式 Runner config，也不把 correlation 結果寫入資料庫。參照 [`DASHBOARD-DESIGN-SPACE.md`](DASHBOARD-DESIGN-SPACE.md) 時，應將其視為產品設計，勿誤當完整現況畫面。Signals 跨頁非 PIT、無 freshness policy，來源讀失敗保持 unavailable，詳見 [Release 2A](STAGE-RELEASE-2A.md)。
+**目前限制：** 九頁導覽已實作部分功能；US Stocks 已有 reports Signals／SEC Transactions partial 切片（PARTIAL），Release 2C Ticker Detail source-separated aggregate 已合併 main `44823ab`、已完成核准累積部署；Reports／SEC 分頁／日期／ID 獨立，無 cross-source join；Ticker Detail 尚未整合 Performance。SEC amendments/corrections 不 collapse；來源完整性與完整 4/A reconciliation 尚未驗證。Reports · All／US Insider 在 Release 2D 為 PARTIAL；TW Daily／Weekly 已核准實作，三來源獨立、無 PIT／semantic diff。TW Stocks v1 已通過 Manager 實作核准，`product-tw` 為 PARTIAL、已整合 main bce84c4 並完成核准累積部署；獨立 Performance v1 已核准為 PARTIAL、已整合 main d69ff5ab 並完成核准正式部署；Data & Evidence Taiwan v1 已核准為 PARTIAL，main c269fe72整合／前次部署已完成。Overview 僅涵蓋 operations，不顯示投資 metrics 或完成百分比。`design/prototype/index.html` 仍是獨立靜態設計原型。沒有自動 `MISSED`；Dashboard 不修改 Scheduler task 或正式 Runner config，也不把 correlation 結果寫入資料庫。參照 [`DASHBOARD-DESIGN-SPACE.md`](DASHBOARD-DESIGN-SPACE.md) 時，應將其視為產品設計，勿誤當完整現況畫面。Signals 跨頁非 PIT、無 freshness policy，來源讀失敗保持 unavailable，詳見 [Release 2A](STAGE-RELEASE-2A.md)。
 
 ## 2. 啟動、設定與安全停止
 
@@ -300,7 +300,7 @@ All 的 US Insider／TW Daily／TW Weekly 分別呈現狀態、分頁、來源�
 
 ## 18. Taiwan Data & Evidence v1：來源證據第一切片
 
-Taiwan Data & Evidence v1 實作 `04f67e9c41085b7ff196b50eac1ca331251cb2d7` 已獲 Manager 核准；本次 consolidated Design Sync 完成，main integration／production deployment 待後續已授權 gates。只將 `product-evidence` DESIGNED→PARTIAL，33 stable IDs 與其他32 statuses 保留；product-tw／product-reports／product-performance 仍 PARTIAL。Taiwan-only 第一切片不是整個跨來源 Evidence 完成，Schedule Versions／Correlation／Runner aggregation 仍未接入。
+Taiwan Data & Evidence v1 實作 `04f67e9c41085b7ff196b50eac1ca331251cb2d7`、Design Sync `243870a5`、main `c269fe720678a045bef9bf328df84bd4dd32b211` 整合與前次正式部署均已完成；此為既有 closeout 結果，不是本次新增 formal observation或自然使用驗收。只將 `product-evidence` DESIGNED→PARTIAL，33 stable IDs 與其他32 statuses 保留；product-tw／product-reports／product-performance 仍 PARTIAL。Taiwan-only 第一切片不是整個跨來源 Evidence 完成，Schedule Versions／Correlation／Runner aggregation 仍未接入。
 
 Taiwan Volume Watch source-owned `tw-daily-accumulation-v1`／`tw-reports-v1` → 既有 `TaiwanStocksAdapter`／`TwStocksProjection` 與 `TaiwanReportsAdapter`／`TwReportsProjection` → 既有 normalized Dashboard APIs → `ui/evidence.mjs`（重用 `readTwStocks`／`readTwReports`）→ Data & Evidence Taiwan v1。沒有新 source contract／backend adapter／projection，不直讀 Taiwan SQLite／file／private schema；沒有新的 Dashboard persistence／backend cache，沒有 report DETAIL fetch、aggregate health／trust／investment score 或 cross-source atomic／PIT interpretation。
 
@@ -320,6 +320,18 @@ COHERENT != SUCCESS；PARTIAL != SUCCESS；UNKNOWN != NO；null != 0；WARMING_U
 
 本輪沒有新的 formal Taiwan compatibility read。只可重用 frozen normalized captures：Stocks observed `2026-10-02T17:04:23.118012500Z`、selected `2026-10-02`、run `e801318d154a46c88f03858a9b60044c`、PARTIAL；Daily LIST observed `2026-10-03T12:17:45.674272100Z`、READY、`tw-daily:2026-10-02:f93460ffdd3d4ec6a60ce1244ce30d0f`；Weekly LIST observed `2026-10-03T12:17:46.080439900Z`、READY／saved FAILED、`tw-weekly:2026-10-02:510f722b6bcd40c09cee9393594be39e`。Replay 仍標為 SAVED_TEST_EVIDENCE，原始 bytes／時間／狀態／ID 不改，不稱新 observations 或 installed acceptance。
 
-Localization / i18n（zh-TW default、en）→ Taiwan History / Range → Taiwan Performance；localization 尚未實作。完成 i18n Stage 後，所有新增 owner-facing UI 必須使用 common i18n resource layer，不再加入 hard-coded user-visible strings。獨立 `chore/i18n-seed` 分支留給下一 Stage，本次不 merge／consume／touch，也不新增 localization stable feature ID。
+Localization / i18n v1 實作已核准，本次 Design Sync完成；main integration／deployment待接續Gate，完成後為cross-cutting deployed能力。後續順序為Taiwan History / Range → Taiwan Performance，本次不開始。33 IDs／status counts不改，locale／持久工程規則及seed界線見下方Localization章節。
 
 [Stage evidence](STAGE-TW-DATA-EVIDENCE-V1.md) 保留實作與 Self-QA；本 Gate A 不建置／部署／觸碰 installed runtime。
+
+## 19. Localization / i18n v1 as-built presentation contract
+
+Localization / i18n v1 實作 `f960723ddcdeec925ef2e8b40035cd28ac74bae1` 已獲 Manager 核准，本次 consolidated Design Sync 完成；main integration／production deployment 由接續的已授權 Gate B／C 執行，完成後成為 deployed cross-cutting capability，最終 exact installed main 與 STOPPED 身分由 operational packet／既有 Owner Docs 確認。Localization 不新增 feature ID；33 stable IDs 與 status counts 保持 DONE 19、PARTIAL 8、BACKEND_READY 3、NOT_STARTED 2、BLOCKED 1，其餘 0。下一 Stage 為 Taiwan History / Range → Taiwan Performance，本次不開始。
+
+共享 flat resource flow 為 `ui/i18n.mjs` → `ui/locale-zh-TW.mjs`／`ui/locale-en.mjs` → 九個既有 owner-facing UI 區域。每語系 1,066 keys，exact key／named placeholder parity；預設 zh-TW，替代 en。偏好僅存 browser localStorage `local-dashboard.locale.v1`；缺值／無效值／read failure 使用 in-memory zh-TW，write failure 安全退回 zh-TW。沒有 backend locale state、application.yml locale setting、DB locale state或外部翻譯服務。
+
+Dashboard-owned chrome、固定表單／提示／狀態／aria-label／placeholder 使用共享文字層；source-owned report Markdown、company/security names、AI free-text、configured job/display metadata、canonical Project Design body、IDs、hashes、timestamps與provenance保留原值。Known machine codes 可顯示在地化解釋並保留 exact raw code；unknown future codes 仍 raw。翻譯只用 textContent／allowlisted text attributes，不插入 translation HTML。
+
+語系切換只更新 held presentation，保留當前 page／subpage、filters、pagination、open dialogs／details、focus及已載入資料；不 navigate、reload、show/load/refresh、refetch、restart server或改 query／business semantics。Project Design parser／來源內容與 source identity、null／UNKNOWN／PARTIAL等語意保持不變。
+
+部署後每個新增 Dashboard-owned owner-facing UI string 必須使用 common i18n layer；新 key 在同一修改加入 zh-TW／en及相同 named placeholders，UI 修改執行 parity／coverage及相關 browser regression。持久規則見 root `AGENTS.md`。歷史參考 `chore/i18n-seed` 保持 `15e9c5c807ffc11e9039c6c60a68c4373f350a58`；不 merge／rebase／cherry-pick，production canonical是兩份 reviewed `ui/locale-*.mjs`，不是 seed。

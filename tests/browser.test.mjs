@@ -1,3 +1,4 @@
+import { englishPage } from './locale-browser.mjs';
 import { test, before, after, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
@@ -57,7 +58,7 @@ before(async () => {
 after(async () => { await browser?.close(); await new Promise(resolve => server?.close(resolve)); });
 beforeEach(async () => {
   context = await browser.newContext({ viewport: { width: 1280, height: 1000 }, timezoneId: 'Asia/Taipei', locale: 'en-US' });
-  page = await context.newPage();
+  page = await englishPage(context);
   failures = [];
   page.on('pageerror', error => failures.push(error.message));
 });
@@ -88,7 +89,7 @@ test('initial loading, one GET, refresh coalescing, new response, no detail coll
   release();
   await ready();
   assert.equal(count, 1);
-  assert.match(await rows().innerText(), /Current\s+Ready\s+Last run: Success/);
+  assert.match(await rows().innerText(), /Current\s+Ready \(READY\)\s+Last run: Success \(SUCCESS\)/);
   assert.doesNotMatch(await page.locator('body').innerText(), /Today Success|Scheduled today/);
   assert.equal(await page.locator('#count-success').innerText(), '1');
   const firstTime = await page.locator('#refreshTime').innerText();
@@ -149,9 +150,9 @@ test('PARTIAL keeps jobs and all diagnostics visible; text is never HTML', async
     unmatchedIncludes: ['未找到的排程']
   }));
   assert.equal(await rows().count(), 1);
-  assert.match(await page.locator('#collectionNotice').innerText(), /部分排程資訊取得失敗.*PARTIAL/);
+  assert.match(await page.locator('#collectionNotice').innerText(), /Some schedules could not be collected.*PARTIAL/);
   assert.match(await page.locator('#collectionDetails').innerText(), /PERMISSION_DENIED.*秘密.*任務/);
-  assert.match(await page.locator('#collectionDetails').innerText(), /unmatchedIncludes: 未找到的排程/);
+  assert.match(await page.locator('#collectionDetails').innerText(), /Unmatched includes: 未找到的排程/);
   assert.equal(await page.locator('#count-attention').innerText(), '1');
   await rows().click();
   assert.match(await page.locator('#detailGrid').innerText(), /<img/);
@@ -167,7 +168,7 @@ test('history persistence failure retains current jobs and displays its diagnost
       message: 'Current scheduler data is available, but observed execution history could not be saved. Check the server log.' }]
   }));
   assert.equal(await rows().count(), 1);
-  assert.match(await rows().innerText(), /Current\s+Ready\s+Last run: Success/);
+  assert.match(await rows().innerText(), /Current\s+Ready \(READY\)\s+Last run: Success \(SUCCESS\)/);
   assert.match(await page.locator('#collectionDetails').innerText(), /HISTORY_PERSISTENCE_FAILED.*could not be saved/);
   assert.match(await page.locator('#collectionTitle').innerText(), /PARTIAL/);
   await page.locator('#historyTab').click();
@@ -188,7 +189,7 @@ for (const offline of [true, false]) {
     assert.equal(await rows().count(), 0);
     assert.equal(await page.locator('#count-success').innerText(), '—');
     assert.equal(await page.locator('#refreshTime').innerText(), '—');
-    assert.match(await page.locator('#collectionTitle').innerText(), /無法讀取/);
+    assert.match(await page.locator('#collectionTitle').innerText(), /Unable to read/);
     if (!offline) {
       assert.match(await page.locator('#collectionDetails').innerText(), /COLLECTOR_TIMEOUT/);
       await page.screenshot({ path: `${artifactDir}/collector-error.png`, fullPage: true });
@@ -202,7 +203,7 @@ for (const collectionStatus of ['OK', 'NOT_CONFIGURED', 'PARTIAL']) {
     assert.equal(await rows().count(), 0);
     assert.equal(await page.locator('#count-monitored').innerText(), '0');
     assert.match(await page.locator('#collectionTitle').innerText(), new RegExp(collectionStatus));
-    assert.match(await page.locator('#emptyState').innerText(), collectionStatus === 'NOT_CONFIGURED' ? /dashboard.scheduler.include.*config\/application.yml/ : /沒有可顯示/);
+    assert.match(await page.locator('#emptyState').innerText(), collectionStatus === 'NOT_CONFIGURED' ? /dashboard.scheduler.include.*config\/application.yml/ : /No schedules to display/);
   });
 }
 
@@ -212,8 +213,8 @@ test('missing optional job fields show placeholders and preserve UNKNOWN', async
   assert.equal(await rows().locator('.job-name').innerText(), '—');
   await rows().click();
   const values = await page.locator('#detailGrid .detail').evaluateAll(details => Object.fromEntries(details.map(detail => [detail.querySelector('small').textContent, detail.querySelector('strong').textContent])));
-  assert.equal(values['Current status'], 'Unknown');
-  assert.equal(values['Last run status'], 'Unknown');
+  assert.equal(values['Current status'], 'Unknown (UNKNOWN)');
+  assert.equal(values['Last run status'], 'Unknown (UNKNOWN)');
   for (const key of ['Scheduler state', 'Enabled', 'Last run', 'Next run', 'Last task result', 'Result text', 'Description']) assert.equal(values[key], '—');
 });
 
@@ -238,7 +239,7 @@ for (const scenario of ['offline', '503', 'ERROR', 'invalid-json', 'invalid-cont
     assert.equal(await rows().count(), 0);
     assert.equal(await page.locator('#count-success').innerText(), '—');
     assert.equal(await page.locator('#collectionNotice').getAttribute('role'), 'alert');
-    assert.match(await page.locator('#collectionTitle').innerText(), /無法讀取/);
+    assert.match(await page.locator('#collectionTitle').innerText(), /Unable to read/);
     assert.equal(await page.locator('#refreshTime').innerText(), lastRefresh);
     if (['503', 'ERROR'].includes(scenario)) assert.match(await page.locator('#collectionDetails').innerText(), /COLLECTOR_TIMEOUT/);
     await page.locator('#refreshBtn').click();
@@ -282,7 +283,7 @@ test('metadata grouping, dependency details, legacy toggle, unknown fallback and
   const requests = await mock(snapshot(names.map((name, index) => fixtureJob('READY', {
     id: `metadata-${index}`, name, description: unsafe
   }))));
-  assert.deepEqual(await page.locator('.market-group:not(.history-group)').allInnerTexts(), ['台股', '美股', '其他']);
+  assert.deepEqual(await page.locator('.market-group:not(.history-group)').allInnerTexts(), ['TW Stocks', 'US Stocks', 'Other']);
   assert.deepEqual(await rows().evaluateAll(nodes => nodes.map(node => node.querySelector('.job-name').textContent)), [
     '異常成交量每日掃描', '籌碼累積上線檢查 · 2026-09-22', '籌碼累積每週檢查',
     '市場資料更新', '內部人資料同步', 'SEC 內部人交易更新', 'Unknown-Task', unsafe]);
@@ -292,17 +293,17 @@ test('metadata grouping, dependency details, legacy toggle, unknown fallback and
   assert.equal(await page.evaluate(() => window.injected), undefined);
   await page.screenshot({ path: `${artifactDir}/ux1-grouped-desktop.png`, fullPage: true });
   await page.locator('.job-row[data-job="metadata-3"]').click();
-  assert.match(await page.locator('#metadataGrid').innerText(), /台股.*主要資料產生流程.*後續 task.*籌碼累積上線檢查.*籌碼累積每週檢查/s);
+  assert.match(await page.locator('#metadataGrid').innerText(), /台股.*主要資料產生流程.*Downstream tasks.*籌碼累積上線檢查.*籌碼累積每週檢查/s);
   await page.screenshot({ path: `${artifactDir}/ux1-dependencies-drawer.png` });
   await page.keyboard.press('Escape');
   await page.locator('.job-row[data-job="metadata-0"]').click();
-  assert.match(await page.locator('#metadataGrid').innerText(), /美股.*僅顯示順序，非硬依賴/s);
+  assert.match(await page.locator('#metadataGrid').innerText(), /美股.*Display order only; no hard dependency/s);
   await page.keyboard.press('Escape');
   await page.locator('.job-row[data-job="metadata-4"]').click();
   assert.match(await page.locator('#metadataGrid').innerText(), /對應日期 Daily 已產生資料/);
   await page.keyboard.press('Escape');
   await page.locator('.job-row[data-job="metadata-6"]').click();
-  assert.match(await page.locator('#metadataGrid').innerText(), /其他.*<img.*無已設定前置 task/s);
+  assert.match(await page.locator('#metadataGrid').innerText(), /其他.*<img.*No configured prerequisite task/s);
   assert.equal(await page.locator('img').count(), 0);
   await page.keyboard.press('Escape');
   await page.locator('#showLegacy').click();
@@ -315,7 +316,7 @@ test('metadata grouping, dependency details, legacy toggle, unknown fallback and
   await page.waitForFunction(() => document.getElementById('historyView').getAttribute('aria-busy') === 'false');
   assert.equal(await page.locator('.history-row').count(), 9);
   assert.equal(await page.locator('#historyBody .fold-toggle').count(), 0);
-  assert.deepEqual(await page.locator('.history-group').allInnerTexts(), ['台股', '美股', '其他']);
+  assert.deepEqual(await page.locator('.history-group').allInnerTexts(), ['TW Stocks', 'US Stocks', 'Other']);
   await page.locator('#showLegacy').click();
   assert.equal(await page.locator('.history-row').count(), 8);
   assert.equal(requests.filter(request => new URL(request.url).pathname === '/api/jobs').length, 1);
@@ -334,7 +335,7 @@ test('UX-2 folds dated rows, preserves workflow semantics, counts, and History i
     { id: `ux2-${index}`, name }));
   const requests = await mock(snapshot(jobs));
   const today = page.locator('#jobList .job-row:visible');
-  assert.equal(await page.locator('#showLegacy').innerText(), '顯示舊版排程');
+  assert.equal(await page.locator('#showLegacy').innerText(), "Show legacy schedules");
   assert.equal(await page.locator('#count-monitored').innerText(), '10');
   assert.equal(await page.locator('#view-visible').innerText(), '7');
   assert.equal(await page.locator('#view-legacyHidden').innerText(), '1');
@@ -345,11 +346,11 @@ test('UX-2 folds dated rows, preserves workflow semantics, counts, and History i
   assert.equal(await page.locator('#jobList .job-row[data-job="ux2-4"]').isVisible(), true);
   assert.equal(await page.locator('#jobList .fold-toggle').getAttribute('aria-expanded'), 'false');
   const workflow = await page.locator('#workflowView').innerText();
-  assert.match(workflow, /台股流程.*異常成交量每日掃描.*資料前置：異常成交量每日掃描.*籌碼累積每週檢查/s);
-  assert.match(workflow, /可能影響：籌碼累積上線檢查、籌碼累積每週檢查/);
-  assert.match(workflow, /美股流程.*市場資料更新.*獨立追蹤既有訊號.*外部前置：外部 AI 日報已產生並進 Git.*僅顯示順序：內部人資料同步，非硬依賴/s);
-  assert.equal(await page.locator('.workflow-card[data-job="ux2-5"] .status').innerText(), 'Ready');
-  assert.equal(await page.locator('.workflow-card[data-job="ux2-0"] .status').innerText(), 'Failed');
+  assert.match(workflow, /TW Stocks workflow.*異常成交量每日掃描.*Data prerequisite: 異常成交量每日掃描.*籌碼累積每週檢查/s);
+  assert.match(workflow, /may affect: 籌碼累積上線檢查、籌碼累積每週檢查/);
+  assert.match(workflow, /US Stocks workflow.*市場資料更新.*Tracks existing signals independently.*External prerequisite: 外部 AI 日報已產生並進 Git.*Display order only: 內部人資料同步; no hard dependency/s);
+  assert.equal(await page.locator('.workflow-card[data-job="ux2-5"] .status').innerText(), 'Ready (READY)');
+  assert.equal(await page.locator('.workflow-card[data-job="ux2-0"] .status').innerText(), 'Failed (FAILED)');
   await page.locator('.workflow-card[data-job="ux2-5"]').click();
   assert.equal(await page.locator('#drawerTitle').innerText(), '籌碼累積每週檢查');
   await page.keyboard.press('Escape');
@@ -473,7 +474,7 @@ test('Runner drawer shows five bounded executions, conservative evidence, safe t
   for (const width of [320, 375]) { await page.setViewportSize({ width, height: 780 }); await noOverflow(); }
   await page.keyboard.press('Escape');
   await page.locator('.job-row[data-job="no-receipt"]').click();
-  assert.match(await page.locator('#runnerSummary').innerText(), /尚無 Runner 執行紀錄/);
+  assert.match(await page.locator('#runnerSummary').innerText(), /No Runner execution records yet/);
   await page.keyboard.press('Escape');
   await page.locator('.job-row[data-job="unmapped"]').click();
   assert.match(await page.locator('#runnerSummary').innerText(), /Runner mapping: Not configured/);

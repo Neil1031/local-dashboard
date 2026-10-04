@@ -1,3 +1,4 @@
+import { englishPage } from './locale-browser.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
@@ -23,7 +24,7 @@ test('packaged UI renders the actual list response and refreshes once', { skip: 
   }
   const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL || 'msedge', headless: true });
   try {
-    const page = await browser.newPage({ viewport: { width: 1280, height: 1000 }, timezoneId: 'Asia/Taipei' });
+    const page = await englishPage(browser, { viewport: { width: 1280, height: 1000 }, timezoneId: 'Asia/Taipei' });
     const errors = [], requests = [];
     page.on('pageerror', error => errors.push(error.message));
     page.on('request', request => { if (new URL(request.url()).pathname.startsWith('/api/')) requests.push({ url: request.url(), method: request.method() }); });

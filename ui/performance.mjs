@@ -1,3 +1,4 @@
+import { message, t, setText, setAttributeText, codeText, isMessage } from './i18n.mjs';
 export const horizons = Object.freeze(['1d', '1w', '1m', '3m', '6m']);
 export const buckets = Object.freeze(['<85', '85-89', '90-94', '95+', 'UNSCORED']);
 const states = new Set(['READY', 'EMPTY', 'UNAVAILABLE', 'ERROR']);
@@ -9,7 +10,7 @@ const nullableNumber = n => n === null || typeof n === 'number' && Number.isFini
 const time = s => typeof s === 'string' && /(?:Z|[+-]\d\d:\d\d)$/.test(s) && Number.isFinite(Date.parse(s));
 const strings = s => Array.isArray(s) && s.every(x => typeof x === 'string');
 export const percent = n => n === null ? '—' : `${n}%`;
-const value = n => n == null ? '—' : String(n);
+const value = n => isMessage(n) ? n : n == null ? '—' : String(n);
 export function exactTicker(s) {
   if (typeof s !== 'string' || !s || s.length > 256 || /[:\s\x00-\x1f\x7f/\\]/u.test(s)) throw new Error('INVALID_PERFORMANCE_TICKER');
   return s;
@@ -72,14 +73,14 @@ export function readPerformance(p, kind, query) {
 
 export function mountPerformance(document, fetcher = globalThis.fetch.bind(globalThis)) {
   const get = id => document.getElementById(id), dialog = get('performanceDetail');
-  const el = (tag, text, cls) => { const n = document.createElement(tag); if (text != null) n.textContent = String(text); if (cls) n.className = cls; return n; };
-  let active = false, visited = false, horizon = '3m', ticker, offset = 0, revision = 0, detailRevision = 0, controller, detailController, pending = false, detailPending = false, returnFocus;
-  const setStatus = (id, state) => { get(id).textContent = state; get(id).setAttribute('role', state.startsWith('ERROR') || state.startsWith('UNAVAILABLE') ? 'alert' : 'status'); };
-  function clearDetail() { get('performanceFacts').replaceChildren(); get('performanceSnapshots').replaceChildren(); get('performanceDetailSource').textContent = ''; }
+  const el = (tag, text, cls) => { const n = document.createElement(tag); if (text != null) setText(n, text); if (cls) n.className = cls; return n; };
+  let active = false, visited = false, horizon = '3m', ticker, offset = 0, revision = 0, detailRevision = 0, controller, detailController, pending = false, detailPending = false, summaryPending = false, returnFocus;
+  const setStatus = (id, state, rawState = state) => { setText(get(id), isMessage(state) ? state : codeText(state)); get(id).setAttribute('role', ['ERROR', 'UNAVAILABLE'].includes(rawState) ? 'alert' : 'status'); };
+  function clearDetail() { setText(get('performanceFacts'), ''); setText(get('performanceSnapshots'), ''); setText(get('performanceDetailSource'), ''); }
   function closeDetail() { ++detailRevision; detailController?.abort(); detailPending = false; if (dialog.open) dialog.close(); clearDetail(); }
   get('performanceDetailClose').addEventListener('click', closeDetail);
   dialog.addEventListener('close', () => { ++detailRevision; detailController?.abort(); detailPending = false; clearDetail(); if (active && returnFocus?.isConnected) returnFocus.focus(); });
-  const source = p => `Insider AI report Performance · contract v${p.sourceContractVersion} · 本次觀察 ${p.observedAt} · 成功來源觀察 ${value(p.provenance.lastObservedAt)}`;
+  const source = p => message("performance.insider.ai.report.performance.contract.v", { value0: p.sourceContractVersion, value1: p.observedAt, value2: value(p.provenance.lastObservedAt) });
   const facts = (node, pairs) => pairs.forEach(([k, v]) => node.append(el('dt', k), el('dd', value(v))));
   async function fetchData(kind, query, signal) {
     const response = await fetcher(`/api/performance/${kind}?${new URLSearchParams(query)}`, { cache: 'no-store', signal });
@@ -87,62 +88,63 @@ export function mountPerformance(document, fetcher = globalThis.fetch.bind(globa
   }
   async function loadDetail(id) {
     if (!active || !dialog.open || detailPending) return; detailPending = true;
-    const n = ++detailRevision, c = new AbortController(); detailController = c; clearDetail(); setStatus('performanceDetailStatus', 'Loading…'); dialog.setAttribute('aria-busy', 'true');
+    const n = ++detailRevision, c = new AbortController(); detailController = c; clearDetail(); setStatus('performanceDetailStatus', message("common.loading")); dialog.setAttribute('aria-busy', 'true');
     const timer = setTimeout(() => c.abort(), 35000);
     try {
       const p = await fetchData('detail', { signalId: id }, c.signal); if (n !== detailRevision || !active || !dialog.open) return;
-      if (c.signal.aborted) throw new Error(); setStatus('performanceDetailStatus', p.dataState); get('performanceDetailSource').textContent = source(p);
+      if (c.signal.aborted) throw new Error(); setStatus('performanceDetailStatus', p.dataState); setText(get('performanceDetailSource'), source(p));
       if (p.dataState !== 'READY') return; const s = p.signal, f = p.performance;
-      facts(get('performanceFacts'), [['Source signal ID', s.signalId], ['Ticker / company', `${s.ticker} · ${value(s.company)}`], ['Report date', s.reportDate],
-        ['Investment Score · imported_ai_report', s.scores.investment.value], ['Signal Score · imported_ai_report', s.scores.signal.value], ['Discovery', s.discoveredAt], ['Discovery basis', s.discoveryBasis],
-        ['Stored performance', f.status], ['Stored asOf', f.asOf], ['Missing sessions · exact source dates', f.missingSessions.length ? f.missingSessions.join(', ') : '來源未列出缺漏日期'],
-        ['Max upside', percent(f.maxUpsidePct)], ['Max adverse', percent(f.maxAdversePct)], ['Max drawdown', percent(f.maxDrawdownPct)], ['Days to peak', f.daysToPeak],
-        ['Days to first +10%', f.daysToFirst10PctGain], ['Days to first −10%', f.daysToFirst10PctLoss], ['Stored updatedAt', f.updatedAt]]);
+      facts(get('performanceFacts'), [[message("performance.source.signal.id"), s.signalId], [message("performance.ticker.company"), `${s.ticker} · ${value(s.company)}`], [message("performance.report.date"), s.reportDate],
+        [message("performance.investment.score.imported.ai.report"), s.scores.investment.value], [message("performance.signal.score.imported.ai.report"), s.scores.signal.value], [message("performance.discovery"), s.discoveredAt], [message("performance.discovery.basis"), s.discoveryBasis],
+        [message("performance.storedPerformance"), codeText(f.status)], [message("performance.stored.asof"), f.asOf], [message("performance.missing.sessions.exact.source.dates"), f.missingSessions.length ? f.missingSessions.join(', ') : message("performance.wording")],
+        [message("performance.max.upside"), percent(f.maxUpsidePct)], [message("performance.max.adverse"), percent(f.maxAdversePct)], [message("performance.max.drawdown"), percent(f.maxDrawdownPct)], [message("performance.days.to.peak"), f.daysToPeak],
+        [message("performance.days.to.first.10"), f.daysToFirst10PctGain], [message("performance.days.to.first.10.2"), f.daysToFirst10PctLoss], [message("performance.stored.updatedat"), f.updatedAt]]);
       for (const k of snapshotTypes) if (Object.hasOwn(p.snapshots, k)) {
         const s = p.snapshots[k], box = el('section', null, 'performance-snapshot'), dl = el('dl'); box.append(el('h4', k), dl);
-        facts(dl, [['Snapshot at', s.snapshotAt], ['Price', s.price], ['Return from tradable', percent(s.returnFromTradablePct)], ['Return from discovery', percent(s.returnFromDiscoveryPct)],
-          ['Provider', s.provider], ['Price basis', s.priceBasis], ['Created at', s.createdAt]]); get('performanceSnapshots').append(box);
+        facts(dl, [[message("performance.snapshot.at"), s.snapshotAt], [message("performance.price"), s.price], [message("performance.return.from.tradable"), percent(s.returnFromTradablePct)], [message("performance.return.from.discovery"), percent(s.returnFromDiscoveryPct)],
+          [message("performance.provider"), s.provider], [message("performance.price.basis"), s.priceBasis], [message("common.createdAt"), s.createdAt]]); get('performanceSnapshots').append(box);
       }
-      if (!Object.keys(p.snapshots).length) get('performanceSnapshots').append(el('p', '沒有保存的 snapshots。'));
-    } catch { if (n === detailRevision && active && dialog.open) { clearDetail(); setStatus('performanceDetailStatus', 'ERROR · 無法安全取得來源明細。'); } }
+      if (!Object.keys(p.snapshots).length) get('performanceSnapshots').append(el('p', message("performance.noSnapshots")));
+    } catch { if (n === detailRevision && active && dialog.open) { clearDetail(); setStatus('performanceDetailStatus', message("performance.error"), 'ERROR'); } }
     finally { clearTimeout(timer); if (n === detailRevision) { detailPending = false; dialog.setAttribute('aria-busy', 'false'); } }
   }
-  function clearList() { get('performanceRows').replaceChildren(); get('performancePageCount').textContent = ''; get('performanceListSource').textContent = ''; get('performancePrevious').disabled = get('performanceNext').disabled = true; closeDetail(); }
+  function clearList() { setText(get('performanceRows'), ''); setText(get('performancePageCount'), ''); setText(get('performanceListSource'), ''); get('performancePrevious').disabled = get('performanceNext').disabled = true; closeDetail(); }
   function renderSummary(p) {
-    setStatus('performanceSummaryStatus', p.dataState); get('performanceSource').textContent = source(p);
+    setStatus('performanceSummaryStatus', p.dataState); setText(get('performanceSource'), source(p));
     if (!['READY', 'EMPTY'].includes(p.dataState)) return;
     for (const g of p.groups) {
       const card = el('section', null, 'performance-bucket'), dl = el('dl'); card.append(el('h3', g.bucket), dl);
-      facts(dl, [['Signals', g.signals], ['Observed return', g.observed], ['Unobserved return', g.unobserved], ['Average return', percent(g.averageReturnPct)], ['Win rate', percent(g.winRatePct)]]);
+      facts(dl, [[message("us.signals"), g.signals], [message("performance.observed.return"), g.observed], [message("performance.unobserved.return"), g.unobserved], [message("performance.average.return"), percent(g.averageReturnPct)], [message("performance.win.rate"), percent(g.winRatePct)]]);
       get('performanceGroups').append(card);
     }
-    const counts = p.performanceStatusCounts; get('performanceCounts').textContent = `Stored performance: COMPLETE ${counts.complete} · PARTIAL ${counts.partial} · PENDING ${counts.pending} · NOT_COMPUTED ${counts.not_computed}`;
+    const counts = p.performanceStatusCounts; setText(get('performanceCounts'), message("performance.stored.performance.complete.partial.pending.not.computed", { value0: counts.complete, value1: counts.partial, value2: counts.pending, value3: counts.not_computed }));
   }
   function renderList(p) {
-    setStatus('performanceListStatus', p.dataState); get('performanceListSource').textContent = source(p);
+    setStatus('performanceListStatus', p.dataState); setText(get('performanceListSource'), source(p));
     if (!['READY', 'EMPTY'].includes(p.dataState)) return;
     for (const s of p.items) {
-      const card = el('article', null, 'performance-row'), b = el('button', `${s.ticker} · ${s.reportDate} · Signal Detail`, 'performance-open'); b.type = 'button';
+      const card = el('article', null, 'performance-row'), b = el('button', message("performance.signal.detail", { value0: s.ticker, value1: s.reportDate }), 'performance-open'); b.type = 'button';
       b.addEventListener('click', () => { closeDetail(); returnFocus = b; dialog.showModal(); get('performanceDetailClose').focus(); void loadDetail(s.signalId); });
-      const state = !s.horizonObserved ? 'Snapshot absent · return unavailable' : s.snapshot.returnFromTradablePct === null ? 'Snapshot saved / return unavailable' : 'Snapshot saved / observed return';
-      card.append(b, el('p', value(s.company)), el('p', `Investment Score ${value(s.scores.investment.value)} · Signal Score ${value(s.scores.signal.value)} · Imported AI report`),
-        el('p', `Stored performance ${s.performanceStatus} · asOf ${value(s.performanceAsOf)}`), el('p', `${horizon.toUpperCase()} · ${state} · ${percent(s.snapshot?.returnFromTradablePct ?? null)}`));
+      const state = !s.horizonObserved ? message("performance.snapshot.absent.return.unavailable") : s.snapshot.returnFromTradablePct === null ? message("performance.snapshot.saved.return.unavailable") : message("performance.snapshot.saved.observed.return");
+      card.append(b, el('p', value(s.company)), el('p', message("performance.investment.score.signal.score.imported.ai.report", { value0: value(s.scores.investment.value), value1: value(s.scores.signal.value) })),
+        el('p', message("performance.stored.performance.asof", { value0: s.performanceStatus, value1: value(s.performanceAsOf) })), el('p', message("display.wording.3", { value0: horizon.toUpperCase(), value1: state, value2: percent(s.snapshot?.returnFromTradablePct ?? null) })));
       get('performanceRows').append(card);
     }
-    get('performancePageCount').textContent = `本頁 ${p.items.length} 筆 · offset ${offset} · 每頁 20`;
+    setText(get('performancePageCount'), message("performance.offset.20", { value0: p.items.length, value1: offset }));
     get('performancePrevious').disabled = offset === 0; get('performanceNext').disabled = !p.page.hasMore;
   }
   async function load(includeSummary = true, replace = false) {
     if (!active || pending && !replace) return; controller?.abort(); const n = ++revision, c = new AbortController(); controller = c; pending = true; visited = true;
     // Replacing a pending group must also replace its unfinished summary.
-    if (!includeSummary && get('performanceSummaryStatus').textContent === 'Loading…') includeSummary = true;
-    clearList(); setStatus('performanceListStatus', 'Loading…');
-    if (includeSummary) { get('performanceGroups').replaceChildren(); get('performanceCounts').textContent = ''; get('performanceSource').textContent = ''; setStatus('performanceSummaryStatus', 'Loading…'); }
+    if (!includeSummary && summaryPending) includeSummary = true;
+    clearList(); setStatus('performanceListStatus', message("common.loading"));
+    if (includeSummary) { summaryPending = true; setText(get('performanceGroups'), ''); setText(get('performanceCounts'), ''); setText(get('performanceSource'), ''); setStatus('performanceSummaryStatus', message("common.loading")); }
     const query = { horizon, limit: 20, offset }; if (ticker) query.ticker = ticker;
     const timer = setTimeout(() => c.abort(), 35000);
     const read = async(kind, q, render, id) => {
       try { const p = await fetchData(kind, q, c.signal); if (n !== revision || !active) return; if (c.signal.aborted) throw new Error(); render(p); }
-      catch { if (n === revision && active) setStatus(id, 'ERROR · 無法安全取得來源資料。'); }
+      catch { if (n === revision && active) setStatus(id, message("performance.error.2"), 'ERROR'); }
+      finally { if (kind === 'summary' && n === revision) summaryPending = false; }
     };
     try { await Promise.all([read('signals', query, renderList, 'performanceListStatus'), ...(includeSummary ? [read('summary', { horizon }, renderSummary, 'performanceSummaryStatus')] : [])]); }
     finally { clearTimeout(timer); if (n === revision) pending = false; }
@@ -153,13 +155,13 @@ export function mountPerformance(document, fetcher = globalThis.fetch.bind(globa
     document.querySelectorAll('[data-performance-horizon]').forEach(x => x.setAttribute('aria-pressed', String(x === b))); void load(true, true);
   }));
   get('performanceFilter').addEventListener('submit', e => {
-    e.preventDefault(); try { const text = get('performanceTicker').value; ticker = text === '' ? undefined : exactTicker(text); offset = 0; get('performanceValidation').textContent = ''; void load(false, true); }
-    catch { get('performanceValidation').textContent = '請輸入完整 exact ticker；保留大小寫、不去空白。'; }
+    e.preventDefault(); try { const text = get('performanceTicker').value; ticker = text === '' ? undefined : exactTicker(text); offset = 0; setText(get('performanceValidation'), ''); void load(false, true); }
+    catch { setText(get('performanceValidation'), message("performance.exact.ticker")); }
   });
   get('performancePrevious').addEventListener('click', () => { offset = Math.max(0, offset - 20); void load(false); });
   get('performanceNext').addEventListener('click', () => { offset += 20; void load(false); });
   return { show(page) {
     active = page === 'performance'; if (active) { if (!visited) void load(); }
-    else { ++revision; controller?.abort(); if (pending) { visited = false; pending = false; clearList(); get('performanceGroups').replaceChildren(); get('performanceCounts').textContent = ''; } closeDetail(); }
+    else { ++revision; controller?.abort(); if (pending) { visited = false; pending = false; clearList(); setText(get('performanceGroups'), ''); setText(get('performanceCounts'), ''); } closeDetail(); }
   } };
 }

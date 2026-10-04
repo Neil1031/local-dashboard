@@ -1,3 +1,4 @@
+import { message, t, setText, setAttributeText, codeText, isMessage } from './i18n.mjs';
 import { renderMarkdown } from './safe-markdown.mjs';
 
 export const TW_REPORT_TIMEOUT_MS = 35000;
@@ -84,21 +85,21 @@ const shapes = {
   }
 };
 const labels = {
-  scope:'保存的累積範圍',strategyStatus:'策略狀態',sources:'來源完整性',markets:'市場資料',readiness:'資料就緒程度',mappingDiagnostics:'代碼對照診斷',baselineDiagnostics:'基準交易日診斷',candidateSummary:'保存／匯出的候選筆數',candidates:'候選觀察（不是買進建議）',days:'保存的逐日狀態與 binding',problems:'保存的問題',pendingRevalidation:'待補查責任（本次匯出）',unfinishedRuns:'未完成 runs（本次匯出）',sourceAnomalyScore:'Source anomaly score（不是投資分數）',analysisEligible:'Analysis eligibility',provenance:'Source provenance'
+  scope:message("tw-reports.wording"),strategyStatus:message("tw-reports.wording.2"),sources:message("tw-reports.wording.3"),markets:message("tw-reports.wording.4"),readiness:message("tw.readiness"),mappingDiagnostics:message("evidence.mappingState"),baselineDiagnostics:message("tw-reports.wording.5"),candidateSummary:message("tw-reports.wording.6"),candidates:message("tw-reports.wording.7"),days:message("tw-reports.binding"),problems:message("tw-reports.wording.8"),pendingRevalidation:message("tw-reports.wording.9"),unfinishedRuns:message("tw-reports.runs"),sourceAnomalyScore:message("tw-reports.source.anomaly.score"),analysisEligible:message("tw-reports.analysis.eligibility"),provenance:message("evidence.source.provenance")
 };
-const label = key => labels[key] || key.replace(/([a-z])([A-Z])/g,'$1 $2');
-const display = (v,key) => v === null ? key === 'analysisEligible' ? 'null · NOT_APPLICABLE_DAILY_OBSERVATION（不適用）' : 'null（未知，不是 0／NO）' : typeof v === 'boolean' ? String(v) : String(v);
+const label = key => Object.hasOwn(labels, key) ? labels[key] : message(`twFacts.${key}`);
+const display = (v,key) => v === null ? key === 'analysisEligible' ? message("tw-reports.null.not.applicable.daily.observation") : message("common.nullMeaning") : typeof v === 'boolean' ? String(v) : ['state','status','reasonCode','classificationStatus','quoteScopeStatus','coverageStatus','bindingState','savedCollectionStatus'].includes(key) ? codeText(String(v)) : String(v);
 export function mountTwReports(document, fetcher = globalThis.fetch.bind(globalThis)) {
   const get = id => document.getElementById(id), dialog = get('twReportDetail');
-  const element = (tag,text,cls) => { const n=document.createElement(tag);if(text!=null)n.textContent=String(text);if(cls)n.className=cls;return n; };
+  const element = (tag,text,cls) => { const n=document.createElement(tag);if(text!=null)setText(n, text);if(cls)n.className=cls;return n; };
   const sections = new Map(['daily','weekly'].map(type => [type,{type,root:get(`twReports-${type}`),query:{type,limit:20,offset:0},revision:0,controller:null,pending:null}]));
   let active=false,current='all',detailRevision=0,detailController,detailId,detailPending,returnFocus;
   const visible = s => active && (current === 'all' || current === `tw-${s.type}`);
-  const messages={READY:'READY · 保存來源可讀取',PARTIAL:'PARTIAL · 保存來源有缺口，仍保留可驗證事實',EMPTY:'EMPTY · 此 bounded page 沒有報告',UNAVAILABLE:'UNAVAILABLE · 來源未設定或目前無法唯讀讀取',ERROR:'ERROR · 來源回應無法安全解析'};
-  function status(node,state) { node.textContent=messages[state]||state;node.setAttribute('role',['ERROR','UNAVAILABLE'].includes(state)?'alert':'status'); }
-  function source(p) { return `Taiwan Volume Watch · ${p.reportType} · tw-reports-v1 · ${p.provenance} · 本次觀察 ${p.observedAt} · 來源產生 ${display(p.generatedAt)}`; }
+  const messages={READY:message("tw-reports.ready"),PARTIAL:message("tw-reports.partial"),EMPTY:message("tw-reports.empty.bounded.page"),UNAVAILABLE:message("tw-reports.unavailable"),ERROR:message("tw-reports.error")};
+  function status(node,state) { setText(node, messages[state]||state);node.setAttribute('role',['ERROR','UNAVAILABLE'].includes(state)?'alert':'status'); }
+  function source(p) { return message("tw-reports.taiwan.volume.watch.tw.reports.v1", { value0: p.reportType, value1: p.provenance, value2: p.observedAt, value3: display(p.generatedAt) }); }
   function warnings(node,items) { node.replaceChildren(...items.map(v=>element('li',v))); }
-  function clearDetail() { for(const id of ['twReportMetadata','twReportFacts','twReportBody','twReportWarnings','twReportSource'])get(id).replaceChildren(); }
+  function clearDetail() { for(const id of ['twReportMetadata','twReportFacts','twReportBody','twReportWarnings','twReportSource'])setText(get(id), ''); }
   function cancelDetail() { ++detailRevision;detailController?.abort();detailPending=null;dialog.setAttribute('aria-busy','false'); }
   function closeDetail() { cancelDetail();clearDetail();if(dialog.open)dialog.close(); }
   get('twReportClose').addEventListener('click',closeDetail);
@@ -107,58 +108,58 @@ export function mountTwReports(document, fetcher = globalThis.fetch.bind(globalT
     const entries=Array.isArray(shape)?shape.map(k=>[k,null]):Object.entries(shape);
     for(const [key,child] of entries) {
       if(!Object.hasOwn(obj,key))continue;const v=obj[key],section=element('section',null,'tw-fact-section');section.append(element('h4',label(key)));
-      if(v===null || child===null) section.append(element('p',Array.isArray(v)? v.length ? v.map(x=>display(x,key)).join(', ') : '0 筆（保存事實）' : display(v,key)));
+      if(v===null || child===null) section.append(element('p',Array.isArray(v)? v.length ? v.map(x=>display(x,key)).join(', ') : message("tw-reports.0") : display(v,key)));
       else if(Array.isArray(child) && typeof child[0]!=='string') {
-        section.append(element('p',`本次匯出 ${v.length} 筆`));for(const row of v){const dl=element('div',null,'tw-fact-record');facts(dl,row,child[0]);section.append(dl);}
+        section.append(element('p',message("tw-reports.wording.10", { value0: v.length })));for(const row of v){const dl=element('div',null,'tw-fact-record');facts(dl,row,child[0]);section.append(dl);}
       } else facts(section,v,child);
       node.append(section);
     }
   }
   function metadata(node,r) {
-    const pairs=r.reportType==='DAILY'?[['日期','targetDate'],['Source report ID','reportId'],['Accumulation run ID','accumulationRunId'],['保存業務狀態','status'],['Classification','classificationStatus'],['候選數（保存）','candidateCount'],['保存時間','savedAt']]:[['Week start','weekStart'],['Week end','weekEnd'],['Source report ID','reportId'],['Check run ID','checkRunId'],['保存週檢狀態','status'],['問題總數（保存）','problemCount'],['待補查總數（保存）','pendingRevalidationCount'],['未完成總數（保存）','unfinishedRunCount'],['檢查時間','checkedAt']];
+    const pairs=r.reportType==='DAILY'?[[message("tw-reports.wording.11"),'targetDate'],[message("reports.source.report.id"),'reportId'],[message("evidence.accumulation.run.id"),'accumulationRunId'],[message("evidence.wording.9"),'status'],[message("evidence.classification"),'classificationStatus'],[message("tw-reports.wording.12"),'candidateCount'],[message("common.savedAt"),'savedAt']]:[[message("evidence.week.start"),'weekStart'],[message("evidence.week.end"),'weekEnd'],[message("reports.source.report.id"),'reportId'],[message("evidence.check.run.id"),'checkRunId'],[message("tw-reports.wording.13"),'status'],[message("tw-reports.wording.14"),'problemCount'],[message("tw-reports.wording.15"),'pendingRevalidationCount'],[message("tw-reports.wording.16"),'unfinishedRunCount'],[message("tw-reports.wording.17"),'checkedAt']];
     for(const [name,key] of pairs)node.append(element('dt',name),element('dd',display(r[key],key)));
-    if(r.reportType==='WEEKLY')for(const [key,n]of Object.entries(r.dayStatusCounts))node.append(element('dt',`Day ${key}`),element('dd',n));
+    if(r.reportType==='WEEKLY')for(const [key,n]of Object.entries(r.dayStatusCounts))node.append(element('dt',message("tw-reports.day", { value0: key })),element('dd',n));
   }
   async function loadDetail(force = false) {
     if(!active||!dialog.open||!detailId)return;
     if(!force && detailPending===detailId)return;
-    cancelDetail();const id=detailId,revision=++detailRevision,controller=new AbortController();detailController=controller;detailPending=id;clearDetail();dialog.setAttribute('aria-busy','true');status(get('twReportStatus'),'Loading Taiwan report…');
+    cancelDetail();const id=detailId,revision=++detailRevision,controller=new AbortController();detailController=controller;detailPending=id;clearDetail();dialog.setAttribute('aria-busy','true');status(get('twReportStatus'),message("tw-reports.loading.taiwan.report"));
     const timer=setTimeout(()=>controller.abort(),TW_REPORT_TIMEOUT_MS);
     try {
       const response=await fetcher(`/api/reports/tw/detail?${new URLSearchParams({reportId:id})}`,{cache:'no-store',signal:controller.signal});if(!response.ok)throw new Error();
       const p=readTwReportDetail(await response.json(),id);if(revision!==detailRevision||!active||!dialog.open||id!==detailId)return;if(controller.signal.aborted)throw new Error();
-      status(get('twReportStatus'),p.dataState);get('twReportSource').textContent=source(p);warnings(get('twReportWarnings'),p.warnings);
+      status(get('twReportStatus'),p.dataState);setText(get('twReportSource'), source(p));warnings(get('twReportWarnings'),p.warnings);
       if(!p.report)return;metadata(get('twReportMetadata'),p.report);facts(get('twReportFacts'),p.report.facts,shapes[p.reportType]);renderMarkdown(document,get('twReportBody'),p.report.markdown);
-      if(p.report.bodyTruncated)get('twReportBody').prepend(element('p','BODY_TRUNCATED · 來源 Markdown 已截斷；上方結構化事實仍是 machine truth。'));
+      if(p.report.bodyTruncated)get('twReportBody').prepend(element('p',message("tw-reports.body.truncated.markdown.machine.truth")));
     } catch {if(revision===detailRevision&&active&&dialog.open){clearDetail();status(get('twReportStatus'),'ERROR');}}
     finally{clearTimeout(timer);if(revision===detailRevision){detailPending=null;dialog.setAttribute('aria-busy','false');}}
   }
   function openDetail(item,opener) {
-    cancelDetail();clearDetail();returnFocus=opener;detailId=item.reportId;get('twReportTitle').textContent=`TW ${item.reportType==='DAILY'?'Daily':'Weekly'} · ${item.effectiveDate}`;if(!dialog.open)dialog.showModal();get('twReportClose').focus();void loadDetail();
+    cancelDetail();clearDetail();returnFocus=opener;detailId=item.reportId;setText(get('twReportTitle'), message('reports.twDetailTitle', { type: item.reportType === 'DAILY' ? message('tw-reports.daily') : message('tw-reports.weekly'), date: item.effectiveDate }));if(!dialog.open)dialog.showModal();get('twReportClose').focus();void loadDetail();
   }
-  function clearList(s) { for(const key of ['Rows','Source','Warnings','Page'])get(`tw${s.type}-${key}`).replaceChildren();get(`tw${s.type}-Previous`).disabled=s.query.offset===0;get(`tw${s.type}-Next`).disabled=true; }
+  function clearList(s) { for(const key of ['Rows','Source','Warnings','Page'])setText(get(`tw${s.type}-${key}`), '');get(`tw${s.type}-Previous`).disabled=s.query.offset===0;get(`tw${s.type}-Next`).disabled=true; }
   function cancelList(s) {++s.revision;s.controller?.abort();s.pending=null;s.root.setAttribute('aria-busy','false');}
   async function loadList(s, force = false) {
     if(!visible(s))return;const query={...s.query},key=JSON.stringify(query);if(!force && s.pending===key)return;
-    cancelList(s);if(dialog.open&&detailId?.startsWith(`tw-${s.type}:`))closeDetail();const revision=++s.revision,controller=new AbortController();s.controller=controller;s.pending=key;clearList(s);s.root.setAttribute('aria-busy','true');status(get(`tw${s.type}-Status`),'Loading Taiwan reports…');
+    cancelList(s);if(dialog.open&&detailId?.startsWith(`tw-${s.type}:`))closeDetail();const revision=++s.revision,controller=new AbortController();s.controller=controller;s.pending=key;clearList(s);s.root.setAttribute('aria-busy','true');status(get(`tw${s.type}-Status`),message("tw-reports.loading.taiwan.reports"));
     const timer=setTimeout(()=>controller.abort(),TW_REPORT_TIMEOUT_MS);
     try {
       const response=await fetcher(`/api/reports/tw?${new URLSearchParams(query)}`,{cache:'no-store',signal:controller.signal});if(!response.ok)throw new Error();const p=readTwReports(await response.json(),query);
-      if(revision!==s.revision||!visible(s))return;if(controller.signal.aborted)throw new Error();status(get(`tw${s.type}-Status`),p.dataState);get(`tw${s.type}-Source`).textContent=source(p);warnings(get(`tw${s.type}-Warnings`),p.warnings);
+      if(revision!==s.revision||!visible(s))return;if(controller.signal.aborted)throw new Error();status(get(`tw${s.type}-Status`),p.dataState);setText(get(`tw${s.type}-Source`), source(p));warnings(get(`tw${s.type}-Warnings`),p.warnings);
       get(`tw${s.type}-Rows`).replaceChildren(...p.items.map(item=>{
-        const card=element('article',null,'signal-card tw-report-card'),button=element('button',s.type==='daily'?item.targetDate:`${item.weekStart} → ${item.weekEnd}`,'signal-open tw-report-open');button.type='button';button.addEventListener('click',()=>openDetail(item,button));const dl=element('dl',null,'signal-facts');metadata(dl,item);card.append(element('p',`Taiwan Volume Watch · TW ${s.type==='daily'?'Daily':'Weekly'}`,'eyebrow'),button,dl);
-        if(s.type==='daily'&&item.classificationStatus==='WARMING_UP')card.append(element('p','WARMING_UP · 0 候選不代表沒有異常。','tw-report-limit'));
+        const card=element('article',null,'signal-card tw-report-card'),button=element('button',s.type==='daily'?item.targetDate:`${item.weekStart} → ${item.weekEnd}`,'signal-open tw-report-open');button.type='button';button.addEventListener('click',()=>openDetail(item,button));const dl=element('dl',null,'signal-facts');metadata(dl,item);card.append(element('p',message("tw-reports.taiwan.volume.watch.tw", { value0: s.type==='daily'?message("tw-reports.daily"):message("tw-reports.weekly") }),'eyebrow'),button,dl);
+        if(s.type==='daily'&&item.classificationStatus==='WARMING_UP')card.append(element('p',message("tw-reports.warming.up.0"),'tw-report-limit'));
         const w=element('ul');warnings(w,item.warnings);card.append(w);return card;
       }));
-      get(`tw${s.type}-Page`).textContent=`本頁 ${p.items.length} 筆 · offset ${query.offset} · 每頁 ${query.limit} · 總數未知；不是完整歷史／PIT snapshot。`;
+      setText(get(`tw${s.type}-Page`), message("tw-reports.offset.pit.snapshot", { value0: p.items.length, value1: query.offset, value2: query.limit }));
       get(`tw${s.type}-Previous`).disabled=query.offset===0||!usable(p.dataState);get(`tw${s.type}-Next`).disabled=!p.page?.hasMore||p.page.nextOffset===null;
-      if(p.page?.hasMore&&p.page.nextOffset===null)get(`tw${s.type}-Page`).append(element('span',' 已達查詢邊界。'));
+      if(p.page?.hasMore&&p.page.nextOffset===null)get(`tw${s.type}-Page`).append(element('span',message("tw-reports.wording.18")));
     } catch {if(revision===s.revision&&visible(s)){clearList(s);status(get(`tw${s.type}-Status`),'ERROR');get(`tw${s.type}-Previous`).disabled=true;}}
     finally{clearTimeout(timer);if(revision===s.revision){s.pending=null;s.root.setAttribute('aria-busy','false');}}
   }
   for(const s of sections.values()) {
     get(`tw${s.type}-Reload`).addEventListener('click',()=>void loadList(s, true));
-    for(const direction of ['Previous','Next'])get(`tw${s.type}-${direction}`).addEventListener('click',()=>{const offset=s.query.offset+(direction==='Next'?1:-1)*s.query.limit;if(offset<0||offset>10000)return;s.query={...s.query,offset};void loadList(s);});
+    for(const direction of ["Previous",'Next'])get(`tw${s.type}-${direction}`).addEventListener('click',()=>{const offset=s.query.offset+(direction==='Next'?1:-1)*s.query.limit;if(offset<0||offset>10000)return;s.query={...s.query,offset};void loadList(s);});
   }
   get('twReportReload').addEventListener('click',()=>void loadDetail(true));
   return {

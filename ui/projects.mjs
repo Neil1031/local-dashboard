@@ -1,11 +1,12 @@
+import { message, t, setText, setAttributeText, codeText, isMessage } from './i18n.mjs';
 import { parseProjectDesign, featureCounts, MAX_DESIGN_BYTES, ProjectDesignError } from './project-design.mjs';
 export const PROJECT_SOURCE = '/project-design/PROJECT-DESIGN.md';
 const messages = {
-  MISSING: '找不到本次建置的專案設計檔。請確認建置資源後重試。',
-  INVALID_FORMAT: '專案設計格式錯誤，無法確認功能與狀態。',
-  UNSUPPORTED_VERSION: '此專案設計版本尚未支援，請使用支援 version 1 的建置。',
-  TOO_LARGE: '專案設計超過 256 KiB 讀取上限。',
-  UNAVAILABLE: '目前無法讀取專案設計，請確認本機服務後重試。'
+  MISSING: message("projects.error.MISSING"),
+  INVALID_FORMAT: message("projects.error.INVALID_FORMAT"),
+  UNSUPPORTED_VERSION: message("projects.version.1"),
+  TOO_LARGE: message("projects.error.TOO_LARGE"),
+  UNAVAILABLE: message("projects.error.UNAVAILABLE")
 };
 // Fixed same-origin URL; no caller-supplied path or external source.
 export async function loadProjectDesign(fetchSource = globalThis.fetch.bind(globalThis), { signal, timeoutMs = 10000 } = {}) {
@@ -59,19 +60,19 @@ export function mountProjects(document, fetchSource) {
   const element = (tag, className, text) => {
     const node = document.createElement(tag);
     node.className = className;
-    if (text !== undefined) node.textContent = text;
+    if (text !== undefined) setText(node, text);
     return node;
   };
   function render({ model, digest, readAt }) {
     const meta = model.metadata;
-    get('projectIdentity').textContent = `${meta.project_name} · ${meta.overall_status}`;
-    get('projectPurpose').textContent = meta.purpose;
-    get('projectReadInfo').textContent = `docs/PROJECT-DESIGN.md · 設計版本 ${meta.design_version} · 本次讀取 ${readAt}`;
+    setText(get('projectIdentity'), message("display.wording.4", { value0: meta.project_name, value1: meta.overall_status }));
+    setText(get('projectPurpose'), meta.purpose);
+    setText(get('projectReadInfo'), message("projects.docs.project.design.md", { value0: meta.design_version, value1: readAt }));
     const info = get('projectSourceInfo');
     info.replaceChildren();
-    for (const [name, value] of [['來源', 'docs/PROJECT-DESIGN.md'], ['Repository', meta.repository],
-      ['設計版本', String(meta.design_version)], ['設計盤點日期', meta.last_reviewed_at],
-      ['歷史盤點 baseline（非本次實作 SHA）', meta.baseline_commit], ['來源 SHA-256', digest], ['本次讀取時間', readAt]]) {
+    for (const [name, value] of [[message("common.source"), 'docs/PROJECT-DESIGN.md'], [message("projects.repository"), meta.repository],
+      [message("projects.designVersion"), String(meta.design_version)], [message("projects.reviewDate"), meta.last_reviewed_at],
+      [message("projects.baseline"), meta.baseline_commit], [message("projects.sha256"), digest], [message("projects.readAt"), readAt]]) {
       info.append(element('dt', '', name), element('dd', '', value));
     }
     get('projectCounts').replaceChildren(...Object.entries(featureCounts(model.features)).map(([status, count]) => {
@@ -88,15 +89,15 @@ export function mountProjects(document, fetchSource) {
       name.append(element('code', '', feature.id), element('strong', '', feature.name));
       title.append(name, element('span', 'project-status', feature.status));
       const content = element('dl', 'project-feature-content');
-      for (const [label, value] of [['領域', feature.area], ['原始目的', feature.originalIntent],
-        ['目前實作', feature.implementation], ['目前限制', feature.limitation],
-        ['剩餘工作', feature.remaining], ['工程參考', feature.evidence]]) {
+      for (const [label, value] of [[message("projects.area"), feature.area], [message("projects.originalIntent"), feature.originalIntent],
+        [message("projects.implementation"), feature.implementation], [message("projects.limitation"), feature.limitation],
+        [message("projects.remaining"), feature.remaining], [message("projects.engineeringReference"), feature.evidence]]) {
         content.append(element('dt', '', label), element('dd', '', value));
       }
       card.append(title, content);
       return card;
     }));
-    get('projectsStatus').textContent = `已讀取 ${model.features.length} 項功能；狀態是工程設計記錄，不代表重新驗收或部署。`;
+    setText(get('projectsStatus'), message("projects.wording", { value0: model.features.length }));
     get('projectsData').hidden = false;
   }
   async function reload() {
@@ -105,10 +106,10 @@ export function mountProjects(document, fetchSource) {
     phase = 'loading';
     get('projectsView').setAttribute('aria-busy', 'true');
     get('projectsData').hidden = true;
-    for (const id of ['projectCounts', 'projectFeatures', 'projectSourceInfo']) get(id).replaceChildren();
-    get('projectIdentity').textContent = ''; get('projectPurpose').textContent = ''; get('projectReadInfo').textContent = '';
+    for (const id of ['projectCounts', 'projectFeatures', 'projectSourceInfo']) setText(get(id), '');
+    setText(get('projectIdentity'), ''); setText(get('projectPurpose'), ''); setText(get('projectReadInfo'), '');
     get('projectsStatus').setAttribute('role', 'status');
-    get('projectsStatus').textContent = '正在讀取本次建置的專案設計…';
+    setText(get('projectsStatus'), message("projects.loading"));
     get('projectsRetry').disabled = true;
     try {
       const result = await loadProjectDesign(fetchSource, { signal: pending.signal });
@@ -118,7 +119,7 @@ export function mountProjects(document, fetchSource) {
       if (current !== revision) return;
       phase = 'error';
       get('projectsStatus').setAttribute('role', 'alert');
-      get('projectsStatus').textContent = `${messages[error.code] ?? messages.UNAVAILABLE} [${error.code ?? 'UNAVAILABLE'}]`;
+      setText(get('projectsStatus'), message("common.codeLabel", { label: messages[error.code] ?? messages.UNAVAILABLE, code: error.code ?? "UNAVAILABLE" }));
     } finally {
       if (current === revision) {
         get('projectsView').setAttribute('aria-busy', 'false');

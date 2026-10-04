@@ -1,3 +1,4 @@
+import { englishPage } from './locale-browser.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
@@ -10,7 +11,7 @@ test('bootstrapped packaged UI shows current Chinese aliases with original sched
     const { chromium } = require('playwright');
     const browser = await chromium.launch({ channel: 'msedge', headless: true });
     try {
-      const page = await browser.newPage();
+      const page = await englishPage(browser);
       const errors = [];
       page.on('pageerror', error => errors.push(error.message));
       const [response] = await Promise.all([

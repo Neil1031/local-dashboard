@@ -1,8 +1,9 @@
+import { message, t, setText, setAttributeText, codeText, isMessage } from './i18n.mjs';
 // SEC transaction facts only; no report joins, scoring or amendment reconciliation.
 const states = new Set(['READY', 'EMPTY', 'UNAVAILABLE', 'ERROR']);
-const value = v => v == null || v === '' ? '—' : String(v);
-const boolean = v => v == null ? '—' : v ? '是' : '否';
-const candidate = v => v === true ? 'Candidate / 尚未認證' : '來源未標示候選；不代表已認證';
+const value = v => isMessage(v) ? v : v == null || v === '' ? '—' : String(v);
+const boolean = v => v == null ? '—' : v ? message("common.yes") : message("common.no");
+const candidate = v => v === true ? message("us-sec-transactions.candidate") : message("us-sec-transactions.wording");
 export function readSecTransactions(payload, query) {
   const invalid = () => { throw new Error('INVALID_SEC_TRANSACTIONS_RESPONSE'); };
   if (payload?.contractVersion !== 1 || !states.has(payload.dataState) || !Array.isArray(payload.items)
@@ -39,7 +40,7 @@ export function createSecTransactionsView(document, get = id => document.getElem
   const dialog = get('secDetail');
   let returnFocus;
   function element(tag, text, className) {
-    const node = document.createElement(tag); if (text != null) node.textContent = String(text);
+    const node = document.createElement(tag); if (text != null) setText(node, text);
     if (className) node.className = className; return node;
   }
   function fact(list, label, data) { list.append(element('dt', label), element('dd', value(data))); }
@@ -47,62 +48,62 @@ export function createSecTransactionsView(document, get = id => document.getElem
   dialog.addEventListener('close', () => { if (returnFocus?.isConnected) returnFocus.focus(); });
   get('secDetailClose').addEventListener('click', close);
   function detail(item, trigger) {
-    returnFocus = trigger; get('secDetailTitle').textContent = `${value(item.ticker)} · ${value(item.company)}`;
+    returnFocus = trigger; setText(get('secDetailTitle'), message("display.wording.4", { value0: value(item.ticker), value1: value(item.company) }));
     const body = get('secDetailBody'); body.replaceChildren();
-    body.append(element('p', 'Partial slice：P code 與 Candidate 均尚未認證。Form 4/A amendments/corrections 未對帳，不合併或刪除來源列。', 'signal-prose'));
+    body.append(element('p', message("us-sec-transactions.partial.slice.p.code.candidate.form.4.a.amendments.corrections"), 'signal-prose'));
     const facts = element('dl', null, 'signal-facts');
-    for (const [label, data] of [['來源位置 ID · 非 immutable business-event ID', item.signalId], ['Transaction index', item.transactionIndex],
-      ['Transaction date · 交易日', item.eventDate], ['Filing date · 申報日', item.filingDate], ['Filing accepted time', item.filingAcceptedAt],
-      ['Local discovered time', item.discoveredAt], ['Discovery basis', item.discoveryBasis], ['Recorded at', item.recordedAt], ['Updated at', item.updatedAt],
-      ['Code · P 不代表已認證買進', item.transactionCode], ['Security type', item.securityType], ['Security title', item.securityTitle],
-      ['Acquired / disposed', item.acquiredDisposed], ['Shares', item.shares], ['Insider execution price · 非策略進場價', item.insiderExecutionPrice],
-      ['Transaction amount', item.transactionAmount], ['Ownership after', item.ownershipAfter], ['Ownership increase %', item.ownershipIncreasePct],
-      ['Direct / indirect', item.isDirect == null ? '—' : item.isDirect ? 'Direct' : 'Indirect'], ['10b5-1 · 來源狀態', boolean(item.is10b51)],
-      ['Candidate open-market flag', candidate(item.candidateOpenMarketPurchase)], ['Review required', boolean(item.reviewRequired)],
-      ['Filing-date source', item.filingDateSource], ['Filing-date metadata observed / updated at', item.filingDateMetadataUpdatedAt]]) fact(facts, label, data);
-    body.append(facts, element('h3', 'Reporting owners · 全部來源列'));
+    for (const [label, data] of [[message("us-sec-transactions.id.immutable.business.event.id"), item.signalId], [message("us-sec-transactions.transaction.index"), item.transactionIndex],
+      [message("us-sec-transactions.transaction.date"), item.eventDate], [message("us-sec-transactions.filing.date"), item.filingDate], [message("us-sec-transactions.filing.accepted.time"), item.filingAcceptedAt],
+      [message("us-sec-transactions.local.discovered.time"), item.discoveredAt], [message("performance.discovery.basis"), item.discoveryBasis], [message("us-sec-transactions.recorded.at"), item.recordedAt], [message("common.updatedAt"), item.updatedAt],
+      [message("us-sec-transactions.code.p"), item.transactionCode], [message("us-sec-transactions.security.type"), item.securityType], [message("us-sec-transactions.security.title"), item.securityTitle],
+      [message("us-sec-transactions.acquired.disposed"), item.acquiredDisposed], [message("us-sec-transactions.shares"), item.shares], [message("us-sec-transactions.insider.execution.price"), item.insiderExecutionPrice],
+      [message("us-sec-transactions.transaction.amount"), item.transactionAmount], [message("us-sec-transactions.ownership.after"), item.ownershipAfter], [message("us-sec-transactions.ownership.increase"), item.ownershipIncreasePct],
+      [message("us-sec-transactions.direct.indirect"), item.isDirect == null ? '—' : item.isDirect ? message("us-sec-transactions.direct") : message("us-sec-transactions.indirect")], [message("us-sec-transactions.10b5.1"), boolean(item.is10b51)],
+      [message("us-sec-transactions.candidate.open.market.flag"), candidate(item.candidateOpenMarketPurchase)], [message("us-sec-transactions.review.required"), boolean(item.reviewRequired)],
+      [message("us-sec-transactions.filing.date.source"), item.filingDateSource], [message("us-sec-transactions.filing.date.metadata.observed.updated.at"), item.filingDateMetadataUpdatedAt]]) fact(facts, label, data);
+    body.append(facts, element('h3', message("us-sec-transactions.reporting.owners")));
     for (const owner of item.reportingOwners) {
       const list = element('dl', null, 'signal-facts');
-      for (const [label, data] of [['Name', owner.name], ['CIK', owner.cik], ['Roles', owner.roles.join(' · ') || null]]) fact(list, label, data);
+      for (const [label, data] of [[message("us-sec-transactions.name"), owner.name], ['CIK', owner.cik], [message("us-sec-transactions.roles"), owner.roles.join(' · ') || null]]) fact(list, label, data);
       body.append(list);
     }
-    if (!item.reportingOwners.length) body.append(element('p', '來源未列出 owners；不代表沒有申報人。'));
-    body.append(element('h3', 'Quality / review flags'));
-    const flags = element('ul'); flags.append(...(item.qualityFlags.length ? item.qualityFlags : ['來源未列出旗標；不代表已完成審核']).map(f => element('li', f))); body.append(flags);
-    body.append(element('h3', 'Footnotes'));
-    for (const note of item.footnotes) body.append(element('p', `${note.id} · ${note.text}`, 'signal-prose'));
-    if (!item.footnotes.length) body.append(element('p', '來源未列出 footnotes。'));
-    body.append(element('h3', 'Sanitized source provenance'));
+    if (!item.reportingOwners.length) body.append(element('p', message("us-sec-transactions.owners")));
+    body.append(element('h3', message("us-sec-transactions.quality.review.flags")));
+    const flags = element('ul'); flags.append(...(item.qualityFlags.length ? item.qualityFlags : [message("us-sec-transactions.wording.2")]).map(f => element('li', f))); body.append(flags);
+    body.append(element('h3', message("us-sec-transactions.footnotes")));
+    for (const note of item.footnotes) body.append(element('p', message("display.wording.4", { value0: note.id, value1: note.text }), 'signal-prose'));
+    if (!item.footnotes.length) body.append(element('p', message("us-sec-transactions.footnotes.2")));
+    body.append(element('h3', message("us-sec-transactions.sanitized.source.provenance")));
     for (const ref of item.provenance) {
       const list = element('dl', null, 'signal-facts');
-      for (const [key, label] of Object.entries({ sourceType: 'Source type', table: 'Source table', recordId: 'Record ID', documentId: 'Accession / document ID',
-        contentHash: 'Content hash', firstObservedAt: 'First observed at', lastObservedAt: 'Last observed at' })) fact(list, label, ref[key]);
+      for (const [key, label] of Object.entries({ sourceType: message("us-sec-transactions.source.type"), table: message("us-sec-transactions.source.table"), recordId: 'Record ID', documentId: message("us-sec-transactions.accession.document.id"),
+        contentHash: message("us-sec-transactions.content.hash"), firstObservedAt: message("us-sec-transactions.first.observed.at"), lastObservedAt: message("us-sec-transactions.last.observed.at") })) fact(list, label, ref[key]);
       body.append(list);
     }
     dialog.showModal(); get('secDetailClose').focus();
   }
   function render(payload, query) {
-    get('secSource').textContent = `Insider SEC · contract v1 · 本次查詢 ${payload.observedAt} · 成功來源觀察 ${value(payload.sources.find(s => s.sourceId === 'insider-sec')?.lastObservedAt)}`;
-    const messages = { READY: 'READY', EMPTY: 'EMPTY · 此頁沒有符合條件的 SEC transactions。', UNAVAILABLE: 'UNAVAILABLE · 來源未設定或目前無法唯讀讀取。', ERROR: 'ERROR · 來源回應無法安全解析。' };
-    get('secStatus').textContent = messages[payload.dataState]; get('secStatus').setAttribute('role', ['UNAVAILABLE', 'ERROR'].includes(payload.dataState) ? 'alert' : 'status');
-    get('secWarnings').textContent = payload.warnings.join(' · ');
+    setText(get('secSource'), message("us-sec-transactions.insider.sec.contract.v1", { value0: payload.observedAt, value1: value(payload.sources.find(s => s.sourceId === 'insider-sec')?.lastObservedAt) }));
+    const messages = { READY: 'READY', EMPTY: message("us-sec-transactions.empty.sec.transactions"), UNAVAILABLE: message("us-sec-transactions.unavailable"), ERROR: message("reports.error.2") };
+    setText(get('secStatus'), messages[payload.dataState]); get('secStatus').setAttribute('role', ['UNAVAILABLE', 'ERROR'].includes(payload.dataState) ? 'alert' : 'status');
+    setText(get('secWarnings'), payload.warnings.join(' · '));
     const rows = get('secRows'); rows.replaceChildren();
     for (const item of payload.items) {
       const card = element('article', null, 'signal-card sec-card');
-      const open = element('button', `${value(item.ticker)} · ${value(item.company)}`, 'signal-open sec-open'); open.type = 'button';
+      const open = element('button', message("display.wording.4", { value0: value(item.ticker), value1: value(item.company) }), 'signal-open sec-open'); open.type = 'button';
       open.addEventListener('click', () => detail(item, open)); card.append(open);
       if (onTicker && typeof item.ticker === 'string' && /^[A-Z0-9][A-Z0-9.\-]{0,15}$/.test(item.ticker.toUpperCase())) {
-        const navigate = element('button', 'View ticker', 'ticker-link'); navigate.type = 'button';
+        const navigate = element('button', message("us-sec-transactions.view.ticker"), 'ticker-link'); navigate.type = 'button';
         navigate.addEventListener('click', () => onTicker(item.ticker)); card.append(navigate);
       }
       const facts = element('dl', null, 'signal-facts');
-      for (const [label, data] of [['Reporting owner(s)', item.reportingOwners.map(o => value(o.name)).join(' · ') || null], ['Transaction date', item.eventDate],
-        ['Transaction code', item.transactionCode], ['Shares', item.shares], ['Insider execution price · 非策略進場價', item.insiderExecutionPrice],
-        ['Transaction amount', item.transactionAmount], ['Filing date', item.filingDate], ['Security type', item.securityType],
-        ['Candidate', candidate(item.candidateOpenMarketPurchase)], ['Review required', boolean(item.reviewRequired)]]) fact(facts, label, data);
-      card.append(facts, element('p', `⚠ ${item.qualityFlags.length} 個品質／review 旗標 · 開啟明細查看`)); rows.append(card);
+      for (const [label, data] of [[message("us-sec-transactions.reporting.owner.s"), item.reportingOwners.map(o => value(o.name)).join(' · ') || null], [message("us-sec-transactions.transaction.date.2"), item.eventDate],
+        [message("us-sec-transactions.transaction.code"), item.transactionCode], [message("us-sec-transactions.shares"), item.shares], [message("us-sec-transactions.insider.execution.price"), item.insiderExecutionPrice],
+        [message("us-sec-transactions.transaction.amount"), item.transactionAmount], [message("us-sec-transactions.filing.date.2"), item.filingDate], [message("us-sec-transactions.security.type"), item.securityType],
+        [message("us-sec-transactions.candidate.2"), candidate(item.candidateOpenMarketPurchase)], [message("us-sec-transactions.review.required"), boolean(item.reviewRequired)]]) fact(facts, label, data);
+      card.append(facts, element('p', message("us-sec-transactions.review", { value0: item.qualityFlags.length }))); rows.append(card);
     }
-    get('secPage').textContent = `本頁 ${payload.items.length} 筆 · offset ${query.offset} · 每頁 ${query.limit}；非總筆數`;
+    setText(get('secPage'), message("us-sec-transactions.offset", { value0: payload.items.length, value1: query.offset, value2: query.limit }));
     get('secPrevious').disabled = query.offset === 0 || !['READY', 'EMPTY'].includes(payload.dataState); get('secNext').disabled = !payload.page.hasMore;
   }
   return { render, close };
@@ -115,8 +116,8 @@ export function mountUsSecTransactions(document, fetcher = globalThis.fetch.bind
   async function load() {
     controller?.abort(); const request = ++revision, requestController = new AbortController(); controller = requestController;
     const requestedQuery = { ...query }; close(); panel.setAttribute('aria-busy', 'true');
-    for (const id of ['secRows', 'secSource', 'secPage', 'secWarnings']) get(id).replaceChildren();
-    get('secStatus').setAttribute('role', 'status'); get('secStatus').textContent = 'Loading SEC transactions…';
+    for (const id of ['secRows', 'secSource', 'secPage', 'secWarnings']) setText(get(id), '');
+    get('secStatus').setAttribute('role', 'status'); setText(get('secStatus'), message("us-sec-transactions.loading.sec.transactions"));
     get('secPrevious').disabled = get('secNext').disabled = true;
     const timer = setTimeout(() => requestController.abort(), 35000);
     try {
@@ -125,13 +126,13 @@ export function mountUsSecTransactions(document, fetcher = globalThis.fetch.bind
       const payload = readSecTransactions(await response.json(), requestedQuery); if (request === revision && active) render(payload, requestedQuery);
     } catch {
       if (request !== revision || !active) return;
-      get('secStatus').textContent = 'ERROR · 無法取得 SEC Transactions；請重試。'; get('secStatus').setAttribute('role', 'alert');
+      setText(get('secStatus'), message("us-sec-transactions.error.sec.transactions")); get('secStatus').setAttribute('role', 'alert');
     } finally { clearTimeout(timer); if (request === revision) panel.setAttribute('aria-busy', 'false'); }
   }
   get('secFilter').addEventListener('submit', event => {
     event.preventDefault(); const ticker = get('secTicker').value.trim().toUpperCase();
     if (ticker && !/^[A-Z0-9][A-Z0-9.\-]{0,15}$/.test(ticker)) {
-      get('secStatus').textContent = '請輸入有效 ticker（最多 16 字元，英數、點或連字號）。'; get('secTicker').focus(); return;
+      setText(get('secStatus'), message("us-sec-transactions.ticker.16")); get('secTicker').focus(); return;
     }
     query = { limit: 50, offset: 0, ...(ticker ? { ticker } : {}) }; void load();
   });

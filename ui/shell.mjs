@@ -1,13 +1,14 @@
+import { message, t, setText, setAttributeText, codeText, isMessage } from './i18n.mjs';
 export const primaryPages = Object.freeze({
-  overview: ['Overview', '排程現況、接下來的工作與已觀察執行。'],
-  projects: ['Projects', 'Local Dashboard 的工程設計建置快照。'],
-  automations: ['Automations', '目前 Scheduler 快照與七天已觀察歷史。'],
-  us: ['US Stocks', 'Signals 與 SEC Transactions · 唯讀 partial slices。'],
-  tw: ['TW Stocks', 'Taiwan Volume Watch · 已保存 daily observation 唯讀契約。'],
-  performance: ['Performance', 'Insider AI report · 已保存的研究觀察與報酬。'],
-  reports: ['Reports', 'US Insider 唯讀報告 · All 只包含已接入來源。'],
-  evidence: ['Data & Evidence', 'Taiwan · 來源狀態、保存身分與資料缺口的唯讀證據。'],
-  settings: ['Settings', '只修改 Dashboard 顯示 metadata。']
+  overview: [message("nav.overview"), message("page.overview.description")],
+  projects: [message("nav.projects"), message("page.projects.description")],
+  automations: [message("nav.automations"), message("page.automations.description")],
+  us: [message("nav.usStocks"), message("shell.signals.sec.transactions.partial.slices")],
+  tw: [message("nav.twStocks"), message("shell.taiwan.volume.watch.daily.observation")],
+  performance: [message("nav.performance"), message("shell.insider.ai.report")],
+  reports: [message("nav.reports"), message("shell.us.insider.all")],
+  evidence: [message("nav.evidence"), message("shell.taiwan")],
+  settings: [message("nav.settings"), message("shell.dashboard.metadata")]
 });
 
 export function mountShell(document, onShow) {
@@ -24,8 +25,8 @@ export function mountShell(document, onShow) {
       else button.removeAttribute('aria-current');
     }
     for (const view of views) view.hidden = view.dataset.pageView !== page;
-    document.getElementById('pageTitle').textContent = primaryPages[page][0];
-    document.getElementById('pageDescription').textContent = primaryPages[page][1];
+    setText(document.getElementById('pageTitle'), primaryPages[page][0]);
+    setText(document.getElementById('pageDescription'), primaryPages[page][1]);
     if (updateLocation) document.defaultView.history.replaceState(null, '', `#${page}`);
     onShow(page);
   }

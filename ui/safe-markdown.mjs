@@ -1,10 +1,12 @@
 // Deliberately small Markdown subset: all source text is text nodes, never HTML.
+import { message, setText } from './i18n.mjs';
 export function renderMarkdown(document, container, text) {
   container.replaceChildren();
   const element = (tag, value) => { const node = document.createElement(tag); if (value != null) node.textContent = value; return node; };
   const lines = text.split(/\r?\n/);
   if (lines.length > 4000) {
-    container.append(element('p', '大型本文以完整純文字顯示；未截斷。'), element('pre', text)); return;
+    const notice = element('p'); setText(notice, message('reports.largeBodyNotice'));
+    container.append(notice, element('pre', text)); return;
   }
   function inline(node, value) {
     const parts = value.split(/(`[^`\n]+`)/g);

@@ -1,4 +1,4 @@
-// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: 3d573818cc84b69138f6b4b9db4393261e3ea6a524d389d73325de076494e297
+// Generated from docs/PROJECT-DESIGN.md; do not edit. SHA-256: 78eb372a576d5e8c9f3a6c70c169309e09b89fd767c3ee00b2cf8a2b6fe18f16
 window.PROJECT_DESIGN_SAMPLE = Object.freeze({
   "metadata": {
     "project_id": "local-dashboard",

@@ -1,6 +1,7 @@
+import { message, t, setText, setAttributeText, codeText, isMessage } from './i18n.mjs';
 // Report assessments retain source identity, score origin and uncertainty.
 const states = new Set(['READY', 'EMPTY', 'UNAVAILABLE', 'ERROR']);
-const value = v => v == null || v === '' ? '—' : String(v);
+const value = v => isMessage(v) ? v : v == null || v === '' ? '—' : String(v);
 export function readSignals(payload, query) {
   const invalid = () => { throw new Error('INVALID_SIGNALS_RESPONSE'); };
   if (payload?.contractVersion !== 1 || !states.has(payload.dataState) || !Array.isArray(payload.items)
@@ -33,7 +34,7 @@ export function createSignalsView(document, get = id => document.getElementById(
   const dialog = get('signalDetail');
   let returnFocus;
   function element(tag, text, className) {
-    const node = document.createElement(tag); if (text != null) node.textContent = String(text);
+    const node = document.createElement(tag); if (text != null) setText(node, text);
     if (className) node.className = className; return node;
   }
   function fact(list, label, data) { list.append(element('dt', label), element('dd', value(data))); }
@@ -41,63 +42,63 @@ export function createSignalsView(document, get = id => document.getElementById(
   dialog.addEventListener('close', () => { if (returnFocus?.isConnected) returnFocus.focus(); });
   get('signalDetailClose').addEventListener('click', close);
   function detail(item, trigger) {
-    returnFocus = trigger; get('signalDetailTitle').textContent = `${value(item.ticker)} · ${value(item.company)}`;
+    returnFocus = trigger; setText(get('signalDetailTitle'), message("display.wording.4", { value0: value(item.ticker), value1: value(item.company) }));
     const body = get('signalDetailBody'); body.replaceChildren();
     const facts = element('dl', null, 'signal-facts');
-    for (const [label, data] of [['Signal ID', item.signalId], ['分數來源', 'Imported AI report'],
-      ['Report date', item.reportDate], ['Event date · 交易日', item.eventDate], ['Filing date', item.filingDate],
-      ['Discovered at', item.discoveredAt], ['Discovery basis', item.discoveryBasis], ['Recorded at', item.recordedAt],
-      ['Updated at', item.updatedAt], ['來源列出買方筆數 · 非完整群體', item.listedBuyerCount],
-      ['Approximate purchase amount · 來源值', item.approximatePurchaseAmount], ['Person', item.personName], ['Role', item.personRole]]) fact(facts, label, data);
+    for (const [label, data] of [[message("common.signal.id"), item.signalId], [message("us-signals.wording"), message("us-signals.imported.ai.report")],
+      [message("performance.report.date"), item.reportDate], [message("us-signals.event.date"), item.eventDate], [message("us-sec-transactions.filing.date.2"), item.filingDate],
+      [message("us-signals.discovered.at"), item.discoveredAt], [message("performance.discovery.basis"), item.discoveryBasis], [message("us-sec-transactions.recorded.at"), item.recordedAt],
+      [message("common.updatedAt"), item.updatedAt], [message("us-signals.wording.2"), item.listedBuyerCount],
+      [message("us-signals.approximate.purchase.amount"), item.approximatePurchaseAmount], [message("us-signals.person"), item.personName], [message("us-signals.role"), item.personRole]]) fact(facts, label, data);
     body.append(facts);
-    for (const [title, text] of [['Positive reasons', item.positiveReasons], ['Risks', item.risks]])
+    for (const [title, text] of [[message("us-signals.positive.reasons"), item.positiveReasons], [message("us-signals.risks"), item.risks]])
       body.append(element('h3', title), element('p', value(text), 'signal-prose'));
-    body.append(element('h3', 'Quality flags'));
-    const flags = element('ul'); flags.append(...(item.qualityFlags.length ? item.qualityFlags : ['無來源旗標']).map(f => element('li', f))); body.append(flags);
-    body.append(element('h3', 'Buyers · 來源列出資料'));
+    body.append(element('h3', message("us-signals.quality.flags")));
+    const flags = element('ul'); flags.append(...(item.qualityFlags.length ? item.qualityFlags : [message("us-signals.wording.3")]).map(f => element('li', f))); body.append(flags);
+    body.append(element('h3', message("us-signals.buyers")));
     for (const buyer of item.buyers) {
       const list = element('dl', null, 'signal-facts');
-      for (const [key, label] of Object.entries({ person_name: 'Person', person_role: 'Role', transaction_date: 'Transaction date',
-        filing_date: 'Filing date', shares: 'Shares', insider_execution_price: 'Insider execution price · 非策略進場價', transaction_amount: 'Transaction amount' })) fact(list, label, buyer[key]);
+      for (const [key, label] of Object.entries({ person_name: message("us-signals.person"), person_role: message("us-signals.role"), transaction_date: message("us-sec-transactions.transaction.date.2"),
+        filing_date: message("us-sec-transactions.filing.date.2"), shares: message("us-sec-transactions.shares"), insider_execution_price: message("us-sec-transactions.insider.execution.price"), transaction_amount: message("us-sec-transactions.transaction.amount") })) fact(list, label, buyer[key]);
       body.append(list);
     }
-    if (!item.buyers.length) body.append(element('p', '來源沒有列出買方明細；不代表沒有買方。'));
-    body.append(element('h3', 'Source provenance'));
+    if (!item.buyers.length) body.append(element('p', message("us-signals.wording.4")));
+    body.append(element('h3', message("evidence.source.provenance")));
     for (const ref of item.provenance) {
       const list = element('dl', null, 'signal-facts');
-      for (const [key, label] of Object.entries({ sourceType: 'Source type', table: 'Source table', recordId: 'Record ID',
-        documentId: 'Document ID', contentHash: 'Content hash', firstObservedAt: 'First observed at', lastObservedAt: 'Last observed at' })) fact(list, label, ref[key]);
+      for (const [key, label] of Object.entries({ sourceType: message("us-sec-transactions.source.type"), table: message("us-sec-transactions.source.table"), recordId: 'Record ID',
+        documentId: 'Document ID', contentHash: message("us-sec-transactions.content.hash"), firstObservedAt: message("us-sec-transactions.first.observed.at"), lastObservedAt: message("us-sec-transactions.last.observed.at") })) fact(list, label, ref[key]);
       body.append(list);
     }
     dialog.showModal(); get('signalDetailClose').focus();
   }
   function render(payload, query) {
     const sourceObserved = payload.sources.find(s => s.sourceId === 'insider-reports')?.lastObservedAt;
-    get('signalsSource').textContent = `Insider reports · Imported AI report · contract v1 · 本次查詢 ${payload.observedAt} · 成功來源觀察 ${value(sourceObserved)}`;
-    const messages = { READY: 'READY', EMPTY: 'EMPTY · 此頁沒有符合條件的 report signals。',
-      UNAVAILABLE: 'UNAVAILABLE · 來源未設定或目前無法唯讀讀取。', ERROR: 'ERROR · 來源回應無法安全解析。' };
-    get('signalsStatus').textContent = messages[payload.dataState];
+    setText(get('signalsSource'), message("us-signals.insider.reports.imported.ai.report.contract.v1", { value0: payload.observedAt, value1: value(sourceObserved) }));
+    const messages = { READY: 'READY', EMPTY: message("us-signals.empty.report.signals"),
+      UNAVAILABLE: message("us-sec-transactions.unavailable"), ERROR: message("reports.error.2") };
+    setText(get('signalsStatus'), messages[payload.dataState]);
     get('signalsStatus').setAttribute('role', ['UNAVAILABLE', 'ERROR'].includes(payload.dataState) ? 'alert' : 'status');
-    get('signalsWarnings').textContent = payload.warnings.join(' · ');
+    setText(get('signalsWarnings'), payload.warnings.join(' · '));
     const rows = get('signalsRows'); rows.replaceChildren();
     for (const item of payload.items) {
       const card = element('article', null, 'signal-card');
-      const open = element('button', `${value(item.ticker)} · ${value(item.company)}`, 'signal-open');
+      const open = element('button', message("display.wording.4", { value0: value(item.ticker), value1: value(item.company) }), 'signal-open');
       open.type = 'button'; open.addEventListener('click', () => detail(item, open)); card.append(open);
       if (onTicker && typeof item.ticker === 'string' && /^[A-Z0-9][A-Z0-9.\-]{0,15}$/.test(item.ticker.toUpperCase())) {
-        const navigate = element('button', 'View ticker', 'ticker-link'); navigate.type = 'button';
+        const navigate = element('button', message("us-sec-transactions.view.ticker"), 'ticker-link'); navigate.type = 'button';
         navigate.addEventListener('click', () => onTicker(item.ticker)); card.append(navigate);
       }
       const facts = element('dl', null, 'signal-facts');
-      for (const [label, data] of [['Report date', item.reportDate], ['Event date · 交易日', item.eventDate],
-        ['Investment Score', item.scores.investment.value], ['Signal Score', item.scores.signal.value],
-        ['來源列出買方筆數', item.listedBuyerCount], ['Approximate amount · 來源值', item.approximatePurchaseAmount],
-        ['Discovered at', item.discoveredAt], ['Discovery basis', item.discoveryBasis]]) fact(facts, label, data);
-      card.append(facts, element('p', 'Imported AI report', 'signal-origin'),
-        element('p', item.qualityFlags.length ? `⚠ ${item.qualityFlags.length} 個資料品質旗標 · 開啟明細查看` : '來源未列出資料品質旗標'));
+      for (const [label, data] of [[message("performance.report.date"), item.reportDate], [message("us-signals.event.date"), item.eventDate],
+        [message("us-signals.investment.score"), item.scores.investment.value], [message("us-signals.signal.score"), item.scores.signal.value],
+        [message("us-signals.wording.5"), item.listedBuyerCount], [message("us-signals.approximate.amount"), item.approximatePurchaseAmount],
+        [message("us-signals.discovered.at"), item.discoveredAt], [message("performance.discovery.basis"), item.discoveryBasis]]) fact(facts, label, data);
+      card.append(facts, element('p', message("us-signals.imported.ai.report"), 'signal-origin'),
+        element('p', item.qualityFlags.length ? message("us-signals.wording.6", { value0: item.qualityFlags.length }) : message("us-signals.wording.7")));
       rows.append(card);
     }
-    get('signalsPage').textContent = `本頁 ${payload.items.length} 筆 · offset ${query.offset} · 每頁 ${query.limit}；非總筆數`;
+    setText(get('signalsPage'), message("us-sec-transactions.offset", { value0: payload.items.length, value1: query.offset, value2: query.limit }));
     get('signalsPrevious').disabled = query.offset === 0 || !['READY', 'EMPTY'].includes(payload.dataState);
     get('signalsNext').disabled = !payload.page.hasMore;
   }
@@ -112,9 +113,9 @@ export function mountUsSignals(document, fetcher = globalThis.fetch.bind(globalT
     controller?.abort(); const request = ++revision; const requestController = new AbortController(); controller = requestController;
     const requestedQuery = { ...query };
     close(); panel.setAttribute('aria-busy', 'true');
-    get('signalsRows').replaceChildren(); get('signalsSource').textContent = '';
-    get('signalsPage').textContent = ''; get('signalsWarnings').textContent = '';
-    get('signalsStatus').setAttribute('role', 'status'); get('signalsStatus').textContent = 'Loading report signals…';
+    setText(get('signalsRows'), ''); setText(get('signalsSource'), '');
+    setText(get('signalsPage'), ''); setText(get('signalsWarnings'), '');
+    get('signalsStatus').setAttribute('role', 'status'); setText(get('signalsStatus'), message("us-signals.loading.report.signals"));
     get('signalsPrevious').disabled = get('signalsNext').disabled = true;
     const timer = setTimeout(() => requestController.abort(), 35000);
     try {
@@ -124,13 +125,13 @@ export function mountUsSignals(document, fetcher = globalThis.fetch.bind(globalT
       if (request === revision && active) render(payload, requestedQuery);
     } catch {
       if (request !== revision || !active) return;
-      get('signalsStatus').textContent = 'ERROR · 無法取得 Signals；請重試。'; get('signalsStatus').setAttribute('role', 'alert');
+      setText(get('signalsStatus'), message("us-signals.error.signals")); get('signalsStatus').setAttribute('role', 'alert');
     } finally { clearTimeout(timer); if (request === revision) panel.setAttribute('aria-busy', 'false'); }
   }
   get('signalsFilter').addEventListener('submit', event => {
     event.preventDefault(); const ticker = get('signalsTicker').value.trim().toUpperCase();
     if (ticker && !/^[A-Z0-9][A-Z0-9.\-]{0,15}$/.test(ticker)) {
-      get('signalsStatus').textContent = '請輸入有效 ticker（最多 16 字元，英數、點或連字號）。'; get('signalsTicker').focus(); return;
+      setText(get('signalsStatus'), message("us-sec-transactions.ticker.16")); get('signalsTicker').focus(); return;
     }
     query = { limit: 50, offset: 0, ...(ticker ? { ticker } : {}) }; void load();
   });

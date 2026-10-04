@@ -1,3 +1,4 @@
+import { englishPage } from './locale-browser.mjs';
 import { test, before, after, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
@@ -19,7 +20,7 @@ before(async () => {
 });
 after(async () => { await browser?.close(); await new Promise(resolve => server?.close(resolve)); });
 beforeEach(async () => {
-  page = await browser.newPage(); errors = [];
+  page = await englishPage(browser); errors = [];
   page.on('pageerror', e => errors.push(e.message));
   await page.route('**/api/**', route => {
     const path = new URL(route.request().url()).pathname;
@@ -45,14 +46,14 @@ for (const width of [1280, 375, 320]) test(`canonical Projects and keyboard deta
   assert.deepEqual(await page.locator('.project-feature').evaluateAll(nodes => nodes.map(n => n.dataset.featureId)), model.features.map(f => f.id));
   for (const [status, count] of Object.entries(featureCounts(model.features)))
     assert.equal(await page.locator(`.project-count[data-status="${status}"] strong`).innerText(), String(count));
-  assert.match(await page.locator('#projectsView').innerText(), /正式專案設計／本次建置快照/);
+  assert.match(await page.locator('#projectsView').innerText(), /Project Design build snapshot/);
   assert.equal(await page.locator('#projectsView script').count(), 0);
   await page.locator('.project-source-summary').click();
-  assert.match(await page.locator('#projectSourceInfo').innerText(), /歷史盤點 baseline（非本次實作 SHA）/);
+  assert.match(await page.locator('#projectSourceInfo').innerText(), /Historical baseline \(not the current implementation SHA\)/);
   const feature = page.locator('[data-feature-id="product-projects"]');
   await feature.locator('summary').focus(); await page.keyboard.press('Enter');
   assert.equal(await feature.getAttribute('open'), '');
-  assert.match(await feature.innerText(), /原始目的[\s\S]*目前實作[\s\S]*目前限制[\s\S]*剩餘工作/);
+  assert.match(await feature.innerText(), /Original intent[\s\S]*Current implementation[\s\S]*Current limitation[\s\S]*Remaining work/);
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), true);
   await page.screenshot({ path: fileURLToPath(new URL(`../target/projects-r1a1/projects-${width}.png`, import.meta.url)), fullPage: true });
   await page.locator('#projectsView').screenshot({ path: fileURLToPath(new URL(`../target/projects-r1a1/projects-panel-${width}.png`, import.meta.url)) });
@@ -75,7 +76,7 @@ test('loading clears old data; missing/format/unsupported/unavailable/oversize e
     await page.locator('#projectsRetry').click();
     assert.equal(await page.locator('.project-feature').count(), 0);
     assert.equal(await page.locator('.project-count').count(), 0);
-    assert.match(await page.locator('#projectsStatus').innerText(), /正在讀取/);
+    assert.match(await page.locator('#projectsStatus').innerText(), /Loading/);
     release(); await settled();
     assert.match(await page.locator('#projectsStatus').innerText(), new RegExp(code));
     assert.doesNotMatch(await page.locator('#projectsStatus').innerText(), /private.db|SQL/);

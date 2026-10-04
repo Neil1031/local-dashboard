@@ -9,6 +9,10 @@ UI job metadata、台股／美股分組、排序與舊版顯示切換見 [Stage 
 專案設計與固定閱讀章節對照見 [Google Docs reading index](docs/GOOGLE-DOCS.md)；
 中文版閱讀內容保存在該頁連結的既有 Google Doc，工程功能狀態與證據以 Git 文件為準。
 
+## 介面語系
+
+預設繁體中文（zh-TW），Settings 可選 English（en），偏好僅存瀏覽器。共用 `ui/i18n.mjs` 與雙語 flat resources 各 1,066 keys；切換語系保留頁面、篩選、分頁、明細與已載入資料，不重讀來源。來源報告、配置顯示名稱、IDs與provenance保留原文。新增介面文字須遵守 root `AGENTS.md` 的雙語 key／placeholder／coverage規則。核准實作與本次文件同步見 [Localization Stage](docs/STAGE-LOCALIZATION-I18N-V1.md)；main integration與部署身分由後續已授權Gate及operational packet／Owner Docs確認。
+
 ## 環境與啟動
 
 **Windows 雙擊使用**：建置者執行 `.\scripts\package-windows.ps1`，使用者雙擊

@@ -1,3 +1,4 @@
+import { message, t, setText, setAttributeText, codeText, isMessage } from './i18n.mjs';
 import { readSignals, createSignalsView } from './us-signals.mjs';
 import { readSecTransactions, createSecTransactionsView } from './us-sec-transactions.mjs';
 
@@ -45,17 +46,17 @@ export function mountUsTickerDetail(document, fetcher = globalThis.fetch.bind(gl
   const close = () => { signalsView.close(); secView.close(); };
   function clear() {
     for (const prefix of ['tickerSignals', 'tickerSec']) {
-      for (const suffix of ['Rows', 'Source', 'Warnings', 'Page', 'Status']) get(prefix + suffix).replaceChildren();
+      for (const suffix of ['Rows', 'Source', 'Warnings', 'Page', 'Status']) setText(get(prefix + suffix), '');
       get(prefix + 'Previous').disabled = get(prefix + 'Next').disabled = true;
     }
-    get('tickerSummary').textContent = '';
+    setText(get('tickerSummary'), '');
   }
   async function load() {
     if (!query || !active) return;
     controller?.abort(); const request = ++revision, requestController = new AbortController(); controller = requestController;
     const requestedQuery = { ...query }; close(); clear(); panel.setAttribute('aria-busy', 'true');
-    get('tickerTitle').textContent = `${query.ticker} · Ticker Detail`;
-    get('tickerStatus').setAttribute('role', 'status'); get('tickerStatus').textContent = 'Loading ticker sources…';
+    setText(get('tickerTitle'), message("us-ticker-detail.ticker.detail", { value0: query.ticker }));
+    get('tickerStatus').setAttribute('role', 'status'); setText(get('tickerStatus'), message("us-ticker-detail.loading.ticker.sources"));
     const timer = setTimeout(() => requestController.abort(), TICKER_DETAIL_TIMEOUT_MS);
     try {
       const response = await fetcher(`/api/us/ticker-detail?${new URLSearchParams(requestedQuery)}`, { cache: 'no-store', signal: requestController.signal });
@@ -65,23 +66,23 @@ export function mountUsTickerDetail(document, fetcher = globalThis.fetch.bind(gl
       if (requestController.signal.aborted) throw new Error('TICKER_REQUEST_ABORTED');
       signalsView.render(payload.sections.signals, sectionQuery(requestedQuery, 'signals'));
       secView.render(payload.sections.secTransactions, sectionQuery(requestedQuery, 'sec'));
-      get('tickerStatus').textContent = `${payload.dataState} · 本次兩來源讀取 ${payload.observedAt}`;
+      setText(get('tickerStatus'), message("us-ticker-detail.wording", { value0: payload.dataState, value1: payload.observedAt }));
       get('tickerStatus').setAttribute('role', ['UNAVAILABLE', 'ERROR'].includes(payload.dataState) ? 'alert' : 'status');
-      get('tickerSummary').textContent = `Reports Signals ${payload.sections.signals.dataState} · SEC Transactions ${payload.sections.secTransactions.dataState}`;
+      setText(get('tickerSummary'), message("us-ticker-detail.reports.signals.sec.transactions", { value0: payload.sections.signals.dataState, value1: payload.sections.secTransactions.dataState }));
     } catch {
       if (request !== revision || !active) return;
-      get('tickerStatus').textContent = 'ERROR · 無法安全取得 Ticker Detail；請重試。'; get('tickerStatus').setAttribute('role', 'alert');
+      setText(get('tickerStatus'), message("us-ticker-detail.error.ticker.detail")); get('tickerStatus').setAttribute('role', 'alert');
     } finally { clearTimeout(timer); if (request === revision) panel.setAttribute('aria-busy', 'false'); }
   }
   function setTicker(value) {
     try { query = { ticker: exactTicker(value), signalsLimit: 50, signalsOffset: 0, secLimit: 50, secOffset: 0 }; }
-    catch { get('tickerValidation').textContent = 'Ticker 必填：1–16 字元，英數、點或連字號，開頭須為英數。'; get('tickerInput').focus(); return false; }
-    get('tickerInput').value = query.ticker; get('tickerValidation').textContent = ''; return true;
+    catch { setText(get('tickerValidation'), message("us-ticker-detail.ticker.1.16")); get('tickerInput').focus(); return false; }
+    get('tickerInput').value = query.ticker; setText(get('tickerValidation'), ''); return true;
   }
   get('tickerFilter').addEventListener('submit', event => { event.preventDefault(); if (setTicker(get('tickerInput').value)) void load(); });
   get('tickerReload').addEventListener('click', () => { if (query) void load(); else if (setTicker(get('tickerInput').value)) void load(); });
   for (const [key, prefix] of [['signals', 'tickerSignals'], ['sec', 'tickerSec']]) {
-    for (const direction of ['Previous', 'Next']) get(prefix + direction).addEventListener('click', () => {
+    for (const direction of ["Previous", 'Next']) get(prefix + direction).addEventListener('click', () => {
       if (!query) return;
       query = { ...query, [`${key}Offset`]: Math.max(0, query[`${key}Offset`] + (direction === 'Next' ? 1 : -1) * query[`${key}Limit`]) };
       void load();
@@ -89,7 +90,7 @@ export function mountUsTickerDetail(document, fetcher = globalThis.fetch.bind(gl
   }
   return {
     setTicker,
-    show() { active = true; if (query) void load(); else { clear(); get('tickerStatus').textContent = '請輸入 exact ticker，分別查看 Reports 與 SEC。'; } },
+    show() { active = true; if (query) void load(); else { clear(); setText(get('tickerStatus'), message("us-ticker-detail.exact.ticker.reports.sec")); } },
     hide() { active = false; ++revision; controller?.abort(); close(); panel.setAttribute('aria-busy', 'false'); }
   };
 }

@@ -1,3 +1,4 @@
+import { englishPage } from './locale-browser.mjs';
 import { test, before, after, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
@@ -13,7 +14,7 @@ before(async () => {
 });
 after(async () => { await browser.close(); await new Promise(r => server.close(r)); });
 beforeEach(async () => {
-  page = await browser.newPage(); errors = []; page.on('pageerror', e => errors.push(e.message));
+  page = await englishPage(browser); errors = []; page.on('pageerror', e => errors.push(e.message));
   await page.route('**/api/**', route => {
     const url = new URL(route.request().url());
     const payload = url.pathname === '/api/us/signals' ? signalsFixture(url)
@@ -24,16 +25,16 @@ beforeEach(async () => {
   });
 });
 afterEach(async () => { await page.close(); assert.deepEqual(errors, []); });
-const ready = () => page.waitForFunction(() => document.getElementById('signalsStatus').textContent === 'READY');
+const ready = () => page.waitForFunction(() => document.getElementById('signalsStatus').textContent.includes("READY"));
 for (const width of [1280, 375, 320]) test(`Signals safe cards, pagination, keyboard/detail/Escape and overflow at ${width}px`, async () => {
   await page.setViewportSize({ width, height: 900 }); await page.goto(`${base}/#us`); await ready();
   assert.equal(await page.locator('.signal-card').count(), 50); assert.equal(await page.locator('#usView img').count(), 0);
-  assert.match(await page.locator('.signal-card').first().innerText(), /Imported AI report[\s\S]*品質旗標/);
+  assert.match(await page.locator('.signal-card').first().innerText(), /Imported AI report[\s\S]*data-quality flags/);
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), true);
   const open = page.locator('.signal-open').first(); await open.focus(); await page.keyboard.press('Enter');
   assert.equal(await page.locator('#signalDetail').evaluate(n => n.open), true);
   assert.match(await page.locator('#signalDetail').innerText(), /<script>evil\(\)<\/script>/);
-  assert.match(await page.locator('#signalDetail').innerText(), /非完整群體/);
+  assert.match(await page.locator('#signalDetail').innerText(), /not the complete population/);
   assert.equal(await page.locator('#signalDetail script').count(), 0);
   assert.equal(await page.locator('#signalDetail').evaluate(n => n.scrollWidth <= n.clientWidth), true);
   await page.keyboard.press('Escape'); assert.equal(await open.evaluate(n => n === document.activeElement), true);
@@ -50,10 +51,10 @@ test('empty/unavailable/error clear prior data and never imply successful observ
     await page.route('**/api/us/signals?*', route => route.fulfill({ contentType: 'application/json', body: JSON.stringify(signalsFixture(new URL(route.request().url()), state)) }));
     await page.locator('#signalsReload').click(); await page.waitForFunction(s => document.getElementById('signalsStatus').textContent.startsWith(s), state);
     assert.equal(await page.locator('.signal-card').count(), 0); assert.equal(await page.locator('#signalsNext').isDisabled(), true);
-    if (state !== 'EMPTY') assert.match(await page.locator('#signalsSource').innerText(), /成功來源觀察 —/);
+    if (state !== 'EMPTY') assert.match(await page.locator('#signalsSource').innerText(), /Successful source observation —/);
   }
   await page.route('**/api/us/signals?*', route => route.fulfill({ status: 500, body: 'private raw error' }));
-  await page.locator('#signalsReload').click(); await page.waitForFunction(() => document.getElementById('signalsStatus').textContent.includes('請重試'));
+  await page.locator('#signalsReload').click(); await page.waitForFunction(() => document.getElementById('signalsStatus').textContent.includes("retry"));
   assert.doesNotMatch(await page.locator('#usView').innerText(), /private raw error/);
 });
 test('loading, newer filter wins, and leaving page prevents stale rendering', async () => {
