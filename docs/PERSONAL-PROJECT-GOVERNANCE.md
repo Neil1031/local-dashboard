@@ -164,6 +164,8 @@ Delegate only after scope, accepted SHA, expected main and exact runtime/config 
 
 Existing Git/deployment rules in sections 15–16 still apply. Frozen inputs alone do not authorize merge or production operations. Installed identity/protection evidence does not introduce a post-install QA campaign.
 
+Follow the frozen closeout role chain and boundary in section 2.1.
+
 **Luna must not independently own**
 
 - architecture;
@@ -201,6 +203,40 @@ Report the observed state, actions already taken, evidence and unresolved issue.
 
 Reduce Sol's time spent on repo archaeology, mechanical edits, repetitive tests, fixtures, hashes/manifests, parity, build/package, frozen closeout and routine deployment evidence. Sol remains accountable for the integrated result. Do not add an approval layer to achieve this.
 
+### 1.5 Evidence reuse / proportional review
+
+Produce the same evidence once by default. When Sol / Luna has already produced verifiable evidence, later roles should preferentially validate that evidence rather than regenerate the entire set:
+
+- hashes;
+- manifests;
+- test receipts;
+- candidate identity;
+- Git ancestry/tree evidence;
+- package identity;
+- deployment receipts.
+
+Management Independent Review defaults to proportional verification focused on:
+
+- exact SHA / diff / scope;
+- Stage Gate evidence;
+- key tests;
+- source / semantic assertions;
+- whether `UNKNOWN` / `PARTIAL` / null was incorrectly hidden or promoted to success;
+- whether the Stage contract was violated;
+- protection / deployment boundary;
+- consistency across evidence.
+
+Expand re-verification only when:
+
+- evidence contradicts other evidence;
+- hash / identity mismatch occurs;
+- test results are not trustworthy;
+- source bytes changed;
+- unexpected scope is found;
+- the reviewer identifies a concrete risk requiring further verification.
+
+Independent Review must not become a rerun of the entire implementation / Self-QA. Evidence reuse does not turn Luna self-check or Sol Self-QA into independent PASS: the reviewer independently checks the existing evidence and performs the proportional verification above. Formal-source reads remain subject to the existing stricter restrictions and explicit allowance; review or evidence reuse does not authorize extra reads.
+
 ---
 
 ## 2. Stage lifecycle
@@ -219,8 +255,8 @@ Default sequence:
 8. Management rechecks exact SHA.
 9. Management reports `READY_FOR_MANAGER_REVIEW`.
 10. Manager performs final review.
-11. Only after Manager approval: Git closeout.
-12. Next Stage starts only after closeout unless explicitly authorized otherwise.
+11. Only after GPT Manager Final PASS and explicit frozen closeout authorization: follow section 2.1.
+12. STOP after closeout acceptance; the next Stage requires separate Manager authorization.
 
 Each substantial Stage should have:
 
@@ -234,6 +270,48 @@ Each substantial Stage should have:
 Do not add extra Gates solely for hypothetical edge cases.
 
 Luna is an implementation worker, not a new Gate. Stages retain Plan → Stage → Gate → Implementation → Self-QA and existing Gate / Done when requirements. A Stage without a suitable bounded task does not invent work merely to use Luna.
+
+### 2.1 Frozen closeout handoff
+
+Required role chain:
+
+`GPT Manager Final PASS → GPT Manager explicitly authorizes frozen closeout boundary → Sol Implementation Work converts authorized content into executable tasks → Luna may execute bounded / frozen mechanical closeout tasks → Sol verifies Luna execution / evidence → Management Work performs proportional closeout verification → GPT Manager final acceptance → STOP / next Stage separately authorized`
+
+Final PASS of a candidate alone is not merge / deployment authorization. GPT Manager explicitly authorizes the applicable closeout actions and freezes:
+
+- accepted candidate SHA;
+- expected live main / merge target;
+- allowed source/runtime paths;
+- runtime delta;
+- config delta;
+- deployment target;
+- formal-read allowance;
+- backup / protection boundary;
+- STOP conditions.
+
+State an explicit no-delta / not-applicable boundary where appropriate; absence of a value does not grant discretion to expand it.
+
+Sol may decide:
+
+- execution-order details;
+- Luna task granularity;
+- how to implement a permitted SOP.
+
+Sol must not independently change:
+
+- Stage scope;
+- accepted SHA;
+- merge target;
+- runtime/config delta;
+- formal-read quota;
+- deployment boundary;
+- product semantics.
+
+Luna may execute only frozen, authorized mechanical actions. Luna must not independently decide that merge / deployment is now permitted.
+
+If a frozen input does not match the actual environment: STOP and return to Sol. If resolving the mismatch requires changing the authorized boundary, escalate through Management / GPT Manager before proceeding.
+
+Sol verifies delegated execution and evidence; Management applies section 1.5 to closeout verification, reusing the existing evidence and expanding checks only for its stated triggers. GPT Manager performs final acceptance, then work stops. This assigns the existing execution/review/acceptance responsibilities without adding an approval layer. Git / deployment rules in sections 15–16 and stricter formal-read limits remain in force; final acceptance does not introduce a post-install QA campaign.
 
 ---
 
