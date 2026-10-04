@@ -1059,6 +1059,8 @@
       </section>
     </section>
     <section class="panel performance" id="performanceView" data-page-view="performance" hidden="">
+      <nav class="us-subnav" aria-label="績效來源" data-i18n-aria-label="twPerformance.navigation"><button id="performanceUsTab" type="button" aria-pressed="true" aria-controls="performanceUsPanel" data-i18n="twPerformance.us">US Insider</button><button id="performanceTwTab" type="button" aria-pressed="false" aria-controls="twPerformancePanel" data-i18n="twPerformance.tw">台股</button></nav>
+      <div id="performanceUsPanel">
       <p class="eyebrow" data-i18n="chrome.us.insider.ai.report.research.evidence">美股／INSIDER AI 報告 · 研究證據</p><h2 data-i18n="chrome.performance.summary.signal.detail">績效 · 摘要／訊號明細</h2>
       <p data-i18n="chrome.active.ai.report.signals">目前啟用的 AI 報告訊號；只讀來源已保存觀察，報酬未觀察時顯示 —。</p>
       <nav class="us-subnav" aria-label="績效時距" data-i18n-aria-label="chrome.performance.horizons"><button type="button" data-performance-horizon="1d" aria-pressed="false">1D</button><button type="button" data-performance-horizon="1w" aria-pressed="false">1W</button><button type="button" data-performance-horizon="1m" aria-pressed="false">1M</button><button type="button" data-performance-horizon="3m" aria-pressed="true">3M</button><button type="button" data-performance-horizon="6m" aria-pressed="false">6M</button></nav>
@@ -1074,6 +1076,16 @@
       <h3 data-i18n="chrome.signals.bounded.current.state.page">訊號 · 限定目前狀態頁</h3><form id="performanceFilter" class="signals-controls"><label for="performanceTicker" data-i18n="chrome.exact.ticker.case.sensitive">精確股票代號（區分大小寫）</label><input id="performanceTicker" type="text" maxlength="256" autocomplete="off"><button type="submit" data-i18n="chrome.list">篩選清單</button></form><p data-i18n="chrome.summary.list.ticker.point.in.time.population.snapshot">摘要不受清單 ticker 篩選影響。各頁反映當次來源狀態，跨頁不是 PIT 群體快照；不自動讀取所有頁面。</p>
       <p id="performanceValidation" role="alert"></p><p id="performanceListStatus" role="status"></p><p id="performanceListSource" class="signal-source"></p><div id="performanceRows" class="signals-grid"></div><div class="signals-controls"><button id="performancePrevious" type="button" disabled="" data-i18n="common.previous">上一頁</button><span id="performancePageCount"></span><button id="performanceNext" type="button" disabled="" data-i18n="common.next">下一頁</button></div>
       <dialog id="performanceDetail" aria-labelledby="performanceDetailTitle"><div class="report-detail-head"><h2 id="performanceDetailTitle" data-i18n="chrome.signal.detail.stored.research.evidence">訊號明細 · 保存研究證據</h2><button id="performanceDetailClose" type="button" data-i18n="common.close">關閉</button></div><p id="performanceDetailStatus" role="status"></p><p id="performanceDetailSource" class="signal-source"></p><dl id="performanceFacts"></dl><h3 data-i18n="chrome.all.stored.snapshots.tradable.discovery">全部保存快照 · 可交易／發現基準分開</h3><div id="performanceSnapshots"></div><p data-i18n="chrome.absent.type.provider.price.basis.snapshot.summary">缺席快照保持缺席；報酬不從價格重新計算。每筆快照提供資料來源／價格基準；方法與限制見摘要。</p></dialog>
+      </div>
+      <section id="twPerformancePanel" hidden="" aria-labelledby="twPerformanceTitle">
+        <h2 id="twPerformanceTitle" data-i18n="twPerformance.title">台股 · 已保存觀察報酬</h2>
+        <p data-i18n="twPerformance.notice">逐筆來源研究證據；參考收盤價不是成交價，觀察報酬不是已實現損益。</p>
+        <p data-i18n="twPerformance.limits">正報酬不等於買進成功；負報酬不是賣出訊號。null 不等於 0，未到期不等於失敗，缺少價格不代表持平。</p>
+        <p data-i18n="twPerformance.method">來源使用未調整官方收盤價及台北 13:33 保守可用時間；不含公司行動／股息。跨頁不是固定快照，也不是歷史 PIT。</p>
+        <form id="twPerformanceFilter" class="signals-controls"><label for="twPerformanceStart" data-i18n="twHistory.start">開始日期</label><input id="twPerformanceStart" type="text" maxlength="10" autocomplete="off" placeholder="YYYY-MM-DD" data-i18n-placeholder="chrome.yyyy.mm.dd"><label for="twPerformanceEnd" data-i18n="twHistory.end">結束日期</label><input id="twPerformanceEnd" type="text" maxlength="10" autocomplete="off" placeholder="YYYY-MM-DD" data-i18n-placeholder="chrome.yyyy.mm.dd"><button type="submit" data-i18n="twHistory.query">查詢</button><button id="twPerformanceRefresh" type="button" data-i18n="common.refresh">重新讀取</button></form>
+        <p id="twPerformanceValidation" role="alert"></p><p id="twPerformanceStatus" role="status"></p><p id="twPerformanceProvenance" class="signal-source"></p><p id="twPerformanceScope"></p><ul id="twPerformanceWarnings" class="signal-warnings"></ul><div id="twPerformanceRows" class="tw-grid"></div>
+        <div class="signals-controls"><button id="twPerformancePrevious" type="button" disabled="" data-i18n="common.previous">上一頁</button><span id="twPerformancePage"></span><button id="twPerformanceNext" type="button" disabled="" data-i18n="common.next">下一頁</button></div>
+      </section>
     </section>
     <section class="panel reports" id="reportsView" data-page-view="reports" hidden="">
       <p class="eyebrow" data-i18n="chrome.reports.partial">報告 · PARTIAL</p>

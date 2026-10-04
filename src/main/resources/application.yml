@@ -12,6 +12,7 @@ dashboard:
       cli-path: ""
       reports-cli-path: ""
       history-cli-path: ""
+      performance-cli-path: ""
       database-path: ""
       output-dir: ""
       timeout-seconds: 10

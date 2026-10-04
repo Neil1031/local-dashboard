@@ -10,6 +10,8 @@ dashboard:
       reports-cli-path: ""
       # History LIST only; separate fixed export_tw_history.py path.
       history-cli-path: ""
+      # Fixed source-owned observed Performance CLI.
+      performance-cli-path: "F:/AI workspace/ai-stock-hunter/export_tw_observed_performance.py"
       database-path: ""
       output-dir: ""
       timeout-seconds: 10 # 1..30

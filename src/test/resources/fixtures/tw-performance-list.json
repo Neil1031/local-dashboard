@@ -1,0 +1,77 @@
+{
+  "contractVersion": "tw-observed-performance-v1",
+  "source": "TAIWAN_VOLUME_WATCH",
+  "generatedAt": "2026-11-01T07:00:00Z",
+  "dataState": "READY",
+  "query": {
+    "operation": "LIST",
+    "requestedStartDate": "2026-10-01",
+    "requestedEndDate": "2026-10-31",
+    "limit": 20,
+    "offset": 0
+  },
+  "scope": {
+    "state": "AVAILABLE",
+    "mode": "DAILY_ACCUMULATION",
+    "startDate": "2026-09-01"
+  },
+  "items": [
+    {
+      "itemId": "tw-candidate:2026-10-02:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa:2330",
+      "targetDate": "2026-10-02",
+      "runId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "symbol": "2330",
+      "market": "TWSE",
+      "observationFinishedAt": "2026-10-02T10:00:00Z",
+      "savedStatus": "SUCCESS",
+      "referenceClose": 100,
+      "referenceState": "OBSERVED",
+      "referenceReasonCode": "OFFICIAL_CLOSE_OBSERVED",
+      "referenceProvenance": {
+        "authority": "daily_price",
+        "officialSource": "TWSE_TPEX_OFFICIAL:market-data",
+        "priceObservedAt": "2026-10-05T05:33:00Z",
+        "marketObservedAt": "2026-10-05T05:33:00Z",
+        "priceRefreshedAt": "2026-10-05T05:34:00Z",
+        "sourceStartedAt": "2026-10-05T05:30:00Z",
+        "sourceFinishedAt": "2026-10-05T05:33:00Z",
+        "priceSourceRunId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "sourceStatus": "SUCCESS"
+      },
+      "calendarMarketsUsed": ["TWSE"],
+      "horizons": [
+        {"sessionCount": 1, "expectedDate": "2026-10-05", "close": 100, "returnPercent": 0, "state": "OBSERVED", "reasonCode": "OFFICIAL_CLOSE_OBSERVED", "dueAt": "2026-10-05T13:33:00+08:00", "provenance": {"authority": "daily_price", "officialSource": "TWSE_TPEX_OFFICIAL:market-data", "priceObservedAt": "2026-10-05T05:33:00Z", "marketObservedAt": "2026-10-05T05:33:00Z", "priceRefreshedAt": "2026-10-05T05:34:00Z", "sourceStartedAt": "2026-10-05T05:30:00Z", "sourceFinishedAt": "2026-10-05T05:33:00Z", "priceSourceRunId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "sourceStatus": "SUCCESS"}},
+        {"sessionCount": 3, "expectedDate": "2026-10-07", "close": 100, "returnPercent": 0, "state": "OBSERVED", "reasonCode": "OFFICIAL_CLOSE_OBSERVED", "dueAt": "2026-10-07T13:33:00+08:00", "provenance": {"authority": "daily_price", "officialSource": "TWSE_TPEX_OFFICIAL:market-data", "priceObservedAt": "2026-10-05T05:33:00Z", "marketObservedAt": "2026-10-05T05:33:00Z", "priceRefreshedAt": "2026-10-05T05:34:00Z", "sourceStartedAt": "2026-10-05T05:30:00Z", "sourceFinishedAt": "2026-10-05T05:33:00Z", "priceSourceRunId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "sourceStatus": "SUCCESS"}},
+        {"sessionCount": 5, "expectedDate": "2026-10-09", "close": 100, "returnPercent": 0, "state": "OBSERVED", "reasonCode": "OFFICIAL_CLOSE_OBSERVED", "dueAt": "2026-10-09T13:33:00+08:00", "provenance": {"authority": "daily_price", "officialSource": "TWSE_TPEX_OFFICIAL:market-data", "priceObservedAt": "2026-10-05T05:33:00Z", "marketObservedAt": "2026-10-05T05:33:00Z", "priceRefreshedAt": "2026-10-05T05:34:00Z", "sourceStartedAt": "2026-10-05T05:30:00Z", "sourceFinishedAt": "2026-10-05T05:33:00Z", "priceSourceRunId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "sourceStatus": "SUCCESS"}},
+        {"sessionCount": 10, "expectedDate": "2026-10-16", "close": 100, "returnPercent": 0, "state": "OBSERVED", "reasonCode": "OFFICIAL_CLOSE_OBSERVED", "dueAt": "2026-10-16T13:33:00+08:00", "provenance": {"authority": "daily_price", "officialSource": "TWSE_TPEX_OFFICIAL:market-data", "priceObservedAt": "2026-10-05T05:33:00Z", "marketObservedAt": "2026-10-05T05:33:00Z", "priceRefreshedAt": "2026-10-05T05:34:00Z", "sourceStartedAt": "2026-10-05T05:30:00Z", "sourceFinishedAt": "2026-10-05T05:33:00Z", "priceSourceRunId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "sourceStatus": "SUCCESS"}},
+        {"sessionCount": 20, "expectedDate": "2026-10-30", "close": 100, "returnPercent": 0, "state": "OBSERVED", "reasonCode": "OFFICIAL_CLOSE_OBSERVED", "dueAt": "2026-10-30T13:33:00+08:00", "provenance": {"authority": "daily_price", "officialSource": "TWSE_TPEX_OFFICIAL:market-data", "priceObservedAt": "2026-10-05T05:33:00Z", "marketObservedAt": "2026-10-05T05:33:00Z", "priceRefreshedAt": "2026-10-05T05:34:00Z", "sourceStartedAt": "2026-10-05T05:30:00Z", "sourceFinishedAt": "2026-10-05T05:33:00Z", "priceSourceRunId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "sourceStatus": "SUCCESS"}}
+      ]
+    }
+  ],
+  "page": {"limit": 20, "offset": 0, "returned": 1, "hasMore": false, "nextOffset": null, "total": null},
+  "semantics": {
+    "purpose": "OBSERVATION_RESEARCH_EVIDENCE",
+    "priceBasis": "CURRENT_SAVED_OFFICIAL_UNADJUSTED_CLOSE",
+    "formula": "(horizonClose / referenceClose - 1) * 100",
+    "dueClock": "CONSERVATIVE_CLOSE_FINALITY_13_33_TAIPEI",
+    "priceFinalityClock": "CONSERVATIVE_CLOSE_FINALITY_13_33_TAIPEI",
+    "crossPageSnapshot": false,
+    "historicalPIT": false,
+    "interpretationLimits": [
+      "referenceClose is not execution price",
+      "observed return is not realized P&L",
+      "positive return is not BUY success",
+      "negative return is not SELL signal",
+      "source anomaly score is not investment score",
+      "null is not zero",
+      "missing price is not 0% return",
+      "NOT_YET_DUE is not failure",
+      "PRICE_UNAVAILABLE is not flat return",
+      "unadjusted closes do not adjust corporate actions or dividends",
+      "normal regular trading ends at 13:30 Taipei",
+      "closing may be postponed, so this contract waits until 13:33 Taipei",
+      "the conservative availability gate is not finality proof for every extraordinary market condition"
+    ]
+  },
+  "warnings": []
+}
