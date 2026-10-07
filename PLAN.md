@@ -1,5 +1,7 @@
 # Local Dashboard Implementation Plan
 
+**Active rule notice — 2026-10-08:** Execution follows the owner-scoped policy in [AGENTS.md](AGENTS.md) and [Personal Project Governance](docs/PERSONAL-PROJECT-GOVERNANCE.md). Verify `Neil1031` ownership, personal target/fork provenance and company exclusions before applying **BACKUP → VERIFY → MODIFY → ACTIVATE → READBACK**. The same approved work includes its necessary integration/activation/readback without repeated merge/deploy/DB approval. Historical goals, Stage Gates, assignments and results below do not restart work or override the current policy; product contracts and new-goal scope remain intact.
+
 ## Goal
 
 Build a **local-only scheduler observability dashboard** for Windows.
@@ -704,11 +706,11 @@ Integration tests may use fixture JSON representing PowerShell output so most te
 
 # Codex Working Rules
 
-This is the current Work policy. The Stage 5A/5B assignments below are retained historical planning; their new-Chat wording does not override this policy or authorize work.
+This is the current Work policy, subject to the 2026-10-08 owner-scoped policy in `AGENTS.md`. The Stage 5A/5B assignments below are retained historical planning; their new-Chat wording does not override this policy or authorize work.
 
 1. A long-lived **Manager Chat** owns requirements, PLAN updates, review, Gate decisions, and the decision to start the next stage.
-2. Follow [Personal Project Governance](docs/PERSONAL-PROJECT-GOVERNANCE.md): reuse the persistent visible `[Dashboard] 管理與初審` and `[Dashboard] Sol 實作` Works across Stages. Do not create a new Work per Stage or use hidden subagents.
-3. Perform research/debugging within the existing Works by default. Create a new Work only when the owner explicitly requests it, for a new project, when a required role is absent, or for a genuine isolation need. Large tasks still require Stage/Gate decomposition; adding Works does not replace it.
+2. Follow [Personal Project Governance](docs/PERSONAL-PROJECT-GOVERNANCE.md): reuse the persistent visible `[Dashboard] 管理與初審` and `[Dashboard] Sol 實作` Works across Stages. Sol may delegate frozen bounded tasks to Luna under the canonical scope/STOP rules; Luna adds no persistent Work or approval layer.
+3. Perform research/debugging within the existing Works; use an appropriate isolated checkout when needed. Create a new persistent Work only when the owner explicitly requests it. Use proportionate Stage/Gate decomposition for substantial tasks without redundant approval loops or repeated checks for the same approved work.
 4. Repository files are the source of truth; do not depend on previous chat context being available.
 5. Start every implementation stage with `/plan`.
 6. Work one stage at a time.
@@ -726,8 +728,8 @@ This is the current Work policy. The Stage 5A/5B assignments below are retained 
    - next stage
 13. Keep changes reviewable.
 14. Do not rewrite working scheduling scripts unless the current stage explicitly requires it.
-15. After a stage passes its Gate, commit and push the implementation branch, then stop. Manager Review decides whether it is merged.
-16. Do not merge an implementation branch to `main` until Manager Review explicitly passes it.
+15. After necessary checks and proportionate independent review pass, complete normal commit/integration/push and the required activation/readback within the same approved goal using the backup/verify policy; do not stop solely to request merge/deployment/DB authorization again.
+16. Preserve independent review, exact version/delta evidence, restorable backups and transaction/process protections. Investigate and fix issues within scope; stop only for a substantive blocker or a new goal/scope decision, and never infer new product authority from this plan.
 
 ---
 
