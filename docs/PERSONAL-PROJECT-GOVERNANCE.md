@@ -1,6 +1,6 @@
 # Personal Project Governance
 
-Status: **Cross-project default governance for personal software projects**
+Status: **Active cross-project governance for verified Neil1031 personal projects — 2026-10-08**
 
 This document records durable workflow, documentation, review, Git, deployment, and evidence rules that should not exist only in chat history. It is a **cross-project default**, not a replacement for each repository's product design or source contract.
 
@@ -12,6 +12,24 @@ Priority when instructions conflict:
 4. Tool / framework defaults.
 
 A repository-specific override should be deliberate and documented. Do not silently drift from this document.
+
+---
+
+## 0. Applicability and highest-priority scope boundary
+
+Notice version: `global-governance-neil1031-v1` (owner decision, 2026-10-08).
+
+Apply the automatic execution policy only after verifying all three facts:
+
+1. The actual GitHub repository owner is `Neil1031`, verified from live repository metadata and the checkout's remote identity.
+2. The target belongs to that personal project: its stock system, Dashboard, other personal project, or the local DB/runtime/scheduler directly used by it.
+3. The operation cannot affect company systems or company data. Inspect project purpose, target paths and dependency/deployment connections; folder name, cwd and ownership alone are insufficient.
+
+For a fork, verify its parent/source provenance. Strictly exclude company projects, company Git repositories, DBs, servers, deployment environments, local company copies, company-derived forks (unless the owner explicitly authorizes that fork), and repositories owned by anyone other than `Neil1031`. Company projects retain their independent workflows and authorization requirements. If identity, provenance or isolation cannot be proven, do not apply automatic modification/deployment/DB updates; investigate the uncertainty and continue unrelated verified work.
+
+This scope boundary has priority over every other rule in this document. A shared local entrypoint or skill does not extend it to company work or another owner. Within the verified scope, the current owner instruction supersedes older requirements for another authorization at each environment, merge, deployment or DB write in the same approved work. Product contracts, data semantics, independent review and restoration safeguards remain in force.
+
+This governance adoption changes active governance/operation documents only. It does not launch all products, deploy all installations, update all DBs, merge unrelated/unapproved product PRs, or authorize a new feature/goal. Preserve historical Stage/evidence and frozen backup bytes; update active rules and verify their actual Git and local readback.
 
 ---
 
@@ -55,8 +73,7 @@ Owns:
 - major design decisions;
 - final review and acceptance;
 - next Stage authorization;
-- merge authorization;
-- deployment authorization.
+- authorization of the work scope, including its necessary merge / deployment / DB operations under section 3.1; no repeated permission for the same approved work.
 
 GPT Manager does not own repository-internal Luna micro-task routing; Sol owns it.
 
@@ -67,7 +84,7 @@ Before implementation, perform only a concise preflight:
 - verify live main / baseline;
 - verify actual repo state against Manager assumptions;
 - detect existing contract / governance conflicts;
-- establish formal-read allowance, including permitted sources/operations and limits; absent allowance is not permission to read production data;
+- establish the necessary source / DB operations and any actual limits within the approved work; respect explicit limits and source contracts, without inventing a separate formal/test permission Gate;
 - establish production / deployment protection boundaries;
 - convert the Stage into a bounded implementation assignment.
 
@@ -239,7 +256,7 @@ Expand re-verification only when:
 - unexpected scope is found;
 - the reviewer identifies a concrete risk requiring further verification.
 
-Independent Review must not become a rerun of the entire implementation / Self-QA. Evidence reuse does not turn Luna self-check or Sol Self-QA into independent PASS: the reviewer independently checks the existing evidence and performs the proportional verification above. Formal-source reads remain subject to the existing stricter restrictions and explicit allowance; review or evidence reuse does not authorize extra reads.
+Independent Review must not become a rerun of the entire implementation / Self-QA. Evidence reuse does not turn Luna self-check or Sol Self-QA into independent PASS: the reviewer independently checks the existing evidence and performs the proportional verification above. Preserve source contracts and any actual explicit read limits. Necessary reads in the same approved work follow section 3.1; review or evidence reuse does not authorize unrelated reads or create a new environment authorization Gate.
 
 ---
 
@@ -259,7 +276,7 @@ Default sequence:
 8. Management rechecks exact SHA.
 9. Management reports `READY_FOR_MANAGER_REVIEW`.
 10. Manager performs final review.
-11. Only after GPT Manager Final PASS and explicit frozen closeout authorization: follow section 2.1.
+11. After the required review passes, complete the approved work through section 2.1 / 3.1, including its necessary closeout, activation and readback; do not wait for the same authority again.
 12. STOP after closeout acceptance; the next Stage requires separate Manager authorization.
 
 Each substantial Stage should have:
@@ -279,9 +296,9 @@ Luna is an implementation worker, not a new Gate. Stages retain Plan → Stage �
 
 Required role chain:
 
-`GPT Manager Final PASS → GPT Manager explicitly authorizes frozen closeout boundary → Sol Implementation Work converts authorized content into executable tasks → Luna may execute bounded / frozen mechanical closeout tasks → Sol verifies Luna execution / evidence → Management Work performs proportional closeout verification → GPT Manager final acceptance → STOP / next Stage separately authorized`
+`GPT Manager authorizes the work and its boundary → required candidate review / GPT Manager Final PASS → Sol freezes executable closeout inputs within that existing authority → Luna may execute bounded / frozen mechanical tasks → Sol verifies execution / evidence → Management performs proportional closeout verification → GPT Manager final acceptance → STOP / next Stage separately authorized`
 
-Final PASS of a candidate alone is not merge / deployment authorization. GPT Manager explicitly authorizes the applicable closeout actions and freezes:
+For verified section 0 projects, the approved work already covers its necessary merge / deployment / DB operations under section 3.1. Final PASS is a review result, not a new permission layer. Sol records the applicable actions and freezes the discovered executable inputs within that approved boundary before assigning mechanical closeout:
 
 - accepted candidate SHA;
 - expected live main / merge target;
@@ -313,9 +330,9 @@ Sol must not independently change:
 
 Luna may execute only frozen, authorized mechanical actions. Luna must not independently decide that merge / deployment is now permitted.
 
-If a frozen input does not match the actual environment: STOP and return to Sol. If resolving the mismatch requires changing the authorized boundary, escalate through Management / GPT Manager before proceeding.
+If a frozen input does not match the actual environment, Luna stops the affected task and returns to Sol. Sol investigates, safely resolves in-scope drift and refreezes/reverifies inputs; a real change to the approved goal, semantics or protection boundary goes through Management / GPT Manager. Do not turn a fixable in-scope mismatch into a new owner authorization Gate.
 
-Sol verifies delegated execution and evidence; Management applies section 1.5 to closeout verification, reusing the existing evidence and expanding checks only for its stated triggers. GPT Manager performs final acceptance, then work stops. This assigns the existing execution/review/acceptance responsibilities without adding an approval layer. Git / deployment rules in sections 15–16 and stricter formal-read limits remain in force; final acceptance does not introduce a post-install QA campaign.
+Sol verifies delegated execution and evidence; Management applies section 1.5 to closeout verification, reusing the existing evidence and expanding checks only for its stated triggers. GPT Manager performs final acceptance, then work stops. This assigns the existing execution/review/acceptance responsibilities without adding an approval layer. Git / deployment safeguards in sections 15–16 and actual explicit source limits remain in force. Necessary activation/readback under section 3.1 is required; it does not create a second full QA campaign.
 
 ---
 
@@ -335,7 +352,7 @@ Manager authorization is process-authoritative for normal repository work, inclu
 - known own-process start/stop;
 - normal schema migration when the Stage explicitly authorizes it;
 - Google Doc updates within section 7.4's role/scope limits; general Stage authorization does not grant Sol Owner Doc write access or automatic full-body synchronization;
-- Git merge/push after Manager approval.
+- necessary Git merge/push, deployment/activation and safe DB updates in the same approved work under section 3.1.
 
 Do not repeatedly ask the owner for the same authorization.
 
@@ -346,6 +363,24 @@ Ask again only when:
 - a platform hard gate explicitly requires direct user action in that exact Work.
 
 If a tool/platform explicitly blocks an action, do not bypass the platform policy through another shell/API/tool. Use the shortest legitimate alternative and classify it as a platform limitation rather than a product failure.
+
+---
+
+### 3.1 BACKUP → VERIFY → MODIFY → ACTIVATE → READBACK
+
+For verified section 0 projects, this is the highest-priority execution principle within a clear, already approved goal. A recoverable backup, correct bounded change and necessary passing tests allow the existing Management / Sol Works to finish the actual used program or DB in the same work.
+
+1. **BACKUP**: protect the real affected state before mutation. Record complete restoration paths/identity and verify a usable backup, including a consistent DB backup where needed. Preserve unrelated dirty/untracked files and prior backups; do not reset, clean or overwrite them.
+2. **VERIFY**: verify repository owner/provenance, actual baseline/target, approved scope, source contracts, writer safety, backup restorability and proportional tests/review. Resolve fixable problems by investigating, attempting safe fixes, verifying and adapting.
+3. **MODIFY**: perform only the changes necessary for that goal, including the real used source/config/data. DB writes use a safe transaction and appropriate concurrency/consistency controls; verify intended rows/results. On failure, rollback or restore the verified backup within the same recovery boundary.
+4. **ACTIVATE**: after the necessary tests and independent review, normally merge/push, deploy and enable the actual intended version where those actions are needed for the approved goal. Use the established SOP and exact identities. Source/TEMP PASS is evidence, not a reason to wait for another deployment permission.
+5. **READBACK**: verify the actual resulting Git/runtime/config/DB identities and relevant behavior/data. Confirm local/tracking/live refs or installed version and intended DB results as applicable. Report verified, pending and unknown states honestly; a submitted command is not proof of activation.
+
+Cancel formal/test phased authorization, asking again for each merge/deploy/DB write of the same approved work, unnecessary repeated Stage Gates, new Works for the same work, and converting a directly fixable data problem into prolonged research. Keep meaningful tests, independent review, source/null/UNKNOWN/PARTIAL semantics, transaction/backup protection and current explicit exclusions. Do not create a second full implementation/Self-QA campaign or demand owner clicking as a generic Gate.
+
+Only a real blocker after reasonable investigation stops affected work: unavailable credentials/resources, inability to prove owner/provenance or company isolation, unsafe/unrestorable state, materially ambiguous product/data outcomes, or a required change outside the approved goal/protection boundary. Report investigation, attempts, evidence, likely cause and the best next action; continue other safe work. A platform hard gate remains binding.
+
+The next unrelated Stage, goal or feature still needs owner definition/authorization. Owner Doc role limits and separately scoped body-sync work in section 7.4 remain unchanged; general implementation authority does not let Sol write Owner Docs.
 
 ---
 
@@ -777,28 +812,17 @@ Do not repeat expensive formal-source reads merely to accumulate evidence when t
 
 ## 15. Deployment policy
 
-Current owner deployment policy:
+For verified section 0 projects, use section 3.1: **BACKUP → VERIFY → MODIFY → ACTIVATE → READBACK**. Deployment and necessary runtime/config/DB actions belong to the same approved work; do not wait for a separate formal/test or deployment authorization after source/TEMP PASS.
 
-**test before install -> complete backup -> image/install swap -> necessary approved config delta -> installation ends**
+Test proportionally, verify the restorable backup and writer/protection conditions before replacement, publish the exact candidate using the established SOP, apply only the necessary bounded config delta, activate the intended version and read back actual identity plus relevant behavior/data. Restore/rollback on failure. Do not overwrite unrelated dirty installation changes or affect excluded company/other-owner systems.
 
-After an approved candidate is installed:
-
-- do not run a second installed-version QA campaign;
-- do not require owner screenshots/clicks;
-- do not proactively launch the installed Dashboard solely for testing;
-- do not make post-install HTTP/API/UI/DB/Safe Stop acceptance a completion Gate.
-
-If the application must be stopped for update, stop it as needed and preserve the desired final state. Do not start it solely for QA.
-
-If the owner later encounters a real problem during normal use, fix forward.
-
-"Installed version not re-tested" is not a blocker or PARTIAL under this policy.
+The former identity-only “installation ends” rule is superseded for this scope. Necessary activation/readback is part of completion. Avoid a second full installed-version QA campaign, generic screenshot/click Gates and unnecessary formal-source rereads; retain tests needed to prove the actual change. Desired process/Task state must match the approved goal, not be inferred from an old receipt.
 
 ---
 
 ## 16. Git integration and closeout
 
-After Manager final approval, run Git closeout only.
+Within the same approved work under section 3.1, perform necessary Git integration after required candidate review, then continue any needed deployment/activation/readback. No separate merge authorization Gate is added. A documentation-only governance assignment activates documents/Git only, not product runtime or DBs.
 
 Default closeout:
 
@@ -886,7 +910,7 @@ Before adding new workflow/governance files to an established repository, inspec
 
 Do not duplicate an existing canonical rule set.
 
-If a repository already has a stronger local rule, keep this document as the cross-project default and link/reference rather than copy-pasting competing text.
+Keep valid local technical/protection rules and link/reference rather than copy-pasting competing text. For verified section 0 projects, supersede older active per-action authorization or installation-ends rules with the current owner decision; do not preserve that conflict merely by calling it a stronger local rule.
 
 ---
 
@@ -894,6 +918,7 @@ If a repository already has a stronger local rule, keep this document as the cro
 
 Manager/management review should normally answer:
 
+- Are actual Neil1031 ownership, fork provenance, personal target and company isolation verified under section 0?
 - Is the Stage still solving the authorized problem?
 - Does the core behavior work?
 - Are important data and protected systems safe?
@@ -904,7 +929,8 @@ Manager/management review should normally answer:
 - Did only intended canonical feature/status rows change?
 - Did engineering docs remain canonical, with Owner Doc lightweight updates / pending content requests truthfully handled under section 7.4?
 - Is the exact reviewed SHA clear?
-- Is the next Stage still stopped until authorized?
+- Are backup/restoration, necessary activation and actual readback proven under section 3.1?
+- Is the next unrelated Stage still stopped until authorized?
 
 This checklist is guidance, not a reason to create unnecessary gates.
 
@@ -932,7 +958,7 @@ Do not rewrite historical evidence merely to erase an old policy. Update only ac
 
 ## 23. Adoption rule
 
-This document is the central cross-project default.
+This document is the central cross-project default for verified section 0 projects. A repository's presence under a shared workspace does not extend that scope.
 
 Each repository should either:
 
