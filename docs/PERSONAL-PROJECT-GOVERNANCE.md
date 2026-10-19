@@ -1,17 +1,19 @@
 # Personal Project Governance
 
-Status: **Active cross-project governance for verified Neil1031 personal projects — 2026-10-08**
+Status: **Active cross-project governance for verified Neil1031 personal projects — Orchestrator + Subagent Architecture V2, 2026-10-19**
 
 This document records durable workflow, documentation, review, Git, deployment, and evidence rules that should not exist only in chat history. It is a **cross-project default**, not a replacement for each repository's product design or source contract.
 
 Priority when instructions conflict:
 
-1. Explicit current owner / Manager instruction.
+1. Explicit current owner instruction and GPT Manager direction within owner-authorized scope.
 2. Intentional repository-specific rules such as `AGENTS.md`, a repository's canonical engineering design, or an approved source contract.
 3. This cross-project governance document.
 4. Tool / framework defaults.
 
-A repository-specific override should be deliberate and documented. Do not silently drift from this document.
+A repository-specific override should be deliberate and documented. Do not silently drift from this document. Orchestrator instructions coordinate execution inside existing authority; they do not grant a new goal, override source contracts or safety boundaries, or replace GPT's final Stage acceptance.
+
+The owner's 2026-10-19 V2 decision intentionally supersedes older two-Work-only / Luna-only topology, role routing and lifecycle wording on active instruction surfaces. It preserves section 0's company exclusion, section 3.1, independent review, evidence/Git traceability and section 7.4. Historical “Manager” means GPT Manager when deciding direction/acceptance, not Orchestrator authority to redefine scope.
 
 ---
 
@@ -37,108 +39,65 @@ This governance adoption changes active governance/operation documents only. It 
 
 ### 1.1 Default visible Work topology
 
-For a managed personal software project, use two persistent visible Works:
+For a managed personal software project, distinguish these roles:
 
-- `[Project] 管理與初審`
-- `[Project] Sol 實作`
+- GPT Manager / Manager Chat: highest direction and final Stage acceptance.
+- Orchestrator Work: an existing project or cross-project coordination Work, for example `[Stock] 跨專案總管理` where assigned.
+- `[Project] 管理與初審`: Independent Reviewer.
+- `[Project] Sol 實作`: Implementation Owner.
 
-Default model for both:
+Reuse the existing Orchestrator and persistent Reviewer/Sol Works across Stages. One authorized Orchestrator may coordinate several projects; this does not require a new Orchestrator per project. The previous “one Manager Chat + exactly two visible Works” ceiling is superseded, while reuse of the existing Reviewer/Sol pair remains the default. Do not create a new Work for every Stage or replace the implementation Work with a coordination-only Work.
 
-- GPT-6.1 Sol
-- High reasoning
+The existing default model for Reviewer/Sol Works is GPT-6.1 Sol with High reasoning unless explicitly configured otherwise. Actual availability and assignment determine internal worker choice; do not silently relabel a worker's model.
 
-Do not create a new Work for every Stage. Reuse the same pair across Stages so context, decisions, and evidence stay continuous.
+Sol may dispatch bounded internal subagents, including Luna or other available agents, under section 1.4. They are not new persistent `[Project] Luna Work` / agent Works or approval layers. V2 authorizes this internal delegation, not arbitrary additional management tiers or unrelated orchestration trees. Do not manufacture work or Works to fill a topology.
 
-Luna is a delegated bounded worker inside Sol Implementation Work, not a third persistent Work. Do not create `[Project] Luna Work` or recreate Management/Sol Works when a Stage changes. Sol may use Luna subagents for the tasks and limits in section 1.4; this is the owner's 2026-10-04 intentional update to the former blanket hidden-subagent prohibition. A broader orchestration tree still requires explicit owner authorization.
-
-Use another model such as Astra only for a concrete escalation need, for example:
-
-- major architecture disagreement;
-- genuinely irreversible or high-risk operation;
-- unresolved root cause after normal investigation;
-- materially conflicting evidence;
-- a focused independent review that benefits from another model.
+Use another model such as Astra for a concrete escalation need, such as major architecture disagreement, high-risk operations, unresolved root cause, conflicting evidence or focused independent review. Model choice does not transfer decision authority or relax safety limits.
 
 ### 1.2 Responsibilities
 
-**GPT Manager / Manager Chat**
+**GPT Manager / Manager Chat — highest decision layer**
 
-Owns:
+Owns roadmap, priority, Stage goal, scope/exclusions, architecture direction, major exceptions, Gate / Done when, final Stage review/acceptance and next-Stage authority. Authorizing a goal covers its necessary merge / deployment / DB operations under section 3.1; no repeated permission is needed for the same approved work. GPT does not manage daily micro-tasks or repeat routine handoffs.
 
-- roadmap and priority;
-- Stage goal;
-- product / architecture direction;
-- scope / exclusions and authorization boundaries;
-- Gate and Done when;
-- major design decisions;
-- final review and acceptance;
-- next Stage authorization;
-- authorization of the work scope, including its necessary merge / deployment / DB operations under section 3.1; no repeated permission for the same approved work.
+**Orchestrator Work — coordination**
 
-GPT Manager does not own repository-internal Luna micro-task routing; Sol owns it.
+- Track the existing lower-level Works and actively assign/resume work within the approved boundary.
+- Arrange Reviewer Preflight, Sol implementation, Independent Review, necessary in-scope fixes and re-review.
+- Turn approved direction plus Preflight constraints into a bounded execution assignment; retain an actual Sol implementation owner.
+- Consolidate status, Gate results, blockers, major deviations and next steps for GPT, with exact references.
+- Do not redo full code review, replace implementation or independent review, or micro-route Sol's internal sub-tasks.
+- Coordinate using actual available tools and event/wait facilities; do not claim unlimited automatic wakeups, guaranteed continuous execution or future monitoring without a supported and authorized mechanism.
 
-**Management Work — Preflight**
+Orchestrator may progress necessary fixes/re-review without GPT approving every small task. It cannot grant new scope, merge/deploy authority beyond the approved goal, override HOLD/STOP or give final Stage acceptance.
 
-Before implementation, perform only a concise preflight:
+**Management Work — Independent Reviewer / Preflight**
 
-- verify live main / baseline;
-- verify actual repo state against Manager assumptions;
-- detect existing contract / governance conflicts;
-- establish the necessary source / DB operations and any actual limits within the approved work; respect explicit limits and source contracts, without inventing a separate formal/test permission Gate;
-- establish production / deployment protection boundaries;
-- convert the Stage into a bounded implementation assignment.
+Before implementation, perform only a concise preflight: verify live baseline and actual state against the assignment, identify contract/governance conflicts, required source/DB operations and explicit read limits, and protection boundaries. Return the Gate/constraints to Orchestrator for dispatch. Without a real conflict/blocker, do not redesign the Stage or expand it into a long new specification.
 
-Without a real conflict/blocker, do not redesign the Stage or expand Manager instructions into another long specification. Report genuine conflicts to Manager; do not silently change product direction or scope.
+After Sol's `HANDOFF_DELIVERED`, independently inspect the necessary exact integrated Git diff, relevant source/contracts, tests and original evidence: scope, semantics, regression, protection, evidence reliability and delegated boundaries. Do not give PASS based only on Self-QA or a worker's claim. Reproduce the relevant checks proportionally under section 1.5; intervene at Preflight and important Gate/IR nodes, not as a daily implementation supervisor. Return findings, recheck the changed candidate and affected evidence, then deliver `READY_FOR_MANAGER_REVIEW` to Orchestrator for consolidation to GPT. Do not re-review unchanged portions without a concrete trigger.
 
-**Management Work — Independent Review**
+Management owns routine Owner Doc lightweight status/comment handling under section 7.4; this does not authorize design-body rewriting. Worker self-check and Sol Self-QA are never independent PASS; IR remains separate from GPT Final Review.
 
-Owns:
+**Sol Implementation Work — Implementation Owner**
 
-- supervising scope;
-- independently reviewing the exact integrated candidate after Sol's `HANDOFF_DELIVERED`: architecture, source/code, semantics, contract, scope, regression, protection, evidence reliability, Luna delegation boundary, and exact SHA;
-- returning findings to Sol;
-- rechecking fixes on the exact resulting SHA;
-- producing `READY_FOR_MANAGER_REVIEW`.
+Sol owns `/plan`, actual workspace inspection, bounded implementation planning, core work, integration, debugging, tests/Self-QA, internal worker dispatch/result verification, fixes to review findings and the final integrated candidate SHA/tree. Actively investigate and resolve implementation problems within scope. All delegated outputs remain Sol's integration and verification responsibility.
 
-Luna self-check and Sol Self-QA do not constitute independent PASS. Management review remains separate from GPT Manager Final Review.
-
-Management owns routine Owner Doc lightweight status/comment handling under section 7.4; this does not authorize design-body rewriting.
-
-**Sol Implementation Work**
-
-Sol is the implementation owner.
-
-Owns:
-
-- `/plan`;
-- inspection of the actual workspace;
-- implementation planning;
-- core implementation;
-- integration;
-- debugging;
-- tests and Self-QA;
-- Luna delegation and result verification;
-- fixing management findings;
-- final integrated candidate SHA;
-- producing a complete handoff packet with `HANDOFF_DELIVERED`.
-
-Sol should actively attempt to solve implementation problems rather than merely report them.
-
-For Owner Doc changes, Sol submits `DOC_CHANGE_REQUEST` under section 7.4 and does not edit the Google Doc.
+Sol decides useful task decomposition, worker choice and non-overlapping write ownership under section 1.4; GPT and Orchestrator do not micro-manage those tasks. Produce the proportional `HANDOFF_DELIVERED` packet through Orchestrator for IR. For Owner Doc changes, submit `DOC_CHANGE_REQUEST` under section 7.4; Sol does not edit the Google Doc.
 
 ### 1.3 Handoff marker
 
-A completed Sol-to-management handoff must explicitly use:
+A completed Sol handoff uses `HANDOFF_DELIVERED`, delivered to Orchestrator for the existing Reviewer. Reviewer verifies the result independently and returns `READY_FOR_MANAGER_REVIEW` through Orchestrator to GPT. These are delivery/review states, not new approval layers or proof of activation/acceptance.
 
-`HANDOFF_DELIVERED`
+Use incremental handoffs: repo/Work, branch, exact integrated commit SHA/tree, Issue/PR and evidence references, changed paths, completed/pending results, Gate/STOP/limits and next action. Include delegated scope, actual worker/model identity and verification only where used. Do not paste full history or treat an intermediate worker SHA as the integrated candidate.
 
-Management should acknowledge receipt and independently verify the result.
+### 1.4 Sol internal subagents / bounded tasks
 
-Include delegated task scope, worker/model identity, changed paths, verification results and any STOP/escalation in the proportional handoff evidence. Bind the final packet to the integrated candidate SHA; a worker's intermediate SHA is not the integrated candidate.
+Sol may use Luna or other available internal agents for independently bounded code, tests, documentation, discovery and verification. Start with roughly 2–3 subagents when parallel work is useful; this is not a quota or a requirement to create agents. A small or single-document task may be done directly. Do not split work just to fill slots or reduce verification quality.
 
-### 1.4 Luna delegated bounded tasks
+Specify allowed paths/actions, exact inputs/baseline and interface, expected output, verification criteria, protection boundaries and STOP conditions. Give each changed file one writer at a time, or serialize explicit ownership transfers; avoid concurrent same-file edits. Sol integrates and verifies every result. GPT/Orchestrator do not micro-dispatch these internal tasks.
 
-Sol should preferentially delegate low-ambiguity, machine-verifiable, easily reversible tasks to Luna. Each assignment specifies allowed paths/actions, inputs and baseline, expected output, verification command/criteria, protection boundaries and STOP conditions. Sol verifies results and integrates them; delegation neither expands Stage authority nor creates another approval layer.
+Luna remains the preferred worker for low-ambiguity, machine-verifiable, easily reversible tasks such as the following. Other agents may handle bounded implementation/investigation appropriate to their capabilities, but cannot independently redefine architecture, contracts, semantics, safety, scope or acceptance. Delegation adds no authority or approval layer.
 
 **Discovery**
 
@@ -187,7 +146,7 @@ Existing Git/deployment rules in sections 15–16 still apply. Frozen inputs alo
 
 Follow the frozen closeout role chain and boundary in section 2.1.
 
-**Luna must not independently own**
+**Luna must not independently own these decisions**
 
 - architecture;
 - source contract design;
@@ -204,9 +163,9 @@ Follow the frozen closeout role chain and boundary in section 2.1.
 - scope expansion;
 - acceptance decisions.
 
-**Luna STOP / escalation**
+**Delegated worker STOP / escalation**
 
-Luna must stop the affected task and report to Sol when it encounters:
+Every delegated worker, including Luna, must stop the affected task and report to Sol when it encounters:
 
 - unexpected diff/state;
 - main moved;
@@ -218,7 +177,7 @@ Luna must stop the affected task and report to Sol when it encounters:
 - destructive action outside explicit authorization;
 - inability to prove correctness/safety under current rules.
 
-Report the observed state, actions already taken, evidence and unresolved issue. Do not independently expand research, architecture or modification scope, repair outside the assignment, or retry destructive operations. Sol investigates, safely fixes/reassigns within existing authority, or escalates an actual scope/design/authorization decision through the existing Management/Manager path. This worker STOP rule limits Luna autonomy; Sol retains the existing investigate → attempt → verify → adapt → continue responsibility.
+Report the observed state, actions already taken, evidence and unresolved issue. Do not independently expand research, architecture or modification scope, repair outside the assignment, or retry destructive operations. Sol investigates, safely fixes/reassigns within existing authority, or escalates an actual scope/design/authorization decision through Orchestrator with Reviewer evidence to GPT as needed. This worker STOP rule limits delegated autonomy; Sol retains the existing investigate → attempt → verify → adapt → continue responsibility. Necessary dangerous operations remain stopped while a genuine safety/authority blocker is unresolved.
 
 **Purpose**
 
@@ -226,7 +185,7 @@ Reduce Sol's time spent on repo archaeology, mechanical edits, repetitive tests,
 
 ### 1.5 Evidence reuse / proportional review
 
-Produce the same evidence once by default. When Sol / Luna has already produced verifiable evidence, later roles should preferentially validate that evidence rather than regenerate the entire set:
+Produce the same evidence once by default. When Sol / delegated workers have already produced verifiable evidence, later roles should preferentially validate that evidence rather than regenerate the entire set:
 
 - hashes;
 - manifests;
@@ -256,7 +215,15 @@ Expand re-verification only when:
 - unexpected scope is found;
 - the reviewer identifies a concrete risk requiring further verification.
 
-Independent Review must not become a rerun of the entire implementation / Self-QA. Evidence reuse does not turn Luna self-check or Sol Self-QA into independent PASS: the reviewer independently checks the existing evidence and performs the proportional verification above. Preserve source contracts and any actual explicit read limits. Necessary reads in the same approved work follow section 3.1; review or evidence reuse does not authorize unrelated reads or create a new environment authorization Gate.
+Independent Review must not become a rerun of the entire implementation / Self-QA. Evidence reuse does not turn delegated self-check or Sol Self-QA into independent PASS: the reviewer independently checks the existing evidence and performs the proportional verification above. Preserve source contracts and any actual explicit read limits. Necessary reads in the same approved work follow section 3.1; review or evidence reuse does not authorize unrelated reads or create a new environment authorization Gate.
+
+### 1.6 Context, coordination and efficiency
+
+Prefer incremental handoffs and exact commit SHA/tree, Issue and evidence references. Re-read necessary changed instructions/diffs and affected evidence; do not unconditionally reload all documents or history. Revalidate identities, actual authorization and relevant safety boundaries when they may have changed.
+
+Use available event waits / bounded status waits instead of short-interval busy polling. Track actual execution/delivery/review states separately. Orchestrator primarily passes status, Gate, blockers and next action; avoid full implementation packets or repeated full review at every hop. Tool capability limits are real: a wait/notification is not an unlimited autonomous scheduler or proof a Work resumed.
+
+Compare old/new elapsed time, actual available token/quota measurements and review quality using comparable scope and evidence. Report measurement source and limitations; unavailable or unmeasured values remain `NOT_MEASURED` / `UNKNOWN`. Do not invent token savings or infer review quality from parallelism alone. Reuse necessary checks and recorded evidence; parallelization must not create meaningless work or weaken verification.
 
 ---
 
@@ -264,20 +231,16 @@ Independent Review must not become a rerun of the entire implementation / Self-Q
 
 Default sequence:
 
-`GPT Manager → Management Work Preflight → Sol Implementation Work → Luna delegated bounded tasks → Sol integration / Self-QA → Management Work Independent Review → GPT Manager Final Review`
+`GPT Stage direction / Gate → Orchestrator dispatch → Independent Reviewer Preflight → Sol + internal subagents → Sol Self-QA → Independent Reviewer IR → Orchestrator consolidation → GPT Final Review`
 
-1. Manager defines Stage.
-2. Management performs concise preflight against actual baseline, contracts, formal-read allowance and protection boundaries.
-3. Management gives Sol a bounded implementation assignment.
-4. Sol runs `/plan`, inspects/plans/implements, routes suitable bounded tasks to Luna, verifies delegated results, integrates and performs Self-QA.
-5. Sol sends a complete packet bound to the final integrated candidate SHA, marked `HANDOFF_DELIVERED`.
-6. Management independently reviews the exact integrated candidate and evidence, including Luna delegation boundaries.
-7. Sol fixes findings.
-8. Management rechecks exact SHA.
-9. Management reports `READY_FOR_MANAGER_REVIEW`.
-10. Manager performs final review.
-11. After the required review passes, complete the approved work through section 2.1 / 3.1, including its necessary closeout, activation and readback; do not wait for the same authority again.
-12. STOP after closeout acceptance; the next Stage requires separate Manager authorization.
+1. GPT defines authorized Stage direction, scope, Gate and Done when.
+2. Orchestrator arranges a concise Reviewer Preflight against actual baseline, contracts, explicit read limits and protection boundaries, then dispatches Sol within those constraints.
+3. Sol runs `/plan`, inspects/plans/implements, delegates useful bounded tasks, verifies/integrates results and performs Self-QA.
+4. Sol delivers an incremental packet bound to the exact final integrated SHA/tree with `HANDOFF_DELIVERED`; Orchestrator arranges IR.
+5. Reviewer independently checks the necessary exact diff, tests and original evidence, including delegated boundaries. Orchestrator arranges in-scope fixes/re-review; Sol fixes findings and Reviewer rechecks affected changes on the resulting exact SHA.
+6. Reviewer returns `READY_FOR_MANAGER_REVIEW`; Orchestrator consolidates Gate results, deviations, limits and next action for GPT Final Review.
+7. After required review, complete necessary closeout / activation / readback under sections 2.1 / 3.1 without asking for the same authority again. Orchestrator coordinates delivery; GPT owns final Stage acceptance.
+8. STOP after closeout acceptance; a new goal or next Stage requires separate GPT/owner direction. Orchestrator may arrange necessary fixes/re-review inside the current authorization, not redefine that authorization.
 
 Each substantial Stage should have:
 
@@ -290,15 +253,15 @@ Each substantial Stage should have:
 
 Do not add extra Gates solely for hypothetical edge cases.
 
-Luna is an implementation worker, not a new Gate. Stages retain Plan → Stage → Gate → Implementation → Self-QA and existing Gate / Done when requirements. A Stage without a suitable bounded task does not invent work merely to use Luna.
+Internal subagents are implementation workers, not a new Gate. Stages retain Plan → Stage → Gate → Implementation → Self-QA and existing Gate / Done when requirements. Do not invent tasks merely to use agents.
 
 ### 2.1 Frozen closeout handoff
 
 Required role chain:
 
-`GPT Manager authorizes the work and its boundary → required candidate review / GPT Manager Final PASS → Sol freezes executable closeout inputs within that existing authority → Luna may execute bounded / frozen mechanical tasks → Sol verifies execution / evidence → Management performs proportional closeout verification → GPT Manager final acceptance → STOP / next Stage separately authorized`
+`GPT authorizes direction / boundary → Orchestrator arranges required candidate IR / GPT Final Review → Sol freezes closeout inputs within existing authority → Sol / delegated workers execute authorized bounded tasks → Sol verifies evidence → Reviewer proportionally verifies closeout → Orchestrator consolidates → GPT final Stage acceptance → STOP / next Stage separately authorized`
 
-For verified section 0 projects, the approved work already covers its necessary merge / deployment / DB operations under section 3.1. Final PASS is a review result, not a new permission layer. Sol records the applicable actions and freezes the discovered executable inputs within that approved boundary before assigning mechanical closeout:
+For verified section 0 projects, the approved work already covers its necessary merge / deployment / DB operations under section 3.1. Required candidate IR / GPT Final PASS is a review result, not a new permission layer. Orchestrator schedules that review and necessary corrections; it does not add another merge/deploy approval or substitute for IR/GPT acceptance. Sol records the applicable actions and freezes the discovered executable inputs within that approved boundary before assigning mechanical closeout:
 
 - accepted candidate SHA;
 - expected live main / merge target;
@@ -315,7 +278,7 @@ State an explicit no-delta / not-applicable boundary where appropriate; absence 
 Sol may decide:
 
 - execution-order details;
-- Luna task granularity;
+- delegated task granularity;
 - how to implement a permitted SOP.
 
 Sol must not independently change:
@@ -328,17 +291,17 @@ Sol must not independently change:
 - deployment boundary;
 - product semantics.
 
-Luna may execute only frozen, authorized mechanical actions. Luna must not independently decide that merge / deployment is now permitted.
+Any delegated closeout worker may execute only frozen, authorized mechanical actions; no worker or Orchestrator independently grants merge / deployment permission beyond the existing approved work.
 
-If a frozen input does not match the actual environment, Luna stops the affected task and returns to Sol. Sol investigates, safely resolves in-scope drift and refreezes/reverifies inputs; a real change to the approved goal, semantics or protection boundary goes through Management / GPT Manager. Do not turn a fixable in-scope mismatch into a new owner authorization Gate.
+If a frozen input does not match the actual environment, the delegated worker stops the affected task and returns to Sol. Sol investigates, safely resolves in-scope drift and refreezes/reverifies inputs; a real change to the approved goal, semantics or protection boundary goes through Orchestrator with Reviewer evidence to GPT. Do not turn a fixable in-scope mismatch into a new owner authorization Gate.
 
-Sol verifies delegated execution and evidence; Management applies section 1.5 to closeout verification, reusing the existing evidence and expanding checks only for its stated triggers. GPT Manager performs final acceptance, then work stops. This assigns the existing execution/review/acceptance responsibilities without adding an approval layer. Git / deployment safeguards in sections 15–16 and actual explicit source limits remain in force. Necessary activation/readback under section 3.1 is required; it does not create a second full QA campaign.
+Sol verifies delegated execution and evidence; Reviewer applies section 1.5 to closeout verification, reusing evidence and expanding checks only for its stated triggers. Orchestrator consolidates the result for GPT final acceptance, then work stops. This assigns the existing execution/review/acceptance responsibilities without adding an approval layer. Git / deployment safeguards in sections 15–16 and actual explicit source limits remain in force. Necessary activation/readback under section 3.1 is required; it does not create a second full QA campaign.
 
 ---
 
 ## 3. Authorization and re-asking policy
 
-Manager authorization is process-authoritative for normal repository work, including:
+Owner / GPT Manager authorization is process-authoritative for normal repository work; Orchestrator arranges execution inside that existing authority, including:
 
 - code changes;
 - documentation changes;
@@ -871,13 +834,15 @@ Update such current-state wording opportunistically during the next normal engin
 
 ## 18. Work naming
 
-When a Work is created or instructions are prepared for one, give it a clear bracketed purpose name:
+When an authorized visible Work is created or instructions are prepared for one, give it a clear bracketed purpose name. Reuse existing Works per section 1.1; naming is not permission to create a new Work:
 
 `[Project] 管理與初審`
 
 `[Project] Sol 實作`
 
-or another concise `[xxx]` purpose label.
+`[Project] 總管理` / an assigned cross-project Orchestrator name
+
+or another concise `[xxx]` purpose label. Internal subagents are not additional persistent Works; preserve existing names and continuity rather than rename/recreate them to adopt V2.
 
 Avoid generic unnamed Works.
 
@@ -950,7 +915,10 @@ Repository/workspace `AGENTS.md` files may define engineering execution details 
 
 Known legacy conflict to remove during normal local-rule maintenance:
 
-- older Local Dashboard planning text that says to create a new implementation/research/debug Chat per Stage conflicts with the current persistent two-visible-Work policy. The two persistent Works are the current default.
+- old per-Stage implementation/research/debug Chats conflict with reusing the existing Reviewer/Sol pair and assigned Orchestrator;
+- the former exactly-two-visible-Works ceiling and Luna-only delegation conflict with V2 section 1; Sol may use Luna or other internal agents, without creating extra persistent worker Works;
+- old direct Management-to-Sol / Sol-to-GPT routing is superseded by section 2's Orchestrator coordination, while independent review and GPT acceptance remain distinct;
+- older generic “Manager” wording is interpreted by section 1.2: GPT decides direction/final acceptance; Orchestrator only coordinates within existing authority. It cannot turn a historical approval into a new scope or replace a source contract/safety limit.
 
 Do not rewrite historical evidence merely to erase an old policy. Update only active/current instruction surfaces.
 
@@ -968,3 +936,5 @@ Each repository should either:
 Do not copy the full document into every repository unless there is a concrete offline/tooling reason to do so. Repetition creates drift.
 
 Repository product semantics remain authoritative in that repository's canonical engineering design and approved source contracts.
+
+Adopt V2 at the next safe handoff point in existing work. Do not cancel, restart, redo accepted checks or lift STOP/HOLD/PAUSED merely because governance changed. Adopting this governance-document update activates only the specified documents/Git; it does not authorize code, DB, Task/scheduling or deployment-setting changes, unrelated repository/skill changes, company access or rewriting historical backups. Necessary product actions still require their own already approved goal under sections 0 / 3.1. Other repositories may adopt the canonical by reference during authorized maintenance, not by a bulk rewrite.
