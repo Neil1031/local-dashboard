@@ -1,6 +1,6 @@
 # Personal Project Governance
 
-Status: **Active cross-project governance for verified Neil1031 personal projects — Orchestrator + Subagent Architecture V2, 2026-10-19**
+Status: **Active cross-project governance for verified Neil1031 personal projects — V2 roles with lightweight delivery, 2026-10-20**
 
 This document records durable workflow, documentation, review, Git, deployment, and evidence rules that should not exist only in chat history. It is a **cross-project default**, not a replacement for each repository's product design or source contract.
 
@@ -14,6 +14,8 @@ Priority when instructions conflict:
 A repository-specific override should be deliberate and documented. Do not silently drift from this document. Orchestrator instructions coordinate execution inside existing authority; they do not grant a new goal, override source contracts or safety boundaries, or replace GPT's final Stage acceptance.
 
 The owner's 2026-10-19 V2 decision intentionally supersedes older two-Work-only / Luna-only topology, role routing and lifecycle wording on active instruction surfaces. It preserves section 0's company exclusion, section 3.1, independent review, evidence/Git traceability and section 7.4. Historical “Manager” means GPT Manager when deciding direction/acceptance, not Orchestrator authority to redefine scope.
+
+**2026-10-20 Owner override — lightweight delivery:** Sol implements, tests and fixes; Management performs independent CODE REVIEW, not a second QA campaign. Ordinary delivery needs only the Git SHA/PR, tests run with results, and review conclusion, usually a few PR lines. Once the reviewed/tested Git version and intended target are confirmed, complete authorized merge/deployment with a recoverable previous version and Sol's basic startup/function check. Do not require routine raw/hash inventories, receipts, screenshots, evidence bundles, repeated backups or another GPT deployment approval. This overrides conflicting older routine evidence/retest/closeout requirements in active instructions or skill templates; specific real risks still receive targeted handling. Sections 0, source/contracts/rights/PIT limits, truthful UNKNOWN/PARTIAL and actual HOLD/spent/STOP boundaries remain binding. GPT retains direction and one Final at actual Stage completion.
 
 ---
 
@@ -52,13 +54,13 @@ The existing default model for Reviewer/Sol Works is GPT-6.1 Sol with High reaso
 
 Sol may dispatch bounded internal subagents, including Luna or other available agents, under section 1.4. They are not new persistent `[Project] Luna Work` / agent Works or approval layers. V2 authorizes this internal delegation, not arbitrary additional management tiers or unrelated orchestration trees. Do not manufacture work or Works to fill a topology.
 
-Use another model such as Astra for a concrete escalation need, such as major architecture disagreement, high-risk operations, unresolved root cause, conflicting evidence or focused independent review. Model choice does not transfer decision authority or relax safety limits.
+Use another model such as Astra for a concrete escalation need, such as major architecture disagreement, high-risk operations, unresolved root cause, conflicting evidence or focused independent review. Model choice does not transfer decision authority or relax safety limits. Use Codex/Sol for authorized implementation; do not switch Claude accounts or models to circumvent a quota or restriction.
 
 ### 1.2 Responsibilities
 
 **GPT Manager / Manager Chat — highest decision layer**
 
-Owns roadmap, priority, Stage goal, scope/exclusions, architecture direction, major exceptions, Gate / Done when, final Stage review/acceptance and next-Stage authority. Authorizing a goal covers its necessary merge / deployment / DB operations under section 3.1; no repeated permission is needed for the same approved work. GPT does not manage daily micro-tasks or repeat routine handoffs.
+Owns roadmap, priority, Stage goal, scope/exclusions, architecture direction, major exceptions, Gate / Done when, final Stage review/acceptance and next-Stage authority. Authorizing a goal covers its necessary merge / deployment / DB operations under section 3.1; no repeated permission is needed for the same approved work. GPT does not manage daily micro-tasks, repeatedly chase routine reviews or approve each deployment. Submit one Final when a real Stage is complete; normal in-scope iterations continue through Sol, code review and deployment.
 
 **Orchestrator Work — coordination**
 
@@ -75,21 +77,27 @@ Orchestrator may progress necessary fixes/re-review without GPT approving every 
 
 Before implementation, perform only a concise preflight: verify live baseline and actual state against the assignment, identify contract/governance conflicts, required source/DB operations and explicit read limits, and protection boundaries. Return the Gate/constraints to Orchestrator for dispatch. Without a real conflict/blocker, do not redesign the Stage or expand it into a long new specification.
 
-After Sol's `HANDOFF_DELIVERED`, independently inspect the necessary exact integrated Git diff, relevant source/contracts, tests and original evidence: scope, semantics, regression, protection, evidence reliability and delegated boundaries. Do not give PASS based only on Self-QA or a worker's claim. Reproduce the relevant checks proportionally under section 1.5; intervene at Preflight and important Gate/IR nodes, not as a daily implementation supervisor. Return findings, recheck the changed candidate and affected evidence, then deliver `READY_FOR_MANAGER_REVIEW` to Orchestrator for consolidation to GPT. Do not re-review unchanged portions without a concrete trigger.
+After Sol's `HANDOFF_DELIVERED`, independently CODE REVIEW the exact diff against requirements/contracts and inspect whether the reported tests cover the change. Review the source itself; Self-QA PASS is not a substitute for independent judgment. By default, do not rerun tests, reconstruct raw evidence, demand hash/receipt/screenshot bundles or conduct a second installed QA campaign. If a concrete bug, missing case or contradiction is found, ask Sol to add the targeted test/fix, then re-review the affected diff and result. Additional independent reproduction is exceptional and limited to a specific unresolved concern, not a routine Gate.
 
-Management owns routine Owner Doc lightweight status/comment handling under section 7.4; this does not authorize design-body rewriting. Worker self-check and Sol Self-QA are never independent PASS; IR remains separate from GPT Final Review.
+Return the concise review conclusion/findings through Orchestrator. `READY_FOR_MANAGER_REVIEW` remains a handoff marker, not a requirement for GPT to review each PR or deployment. Management retains Owner Doc responsibilities under section 7.4; those role limits are unchanged. Worker self-check/Sol Self-QA never constitutes independent code-review PASS.
 
 **Sol Implementation Work — Implementation Owner**
 
-Sol owns `/plan`, actual workspace inspection, bounded implementation planning, core work, integration, debugging, tests/Self-QA, internal worker dispatch/result verification, fixes to review findings and the final integrated candidate SHA/tree. Actively investigate and resolve implementation problems within scope. All delegated outputs remain Sol's integration and verification responsibility.
+Sol owns `/plan`, actual workspace inspection, bounded implementation planning, core work, integration, debugging, tests/Self-QA, internal worker dispatch/result verification, fixes to review findings and the final integrated candidate SHA/tree. Actively investigate and resolve implementation problems within scope. All delegated outputs remain Sol's integration and verification responsibility. Sol runs the relevant tests and necessary unit tests/build, fixes failures, and performs the basic startup and changed-function check after installation where applicable. A documentation-only change needs document/diff checks, not product test campaigns.
 
 Sol decides useful task decomposition, worker choice and non-overlapping write ownership under section 1.4; GPT and Orchestrator do not micro-manage those tasks. Produce the proportional `HANDOFF_DELIVERED` packet through Orchestrator for IR. For Owner Doc changes, submit `DOC_CHANGE_REQUEST` under section 7.4; Sol does not edit the Google Doc.
 
 ### 1.3 Handoff marker
 
-A completed Sol handoff uses `HANDOFF_DELIVERED`, delivered to Orchestrator for the existing Reviewer. Reviewer verifies the result independently and returns `READY_FOR_MANAGER_REVIEW` through Orchestrator to GPT. These are delivery/review states, not new approval layers or proof of activation/acceptance.
+Use `HANDOFF_DELIVERED` for a completed handoff. For an ordinary change, record only:
 
-Use incremental handoffs: repo/Work, branch, exact integrated commit SHA/tree, Issue/PR and evidence references, changed paths, completed/pending results, Gate/STOP/limits and next action. Include delegated scope, actual worker/model identity and verification only where used. Do not paste full history or treat an intermediate worker SHA as the integrated candidate.
+- Git SHA or PR identifying the implementation.
+- Tests actually run and their results (or an honest not-run / not-applicable reason).
+- Independent code-review conclusion or pending review/findings.
+
+At each Stage completion, Sol and Reviewer each add a short account of what they did, their actual start/finish timestamps and elapsed time, plus their test or code-review result, to the normal PR/handoff. Orchestrator summarizes Stage outputs, Sol implementation/testing time, Reviewer review time, whole-Stage wall-clock time and completion/deployment status for Owner. Separate waiting/handoff time when recorded; do not add overlapping parallel durations and call that total elapsed time. Missing timestamps or duration are `UNKNOWN`, never estimated. Do not create JSON receipts, screenshots, a measurement project or extra proof from notification-only roles.
+
+A few PR lines are sufficient. Mention a real blocker, limitation or necessary existing source reference when relevant; do not create a separate evidence packet, multiple JSON reports, full workspace inventory or mandatory tree/hash manifest. Delivery, review, deployment and Stage acceptance remain distinct truthful states. Orchestrator consolidates a real Stage completion for one GPT Final.
 
 ### 1.4 Sol internal subagents / bounded tasks
 
@@ -116,35 +124,11 @@ Luna remains the preferred worker for low-ambiguity, machine-verifiable, easily 
 - schema/example synchronization against an already approved contract, without schema/migration design;
 - explicitly specified status/document updates.
 
-**Verification**
+**Verification and Git / deployment delegation**
 
-- Git SHA / branch / PR;
-- parent / tree / ancestry;
-- changed-path verification;
-- raw hashes;
-- manifests;
-- byte parity;
-- generator execution/checks;
-- i18n key / placeholder parity;
-- `git diff --check`;
-- static asset parity;
-- bounded test command execution.
+Workers may run relevant tests, builds, diff checks or version checks assigned by Sol. Hashes, manifests, byte parity or installed identity inventories are optional tools for a concrete mismatch or risk, not routine deliverables or default acceptance Gates.
 
-**Frozen closeout / deployment**
-
-Delegate only after scope, accepted SHA, expected main and exact runtime/config delta (including an explicit no-delta) are frozen and the action is authorized:
-
-- build/package;
-- backup;
-- candidate freeze;
-- exact blob/hash verification;
-- mechanical no-ff closeout;
-- frozen overlay/image deployment;
-- installed identity/protection evidence.
-
-Existing Git/deployment rules in sections 15–16 still apply. Frozen inputs alone do not authorize merge or production operations. Installed identity/protection evidence does not introduce a post-install QA campaign.
-
-Follow the frozen closeout role chain and boundary in section 2.1.
+For authorized merge/deployment, give a worker the reviewed/tested Git version, correct target and applicable protection/rollback limits. Keep one recoverable previous version; reuse an adequate existing backup. Use sections 2.1 / 3.1 / 15–16, without inventing frozen-input forms, repeated backups or a separate closeout-review campaign. Delegation does not grant new production/source permissions; explicit read limits and actual safety boundaries still apply.
 
 **Luna must not independently own these decisions**
 
@@ -181,55 +165,27 @@ Report the observed state, actions already taken, evidence and unresolved issue.
 
 **Purpose**
 
-Reduce Sol's time spent on repo archaeology, mechanical edits, repetitive tests, fixtures, hashes/manifests, parity, build/package, frozen closeout and routine deployment evidence. Sol remains accountable for the integrated result. Do not add an approval layer to achieve this.
+Reduce Sol's time spent on suitable bounded discovery, edits, tests and builds; do not create evidence-production work merely to delegate it. Sol remains accountable for the integrated result. Do not add an approval layer to achieve this.
 
-### 1.5 Evidence reuse / proportional review
+### 1.5 Independent code review / testing ownership
 
-Produce the same evidence once by default. When Sol / delegated workers have already produced verifiable evidence, later roles should preferentially validate that evidence rather than regenerate the entire set:
+Sol owns testing and necessary unit tests/builds, debugging and fixes. Reviewer owns independent CODE REVIEW of the exact diff, requirement/contract compliance and adequacy of the reported tests. The default is review of code and test coverage, not re-execution or proof-bundle production. Retain useful existing test output; the ordinary handoff is section 1.3's brief Git/tests/review summary.
 
-- hashes;
-- manifests;
-- test receipts;
-- candidate identity;
-- Git ancestry/tree evidence;
-- package identity;
-- deployment receipts.
-
-Management Independent Review defaults to proportional verification focused on:
-
-- exact SHA / diff / scope;
-- Stage Gate evidence;
-- key tests;
-- source / semantic assertions;
-- whether `UNKNOWN` / `PARTIAL` / null was incorrectly hidden or promoted to success;
-- whether the Stage contract was violated;
-- protection / deployment boundary;
-- consistency across evidence.
-
-Expand re-verification only when:
-
-- evidence contradicts other evidence;
-- hash / identity mismatch occurs;
-- test results are not trustworthy;
-- source bytes changed;
-- unexpected scope is found;
-- the reviewer identifies a concrete risk requiring further verification.
-
-Independent Review must not become a rerun of the entire implementation / Self-QA. Evidence reuse does not turn delegated self-check or Sol Self-QA into independent PASS: the reviewer independently checks the existing evidence and performs the proportional verification above. Preserve source contracts and any actual explicit read limits. Necessary reads in the same approved work follow section 3.1; review or evidence reuse does not authorize unrelated reads or create a new environment authorization Gate.
+A concrete concern justifies a targeted request to Sol: identify the suspected problem or missing case, request only the relevant test/fix, and review that change/result. Do not launch a parallel full QA campaign. DB consistency, security and financial-source authenticity checks are required only as the actual change needs them; a missing rights/PIT/source proof stays UNKNOWN or blocked. This simplification never upgrades an unverified claim, invents test results or consumes a spent source allowance.
 
 ### 1.6 Context, coordination and efficiency
 
-Prefer incremental handoffs and exact commit SHA/tree, Issue and evidence references. Re-read necessary changed instructions/diffs and affected evidence; do not unconditionally reload all documents or history. Revalidate identities, actual authorization and relevant safety boundaries when they may have changed.
+Prefer incremental handoffs with the Git SHA/PR and relevant existing Issue/test/source references. Tree/hash references are optional when they resolve a concrete identity question. Re-read necessary changed instructions/diffs and affected evidence; do not unconditionally reload all documents or history. Revalidate identities, actual authorization and relevant safety boundaries when they may have changed.
 
 The owner authorized the following operational defaults on 2026-10-19, within section 0 and the current task's authority:
 
 - **Wait for known tasks:** prefer a supported native event-aware wait with an explicit target/host and the latest cursor. Use at most 30,000 ms per request, shortened by the remaining deadline or the tool's documented limit; a completed event may return earlier. Confirm the matching task/run/turn terminal result, then stop waiting. A wait timeout is not task failure. Preserve ERROR, STOP, blockers and new-input handling. If native waiting is unavailable, use a supported bounded status check and report the limitation; do not simulate event waiting with a fixed sleep or short-interval busy polling.
 - **Select useful tool output:** choose the fields or relevant source ranges needed for the decision before returning large results to the model. Retain errors, findings, authorization/STOP, UNKNOWN/PARTIAL and evidence identity where relevant. Keep the permitted original evidence traceable by path/ref/hash or receipt, and read the necessary original or additional ranges when the summary is insufficient. No output limit may silently hide a finding or required instruction; an initial required instruction read remains required.
-- **Reuse scripts, results and reports:** prefer existing suitable tools and verifiable machine-readable evidence under section 1.5. Generate factual tables from those results and reuse one canonical report; the model adds changed conclusions, findings, review status and limits instead of rewriting unchanged facts or building a new measurement/reporting stack by default. Give a recipient the necessary baseline when it is not already available. Do not add metadata-query or delta-read rounds merely to shorten text, assume a new context knows another Work's history, or force prompt compression / incremental protocols whose total benefit has not been established.
+- **Reuse scripts, results and reports:** prefer existing suitable tools, test output and concise PR/change summaries under sections 1.3–1.5. Reuse an existing report only if useful; do not require a report, machine-readable evidence or a new reporting system for ordinary work. When a table is needed, derive it from actual existing results; the model adds changed conclusions, findings, review status and limits instead of rewriting unchanged facts or building a new measurement/reporting stack by default. Give a recipient the necessary baseline when it is not already available. Do not add metadata-query or delta-read rounds merely to shorten text, assume a new context knows another Work's history, or force prompt compression / incremental protocols whose total benefit has not been established.
 
-Track actual execution/delivery/review states separately. Orchestrator primarily passes status, Gate, blockers and next action; avoid full implementation packets or repeated full review at every hop. Tool capability limits are real: a wait/notification is not an unlimited autonomous scheduler or proof a Work resumed. Adopt these defaults at a safe handoff without restarting work or lifting STOP/HOLD/PAUSED. This update does not change model/Work settings or authorize product, DB, schedule or deployment changes; all existing authorization, Gate, Self-QA, Independent Review and GPT Final Review responsibilities remain intact.
+Track actual execution/delivery/review states separately. Orchestrator primarily passes status, Gate, blockers and next action; avoid full implementation packets or repeated full review at every hop. Tool capability limits are real: a wait/notification is not an unlimited autonomous scheduler or proof a Work resumed. Adopt these defaults at a safe handoff without restarting work or lifting STOP/HOLD/PAUSED. This update does not change model/Work settings or authorize product, DB, schedule or deployment changes; authorization and safety boundaries remain intact; testing/code-review duties and one GPT Final at real Stage completion follow the 2026-10-20 override, without routine evidence or retest obligations.
 
-Compare old/new elapsed time, actual available token/quota measurements and review quality using comparable scope and evidence. Include execution, coordination and review roles, available input/cached/non-cached/output usage, tool calls, supplemental reads and rework; report the cutoff and any missing tail. Use already authorized normal work and existing records for observation, without creating benchmark Works or rerunning accepted stages for this rollout. Report measurement source and limitations; unavailable or unmeasured values remain `NOT_MEASURED` / `UNKNOWN`. Shorter text or an observer-only token delta is not proof of monetary or whole-workflow savings. Do not invent token savings or infer review quality from parallelism alone. Reuse necessary checks and recorded evidence; parallelization must not create meaningless work or weaken verification.
+If an efficiency comparison is requested, use existing all-role records and state the measurement scope/cutoff, overlapping work and missing tail. Unavailable usage or old/new comparison values remain `NOT_MEASURED` / `UNKNOWN`; shorter text, observer-only usage or parallelism does not prove savings or review quality. Do not create benchmark Works, rerun accepted Stages or add a measurement/reporting project. Normal Stage work/time reporting is the short record in section 1.3.
 
 ---
 
@@ -237,16 +193,11 @@ Compare old/new elapsed time, actual available token/quota measurements and revi
 
 Default sequence:
 
-`GPT Stage direction / Gate → Orchestrator dispatch → Independent Reviewer Preflight → Sol + internal subagents → Sol Self-QA → Independent Reviewer IR → Orchestrator consolidation → GPT Final Review`
+`GPT Stage direction / scope → Orchestrator dispatch / necessary brief Preflight → Sol implementation + relevant tests → Independent CODE REVIEW → normal merge / deployment + Sol basic startup/function check → Orchestrator Stage summary → one GPT Final at real Stage completion`
 
-1. GPT defines authorized Stage direction, scope, Gate and Done when.
-2. Orchestrator arranges a concise Reviewer Preflight against actual baseline, contracts, explicit read limits and protection boundaries, then dispatches Sol within those constraints.
-3. Sol runs `/plan`, inspects/plans/implements, delegates useful bounded tasks, verifies/integrates results and performs Self-QA.
-4. Sol delivers an incremental packet bound to the exact final integrated SHA/tree with `HANDOFF_DELIVERED`; Orchestrator arranges IR.
-5. Reviewer independently checks the necessary exact diff, tests and original evidence, including delegated boundaries. Orchestrator arranges in-scope fixes/re-review; Sol fixes findings and Reviewer rechecks affected changes on the resulting exact SHA.
-6. Reviewer returns `READY_FOR_MANAGER_REVIEW`; Orchestrator consolidates Gate results, deviations, limits and next action for GPT Final Review.
-7. After required review, complete necessary closeout / activation / readback under sections 2.1 / 3.1 without asking for the same authority again. Orchestrator coordinates delivery; GPT owns final Stage acceptance.
-8. STOP after closeout acceptance; a new goal or next Stage requires separate GPT/owner direction. Orchestrator may arrange necessary fixes/re-review inside the current authorization, not redefine that authorization.
+Sol fixes test failures and concrete review findings within the approved task. Reviewer re-reads the affected diff and reported targeted tests, not a second full test campaign. Ordinary changes need section 1.3's Git/tests/review summary; do not demand a separate packet or GPT approval before or after each deployment. Orchestrator can arrange these iterations without GPT micro-dispatch.
+
+GPT retains major direction, scope/architecture exceptions, actual Stage acceptance and next-Stage authority. A required real safety/source/HOLD/STOP Gate is not waived. Once a Stage is accepted, stop at its boundary unless continued work is already explicitly authorized.
 
 Each substantial Stage should have:
 
@@ -261,47 +212,13 @@ Do not add extra Gates solely for hypothetical edge cases.
 
 Internal subagents are implementation workers, not a new Gate. Stages retain Plan → Stage → Gate → Implementation → Self-QA and existing Gate / Done when requirements. Do not invent tasks merely to use agents.
 
-### 2.1 Frozen closeout handoff
+### 2.1 Git / deployment closeout
 
-Required role chain:
+After Sol's relevant tests and independent code review, confirm that the Git version being merged/deployed is the reviewed/tested version and that the target is correct. Complete the normal authorized merge/deployment, preserving unrelated changes and a recoverable previous version; Sol performs the basic startup/changed-function confirmation. Report the version and actual result briefly. GPT receives one Final when the real Stage is complete, not a separate deployment or closeout permission request.
 
-`GPT authorizes direction / boundary → Orchestrator arranges required candidate IR / GPT Final Review → Sol freezes closeout inputs within existing authority → Sol / delegated workers execute authorized bounded tasks → Sol verifies evidence → Reviewer proportionally verifies closeout → Orchestrator consolidates → GPT final Stage acceptance → STOP / next Stage separately authorized`
+This explicitly replaces the older routine freeze-checklist / evidence-packet / independent closeout verification / pre-deploy GPT Final chain. No default per-file hash campaign, multiple receipts, full workspace inventory, repeated backup or second installed QA is required. A specific identity mismatch, conflict, unsafe state or material contract concern must still be investigated and resolved before the affected action; changes to the reviewed content receive targeted testing/code review. Explicit task/source limits, company exclusion and already-established recovery protections remain binding.
 
-For verified section 0 projects, the approved work already covers its necessary merge / deployment / DB operations under section 3.1. Required candidate IR / GPT Final PASS is a review result, not a new permission layer. Orchestrator schedules that review and necessary corrections; it does not add another merge/deploy approval or substitute for IR/GPT acceptance. Sol records the applicable actions and freezes the discovered executable inputs within that approved boundary before assigning mechanical closeout:
-
-- accepted candidate SHA;
-- expected live main / merge target;
-- allowed source/runtime paths;
-- runtime delta;
-- config delta;
-- deployment target;
-- formal-read allowance;
-- backup / protection boundary;
-- STOP conditions.
-
-State an explicit no-delta / not-applicable boundary where appropriate; absence of a value does not grant discretion to expand it.
-
-Sol may decide:
-
-- execution-order details;
-- delegated task granularity;
-- how to implement a permitted SOP.
-
-Sol must not independently change:
-
-- Stage scope;
-- accepted SHA;
-- merge target;
-- runtime/config delta;
-- formal-read quota;
-- deployment boundary;
-- product semantics.
-
-Any delegated closeout worker may execute only frozen, authorized mechanical actions; no worker or Orchestrator independently grants merge / deployment permission beyond the existing approved work.
-
-If a frozen input does not match the actual environment, the delegated worker stops the affected task and returns to Sol. Sol investigates, safely resolves in-scope drift and refreezes/reverifies inputs; a real change to the approved goal, semantics or protection boundary goes through Orchestrator with Reviewer evidence to GPT. Do not turn a fixable in-scope mismatch into a new owner authorization Gate.
-
-Sol verifies delegated execution and evidence; Reviewer applies section 1.5 to closeout verification, reusing evidence and expanding checks only for its stated triggers. Orchestrator consolidates the result for GPT final acceptance, then work stops. This assigns the existing execution/review/acceptance responsibilities without adding an approval layer. Git / deployment safeguards in sections 15–16 and actual explicit source limits remain in force. Necessary activation/readback under section 3.1 is required; it does not create a second full QA campaign.
+Sol may delegate mechanical steps within the reviewed version and approved target, but neither a worker nor Orchestrator grants new scope or source/deployment authority. No worker expands a spent quota or overrides an actual HOLD/STOP. Follow sections 3.1 / 15–16 without adding another approval layer.
 
 ---
 
@@ -339,11 +256,11 @@ If a tool/platform explicitly blocks an action, do not bypass the platform polic
 
 For verified section 0 projects, this is the highest-priority execution principle within a clear, already approved goal. A recoverable backup, correct bounded change and necessary passing tests allow the existing Management / Sol Works to finish the actual used program or DB in the same work.
 
-1. **BACKUP**: protect the real affected state before mutation. Record complete restoration paths/identity and verify a usable backup, including a consistent DB backup where needed. Preserve unrelated dirty/untracked files and prior backups; do not reset, clean or overwrite them.
-2. **VERIFY**: verify repository owner/provenance, actual baseline/target, approved scope, source contracts, writer safety, backup restorability and proportional tests/review. Resolve fixable problems by investigating, attempting safe fixes, verifying and adapting.
-3. **MODIFY**: perform only the changes necessary for that goal, including the real used source/config/data. DB writes use a safe transaction and appropriate concurrency/consistency controls; verify intended rows/results. On failure, rollback or restore the verified backup within the same recovery boundary.
-4. **ACTIVATE**: after the necessary tests and independent review, normally merge/push, deploy and enable the actual intended version where those actions are needed for the approved goal. Use the established SOP and exact identities. Source/TEMP PASS is evidence, not a reason to wait for another deployment permission.
-5. **READBACK**: verify the actual resulting Git/runtime/config/DB identities and relevant behavior/data. Confirm local/tracking/live refs or installed version and intended DB results as applicable. Report verified, pending and unknown states honestly; a submitted command is not proof of activation.
+1. **BACKUP**: keep a recoverable previous version appropriate to the affected change. Git history is enough for tracked documentation/source restoration; preserve the prior installed version or actual affected data when needed. Reuse a sufficient existing backup, without default duplicate/full-workspace copies or backup manifests. Preserve unrelated dirty/untracked files; do not reset, clean or overwrite them.
+2. **VERIFY**: confirm owner/provenance, approved scope, reviewed/tested Git version and correct target. Review the diff independently; Sol runs needed tests. Check real writer, security or DB consistency risks only where the actual operation needs them, not through a universal evidence checklist.
+3. **MODIFY**: change only what the approved goal requires. Actual DB writes retain safe transactions and appropriate consistency/concurrency protection; verify the relevant result and roll back/restore on failure. Source contracts and explicit limits remain binding.
+4. **ACTIVATE**: normally merge/push and deploy the reviewed/tested version to the intended target within the same authorization, retaining the previous recoverable version. Do not wait for another GPT approval or routine deployment evidence bundle.
+5. **READBACK**: Sol confirms the actual Git/installed version and basic startup/changed function; for a DB/data change check the relevant actual result. Report success, failure or unknown honestly in the short change summary. Do not turn readback into a second QA campaign or default per-file hash run.
 
 Cancel formal/test phased authorization, asking again for each merge/deploy/DB write of the same approved work, unnecessary repeated Stage Gates, new Works for the same work, and converting a directly fixable data problem into prolonged research. Keep meaningful tests, independent review, source/null/UNKNOWN/PARTIAL semantics, transaction/backup protection and current explicit exclusions. Do not create a second full implementation/Self-QA campaign or demand owner clicking as a generic Gate.
 
@@ -739,7 +656,7 @@ Historical evidence must not be confused with current state, but it should not b
 
 ## 13. Evidence policy
 
-Evidence should prove the claim actually being made.
+Claims must remain truthful and refer to the version actually tested/reviewed. Ordinary delivery uses section 1.3's Git SHA/PR, tests/results and review conclusion; no raw evidence/hash/receipt/screenshot bundle is required by default. Additional records are only for a concrete change-specific concern, not general reassurance.
 
 Do not overstate:
 
@@ -757,68 +674,31 @@ A stricter fail-closed guard added after a formal read may be accepted through T
 
 ## 14. Testing policy
 
-Development / pre-install testing is required.
+Sol runs tests appropriate to the changed behavior, adds necessary unit tests, fixes failures and performs the needed build. Documentation-only work uses relevant document/diff checks. Choose additional integration/browser/source checks only when the actual change requires them, not from a universal responsive-width/screenshot/package-parity checklist.
 
-Use practical coverage appropriate to the Stage, such as:
+Management independently reviews the code/diff, contracts and test coverage/results; it does not rerun tests by default. A concrete missing case or bug goes back to Sol for targeted testing/fixing and affected-diff review. Sol also performs the installation's basic startup and changed-function confirmation when deployment is part of the approved task. Do not make another full installed QA campaign or owner clicking a generic Gate.
 
-- unit tests;
-- integration tests;
-- frontend tests;
-- browser tests;
-- responsive widths 1280 / 375 / 320;
-- keyboard/focus behavior;
-- safe-text/HTML handling;
-- source read-only smoke;
-- generator checks;
-- diff checks;
-- package/static parity.
-
-Literal human clicking is not automatically a Gate when an equivalent test exercises the same approved binary/path/data/runtime.
-
-Do not repeat expensive formal-source reads merely to accumulate evidence when the relevant source/process behavior did not change.
+Do not repeat expensive financial/formal-source reads, consume a spent allowance, or invent results to satisfy a delivery checklist. DB/security/source checks follow actual risk and explicit scope. Tests not run or not applicable must be identified honestly.
 
 ---
 
 ## 15. Deployment policy
 
-For verified section 0 projects, use section 3.1: **BACKUP → VERIFY → MODIFY → ACTIVATE → READBACK**. Deployment and necessary runtime/config/DB actions belong to the same approved work; do not wait for a separate formal/test or deployment authorization after source/TEMP PASS.
+For verified section 0 projects, follow section 3.1 within the same approved task: after Sol's relevant tests/build and independent code review, confirm the reviewed/tested Git version and correct target, then perform the normal deployment. Keep the previous version recoverable and preserve unrelated dirty installation changes.
 
-Test proportionally, verify the restorable backup and writer/protection conditions before replacement, publish the exact candidate using the established SOP, apply only the necessary bounded config delta, activate the intended version and read back actual identity plus relevant behavior/data. Restore/rollback on failure. Do not overwrite unrelated dirty installation changes or affect excluded company/other-owner systems.
+Sol performs basic startup and changed-function confirmation; diagnose/fix or restore the previous version if needed. No default file-by-file hashing, multiple JSON receipts, repeated backups, second full installed QA or GPT approval after deployment. Actual DB changes, active writers, security boundaries and explicit source limits still need their relevant protections, not a new general campaign.
 
-The former identity-only “installation ends” rule is superseded for this scope. Necessary activation/readback is part of completion. Avoid a second full installed-version QA campaign, generic screenshot/click Gates and unnecessary formal-source rereads; retain tests needed to prove the actual change. Desired process/Task state must match the approved goal, not be inferred from an old receipt.
+This deployment workflow does not authorize an automatic-deployment feature or scheduler; an Owner-cancelled automatic-deployment feature remains cancelled. Only separately authorized product work may change code/runtime/config. Documentation-only governance work updates documents/Git, not the product installation.
 
 ---
 
 ## 16. Git integration and closeout
 
-Within the same approved work under section 3.1, perform necessary Git integration after required candidate review, then continue any needed deployment/activation/readback. No separate merge authorization Gate is added. A documentation-only governance assignment activates documents/Git only, not product runtime or DBs.
+Within the same approved work, normally integrate after Sol's tests and independent code review, then deploy when the task requires it. Confirm the reviewed/tested SHA/PR and intended target; preserve unrelated dirty changes. Fetch and synchronize main with `pull --ff-only`, merge the accepted head with explicit `--no-ff`, and normally push. Retain the source branch. No squash, rebase or force-push fallback.
 
-Default closeout:
+Sol checks that local/tracking/live main identify the resulting integration and that no unexpected content/conflict changed the reviewed version. Resolve a real mismatch before proceeding, with targeted testing/review of any changed content. Report the actual SHA and PR state if a PR is used; do not create or manipulate PR metadata just for a checklist.
 
-1. Fetch actual PR/refs.
-2. Verify exact accepted SHA.
-3. Verify main has no unexpected change.
-4. Ensure relevant worktrees are clean.
-5. `pull --ff-only` main.
-6. Merge exact accepted head with explicit `--no-ff`.
-7. Normal push.
-8. No squash.
-9. No rebase.
-10. No force push.
-
-Then independently verify:
-
-- accepted SHA is main ancestor;
-- merge has exactly two parents;
-- first parent is actual reviewed/premerge main;
-- second parent is accepted SHA;
-- merge tree/content equals accepted tree/content;
-- local main = origin/main = live remote main;
-- source branch remains;
-- worktrees are clean;
-- actual PR merged/closed/draft state is reported honestly.
-
-Do not use metadata workarounds solely to clear a retained draft flag if Git ancestry/content is already correct.
+The former mandatory independent parent/ancestry/tree/content proof packet and separate closeout verification are replaced by these ordinary version/target checks. Inspect parents/tree or raw files when a concrete mismatch warrants it, not as a new report/hash campaign. The short Git/tests/review summary is sufficient; no new status-only commit, receipt system or repeated GPT deployment approval is needed.
 
 ---
 
@@ -887,23 +767,9 @@ Keep valid local technical/protection rules and link/reference rather than copy-
 
 ## 21. Review checklist
 
-Manager/management review should normally answer:
+For the actual change, Reviewer checks the exact diff against the approved requirement/contracts, identifies substantive bugs or safety/source-semantic problems, and assesses whether Sol's reported tests cover the change. Return a concise conclusion and specific findings. Do not convert this checklist into mandatory raw evidence, test reruns, backup proofs or independent deployment QA.
 
-- Are actual Neil1031 ownership, fork provenance, personal target and company isolation verified under section 0?
-- Is the Stage still solving the authorized problem?
-- Does the core behavior work?
-- Are important data and protected systems safe?
-- Are source identities and null/partial semantics truthful?
-- Did the implementation avoid forbidden joins/inference?
-- Are tests proportional and meaningful?
-- Are source/formal/synthetic/installed evidence boundaries stated honestly?
-- Did only intended canonical feature/status rows change?
-- Did engineering docs remain canonical, with Owner Doc lightweight updates / pending content requests truthfully handled under section 7.4?
-- Is the exact reviewed SHA clear?
-- Are backup/restoration, necessary activation and actual readback proven under section 3.1?
-- Is the next unrelated Stage still stopped until authorized?
-
-This checklist is guidance, not a reason to create unnecessary gates.
+Sol handles targeted tests/fixes and the relevant operational confirmation. Scope/company exclusions, honest test status, source/PIT/rights/null/UNKNOWN/PARTIAL semantics, actual data/security protections and next-Stage authority remain binding. Unchanged unrelated areas do not need another review.
 
 ---
 
@@ -919,14 +785,14 @@ For Local Dashboard specifically:
 
 Repository/workspace `AGENTS.md` files may define engineering execution details such as Plan -> Stage -> Gate -> Self-QA. Those local rules remain valid unless they conflict with a newer explicit owner/Manager decision or this document's cross-project defaults.
 
-Known legacy conflict to remove during normal local-rule maintenance:
+Known legacy conflicts explicitly superseded on active instruction surfaces:
 
 - old per-Stage implementation/research/debug Chats conflict with reusing the existing Reviewer/Sol pair and assigned Orchestrator;
 - the former exactly-two-visible-Works ceiling and Luna-only delegation conflict with V2 section 1; Sol may use Luna or other internal agents, without creating extra persistent worker Works;
 - old direct Management-to-Sol / Sol-to-GPT routing is superseded by section 2's Orchestrator coordination, while independent review and GPT acceptance remain distinct;
 - older generic “Manager” wording is interpreted by section 1.2: GPT decides direction/final acceptance; Orchestrator only coordinates within existing authority. It cannot turn a historical approval into a new scope or replace a source contract/safety limit.
 
-Do not rewrite historical evidence merely to erase an old policy. Update only active/current instruction surfaces.
+The 2026-10-20 Owner override also supersedes older routine requirements to reproduce tests independently, generate evidence/hash/receipt bundles, freeze long closeout forms, prove every backup again, run a second post-deploy QA or obtain GPT Final before/after each routine deployment. Use the updated sections 1.2–1.6 / 2 / 2.1 / 3.1 / 13–16 / 21 instead, including when an older skill/template says otherwise. Do not rewrite historical evidence or skills merely to erase old policy. Source/safety contracts and specific real-risk checks are not waived.
 
 ---
 
@@ -944,3 +810,5 @@ Do not copy the full document into every repository unless there is a concrete o
 Repository product semantics remain authoritative in that repository's canonical engineering design and approved source contracts.
 
 Adopt V2 at the next safe handoff point in existing work. Do not cancel, restart, redo accepted checks or lift STOP/HOLD/PAUSED merely because governance changed. Adopting this governance-document update activates only the specified documents/Git; it does not authorize code, DB, Task/scheduling or deployment-setting changes, unrelated repository/skill changes, company access or rewriting historical backups. Necessary product actions still require their own already approved goal under sections 0 / 3.1. Other repositories may adopt the canonical by reference during authorized maintenance, not by a bulk rewrite.
+
+The 2026-10-20 simplified workflow applies at the next safe handoff. An explicit Owner instruction may resume its named Codex/Sol MVP work through Orchestrator; it does not lift unrelated source, rights, PIT, HOLD, spent-quota or STOP boundaries. This governance writer performs documentation/Git only; Orchestrator routes product continuation and role notifications.
