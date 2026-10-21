@@ -189,6 +189,23 @@ If an efficiency comparison is requested, use existing all-role records and stat
 
 ---
 
+### 1.7 Routine technical problems — original Work owns diagnosis and repair
+
+**Owner override, 2026-10-21:** ordinary technical problems inside an approved personal-project goal belong to the existing implementation Work. Do not stop at a failed command or route each debugging step to GPT Manager for a new Scope, operation budget or approval. This explicitly supersedes older interpretations that made routine local diagnosis, service recovery or each repair iteration wait for GPT direction.
+
+- **Sol / implementation Work:** investigate the relevant code, errors, processes, listening ports, launcher/configuration and dependencies; identify the cause, try reasonable safe fixes or alternatives, run proportionate tests/builds or basic operational checks, and continue the approved work. This includes safely restoring a known project-owned local service through its existing launcher. Do not ask questions that existing code, documentation or the environment can answer.
+- **Independent Reviewer:** when code changes, review the exact change, requirements/contracts and Sol's relevant test coverage/results. Return concrete findings for Sol to fix; re-review only the affected part. No routine retest or evidence bundle. A service that only needed its existing process started and no code change does not need an invented code-review/PR gate.
+- **Orchestrator:** route the problem directly to the original responsible Work, coordinate actual dependencies and substantive blockers, and track progress. Do not become a third QA layer or make GPT Manager an intermediary for commands, local debugging or routine restart/recovery decisions.
+- **GPT Manager:** own major product direction, architecture or material scope/data/security decisions and one Final at real Stage completion. It does not operate the local computer or approve every technical fix, service start, test iteration or deployment. A routine fix or pure service recovery is not a new Stage and does not require its own GPT Final.
+
+Diagnose → attempt → verify → adapt → continue. Sol records the actual cause, change, relevant tests/basic confirmation and actual elapsed time in the normal short handoff. If no product code changed, report the operational restoration and basic result directly; do not manufacture a PR, separate review campaign or post-deployment approval. If code changed, use the existing Sol tests → independent CODE REVIEW → normal reviewed/tested Git integration/deployment → Sol basic confirmation flow. Preserve a recoverable version and unrelated changes as the actual change requires.
+
+Escalate only a real unresolved blocker after reasonable investigation, a materially different product/architecture or data outcome, unavailable credentials/authority/resources, a destructive or irreversible action outside the goal, an uncertain target/company boundary, or an explicit platform/security restriction. Explain what was investigated/tried, the likely cause and the next practical action; continue other safe work. Technical difficulty, a missing dependency, connection failure or a failed test alone is not a reason to wait for GPT.
+
+This rule does not bypass a platform rejection, start/stop an unidentified or unrelated process, change another user's service, or lift explicit source/data/security limits, spent quotas, HOLD/STOP or company exclusions. Necessary local process/port/configuration inspection and basic health/static confirmation of the known personal service are routine diagnosis; do not invent per-command one-use quotas for them. A service repair does not authorize new provider/financial requests, a scheduled business job rerun, a data refresh/recalculation, DB writes or a new feature when those actions remain explicitly excluded. Escalate that actual boundary rather than blocking unrelated safe diagnosis.
+
+---
+
 ## 2. Stage lifecycle
 
 Default sequence:
